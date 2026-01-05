@@ -3,17 +3,12 @@
  *
  * Reusable utility functions for FrameCraft.
  *
- * Utilities will be exported here as they are extracted:
+ * Utilities exported:
  * - dimensions.ts: Dimension parsing, validation, and formatting
- * - exportPreview.ts: Frame preview export and image conversion
+ *
+ * TODO: Extract additional utilities:
+ * - exportPreview.ts: Frame preview export (depends on app-specific matTiling - may stay in app)
  * - shadowbox-utils.ts: Shadowbox-specific utilities
  */
 
-// Utilities will be exported here once extracted
-// Example:
-// export * from "./dimensions";
-// export * from "./exportPreview";
-// export * from "./shadowbox-utils";
-
-// Placeholder export to make this a valid module
-export {};
+export * from "./dimensions";
