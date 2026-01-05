@@ -74,19 +74,24 @@ npm run lint
 ## 📁 Directory Structure
 
 ### Apps (`apps/*`)
+
 Individual storefront applications that import shared packages. Each app can have store-specific overrides.
 
 ### Packages (`packages/*`)
+
 Shared packages used across all stores:
+
 - **@framecraft/ui**: UI component library (Shadcn/ui, specialty designers)
 - **@framecraft/core**: Business logic (pricing, products, Shopify integration)
 - **@framecraft/config**: Configuration (themes, feature flags, navigation)
 - **@framecraft/types**: Shared TypeScript type definitions
 
 ### Data (`data/`)
+
 Shared data files including product catalogs (frames.json, mats.json, glass.json, pricing-config.json). These will be migrated from the existing codebase.
 
 ### Content (`content/`)
+
 Markdown content files for blog posts, CMS pages, and other content. Will be migrated from the existing codebase.
 
 ## 🛠️ Available Scripts
@@ -108,6 +113,7 @@ Markdown content files for blog posts, CMS pages, and other content. Will be mig
 ## 🏗️ Architecture
 
 This monorepo uses:
+
 - **npm workspaces** for package management
 - **Turborepo** for build orchestration and caching
 - **TypeScript** for type safety
@@ -120,6 +126,7 @@ This monorepo uses [Turborepo](https://turbo.build/) to manage and optimize the 
 ### How It Works
 
 Turborepo provides:
+
 - **Task Orchestration**: Runs tasks in parallel when possible
 - **Build Caching**: Skips unnecessary rebuilds based on file changes
 - **Task Dependencies**: Ensures dependencies are built before dependents
@@ -161,6 +168,7 @@ npx turbo run build --graph
 Turborepo automatically caches task outputs. If a package hasn't changed, Turborepo will skip building it and use the cached output, dramatically speeding up builds.
 
 Output directories are configured per task:
+
 - `build`: `.next/**`, `dist/**`, `build/**`
 - `test`: `coverage/**`
 
@@ -174,6 +182,7 @@ Output directories are configured per task:
 - ✅ P1-004: Shared TypeScript Configuration Set Up
 - ✅ P1-005: ESLint Configuration Complete
 - ✅ P1-006: Prettier Configuration Complete
+- ✅ P1-007: Pre-commit Hooks with Husky Complete
 
 ## 🔧 TypeScript Configuration
 
@@ -182,6 +191,7 @@ This monorepo uses a shared TypeScript base configuration (`tsconfig.base.json`)
 ### Base Configuration
 
 The `tsconfig.base.json` includes:
+
 - **Strict type checking** enabled (all strict flags)
 - **Modern target**: ES2022
 - **Module system**: ESNext
@@ -228,6 +238,7 @@ ESLint is configured at the root level to provide consistent linting rules acros
 ### Configuration
 
 The `.eslintrc.json` includes:
+
 - **TypeScript ESLint**: TypeScript-specific linting rules
 - **React ESLint**: React and React Hooks rules
 - **Strict rules**: No unused variables, no floating promises, etc.
@@ -271,6 +282,7 @@ Prettier is configured for consistent code formatting across all packages in the
 ### Configuration
 
 The `.prettierrc` includes:
+
 - **Print width**: 100 characters
 - **Tab width**: 2 spaces
 - **Semicolons**: Enabled
@@ -281,6 +293,7 @@ The `.prettierrc` includes:
 ### ESLint Integration
 
 Prettier is integrated with ESLint using `eslint-config-prettier` to disable formatting-related ESLint rules that conflict with Prettier. This ensures:
+
 - ESLint handles code quality
 - Prettier handles code formatting
 - No conflicts between the two tools
@@ -298,11 +311,55 @@ npm run format:check
 ### Ignored Files
 
 The `.prettierignore` file excludes:
+
 - Build outputs (`dist/`, `build/`, `.next/`)
 - Dependencies (`node_modules/`)
 - Config files (to preserve their formatting)
 - Lock files
 - Cache directories
+
+## 🪝 Git Hooks with Husky
+
+Husky is configured to run automated checks before commits, ensuring code quality.
+
+### Configuration
+
+Husky uses pre-commit hooks that run `lint-staged` on staged files:
+
+- **TypeScript/TSX files**: ESLint auto-fix + Prettier formatting
+- **JSON/Markdown files**: Prettier formatting only
+
+### How It Works
+
+When you commit code:
+
+1. Husky intercepts the commit
+2. `lint-staged` runs only on staged files (not entire repo)
+3. ESLint fixes are applied automatically
+4. Prettier formats the files
+5. If checks pass, commit proceeds
+6. If checks fail, commit is blocked
+
+### Bypassing Hooks (Emergency Only)
+
+If you need to bypass the pre-commit hook in an emergency:
+
+```bash
+# Use --no-verify flag (use sparingly!)
+git commit --no-verify -m "Emergency commit message"
+```
+
+**⚠️ Warning**: Only bypass hooks in genuine emergencies. The checks exist to maintain code quality.
+
+### Manually Running lint-staged
+
+You can test lint-staged without committing:
+
+```bash
+npx lint-staged
+```
+
+This runs the same checks that the pre-commit hook would run.
 
 ## 📝 Development Guidelines
 
@@ -320,4 +377,3 @@ This is a private project. Follow the ticket structure in `docs/PHASE1_TICKETS.m
 ---
 
 **Last Updated**: December 29, 2025
-
