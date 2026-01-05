@@ -13,7 +13,7 @@
 
 // Services
 export * from "./products";
-// export * from "./pricing";
+export * from "./pricing";
 // export * from "./shopify";
 // export * from "./validation";
 // export * from "./printCompositor";
