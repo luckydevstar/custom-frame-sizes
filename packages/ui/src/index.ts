@@ -280,3 +280,9 @@ export {
   type FooterLink,
   type FooterLinks,
 } from "./components/layout/Footer";
+export {
+  Navigation,
+  type NavigationProps,
+  type NavigationConfig,
+  type NavigationItem,
+} from "./components/layout/Navigation";
