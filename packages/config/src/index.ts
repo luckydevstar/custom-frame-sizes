@@ -11,8 +11,4 @@
  */
 
 // Palette configuration
-// TODO: Extract palette configuration from CustomFrameSizes-CODE/client/src/config/palette.config.ts
-// export * from "./palette";
-
-// Placeholder export to make this a valid module
-export {};
+export * from "./palette";
