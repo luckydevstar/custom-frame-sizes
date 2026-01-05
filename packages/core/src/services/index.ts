@@ -11,13 +11,9 @@
  * - printCompositor.ts: Print file generation
  */
 
-// Services will be exported here once extracted
-// Example:
-// export * from "./products";
+// Services
+export * from "./products";
 // export * from "./pricing";
 // export * from "./shopify";
 // export * from "./validation";
 // export * from "./printCompositor";
-
-// Placeholder export to make this a valid module
-export {};

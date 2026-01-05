@@ -1,0 +1,277 @@
+/**
+ * Product data service
+ * Loads and provides access to frame, mat, and glass product data
+ *
+ * NOTE: This service has been extracted to @framecraft/core.
+ * Dependencies that will be extracted in future tickets:
+ * - Data files: Will be moved to @framecraft/data package (future ticket)
+ * - Validation: Will be extracted in P1-019
+ * - Palette config: Will be extracted to @framecraft/config in P1-026
+ * - Types: Will be extracted to @framecraft/types in P1-023
+ *
+ * For now, this service uses relative imports and will be updated
+ * as dependencies are extracted.
+ */
+
+// TODO: Update to import from @framecraft/data once data package is created
+// For now, using relative path - data files are in root data/ folder
+// @ts-expect-error - Data files will be in @framecraft/data package
+import framesData from "../../../../data/frames.json";
+// @ts-expect-error - Data files will be in @framecraft/data package
+import matsDataRaw from "../../../../data/mats.json";
+// @ts-expect-error - Data files will be in @framecraft/data package
+import glassData from "../../../../data/glass.json";
+// @ts-expect-error - Data files will be in @framecraft/data package
+import pricingConfigData from "../../../../data/pricing-config.json";
+
+// TODO: Update to import from @framecraft/types once types are extracted in P1-023
+// For now, using any to avoid circular dependency
+// import type { FrameStyle, MatColor, GlassType, PricingConfig } from '@framecraft/types';
+type FrameStyle = any;
+type MatColor = any;
+type GlassType = any;
+type PricingConfig = any;
+
+// TODO: Update to import from @framecraft/core/services/validation once extracted in P1-019
+// For now, using inline validation functions
+// import { validateFrameStyles, validateMatColors, validateGlassTypes } from './validation';
+
+/**
+ * Validate frame style data
+ * TODO: Move to validation service in P1-019
+ */
+function validateFrameStyle(frame: any): frame is FrameStyle {
+  const validCategories = ["picture", "shadowbox", "canvas"];
+  return (
+    typeof frame === "object" &&
+    typeof frame.id === "string" &&
+    typeof frame.name === "string" &&
+    typeof frame.material === "string" &&
+    typeof frame.color === "string" &&
+    typeof frame.pricePerInch === "number" &&
+    typeof frame.borderColor === "string" &&
+    typeof frame.mouldingWidth === "number" &&
+    typeof frame.category === "string" &&
+    validCategories.includes(frame.category)
+  );
+}
+
+/**
+ * Validate array of frame styles
+ * TODO: Move to validation service in P1-019
+ */
+function validateFrameStyles(frames: any[]): FrameStyle[] {
+  return frames.filter(validateFrameStyle);
+}
+
+/**
+ * Validate mat color data
+ * Supports both old format (color) and new format (hexColor)
+ * TODO: Move to validation service in P1-019
+ */
+function validateMatColor(mat: any): mat is MatColor {
+  return (
+    typeof mat === "object" &&
+    typeof mat.id === "string" &&
+    typeof mat.name === "string" &&
+    (typeof mat.hexColor === "string" || typeof mat.color === "string")
+  );
+}
+
+/**
+ * Validate array of mat colors
+ * TODO: Move to validation service in P1-019
+ */
+function validateMatColors(mats: any[]): MatColor[] {
+  return mats.filter(validateMatColor);
+}
+
+/**
+ * Validate glass type data
+ * TODO: Move to validation service in P1-019
+ */
+function validateGlassType(glass: any): glass is GlassType {
+  return (
+    typeof glass === "object" &&
+    typeof glass.id === "string" &&
+    typeof glass.name === "string" &&
+    typeof glass.pricePerSqFt === "number"
+  );
+}
+
+/**
+ * Validate array of glass types
+ * TODO: Move to validation service in P1-019
+ */
+function validateGlassTypes(glassTypes: any[]): GlassType[] {
+  return glassTypes.filter(validateGlassType);
+}
+
+// Extract mats array from new catalog structure - mats.json already has correct structure
+const matsDataNew = (matsDataRaw as any).mats || [];
+const matsData = matsDataNew.map((mat: any) => {
+  // mats.json already has the correct structure with hexColor field
+  // Just ensure backward compatibility by adding color alias
+  return {
+    ...mat,
+    color: mat.hexColor || mat.color || "#FFFFFF", // Backward compatibility alias
+  };
+});
+
+// Validate data on load
+const validatedFrames = validateFrameStyles(framesData);
+const validatedMats = validateMatColors(matsData);
+const validatedGlass = validateGlassTypes(glassData);
+
+/**
+ * Get all available frame styles
+ * @returns Array of frame style configurations
+ */
+export function getFrameStyles(): FrameStyle[] {
+  return validatedFrames;
+}
+
+/**
+ * Get a specific frame style by ID
+ * @param id - Frame style ID
+ * @returns Frame style or undefined if not found
+ */
+export function getFrameStyleById(id: string): FrameStyle | undefined {
+  return validatedFrames.find((frame) => frame.id === id);
+}
+
+/**
+ * Get all available mat colors
+ * @returns Array of mat color options
+ */
+export function getMatColors(): MatColor[] {
+  return validatedMats;
+}
+
+/**
+ * Get a specific mat color by ID
+ * @param id - Mat color ID
+ * @returns Mat color or undefined if not found
+ * Falls back to palette.config.ts for mats not yet in production catalog
+ *
+ * TODO: Update to use @framecraft/config once palette config is extracted in P1-026
+ */
+export function getMatColorById(id: string): MatColor | undefined {
+  // First try production catalog
+  const productionMat = validatedMats.find((mat) => mat.id === id);
+  if (productionMat) return productionMat;
+
+  // TODO: Fall back to palette config from @framecraft/config once extracted
+  // For now, return undefined if not in production catalog
+  // const paletteMat = getPaletteMatById(id);
+  // if (paletteMat) { ... }
+
+  return undefined;
+}
+
+/**
+ * Get all available glass types
+ * @returns Array of glass type options
+ */
+export function getGlassTypes(): GlassType[] {
+  return validatedGlass;
+}
+
+/**
+ * Get a specific glass type by ID
+ * @param id - Glass type ID
+ * @returns Glass type or undefined if not found
+ */
+export function getGlassTypeById(id: string): GlassType | undefined {
+  return validatedGlass.find((glass) => glass.id === id);
+}
+
+/**
+ * Get pricing configuration
+ * @returns Pricing configuration object
+ */
+export function getPricingConfig(): PricingConfig {
+  return pricingConfigData as PricingConfig;
+}
+
+/**
+ * Filter frames by material
+ * @param material - Material type to filter by
+ * @returns Array of matching frame styles
+ */
+export function getFramesByMaterial(material: string): FrameStyle[] {
+  return validatedFrames.filter((frame) => frame.material === material);
+}
+
+/**
+ * Filter frames by category
+ * @param category - Frame category to filter by ("picture", "shadowbox", or "canvas")
+ * @returns Array of matching frame styles
+ */
+export function getFramesByCategory(category: "picture" | "shadowbox" | "canvas"): FrameStyle[] {
+  return validatedFrames.filter((frame) => frame.category === category);
+}
+
+/**
+ * Get default selections for frame designer
+ * @returns Object with default frame, mat, and glass selections
+ */
+export function getDefaultSelections() {
+  const frames = getFrameStyles();
+  const mats = getMatColors();
+  const glass = getGlassTypes();
+
+  return {
+    frame: frames[0],
+    mat: mats[0],
+    matInner: mats[1],
+    glass: glass[0],
+  };
+}
+
+/**
+ * Convert frame ID to URL-friendly slug for routing
+ *
+ * IMPORTANT: Frame pages use descriptive slugs with "-frame" suffix (e.g., "museum-bronze-frame")
+ * rather than SKUs (e.g., "6301") for better SEO and user experience.
+ *
+ * When adding new frame pages:
+ * 1. Add the frame ID to slug mapping in slugMap below (without -frame suffix)
+ * 2. Create the corresponding route in App.tsx (e.g., /frames/museum-bronze-frame)
+ * 3. Add a legacy redirect route if needed (e.g., /frames/6301 → /frames/museum-bronze-frame)
+ *
+ * @param frameId - Frame ID (e.g., "6301")
+ * @returns URL slug with -frame suffix (e.g., "museum-bronze-frame")
+ */
+export function getFrameSlug(frameId: string): string {
+  // Map specific frame IDs to their URL slugs (without -frame suffix)
+  // Add new frames here to ensure consistent URL structure
+  const slugMap: Record<string, string> = {
+    "museum-bronze": "museum-bronze",
+    "black-wood": "black-wood",
+    "white-wood": "white-wood",
+    "silver-wood": "silver-wood",
+    "pink-wood": "pink-wood",
+    "6301": "museum-bronze", // Legacy SKU support
+    // Add more frame-specific slugs here as new frame pages are created
+  };
+
+  let baseSlug: string;
+
+  // Get base slug from map or generate it
+  if (slugMap[frameId]) {
+    baseSlug = slugMap[frameId];
+  } else {
+    // Fallback: get frame by ID and convert name to slug
+    const frame = getFrameStyleById(frameId);
+    if (frame) {
+      baseSlug = frame.name.toLowerCase().replace(/\s+/g, "-");
+    } else {
+      // Last resort: use the ID itself
+      baseSlug = frameId.replace(/_/g, "-");
+    }
+  }
+
+  // Always append -frame suffix for SEO
+  return `${baseSlug}-frame`;
+}
