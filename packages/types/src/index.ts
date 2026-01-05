@@ -5,21 +5,19 @@
  *
  * This package contains:
  * - Product types: FrameStyle, MatColor, GlassType, FrameConfiguration, etc.
- * - Schema types: Database schema types (User, MatDesign, UploadedImage, etc.)
- * - Specialty types: Shadowbox, mat, and other specialty frame types
+ * - Schema types: Database schema types (User, MatDesign, UploadedImage, etc.) - TODO
+ * - Specialty types: Shadowbox, mat, and other specialty frame types - TODO
  *
  * @packageDocumentation
  */
 
-// Product types will be exported here once extracted
-// export * from "./products";
+// Product types
+export * from "./products";
 
-// Schema types will be exported here once extracted
-// export * from "./schema";
+// Schema types
+// TODO: Extract database schema types from CustomFrameSizes-CODE/shared/schema.ts
+export * from "./schema";
 
-// Specialty types will be exported here once extracted
-// export * from "./shadowbox";
-// export * from "./mat";
-
-// Placeholder export to make this a valid module
-export {};
+// Specialty types
+// TODO: Extract specialty frame types
+export * from "./specialty";
