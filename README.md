@@ -31,9 +31,8 @@ framecraft-monorepo/
 │   ├── MIGRATION_PLAN.md  # Overall migration strategy
 │   └── PHASE1_TICKETS.md  # Phase 1 detailed tickets
 │
-├── pnpm-workspace.yaml    # pnpm workspace configuration
 ├── turbo.json             # Turborepo build configuration
-└── package.json           # Root package.json
+└── package.json           # Root package.json (includes workspaces config)
 ```
 
 ## 🚀 Quick Start
@@ -41,40 +40,35 @@ framecraft-monorepo/
 ### Prerequisites
 
 - **Node.js**: >= 18.0.0
-- **pnpm**: >= 8.0.0
-
-Install pnpm globally if not already installed:
-```bash
-npm install -g pnpm@8.15.0
-```
+- **npm**: >= 9.0.0 (comes with Node.js)
 
 ### Installation
 
 ```bash
 # Install all workspace dependencies
-pnpm install
+npm install
 
 # Verify workspace structure
-pnpm list -r
+npm list --workspaces
 ```
 
 ### Development
 
 ```bash
 # Start all apps in development mode
-pnpm dev
+npm run dev
 
-# Start specific app
-pnpm dev --filter store-a
+# Start specific app (using Turborepo filter)
+npm run dev -- --filter store-a
 
 # Build all packages and apps
-pnpm build
+npm run build
 
 # Type check all packages
-pnpm type-check
+npm run type-check
 
 # Lint all packages
-pnpm lint
+npm run lint
 ```
 
 ## 📁 Directory Structure
@@ -97,14 +91,14 @@ Markdown content files for blog posts, CMS pages, and other content. Will be mig
 
 ## 🛠️ Available Scripts
 
-- `pnpm build` - Build all packages and apps
-- `pnpm dev` - Start all apps in development mode
-- `pnpm lint` - Lint all packages
-- `pnpm type-check` - Type check all packages
-- `pnpm test` - Run tests across all packages
-- `pnpm clean` - Clean all build artifacts
-- `pnpm format` - Format code with Prettier
-- `pnpm format:check` - Check code formatting
+- `npm run build` - Build all packages and apps
+- `npm run dev` - Start all apps in development mode
+- `npm run lint` - Lint all packages
+- `npm run type-check` - Type check all packages
+- `npm run test` - Run tests across all packages
+- `npm run clean` - Clean all build artifacts
+- `npm run format` - Format code with Prettier
+- `npm run format:check` - Check code formatting
 
 ## 📚 Documentation
 
@@ -114,7 +108,7 @@ Markdown content files for blog posts, CMS pages, and other content. Will be mig
 ## 🏗️ Architecture
 
 This monorepo uses:
-- **pnpm workspaces** for package management
+- **npm workspaces** for package management
 - **Turborepo** for build orchestration and caching
 - **TypeScript** for type safety
 - **Shared packages** for code reuse across stores
@@ -146,19 +140,20 @@ The `turbo.json` configuration defines the following tasks:
 
 ```bash
 # Run all builds
-pnpm turbo run build
+npm run build
+# Or directly: npx turbo run build
 
 # Run builds for specific package
-pnpm turbo run build --filter=@framecraft/ui
+npx turbo run build --filter=@framecraft/ui
 
 # Run builds for a package and its dependencies
-pnpm turbo run build --filter=@framecraft/ui...
+npx turbo run build --filter=@framecraft/ui...
 
 # Clear Turborepo cache
-pnpm turbo run build --force
+npx turbo run build --force
 
 # View task execution graph
-pnpm turbo run build --graph
+npx turbo run build --graph
 ```
 
 ### Caching
@@ -177,7 +172,8 @@ Output directories are configured per task:
 - ✅ P1-002: Turborepo Configuration Complete
 - ✅ P1-003: Base Monorepo Directory Structure Created
 - ✅ P1-004: Shared TypeScript Configuration Set Up
-- ⏳ P1-005: Configure ESLint for Monorepo (Next)
+- ✅ P1-005: ESLint Configuration Complete
+- ⏳ P1-006: Configure Prettier for Monorepo (Next)
 
 ## 🔧 TypeScript Configuration
 
@@ -219,19 +215,63 @@ See `packages/tsconfig.template.json` for a complete template.
 
 ```bash
 # Type check all packages
-pnpm type-check
+npm run type-check
 
-# Type check specific package
-pnpm type-check --filter @framecraft/ui
+# Type check specific package (using Turborepo)
+npx turbo run type-check --filter=@framecraft/ui
+```
+
+## 🔍 ESLint Configuration
+
+ESLint is configured at the root level to provide consistent linting rules across all packages.
+
+### Configuration
+
+The `.eslintrc.json` includes:
+- **TypeScript ESLint**: TypeScript-specific linting rules
+- **React ESLint**: React and React Hooks rules
+- **Strict rules**: No unused variables, no floating promises, etc.
+- **Monorepo support**: Works with TypeScript project references
+
+### Extending ESLint Config
+
+Each package can have its own `.eslintrc.json` that extends the root config:
+
+```json
+{
+  "extends": ["../../.eslintrc.json"],
+  "parserOptions": {
+    "project": ["./tsconfig.json"]
+  },
+  "rules": {
+    // Package-specific rule overrides
+  }
+}
+```
+
+See `packages/.eslintrc.template.json` for a complete template.
+
+### Linting Commands
+
+```bash
+# Lint all packages
+npm run lint
+
+# Lint specific package (using Turborepo)
+npx turbo run lint --filter=@framecraft/ui
+
+# Fix linting issues automatically (add fix script if needed)
+npm run lint -- --fix
 ```
 
 ## 📝 Development Guidelines
 
 1. All shared code goes in `packages/`
 2. Store-specific code goes in `apps/{store-name}/`
-3. Use workspace protocol (`workspace:*`) for internal dependencies
+3. Use workspace protocol (`workspace:*` or package name) for internal dependencies
 4. Keep packages focused and independent where possible
 5. All packages must extend `tsconfig.base.json` for consistency
+6. Use `npm workspaces` commands for workspace management
 
 ## 🤝 Contributing
 

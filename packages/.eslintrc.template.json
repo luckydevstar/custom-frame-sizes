@@ -1,0 +1,13 @@
+{
+  "extends": ["../../.eslintrc.json"],
+  "parserOptions": {
+    "project": ["./tsconfig.json"],
+    "tsconfigRootDir": "."
+  },
+  "rules": {
+    // Package-specific overrides can go here
+    // Example: "@typescript-eslint/no-explicit-any": "off"
+    // Enable type-checked rules if needed:
+    // "@typescript-eslint/no-floating-promises": "error"
+  }
+}

@@ -48,7 +48,8 @@ tmp/
 temp/
 *.tmp
 
-# Lock files (pnpm workspaces use a single lockfile at root)
-# Uncomment if you want to ignore pnpm-lock.yaml
-# pnpm-lock.yaml
+# Lock files
+package-lock.json
+pnpm-lock.yaml
+yarn.lock
 
