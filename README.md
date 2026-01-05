@@ -173,7 +173,7 @@ Output directories are configured per task:
 - ✅ P1-003: Base Monorepo Directory Structure Created
 - ✅ P1-004: Shared TypeScript Configuration Set Up
 - ✅ P1-005: ESLint Configuration Complete
-- ⏳ P1-006: Configure Prettier for Monorepo (Next)
+- ✅ P1-006: Prettier Configuration Complete
 
 ## 🔧 TypeScript Configuration
 
@@ -263,6 +263,46 @@ npx turbo run lint --filter=@framecraft/ui
 # Fix linting issues automatically (add fix script if needed)
 npm run lint -- --fix
 ```
+
+## ✨ Prettier Configuration
+
+Prettier is configured for consistent code formatting across all packages in the monorepo.
+
+### Configuration
+
+The `.prettierrc` includes:
+- **Print width**: 100 characters
+- **Tab width**: 2 spaces
+- **Semicolons**: Enabled
+- **Quotes**: Double quotes
+- **Trailing commas**: ES5 compatible
+- **End of line**: LF (Unix-style)
+
+### ESLint Integration
+
+Prettier is integrated with ESLint using `eslint-config-prettier` to disable formatting-related ESLint rules that conflict with Prettier. This ensures:
+- ESLint handles code quality
+- Prettier handles code formatting
+- No conflicts between the two tools
+
+### Formatting Commands
+
+```bash
+# Format all code
+npm run format
+
+# Check formatting without making changes (useful for CI)
+npm run format:check
+```
+
+### Ignored Files
+
+The `.prettierignore` file excludes:
+- Build outputs (`dist/`, `build/`, `.next/`)
+- Dependencies (`node_modules/`)
+- Config files (to preserve their formatting)
+- Lock files
+- Cache directories
 
 ## 📝 Development Guidelines
 
