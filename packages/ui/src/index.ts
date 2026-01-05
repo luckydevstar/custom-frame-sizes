@@ -286,3 +286,6 @@ export {
   type NavigationConfig,
   type NavigationItem,
 } from "./components/layout/Navigation";
+
+// Specialty components
+export { FrameDesigner } from "./components/specialty/FrameDesigner";
