@@ -54,6 +54,7 @@
 Create the foundational pnpm workspace structure for the monorepo. This is the first step that enables all subsequent package work.
 
 **Tasks**:
+
 - Create new repository or branch for monorepo structure
 - Install pnpm globally (if not already installed)
 - Initialize pnpm workspace with `pnpm init`
@@ -64,6 +65,7 @@ Create the foundational pnpm workspace structure for the monorepo. This is the f
 - Verify workspace structure with `pnpm list -r`
 
 **Acceptance Criteria**:
+
 - [ ] `pnpm-workspace.yaml` exists and correctly defines workspace patterns
 - [ ] Root `package.json` exists with proper metadata
 - [ ] Running `pnpm list -r` shows workspace structure
@@ -71,6 +73,7 @@ Create the foundational pnpm workspace structure for the monorepo. This is the f
 - [ ] Documentation added to README about workspace structure
 
 **Files to Create/Modify**:
+
 - `pnpm-workspace.yaml` (new)
 - `package.json` (new/update)
 - `README.md` (update)
@@ -87,6 +90,7 @@ Create the foundational pnpm workspace structure for the monorepo. This is the f
 Install Turborepo as the build orchestration tool and configure basic pipeline for monorepo tasks.
 
 **Tasks**:
+
 - Install Turborepo as dev dependency: `pnpm add -D turbo`
 - Create initial `turbo.json` configuration file
 - Configure basic pipeline tasks (build, dev, lint, type-check)
@@ -97,6 +101,7 @@ Install Turborepo as the build orchestration tool and configure basic pipeline f
 - Document Turborepo commands in README
 
 **Acceptance Criteria**:
+
 - [ ] `turbo.json` exists with valid configuration
 - [ ] Turborepo is installed as dev dependency
 - [ ] Pipeline defines at least: build, dev, lint, type-check tasks
@@ -106,6 +111,7 @@ Install Turborepo as the build orchestration tool and configure basic pipeline f
 - [ ] Documentation updated with Turborepo usage
 
 **Files to Create/Modify**:
+
 - `turbo.json` (new)
 - `package.json` (update - add turbo dependency)
 - `README.md` (update)
@@ -122,6 +128,7 @@ Install Turborepo as the build orchestration tool and configure basic pipeline f
 Create the directory structure for apps, packages, data, and content directories as planned in the architecture.
 
 **Tasks**:
+
 - Create `apps/` directory
 - Create `packages/` directory
 - Create `data/` directory (for shared data files)
@@ -131,12 +138,14 @@ Create the directory structure for apps, packages, data, and content directories
 - Create initial directory structure diagram
 
 **Acceptance Criteria**:
+
 - [ ] All required directories exist: `apps/`, `packages/`, `data/`, `content/`
 - [ ] Directory structure documented in README
 - [ ] Empty directories have `.gitkeep` to preserve structure in git
 - [ ] Structure matches planned architecture
 
 **Files to Create/Modify**:
+
 - `apps/.gitkeep` (new)
 - `packages/.gitkeep` (new)
 - `data/.gitkeep` (new)
@@ -155,6 +164,7 @@ Create the directory structure for apps, packages, data, and content directories
 Create base TypeScript configuration that all packages will extend, ensuring consistent TypeScript settings across the monorepo.
 
 **Tasks**:
+
 - Create `tsconfig.base.json` in root
 - Configure base compiler options (target, module, lib, strict mode)
 - Set up path mappings for shared packages
@@ -165,6 +175,7 @@ Create base TypeScript configuration that all packages will extend, ensuring con
 - Document TypeScript configuration approach
 
 **Acceptance Criteria**:
+
 - [ ] `tsconfig.base.json` exists with appropriate settings
 - [ ] Strict type checking enabled
 - [ ] Path mappings configured for package imports
@@ -174,6 +185,7 @@ Create base TypeScript configuration that all packages will extend, ensuring con
 - [ ] Example package tsconfig.json created as template
 
 **Files to Create/Modify**:
+
 - `tsconfig.base.json` (new)
 - `package.json` (update - add typescript dependency)
 - `README.md` (update)
@@ -190,6 +202,7 @@ Create base TypeScript configuration that all packages will extend, ensuring con
 Set up ESLint configuration that works across all packages in the monorepo, with shared rules and package-specific overrides.
 
 **Tasks**:
+
 - Install ESLint and necessary plugins as dev dependencies
 - Create root `.eslintrc.js` or `.eslintrc.json`
 - Configure TypeScript ESLint parser
@@ -201,6 +214,7 @@ Set up ESLint configuration that works across all packages in the monorepo, with
 - Test linting works: `pnpm turbo run lint`
 
 **Acceptance Criteria**:
+
 - [ ] ESLint configuration file exists at root
 - [ ] TypeScript and React rules configured
 - [ ] ESLint can run on all packages: `pnpm turbo run lint`
@@ -209,6 +223,7 @@ Set up ESLint configuration that works across all packages in the monorepo, with
 - [ ] Documentation explains linting setup
 
 **Files to Create/Modify**:
+
 - `.eslintrc.json` (new)
 - `package.json` (update - add eslint dependencies and scripts)
 - `.eslintignore` (new)
@@ -225,6 +240,7 @@ Set up ESLint configuration that works across all packages in the monorepo, with
 Set up Prettier for consistent code formatting across all packages.
 
 **Tasks**:
+
 - Install Prettier as dev dependency
 - Create `.prettierrc` configuration file
 - Create `.prettierignore` file
@@ -235,6 +251,7 @@ Set up Prettier for consistent code formatting across all packages.
 - Document Prettier configuration
 
 **Acceptance Criteria**:
+
 - [ ] `.prettierrc` exists with configuration
 - [ ] `.prettierignore` exists with appropriate patterns
 - [ ] Prettier installed as dev dependency
@@ -244,6 +261,7 @@ Set up Prettier for consistent code formatting across all packages.
 - [ ] Documentation explains formatting rules
 
 **Files to Create/Modify**:
+
 - `.prettierrc` (new)
 - `.prettierignore` (new)
 - `package.json` (update - add prettier and scripts)
@@ -260,6 +278,7 @@ Set up Prettier for consistent code formatting across all packages.
 Configure Husky to run linting and formatting checks before commits, ensuring code quality.
 
 **Tasks**:
+
 - Install Husky as dev dependency
 - Initialize Husky: `pnpm exec husky install`
 - Create pre-commit hook script
@@ -270,6 +289,7 @@ Configure Husky to run linting and formatting checks before commits, ensuring co
 - Document pre-commit hook behavior
 
 **Acceptance Criteria**:
+
 - [ ] Husky installed and initialized
 - [ ] Pre-commit hook file exists in `.husky/`
 - [ ] Hook runs linting on staged files
@@ -279,6 +299,7 @@ Configure Husky to run linting and formatting checks before commits, ensuring co
 - [ ] Test commit shows hooks working
 
 **Files to Create/Modify**:
+
 - `.husky/pre-commit` (new)
 - `package.json` (update - add husky, lint-staged dependencies)
 - `.lintstagedrc` (new, if using lint-staged)
@@ -295,6 +316,7 @@ Configure Husky to run linting and formatting checks before commits, ensuring co
 Document the monorepo structure, conventions, and workflows for developers.
 
 **Tasks**:
+
 - Create `docs/WORKSPACE.md` or update root README
 - Document workspace structure
 - Explain package naming conventions
@@ -305,6 +327,7 @@ Document the monorepo structure, conventions, and workflows for developers.
 - Create getting started guide for new developers
 
 **Acceptance Criteria**:
+
 - [ ] Workspace documentation exists
 - [ ] Structure and conventions clearly explained
 - [ ] Common commands documented with examples
@@ -313,6 +336,7 @@ Document the monorepo structure, conventions, and workflows for developers.
 - [ ] New developer onboarding path clear
 
 **Files to Create/Modify**:
+
 - `docs/WORKSPACE.md` (new)
 - `README.md` (update)
 
@@ -330,6 +354,7 @@ Document the monorepo structure, conventions, and workflows for developers.
 Analyze existing component structure in `client/src/components/` to identify what should be extracted to shared packages.
 
 **Tasks**:
+
 - List all components in `client/src/components/`
 - Categorize components: UI primitives, layout, specialty designers, business logic
 - Identify dependencies between components
@@ -339,6 +364,7 @@ Analyze existing component structure in `client/src/components/` to identify wha
 - Note any breaking changes needed for extraction
 
 **Acceptance Criteria**:
+
 - [ ] Complete inventory of all components created
 - [ ] Components categorized by extraction strategy
 - [ ] Dependencies mapped between components
@@ -346,6 +372,7 @@ Analyze existing component structure in `client/src/components/` to identify wha
 - [ ] Clear plan for which components go to which packages
 
 **Deliverables**:
+
 - Component audit document (markdown/spreadsheet)
 - Extraction plan with priorities
 
@@ -361,6 +388,7 @@ Analyze existing component structure in `client/src/components/` to identify wha
 Initialize the UI package structure that will contain all shared UI components.
 
 **Tasks**:
+
 - Create `packages/ui/` directory
 - Initialize package.json with name `@framecraft/ui`
 - Create `src/` directory structure (components/, index.ts)
@@ -371,6 +399,7 @@ Initialize the UI package structure that will contain all shared UI components.
 - Test package can be imported from workspace root
 
 **Acceptance Criteria**:
+
 - [ ] `packages/ui/` directory structure exists
 - [ ] Package.json configured with correct name and scripts
 - [ ] TypeScript configuration extends base config
@@ -379,6 +408,7 @@ Initialize the UI package structure that will contain all shared UI components.
 - [ ] Package structure documented
 
 **Files to Create/Modify**:
+
 - `packages/ui/package.json` (new)
 - `packages/ui/tsconfig.json` (new)
 - `packages/ui/src/index.ts` (new)
@@ -396,6 +426,7 @@ Initialize the UI package structure that will contain all shared UI components.
 Move all Shadcn/ui primitive components (Button, Card, Dialog, etc.) to the UI package.
 
 **Tasks**:
+
 - Identify all Shadcn/ui components in `client/src/components/ui/`
 - Copy components to `packages/ui/src/components/ui/`
 - Update import paths within moved components
@@ -406,6 +437,7 @@ Move all Shadcn/ui primitive components (Button, Card, Dialog, etc.) to the UI p
 - Update any existing imports in codebase (if extracting incrementally)
 
 **Acceptance Criteria**:
+
 - [ ] All Shadcn/ui components moved to `packages/ui/src/components/ui/`
 - [ ] Components maintain original functionality
 - [ ] Import paths updated and working
@@ -414,6 +446,7 @@ Move all Shadcn/ui primitive components (Button, Card, Dialog, etc.) to the UI p
 - [ ] Components can be imported: `import { Button } from '@framecraft/ui'`
 
 **Files to Create/Modify**:
+
 - `packages/ui/src/components/ui/*` (new - moved files)
 - `packages/ui/src/index.ts` (update)
 - Original component files (remove after verification)
@@ -430,6 +463,7 @@ Move all Shadcn/ui primitive components (Button, Card, Dialog, etc.) to the UI p
 Move Header and Footer layout components to the UI package, making them shareable across stores.
 
 **Tasks**:
+
 - Locate Header component in current codebase
 - Locate Footer component in current codebase
 - Copy to `packages/ui/src/components/layout/`
@@ -440,6 +474,7 @@ Move Header and Footer layout components to the UI package, making them shareabl
 - Update imports where used
 
 **Acceptance Criteria**:
+
 - [ ] Header component in `packages/ui/src/components/layout/Header.tsx`
 - [ ] Footer component in `packages/ui/src/components/layout/Footer.tsx`
 - [ ] Components accept configuration via props (theme, navigation, etc.)
@@ -448,6 +483,7 @@ Move Header and Footer layout components to the UI package, making them shareabl
 - [ ] Components can be imported and used
 
 **Files to Create/Modify**:
+
 - `packages/ui/src/components/layout/Header.tsx` (new)
 - `packages/ui/src/components/layout/Footer.tsx` (new)
 - `packages/ui/src/index.ts` (update)
@@ -464,6 +500,7 @@ Move Header and Footer layout components to the UI package, making them shareabl
 Move Navigation component to UI package, making it configurable per store.
 
 **Tasks**:
+
 - Locate Navigation component
 - Copy to `packages/ui/src/components/layout/Navigation.tsx`
 - Make navigation items configurable via props
@@ -473,6 +510,7 @@ Move Navigation component to UI package, making it configurable per store.
 - Document navigation configuration format
 
 **Acceptance Criteria**:
+
 - [ ] Navigation component in UI package
 - [ ] Component accepts navigation configuration via props
 - [ ] Hardcoded navigation items removed
@@ -480,6 +518,7 @@ Move Navigation component to UI package, making it configurable per store.
 - [ ] Documentation explains navigation configuration
 
 **Files to Create/Modify**:
+
 - `packages/ui/src/components/layout/Navigation.tsx` (new)
 - `packages/ui/src/index.ts` (update)
 
@@ -495,6 +534,7 @@ Move Navigation component to UI package, making it configurable per store.
 Move the main FrameDesigner component to UI package. This is a critical component that needs careful extraction.
 
 **Tasks**:
+
 - Locate FrameDesigner component
 - Identify all dependencies (hooks, utilities, types)
 - Copy component to `packages/ui/src/components/specialty/FrameDesigner.tsx`
@@ -505,6 +545,7 @@ Move the main FrameDesigner component to UI package. This is a critical componen
 - Update barrel exports
 
 **Acceptance Criteria**:
+
 - [ ] FrameDesigner component in UI package
 - [ ] All dependencies identified and handled
 - [ ] Component builds and runs correctly
@@ -513,6 +554,7 @@ Move the main FrameDesigner component to UI package. This is a critical componen
 - [ ] Original functionality preserved
 
 **Files to Create/Modify**:
+
 - `packages/ui/src/components/specialty/FrameDesigner.tsx` (new)
 - `packages/ui/src/index.ts` (update)
 - May need to extract dependencies first (see related tickets)
@@ -529,6 +571,7 @@ Move the main FrameDesigner component to UI package. This is a critical componen
 Move all specialty designer components (ShadowboxDesigner, JerseyDesigner, etc.) to UI package.
 
 **Tasks**:
+
 - Identify all specialty designer components
 - For each designer:
   - Copy component to `packages/ui/src/components/specialty/`
@@ -540,6 +583,7 @@ Move all specialty designer components (ShadowboxDesigner, JerseyDesigner, etc.)
 - Test all designers work after extraction
 
 **Acceptance Criteria**:
+
 - [ ] All specialty designers in UI package:
   - ShadowboxDesigner
   - JerseyDesigner
@@ -552,6 +596,7 @@ Move all specialty designer components (ShadowboxDesigner, JerseyDesigner, etc.)
 - [ ] Original functionality preserved
 
 **Files to Create/Modify**:
+
 - `packages/ui/src/components/specialty/*Designer.tsx` (new - multiple files)
 - `packages/ui/src/index.ts` (update)
 
@@ -567,6 +612,7 @@ Move all specialty designer components (ShadowboxDesigner, JerseyDesigner, etc.)
 Initialize the core business logic package that will contain services, utilities, and shared logic.
 
 **Tasks**:
+
 - Create `packages/core/` directory
 - Initialize package.json with name `@framecraft/core`
 - Create directory structure: `src/services/`, `src/utils/`, `src/hooks/`, `src/types/`
@@ -577,6 +623,7 @@ Initialize the core business logic package that will contain services, utilities
 - Test package structure
 
 **Acceptance Criteria**:
+
 - [ ] `packages/core/` structure exists
 - [ ] Package.json configured correctly
 - [ ] TypeScript configuration extends base
@@ -585,6 +632,7 @@ Initialize the core business logic package that will contain services, utilities
 - [ ] Package documented
 
 **Files to Create/Modify**:
+
 - `packages/core/package.json` (new)
 - `packages/core/tsconfig.json` (new)
 - `packages/core/src/index.ts` (new)
@@ -604,6 +652,7 @@ Initialize the core business logic package that will contain services, utilities
 Move products service to core package, making product data access reusable.
 
 **Tasks**:
+
 - Locate `client/src/services/products.ts`
 - Copy to `packages/core/src/services/products.ts`
 - Update imports (remove client-specific paths)
@@ -613,6 +662,7 @@ Move products service to core package, making product data access reusable.
 - Document service API
 
 **Acceptance Criteria**:
+
 - [ ] Products service in `packages/core/src/services/products.ts`
 - [ ] All functions exported correctly
 - [ ] No client-specific dependencies
@@ -621,6 +671,7 @@ Move products service to core package, making product data access reusable.
 - [ ] API documented
 
 **Files to Create/Modify**:
+
 - `packages/core/src/services/products.ts` (new)
 - `packages/core/src/services/index.ts` (update)
 - `packages/core/src/index.ts` (update)
@@ -637,6 +688,7 @@ Move products service to core package, making product data access reusable.
 Move pricing calculation logic to core package. This is critical business logic that must work correctly.
 
 **Tasks**:
+
 - Locate `client/src/services/pricing.ts`
 - Copy to `packages/core/src/services/pricing.ts`
 - Identify and extract any dependencies
@@ -647,6 +699,7 @@ Move pricing calculation logic to core package. This is critical business logic 
 - Document pricing calculation logic
 
 **Acceptance Criteria**:
+
 - [ ] Pricing service in core package
 - [ ] All pricing functions exported
 - [ ] Calculations produce same results as before
@@ -655,6 +708,7 @@ Move pricing calculation logic to core package. This is critical business logic 
 - [ ] Documentation explains pricing logic
 
 **Files to Create/Modify**:
+
 - `packages/core/src/services/pricing.ts` (new)
 - `packages/core/src/services/index.ts` (update)
 - `packages/core/src/index.ts` (update)
@@ -671,6 +725,7 @@ Move pricing calculation logic to core package. This is critical business logic 
 Move validation utilities to core package for reuse across packages.
 
 **Tasks**:
+
 - Locate validation service/utilities
 - Copy to `packages/core/src/services/validation.ts` or `src/utils/validation.ts`
 - Update imports
@@ -679,6 +734,7 @@ Move validation utilities to core package for reuse across packages.
 - Document validation rules
 
 **Acceptance Criteria**:
+
 - [ ] Validation code in core package
 - [ ] All validation functions exported
 - [ ] Functions work correctly
@@ -686,6 +742,7 @@ Move validation utilities to core package for reuse across packages.
 - [ ] Validation rules documented
 
 **Files to Create/Modify**:
+
 - `packages/core/src/services/validation.ts` (new)
 - `packages/core/src/index.ts` (update)
 
@@ -701,6 +758,7 @@ Move validation utilities to core package for reuse across packages.
 Move reusable React hooks to core package.
 
 **Tasks**:
+
 - Identify hooks in `client/src/hooks/`
 - Categorize: shared vs component-specific
 - Copy shared hooks to `packages/core/src/hooks/`
@@ -710,6 +768,7 @@ Move reusable React hooks to core package.
 - Document hook usage
 
 **Acceptance Criteria**:
+
 - [ ] Shared hooks moved to core package
 - [ ] Hooks in `packages/core/src/hooks/`
 - [ ] All hooks exported correctly
@@ -717,6 +776,7 @@ Move reusable React hooks to core package.
 - [ ] Hook documentation created
 
 **Files to Create/Modify**:
+
 - `packages/core/src/hooks/*.ts` (new - multiple files)
 - `packages/core/src/hooks/index.ts` (new)
 - `packages/core/src/index.ts` (update)
@@ -733,6 +793,7 @@ Move reusable React hooks to core package.
 Move shared utility functions from `client/src/lib/` to core package.
 
 **Tasks**:
+
 - Identify utility functions in `client/src/lib/`
 - Categorize utilities (formatting, calculations, transformations)
 - Copy utilities to `packages/core/src/utils/`
@@ -743,6 +804,7 @@ Move shared utility functions from `client/src/lib/` to core package.
 - Document utility functions
 
 **Acceptance Criteria**:
+
 - [ ] Utility functions in core package
 - [ ] Organized into logical files
 - [ ] All utilities exported
@@ -750,6 +812,7 @@ Move shared utility functions from `client/src/lib/` to core package.
 - [ ] Utility documentation created
 
 **Files to Create/Modify**:
+
 - `packages/core/src/utils/*.ts` (new - multiple files)
 - `packages/core/src/utils/index.ts` (new)
 - `packages/core/src/index.ts` (update)
@@ -766,6 +829,7 @@ Move shared utility functions from `client/src/lib/` to core package.
 Create dedicated types package for shared TypeScript type definitions.
 
 **Tasks**:
+
 - Create `packages/types/` directory
 - Initialize package.json with name `@framecraft/types`
 - Set up TypeScript configuration (declaration only)
@@ -775,6 +839,7 @@ Create dedicated types package for shared TypeScript type definitions.
 - Create initial index.ts barrel export
 
 **Acceptance Criteria**:
+
 - [ ] `packages/types/` package exists
 - [ ] Package.json configured correctly
 - [ ] TypeScript configured for declaration output
@@ -782,6 +847,7 @@ Create dedicated types package for shared TypeScript type definitions.
 - [ ] Package structure documented
 
 **Files to Create/Modify**:
+
 - `packages/types/package.json` (new)
 - `packages/types/tsconfig.json` (new)
 - `packages/types/src/index.ts` (new)
@@ -798,6 +864,7 @@ Create dedicated types package for shared TypeScript type definitions.
 Move all shared TypeScript type definitions to the types package.
 
 **Tasks**:
+
 - Identify type definitions in `client/src/types/`
 - Categorize types (products, pricing, configuration, etc.)
 - Copy types to `packages/types/src/` organized by category
@@ -808,6 +875,7 @@ Move all shared TypeScript type definitions to the types package.
 - Document type definitions
 
 **Acceptance Criteria**:
+
 - [ ] All shared types in types package
 - [ ] Types organized by category
 - [ ] All types exported correctly
@@ -816,6 +884,7 @@ Move all shared TypeScript type definitions to the types package.
 - [ ] Type definitions documented
 
 **Files to Create/Modify**:
+
 - `packages/types/src/*.ts` (new - multiple type definition files)
 - `packages/types/src/index.ts` (update)
 
@@ -831,6 +900,7 @@ Move all shared TypeScript type definitions to the types package.
 Initialize the configuration package for shared configuration schemas and utilities.
 
 **Tasks**:
+
 - Create `packages/config/` directory
 - Initialize package.json with name `@framecraft/config`
 - Create directory structure for different config types
@@ -840,6 +910,7 @@ Initialize the configuration package for shared configuration schemas and utilit
 - Add to workspace
 
 **Acceptance Criteria**:
+
 - [ ] `packages/config/` package exists
 - [ ] Package.json configured correctly
 - [ ] TypeScript configuration set up
@@ -847,6 +918,7 @@ Initialize the configuration package for shared configuration schemas and utilit
 - [ ] Structure documented
 
 **Files to Create/Modify**:
+
 - `packages/config/package.json` (new)
 - `packages/config/tsconfig.json` (new)
 - `packages/config/src/index.ts` (new)
@@ -863,6 +935,7 @@ Initialize the configuration package for shared configuration schemas and utilit
 Move navigation configuration to config package.
 
 **Tasks**:
+
 - Locate navigation configuration in current codebase
 - Copy to `packages/config/src/navigation.ts`
 - Define navigation configuration type/interface
@@ -871,6 +944,7 @@ Move navigation configuration to config package.
 - Document navigation configuration format
 
 **Acceptance Criteria**:
+
 - [ ] Navigation configuration in config package
 - [ ] Configuration type defined
 - [ ] Configuration exported correctly
@@ -878,6 +952,7 @@ Move navigation configuration to config package.
 - [ ] Configuration format documented
 
 **Files to Create/Modify**:
+
 - `packages/config/src/navigation.ts` (new)
 - `packages/config/src/index.ts` (update)
 
@@ -893,6 +968,7 @@ Move navigation configuration to config package.
 Move theme configuration to config package, setting up the foundation for multi-store theming.
 
 **Tasks**:
+
 - Locate theme/color configuration in current codebase
 - Copy to `packages/config/src/theme.ts`
 - Define theme configuration interface
@@ -902,6 +978,7 @@ Move theme configuration to config package, setting up the foundation for multi-
 - Document theme configuration structure
 
 **Acceptance Criteria**:
+
 - [ ] Theme configuration in config package
 - [ ] Theme interface/types defined
 - [ ] Base theme exported
@@ -910,6 +987,7 @@ Move theme configuration to config package, setting up the foundation for multi-
 - [ ] Configuration documented
 
 **Files to Create/Modify**:
+
 - `packages/config/src/theme.ts` (new)
 - `packages/config/src/index.ts` (update)
 
@@ -925,6 +1003,7 @@ Move theme configuration to config package, setting up the foundation for multi-
 Move feature flag configuration and logic to config package.
 
 **Tasks**:
+
 - Locate feature flag definitions
 - Copy to `packages/config/src/features.ts`
 - Define feature flag type/interface
@@ -934,6 +1013,7 @@ Move feature flag configuration and logic to config package.
 - Document feature flag system
 
 **Acceptance Criteria**:
+
 - [ ] Feature flag configuration in config package
 - [ ] Feature flag interface defined
 - [ ] Default flags exported
@@ -942,6 +1022,7 @@ Move feature flag configuration and logic to config package.
 - [ ] Feature flag system documented
 
 **Files to Create/Modify**:
+
 - `packages/config/src/features.ts` (new)
 - `packages/config/src/index.ts` (update)
 
@@ -957,6 +1038,7 @@ Move feature flag configuration and logic to config package.
 Initialize the data package that will contain product catalogs and static data.
 
 **Tasks**:
+
 - Create `packages/data/` directory
 - Initialize package.json (may not need build, just data files)
 - Copy product catalog JSON files (frames.json, mats.json, glass.json)
@@ -966,6 +1048,7 @@ Initialize the data package that will contain product catalogs and static data.
 - Document data package structure
 
 **Acceptance Criteria**:
+
 - [ ] `packages/data/` package exists
 - [ ] All product catalog files copied
 - [ ] Pricing configuration copied
@@ -974,6 +1057,7 @@ Initialize the data package that will contain product catalogs and static data.
 - [ ] Package documented
 
 **Files to Create/Modify**:
+
 - `packages/data/package.json` (new)
 - `packages/data/frames.json` (copy)
 - `packages/data/mats.json` (copy)
@@ -992,6 +1076,7 @@ Initialize the data package that will contain product catalogs and static data.
 Ensure all packages have correct dependencies and peer dependencies configured.
 
 **Tasks**:
+
 - Review each package's dependencies
 - Move shared dependencies to workspace root where appropriate
 - Configure peer dependencies correctly
@@ -1001,6 +1086,7 @@ Ensure all packages have correct dependencies and peer dependencies configured.
 - Document dependency strategy
 
 **Acceptance Criteria**:
+
 - [ ] All packages have correct dependencies
 - [ ] Peer dependencies configured properly
 - [ ] Internal package dependencies working
@@ -1009,6 +1095,7 @@ Ensure all packages have correct dependencies and peer dependencies configured.
 - [ ] Dependency strategy documented
 
 **Files to Create/Modify**:
+
 - `packages/*/package.json` (update - all packages)
 - Root `package.json` (update if moving dependencies)
 
@@ -1024,6 +1111,7 @@ Ensure all packages have correct dependencies and peer dependencies configured.
 Configure build scripts for each package to ensure they can be built independently and as part of monorepo.
 
 **Tasks**:
+
 - Add build scripts to each package.json
 - Configure output directories (dist/, lib/, etc.)
 - Set up TypeScript compilation for packages that need it
@@ -1033,6 +1121,7 @@ Configure build scripts for each package to ensure they can be built independent
 - Ensure build outputs are in correct locations
 
 **Acceptance Criteria**:
+
 - [ ] Each package has build script
 - [ ] Packages can be built independently
 - [ ] Monorepo build works: `pnpm turbo run build`
@@ -1040,6 +1129,7 @@ Configure build scripts for each package to ensure they can be built independent
 - [ ] Build process documented
 
 **Files to Create/Modify**:
+
 - `packages/*/package.json` (update - add build scripts)
 - `turbo.json` (update if needed)
 
@@ -1055,6 +1145,7 @@ Configure build scripts for each package to ensure they can be built independent
 Ensure all packages have proper exports configured for clean imports.
 
 **Tasks**:
+
 - Review each package's main entry point
 - Update barrel export files (index.ts) to export all public APIs
 - Configure package.json exports field (if using)
@@ -1063,6 +1154,7 @@ Ensure all packages have proper exports configured for clean imports.
 - Document what each package exports
 
 **Acceptance Criteria**:
+
 - [ ] All packages have proper exports
 - [ ] Barrel files export all public APIs
 - [ ] Imports work correctly from packages
@@ -1070,6 +1162,7 @@ Ensure all packages have proper exports configured for clean imports.
 - [ ] Package exports documented
 
 **Files to Create/Modify**:
+
 - `packages/*/src/index.ts` (update - all packages)
 - `packages/*/package.json` (update exports field)
 
@@ -1087,6 +1180,7 @@ Ensure all packages have proper exports configured for clean imports.
 Design the architecture for the Storefront API client that will handle all client-side Shopify interactions.
 
 **Tasks**:
+
 - Research Shopify Storefront API structure
 - Design client class structure
 - Plan store identifier mapping system
@@ -1097,6 +1191,7 @@ Design the architecture for the Storefront API client that will handle all clien
 - Document design decisions
 
 **Acceptance Criteria**:
+
 - [ ] Architecture design document created
 - [ ] Client class structure defined
 - [ ] Store mapping approach documented
@@ -1105,6 +1200,7 @@ Design the architecture for the Storefront API client that will handle all clien
 - [ ] Design decisions documented
 
 **Deliverables**:
+
 - Architecture design document
 
 ---
@@ -1119,6 +1215,7 @@ Design the architecture for the Storefront API client that will handle all clien
 Implement the base Storefront API client class in the core package.
 
 **Tasks**:
+
 - Create `packages/core/src/shopify/storefront-client.ts`
 - Implement client class with constructor accepting store config
 - Implement base query method
@@ -1129,6 +1226,7 @@ Implement the base Storefront API client class in the core package.
 - Document client usage
 
 **Acceptance Criteria**:
+
 - [ ] StorefrontClient class implemented
 - [ ] Query method works
 - [ ] Mutation method works
@@ -1138,6 +1236,7 @@ Implement the base Storefront API client class in the core package.
 - [ ] Client usage documented
 
 **Files to Create/Modify**:
+
 - `packages/core/src/shopify/storefront-client.ts` (new)
 - `packages/core/src/shopify/__tests__/storefront-client.test.ts` (new)
 
@@ -1153,6 +1252,7 @@ Implement the base Storefront API client class in the core package.
 Create system to map store identifiers to Shopify store configurations.
 
 **Tasks**:
+
 - Design store configuration interface
 - Create store configuration registry/map
 - Implement function to get store config by ID
@@ -1163,6 +1263,7 @@ Create system to map store identifiers to Shopify store configurations.
 - Document store configuration setup
 
 **Acceptance Criteria**:
+
 - [ ] Store configuration interface defined
 - [ ] Store mapping system implemented
 - [ ] Can get store config by ID
@@ -1172,6 +1273,7 @@ Create system to map store identifiers to Shopify store configurations.
 - [ ] Configuration documented
 
 **Files to Create/Modify**:
+
 - `packages/core/src/shopify/store-config.ts` (new)
 
 ---
@@ -1186,6 +1288,7 @@ Create system to map store identifiers to Shopify store configurations.
 Create reusable GraphQL fragment for product fields to ensure consistent product data structure.
 
 **Tasks**:
+
 - Research Shopify Storefront API product fields
 - Create `packages/core/src/shopify/fragments.ts`
 - Define ProductFields fragment with all needed fields
@@ -1197,6 +1300,7 @@ Create reusable GraphQL fragment for product fields to ensure consistent product
 - Test fragment syntax is valid
 
 **Acceptance Criteria**:
+
 - [ ] ProductFields fragment created
 - [ ] Fragment includes all essential product fields
 - [ ] Fragment syntax is valid GraphQL
@@ -1204,6 +1308,7 @@ Create reusable GraphQL fragment for product fields to ensure consistent product
 - [ ] Fragment can be composed in queries
 
 **Files to Create/Modify**:
+
 - `packages/core/src/shopify/fragments.ts` (new)
 
 ---
@@ -1218,6 +1323,7 @@ Create reusable GraphQL fragment for product fields to ensure consistent product
 Create reusable GraphQL fragment for product variant fields.
 
 **Tasks**:
+
 - Define VariantFields fragment
 - Include variant ID, title, SKU
 - Include price fields
@@ -1229,6 +1335,7 @@ Create reusable GraphQL fragment for product variant fields.
 - Test fragment syntax
 
 **Acceptance Criteria**:
+
 - [ ] VariantFields fragment created
 - [ ] Fragment includes all variant fields needed
 - [ ] Fragment syntax valid
@@ -1236,6 +1343,7 @@ Create reusable GraphQL fragment for product variant fields.
 - [ ] Fragment can be used in queries
 
 **Files to Create/Modify**:
+
 - `packages/core/src/shopify/fragments.ts` (update)
 
 ---
@@ -1250,6 +1358,7 @@ Create reusable GraphQL fragment for product variant fields.
 Create GraphQL fragment for cart fields including line items.
 
 **Tasks**:
+
 - Define CartFields fragment
 - Include cart ID, checkout URL
 - Include total quantity
@@ -1261,6 +1370,7 @@ Create GraphQL fragment for cart fields including line items.
 - Test fragment syntax
 
 **Acceptance Criteria**:
+
 - [ ] CartFields fragment created
 - [ ] Fragment includes all cart fields
 - [ ] Line items structure defined
@@ -1269,6 +1379,7 @@ Create GraphQL fragment for cart fields including line items.
 - [ ] Fragment documented
 
 **Files to Create/Modify**:
+
 - `packages/core/src/shopify/fragments.ts` (update)
 
 ---
@@ -1283,6 +1394,7 @@ Create GraphQL fragment for cart fields including line items.
 Create GraphQL fragment for collection fields.
 
 **Tasks**:
+
 - Define CollectionFields fragment
 - Include collection ID, title, handle, description
 - Include product connection structure
@@ -1291,6 +1403,7 @@ Create GraphQL fragment for collection fields.
 - Test fragment syntax
 
 **Acceptance Criteria**:
+
 - [ ] CollectionFields fragment created
 - [ ] Fragment includes collection fields
 - [ ] Product connection defined
@@ -1298,6 +1411,7 @@ Create GraphQL fragment for collection fields.
 - [ ] Fragment syntax valid
 
 **Files to Create/Modify**:
+
 - `packages/core/src/shopify/fragments.ts` (update)
 
 ---
@@ -1312,6 +1426,7 @@ Create GraphQL fragment for collection fields.
 Implement function to fetch a single product by handle with store context.
 
 **Tasks**:
+
 - Create `packages/core/src/shopify/products.ts`
 - Implement getProductByHandle function
 - Accept storeId and handle as parameters
@@ -1323,6 +1438,7 @@ Implement function to fetch a single product by handle with store context.
 - Document function usage
 
 **Acceptance Criteria**:
+
 - [ ] getProductByHandle function implemented
 - [ ] Function accepts storeId and handle
 - [ ] Query uses ProductFields fragment
@@ -1332,6 +1448,7 @@ Implement function to fetch a single product by handle with store context.
 - [ ] Function documented with examples
 
 **Files to Create/Modify**:
+
 - `packages/core/src/shopify/products.ts` (new)
 - `packages/core/src/shopify/__tests__/products.test.ts` (new)
 
@@ -1347,6 +1464,7 @@ Implement function to fetch a single product by handle with store context.
 Implement function to fetch collection products with pagination support.
 
 **Tasks**:
+
 - Add getCollection function to products.ts
 - Accept storeId, handle, and pagination params (first, after)
 - Build GraphQL query with pagination arguments
@@ -1358,6 +1476,7 @@ Implement function to fetch collection products with pagination support.
 - Document pagination usage
 
 **Acceptance Criteria**:
+
 - [ ] getCollection function implemented
 - [ ] Pagination parameters accepted
 - [ ] Query includes pageInfo
@@ -1367,6 +1486,7 @@ Implement function to fetch collection products with pagination support.
 - [ ] Function documented
 
 **Files to Create/Modify**:
+
 - `packages/core/src/shopify/products.ts` (update)
 - `packages/core/src/shopify/__tests__/products.test.ts` (update)
 
@@ -1382,6 +1502,7 @@ Implement function to fetch collection products with pagination support.
 Implement product search functionality using Shopify's search API.
 
 **Tasks**:
+
 - Add searchProducts function
 - Accept storeId and search query string
 - Build GraphQL search query
@@ -1393,6 +1514,7 @@ Implement product search functionality using Shopify's search API.
 - Document search usage
 
 **Acceptance Criteria**:
+
 - [ ] searchProducts function implemented
 - [ ] Search query parameter accepted
 - [ ] GraphQL search query works
@@ -1402,6 +1524,7 @@ Implement product search functionality using Shopify's search API.
 - [ ] Function documented
 
 **Files to Create/Modify**:
+
 - `packages/core/src/shopify/products.ts` (update)
 - `packages/core/src/shopify/__tests__/products.test.ts` (update)
 
@@ -1417,6 +1540,7 @@ Implement product search functionality using Shopify's search API.
 Design how frame configurations will be serialized to Shopify line item attributes.
 
 **Tasks**:
+
 - Review current frame configuration structure
 - Design attribute key naming convention
 - Plan attribute structure (key-value pairs)
@@ -1427,6 +1551,7 @@ Design how frame configurations will be serialized to Shopify line item attribut
 - Review with team/stakeholder
 
 **Acceptance Criteria**:
+
 - [ ] Serialization design document created
 - [ ] Attribute naming convention defined
 - [ ] Attribute structure planned
@@ -1435,6 +1560,7 @@ Design how frame configurations will be serialized to Shopify line item attribut
 - [ ] Specification reviewed and approved
 
 **Deliverables**:
+
 - Frame configuration serialization specification
 
 ---
@@ -1449,6 +1575,7 @@ Design how frame configurations will be serialized to Shopify line item attribut
 Implement serializer to convert frame configuration to Shopify line item attributes.
 
 **Tasks**:
+
 - Create `packages/core/src/shopify/serialization.ts`
 - Implement serializeFrameConfiguration function
 - Convert configuration to attribute array
@@ -1459,6 +1586,7 @@ Implement serializer to convert frame configuration to Shopify line item attribu
 - Document serialization format
 
 **Acceptance Criteria**:
+
 - [ ] serializeFrameConfiguration function implemented
 - [ ] All configuration fields serialized
 - [ ] Attributes follow naming convention
@@ -1468,6 +1596,7 @@ Implement serializer to convert frame configuration to Shopify line item attribu
 - [ ] Serialization documented
 
 **Files to Create/Modify**:
+
 - `packages/core/src/shopify/serialization.ts` (new)
 - `packages/core/src/shopify/__tests__/serialization.test.ts` (new)
 
@@ -1483,6 +1612,7 @@ Implement serializer to convert frame configuration to Shopify line item attribu
 Implement serializers for each specialty designer type (shadowbox, jersey, etc.).
 
 **Tasks**:
+
 - Create serializer functions for each designer type
 - Implement serializeShadowboxConfiguration
 - Implement serializeJerseyConfiguration
@@ -1494,6 +1624,7 @@ Implement serializers for each specialty designer type (shadowbox, jersey, etc.)
 - Document specialty serialization
 
 **Acceptance Criteria**:
+
 - [ ] Serializers for all specialty designers implemented
 - [ ] Each serializer handles designer-specific fields
 - [ ] All serializers follow same pattern
@@ -1501,6 +1632,7 @@ Implement serializers for each specialty designer type (shadowbox, jersey, etc.)
 - [ ] Serialization documented
 
 **Files to Create/Modify**:
+
 - `packages/core/src/shopify/serialization.ts` (update)
 - `packages/core/src/shopify/__tests__/serialization.test.ts` (update)
 
@@ -1516,6 +1648,7 @@ Implement serializers for each specialty designer type (shadowbox, jersey, etc.)
 Implement deserializer to convert Shopify line item attributes back to frame configuration for order fulfillment.
 
 **Tasks**:
+
 - Implement deserializeFrameConfiguration function
 - Parse attribute array back to configuration object
 - Handle JSON attribute if present
@@ -1525,6 +1658,7 @@ Implement deserializer to convert Shopify line item attributes back to frame con
 - Document deserialization
 
 **Acceptance Criteria**:
+
 - [ ] Deserializer function implemented
 - [ ] Can deserialize all configuration types
 - [ ] JSON attribute parsed correctly
@@ -1533,6 +1667,7 @@ Implement deserializer to convert Shopify line item attributes back to frame con
 - [ ] Deserialization documented
 
 **Files to Create/Modify**:
+
 - `packages/core/src/shopify/serialization.ts` (update)
 - `packages/core/src/shopify/__tests__/serialization.test.ts` (update)
 
@@ -1548,6 +1683,7 @@ Implement deserializer to convert Shopify line item attributes back to frame con
 Design the cart state management approach using Zustand for client-side cart handling.
 
 **Tasks**:
+
 - Review Zustand patterns
 - Design cart store structure
 - Plan cart state shape (items, totals, metadata)
@@ -1558,6 +1694,7 @@ Design the cart state management approach using Zustand for client-side cart han
 - Document cart state design
 
 **Acceptance Criteria**:
+
 - [ ] Cart state design document created
 - [ ] Store structure defined
 - [ ] Actions planned
@@ -1566,6 +1703,7 @@ Design the cart state management approach using Zustand for client-side cart han
 - [ ] Design documented
 
 **Deliverables**:
+
 - Cart state management design document
 
 ---
@@ -1580,6 +1718,7 @@ Design the cart state management approach using Zustand for client-side cart han
 Create Zustand store for cart state management.
 
 **Tasks**:
+
 - Install Zustand if not already installed
 - Create `packages/core/src/stores/cart-store.ts`
 - Define cart state interface
@@ -1591,6 +1730,7 @@ Create Zustand store for cart state management.
 - Document store usage
 
 **Acceptance Criteria**:
+
 - [ ] Cart store implemented with Zustand
 - [ ] All cart actions implemented
 - [ ] Selectors for totals work
@@ -1600,6 +1740,7 @@ Create Zustand store for cart state management.
 - [ ] Store usage documented
 
 **Files to Create/Modify**:
+
 - `packages/core/src/stores/cart-store.ts` (new)
 - `packages/core/src/stores/__tests__/cart-store.test.ts` (new)
 - `packages/core/package.json` (update - add zustand if needed)
@@ -1616,6 +1757,7 @@ Create Zustand store for cart state management.
 Implement cart persistence to localStorage or sessionStorage.
 
 **Tasks**:
+
 - Design persistence strategy (localStorage vs sessionStorage)
 - Implement saveCartToStorage function
 - Implement loadCartFromStorage function
@@ -1626,6 +1768,7 @@ Implement cart persistence to localStorage or sessionStorage.
 - Document persistence behavior
 
 **Acceptance Criteria**:
+
 - [ ] Cart persistence implemented
 - [ ] Cart saves to storage
 - [ ] Cart loads from storage on init
@@ -1635,6 +1778,7 @@ Implement cart persistence to localStorage or sessionStorage.
 - [ ] Behavior documented
 
 **Files to Create/Modify**:
+
 - `packages/core/src/stores/cart-store.ts` (update)
 - May need utility file for storage operations
 
@@ -1650,6 +1794,7 @@ Implement cart persistence to localStorage or sessionStorage.
 Implement cart synchronization with Shopify Storefront API (cart creation/updates).
 
 **Tasks**:
+
 - Create cart mutation functions in shopify module
 - Implement cartCreate mutation
 - Implement cartLinesAdd mutation
@@ -1662,6 +1807,7 @@ Implement cart synchronization with Shopify Storefront API (cart creation/update
 - Document cart sync
 
 **Acceptance Criteria**:
+
 - [ ] Cart mutations implemented
 - [ ] Cart can be created via API
 - [ ] Cart lines can be added/updated/removed
@@ -1672,6 +1818,7 @@ Implement cart synchronization with Shopify Storefront API (cart creation/update
 - [ ] Cart sync documented
 
 **Files to Create/Modify**:
+
 - `packages/core/src/shopify/cart.ts` (new)
 - `packages/core/src/shopify/__tests__/cart.test.ts` (new)
 - `packages/core/src/stores/cart-store.ts` (update)
@@ -1688,6 +1835,7 @@ Implement cart synchronization with Shopify Storefront API (cart creation/update
 Implement error recovery mechanisms for cart operations.
 
 **Tasks**:
+
 - Design error recovery strategy
 - Implement cart state recovery on error
 - Handle network errors
@@ -1698,6 +1846,7 @@ Implement error recovery mechanisms for cart operations.
 - Document error handling
 
 **Acceptance Criteria**:
+
 - [ ] Error recovery implemented
 - [ ] Cart state recovers from errors
 - [ ] Network errors handled
@@ -1707,6 +1856,7 @@ Implement error recovery mechanisms for cart operations.
 - [ ] Error handling documented
 
 **Files to Create/Modify**:
+
 - `packages/core/src/stores/cart-store.ts` (update)
 - `packages/core/src/shopify/cart.ts` (update)
 
@@ -1724,6 +1874,7 @@ Implement error recovery mechanisms for cart operations.
 Design the serverless API architecture for Vercel deployment with secure Admin API access.
 
 **Tasks**:
+
 - Research Vercel serverless function structure
 - Design API route organization
 - Plan endpoint structure (/api/cart, /api/checkout, etc.)
@@ -1735,6 +1886,7 @@ Design the serverless API architecture for Vercel deployment with secure Admin A
 - Document API design
 
 **Acceptance Criteria**:
+
 - [ ] API architecture document created
 - [ ] Route structure defined
 - [ ] Request/response schemas designed
@@ -1744,6 +1896,7 @@ Design the serverless API architecture for Vercel deployment with secure Admin A
 - [ ] Architecture documented
 
 **Deliverables**:
+
 - Backend API architecture document
 
 ---
@@ -1758,6 +1911,7 @@ Design the serverless API architecture for Vercel deployment with secure Admin A
 Create the basic API route structure for Next.js/Vercel serverless functions.
 
 **Tasks**:
+
 - Decide on framework (Next.js API routes or standalone functions)
 - Create `apps/api/` directory structure
 - Set up route handlers structure
@@ -1768,6 +1922,7 @@ Create the basic API route structure for Next.js/Vercel serverless functions.
 - Document API route structure
 
 **Acceptance Criteria**:
+
 - [ ] `apps/api/` directory created
 - [ ] Route structure defined
 - [ ] Example route handler works
@@ -1776,6 +1931,7 @@ Create the basic API route structure for Next.js/Vercel serverless functions.
 - [ ] Structure documented
 
 **Files to Create/Modify**:
+
 - `apps/api/package.json` (new)
 - `apps/api/README.md` (new)
 - `apps/api/lib/route-handler.ts` (new)
@@ -1793,6 +1949,7 @@ Create the basic API route structure for Next.js/Vercel serverless functions.
 Create the POST endpoint for cart creation with secure Admin API integration and HTTP-only cookie management.
 
 **Tasks**:
+
 - Create POST /api/cart route handler
 - Implement cart creation using Admin API
 - Generate unique cart ID
@@ -1804,6 +1961,7 @@ Create the POST endpoint for cart creation with secure Admin API integration and
 - Write unit tests
 
 **Acceptance Criteria**:
+
 - [ ] POST /api/cart creates new cart
 - [ ] Cart ID stored in HTTP-only cookie
 - [ ] Request validation works
@@ -1813,6 +1971,7 @@ Create the POST endpoint for cart creation with secure Admin API integration and
 - [ ] Documentation updated
 
 **Files to Create/Modify**:
+
 - `apps/api/routes/cart/route.ts` (update)
 - `apps/api/lib/cart-utils.ts` (new)
 - `apps/api/__tests__/cart.test.ts` (new)
@@ -1829,6 +1988,7 @@ Create the POST endpoint for cart creation with secure Admin API integration and
 Create the PATCH endpoint for updating cart line items (add, update, remove items).
 
 **Tasks**:
+
 - Create PATCH /api/cart/lines route handler
 - Implement cart ID retrieval from cookie
 - Handle add line item operation
@@ -1841,6 +2001,7 @@ Create the PATCH endpoint for updating cart line items (add, update, remove item
 - Write unit tests
 
 **Acceptance Criteria**:
+
 - [ ] PATCH /api/cart/lines updates cart
 - [ ] Can add items to cart
 - [ ] Can update item quantities
@@ -1850,6 +2011,7 @@ Create the PATCH endpoint for updating cart line items (add, update, remove item
 - [ ] Tests pass
 
 **Files to Create/Modify**:
+
 - `apps/api/routes/cart/lines/route.ts` (new)
 - `apps/api/lib/cart-utils.ts` (update)
 - `apps/api/__tests__/cart-lines.test.ts` (new)
@@ -1866,6 +2028,7 @@ Create the PATCH endpoint for updating cart line items (add, update, remove item
 Create validation utilities to sanitize and validate all API requests for security.
 
 **Tasks**:
+
 - Create validation schema for cart requests
 - Create validation schema for checkout requests
 - Implement variant ID format validation
@@ -1878,6 +2041,7 @@ Create validation utilities to sanitize and validate all API requests for securi
 - Write validation tests
 
 **Acceptance Criteria**:
+
 - [ ] Validation schemas created
 - [ ] All inputs validated
 - [ ] Sanitization implemented
@@ -1886,6 +2050,7 @@ Create validation utilities to sanitize and validate all API requests for securi
 - [ ] Documentation updated
 
 **Files to Create/Modify**:
+
 - `apps/api/lib/validation.ts` (new)
 - `apps/api/lib/sanitization.ts` (new)
 - `apps/api/__tests__/validation.test.ts` (new)
@@ -1902,6 +2067,7 @@ Create validation utilities to sanitize and validate all API requests for securi
 Add rate limiting to API endpoints to prevent abuse and protect against DoS attacks.
 
 **Tasks**:
+
 - Research rate limiting libraries (e.g., `@upstash/ratelimit`)
 - Design rate limiting strategy (per IP, per session)
 - Configure rate limits for cart endpoints
@@ -1914,6 +2080,7 @@ Add rate limiting to API endpoints to prevent abuse and protect against DoS atta
 - Document rate limit configuration
 
 **Acceptance Criteria**:
+
 - [ ] Rate limiting implemented
 - [ ] Limits configured per endpoint
 - [ ] Rate limit headers added
@@ -1923,6 +2090,7 @@ Add rate limiting to API endpoints to prevent abuse and protect against DoS atta
 - [ ] Documentation updated
 
 **Files to Create/Modify**:
+
 - `apps/api/lib/rate-limit.ts` (new)
 - `apps/api/middleware/rate-limit.ts` (new)
 - `apps/api/__tests__/rate-limit.test.ts` (new)
@@ -1939,6 +2107,7 @@ Add rate limiting to API endpoints to prevent abuse and protect against DoS atta
 Build a secure abstraction layer for Shopify Admin API calls that handles tokens, errors, and retries.
 
 **Tasks**:
+
 - Create Admin API client class
 - Implement token management (from environment variables)
 - Add GraphQL query execution
@@ -1951,6 +2120,7 @@ Build a secure abstraction layer for Shopify Admin API calls that handles tokens
 - Document Admin API client usage
 
 **Acceptance Criteria**:
+
 - [ ] Admin API client created
 - [ ] Token management works
 - [ ] GraphQL queries execute
@@ -1961,6 +2131,7 @@ Build a secure abstraction layer for Shopify Admin API calls that handles tokens
 - [ ] Documentation updated
 
 **Files to Create/Modify**:
+
 - `packages/core/src/shopify/admin-client.ts` (new)
 - `packages/core/src/shopify/admin-types.ts` (new)
 - `packages/core/src/shopify/__tests__/admin-client.test.ts` (new)
@@ -1977,6 +2148,7 @@ Build a secure abstraction layer for Shopify Admin API calls that handles tokens
 Create the checkout endpoint that generates Shopify checkout URLs from cart data.
 
 **Tasks**:
+
 - Create POST /api/checkout route handler
 - Retrieve cart from cookie or cart ID
 - Validate cart has items
@@ -1989,6 +2161,7 @@ Create the checkout endpoint that generates Shopify checkout URLs from cart data
 - Write unit tests
 
 **Acceptance Criteria**:
+
 - [ ] POST /api/checkout creates checkout
 - [ ] Checkout URL generated correctly
 - [ ] Discount codes validated
@@ -1998,6 +2171,7 @@ Create the checkout endpoint that generates Shopify checkout URLs from cart data
 - [ ] Tests pass
 
 **Files to Create/Modify**:
+
 - `apps/api/routes/checkout/route.ts` (new)
 - `apps/api/lib/checkout-utils.ts` (new)
 - `apps/api/__tests__/checkout.test.ts` (new)
@@ -2014,6 +2188,7 @@ Create the checkout endpoint that generates Shopify checkout URLs from cart data
 Add optional tracking for checkout abandonment to help analyze conversion funnel.
 
 **Tasks**:
+
 - Design abandonment tracking data structure
 - Create tracking endpoint (optional)
 - Implement abandonment event logging
@@ -2023,6 +2198,7 @@ Add optional tracking for checkout abandonment to help analyze conversion funnel
 - Add feature flag for tracking
 
 **Acceptance Criteria**:
+
 - [ ] Abandonment tracking designed
 - [ ] Tracking implemented
 - [ ] Analytics integrated (if applicable)
@@ -2030,6 +2206,7 @@ Add optional tracking for checkout abandonment to help analyze conversion funnel
 - [ ] Documentation updated
 
 **Files to Create/Modify**:
+
 - `apps/api/lib/checkout-tracking.ts` (new)
 - `apps/api/routes/checkout/tracking/route.ts` (new, optional)
 
@@ -2045,6 +2222,7 @@ Add optional tracking for checkout abandonment to help analyze conversion funnel
 Create endpoint for storing order file metadata associated with Shopify orders.
 
 **Tasks**:
+
 - Create POST /api/orders/files route handler
 - Validate order ID (Shopify order ID format)
 - Validate file metadata (file type, URL, name)
@@ -2055,6 +2233,7 @@ Create endpoint for storing order file metadata associated with Shopify orders.
 - Write unit tests
 
 **Acceptance Criteria**:
+
 - [ ] POST /api/orders/files works
 - [ ] Order file metadata stored
 - [ ] Site ID linked correctly
@@ -2063,6 +2242,7 @@ Create endpoint for storing order file metadata associated with Shopify orders.
 - [ ] Tests pass
 
 **Files to Create/Modify**:
+
 - `apps/api/routes/orders/files/route.ts` (new)
 - `apps/api/lib/order-file-utils.ts` (new)
 - `apps/api/__tests__/order-files.test.ts` (new)
@@ -2079,6 +2259,7 @@ Create endpoint for storing order file metadata associated with Shopify orders.
 Create endpoint to retrieve order files by order ID with proper site ID filtering.
 
 **Tasks**:
+
 - Create GET /api/orders/files route handler
 - Retrieve order ID from query parameters
 - Filter by site ID (multi-tenant security)
@@ -2089,12 +2270,14 @@ Create endpoint to retrieve order files by order ID with proper site ID filterin
 - Write unit tests
 
 **Acceptance Criteria**:
+
 - [ ] GET /api/orders/files retrieves files
 - [ ] Site ID filtering works
 - [ ] Error handling implemented
 - [ ] Tests pass
 
 **Files to Create/Modify**:
+
 - `apps/api/routes/orders/files/route.ts` (update)
 - `apps/api/lib/order-file-utils.ts` (update)
 - `apps/api/__tests__/order-files.test.ts` (update)
@@ -2111,6 +2294,7 @@ Create endpoint to retrieve order files by order ID with proper site ID filterin
 Design the complete TypeScript interface for store configuration including all override options.
 
 **Tasks**:
+
 - Review existing brand.config.ts structure
 - Design BrandConfig interface
 - Design theme override interface
@@ -2123,6 +2307,7 @@ Design the complete TypeScript interface for store configuration including all o
 - Create example configurations
 
 **Acceptance Criteria**:
+
 - [ ] BrandConfig interface designed
 - [ ] All configuration types defined
 - [ ] Validation schema created
@@ -2130,6 +2315,7 @@ Design the complete TypeScript interface for store configuration including all o
 - [ ] Documentation complete
 
 **Files to Create/Modify**:
+
 - `packages/config/src/types/brand-config.ts` (new)
 - `packages/config/src/validation/schema.ts` (new)
 - `packages/config/docs/configuration.md` (new)
@@ -2146,6 +2332,7 @@ Design the complete TypeScript interface for store configuration including all o
 Implement the base theme system with CSS custom properties that stores can override.
 
 **Tasks**:
+
 - Design theme token structure (colors, fonts, spacing, etc.)
 - Create base theme configuration
 - Implement CSS custom properties generation
@@ -2155,6 +2342,7 @@ Implement the base theme system with CSS custom properties that stores can overr
 - Create theme examples
 
 **Acceptance Criteria**:
+
 - [ ] Base theme created
 - [ ] CSS custom properties generated
 - [ ] Theme utilities work
@@ -2163,6 +2351,7 @@ Implement the base theme system with CSS custom properties that stores can overr
 - [ ] Documentation complete
 
 **Files to Create/Modify**:
+
 - `packages/config/src/theme/base-theme.ts` (new)
 - `packages/config/src/theme/theme-utils.ts` (new)
 - `packages/config/src/theme/types.ts` (new)
@@ -2179,6 +2368,7 @@ Implement the base theme system with CSS custom properties that stores can overr
 Create function to merge store-specific theme overrides with base theme.
 
 **Tasks**:
+
 - Design theme merging algorithm (deep merge)
 - Implement theme merge function
 - Handle color overrides
@@ -2190,6 +2380,7 @@ Create function to merge store-specific theme overrides with base theme.
 - Document merging behavior
 
 **Acceptance Criteria**:
+
 - [ ] Theme merge function works
 - [ ] Deep merge implemented correctly
 - [ ] All override types supported
@@ -2198,6 +2389,7 @@ Create function to merge store-specific theme overrides with base theme.
 - [ ] Documentation complete
 
 **Files to Create/Modify**:
+
 - `packages/config/src/theme/theme-merge.ts` (new)
 - `packages/config/src/theme/__tests__/theme-merge.test.ts` (new)
 
@@ -2213,6 +2405,7 @@ Create function to merge store-specific theme overrides with base theme.
 Create React hook and utilities to apply merged theme to the application at runtime.
 
 **Tasks**:
+
 - Create useTheme hook
 - Implement CSS custom property injection
 - Create ThemeProvider component
@@ -2223,6 +2416,7 @@ Create React hook and utilities to apply merged theme to the application at runt
 - Document usage
 
 **Acceptance Criteria**:
+
 - [ ] useTheme hook works
 - [ ] ThemeProvider implemented
 - [ ] CSS properties injected
@@ -2231,6 +2425,7 @@ Create React hook and utilities to apply merged theme to the application at runt
 - [ ] Documentation complete
 
 **Files to Create/Modify**:
+
 - `packages/core/src/hooks/use-theme.ts` (new)
 - `packages/ui/src/providers/ThemeProvider.tsx` (new)
 - `packages/core/src/__tests__/use-theme.test.ts` (new)
@@ -2247,6 +2442,7 @@ Create React hook and utilities to apply merged theme to the application at runt
 Create the core feature flag evaluation system that checks store configuration.
 
 **Tasks**:
+
 - Design feature flag structure
 - Create default feature flags
 - Implement feature flag evaluation function
@@ -2256,6 +2452,7 @@ Create the core feature flag evaluation system that checks store configuration.
 - Document feature flags
 
 **Acceptance Criteria**:
+
 - [ ] Feature flag structure defined
 - [ ] Default flags created
 - [ ] Evaluation function works
@@ -2264,6 +2461,7 @@ Create the core feature flag evaluation system that checks store configuration.
 - [ ] Documentation complete
 
 **Files to Create/Modify**:
+
 - `packages/config/src/features/default-features.ts` (new)
 - `packages/config/src/features/feature-flags.ts` (new)
 - `packages/core/src/hooks/use-feature-flag.ts` (new)
@@ -2281,6 +2479,7 @@ Create the core feature flag evaluation system that checks store configuration.
 Create system for stores to override shared components with custom implementations.
 
 **Tasks**:
+
 - Design component override resolution algorithm
 - Create override registry
 - Implement lazy loading for override components
@@ -2292,6 +2491,7 @@ Create system for stores to override shared components with custom implementatio
 - Create override examples
 
 **Acceptance Criteria**:
+
 - [ ] Override system designed
 - [ ] Lazy loading works
 - [ ] Fallback works
@@ -2301,6 +2501,7 @@ Create system for stores to override shared components with custom implementatio
 - [ ] Documentation complete
 
 **Files to Create/Modify**:
+
 - `packages/core/src/components/override-registry.ts` (new)
 - `packages/core/src/hooks/use-component-override.ts` (new)
 - `packages/ui/src/components/OverrideResolver.tsx` (new)
@@ -2318,6 +2519,7 @@ Create system for stores to override shared components with custom implementatio
 Implement React context provider that loads and provides store configuration to all components.
 
 **Tasks**:
+
 - Create StoreConfigContext
 - Create StoreConfigProvider component
 - Implement configuration loading
@@ -2329,6 +2531,7 @@ Implement React context provider that loads and provides store configuration to 
 - Document usage
 
 **Acceptance Criteria**:
+
 - [ ] StoreConfigContext created
 - [ ] StoreConfigProvider implemented
 - [ ] Configuration loading works
@@ -2339,6 +2542,7 @@ Implement React context provider that loads and provides store configuration to 
 - [ ] Documentation complete
 
 **Files to Create/Modify**:
+
 - `packages/core/src/contexts/StoreConfigContext.tsx` (new)
 - `packages/core/src/hooks/use-store-config.ts` (new)
 - `packages/core/src/__tests__/store-config.test.ts` (new)
@@ -2355,6 +2559,7 @@ Implement React context provider that loads and provides store configuration to 
 Review all existing database tables to identify which need siteId for multi-tenant support.
 
 **Tasks**:
+
 - Review shared/schema.ts file
 - List all tables
 - Identify tables that store user/store-specific data
@@ -2365,6 +2570,7 @@ Review all existing database tables to identify which need siteId for multi-tena
 - Plan migration strategy
 
 **Acceptance Criteria**:
+
 - [ ] All tables reviewed
 - [ ] Tables needing siteId identified
 - [ ] Relationships documented
@@ -2372,6 +2578,7 @@ Review all existing database tables to identify which need siteId for multi-tena
 - [ ] Audit document created
 
 **Files to Create/Modify**:
+
 - `docs/database-schema-audit.md` (new)
 - Review: `shared/schema.ts` (read-only)
 
@@ -2387,6 +2594,7 @@ Review all existing database tables to identify which need siteId for multi-tena
 Add siteId columns to all relevant tables in the Drizzle schema definitions.
 
 **Tasks**:
+
 - Add siteId column to order_files table
 - Add siteId column to uploaded_images table
 - Add siteId column to mat_designs table
@@ -2397,6 +2605,7 @@ Add siteId columns to all relevant tables in the Drizzle schema definitions.
 - Document schema changes
 
 **Acceptance Criteria**:
+
 - [ ] siteId added to all relevant tables
 - [ ] Indexes created
 - [ ] Foreign keys updated
@@ -2404,6 +2613,7 @@ Add siteId columns to all relevant tables in the Drizzle schema definitions.
 - [ ] Changes documented
 
 **Files to Create/Modify**:
+
 - `shared/schema.ts` (update)
 - `docs/database-schema-changes.md` (new)
 
@@ -2419,6 +2629,7 @@ Add siteId columns to all relevant tables in the Drizzle schema definitions.
 Update all database queries to automatically filter by siteId for multi-tenant data isolation.
 
 **Tasks**:
+
 - Review storage.ts file
 - Update all SELECT queries to include siteId filter
 - Update all INSERT queries to include siteId
@@ -2429,6 +2640,7 @@ Update all database queries to automatically filter by siteId for multi-tenant d
 - Write unit tests
 
 **Acceptance Criteria**:
+
 - [ ] All queries filter by siteId
 - [ ] Inserts include siteId
 - [ ] Helper functions created
@@ -2436,6 +2648,7 @@ Update all database queries to automatically filter by siteId for multi-tenant d
 - [ ] Tests pass
 
 **Files to Create/Modify**:
+
 - `server/storage.ts` (update)
 - `server/lib/db-helpers.ts` (new)
 - `server/__tests__/storage.test.ts` (new)
@@ -2452,6 +2665,7 @@ Update all database queries to automatically filter by siteId for multi-tenant d
 Create migration script to add siteId columns to existing tables without data loss.
 
 **Tasks**:
+
 - Design migration strategy
 - Create migration script using Drizzle
 - Add siteId column as nullable initially
@@ -2463,6 +2677,7 @@ Create migration script to add siteId columns to existing tables without data lo
 - Document migration process
 
 **Acceptance Criteria**:
+
 - [ ] Migration script created
 - [ ] Backfill script created
 - [ ] Rollback script created
@@ -2470,6 +2685,7 @@ Create migration script to add siteId columns to existing tables without data lo
 - [ ] Migration documented
 
 **Files to Create/Modify**:
+
 - `server/migrations/add-siteid-columns.ts` (new)
 - `server/migrations/backfill-siteid.ts` (new)
 - `server/migrations/rollback-siteid.ts` (new)
@@ -2487,6 +2703,7 @@ Create migration script to add siteId columns to existing tables without data lo
 Document and create scripts for database backups and restoration before running migrations.
 
 **Tasks**:
+
 - Research database backup best practices
 - Create backup script
 - Create restore script
@@ -2497,6 +2714,7 @@ Document and create scripts for database backups and restoration before running 
 - Document rollback procedures
 
 **Acceptance Criteria**:
+
 - [ ] Backup script created
 - [ ] Restore script created
 - [ ] Process documented
@@ -2504,6 +2722,7 @@ Document and create scripts for database backups and restoration before running 
 - [ ] Checklist created
 
 **Files to Create/Modify**:
+
 - `server/scripts/backup-db.ts` (new)
 - `server/scripts/restore-db.ts` (new)
 - `docs/database-backup-procedures.md` (new)
@@ -2520,6 +2739,7 @@ Document and create scripts for database backups and restoration before running 
 Create comprehensive tests for the updated data access layer to ensure proper siteId isolation.
 
 **Tasks**:
+
 - Set up test database
 - Create tests for siteId filtering in SELECT
 - Create tests for siteId injection in INSERT
@@ -2531,6 +2751,7 @@ Create comprehensive tests for the updated data access layer to ensure proper si
 - Document test coverage
 
 **Acceptance Criteria**:
+
 - [ ] Test database set up
 - [ ] All query types tested
 - [ ] Data isolation tested
@@ -2539,6 +2760,7 @@ Create comprehensive tests for the updated data access layer to ensure proper si
 - [ ] Coverage documented
 
 **Files to Create/Modify**:
+
 - `server/__tests__/storage.test.ts` (update)
 - `server/__tests__/test-helpers.ts` (new)
 - `server/__tests__/data-isolation.test.ts` (new)
@@ -2554,7 +2776,7 @@ Create comprehensive tests for the updated data access layer to ensure proper si
 ### Tickets by Section
 
 - **Section 1.1** (Monorepo Setup): 8 tickets
-- **Section 1.2** (Package Extraction): 22 tickets  
+- **Section 1.2** (Package Extraction): 22 tickets
 - **Section 1.3** (Storefront API): 19 tickets
 - **Section 1.4** (Admin API): 13 tickets
 - **Section 1.5** (Multi-Store Config): 7 tickets

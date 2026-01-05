@@ -1,6 +1,5 @@
 # FrameCraft → Headless Shopify Multi-Store Migration Plan
 
-
 ## Executive Summary
 
 This document outlines the comprehensive strategy for migrating the FrameCraft custom picture frame configurator from its current Replit-hosted prototype into a production-ready, headless Shopify multi-store architecture. The system will support **10+ storefronts** sharing a common codebase while allowing per-domain branding and configuration overrides.
@@ -8,7 +7,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 ### Project Objectives
 
 1. **Multi-Store Architecture** - Single codebase powering multiple branded storefronts
-2. **Headless Shopify Integration** - Full Storefront API + Admin API implementation  
+2. **Headless Shopify Integration** - Full Storefront API + Admin API implementation
 3. **SEO-Safe Migration** - Preserve existing custompictureframes.com rankings
 4. **Scalable Deployment** - Vercel-based infrastructure with isolated environments
 5. **Shared Configurator** - Frame designer propagates changes across all stores
@@ -16,6 +15,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 ### Current State Analysis
 
 **Technology Stack (Already Built)**:
+
 - React 18 + TypeScript with Vite
 - Express.js backend with PostgreSQL (Drizzle ORM)
 - Tailwind CSS + Shadcn/ui components
@@ -24,6 +24,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Already has multi-site awareness via `SITE_ID` environment variable
 
 **Core Features (Already Implemented)**:
+
 - Interactive frame designer with real-time preview
 - Specialty designers (Shadowbox, Jersey, Canvas Float, Puzzle, Comic Book, Playbill)
 - Dynamic pricing engine with per-linear-inch calculations
@@ -35,6 +36,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Multi-tenant database schema with siteId support
 
 **What Needs to Change**:
+
 - Move from single-brand config to per-store configs
 - Transition from Replit to Vercel deployment
 - Convert to pnpm monorepo with Turborepo
@@ -69,6 +71,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **1.1.1 Initialize pnpm Workspace**
+
 - Create new repository structure with pnpm workspaces
 - Set up Turborepo for build orchestration
 - Configure workspace dependencies and version management
@@ -77,6 +80,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document workspace structure and conventions
 
 **1.1.2 Define Monorepo Structure**
+
 - Design folder hierarchy (apps/, packages/, data/, content/)
 - Plan package boundaries and responsibilities
 - Define dependency graph between packages
@@ -85,6 +89,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Set up package visibility rules (public vs internal)
 
 **1.1.3 Configure Build System**
+
 - Set up Turborepo pipeline configuration (build, dev, lint, type-check)
 - Configure caching strategies for optimal build performance
 - Set up incremental builds with dependency tracking
@@ -93,6 +98,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document build commands and pipeline behavior
 
 **1.1.4 Set Up Development Environment**
+
 - Configure ESLint and Prettier for monorepo
 - Set up shared TypeScript configuration (tsconfig.base.json)
 - Configure VS Code workspace settings
@@ -107,6 +113,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **1.2.1 Extract UI Component Library (@framecraft/ui)**
+
 - Audit existing components in client/src/components/
 - Identify shared vs store-specific components
 - Extract all Shadcn/ui components to shared package
@@ -117,6 +124,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Write component usage guidelines
 
 **1.2.2 Extract Core Business Logic (@framecraft/core)**
+
 - Move services (products.ts, pricing.ts, shopify.ts, validation.ts)
 - Extract utility functions from client/src/lib/
 - Move hooks to shared package (use-mat-catalog.ts, etc.)
@@ -127,6 +135,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Write API documentation for core functions
 
 **1.2.3 Extract Configuration Package (@framecraft/config)**
+
 - Move navigation configurations
 - Extract animation configurations
 - Move feature flag system
@@ -136,6 +145,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document configuration options and overrides
 
 **1.2.4 Create Data Package (@framecraft/data)**
+
 - Move product catalogs (frames.json, mats.json, glass.json)
 - Move pricing configuration
 - Create data access layer
@@ -144,6 +154,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Create data migration utilities if needed
 
 **1.2.5 Extract Shared Types Package (@framecraft/types)**
+
 - Move all TypeScript type definitions
 - Extract interface definitions
 - Create shared schema definitions
@@ -158,6 +169,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **1.3.1 Design Data Access Layer**
+
 - Create Storefront API client abstraction
 - Design typed data access functions (getProductByHandle, getCollection, etc.)
 - Implement store identifier mapping system
@@ -166,6 +178,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Design retry and fallback strategies
 
 **1.3.2 Implement GraphQL Fragments**
+
 - Create reusable ProductFields fragment
 - Create VariantFields fragment
 - Create CartFields fragment
@@ -175,6 +188,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Set up fragment composition strategy
 
 **1.3.3 Build Product Query Functions**
+
 - Implement getProductByHandle with store context
 - Implement getCollection with pagination
 - Implement searchProducts functionality
@@ -184,6 +198,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Write unit tests for query functions
 
 **1.3.4 Implement Configuration Serialization**
+
 - Design line item attribute structure
 - Implement frame configuration serializer
 - Create serialization for each specialty designer type
@@ -193,6 +208,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Write serialization unit tests
 
 **1.3.5 Set Up Client-Side Cart State**
+
 - Design cart state management with Zustand
 - Implement optimistic updates
 - Create cart persistence strategy
@@ -208,6 +224,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **1.4.1 Design Backend API Architecture**
+
 - Define serverless function structure for Vercel
 - Design API route organization
 - Create request/response schemas
@@ -217,6 +234,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Create API versioning strategy
 
 **1.4.2 Implement Secure Cart Management**
+
 - Create POST /api/cart endpoint for cart creation
 - Create PATCH /api/cart/lines endpoint for updates
 - Implement HTTP-only cookie management
@@ -227,6 +245,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Write API endpoint tests
 
 **1.4.3 Implement Checkout Session Management**
+
 - Create POST /api/checkout endpoint
 - Implement checkout URL generation
 - Add discount code validation
@@ -237,6 +256,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Write checkout flow tests
 
 **1.4.4 Build Admin Token Security Layer**
+
 - Design secure environment variable management
 - Create Admin API client abstraction
 - Implement token rotation strategy (if needed)
@@ -246,6 +266,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Set up monitoring for unauthorized access attempts
 
 **1.4.5 Implement Order File Management**
+
 - Create POST /api/orders/files endpoint
 - Implement file upload handling
 - Create order metadata storage
@@ -261,6 +282,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **1.5.1 Design Store Configuration Schema**
+
 - Define complete configuration interface
 - Design theme override system
 - Create feature flag structure
@@ -270,6 +292,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Create configuration validation schema
 
 **1.5.2 Implement Theme System**
+
 - Create base theme with CSS custom properties
 - Implement theme merging function
 - Create theme preview system
@@ -279,6 +302,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Create theme testing utilities
 
 **1.5.3 Build Feature Flag System**
+
 - Implement feature flag evaluation
 - Create feature flag override mechanism
 - Add feature flag documentation
@@ -288,6 +312,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Create feature flag management UI (optional)
 
 **1.5.4 Create Component Override System**
+
 - Design lazy loading for override components
 - Implement override resolution logic
 - Create fallback to default components
@@ -297,6 +322,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Write override implementation examples
 
 **1.5.5 Implement Store Context Provider**
+
 - Create React context for store configuration
 - Implement configuration loading from API
 - Add error handling for missing configuration
@@ -312,6 +338,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **1.6.1 Audit Existing Schema**
+
 - Review all current tables in shared/schema.ts
 - Identify tables missing siteId
 - Document relationships between tables
@@ -320,6 +347,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Create schema documentation
 
 **1.6.2 Update Schema Definitions**
+
 - Add siteId to all relevant tables
 - Add proper foreign key constraints
 - Create indexes on siteId columns for performance
@@ -328,6 +356,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document schema changes
 
 **1.6.3 Implement Data Access Layer Updates**
+
 - Update storage.ts with siteId filtering
 - Add automatic siteId injection in inserts
 - Update all queries to filter by siteId
@@ -336,6 +365,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Write data access layer tests
 
 **1.6.4 Create Database Migration Scripts**
+
 - Write migration for adding siteId columns
 - Create backfill scripts for existing data
 - Write rollback procedures
@@ -357,8 +387,9 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **2.1.1 Create Store A Application**
+
 - Set up new app in apps/store-a directory
-- Install dependencies (@framecraft/* packages)
+- Install dependencies (@framecraft/\* packages)
 - Configure Next.js or Vite setup
 - Set up routing and navigation
 - Create store-specific brand.config.ts
@@ -366,6 +397,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document store setup process
 
 **2.1.2 Configure Store A Branding**
+
 - Define brand identity (colors, fonts, logos)
 - Create theme configuration
 - Set up navigation structure
@@ -375,6 +407,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document branding decisions
 
 **2.1.3 Set Up Store A Shopify Store**
+
 - Create new Shopify store account
 - Configure products and collections
 - Set up payment gateways
@@ -385,6 +418,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document Shopify configuration
 
 **2.1.4 Configure Store A Domain**
+
 - Purchase domain name
 - Set up DNS configuration
 - Configure SSL certificates
@@ -394,6 +428,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document domain setup
 
 **2.1.5 Integrate Store A with Shopify**
+
 - Configure Shopify credentials in environment
 - Test product fetching from Storefront API
 - Test cart creation and management
@@ -403,6 +438,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document integration points
 
 **2.1.6 Test Store A Functionality**
+
 - Test all frame designer variations
 - Test specialty designers (if enabled)
 - Test image upload and AI features
@@ -414,6 +450,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document test results and issues
 
 **2.1.7 Deploy Store A to Vercel**
+
 - Create Vercel project for Store A
 - Configure environment variables in Vercel
 - Set up production, preview, and development environments
@@ -430,6 +467,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **2.2.1 Create Store B Application**
+
 - Set up new app in apps/store-b directory
 - Follow Store A setup process
 - Configure different brand identity
@@ -439,6 +477,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document differences from Store A
 
 **2.2.2 Configure Store B with Different Focus**
+
 - Choose different product focus (e.g., sports memorabilia vs art)
 - Configure appropriate feature flags
 - Disable irrelevant specialty designers
@@ -448,6 +487,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document focus area strategy
 
 **2.2.3 Test Shared Code Reusability**
+
 - Verify shared components work correctly
 - Test pricing engine with different configurations
 - Verify frame designer works identically
@@ -457,6 +497,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Create guidelines for future stores
 
 **2.2.4 Deploy Store B to Vercel**
+
 - Create separate Vercel project for Store B
 - Configure isolated environment variables
 - Set up separate domains
@@ -472,6 +513,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **2.3.1 Validate Pricing Calculations**
+
 - Test pricing with Store A configuration
 - Test pricing with Store B configuration
 - Verify per-linear-inch calculations
@@ -482,6 +524,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document pricing test results
 
 **2.3.2 Implement Store-Specific Pricing Overrides**
+
 - Design pricing override system
 - Implement markup configuration per store
 - Add promotional pricing support
@@ -491,6 +534,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Create pricing admin interface (optional)
 
 **2.3.3 Integrate Pricing with Shopify**
+
 - Verify calculated prices match Shopify checkout
 - Implement dynamic pricing in line items
 - Test discount code handling
@@ -506,6 +550,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **2.4.1 Implement Caching Strategy**
+
 - Set up Redis or similar caching layer (optional)
 - Implement product catalog caching
 - Cache Shopify API responses
@@ -515,6 +560,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document caching architecture
 
 **2.4.2 Optimize Bundle Sizes**
+
 - Analyze bundle sizes with Webpack Bundle Analyzer
 - Implement code splitting where beneficial
 - Optimize image loading and formats
@@ -524,6 +570,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document optimization strategies
 
 **2.4.3 Implement Performance Monitoring**
+
 - Set up performance metrics collection
 - Implement error tracking (Sentry or similar)
 - Create performance dashboards
@@ -533,6 +580,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document monitoring setup
 
 **2.4.4 Conduct Load Testing**
+
 - Create load testing scenarios
 - Test concurrent user scenarios
 - Test cart creation under load
@@ -548,6 +596,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **2.5.1 Conduct Pre-Migration Audit**
+
 - Export current URL structure from existing site
 - Identify all indexed pages (Google Search Console)
 - Analyze current traffic sources and patterns
@@ -557,6 +606,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Create baseline metrics for comparison
 
 **2.5.2 Create URL Mapping Strategy**
+
 - Map old URLs to new URL structure
 - Identify URL pattern changes
 - Prioritize redirects by traffic volume
@@ -566,6 +616,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document URL mapping decisions
 
 **2.5.3 Implement Redirect Infrastructure**
+
 - Design redirect handling system
 - Implement 301 redirects in Next.js/Vercel
 - Create edge-based redirects for performance
@@ -575,6 +626,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document redirect implementation
 
 **2.5.4 Prepare Content Migration**
+
 - Audit existing content pages
 - Map content to new CMS/markdown system
 - Preserve meta titles and descriptions
@@ -584,6 +636,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document content migration process
 
 **2.5.5 Set Up Monitoring for Migration**
+
 - Configure Google Search Console for new domain
 - Set up 404 monitoring
 - Create traffic comparison dashboards
@@ -599,6 +652,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **2.6.1 Create Store C & D Applications**
+
 - Replicate successful Store A/B setup process
 - Apply learnings from first two stores
 - Configure distinct brand identities
@@ -608,6 +662,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document any new challenges
 
 **2.6.2 Refine Deployment Process**
+
 - Create deployment checklist
 - Automate repetitive setup tasks
 - Create store scaffolding CLI tool
@@ -617,6 +672,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Update developer documentation
 
 **2.6.3 Implement Store Management Tools**
+
 - Create store configuration dashboard (optional)
 - Build store health monitoring
 - Create deployment status tracking
@@ -639,6 +695,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **3.1.1 Monitor Production Performance**
+
 - Review performance metrics daily
 - Identify and resolve bottlenecks
 - Monitor error rates and patterns
@@ -648,6 +705,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document performance baselines
 
 **3.1.2 Address Production Issues**
+
 - Triage and prioritize bug reports
 - Fix critical issues immediately
 - Create bug fix testing procedures
@@ -657,6 +715,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Create bug prevention strategies
 
 **3.1.3 Optimize Database Performance**
+
 - Analyze slow queries
 - Add missing indexes
 - Optimize data access patterns
@@ -666,6 +725,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document optimization work
 
 **3.1.4 Refine Error Handling**
+
 - Improve error messages for users
 - Add comprehensive error logging
 - Implement error recovery mechanisms
@@ -681,6 +741,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **3.2.1 Implement New Store Features**
+
 - Gather feature requests from stakeholders
 - Design new feature architecture
 - Implement features in shared packages
@@ -690,6 +751,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document new features
 
 **3.2.2 Enhance Frame Designer**
+
 - Add new frame style options
 - Improve mat customization
 - Enhance glass selection
@@ -699,6 +761,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document designer enhancements
 
 **3.2.3 Improve User Experience**
+
 - Analyze user feedback and behavior
 - Identify UX pain points
 - Design UX improvements
@@ -708,6 +771,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document UX decisions
 
 **3.2.4 Add New Integrations**
+
 - Integrate additional payment methods
 - Add shipping carrier integrations
 - Integrate analytics platforms
@@ -723,6 +787,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **3.3.1 Launch Stores 5-10**
+
 - Apply streamlined deployment process
 - Configure each store's unique branding
 - Set up Shopify integration
@@ -732,6 +797,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document launch process improvements
 
 **3.3.2 Create Store Templates**
+
 - Develop store templates by category
 - Create quick-start configurations
 - Build template documentation
@@ -741,6 +807,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Iterate on template offerings
 
 **3.3.3 Improve Store Provisioning**
+
 - Automate store creation process
 - Create store setup wizard
 - Automate Shopify store configuration
@@ -756,6 +823,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **3.4.1 Conduct Architecture Reviews**
+
 - Review system architecture quarterly
 - Identify architectural technical debt
 - Plan architectural improvements
@@ -765,6 +833,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Plan migration paths for improvements
 
 **3.4.2 Implement Architectural Improvements**
+
 - Refactor problematic code areas
 - Migrate to better patterns where needed
 - Update dependencies regularly
@@ -774,6 +843,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document architectural changes
 
 **3.4.3 Scale Infrastructure**
+
 - Monitor resource usage across stores
 - Plan for traffic growth
 - Optimize database scaling
@@ -789,6 +859,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **3.5.1 Maintain Technical Documentation**
+
 - Update architecture diagrams
 - Document new features and changes
 - Maintain API documentation
@@ -798,6 +869,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Review and update docs quarterly
 
 **3.5.2 Create Developer Guides**
+
 - Write onboarding documentation
 - Create code contribution guidelines
 - Document common development tasks
@@ -807,6 +879,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Maintain developer FAQ
 
 **3.5.3 Document Business Processes**
+
 - Document store launch process
 - Create pricing configuration guide
 - Document brand configuration process
@@ -816,6 +889,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Maintain operations runbooks
 
 **3.5.4 Knowledge Transfer Sessions**
+
 - Conduct code walkthroughs with team
 - Present architectural decisions
 - Share lessons learned
@@ -831,6 +905,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 #### Tasks
 
 **3.6.1 Quarterly Planning Sessions**
+
 - Review current system state
 - Identify improvement opportunities
 - Plan next quarter's priorities
@@ -840,6 +915,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Present plans to stakeholders
 
 **3.6.2 Technology Evaluation**
+
 - Research emerging technologies
 - Evaluate tools and frameworks
 - Plan technology upgrades
@@ -849,6 +925,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 - Document technology decisions
 
 **3.6.3 Competitive Analysis**
+
 - Monitor competitor features
 - Identify differentiation opportunities
 - Evaluate industry best practices
@@ -863,15 +940,16 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 
 ### Phase 1: Foundation & Architecture (Weeks 1-10)
 
-| Week | Milestone | Deliverables |
-|------|-----------|--------------|
-| 1-2 | Monorepo initialized | Working monorepo with Turborepo, shared packages extracted |
-| 3-4 | Shopify Storefront API complete | Product queries, cart management working |
-| 5-6 | Shopify Admin API complete | Secure backend APIs for cart/checkout |
-| 7-8 | Multi-store config system complete | Theme system, feature flags, component overrides |
-| 9-10 | Database updates complete | Multi-tenant schema, data migration |
+| Week | Milestone                          | Deliverables                                               |
+| ---- | ---------------------------------- | ---------------------------------------------------------- |
+| 1-2  | Monorepo initialized               | Working monorepo with Turborepo, shared packages extracted |
+| 3-4  | Shopify Storefront API complete    | Product queries, cart management working                   |
+| 5-6  | Shopify Admin API complete         | Secure backend APIs for cart/checkout                      |
+| 7-8  | Multi-store config system complete | Theme system, feature flags, component overrides           |
+| 9-10 | Database updates complete          | Multi-tenant schema, data migration                        |
 
 **Phase 1 Completion Criteria**:
+
 - [ ] All shared packages building successfully
 - [ ] First test app running locally with shared packages
 - [ ] Shopify integration fully functional in test mode
@@ -880,15 +958,16 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 
 ### Phase 2: Store Launches & Iteration (Weeks 11-20)
 
-| Week | Milestone | Deliverables |
-|------|-----------|--------------|
-| 11-13 | Store A launched | First production store live on custom domain |
-| 14-16 | Store B launched | Second store validates architecture flexibility |
-| 16-17 | Pricing integration complete | Pricing working across all stores |
-| 17-18 | Performance optimization | Caching, bundle optimization, monitoring |
-| 19-20 | SEO migration prep complete | Redirects, content migration ready for custompictureframes.com |
+| Week  | Milestone                    | Deliverables                                                   |
+| ----- | ---------------------------- | -------------------------------------------------------------- |
+| 11-13 | Store A launched             | First production store live on custom domain                   |
+| 14-16 | Store B launched             | Second store validates architecture flexibility                |
+| 16-17 | Pricing integration complete | Pricing working across all stores                              |
+| 17-18 | Performance optimization     | Caching, bundle optimization, monitoring                       |
+| 19-20 | SEO migration prep complete  | Redirects, content migration ready for custompictureframes.com |
 
 **Phase 2 Completion Criteria**:
+
 - [ ] Two stores live and accepting orders
 - [ ] Shared configurator working identically across stores
 - [ ] Performance metrics meet targets
@@ -898,6 +977,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 ### Phase 3: Ongoing Support (Week 21+)
 
 **Ongoing Milestones**:
+
 - Launch stores 3-10 at regular intervals (1-2 per month)
 - Implement 2-3 new features per quarter
 - Address bug reports within SLA (critical: 24hrs, high: 1 week, medium: 2 weeks)
@@ -911,33 +991,35 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 
 ### Technical Risks
 
-| Risk | Probability | Impact | Mitigation Strategy |
-|------|-------------|--------|---------------------|
-| Shopify API rate limits | Medium | High | Implement aggressive caching, request queuing, backoff strategies |
-| Monorepo build times increase | Medium | Medium | Leverage Turborepo caching, implement selective rebuilds, optimize build pipeline |
-| Package version conflicts | Low | Medium | Use strict version pinning, automated dependency updates with Renovate |
-| Database migration data loss | Low | Critical | Comprehensive backups, test migrations in staging, implement rollback procedures |
-| Vercel cold start performance | Medium | Medium | Implement edge caching, optimize bundle sizes, use serverless warm-up strategies |
-| Cross-store data leakage | Low | Critical | Extensive testing of siteId filtering, automated data isolation tests, code reviews |
+| Risk                          | Probability | Impact   | Mitigation Strategy                                                                 |
+| ----------------------------- | ----------- | -------- | ----------------------------------------------------------------------------------- |
+| Shopify API rate limits       | Medium      | High     | Implement aggressive caching, request queuing, backoff strategies                   |
+| Monorepo build times increase | Medium      | Medium   | Leverage Turborepo caching, implement selective rebuilds, optimize build pipeline   |
+| Package version conflicts     | Low         | Medium   | Use strict version pinning, automated dependency updates with Renovate              |
+| Database migration data loss  | Low         | Critical | Comprehensive backups, test migrations in staging, implement rollback procedures    |
+| Vercel cold start performance | Medium      | Medium   | Implement edge caching, optimize bundle sizes, use serverless warm-up strategies    |
+| Cross-store data leakage      | Low         | Critical | Extensive testing of siteId filtering, automated data isolation tests, code reviews |
 
 ### Business Risks
 
-| Risk | Probability | Impact | Mitigation Strategy |
-|------|-------------|--------|---------------------|
-| SEO traffic loss during migration | Medium | Critical | Comprehensive redirect testing, phased rollout, continuous monitoring, rollback plan |
-| Checkout failures on launch | Low | Critical | Extensive QA, beta testing period, fallback to direct Shopify checkout option |
-| Store-specific bugs not caught | Medium | Medium | Feature flags for gradual rollout, store-specific testing checklist, monitoring |
-| Timeline delays | Medium | Medium | Built-in buffer time, parallel workstreams, prioritization framework |
-| Scope creep | Medium | Medium | Clear phase boundaries, change request process, stakeholder alignment |
+| Risk                              | Probability | Impact   | Mitigation Strategy                                                                  |
+| --------------------------------- | ----------- | -------- | ------------------------------------------------------------------------------------ |
+| SEO traffic loss during migration | Medium      | Critical | Comprehensive redirect testing, phased rollout, continuous monitoring, rollback plan |
+| Checkout failures on launch       | Low         | Critical | Extensive QA, beta testing period, fallback to direct Shopify checkout option        |
+| Store-specific bugs not caught    | Medium      | Medium   | Feature flags for gradual rollout, store-specific testing checklist, monitoring      |
+| Timeline delays                   | Medium      | Medium   | Built-in buffer time, parallel workstreams, prioritization framework                 |
+| Scope creep                       | Medium      | Medium   | Clear phase boundaries, change request process, stakeholder alignment                |
 
 ### Mitigation Procedures
 
 **Rollback Procedures**:
+
 1. **Feature Rollback**: Disable feature flag (immediate, no deployment)
 2. **Store Rollback**: Revert to previous Vercel deployment (1-click, 30 seconds)
 3. **Infrastructure Rollback**: DNS change to old infrastructure (5-10 minutes)
 
 **Communication Protocol**:
+
 - Daily progress updates via project management tool
 - Weekly sync meetings with stakeholders
 - Immediate notification for critical issues
@@ -978,6 +1060,7 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 ### Overall Project Success
 
 **The project is successful when**:
+
 1. All stores are generating revenue with zero blocking issues
 2. New stores can be launched in < 1 day
 3. Shared features propagate across all stores automatically
@@ -992,51 +1075,51 @@ This document outlines the comprehensive strategy for migrating the FrameCraft c
 
 ### Technical Terms
 
-| Term | Definition |
-|------|------------|
-| **Monorepo** | Single repository containing multiple related projects/packages with shared dependencies |
-| **Headless** | Frontend and backend are decoupled and communicate via APIs |
-| **Storefront API** | Shopify's customer-facing API for products, cart, and checkout (browser-safe) |
-| **Admin API** | Shopify's privileged API for store management (server-only) |
-| **Serverless Function** | Code that runs on-demand without managing servers (e.g., Vercel Edge Functions) |
-| **Backend-for-Frontend (BFF)** | Server layer between frontend and external APIs for security and logic |
-| **pnpm** | Fast, disk-efficient package manager |
-| **Turborepo** | Build system for monorepos with caching and task orchestration |
-| **HTTP-only Cookie** | Cookie not accessible via JavaScript (secure for authentication) |
-| **Line Item Attributes** | Custom data attached to Shopify cart items (e.g., frame config) |
+| Term                           | Definition                                                                               |
+| ------------------------------ | ---------------------------------------------------------------------------------------- |
+| **Monorepo**                   | Single repository containing multiple related projects/packages with shared dependencies |
+| **Headless**                   | Frontend and backend are decoupled and communicate via APIs                              |
+| **Storefront API**             | Shopify's customer-facing API for products, cart, and checkout (browser-safe)            |
+| **Admin API**                  | Shopify's privileged API for store management (server-only)                              |
+| **Serverless Function**        | Code that runs on-demand without managing servers (e.g., Vercel Edge Functions)          |
+| **Backend-for-Frontend (BFF)** | Server layer between frontend and external APIs for security and logic                   |
+| **pnpm**                       | Fast, disk-efficient package manager                                                     |
+| **Turborepo**                  | Build system for monorepos with caching and task orchestration                           |
+| **HTTP-only Cookie**           | Cookie not accessible via JavaScript (secure for authentication)                         |
+| **Line Item Attributes**       | Custom data attached to Shopify cart items (e.g., frame config)                          |
 
 ### Shopify Terms
 
-| Term | Definition |
-|------|------------|
-| **Variant** | Specific version of a product (e.g., "Black Wood Frame - 8x10") |
-| **Handle** | URL-friendly identifier (e.g., "black-wood-frame") |
-| **Checkout** | Shopify-hosted page where customers complete purchase |
-| **Cart** | Collection of items customer intends to purchase |
-| **Storefront Token** | API key for Storefront API access |
-| **Admin Token** | API key for Admin API access (highly privileged) |
+| Term                 | Definition                                                      |
+| -------------------- | --------------------------------------------------------------- |
+| **Variant**          | Specific version of a product (e.g., "Black Wood Frame - 8x10") |
+| **Handle**           | URL-friendly identifier (e.g., "black-wood-frame")              |
+| **Checkout**         | Shopify-hosted page where customers complete purchase           |
+| **Cart**             | Collection of items customer intends to purchase                |
+| **Storefront Token** | API key for Storefront API access                               |
+| **Admin Token**      | API key for Admin API access (highly privileged)                |
 
 ### Deployment Terms
 
-| Term | Definition |
-|------|------------|
-| **Production** | Live environment serving real customers |
-| **Preview** | Temporary environment for reviewing changes before production |
+| Term                     | Definition                                                              |
+| ------------------------ | ----------------------------------------------------------------------- |
+| **Production**           | Live environment serving real customers                                 |
+| **Preview**              | Temporary environment for reviewing changes before production           |
 | **Environment Variable** | Configuration value that differs per environment (API keys, URLs, etc.) |
-| **Edge Function** | Serverless function running close to users for low latency |
-| **DNS** | Domain Name System - translates domain names to IP addresses |
-| **SSL Certificate** | Security certificate enabling HTTPS |
+| **Edge Function**        | Serverless function running close to users for low latency              |
+| **DNS**                  | Domain Name System - translates domain names to IP addresses            |
+| **SSL Certificate**      | Security certificate enabling HTTPS                                     |
 
 ### SEO Terms
 
-| Term | Definition |
-|------|------------|
-| **301 Redirect** | Permanent redirect that transfers SEO value to new URL |
-| **Canonical URL** | The "official" version of a page when multiple URLs show same content |
-| **Structured Data** | Markup (JSON-LD) that helps search engines understand page content |
-| **Crawl** | When search engine bots visit and index website pages |
-| **Backlink** | Link from another website to your site (SEO value) |
-| **Meta Description** | Summary text shown in search results |
+| Term                 | Definition                                                            |
+| -------------------- | --------------------------------------------------------------------- |
+| **301 Redirect**     | Permanent redirect that transfers SEO value to new URL                |
+| **Canonical URL**    | The "official" version of a page when multiple URLs show same content |
+| **Structured Data**  | Markup (JSON-LD) that helps search engines understand page content    |
+| **Crawl**            | When search engine bots visit and index website pages                 |
+| **Backlink**         | Link from another website to your site (SEO value)                    |
+| **Meta Description** | Summary text shown in search results                                  |
 
 ---
 
@@ -1105,7 +1188,7 @@ vercel ls
 // Template for new store configuration
 // Copy to apps/[store-name]/src/brand.config.ts
 
-import type { BrandConfig } from '@framecraft/config';
+import type { BrandConfig } from "@framecraft/config";
 
 export const brandConfig: BrandConfig = {
   // Required: Identity
@@ -1114,23 +1197,23 @@ export const brandConfig: BrandConfig = {
   siteUrl: "https://yourdomain.com",
   defaultTitle: "Your Store | Custom Picture Frames",
   defaultDescription: "Your store description for SEO (120-160 chars)",
-  
+
   // Required: Contact
   contactEmail: "support@yourdomain.com",
   contactPhone: "1-888-XXX-XXXX",
-  
+
   // Optional: Theme overrides
   theme: {
     colors: {
-      primary: 'hsl(210, 85%, 45%)',  // Your brand color
-      accent: 'hsl(45, 90%, 50%)',    // Accent color
+      primary: "hsl(210, 85%, 45%)", // Your brand color
+      accent: "hsl(45, 90%, 50%)", // Accent color
     },
     fonts: {
-      heading: 'Your Heading Font, serif',
-      body: 'Your Body Font, sans-serif',
+      heading: "Your Heading Font, serif",
+      body: "Your Body Font, sans-serif",
     },
   },
-  
+
   // Optional: Feature flags
   features: {
     enableAR: true,
@@ -1142,17 +1225,17 @@ export const brandConfig: BrandConfig = {
     enablePrintAndFrame: true,
     enableGalleryWall: true,
   },
-  
+
   // Optional: Navigation customization
   navigation: {
     // Override navigation items if needed
   },
-  
+
   // Optional: Component overrides
   overrides: {
     // Header: () => import('./components/CustomHeader'),
   },
-  
+
   // Required: Shopify
   shopify: {
     domain: "your-store.myshopify.com",
@@ -1168,6 +1251,7 @@ export const brandConfig: BrandConfig = {
 ### Time Allocation by Phase
 
 **Phase 1: Foundation & Architecture (320-400 hours)**
+
 - Monorepo setup & infrastructure: 40-50 hours
 - Package extraction: 80-100 hours
 - Shopify Storefront API: 60-80 hours
@@ -1176,6 +1260,7 @@ export const brandConfig: BrandConfig = {
 - Database updates: 40-50 hours
 
 **Phase 2: Store Launches & Iteration (320-400 hours)**
+
 - Store A setup & launch: 60-80 hours
 - Store B setup & launch: 40-60 hours
 - Pricing integration: 40-50 hours
@@ -1184,6 +1269,7 @@ export const brandConfig: BrandConfig = {
 - Additional store rollouts: 40-60 hours
 
 **Phase 3: Ongoing (Continuous)**
+
 - Estimated 160 hours/month for ongoing work
 - System stabilization & maintenance: ~40 hours/month
 - Feature enhancements: ~60 hours/month
@@ -1195,4 +1281,3 @@ export const brandConfig: BrandConfig = {
 **End of Migration Plan v1.0**
 
 This plan will be updated as we progress through each phase and learn from implementation.
-
