@@ -3,21 +3,16 @@
  *
  * Shared React hooks for FrameCraft.
  *
- * Hooks will be exported here as they are extracted:
- * - use-toast.ts: Toast notification hook
- * - use-mobile.ts: Mobile device detection hook
+ * Hooks exported:
+ * - useIsMobile.ts: Mobile device detection hook
  * - useMobileViewToggle.ts: Mobile view toggle state management
  * - useIntersectionVisible.ts: Intersection observer hook
+ *
+ * TODO: Extract additional hooks:
+ * - use-toast.ts: Toast notification hook (depends on UI components - may stay in app)
  * - use-mat-catalog.ts: Mat catalog data hook
  */
 
-// Hooks will be exported here once extracted
-// Example:
-// export * from "./use-toast";
-// export * from "./use-mobile";
-// export * from "./useMobileViewToggle";
-// export * from "./useIntersectionVisible";
-// export * from "./use-mat-catalog";
-
-// Placeholder export to make this a valid module
-export {};
+export * from "./useIsMobile";
+export * from "./useMobileViewToggle";
+export * from "./useIntersectionVisible";
