@@ -21,6 +21,12 @@ framecraft-monorepo/
 │   ├── data/              # Product catalogs and data
 │   └── types/             # Shared TypeScript types
 │
+├── data/                   # Shared data files (to be migrated)
+│   └── (frames.json, mats.json, etc.)
+│
+├── content/                # Markdown content files
+│   └── (blog posts, pages, etc.)
+│
 ├── docs/                   # Documentation
 │   ├── MIGRATION_PLAN.md  # Overall migration strategy
 │   └── PHASE1_TICKETS.md  # Phase 1 detailed tickets
@@ -71,19 +77,23 @@ pnpm type-check
 pnpm lint
 ```
 
-## 📦 Workspace Packages
+## 📁 Directory Structure
 
 ### Apps (`apps/*`)
-- Individual storefront applications
-- Each app imports shared packages
-- Can have store-specific overrides
+Individual storefront applications that import shared packages. Each app can have store-specific overrides.
 
-### Shared Packages (`packages/*`)
+### Packages (`packages/*`)
+Shared packages used across all stores:
 - **@framecraft/ui**: UI component library (Shadcn/ui, specialty designers)
 - **@framecraft/core**: Business logic (pricing, products, Shopify integration)
 - **@framecraft/config**: Configuration (themes, feature flags, navigation)
-- **@framecraft/data**: Product catalogs (frames, mats, glass)
 - **@framecraft/types**: Shared TypeScript type definitions
+
+### Data (`data/`)
+Shared data files including product catalogs (frames.json, mats.json, glass.json, pricing-config.json). These will be migrated from the existing codebase.
+
+### Content (`content/`)
+Markdown content files for blog posts, CMS pages, and other content. Will be migrated from the existing codebase.
 
 ## 🛠️ Available Scripts
 
@@ -165,7 +175,8 @@ Output directories are configured per task:
 
 - ✅ P1-001: pnpm Workspace Initialized
 - ✅ P1-002: Turborepo Configuration Complete
-- ⏳ P1-003: Create Base Monorepo Directory Structure (Next)
+- ✅ P1-003: Base Monorepo Directory Structure Created
+- ⏳ P1-004: Set Up Shared TypeScript Configuration (Next)
 
 ## 📝 Development Guidelines
 
