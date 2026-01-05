@@ -1,17 +1,10 @@
-/**
- * @framecraft/ui - Shared UI Component Library
- *
- * This package contains all shared UI components used across FrameCraft stores.
- */
-
-// Base UI Components (Shadcn/ui)
+// Barrel exports for Shadcn/ui components
 export {
   Accordion,
   AccordionItem,
   AccordionTrigger,
   AccordionContent,
 } from "./components/ui/accordion";
-export { Alert, AlertTitle, AlertDescription } from "./components/ui/alert";
 export {
   AlertDialog,
   AlertDialogPortal,
@@ -25,6 +18,7 @@ export {
   AlertDialogAction,
   AlertDialogCancel,
 } from "./components/ui/alert-dialog";
+export { Alert, AlertTitle, AlertDescription } from "./components/ui/alert";
 export { AspectRatio } from "./components/ui/aspect-ratio";
 export { Avatar, AvatarImage, AvatarFallback } from "./components/ui/avatar";
 export { Badge, badgeVariants } from "./components/ui/badge";
@@ -54,9 +48,17 @@ export {
   CarouselPrevious,
   CarouselNext,
 } from "./components/ui/carousel";
-export { ChartContainer, ChartTooltip, ChartTooltipContent } from "./components/ui/chart";
+export {
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+  ChartLegend,
+  ChartLegendContent,
+  ChartStyle,
+} from "./components/ui/chart";
 export { Checkbox } from "./components/ui/checkbox";
 export { Collapsible, CollapsibleTrigger, CollapsibleContent } from "./components/ui/collapsible";
+export { ColorSwatches, ColorSwatchesWithSeparator } from "./components/ui/ColorSwatches";
 export {
   Command,
   CommandDialog,
@@ -65,8 +67,8 @@ export {
   CommandEmpty,
   CommandGroup,
   CommandItem,
-  CommandShortcut,
   CommandSeparator,
+  CommandShortcut,
 } from "./components/ui/command";
 export {
   ContextMenu,
@@ -78,17 +80,19 @@ export {
   ContextMenuLabel,
   ContextMenuSeparator,
   ContextMenuShortcut,
+  ContextMenuGroup,
+  ContextMenuPortal,
   ContextMenuSub,
-  ContextMenuSubContent,
   ContextMenuSubTrigger,
+  ContextMenuSubContent,
   ContextMenuRadioGroup,
 } from "./components/ui/context-menu";
 export {
   Dialog,
   DialogPortal,
   DialogOverlay,
-  DialogClose,
   DialogTrigger,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogFooter,
@@ -120,23 +124,24 @@ export {
   DropdownMenuGroup,
   DropdownMenuPortal,
   DropdownMenuSub,
-  DropdownMenuSubContent,
   DropdownMenuSubTrigger,
+  DropdownMenuSubContent,
   DropdownMenuRadioGroup,
 } from "./components/ui/dropdown-menu";
 export {
   Form,
+  FormField,
   FormItem,
   FormLabel,
   FormControl,
   FormDescription,
   FormMessage,
-  FormField,
-  useFormField,
 } from "./components/ui/form";
+export { FrameSpinner } from "./components/ui/frame-spinner";
+export { HelpTooltip } from "./components/ui/help-tooltip";
 export { HoverCard, HoverCardTrigger, HoverCardContent } from "./components/ui/hover-card";
-export { Input } from "./components/ui/input";
 export { InputOTP, InputOTPGroup, InputOTPSlot } from "./components/ui/input-otp";
+export { Input } from "./components/ui/input";
 export { Label } from "./components/ui/label";
 export {
   Menubar,
@@ -152,10 +157,9 @@ export {
   MenubarPortal,
   MenubarSubContent,
   MenubarSubTrigger,
-  MenubarGroup,
   MenubarSub,
-  MenubarShortcut,
 } from "./components/ui/menubar";
+export { MobilePriceBar } from "./components/ui/MobilePriceBar";
 export {
   NavigationMenu,
   NavigationMenuList,
@@ -165,7 +169,6 @@ export {
   NavigationMenuLink,
   NavigationMenuIndicator,
   NavigationMenuViewport,
-  navigationMenuTriggerStyle,
 } from "./components/ui/navigation-menu";
 export {
   Pagination,
@@ -177,7 +180,9 @@ export {
   PaginationPrevious,
 } from "./components/ui/pagination";
 export { Popover, PopoverTrigger, PopoverContent } from "./components/ui/popover";
+export { PriceBox } from "./components/ui/PriceBox";
 export { Progress } from "./components/ui/progress";
+export { QuantitySelector } from "./components/ui/quantity-selector";
 export { RadioGroup, RadioGroupItem } from "./components/ui/radio-group";
 export { ResizablePanelGroup, ResizablePanel, ResizableHandle } from "./components/ui/resizable";
 export { ScrollArea, ScrollBar } from "./components/ui/scroll-area";
@@ -190,8 +195,6 @@ export {
   SelectLabel,
   SelectItem,
   SelectSeparator,
-  SelectScrollUpButton,
-  SelectScrollDownButton,
 } from "./components/ui/select";
 export { Separator } from "./components/ui/separator";
 export {
@@ -206,8 +209,40 @@ export {
   SheetTitle,
   SheetDescription,
 } from "./components/ui/sheet";
+export {
+  Sidebar,
+  SidebarProvider,
+  SidebarTrigger,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupAction,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarInput,
+  SidebarInset,
+  SidebarMenu,
+  SidebarMenuAction,
+  SidebarMenuBadge,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarMenuSkeleton,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
+  SidebarRail,
+  SidebarSeparator,
+  useSidebar,
+} from "./components/ui/sidebar";
+export {
+  PageSkeleton,
+  GallerySkeleton,
+  AchievementsSkeleton,
+} from "./components/ui/skeleton-loader";
 export { Skeleton } from "./components/ui/skeleton";
 export { Slider } from "./components/ui/slider";
+export { SwingOut } from "./components/ui/SwingOut";
 export { Switch } from "./components/ui/switch";
 export {
   Table,
@@ -225,52 +260,23 @@ export {
   Toast,
   ToastProvider,
   ToastViewport,
+  ToastIcon,
   ToastTitle,
   ToastDescription,
   ToastClose,
   ToastAction,
 } from "./components/ui/toast";
 export { Toaster } from "./components/ui/toaster";
-export { Toggle, toggleVariants } from "./components/ui/toggle";
 export { ToggleGroup, ToggleGroupItem } from "./components/ui/toggle-group";
+export { Toggle, toggleVariants } from "./components/ui/toggle";
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "./components/ui/tooltip";
 
-// Custom UI Components
-export { ColorSwatches, ColorSwatchesWithSeparator } from "./components/ui/ColorSwatches";
-export { FrameSpinner } from "./components/ui/frame-spinner";
-export { HelpTooltip } from "./components/ui/help-tooltip";
-export { MobilePriceBar } from "./components/ui/MobilePriceBar";
-export { PriceBox, type PriceLineItem } from "./components/ui/PriceBox";
-export { QuantitySelector } from "./components/ui/quantity-selector";
+// Layout components
+export { Header, type HeaderProps, type HeaderConfig } from "./components/layout/Header";
 export {
-  PageSkeleton,
-  GallerySkeleton,
-  AchievementsSkeleton,
-} from "./components/ui/skeleton-loader";
-export { SwingOut } from "./components/ui/SwingOut";
-
-// Sidebar (has hook dependency - useIsMobile - will be handled in future ticket)
-// Toaster (has hook dependency - useToast - will be handled in future ticket)
-// Note: These components require hooks that will be extracted separately
-export {
-  Sidebar,
-  SidebarProvider,
-  SidebarTrigger,
-  SidebarInset,
-  SidebarInput,
-  SidebarHeader,
-  SidebarFooter,
-  SidebarSeparator,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarGroupAction,
-  SidebarGroupContent,
-  SidebarMenu,
-  SidebarMenuButton,
-  SidebarMenuItem,
-  SidebarMenuAction,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
-} from "./components/ui/sidebar";
+  Footer,
+  type FooterProps,
+  type FooterConfig,
+  type FooterLink,
+  type FooterLinks,
+} from "./components/layout/Footer";
