@@ -1,0 +1,28 @@
+{
+  "name": "@framecraft/types",
+  "version": "0.1.0",
+  "private": true,
+  "description": "FrameCraft shared TypeScript type definitions",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc --build",
+    "dev": "tsc --build --watch",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint . --ext .ts",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "typescript": "^5.6.3"
+  },
+  "keywords": [
+    "framecraft",
+    "types",
+    "typescript",
+    "definitions"
+  ],
+  "author": "FrameCraft Team",
+  "license": "MIT"
+}
