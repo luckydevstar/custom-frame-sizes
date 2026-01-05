@@ -1,0 +1,53 @@
+{
+  "extends": ["../../.eslintrc.json"],
+  "rules": {
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+        "ignoreRestSiblings": true
+      }
+    ],
+    "react/no-unknown-property": [
+      "error",
+      {
+        "ignore": [
+          "cmdk-input-wrapper",
+          "cmdk-group-heading",
+          "cmdk-group",
+          "cmdk-input",
+          "cmdk-item"
+        ]
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": ["**/ColorSwatches.tsx"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_|matNeedsBorder",
+            "ignoreRestSiblings": true
+          }
+        ]
+      }
+    },
+    {
+      "files": ["**/MobilePriceBar.tsx"],
+      "rules": {
+        "@typescript-eslint/no-unused-vars": [
+          "warn",
+          {
+            "argsIgnorePattern": "^_",
+            "varsIgnorePattern": "^_|ShoppingCart",
+            "ignoreRestSiblings": true
+          }
+        ]
+      }
+    }
+  ]
+}
