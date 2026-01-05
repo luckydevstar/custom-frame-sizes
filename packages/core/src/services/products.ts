@@ -3,14 +3,12 @@
  * Loads and provides access to frame, mat, and glass product data
  *
  * NOTE: This service has been extracted to @framecraft/core.
- * Dependencies that will be extracted in future tickets:
- * - Data files: Will be moved to @framecraft/data package (future ticket)
- * - Validation: Will be extracted in P1-019
- * - Palette config: Will be extracted to @framecraft/config in P1-026
- * - Types: Will be extracted to @framecraft/types in P1-023
+ * Dependencies:
+ * - Types: @framecraft/types (extracted in P1-023)
+ * - Validation: @framecraft/core/services/validation (extracted in P1-019)
+ * - Palette config: @framecraft/config (extracted in P1-026)
  *
- * For now, this service uses relative imports and will be updated
- * as dependencies are extracted.
+ * TODO: Data files will be moved to @framecraft/data package (future ticket)
  */
 
 // TODO: Update to import from @framecraft/data once data package is created
@@ -24,88 +22,8 @@ import glassData from "../../../../data/glass.json";
 // @ts-expect-error - Data files will be in @framecraft/data package
 import pricingConfigData from "../../../../data/pricing-config.json";
 
-// TODO: Update to import from @framecraft/types once types are extracted in P1-023
-// For now, using any to avoid circular dependency
-// import type { FrameStyle, MatColor, GlassType, PricingConfig } from '@framecraft/types';
-type FrameStyle = any;
-type MatColor = any;
-type GlassType = any;
-type PricingConfig = any;
-
-// TODO: Update to import from @framecraft/core/services/validation once extracted in P1-019
-// For now, using inline validation functions
-// import { validateFrameStyles, validateMatColors, validateGlassTypes } from './validation';
-
-/**
- * Validate frame style data
- * TODO: Move to validation service in P1-019
- */
-function validateFrameStyle(frame: any): frame is FrameStyle {
-  const validCategories = ["picture", "shadowbox", "canvas"];
-  return (
-    typeof frame === "object" &&
-    typeof frame.id === "string" &&
-    typeof frame.name === "string" &&
-    typeof frame.material === "string" &&
-    typeof frame.color === "string" &&
-    typeof frame.pricePerInch === "number" &&
-    typeof frame.borderColor === "string" &&
-    typeof frame.mouldingWidth === "number" &&
-    typeof frame.category === "string" &&
-    validCategories.includes(frame.category)
-  );
-}
-
-/**
- * Validate array of frame styles
- * TODO: Move to validation service in P1-019
- */
-function validateFrameStyles(frames: any[]): FrameStyle[] {
-  return frames.filter(validateFrameStyle);
-}
-
-/**
- * Validate mat color data
- * Supports both old format (color) and new format (hexColor)
- * TODO: Move to validation service in P1-019
- */
-function validateMatColor(mat: any): mat is MatColor {
-  return (
-    typeof mat === "object" &&
-    typeof mat.id === "string" &&
-    typeof mat.name === "string" &&
-    (typeof mat.hexColor === "string" || typeof mat.color === "string")
-  );
-}
-
-/**
- * Validate array of mat colors
- * TODO: Move to validation service in P1-019
- */
-function validateMatColors(mats: any[]): MatColor[] {
-  return mats.filter(validateMatColor);
-}
-
-/**
- * Validate glass type data
- * TODO: Move to validation service in P1-019
- */
-function validateGlassType(glass: any): glass is GlassType {
-  return (
-    typeof glass === "object" &&
-    typeof glass.id === "string" &&
-    typeof glass.name === "string" &&
-    typeof glass.pricePerSqFt === "number"
-  );
-}
-
-/**
- * Validate array of glass types
- * TODO: Move to validation service in P1-019
- */
-function validateGlassTypes(glassTypes: any[]): GlassType[] {
-  return glassTypes.filter(validateGlassType);
-}
+import type { FrameStyle, MatColor, GlassType, PricingConfig } from "@framecraft/types";
+import { validateFrameStyles, validateMatColors, validateGlassTypes } from "./validation";
 
 // Extract mats array from new catalog structure - mats.json already has correct structure
 const matsDataNew = (matsDataRaw as any).mats || [];

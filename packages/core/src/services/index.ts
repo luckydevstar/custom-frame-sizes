@@ -14,6 +14,6 @@
 // Services
 export * from "./products";
 export * from "./pricing";
+export * from "./validation";
 // export * from "./shopify";
-// export * from "./validation";
 // export * from "./printCompositor";

@@ -133,12 +133,14 @@ export function calculatePricing(config: FrameConfiguration): PricingBreakdown {
     const singleMatPrice = calculateMatPriceForDesigner(frameWidth, frameHeight, matColor.name);
     if (singleMatPrice !== null) {
       // Apply double mat multiplier if needed (1.0 for single, 1.5 for double)
-      const matMultiplier = pricingConfig.matMultipliers[config.matType];
+      const matMultiplier =
+        (pricingConfig.matMultipliers as Record<string, number>)[config.matType] ?? 1.0;
       matPrice = singleMatPrice * matMultiplier;
     } else {
       // Fallback to legacy perimeter pricing if mat not found in TRUE pricing
       const pricePerInch = matColor.pricePerInch ?? 0.1;
-      const matMultiplier = pricingConfig.matMultipliers[config.matType];
+      const matMultiplier =
+        (pricingConfig.matMultipliers as Record<string, number>)[config.matType] ?? 1.0;
       matPrice = perimeter * pricePerInch * matMultiplier;
     }
   }
