@@ -289,3 +289,9 @@ export {
 
 // Specialty components
 export { FrameDesigner } from "./components/specialty/FrameDesigner";
+export { ShadowboxDesigner } from "./components/specialty/ShadowboxDesigner";
+export { JerseyFrameDesigner } from "./components/specialty/JerseyFrameDesigner";
+export { CanvasFrameDesigner } from "./components/specialty/CanvasFrameDesigner";
+export { PuzzleFrameDesigner } from "./components/specialty/PuzzleFrameDesigner";
+export { ComicBookFrameDesigner } from "./components/specialty/ComicBookFrameDesigner";
+export { PlaybillFrameDesigner } from "./components/specialty/PlaybillFrameDesigner";
