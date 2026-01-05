@@ -1,0 +1,36 @@
+{
+  "name": "@framecraft/core",
+  "version": "0.1.0",
+  "private": true,
+  "description": "FrameCraft core business logic, services, utilities, and hooks",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc --build",
+    "dev": "tsc --build --watch",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint . --ext .ts,.tsx",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.11",
+    "@types/react-dom": "^18.3.1"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "keywords": [
+    "framecraft",
+    "core",
+    "services",
+    "utilities",
+    "hooks"
+  ],
+  "author": "FrameCraft Team",
+  "license": "MIT"
+}
