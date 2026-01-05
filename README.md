@@ -176,7 +176,54 @@ Output directories are configured per task:
 - ✅ P1-001: pnpm Workspace Initialized
 - ✅ P1-002: Turborepo Configuration Complete
 - ✅ P1-003: Base Monorepo Directory Structure Created
-- ⏳ P1-004: Set Up Shared TypeScript Configuration (Next)
+- ✅ P1-004: Shared TypeScript Configuration Set Up
+- ⏳ P1-005: Configure ESLint for Monorepo (Next)
+
+## 🔧 TypeScript Configuration
+
+This monorepo uses a shared TypeScript base configuration (`tsconfig.base.json`) that all packages extend. This ensures consistent type checking and compilation settings across the entire codebase.
+
+### Base Configuration
+
+The `tsconfig.base.json` includes:
+- **Strict type checking** enabled (all strict flags)
+- **Modern target**: ES2022
+- **Module system**: ESNext
+- **Path mappings** for shared packages:
+  - `@framecraft/ui` → `./packages/ui/src`
+  - `@framecraft/core` → `./packages/core/src`
+  - `@framecraft/config` → `./packages/config/src`
+  - `@framecraft/types` → `./packages/types/src`
+  - `@framecraft/data` → `./packages/data/src`
+
+### Extending Base Config
+
+Each package should have its own `tsconfig.json` that extends the base:
+
+```json
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "composite": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.test.ts"]
+}
+```
+
+See `packages/tsconfig.template.json` for a complete template.
+
+### Type Checking
+
+```bash
+# Type check all packages
+pnpm type-check
+
+# Type check specific package
+pnpm type-check --filter @framecraft/ui
+```
 
 ## 📝 Development Guidelines
 
@@ -184,6 +231,7 @@ Output directories are configured per task:
 2. Store-specific code goes in `apps/{store-name}/`
 3. Use workspace protocol (`workspace:*`) for internal dependencies
 4. Keep packages focused and independent where possible
+5. All packages must extend `tsconfig.base.json` for consistency
 
 ## 🤝 Contributing
 

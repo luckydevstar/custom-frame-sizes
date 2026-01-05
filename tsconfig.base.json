@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    // Type Checking
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "strictPropertyInitialization": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedIndexedAccess": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": false,
+
+    // Modules
+    "target": "ES2022",
+    "module": "ESNext",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": false,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+
+    // Emit
+    "noEmit": true,
+    "incremental": true,
+    "declaration": true,
+    "declarationMap": true,
+    "sourceMap": true,
+
+    // Interop Constraints
+    "skipLibCheck": true,
+
+    // Language and Environment
+    "jsx": "react-jsx",
+
+    // Path Mappings for Shared Packages
+    "baseUrl": ".",
+    "paths": {
+      "@framecraft/ui": ["./packages/ui/src"],
+      "@framecraft/ui/*": ["./packages/ui/src/*"],
+      "@framecraft/core": ["./packages/core/src"],
+      "@framecraft/core/*": ["./packages/core/src/*"],
+      "@framecraft/config": ["./packages/config/src"],
+      "@framecraft/config/*": ["./packages/config/src/*"],
+      "@framecraft/types": ["./packages/types/src"],
+      "@framecraft/types/*": ["./packages/types/src/*"],
+      "@framecraft/data": ["./packages/data/src"],
+      "@framecraft/data/*": ["./packages/data/src/*"]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build",
+    ".next",
+    ".turbo",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
+  ]
+}
+
