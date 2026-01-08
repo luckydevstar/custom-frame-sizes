@@ -14,7 +14,9 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@tanstack/react-query": "^5.0.0"
+    "@tanstack/react-query": "^5.0.0",
+    "@framecraft/data": "workspace:*",
+    "@framecraft/types": "workspace:*"
   },
   "devDependencies": {
     "@types/react": "^18.3.11",

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "standard",
+    "name": "Standard Acrylic",
+    "pricePerSqFt": 0,
+    "shopifyVariantId": null
+  },
+  {
+    "id": "non-glare",
+    "name": "Non-glare Acrylic",
+    "pricePerSqFt": 3.5,
+    "shopifyVariantId": null
+  },
+  {
+    "id": "backing-only",
+    "name": "No Acrylic, with Backing",
+    "pricePerSqFt": -1.0,
+    "shopifyVariantId": null
+  },
+  {
+    "id": "none",
+    "name": "No Acrylic, No Backing",
+    "pricePerSqFt": -2.0,
+    "shopifyVariantId": null
+  }
+]

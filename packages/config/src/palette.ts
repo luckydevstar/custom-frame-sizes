@@ -9,12 +9,8 @@
  * For now, using relative import from root data/ folder
  */
 
-// TODO: Update to import from @framecraft/data once data package is created
-// import matData from '@framecraft/data/mats.json';
-//
-// For now, using relative import - data files are in root data/ folder
-// @ts-expect-error - Data files will be in @framecraft/data package
-import matData from "../../../../data/mats.json";
+// Import data from @framecraft/data package
+import { matsData } from "@framecraft/data";
 
 export interface MatSize {
   sku: string;
@@ -47,18 +43,18 @@ export interface MatDisplayOrder {
 /**
  * All 46 production mats
  */
-export const ALL_MATS: Mat[] = (matData as any).mats as Mat[];
+export const ALL_MATS: Mat[] = (matsData as any).mats as Mat[];
 
 /**
  * Display order for desktop (27 regular + 18 premium, omits Terracotta)
  */
-export const DESKTOP_DISPLAY_ORDER: MatDisplayOrder = (matData as any).displayOrder
+export const DESKTOP_DISPLAY_ORDER: MatDisplayOrder = (matsData as any).displayOrder
   .desktop as MatDisplayOrder;
 
 /**
  * Display order for mobile (28 regular + 18 premium, includes Terracotta in red section)
  */
-export const MOBILE_DISPLAY_ORDER: MatDisplayOrder = (matData as any).displayOrder
+export const MOBILE_DISPLAY_ORDER: MatDisplayOrder = (matsData as any).displayOrder
   .mobile as MatDisplayOrder;
 
 /**
@@ -246,10 +242,10 @@ export function matNeedsBorder(mat: Mat): boolean {
  * Get mat metadata
  */
 export const MAT_METADATA = {
-  total: (matData as any).metadata.totalMats,
-  regular: (matData as any).metadata.regularCount,
-  premium: (matData as any).metadata.premiumCount,
-  blackCore: (matData as any).metadata.blackCoreCount,
+  total: (matsData as any).metadata.totalMats,
+  regular: (matsData as any).metadata.regularCount,
+  premium: (matsData as any).metadata.premiumCount,
+  blackCore: (matsData as any).metadata.blackCoreCount,
 } as const;
 
 // ========================================

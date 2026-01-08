@@ -8,19 +8,16 @@
  * - Validation: @framecraft/core/services/validation (extracted in P1-019)
  * - Palette config: @framecraft/config (extracted in P1-026)
  *
- * TODO: Data files will be moved to @framecraft/data package (future ticket)
+ * Data files are imported from @framecraft/data package.
  */
 
-// TODO: Update to import from @framecraft/data once data package is created
-// For now, using relative path - data files are in root data/ folder
-// @ts-expect-error - Data files will be in @framecraft/data package
-import framesData from "../../../../data/frames.json";
-// @ts-expect-error - Data files will be in @framecraft/data package
-import matsDataRaw from "../../../../data/mats.json";
-// @ts-expect-error - Data files will be in @framecraft/data package
-import glassData from "../../../../data/glass.json";
-// @ts-expect-error - Data files will be in @framecraft/data package
-import pricingConfigData from "../../../../data/pricing-config.json";
+// Import data from @framecraft/data package
+import {
+  framesData,
+  matsData as matsDataRaw,
+  glassData,
+  pricingConfigData,
+} from "@framecraft/data";
 
 import type { FrameStyle, MatColor, GlassType, PricingConfig } from "@framecraft/types";
 import { validateFrameStyles, validateMatColors, validateGlassTypes } from "./validation";
@@ -34,7 +31,7 @@ const matsData = matsDataNew.map((mat: any) => {
     ...mat,
     color: mat.hexColor || mat.color || "#FFFFFF", // Backward compatibility alias
   };
-});
+}) as MatColor[];
 
 // Validate data on load
 const validatedFrames = validateFrameStyles(framesData);

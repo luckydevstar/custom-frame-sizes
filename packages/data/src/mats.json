@@ -1,0 +1,1028 @@
+{
+  "mats": [
+    {
+      "id": "mat-1",
+      "lineNumber": 1,
+      "type": "Regular",
+      "name": "White",
+      "swatchFile": "1.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB222",
+          "price": 3.46,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "VB8222",
+          "price": 11.85,
+          "vendor": "Decor"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#FFFFFF"
+    },
+    {
+      "id": "mat-2",
+      "lineNumber": 2,
+      "type": "Regular",
+      "name": "Black",
+      "swatchFile": "2.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB221",
+          "price": 3.46,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "VB8221",
+          "price": 11.85,
+          "vendor": "Decor"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#333D37"
+    },
+    {
+      "id": "mat-3",
+      "lineNumber": 3,
+      "type": "Regular",
+      "name": "Dark Gray",
+      "swatchFile": "3.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB161",
+          "price": 5,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "CB8-569",
+          "price": 13.77,
+          "vendor": "Omega"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#5C6964"
+    },
+    {
+      "id": "mat-4",
+      "lineNumber": 4,
+      "type": "Regular",
+      "name": "Light Gray",
+      "swatchFile": "4.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB535",
+          "price": 5.77,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "CBW8-535",
+          "price": 16.77,
+          "vendor": "Omega"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#C9D0CE"
+    },
+    {
+      "id": "mat-5",
+      "lineNumber": 5,
+      "type": "Regular",
+      "name": "Oyster Shell",
+      "swatchFile": "5.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB163",
+          "price": 5.77,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "VB8163",
+          "price": 13.42,
+          "vendor": "Decor"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#F8F8F8"
+    },
+    {
+      "id": "mat-6",
+      "lineNumber": 6,
+      "type": "Regular",
+      "name": "Off White",
+      "swatchFile": "6.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB502",
+          "price": 5,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "CB8-502",
+          "price": 11,
+          "vendor": "Omega"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#FFFEEB"
+    },
+    {
+      "id": "mat-7",
+      "lineNumber": 7,
+      "type": "Regular",
+      "name": "Beige",
+      "swatchFile": "7.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB511",
+          "price": 5,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "CB8-514",
+          "price": 13.77,
+          "vendor": "Omega"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#EBD0AF"
+    },
+    {
+      "id": "mat-8",
+      "lineNumber": 8,
+      "type": "Regular",
+      "name": "Brown",
+      "swatchFile": "8.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB710",
+          "price": 5,
+          "vendor": "Decor"
+        },
+        "40x60": null
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#785C3F"
+    },
+    {
+      "id": "mat-9",
+      "lineNumber": 9,
+      "type": "Regular",
+      "name": "Dark Red",
+      "swatchFile": "9.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB038",
+          "price": 5,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "CB8-038",
+          "price": 11,
+          "vendor": "Omega"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#764C4C"
+    },
+    {
+      "id": "mat-10",
+      "lineNumber": 10,
+      "type": "Regular",
+      "name": "Red",
+      "swatchFile": "10.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB459",
+          "price": 5,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "VB8459",
+          "price": 12.16,
+          "vendor": "Decor"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#C9384F"
+    },
+    {
+      "id": "mat-11",
+      "lineNumber": 11,
+      "type": "Regular",
+      "name": "Orange",
+      "swatchFile": "11.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB152",
+          "price": 5.77,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "C89876",
+          "price": 29.67,
+          "vendor": "Decor"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#FB9159"
+    },
+    {
+      "id": "mat-12",
+      "lineNumber": 12,
+      "type": "Regular",
+      "name": "Mustard",
+      "swatchFile": "12.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB520",
+          "price": 5.77,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "C89894",
+          "price": 29.67,
+          "vendor": "Decor"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#E9A44B"
+    },
+    {
+      "id": "mat-13",
+      "lineNumber": 13,
+      "type": "Regular",
+      "name": "Yellow",
+      "swatchFile": "13.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB110",
+          "price": 5.77,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "C89518",
+          "price": 29.67,
+          "vendor": "Decor"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#FDEF6F"
+    },
+    {
+      "id": "mat-14",
+      "lineNumber": 14,
+      "type": "Regular",
+      "name": "Spring Green",
+      "swatchFile": "14.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB361",
+          "price": 5.77,
+          "vendor": "Decor"
+        },
+        "40x60": null
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#C8D092"
+    },
+    {
+      "id": "mat-15",
+      "lineNumber": 15,
+      "type": "Regular",
+      "name": "Green",
+      "swatchFile": "15.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB527",
+          "price": 6.07,
+          "vendor": "Decor"
+        },
+        "40x60": null
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#52B275"
+    },
+    {
+      "id": "mat-16",
+      "lineNumber": 16,
+      "type": "Regular",
+      "name": "Olive",
+      "swatchFile": "16.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB358",
+          "price": 5.77,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "C89822",
+          "price": 29.67,
+          "vendor": "Decor"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#6B7654"
+    },
+    {
+      "id": "mat-17",
+      "lineNumber": 17,
+      "type": "Regular",
+      "name": "Forest Green",
+      "swatchFile": "17.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB524",
+          "price": 5,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "CB8-524",
+          "price": 11,
+          "vendor": "Omega"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#465F52"
+    },
+    {
+      "id": "mat-18",
+      "lineNumber": 18,
+      "type": "Regular",
+      "name": "Navy Blue",
+      "swatchFile": "18.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB131",
+          "price": 5.77,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "CB8-131",
+          "price": 11,
+          "vendor": "Omega"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#414C5C"
+    },
+    {
+      "id": "mat-19",
+      "lineNumber": 19,
+      "type": "Regular",
+      "name": "Blue",
+      "swatchFile": "19.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB334",
+          "price": 3.46,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "CB8-334",
+          "price": 11,
+          "vendor": "Omega"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#30527A"
+    },
+    {
+      "id": "mat-20",
+      "lineNumber": 20,
+      "type": "Regular",
+      "name": "Ocean Blue",
+      "swatchFile": "20.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB532",
+          "price": 5.77,
+          "vendor": "Decor"
+        },
+        "40x60": null
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#068B98"
+    },
+    {
+      "id": "mat-21",
+      "lineNumber": 21,
+      "type": "Regular",
+      "name": "Teal Blue",
+      "swatchFile": "21.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "CB531",
+          "price": 4.5,
+          "vendor": "Omega"
+        },
+        "40x60": null
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#28B9CB"
+    },
+    {
+      "id": "mat-22",
+      "lineNumber": 22,
+      "type": "Regular",
+      "name": "Steel Blue",
+      "swatchFile": "22.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB143",
+          "price": 5,
+          "vendor": "Decor"
+        },
+        "40x60": null
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#4188CC"
+    },
+    {
+      "id": "mat-23",
+      "lineNumber": 23,
+      "type": "Regular",
+      "name": "French Blue",
+      "swatchFile": "23.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB538",
+          "price": 5.77,
+          "vendor": "Decor"
+        },
+        "40x60": null
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#7496B9"
+    },
+    {
+      "id": "mat-24",
+      "lineNumber": 24,
+      "type": "Regular",
+      "name": "Sky Blue",
+      "swatchFile": "24.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB534",
+          "price": 5,
+          "vendor": "Decor"
+        },
+        "40x60": null
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#B2C7EC"
+    },
+    {
+      "id": "mat-25",
+      "lineNumber": 25,
+      "type": "Regular",
+      "name": "Purple",
+      "swatchFile": "25.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB120",
+          "price": 5.77,
+          "vendor": "Decor"
+        },
+        "40x60": null
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#845BA3"
+    },
+    {
+      "id": "mat-26",
+      "lineNumber": 26,
+      "type": "Regular",
+      "name": "Pansy",
+      "swatchFile": "26.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB548",
+          "price": 5,
+          "vendor": "Decor"
+        },
+        "40x60": null
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#B589D9"
+    },
+    {
+      "id": "mat-27",
+      "lineNumber": 27,
+      "type": "Regular",
+      "name": "Pink",
+      "swatchFile": "27.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB102",
+          "price": 5.77,
+          "vendor": "Decor"
+        },
+        "40x60": null
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#FEECF8"
+    },
+    {
+      "id": "mat-28",
+      "lineNumber": 28,
+      "type": "Regular",
+      "name": "Terracotta",
+      "swatchFile": "28.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB153",
+          "price": 5.59,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "C89834",
+          "price": 29.67,
+          "vendor": "Decor"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": true,
+      "isPremium": false,
+      "hexColor": "#AB5654"
+    },
+    {
+      "id": "mat-29",
+      "lineNumber": 29,
+      "type": "Premium",
+      "name": "White Suede",
+      "swatchFile": "29.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB9125",
+          "price": 19.19,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "C87180",
+          "price": 85.87,
+          "vendor": "Decor"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#FFFFFF"
+    },
+    {
+      "id": "mat-30",
+      "lineNumber": 30,
+      "type": "Premium",
+      "name": "Black Suede",
+      "swatchFile": "30.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB9142",
+          "price": 19.19,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "CB89-142",
+          "price": 58.36,
+          "vendor": "Omega"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#252525"
+    },
+    {
+      "id": "mat-31",
+      "lineNumber": 31,
+      "type": "Premium",
+      "name": "Dark Gray Suede",
+      "swatchFile": "31.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB9141",
+          "price": 19.19,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "CB89-141",
+          "price": 58.36,
+          "vendor": "Omega"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#4F5C59"
+    },
+    {
+      "id": "mat-32",
+      "lineNumber": 32,
+      "type": "Premium",
+      "name": "Light Gray Suede",
+      "swatchFile": "32.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB9140",
+          "price": 19.19,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "C87158",
+          "price": 85.87,
+          "vendor": "Decor"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#ADB1AA"
+    },
+    {
+      "id": "mat-33",
+      "lineNumber": 33,
+      "type": "Premium",
+      "name": "Beige Suede",
+      "swatchFile": "33.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB9137",
+          "price": 19.19,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "CB89-137",
+          "price": 58.36,
+          "vendor": "Omega"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#C1A47C"
+    },
+    {
+      "id": "mat-34",
+      "lineNumber": 34,
+      "type": "Premium",
+      "name": "Dark Red Suede",
+      "swatchFile": "34.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB9134",
+          "price": 19.19,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "C87112",
+          "price": 85.87,
+          "vendor": "Decor"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#4B272D"
+    },
+    {
+      "id": "mat-35",
+      "lineNumber": 35,
+      "type": "Premium",
+      "name": "Red Suede",
+      "swatchFile": "35.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB9135",
+          "price": 19.19,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "CB89-135",
+          "price": 58.36,
+          "vendor": "Omega"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#A8213A"
+    },
+    {
+      "id": "mat-36",
+      "lineNumber": 36,
+      "type": "Premium",
+      "name": "Green Suede",
+      "swatchFile": "36.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB9129",
+          "price": 19.19,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "CB89-129",
+          "price": 58.36,
+          "vendor": "Omega"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#214430"
+    },
+    {
+      "id": "mat-37",
+      "lineNumber": 37,
+      "type": "Premium",
+      "name": "Navy Blue Suede",
+      "swatchFile": "37.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB9133",
+          "price": 19.19,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "CB89-133",
+          "price": 58.36,
+          "vendor": "Omega"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#232E43"
+    },
+    {
+      "id": "mat-38",
+      "lineNumber": 38,
+      "type": "Premium",
+      "name": "Blue Suede",
+      "swatchFile": "38.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB9124",
+          "price": 19.19,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "B85501",
+          "price": 72.11,
+          "vendor": "Decor"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#1E246E"
+    },
+    {
+      "id": "mat-39",
+      "lineNumber": 39,
+      "type": "Premium",
+      "name": "Purple Suede",
+      "swatchFile": "39.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "CB9-148",
+          "price": 23.12,
+          "vendor": "Omega"
+        },
+        "40x60": {
+          "sku": "B85636",
+          "price": 72.11,
+          "vendor": "Decor"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#5F427E"
+    },
+    {
+      "id": "mat-40",
+      "lineNumber": 40,
+      "type": "Premium",
+      "name": "Metallic Gold",
+      "swatchFile": "40.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB577",
+          "price": 6.5,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "CB8-577",
+          "price": 16.46,
+          "vendor": "Omega"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#CCAD5C"
+    },
+    {
+      "id": "mat-41",
+      "lineNumber": 41,
+      "type": "Premium",
+      "name": "Metallic Silver",
+      "swatchFile": "41.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB5074",
+          "price": 7.76,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "C89850",
+          "price": 34.17,
+          "vendor": "Decor"
+        }
+      },
+      "coreColor": "white",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#C3C3C5"
+    },
+    {
+      "id": "mat-42",
+      "lineNumber": 42,
+      "type": "Premium",
+      "name": "Football Texture with Black Core",
+      "swatchFile": "42.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB62101",
+          "price": 20.93,
+          "vendor": "Decor"
+        },
+        "40x60": null
+      },
+      "coreColor": "black",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#8C4235"
+    },
+    {
+      "id": "mat-43",
+      "lineNumber": 43,
+      "type": "Premium",
+      "name": "Basketball Texture with Black Core",
+      "swatchFile": "43.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB62100",
+          "price": 20.93,
+          "vendor": "Decor"
+        },
+        "40x60": null
+      },
+      "coreColor": "black",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#BE5435"
+    },
+    {
+      "id": "mat-44",
+      "lineNumber": 44,
+      "type": "Premium",
+      "name": "White with Black Core",
+      "swatchFile": "44.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB697",
+          "price": 5.99,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "C863297",
+          "price": 25.95,
+          "vendor": "Decor"
+        }
+      },
+      "coreColor": "black",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#F8F8F8"
+    },
+    {
+      "id": "mat-45",
+      "lineNumber": 45,
+      "type": "Premium",
+      "name": "Black with Black Core",
+      "swatchFile": "45.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "VB6277",
+          "price": 5.99,
+          "vendor": "Decor"
+        },
+        "40x60": {
+          "sku": "VB86277",
+          "price": 15.99,
+          "vendor": "Decor"
+        }
+      },
+      "coreColor": "black",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#0B0B0B"
+    },
+    {
+      "id": "mat-46",
+      "lineNumber": 46,
+      "type": "Premium",
+      "name": "White Canvas",
+      "swatchFile": "46.jpg",
+      "sizes": {
+        "32x40": {
+          "sku": "AC4881",
+          "price": 10,
+          "vendor": "Peterboro"
+        },
+        "40x60": null
+      },
+      "coreColor": "white",
+      "isRegular": false,
+      "isPremium": true,
+      "hexColor": "#DBDBDB"
+    }
+  ],
+  "displayOrder": {
+    "desktop": {
+      "regular": [
+        1, 6, 5, 2, 3, 4, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,
+        26, 27
+      ],
+      "premium": [29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46]
+    },
+    "mobile": {
+      "regular": [
+        1, 6, 5, 2, 3, 4, 7, 8, 9, 10, 28, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,
+        25, 26, 27
+      ],
+      "premium": [29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46]
+    }
+  },
+  "metadata": {
+    "totalMats": 46,
+    "regularCount": 28,
+    "premiumCount": 18,
+    "blackCoreCount": 4
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "@framecraft/data",
+  "version": "0.1.0",
+  "private": true,
+  "description": "FrameCraft product catalog and static data",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "type-check": "tsc --noEmit",
+    "lint": "eslint . --ext .ts",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "framecraft",
+    "data",
+    "catalog",
+    "products"
+  ],
+  "author": "FrameCraft Team",
+  "license": "MIT"
+}
