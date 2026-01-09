@@ -15,3 +15,6 @@ export * from "./fragments";
 
 // Product queries
 export * from "./products";
+
+// Serialization
+export * from "./serialization";
