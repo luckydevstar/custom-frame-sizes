@@ -9,6 +9,9 @@
     "noEmit": false // Required for project references - must emit declaration files
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"]
+  "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"],
+  "references": [
+    { "path": "../data" }
+  ]
 }
 

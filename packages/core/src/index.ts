@@ -14,6 +14,9 @@
 // Services
 export * from "./services";
 
+// Shopify integration
+export * from "./shopify";
+
 // Utilities
 export * from "./utils";
 

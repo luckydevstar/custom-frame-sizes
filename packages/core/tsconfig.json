@@ -13,7 +13,8 @@
   "exclude": ["node_modules", "dist", "**/*.test.ts", "**/*.test.tsx"],
   "references": [
     { "path": "../types" },
-    { "path": "../config" }
+    { "path": "../config" },
+    { "path": "../data" }
   ]
 }
 
