@@ -15,8 +15,9 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^5.0.0",
-    "@framecraft/data": "workspace:*",
-    "@framecraft/types": "workspace:*"
+    "@framecraft/data": "*",
+    "@framecraft/types": "*",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/react": "^18.3.11",

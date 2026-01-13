@@ -14,9 +14,9 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
-    "@framecraft/config": "workspace:*",
-    "@framecraft/core": "workspace:*",
-    "@framecraft/types": "workspace:*",
+    "@framecraft/config": "*",
+    "@framecraft/core": "*",
+    "@framecraft/types": "*",
     "@radix-ui/react-accordion": "^1.2.4",
     "@radix-ui/react-alert-dialog": "^1.1.7",
     "@radix-ui/react-aspect-ratio": "^1.1.3",
