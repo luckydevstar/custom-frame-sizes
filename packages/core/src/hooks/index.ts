@@ -16,3 +16,5 @@
 export * from "./useIsMobile";
 export * from "./useMobileViewToggle";
 export * from "./useIntersectionVisible";
+export * from "./use-theme";
+export * from "./use-feature-flag";

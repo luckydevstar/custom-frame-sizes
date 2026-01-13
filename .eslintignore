@@ -40,3 +40,8 @@ yarn.lock
 # OS
 .DS_Store
 Thumbs.db
+
+# Example files
+**/examples/**
+**/*.example.*
+**/*.config.example.*

@@ -29,6 +29,7 @@
     "typescript": "^5.3.3"
   },
   "dependencies": {
-    "@framecraft/data": "*"
+    "@framecraft/data": "*",
+    "zod": "^3.22.4"
   }
 }

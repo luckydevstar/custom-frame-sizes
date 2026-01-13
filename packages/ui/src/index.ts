@@ -295,3 +295,6 @@ export { CanvasFrameDesigner } from "./components/specialty/CanvasFrameDesigner"
 export { PuzzleFrameDesigner } from "./components/specialty/PuzzleFrameDesigner";
 export { ComicBookFrameDesigner } from "./components/specialty/ComicBookFrameDesigner";
 export { PlaybillFrameDesigner } from "./components/specialty/PlaybillFrameDesigner";
+
+// Providers
+export { ThemeProvider, useThemeContext } from "./providers/ThemeProvider";

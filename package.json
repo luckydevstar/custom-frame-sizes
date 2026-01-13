@@ -24,7 +24,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-      "npx eslint --fix --max-warnings=0",
+      "node scripts/lint-staged-filter.mjs",
       "npx prettier --write"
     ],
     "*.{json,md}": [
