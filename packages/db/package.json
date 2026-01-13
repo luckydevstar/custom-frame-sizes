@@ -1,0 +1,37 @@
+{
+  "name": "@framecraft/db",
+  "version": "0.1.0",
+  "private": true,
+  "description": "FrameCraft database schema and utilities",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc --build",
+    "dev": "tsc --build --watch",
+    "type-check": "tsc --noEmit",
+    "lint": "eslint . --ext .ts",
+    "clean": "rm -rf dist",
+    "db:push": "drizzle-kit push",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.29.0",
+    "postgres": "^3.4.3",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "drizzle-kit": "^0.20.0",
+    "typescript": "^5.6.3"
+  },
+  "keywords": [
+    "framecraft",
+    "database",
+    "drizzle",
+    "postgresql"
+  ],
+  "author": "FrameCraft Team",
+  "license": "MIT"
+}
