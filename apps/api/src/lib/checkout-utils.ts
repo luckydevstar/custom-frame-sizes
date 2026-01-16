@@ -4,24 +4,45 @@
  * Helper functions for checkout operations using Shopify Storefront API.
  */
 
-import { StorefrontClient } from "@framecraft/core";
-import { StoreConfigRegistry } from "@framecraft/core";
 import { getCart } from "@framecraft/core";
-import type { CartResponse } from "@/types/responses";
+import type { CartResponse } from "../types/responses";
 
 /**
  * Get cart by ID
  */
 export async function getCartById(storeId: string, cartId: string): Promise<CartResponse> {
-  const storeConfig = StoreConfigRegistry.get(storeId);
-  if (!storeConfig) {
-    throw new Error(`Store configuration not found: ${storeId}`);
+  const cart = await getCart(cartId, storeId);
+
+  if (!cart) {
+    throw new Error("Cart not found");
   }
 
-  const client = new StorefrontClient(storeConfig);
-  const cart = await getCart(client, cartId);
-
-  return cart;
+  return {
+    id: cart.id,
+    checkoutUrl: cart.checkoutUrl,
+    cost: {
+      totalAmount: {
+        amount: cart.cost.totalAmount.amount,
+        currencyCode: cart.cost.totalAmount.currencyCode,
+      },
+    },
+    lines: {
+      edges: cart.lines.edges.map((edge) => ({
+        node: {
+          id: edge.node.id,
+          quantity: edge.node.quantity,
+          merchandise: {
+            id: edge.node.merchandise.id,
+            title: edge.node.merchandise.title,
+            product: {
+              id: edge.node.merchandise.product.id,
+              title: edge.node.merchandise.product.title,
+            },
+          },
+        },
+      })),
+    },
+  };
 }
 
 /**
@@ -39,12 +60,16 @@ export async function createCheckoutUrl(
   const cart = await getCartById(storeId, cartId);
 
   // Validate cart has items
-  if (!cart.lines.edges || cart.lines.edges.length === 0) {
+  if (!cart.lines || !cart.lines.edges || cart.lines.edges.length === 0) {
     throw new Error("Cart is empty. Cannot create checkout.");
   }
 
   // Build checkout URL with discount code if provided
-  let checkoutUrl = cart.checkoutUrl;
+  let checkoutUrl = cart.checkoutUrl || "";
+
+  if (!checkoutUrl) {
+    throw new Error("Cart does not have a checkout URL");
+  }
 
   if (discountCode) {
     // Add discount code to checkout URL
@@ -55,7 +80,11 @@ export async function createCheckoutUrl(
 
   // Extract checkout ID from URL (format: /checkouts/{id})
   const checkoutIdMatch = checkoutUrl.match(/\/checkouts\/([a-zA-Z0-9]+)/);
-  const checkoutId = checkoutIdMatch ? checkoutIdMatch[1] : cart.id;
+  const checkoutId = checkoutIdMatch ? checkoutIdMatch[1] : cart.id || "";
+
+  if (!checkoutId) {
+    throw new Error("Could not extract checkout ID from cart");
+  }
 
   return {
     checkoutUrl,

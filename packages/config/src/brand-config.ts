@@ -68,7 +68,12 @@ class BrandConfigRegistryImpl implements BrandConfigRegistry {
 /**
  * Global brand configuration registry instance
  */
-export const BrandConfigRegistry = new BrandConfigRegistryImpl();
+const BrandConfigRegistry = new BrandConfigRegistryImpl();
+
+/**
+ * Export the registry instance
+ */
+export { BrandConfigRegistry };
 
 /**
  * Register multiple store configurations

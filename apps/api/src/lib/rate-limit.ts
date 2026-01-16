@@ -83,7 +83,7 @@ export function getClientIdentifier(req: {
   let ip: string | undefined;
 
   if (typeof forwardedFor === "string" && forwardedFor.length > 0) {
-    ip = forwardedFor.split(",")[0].trim();
+    ip = forwardedFor.split(",")[0]?.trim();
   } else if (typeof realIp === "string" && realIp.length > 0) {
     ip = realIp;
   } else if (typeof cfConnectingIp === "string" && cfConnectingIp.length > 0) {

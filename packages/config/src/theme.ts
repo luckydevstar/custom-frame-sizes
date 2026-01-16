@@ -388,14 +388,20 @@ export function generateThemeCSS(theme: ThemeConfig, mode: "light" | "dark"): st
 
 /**
  * Get color value from theme palette
+ *
+ * @deprecated Use getThemeColor from theme-utils instead for runtime color access
+ * This function is kept for internal use in theme utilities
  */
-export function getThemeColor(
+function getThemeColorFromPalette(
   theme: ThemeConfig,
   mode: "light" | "dark",
   colorKey: keyof ColorPalette
 ): string {
   return theme.colors[mode][colorKey];
 }
+
+// Export for internal use only
+export { getThemeColorFromPalette };
 
 /**
  * Get typography font family
@@ -412,15 +418,32 @@ export function getTypographyFont(
  */
 export function getLayoutValue(theme: ThemeConfig, path: string): string | number | undefined {
   const keys = path.split(".");
-  let value: any = theme.layout;
+  let value: unknown = theme.layout;
 
   for (const key of keys) {
     if (value && typeof value === "object" && key in value) {
-      value = value[key as keyof typeof value];
+      value = (value as Record<string, unknown>)[key];
     } else {
       return undefined;
     }
   }
 
-  return value;
+  // Type narrowing: return only if value is string, number, or undefined
+  if (typeof value === "string" || typeof value === "number") {
+    return value;
+  }
+
+  return undefined;
 }
+
+// Re-export utilities from theme-utils (these are the main utilities for runtime use)
+export {
+  applyThemeToDocument,
+  getThemeProperty,
+  getThemeColor, // This is the main runtime getThemeColor function
+  isDarkMode,
+  toggleDarkMode,
+} from "./theme/theme-utils";
+
+// Re-export merge functions
+export { mergeTheme, getMergedTheme } from "./theme/theme-merge";

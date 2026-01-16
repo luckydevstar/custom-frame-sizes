@@ -19,14 +19,24 @@ export * from "./navigation";
 
 // Theme configuration
 export * from "./theme";
-export * from "./theme/base-theme";
-export * from "./theme/theme-merge";
-export * from "./theme/theme-utils";
+// Note: base-theme, theme-merge, and theme-utils are re-exported via ./theme
+// to avoid duplicate exports
 
 // Feature flags configuration
 export * from "./features";
 
 // Brand configuration
 export * from "./brand-config";
-export * from "./types/brand-config";
+// Note: BrandConfigRegistry type is exported from types/brand-config
+// The instance is exported from brand-config
+export type {
+  BrandConfig,
+  BrandConfigRegistry,
+  StoreId,
+  ThemeOverride,
+  NavigationOverride,
+  ComponentOverrides,
+  SEOConfig,
+  ShopifyConfig,
+} from "./types/brand-config";
 export * from "./validation/schema";

@@ -8,9 +8,13 @@
  * when using a private Storefront API token.
  */
 
-import { StorefrontClient } from "@framecraft/core";
-import { createCart, addCartLines, updateCartLines, removeCartLines } from "@framecraft/core";
-import { StoreConfigRegistry } from "@framecraft/core";
+import {
+  createCart,
+  addCartLines,
+  updateCartLines,
+  removeCartLines,
+  type CartLineInput,
+} from "@framecraft/core";
 import type { CartResponse } from "../types/responses";
 
 /**
@@ -22,25 +26,37 @@ import type { CartResponse } from "../types/responses";
  */
 export async function createCartWithStorefront(
   storeId: string,
-  lines?: Array<{
-    merchandiseId: string;
-    quantity: number;
-    attributes?: Array<{ key: string; value: string }>;
-  }>
+  lines?: CartLineInput[]
 ): Promise<CartResponse> {
-  // Get store configuration
-  const storeConfig = StoreConfigRegistry.get(storeId);
-  if (!storeConfig) {
-    throw new Error(`Store configuration not found: ${storeId}`);
-  }
+  // Create cart - function handles store config internally
+  const cart = await createCart(lines || [], storeId);
 
-  // Create Storefront API client
-  const client = new StorefrontClient(storeConfig);
-
-  // Create cart
-  const cart = await createCart(client, lines || []);
-
-  return cart;
+  return {
+    id: cart.id,
+    checkoutUrl: cart.checkoutUrl,
+    cost: {
+      totalAmount: {
+        amount: cart.cost.totalAmount.amount,
+        currencyCode: cart.cost.totalAmount.currencyCode,
+      },
+    },
+    lines: {
+      edges: cart.lines.edges.map((edge) => ({
+        node: {
+          id: edge.node.id,
+          quantity: edge.node.quantity,
+          merchandise: {
+            id: edge.node.merchandise.id,
+            title: edge.node.merchandise.title,
+            product: {
+              id: edge.node.merchandise.product.id,
+              title: edge.node.merchandise.product.title,
+            },
+          },
+        },
+      })),
+    },
+  };
 }
 
 /**
@@ -54,21 +70,36 @@ export async function createCartWithStorefront(
 export async function addLinesToCart(
   storeId: string,
   cartId: string,
-  lines: Array<{
-    merchandiseId: string;
-    quantity: number;
-    attributes?: Array<{ key: string; value: string }>;
-  }>
+  lines: CartLineInput[]
 ): Promise<CartResponse> {
-  const storeConfig = StoreConfigRegistry.get(storeId);
-  if (!storeConfig) {
-    throw new Error(`Store configuration not found: ${storeId}`);
-  }
+  const cart = await addCartLines(cartId, lines, storeId);
 
-  const client = new StorefrontClient(storeConfig);
-  const cart = await addCartLines(client, cartId, lines);
-
-  return cart;
+  return {
+    id: cart.id,
+    checkoutUrl: cart.checkoutUrl,
+    cost: {
+      totalAmount: {
+        amount: cart.cost.totalAmount.amount,
+        currencyCode: cart.cost.totalAmount.currencyCode,
+      },
+    },
+    lines: {
+      edges: cart.lines.edges.map((edge) => ({
+        node: {
+          id: edge.node.id,
+          quantity: edge.node.quantity,
+          merchandise: {
+            id: edge.node.merchandise.id,
+            title: edge.node.merchandise.title,
+            product: {
+              id: edge.node.merchandise.product.id,
+              title: edge.node.merchandise.product.title,
+            },
+          },
+        },
+      })),
+    },
+  };
 }
 
 /**
@@ -88,15 +119,34 @@ export async function updateLinesInCart(
     attributes?: Array<{ key: string; value: string }>;
   }>
 ): Promise<CartResponse> {
-  const storeConfig = StoreConfigRegistry.get(storeId);
-  if (!storeConfig) {
-    throw new Error(`Store configuration not found: ${storeId}`);
-  }
+  const cart = await updateCartLines(cartId, lines, storeId);
 
-  const client = new StorefrontClient(storeConfig);
-  const cart = await updateCartLines(client, cartId, lines);
-
-  return cart;
+  return {
+    id: cart.id,
+    checkoutUrl: cart.checkoutUrl,
+    cost: {
+      totalAmount: {
+        amount: cart.cost.totalAmount.amount,
+        currencyCode: cart.cost.totalAmount.currencyCode,
+      },
+    },
+    lines: {
+      edges: cart.lines.edges.map((edge) => ({
+        node: {
+          id: edge.node.id,
+          quantity: edge.node.quantity,
+          merchandise: {
+            id: edge.node.merchandise.id,
+            title: edge.node.merchandise.title,
+            product: {
+              id: edge.node.merchandise.product.id,
+              title: edge.node.merchandise.product.title,
+            },
+          },
+        },
+      })),
+    },
+  };
 }
 
 /**
@@ -112,13 +162,32 @@ export async function removeLinesFromCart(
   cartId: string,
   lineIds: string[]
 ): Promise<CartResponse> {
-  const storeConfig = StoreConfigRegistry.get(storeId);
-  if (!storeConfig) {
-    throw new Error(`Store configuration not found: ${storeId}`);
-  }
+  const cart = await removeCartLines(cartId, lineIds, storeId);
 
-  const client = new StorefrontClient(storeConfig);
-  const cart = await removeCartLines(client, cartId, lineIds);
-
-  return cart;
+  return {
+    id: cart.id,
+    checkoutUrl: cart.checkoutUrl,
+    cost: {
+      totalAmount: {
+        amount: cart.cost.totalAmount.amount,
+        currencyCode: cart.cost.totalAmount.currencyCode,
+      },
+    },
+    lines: {
+      edges: cart.lines.edges.map((edge) => ({
+        node: {
+          id: edge.node.id,
+          quantity: edge.node.quantity,
+          merchandise: {
+            id: edge.node.merchandise.id,
+            title: edge.node.merchandise.title,
+            product: {
+              id: edge.node.merchandise.product.id,
+              title: edge.node.merchandise.product.title,
+            },
+          },
+        },
+      })),
+    },
+  };
 }

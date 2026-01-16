@@ -87,12 +87,47 @@ export class AdminApiClient {
       isEmbeddedApp: false,
     });
 
-    // Create GraphQL client
+    // Create GraphQL client with minimal session
+    // Note: Shopify GraphQL client requires a Session object, but we only need shop and accessToken
+    const shop = config.hostName || process.env.SHOPIFY_STORE_DOMAIN || "";
+    const accessToken = config.apiSecretKey;
+
+    // Create a minimal session-like object for the GraphQL client
+    // The client only uses shop and accessToken from the session
+    // We need to provide all required Session properties, but the client only uses shop and accessToken
+    interface MinimalSession {
+      shop: string;
+      accessToken: string;
+      id: string;
+      state: string;
+      isOnline: boolean;
+      isActive: boolean;
+      scope: string;
+      expires: unknown;
+      onlineAccessInfo: unknown;
+    }
+
+    const minimalSession: MinimalSession = {
+      shop,
+      accessToken,
+      id: "",
+      state: "",
+      isOnline: false,
+      isActive: false,
+      scope: "",
+      expires: null,
+      onlineAccessInfo: null,
+    };
+
+    // Type assertion needed because Shopify's Session type has many required properties
+    // but the GraphQL client only uses shop and accessToken at runtime
+    // Using double assertion: MinimalSession -> unknown -> Session type
+    // This is safe because the GraphQL client only accesses shop and accessToken
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
+    const session = minimalSession as any;
+
     this.client = new shopify.clients.Graphql({
-      session: {
-        shop: config.hostName || process.env.SHOPIFY_STORE_DOMAIN || "",
-        accessToken: config.apiSecretKey,
-      },
+      session,
     });
   }
 
@@ -116,16 +151,22 @@ export class AdminApiClient {
         },
       });
 
-      const result = response.body as AdminApiResponse<T>;
+      const result = response.body as AdminApiResponse<T> | undefined;
+
+      if (!result) {
+        throw new AdminApiClientError("No response body from Shopify API", "NO_RESPONSE");
+      }
 
       // Check for GraphQL errors
       if (result.errors && result.errors.length > 0) {
         const error = result.errors[0];
-        throw new AdminApiClientError(
-          error.message,
-          error.code || "GRAPHQL_ERROR",
-          result.extensions
-        );
+        if (error) {
+          throw new AdminApiClientError(
+            error.message || "Unknown GraphQL error",
+            error.code || "GRAPHQL_ERROR",
+            result.extensions
+          );
+        }
       }
 
       // Check rate limit status

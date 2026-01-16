@@ -6,16 +6,15 @@
  */
 
 import { useEffect, useMemo } from "react";
-import type { ThemeConfig } from "@framecraft/config";
-import { getMergedTheme } from "@framecraft/config";
+import type { ThemeConfig, ThemeOverride } from "@framecraft/config";
 import {
+  getMergedTheme,
   applyThemeToDocument,
   getThemeColor,
   isDarkMode,
   toggleDarkMode,
+  getBrandConfig,
 } from "@framecraft/config";
-import type { ThemeOverride } from "@framecraft/config";
-import { getBrandConfig } from "@framecraft/config";
 
 export interface UseThemeOptions {
   /**
@@ -113,7 +112,7 @@ export function useTheme(options: UseThemeOptions = {}): UseThemeReturn {
     if (typeof document === "undefined") {
       return null;
     }
-    return getThemeColor(colorName);
+    return getThemeColor(colorName, document.documentElement);
   };
 
   // Dark mode helpers

@@ -45,12 +45,8 @@ export interface ThemeOverride {
   typography?: Partial<ThemeConfig["typography"]>;
 
   /**
-   * Spacing overrides (partial)
-   */
-  spacing?: Partial<ThemeConfig["spacing"]>;
-
-  /**
    * Layout overrides (partial)
+   * Note: spacing is part of layout, not a top-level property
    */
   layout?: Partial<ThemeConfig["layout"]>;
 
@@ -95,19 +91,24 @@ export interface ThemeOverride {
  */
 export interface NavigationOverride {
   /**
-   * Override main navigation items
+   * Override products section
    */
-  mainNav?: Partial<NavigationConfig["mainNav"]>;
+  products?: Partial<NavigationConfig["products"]>;
 
   /**
-   * Override footer navigation
+   * Override design tools section
    */
-  footerNav?: Partial<NavigationConfig["footerNav"]>;
+  designTools?: Partial<NavigationConfig["designTools"]>;
 
   /**
-   * Custom navigation items to add
+   * Override resources section
    */
-  customItems?: NavigationConfig["mainNav"]["items"];
+  resources?: Partial<NavigationConfig["resources"]>;
+
+  /**
+   * Override company section
+   */
+  company?: Partial<NavigationConfig["company"]>;
 }
 
 /**

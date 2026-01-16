@@ -17,7 +17,12 @@ export interface ThemeProviderProps {
   /**
    * Theme override (optional)
    */
-  themeOverride?: Parameters<typeof useTheme>[0]["override"];
+  themeOverride?: {
+    colors?: Partial<Record<string, string>>;
+    typography?: Partial<Record<string, unknown>>;
+    spacing?: Partial<Record<string, string>>;
+    layout?: Partial<Record<string, unknown>>;
+  };
 
   /**
    * Children components
