@@ -27,6 +27,8 @@ coverage/
 # Config files (if not using TypeScript)
 *.config.js
 *.config.mjs
+*.config.ts
+vitest.config.ts
 
 # Package manager files
 pnpm-lock.yaml

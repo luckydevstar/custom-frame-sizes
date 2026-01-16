@@ -14,6 +14,9 @@
 // Product types
 export * from "./products";
 
+// Mat types
+export * from "./mat";
+
 // Schema types
 // TODO: Extract database schema types from CustomFrameSizes-CODE/shared/schema.ts
 export * from "./schema";

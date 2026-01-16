@@ -4,9 +4,11 @@
  * Core business logic, services, utilities, and hooks for FrameCraft.
  *
  * This package contains:
- * - Services: products, pricing, shopify, validation, etc.
+ * - Services: products, pricing, shopify, validation, logging, mat-catalog
  * - Utilities: dimension parsing, export functions, etc.
  * - Hooks: shared React hooks for common functionality
+ * - Shopify: Storefront API client and cart management
+ * - Monitoring: Error monitoring with Sentry
  *
  * @packageDocumentation
  */
@@ -29,9 +31,8 @@ export * from "./stores";
 // Store context
 export * from "./stores/store-context";
 
-// Hooks
-export * from "./hooks/use-theme";
-export * from "./hooks/use-feature-flag";
-
 // Component overrides
 export * from "./components/component-override";
+
+// Monitoring
+export * from "./monitoring";
