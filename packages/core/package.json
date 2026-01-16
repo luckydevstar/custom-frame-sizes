@@ -17,6 +17,8 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
+    "@sentry/react": "^8.0.0",
+    "@sentry/node": "^8.0.0",
     "@tanstack/react-query": "^5.0.0",
     "@framecraft/data": "*",
     "@framecraft/types": "*",

@@ -3,23 +3,14 @@
  * Centralizes all pricing logic for frame configurations
  * Uses NEW pricing engine v2 from schema.ts
  *
- * NOTE: This service has been extracted to @framecraft/core.
- * Dependencies that will be extracted in future tickets:
- * - Types: Will be extracted to @framecraft/types in P1-023
- * - Pricing engine functions: Will be extracted from @shared/schema (future ticket)
- *
- * For now, this service uses relative imports for pricing engine functions
- * and will be updated as dependencies are extracted.
+ * @packageDocumentation
  */
+
+// Import types from @framecraft/types
+import type { FrameConfiguration, PricingBreakdown } from "@framecraft/types";
 
 // Import products service from same package
 import { getPricingConfig, getFrameStyleById, getMatColorById, getGlassTypeById } from "./products";
-
-// TODO: Update to import from @framecraft/types once types are extracted in P1-023
-// For now, using any to avoid circular dependency
-// import type { FrameConfiguration, PricingBreakdown } from "@framecraft/types";
-type FrameConfiguration = any;
-type PricingBreakdown = any;
 
 // Import pricing engine functions from temporary pricing-engine module
 // TODO: Extract full pricing engine from @shared/schema - this is a minimal version

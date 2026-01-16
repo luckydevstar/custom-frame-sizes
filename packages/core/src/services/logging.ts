@@ -7,6 +7,15 @@
  * @packageDocumentation
  */
 
+import {
+  captureException as sentryCaptureException,
+  captureMessage as sentryCaptureMessage,
+  addBreadcrumb as sentryAddBreadcrumb,
+  isSentryInitialized,
+  initSentryClient,
+  initSentryServer,
+} from "../monitoring/sentry";
+
 /**
  * Log context with additional metadata
  */
@@ -40,7 +49,7 @@ export interface ErrorData {
  *
  * Provides:
  * - Console logging (always enabled)
- * - Sentry integration (optional, production)
+ * - Sentry integration (automatic in production)
  * - Local storage for debugging (development only)
  *
  * @example
@@ -55,7 +64,6 @@ export interface ErrorData {
  * ```
  */
 export class LoggingService {
-  private sentryEnabled: boolean = false;
   private environment: string;
 
   constructor(environment: string = "development") {
@@ -64,34 +72,32 @@ export class LoggingService {
 
   /**
    * Initialize Sentry error tracking
-   * Stub implementation - add actual Sentry SDK in production
    *
    * @param config - Sentry configuration
    */
   initSentry(config: SentryConfig): void {
-    try {
-      // TODO: Install @sentry/react or @sentry/node package and initialize
-      // For client-side:
-      // import * as Sentry from '@sentry/react';
-      // Sentry.init({
-      //   dsn: config.dsn,
-      //   environment: config.environment,
-      //   tracesSampleRate: 1.0,
-      // });
-      //
-      // For server-side:
-      // import * as Sentry from '@sentry/node';
-      // Sentry.init({
-      //   dsn: config.dsn,
-      //   environment: config.environment,
-      //   tracesSampleRate: 1.0,
-      // });
+    if (!config.dsn) {
+      console.warn("[Logging] Sentry DSN not provided, skipping initialization");
+      return;
+    }
 
-      this.sentryEnabled = true;
+    try {
+      const isBrowser = typeof window !== "undefined";
+      const sentryConfig = {
+        dsn: config.dsn,
+        environment: config.environment || this.environment,
+        enabled: config.enabled,
+      };
+
+      if (isBrowser) {
+        initSentryClient(sentryConfig);
+      } else {
+        initSentryServer(sentryConfig);
+      }
+
       console.log("[Logging] Sentry initialized", { environment: config.environment });
     } catch (error) {
       console.error("[Logging] Failed to initialize Sentry", error);
-      this.sentryEnabled = false;
     }
   }
 
@@ -113,10 +119,9 @@ export class LoggingService {
     // Console logging (always enabled)
     console.error("[Error]", error.message, errorData);
 
-    // Send to Sentry in production
-    if (this.sentryEnabled) {
-      // TODO: Sentry.captureException(error, { extra: context });
-      // Note: Uncomment when Sentry SDK is installed
+    // Send to Sentry if initialized
+    if (isSentryInitialized()) {
+      sentryCaptureException(error, context);
     }
 
     // Store in local storage for debugging (development only, browser only)
@@ -141,9 +146,8 @@ export class LoggingService {
 
     console.warn("[Warning]", message, warningData);
 
-    if (this.sentryEnabled) {
-      // TODO: Sentry.captureMessage(message, 'warning');
-      // Note: Uncomment when Sentry SDK is installed
+    if (isSentryInitialized()) {
+      sentryCaptureMessage(message, "warning", context);
     }
   }
 
@@ -159,10 +163,14 @@ export class LoggingService {
       console.log("[Info]", message, context);
     }
 
-    // Stub for Sentry breadcrumbs
-    if (this.sentryEnabled) {
-      // TODO: Sentry.addBreadcrumb({ message, data: context, level: 'info' });
-      // Note: Uncomment when Sentry SDK is installed
+    // Add breadcrumb for Sentry (helps with debugging errors)
+    if (isSentryInitialized()) {
+      sentryAddBreadcrumb({
+        message,
+        category: "info",
+        level: "info",
+        data: context,
+      });
     }
   }
 

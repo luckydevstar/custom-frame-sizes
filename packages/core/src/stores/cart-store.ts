@@ -27,6 +27,7 @@ import {
   createCart as apiCreateCart,
   addCartLines,
   updateCartLines,
+  removeCartLines,
   type CartLineInput,
   type CartLineUpdateInput,
   type ShopifyCart,
@@ -536,14 +537,22 @@ export const useCartStore = create<CartStore>(
      * 1. Clear items from state immediately
      * 2. Clear cartId and checkoutUrl
      * 3. Clear pendingSyncs queue
-     * 4. Attempt to delete cart via API (if cartId exists)
+     * 4. Attempt to delete cart items via API (if cartId exists)
      * 5. Clear persistence storage
+     *
+     * Note: Shopify Storefront API doesn't have a "delete cart" mutation.
+     * Instead, we remove all line items from the cart, effectively clearing it.
+     * The cart ID will remain in Shopify but will be empty.
      */
     clearCart: () => {
       const state = get();
-      const hadCartId = state.metadata.cartId;
+      const cartId = state.metadata.cartId;
+      const lineItemIds = state.items
+        .filter((item) => item.lineItemId !== null)
+        .map((item) => item.lineItemId as string);
+      const storeId = state.metadata.storeId;
 
-      // Clear state immediately
+      // Clear state immediately (optimistic update)
       set({
         items: [],
         metadata: {
@@ -557,13 +566,17 @@ export const useCartStore = create<CartStore>(
       });
 
       // Clear storage
-      persistClearCart(state.metadata.storeId);
+      persistClearCart(storeId);
 
-      // Background: Delete cart in Shopify if it exists
-      // This will be implemented in P1-049
-      if (hadCartId) {
-        // TODO: Implement cart deletion via API
-        console.log("TODO: Delete cart via API", hadCartId);
+      // Background: Remove all line items from cart in Shopify if it exists
+      if (cartId && lineItemIds.length > 0) {
+        removeCartLines(cartId, lineItemIds, storeId).catch((error: unknown) => {
+          // Log error but don't restore state - cart is already cleared locally
+          console.error(
+            "Failed to clear cart in Shopify:",
+            error instanceof Error ? error.message : String(error)
+          );
+        });
       }
     },
 

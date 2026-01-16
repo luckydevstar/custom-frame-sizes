@@ -2,10 +2,21 @@
  * Logging Service Tests
  *
  * Tests for the centralized logging service, including error logging,
- * warning logging, and Sentry integration stubs.
+ * warning logging, and Sentry integration.
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+
+// Mock the Sentry module before importing logging
+vi.mock("../../monitoring/sentry", () => ({
+  captureException: vi.fn(),
+  captureMessage: vi.fn(),
+  addBreadcrumb: vi.fn(),
+  isSentryInitialized: vi.fn(() => false),
+  initSentryClient: vi.fn(),
+  initSentryServer: vi.fn(),
+}));
+
 import { LoggingService, logError, logWarning, logInfo, logApiError } from "../logging";
 
 describe("LoggingService", () => {
