@@ -50,8 +50,8 @@ import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
 import { useToast } from "../../hooks/use-toast";
 import { useIntelligentPreviewSizing } from "@framecraft/core";
 import { TrustBox } from "../marketing/TrustBox";
-import { isOversizeMat } from "@framecraft/core";
 import {
+  isOversizeMat,
   PUZZLE_SIZES as _PUZZLE_SIZES,
   getPuzzleSizesByCategory,
   getPuzzleSizeById,
@@ -59,10 +59,8 @@ import {
   validatePuzzleDimensions,
   type PuzzleSize,
 } from "@framecraft/core";
-import { getRandomPuzzleImage } from "@framecraft/core";
 import { Slider } from "../ui/slider";
 import { getMatBevelColor } from "@framecraft/core";
-import { getRandomPuzzlePhoto } from "@framecraft/core";
 import { PuzzleLifestyleCarousel } from "./PuzzleLifestyleCarousel";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
 import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
@@ -96,14 +94,36 @@ const _HARDWARE_OPTIONS = [
   },
 ];
 
+interface PuzzleLifestylePhoto {
+  url: string;
+  alt: string;
+}
+
 interface PuzzleFrameDesignerProps {
   defaultFrameId?: string;
   embedded?: boolean;
+  /**
+   * Function to get a random puzzle lifestyle photo.
+   * Should be provided by the app level.
+   *
+   * @returns A random puzzle lifestyle photo object with url and alt text
+   */
+  getRandomPuzzlePhoto: () => PuzzleLifestylePhoto;
+  /**
+   * Function to get a random puzzle insert image for preview.
+   * Should be provided by the app level (from StockImageLibrary factory).
+   *
+   * @param seed - Optional seed for deterministic randomization
+   * @returns Path to a random puzzle insert image
+   */
+  getRandomPuzzleImage: (seed?: string | number) => string;
 }
 
 export function PuzzleFrameDesigner({
   defaultFrameId,
   embedded: _embedded = false,
+  getRandomPuzzlePhoto,
+  getRandomPuzzleImage,
 }: PuzzleFrameDesignerProps) {
   const [,] = useLocation();
   const { toast } = useToast();
@@ -118,14 +138,14 @@ export function PuzzleFrameDesigner({
   const initialFrame = useMemo(() => {
     if (defaultFrameId) {
       const frame = pictureFrames.find((f) => f.id === defaultFrameId || f.sku === defaultFrameId);
-      return frame || pictureFrames[0];
+      return frame || pictureFrames[0]!;
     }
     const frameParam = urlParams.get("frame");
     if (frameParam) {
       const frame = pictureFrames.find((f) => f.id === frameParam || f.sku === frameParam);
-      return frame || pictureFrames[0];
+      return frame || pictureFrames[0]!;
     }
-    return pictureFrames[0];
+    return pictureFrames[0]!;
   }, [defaultFrameId, urlParams]);
 
   // Designer state
@@ -186,7 +206,7 @@ export function PuzzleFrameDesigner({
   });
 
   const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(() => {
-    return initialFrame ?? pictureFrames[0];
+    return initialFrame || pictureFrames[0]!;
   });
 
   const [matType, setMatType] = useState<"single" | "double" | "none">(() => {
@@ -267,7 +287,7 @@ export function PuzzleFrameDesigner({
   // Update lifestyle photo when frame changes
   useEffect(() => {
     setLifestylePhoto(getRandomPuzzlePhoto());
-  }, [selectedFrame.id]);
+  }, [selectedFrame.id, getRandomPuzzlePhoto]);
 
   // Fetch frame photos when frame changes
   useEffect(() => {
@@ -330,7 +350,7 @@ export function PuzzleFrameDesigner({
   // Puzzle image for preview (uses random seed for variety on page load)
   const puzzleImage = useMemo(() => {
     return getRandomPuzzleImage(randomSeed);
-  }, [randomSeed]);
+  }, [randomSeed, getRandomPuzzleImage]);
 
   // Parse mat border and reveal as numbers
   const matBorder = parseFloat(matBorderWidth) || 2.5;

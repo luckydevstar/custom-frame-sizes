@@ -23,6 +23,7 @@ export * from "./shadowbox-utils";
 export * from "./markdown";
 export * from "./schemas";
 export * from "./query-client";
+export * from "./mat-rules";
 export * from "./specialty";
 export * from "./export-preview";
 export * from "./ar-model-generator";

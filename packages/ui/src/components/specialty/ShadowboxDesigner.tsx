@@ -74,10 +74,10 @@ interface ShadowboxDesignerProps {
   embedded?: boolean;
   hideMobileSticky?: boolean;
   readonly?: boolean;
-  initialConfig?: import("@shared/shadowbox-types").ShadowboxConfig | null;
-  featureFlags?: import("@shared/shadowbox-types").ShadowboxFeatureFlags;
-  onChange?: (config: import("@shared/shadowbox-types").ShadowboxConfig) => void;
-  onSave?: (config: import("@shared/shadowbox-types").ShadowboxConfig) => void;
+  initialConfig?: import("@framecraft/types").ShadowboxConfig | null;
+  featureFlags?: import("@framecraft/types").ShadowboxFeatureFlags;
+  onChange?: (config: import("@framecraft/types").ShadowboxConfig) => void;
+  onSave?: (config: import("@framecraft/types").ShadowboxConfig) => void;
 }
 
 // Upscaled plywood texture for realistic backing (4x upscaled via Real-ESRGAN)

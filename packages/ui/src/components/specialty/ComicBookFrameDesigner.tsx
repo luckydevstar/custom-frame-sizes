@@ -69,7 +69,6 @@ import {
   calculateComicPreviewDimensions,
   type ComicLayoutType,
 } from "@framecraft/core";
-import { getCoversForConfig } from "@framecraft/core";
 import { ComicPreviewCanvas, useComicPreviewState } from "./ComicPreviewCanvas";
 import { useComicPricing } from "@framecraft/core";
 import { ComicLayoutGallery } from "./ComicLayoutGallery";
@@ -87,11 +86,22 @@ const glassTypes = allGlassTypes.filter((g) => g.id === "standard" || g.id === "
 interface ComicBookFrameDesignerProps {
   defaultFrameId?: string;
   embedded?: boolean;
+  /**
+   * Function to get comic cover images for a given configuration.
+   * Should be provided by the app level.
+   *
+   * @param formatId - Comic format ID (e.g., "modern-age", "slabbed-cgc")
+   * @param layoutId - Layout ID (e.g., "comic-single", "comic-double")
+   * @param count - Number of covers needed
+   * @returns Array of cover image paths
+   */
+  getCoversForConfig: (formatId: string, layoutId: string, count: number) => string[];
 }
 
 export function ComicBookFrameDesigner({
   defaultFrameId,
   embedded = false,
+  getCoversForConfig,
 }: ComicBookFrameDesignerProps) {
   useLocation(); // Location hook - navigate not currently used
   const { toast } = useToast();
@@ -470,7 +480,7 @@ export function ComicBookFrameDesigner({
 
     const layout = getComicLayout(selectedLayout);
     return getCoversForConfig(selectedFormat, selectedLayout, layout.count);
-  }, [selectedFormat, selectedLayout]);
+  }, [selectedFormat, selectedLayout, getCoversForConfig]);
 
   // Get current format details
   const currentFormat = useMemo(() => getComicFormatById(selectedFormat), [selectedFormat]);
@@ -535,6 +545,7 @@ export function ComicBookFrameDesigner({
     containerWidth: containerSize.width,
     containerHeight: containerSize.height,
     bottomWeightedExtra,
+    getCoversForConfig,
   });
 
   // Get fullscreen preview state with larger dimensions
@@ -551,6 +562,7 @@ export function ComicBookFrameDesigner({
     containerWidth: typeof window !== "undefined" ? window.innerWidth - 100 : 1000,
     containerHeight: typeof window !== "undefined" ? window.innerHeight - 100 : 800,
     bottomWeightedExtra,
+    getCoversForConfig,
   });
 
   // Get mats filtered by frame size to hide mats that don't have required sheet sizes

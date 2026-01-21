@@ -266,3 +266,61 @@ export function getPuzzleSizeById(id: string): PuzzleSize | undefined {
 export function getPuzzleSizesByPieces(pieces: number): PuzzleSize[] {
   return PUZZLE_SIZES.filter((p) => p.pieces === pieces);
 }
+
+/**
+ * Get puzzle size range for validation
+ */
+export function getPuzzleSizeRange() {
+  const widths = PUZZLE_SIZES.map((p) => p.width);
+  const heights = PUZZLE_SIZES.map((p) => p.height);
+
+  return {
+    minWidth: Math.min(...widths),
+    maxWidth: Math.max(...widths),
+    minHeight: Math.min(...heights),
+    maxHeight: Math.max(...heights),
+  };
+}
+
+/**
+ * Create round mat opening for puzzle frames (with 1/16" reveal)
+ */
+export function createRoundMatOpening(diameter: number) {
+  const REVEAL = 0.0625; // 1/16" reveal showing puzzle edge
+  const matOpeningDiameter = diameter + REVEAL * 2;
+
+  return {
+    type: "circle" as const,
+    diameter: matOpeningDiameter,
+    revealWidth: REVEAL,
+  };
+}
+
+/**
+ * Validate custom puzzle dimensions
+ */
+export function validatePuzzleDimensions(
+  width: number,
+  height: number
+): {
+  valid: boolean;
+  error?: string;
+} {
+  const range = getPuzzleSizeRange();
+
+  if (width < range.minWidth || width > range.maxWidth) {
+    return {
+      valid: false,
+      error: `Width must be between ${range.minWidth}" and ${range.maxWidth}"`,
+    };
+  }
+
+  if (height < range.minHeight || height > range.maxHeight) {
+    return {
+      valid: false,
+      error: `Height must be between ${range.minHeight}" and ${range.maxHeight}"`,
+    };
+  }
+
+  return { valid: true };
+}
