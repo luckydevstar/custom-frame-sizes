@@ -1,6 +1,6 @@
 import { useIntersectionAnimation } from "@framecraft/core";
 
-interface SeoTextBlockProps {
+export interface SeoTextBlockProps {
   heading?: string;
   content?: string;
   links?: {

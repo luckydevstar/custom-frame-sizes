@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { Button } from "../ui/button";
 import { ArrowRight } from "lucide-react";
-import { useParallax } from "@framecraft/core/hooks/use-parallax";
+import { useParallax } from "@framecraft/core";
 import { Skeleton } from "../ui/skeleton";
 
 export interface HeroImage {

@@ -125,6 +125,7 @@ export const ComicPreviewCanvas = memo(function ComicPreviewCanvas({
   }, [previewWidth, previewHeight, frameFaceWidth, manifest.openings]);
 
   // Bevel color based on bottom mat (the mat that shows at opening edges)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _bevelColor = useMemo(() => {
     return getMatBevelColor(bottomMatColor.name);
   }, [bottomMatColor.name]);

@@ -41,7 +41,7 @@ export interface MatManifest {
 export function computeComicOpeningsPx(
   frameWidthInches: number,
   frameHeightInches: number,
-  matBorderInches: number,
+  _matBorderInches: number,
   rows: number,
   columns: number,
   comicWidthInches: number,

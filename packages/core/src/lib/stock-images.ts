@@ -75,6 +75,24 @@ export interface StockImageLibrary {
 /**
  * Create a stock image library instance with provided image data
  */
+// Helper function to get a random stock image from a default library instance
+// This is a convenience export for components that need a simple random image
+let defaultLibraryInstance: StockImageLibrary | null = null;
+
+function getDefaultLibrary(): StockImageLibrary {
+  if (!defaultLibraryInstance) {
+    // Create a minimal default library - app should provide proper config
+    defaultLibraryInstance = createStockImageLibrary({
+      photoInsertImages: [],
+      canvasImages: [],
+      puzzleInsertImages: [],
+      sonogramInsertImages: [],
+      needleworkInserts: [],
+    });
+  }
+  return defaultLibraryInstance;
+}
+
 export function createStockImageLibrary(config: StockImageLibraryConfig): StockImageLibrary {
   const {
     photoInserts,
@@ -211,12 +229,14 @@ export function createStockImageLibrary(config: StockImageLibraryConfig): StockI
           ? seed.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0)
           : seed;
       const index = seedNum % imagePool.length;
-      return imagePool[index];
+      const selected = imagePool[index];
+      return selected || "";
     }
 
     // Random selection
     const randomIndex = Math.floor(Math.random() * imagePool.length);
-    return imagePool[randomIndex];
+    const selected = imagePool[randomIndex];
+    return selected || "";
   }
 
   /**
@@ -260,11 +280,13 @@ export function createStockImageLibrary(config: StockImageLibraryConfig): StockI
           ? seed.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0)
           : seed;
       const index = seedNum % puzzleInsertImages.length;
-      return puzzleInsertImages[index];
+      const selected = puzzleInsertImages[index];
+      return selected || "";
     }
 
     const randomIndex = Math.floor(Math.random() * puzzleInsertImages.length);
-    return puzzleInsertImages[randomIndex];
+    const selected = puzzleInsertImages[randomIndex];
+    return selected || "";
   }
 
   /**
@@ -290,11 +312,13 @@ export function createStockImageLibrary(config: StockImageLibraryConfig): StockI
           ? seed.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0)
           : seed;
       const index = seedNum % diplomaImages.length;
-      return diplomaImages[index];
+      const selected = diplomaImages[index];
+      return selected || "";
     }
 
     const randomIndex = Math.floor(Math.random() * diplomaImages.length);
-    return diplomaImages[randomIndex];
+    const selected = diplomaImages[randomIndex];
+    return selected || "";
   }
 
   /**
@@ -318,11 +342,13 @@ export function createStockImageLibrary(config: StockImageLibraryConfig): StockI
           ? seed.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0)
           : seed;
       const index = seedNum % needleworkInserts.length;
-      return needleworkInserts[index];
+      const selected = needleworkInserts[index];
+      return selected || "";
     }
 
     const randomIndex = Math.floor(Math.random() * needleworkInserts.length);
-    return needleworkInserts[randomIndex];
+    const selected = needleworkInserts[randomIndex];
+    return selected || "";
   }
 
   /**
@@ -353,11 +379,13 @@ export function createStockImageLibrary(config: StockImageLibraryConfig): StockI
           ? seed.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0)
           : seed;
       const index = seedNum % sonogramInsertImages.length;
-      return sonogramInsertImages[index];
+      const selected = sonogramInsertImages[index];
+      return selected || "";
     }
 
     const randomIndex = Math.floor(Math.random() * sonogramInsertImages.length);
-    return sonogramInsertImages[randomIndex];
+    const selected = sonogramInsertImages[randomIndex];
+    return selected || "";
   }
 
   /**
@@ -390,4 +418,12 @@ export function createStockImageLibrary(config: StockImageLibraryConfig): StockI
     getAllSonogramImages,
     getSonogramImageCount,
   };
+}
+
+// Export a convenience function that uses the default library
+export function getRandomStockImage(
+  seed?: string | number,
+  subfolder?: "photo_inserts" | "canvas_paintings"
+): string {
+  return getDefaultLibrary().getRandomStockImage(seed, subfolder);
 }

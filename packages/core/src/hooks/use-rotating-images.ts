@@ -39,15 +39,20 @@ function weightedRandomSelection<T extends { weight: number }>(items: T[], count
 
     let selectedIndex = 0;
     for (let j = 0; j < available.length; j++) {
-      random -= available[j].weight;
+      const item = available[j];
+      if (!item) continue;
+      random -= item.weight;
       if (random <= 0) {
         selectedIndex = j;
         break;
       }
     }
 
-    selected.push(available[selectedIndex]);
-    available.splice(selectedIndex, 1);
+    const selectedItem = available[selectedIndex];
+    if (selectedItem) {
+      selected.push(selectedItem);
+      available.splice(selectedIndex, 1);
+    }
   }
 
   return selected;

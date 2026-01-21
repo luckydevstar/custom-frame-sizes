@@ -34,6 +34,7 @@ export function BrassNameplatePlaceholder({
   const height = width / 3;
 
   const colors = COLOR_MAP[config.color] || COLOR_MAP["brass-black"];
+  if (!colors) return null;
 
   return (
     <svg

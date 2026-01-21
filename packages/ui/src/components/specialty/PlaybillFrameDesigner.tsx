@@ -204,14 +204,15 @@ export function PlaybillFrameDesigner({
       const frame = shadowboxFrames.find(
         (f) => f.id === defaultFrameId || f.sku === defaultFrameId
       );
-      return frame || shadowboxFrames[0];
+      return frame ?? shadowboxFrames[0];
     }
     const frameParam = urlParams.get("frame");
     if (frameParam) {
       const frame = shadowboxFrames.find((f) => f.id === frameParam || f.sku === frameParam);
-      return frame || shadowboxFrames[0];
+      return frame ?? shadowboxFrames[0];
     }
     // Default to SKU 8693 (black shadowbox)
+    return shadowboxFrames[0];
     const defaultFrame = shadowboxFrames.find((f) => f.sku === "8693");
     return defaultFrame || shadowboxFrames[0];
   }, [defaultFrameId, urlParams]);
@@ -225,17 +226,19 @@ export function PlaybillFrameDesigner({
     return "playbill-single";
   });
 
-  const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(initialFrame);
+  const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(
+    () => initialFrame ?? shadowboxFrames[0]
+  );
 
   // Mat configuration
   const [selectedMat, setSelectedMat] = useState<Mat>(() => {
     const urlMat = urlParams.get("mat");
-    return (urlMat ? getMatById(urlMat) : getMatById("mat-1")) || ALL_MATS[0]; // Default: White
+    return (urlMat ? getMatById(urlMat) : getMatById("mat-1")) ?? ALL_MATS[0]; // Default: White
   });
 
   const [selectedMatInner, setSelectedMatInner] = useState<Mat>(() => {
     const urlMatInner = urlParams.get("matInner");
-    return (urlMatInner ? getMatById(urlMatInner) : getMatById("mat-2")) || ALL_MATS[1]; // Default: Black
+    return (urlMatInner ? getMatById(urlMatInner) : getMatById("mat-2")) ?? ALL_MATS[1]; // Default: Black
   });
 
   const [matType, setMatType] = useState<"none" | "single" | "double">(() => {
@@ -330,6 +333,7 @@ export function PlaybillFrameDesigner({
   const hardwareSectionRef = useRef<HTMLDivElement>(null);
 
   // Scroll to designer function
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _scrollToDesigner = useCallback(() => {
     designerSectionRef.current?.scrollIntoView({
       behavior: "smooth",
@@ -358,7 +362,8 @@ export function PlaybillFrameDesigner({
   useEffect(() => {
     if (PLAYBILL_LIFESTYLE_IMAGES.length > 0) {
       const randomIndex = Math.floor(Math.random() * PLAYBILL_LIFESTYLE_IMAGES.length);
-      setRandomLifestylePhoto(PLAYBILL_LIFESTYLE_IMAGES[randomIndex]);
+      const photo = PLAYBILL_LIFESTYLE_IMAGES[randomIndex];
+      if (photo) setRandomLifestylePhoto(photo);
     }
   }, [selectedFrame.sku]);
 
@@ -417,7 +422,9 @@ export function PlaybillFrameDesigner({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setPricingSidebarExpanded(!entry.isIntersecting);
+        if (entry) {
+          setPricingSidebarExpanded(!entry.isIntersecting);
+        }
       },
       { threshold: 0, rootMargin: "-100px 0px 0px 0px" }
     );
@@ -434,7 +441,7 @@ export function PlaybillFrameDesigner({
     params.set("mat", selectedMat.id);
     if (matType === "double") params.set("matInner", selectedMatInner.id);
     params.set("matType", matType);
-    params.set("glass", selectedGlass.id);
+    params.set("glass", selectedGlass?.id ?? "");
     params.set("hardware", hardware);
     if (bottomWeighted) {
       params.set("bottomWeighted", "true");
@@ -456,7 +463,7 @@ export function PlaybillFrameDesigner({
       description: "Design link copied to clipboard",
     });
 
-    setShowShareDialog(false);
+    _setShowShareDialog(false);
   }, [
     selectedLayout,
     selectedFrame,
@@ -999,7 +1006,7 @@ export function PlaybillFrameDesigner({
                     </AccordionTrigger>
                     <AccordionContent className="space-y-4 pt-4">
                       <RadioGroup
-                        value={selectedGlass.id}
+                        value={selectedGlass?.id ?? ""}
                         onValueChange={(value) => {
                           const glass = glassTypes.find((g) => g.id === value);
                           if (glass) setSelectedGlass(glass);

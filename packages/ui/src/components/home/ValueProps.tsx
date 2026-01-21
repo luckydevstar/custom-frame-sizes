@@ -14,7 +14,7 @@ export interface WhyChooseUsConfig {
   cards: WhyChooseUsCard[];
 }
 
-interface ValuePropsProps {
+export interface ValuePropsProps {
   config: WhyChooseUsConfig;
 }
 

@@ -55,10 +55,10 @@ async function embedJpegDpi(blob: Blob, dpi: number): Promise<Blob> {
     if (marker === 0xe0) {
       // Verify JFIF identifier
       const jfifId = String.fromCharCode(
-        data[offset + 4],
-        data[offset + 5],
-        data[offset + 6],
-        data[offset + 7]
+        data[offset + 4] ?? 0,
+        data[offset + 5] ?? 0,
+        data[offset + 6] ?? 0,
+        data[offset + 7] ?? 0
       );
       if (jfifId === "JFIF") {
         // Found JFIF segment - modify DPI values
@@ -78,7 +78,7 @@ async function embedJpegDpi(blob: Blob, dpi: number): Promise<Blob> {
     }
 
     // Skip to next segment
-    const segmentLength = (data[offset + 2] << 8) | data[offset + 3];
+    const segmentLength = ((data[offset + 2] ?? 0) << 8) | (data[offset + 3] ?? 0);
     offset += 2 + segmentLength;
   }
 
@@ -791,6 +791,8 @@ export async function generateCollagePrintFile(
   // Process each opening
   for (let i = 0; i < openings.length; i++) {
     const opening = openings[i];
+    if (!opening) continue;
+
     const source = openingSources[i] || "upload";
     const photoUrl = userPhotos[i];
 

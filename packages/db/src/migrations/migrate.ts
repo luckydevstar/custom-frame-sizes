@@ -4,6 +4,7 @@
  * Utility for running database migrations.
  */
 
+import { sql } from "drizzle-orm";
 import type { Database } from "../connection";
 import { migrations } from "./index";
 
@@ -27,7 +28,7 @@ export async function runMigration(
   const statements = direction === "up" ? migration.up : migration.down;
 
   for (const statement of statements) {
-    await db.execute(statement);
+    await db.execute(sql.raw(statement));
   }
 }
 

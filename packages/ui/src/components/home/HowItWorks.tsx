@@ -14,7 +14,7 @@ export interface HowItWorksConfig {
   steps: HowItWorksStep[];
 }
 
-interface HowItWorksProps {
+export interface HowItWorksProps {
   config: HowItWorksConfig;
 }
 

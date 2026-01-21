@@ -245,9 +245,9 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
 
   // Get random lifestyle image from CANVAS_LIFESTYLE_IMAGES array
   const getRandomLifestyleImage = useCallback(() => {
-    if (CANVAS_LIFESTYLE_IMAGES.length === 0) return undefined;
+    if (CANVAS_LIFESTYLE_IMAGES.length === 0) return "";
     const randomIndex = Math.floor(Math.random() * CANVAS_LIFESTYLE_IMAGES.length);
-    return CANVAS_LIFESTYLE_IMAGES[randomIndex].url;
+    return CANVAS_LIFESTYLE_IMAGES[randomIndex]?.url ?? "";
   }, []);
 
   const configuratorRef = useRef<HTMLDivElement>(null);
@@ -488,6 +488,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
   ) => {
     if (result.successful && result.successful.length > 0) {
       const uploadedFile = result.successful[0];
+      if (!uploadedFile) return;
       // The upload URL was stored in file meta by PhotoUploadOptions
       const uploadURL = uploadedFile.meta?.uploadURL as string;
 

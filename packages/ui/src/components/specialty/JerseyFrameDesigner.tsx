@@ -106,10 +106,10 @@ export function JerseyFrameDesigner({
   // Initialize frame selection
   const initialFrame = useMemo(() => {
     if (defaultFrameId) {
-      return getFrameStyleById(defaultFrameId) || jerseyFrames[0];
+      return getFrameStyleById(defaultFrameId) ?? jerseyFrames[0];
     }
     const frameParam = urlParams.get("frame");
-    return frameParam ? getFrameStyleById(frameParam) || jerseyFrames[0] : jerseyFrames[0];
+    return frameParam ? (getFrameStyleById(frameParam) ?? jerseyFrames[0]) : jerseyFrames[0];
   }, [defaultFrameId, urlParams]);
 
   // Designer state
@@ -158,7 +158,9 @@ export function JerseyFrameDesigner({
     setSelectedLayout(`${selectedLayoutType}-${size}` as JerseyLayoutType);
   };
 
-  const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(initialFrame);
+  const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(
+    () => initialFrame ?? jerseyFrames[0]
+  );
 
   // Mat color selections (top, bottom, backing)
   const [selectedTopMat, setSelectedTopMat] = useState<MatOption>(() => {
@@ -547,6 +549,7 @@ export function JerseyFrameDesigner({
     );
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _availableLayouts = getAllJerseyLayouts();
 
   return (
@@ -686,6 +689,7 @@ export function JerseyFrameDesigner({
                         <div className="grid grid-cols-3 gap-2">
                           {(["small", "regular", "large"] as const).map((size) => {
                             const layoutId: JerseyLayoutType = `${selectedLayoutType}-${size}`;
+                            // eslint-disable-next-line @typescript-eslint/no-unused-vars
                             const _layout = JERSEY_LAYOUTS[layoutId];
 
                             // Clear, action-oriented labels
@@ -994,6 +998,7 @@ export function JerseyFrameDesigner({
                         <div className="grid grid-cols-3 gap-2">
                           {(["small", "regular", "large"] as const).map((size) => {
                             const layoutId: JerseyLayoutType = `${selectedLayoutType}-${size}`;
+                            // eslint-disable-next-line @typescript-eslint/no-unused-vars
                             const _layout = JERSEY_LAYOUTS[layoutId];
 
                             const headline =

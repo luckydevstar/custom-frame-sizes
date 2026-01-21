@@ -3,7 +3,7 @@ import { Search } from "lucide-react";
 import { Input } from "../ui/input";
 import { useLocation } from "wouter";
 
-interface SearchBarProps {
+export interface SearchBarProps {
   placeholder?: string;
   onSearch?: (query: string) => void;
 }

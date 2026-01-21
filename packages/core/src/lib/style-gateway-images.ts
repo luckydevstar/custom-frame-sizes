@@ -340,16 +340,17 @@ export function getStyleHeroImage(
   alt: string;
 } {
   const images = getStyleLifestyleImages(styleName, frames);
-  if (images.length > 0) {
+  if (images.length > 0 && images[0]) {
     return { url: images[0].url, alt: images[0].alt };
   }
 
   // Fallback to first frame's thumbnail
   const styleFrames = getFramesForStyle(styleName, frames);
-  if (styleFrames.length > 0) {
-    const cornerImg = styleFrames[0].alternateImages?.find((img) => img.type === "corner");
+  if (styleFrames.length > 0 && styleFrames[0]) {
+    const firstFrame = styleFrames[0];
+    const cornerImg = firstFrame.alternateImages?.find((img) => img.type === "corner");
     return {
-      url: cornerImg?.url || styleFrames[0].thumbnail || "/frames/8446/lifestyle_1.jpg",
+      url: cornerImg?.url || firstFrame.thumbnail || "/frames/8446/lifestyle_1.jpg",
       alt: `${styleName} style picture frame`,
     };
   }

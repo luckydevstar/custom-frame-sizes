@@ -9,7 +9,7 @@ export interface FAQ {
   answer: string;
 }
 
-interface FaqMiniProps {
+export interface FaqMiniProps {
   faqs?: FAQ[];
   faqPageLink?: string;
 }

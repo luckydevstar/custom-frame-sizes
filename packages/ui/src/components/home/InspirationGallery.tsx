@@ -5,7 +5,7 @@ import { useRotatingImages } from "@framecraft/core";
 import { useIntersectionAnimation } from "@framecraft/core";
 import { RotatingImage } from "../marketing/RotatingImage";
 
-interface InspirationGalleryProps {
+export interface InspirationGalleryProps {
   galleryLink?: string;
   imageCategory?: string;
   imageCount?: number;
@@ -16,7 +16,10 @@ export function InspirationGallery({
   imageCategory = "inspiration",
   imageCount = 6,
 }: InspirationGalleryProps) {
-  const { images: rotatingImages } = useRotatingImages(imageCategory, { count: imageCount });
+  const { images: rotatingImages } = useRotatingImages(
+    imageCategory as "howItWorks" | "valueProps" | "inspiration" | "educationTeasers",
+    { count: imageCount }
+  );
   const titleRef = useIntersectionAnimation({ animationClass: "motion-fade-rise" });
   const galleryRef = useIntersectionAnimation({ stagger: true, animationClass: "motion-scale-in" });
 

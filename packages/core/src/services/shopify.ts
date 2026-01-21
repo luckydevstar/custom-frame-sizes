@@ -21,8 +21,8 @@ import { getFrameStyleById } from "./products";
 import { apiRequest } from "../utils/query-client";
 
 // Environment configuration
-const SHOPIFY_DOMAIN = import.meta.env.VITE_SHOPIFY_DOMAIN;
-const SHOPIFY_STOREFRONT_TOKEN = import.meta.env.VITE_SHOPIFY_STOREFRONT_TOKEN;
+const SHOPIFY_DOMAIN = (import.meta as any).env?.VITE_SHOPIFY_DOMAIN;
+const SHOPIFY_STOREFRONT_TOKEN = (import.meta as any).env?.VITE_SHOPIFY_STOREFRONT_TOKEN;
 const SHOPIFY_API_VERSION = "2024-01"; // Update as needed
 
 // Check if Shopify is configured
@@ -32,12 +32,12 @@ const isShopifyConfigured = Boolean(SHOPIFY_DOMAIN && SHOPIFY_STOREFRONT_TOKEN);
  * Shopify GraphQL client for Storefront API
  */
 class ShopifyClient {
-  private domain: string;
+  private _domain: string;
   private token: string;
   private endpoint: string;
 
   constructor(domain: string, token: string) {
-    this.domain = domain;
+    this._domain = domain; // Used in endpoint construction
     this.token = token;
     this.endpoint = `https://${domain}/api/${SHOPIFY_API_VERSION}/graphql.json`;
   }
@@ -257,9 +257,9 @@ function serializeFrameConfiguration(
  *
  * @throws Error if variant ID is not configured in production mode
  */
-export async function addToCart(config: FrameConfiguration, price: number, quantity: number = 1) {
+export async function addToCart(config: FrameConfiguration, _price: number, quantity: number = 1) {
   // Get variant ID from environment or frame-specific mapping
-  const defaultVariantId = import.meta.env.VITE_SHOPIFY_FRAME_VARIANT_ID;
+  const defaultVariantId = (import.meta as any).env?.VITE_SHOPIFY_FRAME_VARIANT_ID;
 
   // Try to get frame-specific variant ID from product data (if configured)
   const frameStyle = getFrameStyleById(config.frameStyleId);
@@ -374,7 +374,7 @@ export function isShopifyEnabled(): boolean {
  * Get configuration status for debugging
  */
 export function getShopifyStatus() {
-  const frameVariantId = import.meta.env.VITE_SHOPIFY_FRAME_VARIANT_ID;
+  const frameVariantId = (import.meta as any).env?.VITE_SHOPIFY_FRAME_VARIANT_ID;
 
   return {
     configured: isShopifyConfigured,
@@ -418,9 +418,9 @@ function serializeMatConfiguration(config: MatConfig): Array<{ key: string; valu
  *
  * @throws Error if variant ID is not configured in production mode
  */
-export async function addMatToCart(config: MatConfig, price: number, quantity: number = 1) {
+export async function addMatToCart(config: MatConfig, _price: number, quantity: number = 1) {
   // Get variant ID from environment
-  const defaultVariantId = import.meta.env.VITE_SHOPIFY_MAT_VARIANT_ID;
+  const defaultVariantId = (import.meta as any).env?.VITE_SHOPIFY_MAT_VARIANT_ID;
 
   // Validate variant ID is configured in production
   if (isShopifyConfigured && !defaultVariantId) {

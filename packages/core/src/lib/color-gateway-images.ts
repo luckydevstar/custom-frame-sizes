@@ -128,7 +128,7 @@ export function getColorHeroImage(
   const images = getColorLifestyleImages(colorName, frames);
   return (
     images[0] || {
-      url: PLACEHOLDER_IMAGE_POOL[0],
+      url: PLACEHOLDER_IMAGE_POOL[0] || "/frames/8446/lifestyle_1.jpg",
       alt: "Custom picture frames in professional setting",
       isPlaceholder: true,
     }
@@ -150,7 +150,16 @@ export function getColorFAQSidebarImages(
 
   // Select diverse images: first, middle, last from collection
   const indices = [0, Math.floor(allImages.length / 2), Math.min(allImages.length - 1, 2)];
-  return indices.map((i) => allImages[i] || allImages[0]);
+  const firstImage = allImages[0] || {
+    url: PLACEHOLDER_IMAGE_POOL[0] || "/frames/8446/lifestyle_1.jpg",
+    alt: "Custom picture frames in professional setting",
+    isPlaceholder: true,
+  };
+  return indices
+    .map((i) => allImages[i] || firstImage)
+    .filter(
+      (img): img is { url: string; alt: string; isPlaceholder: boolean } => img !== undefined
+    );
 }
 
 /**
@@ -208,7 +217,7 @@ export function getColorHubImage(colorName: string, frames: Frame[]): string {
   const isPlaceholder = PLACEHOLDER_COLORS.map((c) => c.toLowerCase()).includes(normalizedColor);
 
   if (isPlaceholder) {
-    return PLACEHOLDER_IMAGE_POOL[0];
+    return PLACEHOLDER_IMAGE_POOL[0] ?? "";
   }
 
   // Get all frames in this color
@@ -237,7 +246,7 @@ export function getColorHubImage(colorName: string, frames: Frame[]): string {
   }
 
   // Final fallback
-  return PLACEHOLDER_IMAGE_POOL[0];
+  return PLACEHOLDER_IMAGE_POOL[0] || "/frames/8446/lifestyle_1.jpg";
 }
 
 // ============================================================================

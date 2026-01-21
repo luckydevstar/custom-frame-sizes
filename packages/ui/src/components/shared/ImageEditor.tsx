@@ -59,9 +59,9 @@ export function ImageEditor({ imageUrl, onComplete, onCancel }: ImageEditorProps
 
     // Simple, natural enhancement focusing on brightness, contrast, and saturation
     for (let i = 0; i < data.length; i += 4) {
-      let r = data[i];
-      let g = data[i + 1];
-      let b = data[i + 2];
+      let r = data[i] ?? 0;
+      let g = data[i + 1] ?? 0;
+      let b = data[i + 2] ?? 0;
 
       // Brightness boost (+8%)
       r *= 1.08;
@@ -520,21 +520,21 @@ function applySharpen(imageData: ImageData, amount: number): ImageData {
       for (let ky = -1; ky <= 1; ky++) {
         for (let kx = -1; kx <= 1; kx++) {
           const idx = ((y + ky) * width + (x + kx)) * 4;
-          const weight = kernel[(ky + 1) * 3 + (kx + 1)];
+          const weight = kernel[(ky + 1) * 3 + (kx + 1)] ?? 0;
 
-          r += src[idx] * weight;
-          g += src[idx + 1] * weight;
-          b += src[idx + 2] * weight;
+          r += (src[idx] ?? 0) * weight;
+          g += (src[idx + 1] ?? 0) * weight;
+          b += (src[idx + 2] ?? 0) * weight;
         }
       }
 
       const idx = (y * width + x) * 4;
 
       // Blend with original based on amount
-      dst[idx] = src[idx] * (1 - amount) + r * amount;
-      dst[idx + 1] = src[idx + 1] * (1 - amount) + g * amount;
-      dst[idx + 2] = src[idx + 2] * (1 - amount) + b * amount;
-      dst[idx + 3] = src[idx + 3];
+      dst[idx] = (src[idx] ?? 0) * (1 - amount) + r * amount;
+      dst[idx + 1] = (src[idx + 1] ?? 0) * (1 - amount) + g * amount;
+      dst[idx + 2] = (src[idx + 2] ?? 0) * (1 - amount) + b * amount;
+      dst[idx + 3] = src[idx + 3] ?? 255;
     }
   }
 

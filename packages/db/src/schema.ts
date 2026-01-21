@@ -166,16 +166,5 @@ export const insertSchemas = {
   orderFiles: insertOrderFileSchema,
 };
 
-/**
- * Export all types
- */
-export type {
-  User,
-  InsertUser,
-  MatDesign,
-  InsertMatDesign,
-  UploadedImage,
-  InsertUploadedImage,
-  OrderFile,
-  InsertOrderFile,
-};
+// Types are already exported individually above
+// No need to re-export them here to avoid conflicts

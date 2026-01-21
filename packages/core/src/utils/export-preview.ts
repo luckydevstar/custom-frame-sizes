@@ -87,7 +87,7 @@ async function createMatPattern(
 
   // Extract texture URL from background-image
   const urlMatch = matStyle.backgroundImage.match(/url\(['"]?([^'"]+)['"]?\)/);
-  if (!urlMatch) return null;
+  if (!urlMatch || !urlMatch[1]) return null;
 
   try {
     const textureUrl = urlMatch[1];
@@ -121,9 +121,13 @@ async function drawFramePiece(
 
     // Apply clip path
     ctx.beginPath();
-    ctx.moveTo(clipPolygon[0][0], clipPolygon[0][1]);
+    const firstPoint = clipPolygon[0];
+    if (!firstPoint) return;
+    ctx.moveTo(firstPoint[0], firstPoint[1]);
     for (let i = 1; i < clipPolygon.length; i++) {
-      ctx.lineTo(clipPolygon[i][0], clipPolygon[i][1]);
+      const point = clipPolygon[i];
+      if (!point) continue;
+      ctx.lineTo(point[0], point[1]);
     }
     ctx.closePath();
     ctx.clip();

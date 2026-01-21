@@ -138,14 +138,14 @@ export function PuzzleFrameDesigner({
   const initialFrame = useMemo(() => {
     if (defaultFrameId) {
       const frame = pictureFrames.find((f) => f.id === defaultFrameId || f.sku === defaultFrameId);
-      return frame || pictureFrames[0]!;
+      return frame ?? pictureFrames[0]!;
     }
     const frameParam = urlParams.get("frame");
     if (frameParam) {
       const frame = pictureFrames.find((f) => f.id === frameParam || f.sku === frameParam);
-      return frame || pictureFrames[0]!;
+      return frame ?? pictureFrames[0]!;
     }
-    return pictureFrames[0]!;
+    return pictureFrames[0] ?? pictureFrames[0]!;
   }, [defaultFrameId, urlParams]);
 
   // Designer state
@@ -206,7 +206,7 @@ export function PuzzleFrameDesigner({
   });
 
   const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(() => {
-    return initialFrame || pictureFrames[0]!;
+    return initialFrame ?? pictureFrames[0]!;
   });
 
   const [matType, setMatType] = useState<"single" | "double" | "none">(() => {
@@ -787,6 +787,7 @@ export function PuzzleFrameDesigner({
   };
 
   // Handle share - copy link to clipboard
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _handleShare = () => {
     handleCopyLink();
   };
@@ -814,9 +815,11 @@ export function PuzzleFrameDesigner({
   };
 
   // Get puzzle sizes by category
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _sizesByCategory = getPuzzleSizesByCategory();
 
   // Frame dimensions for display (uses actual totalFrameWidth/Height with reveal)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _frameDimensions = useMemo(() => {
     if (!selectedPuzzleSize) return null;
     return { width: totalFrameWidth, height: totalFrameHeight };
@@ -1666,6 +1669,7 @@ function PuzzlePreview({
   // Mat border creates padding around puzzle - use asymmetric borders for Type B nameplate behavior
   const matBorderPx = matBorder * INCHES_TO_PX * scale;
   const bottomMatBorderPx = matBottomBorder * INCHES_TO_PX * scale;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _matRevealPx = matReveal * INCHES_TO_PX * scale;
 
   // Calculate brass nameplate positioning

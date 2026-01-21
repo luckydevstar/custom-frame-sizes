@@ -14,7 +14,34 @@
 export * from "./holiday-calculator";
 export * from "./seasonal-collections";
 export * from "./nameplate-positioning";
-export * from "./color-gateway-images";
-export * from "./shadowbox-color-images";
-export * from "./style-gateway-images";
+// Export color-gateway-images functions but avoid duplicate Frame type
+export {
+  getColorLifestyleImages,
+  getColorHeroImage,
+  getColorFAQSidebarImages,
+  getColorGalleryImages,
+  getColorHubImage,
+  isUsingPlaceholderImages,
+} from "./color-gateway-images";
+export type { Frame as ColorGatewayFrame } from "./color-gateway-images";
+// Export shadowbox-color-images functions but avoid duplicate Frame type
+export {
+  getShadowboxColorLifestyleImages,
+  getShadowboxColorHeroImage,
+  getShadowboxColorFAQSidebarImages,
+  getShadowboxColorGalleryImages,
+  getShadowboxColorHubImage,
+  getShadowboxColorCounts,
+  isUsingShadowboxPlaceholderImages,
+} from "./shadowbox-color-images";
+export type { Frame as ShadowboxColorFrame } from "./shadowbox-color-images";
+// Export style-gateway-images functions but avoid duplicate Frame type
+export {
+  getStyleLifestyleImages,
+  getStyleHeroImage,
+  getStyleHubImage,
+  getFramesForStyle,
+  countFramesPerStyle,
+} from "./style-gateway-images";
+export type { Frame as StyleGatewayFrame } from "./style-gateway-images";
 export * from "./stock-images";

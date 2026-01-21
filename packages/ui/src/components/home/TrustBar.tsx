@@ -6,7 +6,7 @@ export interface TrustBarItem {
   value: string;
 }
 
-interface TrustBarProps {
+export interface TrustBarProps {
   items: TrustBarItem[];
 }
 

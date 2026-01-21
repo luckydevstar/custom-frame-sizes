@@ -39,7 +39,7 @@ export interface MatTilingStyle {
  */
 export function getMatTilingStyle(
   matColorName: string,
-  previewScale: number,
+  _previewScale: number,
   fallbackColor?: string
 ): React.CSSProperties {
   // Guard against undefined/null values
@@ -115,6 +115,7 @@ function getRelativeLuminance(hex: string): number {
  * Darken a hex color by a percentage
  * @internal - Currently unused, kept for potential future use
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function _darkenColor(hex: string, percent: number): string {
   const rgb = parseInt(hex.slice(1), 16);
   const r = Math.max(0, Math.floor(((rgb >> 16) & 0xff) * (1 - percent)));
@@ -128,6 +129,7 @@ function _darkenColor(hex: string, percent: number): string {
  * Lighten a hex color by a percentage
  * @internal - Currently unused, kept for potential future use
  */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function _lightenColor(hex: string, percent: number): string {
   const rgb = parseInt(hex.slice(1), 16);
   const r = Math.min(
@@ -246,7 +248,7 @@ export const MAT_VGROOVE_MAX_OFFSET = 1.0; // Maximum 1.0" offset
  */
 export function getMatSVGPatternData(
   matColorName: string,
-  previewScale: number,
+  _previewScale: number,
   fallbackColor?: string
 ): { imagePath: string } | { fallbackColor: string } {
   // Guard against undefined/null values

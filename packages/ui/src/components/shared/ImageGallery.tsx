@@ -37,11 +37,11 @@ export function ImageGallery({ images, initialIndex = 0, open, onOpenChange }: I
 
   const onTouchStart = (e: React.TouchEvent) => {
     setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
+    setTouchStart(e.targetTouches[0]?.clientX ?? 0);
   };
 
   const onTouchMove = (e: React.TouchEvent) => {
-    setTouchEnd(e.targetTouches[0].clientX);
+    setTouchEnd(e.targetTouches[0]?.clientX ?? 0);
   };
 
   const onTouchEnd = () => {
@@ -128,8 +128,8 @@ export function ImageGallery({ images, initialIndex = 0, open, onOpenChange }: I
           )}
 
           <img
-            src={currentImage.url}
-            alt={currentImage.alt}
+            src={currentImage?.url ?? ""}
+            alt={currentImage?.alt ?? ""}
             className="max-w-full max-h-full object-contain"
             data-testid={`image-gallery-${currentIndex}`}
           />

@@ -56,10 +56,10 @@ export function mergeTheme(baseTheme: ThemeConfig, override: ThemeOverride): The
   }
 
   // Merge spacing (if provided as object, convert to array or merge)
-  if (override.spacing) {
+  if (override.layout?.spacing) {
     // Spacing override is a record, but layout.spacing is an array
     // For now, keep base spacing array (can be enhanced later)
-    // merged.layout.spacing = override.spacing;
+    // merged.layout.spacing = override.layout.spacing;
   }
 
   // Merge layout

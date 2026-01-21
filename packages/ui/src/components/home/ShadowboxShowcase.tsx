@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { ArrowRight } from "lucide-react";
 import type { FrameStyle } from "@framecraft/types";
 
-interface ShadowboxShowcaseProps {
+export interface ShadowboxShowcaseProps {
   frames: FrameStyle[];
   shadowboxLink?: string;
 }

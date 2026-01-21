@@ -191,8 +191,8 @@ function RecommendationCard({
             bottomMatColor={recommendation.bottomMatColor}
             matType="double"
             uploadedImage={uploadedImage}
-            artworkWidth={selectedSizeOption.width}
-            artworkHeight={selectedSizeOption.height}
+            artworkWidth={selectedSizeOption?.width ?? 0}
+            artworkHeight={selectedSizeOption?.height ?? 0}
             fillMatOpening={true}
             matBorderWidth={1.0}
             frameWidth={0.625}
@@ -298,7 +298,7 @@ function RecommendationCard({
             data-testid={`button-add-to-cart-${index}`}
           >
             <ShoppingCart className="w-4 h-4 mr-2" />
-            Add to Cart · {formatPrice(selectedSizeOption.price)}
+            Add to Cart · {formatPrice(selectedSizeOption?.price ?? 0)}
           </Button>
           <Button
             onClick={onApply}

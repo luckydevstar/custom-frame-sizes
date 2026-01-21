@@ -110,7 +110,7 @@ export function BrassNameplateOrderModule() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting) {
+        if (entries[0]?.isIntersecting) {
           setShowMobileBar(true);
         }
       },
@@ -319,7 +319,9 @@ export function BrassNameplateOrderModule() {
                   </button>
                 ))}
               </div>
-              <p className="text-xs text-muted-foreground mt-2">Selected: {colorOption.name}</p>
+              <p className="text-xs text-muted-foreground mt-2">
+                Selected: {colorOption?.name ?? ""}
+              </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">
@@ -377,7 +379,12 @@ export function BrassNameplateOrderModule() {
               </div>
               <Slider
                 value={[config.lineSpacing]}
-                onValueChange={([value]) => setConfig((prev) => ({ ...prev, lineSpacing: value }))}
+                onValueChange={([value]) =>
+                  setConfig((prev) => ({
+                    ...prev,
+                    lineSpacing: value ?? STANDALONE_NAMEPLATE_SPECS.DEFAULT_LINE_SPACING,
+                  }))
+                }
                 min={STANDALONE_NAMEPLATE_SPECS.MIN_LINE_SPACING}
                 max={STANDALONE_NAMEPLATE_SPECS.MAX_LINE_SPACING}
                 step={0.1}

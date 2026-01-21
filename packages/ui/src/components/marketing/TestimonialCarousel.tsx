@@ -34,12 +34,14 @@ export function TestimonialCarousel({
     let touchEndX = 0;
 
     const handleTouchStart = (e: TouchEvent) => {
-      touchStartX = e.changedTouches[0].screenX;
+      touchStartX = e.changedTouches[0]?.screenX ?? 0;
     };
 
     const handleTouchEnd = (e: TouchEvent) => {
-      touchEndX = e.changedTouches[0].screenX;
-      handleSwipe();
+      touchEndX = e.changedTouches[0]?.screenX ?? 0;
+      if (touchStartX && touchEndX) {
+        handleSwipe();
+      }
     };
 
     const handleSwipe = () => {

@@ -28,6 +28,7 @@ export function StandaloneNameplatePreview({
   const displayWidth = pxWidth * scale;
   const displayHeight = pxHeight * scale;
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _usableSpace = calculateUsableSpace(config.width, config.height);
   const borderInset = STANDALONE_NAMEPLATE_SPECS.BORDER_INSET * DPI;
 
@@ -64,8 +65,10 @@ export function StandaloneNameplatePreview({
     let currentY = startY;
 
     const result = activeLines.map((line, index) => {
-      const y = currentY + lineHeights[index] * 0.75;
-      currentY += lineHeights[index];
+      const lineHeight = lineHeights[index];
+      if (lineHeight === undefined) return { ...line, y: currentY };
+      const y = currentY + lineHeight * 0.75;
+      currentY += lineHeight;
       return { ...line, y };
     });
 
@@ -82,6 +85,13 @@ export function StandaloneNameplatePreview({
   );
   const sheenId = useMemo(() => `sheen-${Math.random().toString(36).substr(2, 9)}`, []);
 
+  // Early return after all hooks
+  if (!colorOption || !fontOption) return null;
+
+  // TypeScript: colorOption and fontOption are guaranteed to be non-null after the check above
+  const safeColorOption = colorOption;
+  const safeFontOption = fontOption;
+
   return (
     <svg
       width={displayWidth}
@@ -92,7 +102,7 @@ export function StandaloneNameplatePreview({
       data-testid="nameplate-preview-svg"
     >
       <defs>
-        {colorOption.metallic ? (
+        {safeColorOption.metallic ? (
           <linearGradient id={gradientId} x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#D4AF37" />
             <stop offset="15%" stopColor="#F0E68C" />
@@ -102,7 +112,7 @@ export function StandaloneNameplatePreview({
             <stop offset="85%" stopColor="#8B7355" />
             <stop offset="100%" stopColor="#B8860B" />
           </linearGradient>
-        ) : colorOption.metallicSilver ? (
+        ) : safeColorOption.metallicSilver ? (
           <linearGradient id={gradientId} x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#E8E8E8" />
             <stop offset="15%" stopColor="#F5F5F5" />
@@ -114,13 +124,13 @@ export function StandaloneNameplatePreview({
           </linearGradient>
         ) : (
           <linearGradient id={gradientId} x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor={colorOption.plaqueColor as string} />
-            <stop offset="50%" stopColor={colorOption.plaqueColor as string} />
-            <stop offset="100%" stopColor={colorOption.plaqueColor as string} />
+            <stop offset="0%" stopColor={safeColorOption.plaqueColor as string} />
+            <stop offset="50%" stopColor={safeColorOption.plaqueColor as string} />
+            <stop offset="100%" stopColor={safeColorOption.plaqueColor as string} />
           </linearGradient>
         )}
 
-        {colorOption.metallicText && config.color === "black-gold" && (
+        {safeColorOption.metallicText && config.color === "black-gold" && (
           <linearGradient id={textGradientId} x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#D4AF37" />
             <stop offset="25%" stopColor="#F0E68C" />
@@ -130,7 +140,7 @@ export function StandaloneNameplatePreview({
           </linearGradient>
         )}
 
-        {colorOption.metallicText && config.color === "black-silver" && (
+        {safeColorOption.metallicText && config.color === "black-silver" && (
           <linearGradient id={textGradientId} x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" stopColor="#C0C0C0" />
             <stop offset="25%" stopColor="#E8E8E8" />
@@ -140,21 +150,21 @@ export function StandaloneNameplatePreview({
           </linearGradient>
         )}
 
-        {(colorOption.metallic || colorOption.metallicSilver) && (
+        {(safeColorOption.metallic || safeColorOption.metallicSilver) && (
           <radialGradient id={sheenId} cx="50%" cy="30%">
             <stop
               offset="0%"
-              stopColor={colorOption.metallic ? "#FFFACD" : "#FFFFFF"}
+              stopColor={safeColorOption.metallic ? "#FFFACD" : "#FFFFFF"}
               stopOpacity="0.3"
             />
             <stop
               offset="40%"
-              stopColor={colorOption.metallic ? "#FFD700" : "#E8E8E8"}
+              stopColor={safeColorOption.metallic ? "#FFD700" : "#E8E8E8"}
               stopOpacity="0.1"
             />
             <stop
               offset="100%"
-              stopColor={colorOption.metallic ? "#B8860B" : "#C0C0C0"}
+              stopColor={safeColorOption.metallic ? "#B8860B" : "#C0C0C0"}
               stopOpacity="0"
             />
           </radialGradient>
@@ -181,9 +191,9 @@ export function StandaloneNameplatePreview({
         rx="6"
         ry="6"
         fill={
-          colorOption.metallic || colorOption.metallicSilver
+          safeColorOption.metallic || safeColorOption.metallicSilver
             ? `url(#${gradientId})`
-            : (colorOption.plaqueColor as string)
+            : (safeColorOption.plaqueColor as string)
         }
         stroke={showBorder ? "#eeeeee" : "none"}
         strokeWidth={showBorder ? 2 : 0}
@@ -213,7 +223,9 @@ export function StandaloneNameplatePreview({
           ry="2"
           fill="none"
           stroke={
-            colorOption.metallicText ? `url(#${textGradientId})` : (colorOption.textColor as string)
+            safeColorOption.metallicText
+              ? `url(#${textGradientId})`
+              : (safeColorOption.textColor as string)
           }
           strokeWidth="1"
           strokeDasharray="4,2"
@@ -229,7 +241,7 @@ export function StandaloneNameplatePreview({
           fill={
             colorOption.metallicText ? `url(#${textGradientId})` : (colorOption.textColor as string)
           }
-          fontFamily={fontOption.family}
+          fontFamily={safeFontOption.family}
           fontSize={line.fontSize}
           fontWeight={line.bold ? "bold" : "normal"}
           fontStyle={line.italic ? "italic" : "normal"}
@@ -247,7 +259,7 @@ export function StandaloneNameplatePreview({
           fill={
             colorOption.metallicText ? `url(#${textGradientId})` : (colorOption.textColor as string)
           }
-          fontFamily={fontOption.family}
+          fontFamily={safeFontOption.family}
           fontSize={24}
           fontWeight="normal"
           textAnchor="middle"

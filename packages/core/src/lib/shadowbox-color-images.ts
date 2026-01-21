@@ -184,7 +184,7 @@ export function getShadowboxColorHubImage(colorName: string, frames: Frame[]): s
   }
 
   // Final fallback to placeholder pool
-  return PLACEHOLDER_IMAGE_POOL[0];
+  return PLACEHOLDER_IMAGE_POOL[0] || "/frames/8446/lifestyle_1.jpg";
 }
 
 /**
@@ -247,7 +247,7 @@ export function getShadowboxColorHeroImage(
   const images = getShadowboxColorLifestyleImages(colorName, frames);
   return (
     images[0] || {
-      url: PLACEHOLDER_IMAGE_POOL[0],
+      url: PLACEHOLDER_IMAGE_POOL[0] || "/frames/8446/lifestyle_1.jpg",
       alt: "Custom shadowbox frames for professional memorabilia display",
       isPlaceholder: true,
     }
@@ -288,7 +288,16 @@ export function getShadowboxColorFAQSidebarImages(
 
   // Select diverse images: first, middle, last from collection
   const indices = [0, Math.floor(allImages.length / 2), Math.min(allImages.length - 1, 2)];
-  return indices.map((i) => allImages[i] || allImages[0]).filter(Boolean);
+  const firstImage = allImages[0] || {
+    url: PLACEHOLDER_IMAGE_POOL[0] || "/frames/8446/lifestyle_1.jpg",
+    alt: "Custom shadowbox frames for professional memorabilia display",
+    isPlaceholder: true,
+  };
+  return indices
+    .map((i) => allImages[i] || firstImage)
+    .filter(
+      (img): img is { url: string; alt: string; isPlaceholder: boolean } => img !== undefined
+    );
 }
 
 /**

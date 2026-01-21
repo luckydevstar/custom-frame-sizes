@@ -126,12 +126,14 @@ export function ShadowboxDesigner({
   void onSave;
   // Initialize selected frame with defaultFrameId if provided
   const initialFrame = defaultFrameId
-    ? frameStyles.find((f) => f.id === defaultFrameId) || frameStyles[0]
+    ? (frameStyles.find((f) => f.id === defaultFrameId) ?? frameStyles[0])
     : frameStyles[0];
-  const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(initialFrame);
-  const [selectedMat, setSelectedMat] = useState<Mat>(() => getMatById("mat-1") || MAT_PALETTE[0]);
+  const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(
+    () => initialFrame ?? frameStyles[0]
+  );
+  const [selectedMat, setSelectedMat] = useState<Mat>(() => getMatById("mat-1") ?? MAT_PALETTE[0]);
   const [selectedMatInner, setSelectedMatInner] = useState<Mat>(
-    () => getMatById("mat-4") || MAT_PALETTE[1]
+    () => getMatById("mat-4") ?? MAT_PALETTE[1]
   );
   const [selectedGlass, setSelectedGlass] = useState(glassTypes[0]);
   const [matType, setMatType] = useState<"none" | "single" | "double">("single");
@@ -373,7 +375,7 @@ export function ShadowboxDesigner({
         },
         matBorderWidth,
         matRevealWidth,
-        selectedGlass,
+        selectedGlass: selectedGlass ?? glassTypes[0],
         selectedBacking,
         selectedBackingColor, // Preserve original color for round-trip
         hangingHardware,

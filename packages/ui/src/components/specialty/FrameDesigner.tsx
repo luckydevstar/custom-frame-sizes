@@ -103,14 +103,16 @@ export function FrameDesigner({
   // Initialize frame selection based on defaultFrameId prop or URL parameter
   const initialFrame = useMemo(() => {
     if (defaultFrameId) {
-      return getFrameStyleById(defaultFrameId) || frameStyles[0];
+      return getFrameStyleById(defaultFrameId) ?? frameStyles[0];
     }
     const params = new URLSearchParams(window.location.search);
     const frameParam = params.get("frame");
-    return frameParam ? getFrameStyleById(frameParam) || frameStyles[0] : frameStyles[0];
+    return frameParam ? (getFrameStyleById(frameParam) ?? frameStyles[0]) : frameStyles[0];
   }, [defaultFrameId]);
 
-  const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(initialFrame);
+  const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(
+    () => initialFrame ?? frameStyles[0]
+  );
   const [selectedMat, setSelectedMat] = useState<Mat>(() => getMatById("mat-1") ?? ALL_MATS[0]);
   const [selectedMatInner, setSelectedMatInner] = useState<Mat>(
     () => getMatById("mat-4") ?? ALL_MATS[1]
@@ -226,10 +228,10 @@ export function FrameDesigner({
     const lifestyleImages = frame.alternateImages.filter(
       (img: { type: string; url: string }) => img.type === "lifestyle"
     );
-    if (lifestyleImages.length === 0) return undefined;
+    if (lifestyleImages.length === 0) return "";
 
     const randomIndex = Math.floor(Math.random() * lifestyleImages.length);
-    return lifestyleImages[randomIndex].url;
+    return lifestyleImages[randomIndex]?.url ?? "";
   }, []);
 
   // navigate not currently used but may be needed in future
@@ -476,6 +478,7 @@ export function FrameDesigner({
   ) => {
     if (result.successful && result.successful.length > 0) {
       const uploadedFile = result.successful[0];
+      if (!uploadedFile) return;
       // The upload URL was stored in file meta by PhotoUploadOptions
       const uploadURL = uploadedFile.meta?.uploadURL as string;
 
@@ -818,8 +821,8 @@ export function FrameDesigner({
     setMatBorderWidth("2.5");
 
     // Set dimensions
-    setArtworkWidth(size.width.toString());
-    setArtworkHeight(size.height.toString());
+    setArtworkWidth((size?.width ?? 0).toString());
+    setArtworkHeight((size?.height ?? 0).toString());
 
     // Close modal
     setShowRecommendations(false);
@@ -836,19 +839,20 @@ export function FrameDesigner({
     sizeIndex: number
   ) => {
     const size = recommendation.sizes[sizeIndex];
+    if (!size) return;
 
     // Create a frame configuration for this recommendation
     const recFrameConfig: FrameConfiguration = {
       serviceType,
-      artworkWidth: size.width,
-      artworkHeight: size.height,
+      artworkWidth: size.width ?? 0,
+      artworkHeight: size.height ?? 0,
       frameStyleId: recommendation.frameId,
       matType: "double",
       matBorderWidth: 2.5,
       matRevealWidth: 0.25,
       matColorId: recommendation.topMatId,
       matInnerColorId: recommendation.bottomMatId,
-      glassTypeId: selectedGlass.id,
+      glassTypeId: selectedGlass?.id ?? "",
       imageUrl: selectedImage || undefined,
       copyrightAgreed,
       orderSource: "ai-recommendation",
@@ -961,6 +965,7 @@ export function FrameDesigner({
     artWidth > 0 && artHeight > 0 && (!artworkSizeValidation || artworkSizeValidation.valid);
 
   // Print resolution check for print-and-frame mode
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const _printResolutionCheck = useMemo(() => {
     if (!uploadedImageDimensions || serviceType !== "print-and-frame" || !selectedImage) {
       return null;
@@ -988,7 +993,7 @@ export function FrameDesigner({
       matRevealWidth: matReveal,
       matColorId: selectedMat.id,
       matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
-      glassTypeId: selectedGlass.id,
+      glassTypeId: selectedGlass?.id ?? "",
       imageUrl: selectedImage || undefined,
       copyrightAgreed,
       bottomWeighted,
@@ -2568,8 +2573,11 @@ export function FrameDesigner({
               <AccordionTrigger data-testid="accordion-glass">Glazing & Backing</AccordionTrigger>
               <AccordionContent>
                 <RadioGroup
-                  value={selectedGlass.id}
-                  onValueChange={(id) => setSelectedGlass(glassTypes.find((g) => g.id === id)!)}
+                  value={selectedGlass?.id ?? ""}
+                  onValueChange={(id) => {
+                    const glass = glassTypes.find((g) => g.id === id);
+                    if (glass) setSelectedGlass(glass);
+                  }}
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     {glassTypes.map((glass) => (
@@ -3452,7 +3460,7 @@ export function FrameDesigner({
             matRevealWidth: parseFraction(matRevealWidth),
             matColorId: selectedMat.id,
             matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
-            glassTypeId: selectedGlass.id,
+            glassTypeId: selectedGlass?.id ?? "",
             imageUrl: displayImage,
             copyrightAgreed,
           }}

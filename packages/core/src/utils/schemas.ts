@@ -10,24 +10,31 @@ import type { BrandConfig } from "@framecraft/config";
  * @param config Brand configuration
  */
 export function getOrganizationSchema(config: BrandConfig) {
+  const siteName = (config as any).siteName ?? config.seo?.title ?? config.name ?? "";
+  const legalName = (config as any).legalName ?? config.name ?? "";
+  const siteUrl = (config as any).siteUrl ?? `https://${config.domain}`;
+  const contactEmail = (config as any).contactEmail ?? "";
+  const twitter = (config as any).twitter;
+  const foundedYear = (config as any).foundedYear;
+
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: config.siteName,
-    legalName: config.legalName,
-    url: config.siteUrl,
-    logo: `${config.siteUrl}/assets/brand/logo-blue.png`,
-    foundingDate: config.foundedYear?.toString(),
+    name: siteName,
+    legalName: legalName,
+    url: siteUrl,
+    logo: siteUrl ? `${siteUrl}/assets/brand/logo-blue.png` : "",
+    foundingDate: foundedYear?.toString(),
     contactPoint: {
       "@type": "ContactPoint",
-      email: config.contactEmail,
+      email: contactEmail,
       contactType: "customer service",
       areaServed: "US",
       availableLanguage: "English",
     },
-    ...(config.twitter
+    ...(twitter
       ? {
-          sameAs: [`https://twitter.com/${config.twitter.replace("@", "")}`],
+          sameAs: [`https://twitter.com/${twitter.replace("@", "")}`],
         }
       : {}),
   };
@@ -38,15 +45,20 @@ export function getOrganizationSchema(config: BrandConfig) {
  * @param config Brand configuration
  */
 export function getWebSiteSchema(config: BrandConfig) {
+  const siteName = (config as any).siteName ?? config.seo?.title ?? config.name ?? "";
+  const siteUrl = (config as any).siteUrl ?? `https://${config.domain}`;
+  const defaultDescription = (config as any).defaultDescription ?? config.seo?.description ?? "";
+  const legalName = (config as any).legalName ?? config.name ?? "";
+
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    name: config.siteName,
-    url: config.siteUrl,
-    description: config.defaultDescription,
+    name: siteName,
+    url: siteUrl,
+    description: defaultDescription,
     publisher: {
       "@type": "Organization",
-      name: config.legalName,
+      name: legalName,
     },
   };
 }
@@ -56,15 +68,21 @@ export function getWebSiteSchema(config: BrandConfig) {
  * @param config Brand configuration
  */
 export function getLocalBusinessSchema(config: BrandConfig) {
+  const siteName = (config as any).siteName ?? config.seo?.title ?? config.name ?? "";
+  const legalName = (config as any).legalName ?? config.name ?? "";
+  const siteUrl = (config as any).siteUrl ?? `https://${config.domain}`;
+  const defaultDescription = (config as any).defaultDescription ?? config.seo?.description ?? "";
+  const contactEmail = (config as any).contactEmail ?? "";
+
   return {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    name: config.siteName,
-    legalName: config.legalName,
-    url: config.siteUrl,
-    logo: `${config.siteUrl}/assets/brand/logo-blue.png`,
-    description: config.defaultDescription,
-    email: config.contactEmail,
+    name: siteName,
+    legalName: legalName,
+    url: siteUrl,
+    logo: siteUrl ? `${siteUrl}/assets/brand/logo-blue.png` : "",
+    description: defaultDescription,
+    email: contactEmail,
     priceRange: "$$",
     areaServed: {
       "@type": "Country",

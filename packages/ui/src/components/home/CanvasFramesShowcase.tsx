@@ -11,7 +11,7 @@ interface CanvasStyle {
   keywords?: string;
 }
 
-interface CanvasFramesShowcaseProps {
+export interface CanvasFramesShowcaseProps {
   canvasStyles?: CanvasStyle[];
   canvasLink?: string;
 }

@@ -264,8 +264,8 @@ export function urlParamsToConfig(search: string): Partial<StandaloneNameplateCo
         const [text, fontSize, bold, italic] = lineStr.split("|");
         return {
           id: `line-${index + 1}`,
-          text: decodeURIComponent(text || ""),
-          fontSize: parseInt(fontSize) || STANDALONE_NAMEPLATE_SPECS.DEFAULT_FONT_SIZE,
+          text: decodeURIComponent((text || "") ?? ""),
+          fontSize: parseInt(fontSize || "") || STANDALONE_NAMEPLATE_SPECS.DEFAULT_FONT_SIZE,
           bold: bold === "1",
           italic: italic === "1",
         };
