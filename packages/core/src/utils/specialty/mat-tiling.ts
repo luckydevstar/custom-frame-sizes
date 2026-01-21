@@ -12,7 +12,7 @@ import { getMatByName, ALL_MATS } from "@framecraft/config";
 
 // Build hex-to-mat-name lookup table once at module scope
 const HEX_TO_MAT_NAME: Record<string, string> = {};
-ALL_MATS.forEach((mat) => {
+ALL_MATS.forEach((mat: { hexColor?: string; name: string }) => {
   if (mat.hexColor) {
     HEX_TO_MAT_NAME[mat.hexColor.toUpperCase()] = mat.name;
   }

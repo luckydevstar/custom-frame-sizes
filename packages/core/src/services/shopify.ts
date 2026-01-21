@@ -64,7 +64,7 @@ class ShopifyClient {
         throw error;
       }
 
-      const data = await response.json();
+      const data = (await response.json()) as { errors?: unknown[]; data?: T };
 
       if (data.errors) {
         const error = new Error(`GraphQL errors: ${JSON.stringify(data.errors)}`);
@@ -76,7 +76,11 @@ class ShopifyClient {
         throw error;
       }
 
-      return data.data as T;
+      if (!data.data) {
+        throw new Error("No data returned from GraphQL query");
+      }
+
+      return data.data;
     } catch (error) {
       if (error instanceof Error) {
         logApiError(error, {
@@ -346,7 +350,7 @@ export async function getOrderFiles(shopifyOrderId: string) {
       throw new Error("Failed to retrieve order files");
     }
 
-    const data = await response.json();
+    const data = (await response.json()) as { orderFiles?: unknown[] };
     return {
       success: true,
       files: data.orderFiles || [],

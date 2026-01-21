@@ -27,20 +27,28 @@ export async function getCartById(storeId: string, cartId: string): Promise<Cart
       },
     },
     lines: {
-      edges: cart.lines.edges.map((edge) => ({
-        node: {
-          id: edge.node.id,
-          quantity: edge.node.quantity,
-          merchandise: {
-            id: edge.node.merchandise.id,
-            title: edge.node.merchandise.title,
-            product: {
-              id: edge.node.merchandise.product.id,
-              title: edge.node.merchandise.product.title,
+      edges: cart.lines.edges.map(
+        (edge: {
+          node: {
+            id: string;
+            quantity: number;
+            merchandise: { id: string; title: string; product: { id: string; title: string } };
+          };
+        }) => ({
+          node: {
+            id: edge.node.id,
+            quantity: edge.node.quantity,
+            merchandise: {
+              id: edge.node.merchandise.id,
+              title: edge.node.merchandise.title,
+              product: {
+                id: edge.node.merchandise.product.id,
+                title: edge.node.merchandise.product.title,
+              },
             },
           },
-        },
-      })),
+        })
+      ),
     },
   };
 }

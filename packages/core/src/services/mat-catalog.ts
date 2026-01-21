@@ -88,7 +88,7 @@ export async function fetchMatCatalog(
       throw new Error(`Failed to fetch mat catalog: ${response.status} ${response.statusText}`);
     }
 
-    return await response.json();
+    return (await response.json()) as MatCatalog;
   } catch (error) {
     // Re-throw with context
     if (error instanceof Error) {

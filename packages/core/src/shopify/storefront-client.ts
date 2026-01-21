@@ -220,7 +220,7 @@ export class StorefrontClient {
         await this.handleHttpError(response);
       }
 
-      const data: GraphQLResponse<T> = await response.json();
+      const data = (await response.json()) as GraphQLResponse<T>;
 
       // Handle GraphQL errors
       if (data.errors && data.errors.length > 0) {

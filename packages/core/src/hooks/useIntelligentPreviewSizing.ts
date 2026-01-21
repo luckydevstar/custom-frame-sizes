@@ -145,7 +145,7 @@ export function useIntelligentPreviewSizing(
 
     let timeoutId: NodeJS.Timeout;
 
-    const resizeObserver = new ResizeObserver((entries) => {
+    const resizeObserver = new ResizeObserver((entries: ResizeObserverEntry[]) => {
       clearTimeout(timeoutId);
 
       timeoutId = setTimeout(() => {

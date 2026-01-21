@@ -29,7 +29,7 @@ export function useIntersectionVisible(
       return;
     }
 
-    const observer = new IntersectionObserver((entries) => {
+    const observer = new IntersectionObserver((entries: IntersectionObserverEntry[]) => {
       const entry = entries[0];
       if (entry) {
         setIsVisible(entry.isIntersecting);

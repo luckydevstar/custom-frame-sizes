@@ -122,8 +122,8 @@ export function useIntersectionAnimation<T extends HTMLElement = HTMLDivElement>
     }
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      (entries: IntersectionObserverEntry[]) => {
+        entries.forEach((entry: IntersectionObserverEntry) => {
           if (entry.isIntersecting) {
             if (stagger) {
               // Apply staggered animation to children using CSS animation-delay

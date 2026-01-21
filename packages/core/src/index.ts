@@ -36,3 +36,6 @@ export * from "./components/component-override";
 
 // Monitoring
 export * from "./monitoring";
+
+// Shopify (Storefront API client and cart management)
+export * from "./shopify";

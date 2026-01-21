@@ -5,7 +5,7 @@
     "rootDir": "./src",
     "module": "ESNext",
     "target": "ES2022",
-    "lib": ["ES2022"],
+    "lib": ["ES2022", "DOM"],
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "esModuleInterop": true,
@@ -15,14 +15,30 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "./src",
+    "baseUrl": "../../",
     "paths": {
-      "@/lib/*": ["./lib/*"],
-      "@/routes/*": ["./routes/*"],
-      "@/types/*": ["./types/*"]
+      "@framecraft/ui": ["./packages/ui/src"],
+      "@framecraft/ui/*": ["./packages/ui/src/*"],
+      "@framecraft/core": ["./packages/core/src"],
+      "@framecraft/core/*": ["./packages/core/src/*"],
+      "@framecraft/config": ["./packages/config/src"],
+      "@framecraft/config/*": ["./packages/config/src/*"],
+      "@framecraft/types": ["./packages/types/src"],
+      "@framecraft/types/*": ["./packages/types/src/*"],
+      "@framecraft/data": ["./packages/data/src"],
+      "@framecraft/data/*": ["./packages/data/src/*"],
+      "@/lib/*": ["./apps/api/src/lib/*"],
+      "@/routes/*": ["./apps/api/src/routes/*"],
+      "@/types/*": ["./apps/api/src/types/*"]
     }
   },
   "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist", "__tests__"]
+  "exclude": ["node_modules", "dist", "__tests__"],
+  "references": [
+    { "path": "../../packages/core" },
+    { "path": "../../packages/config" },
+    { "path": "../../packages/types" },
+    { "path": "../../packages/data" }
+  ]
 }
 

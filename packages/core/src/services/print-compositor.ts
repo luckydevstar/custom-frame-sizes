@@ -282,7 +282,7 @@ export async function generatePrintFile(
   // Convert to JPEG blob
   let blob = await new Promise<Blob>((resolve, reject) => {
     canvas.toBlob(
-      (b) => {
+      (b: Blob | null) => {
         if (b) resolve(b);
         else reject(new Error("Failed to create blob"));
       },
@@ -637,7 +637,7 @@ export async function generateCanvasPrintFile(
   // Convert to JPEG blob
   let blob = await new Promise<Blob>((resolve, reject) => {
     canvas.toBlob(
-      (b) => {
+      (b: Blob | null) => {
         if (b) resolve(b);
         else reject(new Error("Failed to create blob"));
       },
@@ -853,7 +853,7 @@ export async function generateCollagePrintFile(
   // Convert to JPEG blob
   let blob = await new Promise<Blob>((resolve, reject) => {
     canvas.toBlob(
-      (b) => {
+      (b: Blob | null) => {
         if (b) resolve(b);
         else reject(new Error("Failed to create blob"));
       },
@@ -1028,7 +1028,7 @@ export async function uploadCollagePrintFile(
       return null;
     }
 
-    const { uploadURL } = await uploadResponse.json();
+    const { uploadURL } = (await uploadResponse.json()) as { uploadURL?: string };
 
     if (!uploadURL) {
       console.error("[Print Upload] No upload URL returned");
@@ -1065,9 +1065,9 @@ export async function uploadCollagePrintFile(
       return uploadURL;
     }
 
-    const { objectPath } = await trackResponse.json();
+    const { objectPath } = (await trackResponse.json()) as { objectPath?: string };
 
-    return objectPath;
+    return objectPath ?? null;
   } catch (error) {
     console.error("[Print Upload] Error uploading collage print file:", error);
     return null;

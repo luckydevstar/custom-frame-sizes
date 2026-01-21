@@ -48,11 +48,16 @@ export async function convertImageToDataURL(url: string): Promise<string> {
   });
 
   if (!response.ok) {
-    const error = await response.json().catch(() => ({ error: "Proxy failed" }));
+    const error = (await response.json().catch(() => ({ error: "Proxy failed" }))) as {
+      error?: string;
+    };
     throw new Error(error.error || `HTTP ${response.status}`);
   }
 
-  const data = await response.json();
+  const data = (await response.json()) as { dataUrl?: string };
+  if (!data.dataUrl) {
+    throw new Error("No dataUrl in response");
+  }
   return data.dataUrl;
 }
 

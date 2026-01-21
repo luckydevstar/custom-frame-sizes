@@ -126,7 +126,7 @@ export function initializeComponentOverrides(overrides?: ComponentOverrides): vo
     registerComponentOverride(componentPath, () => {
       // Dynamic import of override component
       // Note: This assumes overridePath is a valid import path
-      return import(/* @vite-ignore */ overridePath);
+      return import(/* @vite-ignore */ overridePath as string);
     });
   }
 }
