@@ -1,28 +1,23 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { useLocation } from "wouter";
 import { Maximize, X, Eye, Settings, Info, Smartphone, Copy } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { ARViewer } from "@/components/ARViewer";
-import { Card } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Input } from "@/components/ui/input";
-import { Slider } from "@/components/ui/slider";
-import { Separator } from "@/components/ui/separator";
+import { Button } from "../ui/button";
+import { ARViewer } from "../shared/ARViewer";
+import { Card } from "../ui/card";
+import { Label } from "../ui/label";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Checkbox } from "../ui/checkbox";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Input } from "../ui/input";
+import { Slider } from "../ui/slider";
+import { Separator } from "../ui/separator";
 // Select components not currently used
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { PriceBox } from "@/components/ui/PriceBox";
-import { QuantitySelector } from "@/components/ui/quantity-selector";
-import type { PriceLineItem } from "@/components/ui/PriceBox";
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import { PriceBox } from "../ui/PriceBox";
+import { QuantitySelector } from "../ui/quantity-selector";
+import type { PriceLineItem } from "../ui/PriceBox";
 // Import types from @framecraft/types
 import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
 
@@ -48,30 +43,16 @@ import {
 // Import UI components from same package
 import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
 
-// TODO: Extract these app-specific dependencies or make them injectable
-// - ARViewer component
-// - TrustBox component
-// - shopify service (addToCart, isShopifyEnabled)
-// - useToast hook
-// - shadowbox-utils (toShadowboxConfig, fromShadowboxConfig)
-// - matTiling utilities (getMatTilingStyle, getMatBevelColor)
-// - BrassNameplateSection, BrassNameplatePreview components
-// - HangingHardwareSection component
-// - @shared/schema types
-import { ARViewer } from "@/components/ARViewer";
-import { TrustBox } from "@/components/TrustBox";
-import { addToCart, isShopifyEnabled } from "@/services/shopify";
-import { useToast } from "@/hooks/use-toast";
-import { toShadowboxConfig, fromShadowboxConfig } from "@/utils/shadowbox-utils";
-import { getMatTilingStyle, getMatBevelColor } from "@/lib/specialty/matTiling";
-import { BrassNameplateSection } from "@/components/brass-nameplate/BrassNameplateSection";
-import { BrassNameplatePreview } from "@/components/brass-nameplate/BrassNameplatePreview";
-import { getMatTilingStyle, getMatBevelColor } from "@/lib/specialty/matTiling";
-import { BrassNameplateSection } from "@/components/brass-nameplate/BrassNameplateSection";
-import { BrassNameplatePreview } from "@/components/brass-nameplate/BrassNameplatePreview";
-import type { BrassNameplateConfig } from "@shared/schema";
-import { BRASS_NAMEPLATE_SPECS, getTypeBBottomBorder } from "@shared/schema";
-import { HangingHardwareSection } from "@/components/specialty/shared/HangingHardwareSection";
+import { TrustBox } from "../marketing/TrustBox";
+import { addToCart, isShopifyEnabled } from "@framecraft/core";
+import { useToast } from "../../hooks/use-toast";
+import { toShadowboxConfig, fromShadowboxConfig } from "@framecraft/core";
+import { getMatTilingStyle, getMatBevelColor } from "@framecraft/core";
+import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
+import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+import type { BrassNameplateConfig } from "@framecraft/types";
+import { BRASS_NAMEPLATE_SPECS, getTypeBBottomBorder } from "@framecraft/types";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
 
 // Get product data from services
 // Note: Shadowbox frames need deeper rabbet depth than standard picture frames

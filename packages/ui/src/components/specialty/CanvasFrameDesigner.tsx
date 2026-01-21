@@ -13,24 +13,19 @@ import {
   Loader2,
   CheckCircle2,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { QuantitySelector } from "@/components/ui/quantity-selector";
-import { Card } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Button } from "../ui/button";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { Card } from "../ui/card";
+import { Label } from "../ui/label";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 // Select components not currently used but may be needed in future
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Input } from "../ui/input";
+import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import { Checkbox } from "../ui/checkbox";
+import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 
 // Import types from @framecraft/types
 import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
@@ -58,44 +53,26 @@ import { useIsMobile, useMobileViewToggle, useIntersectionVisible } from "@frame
 // - apiRequest from queryClient
 // - floaterFrameDiagram asset
 // - @uppy/core types
-// @ts-expect-error - App-specific dependencies, will be extracted in future tickets
-import { TermsOfServiceModal } from "@/components/TermsOfServiceModal";
-// @ts-expect-error - App-specific dependencies, will be extracted in future tickets
+import { TermsOfServiceModal } from "../shared/TermsOfServiceModal";
+// Asset imports need to be handled at app level - placeholder for now
+// @ts-expect-error - Asset import needs to be handled at app level
 import floaterFrameDiagram from "@assets/image_1765893431262.png";
-// @ts-expect-error - App-specific dependencies, will be extracted in future tickets
-import { ARViewer } from "@/components/ARViewer";
-// @ts-expect-error - App-specific dependencies, will be extracted in future tickets
-import { PhotoUploadOptions } from "@/components/PhotoUploadOptions";
-// @ts-expect-error - App-specific dependencies, will be extracted in future tickets
+import { ARViewer } from "../shared/ARViewer";
+import { PhotoUploadOptions } from "../shared/PhotoUploadOptions";
 import type { UploadResult } from "@uppy/core";
-// @ts-expect-error - App-specific dependencies, will be extracted in future tickets
-import { apiRequest } from "@/lib/queryClient";
-// @ts-expect-error - App-specific dependencies, will be extracted in future tickets
-import { addToCart, isShopifyEnabled } from "@/services/shopify";
-// @ts-expect-error - App-specific dependencies, will be extracted in future tickets
-import { useToast } from "@/hooks/use-toast";
-// @ts-expect-error - App-specific dependencies, will be extracted in future tickets
-import { getRandomStockImage } from "@/lib/stockImages";
-// @ts-expect-error - App-specific dependencies, will be extracted in future tickets
-import { TrustBadges } from "@/components/TrustBadges";
-// @ts-expect-error - App-specific dependencies, will be extracted in future tickets
-import { TrustBox } from "@/components/TrustBox";
-// @ts-expect-error - App-specific dependencies, will be extracted in future tickets
-import { HangingHardwareSection } from "@/components/specialty/shared/HangingHardwareSection";
-// @ts-expect-error - App-specific dependencies, will be extracted in future tickets
-import {
-  CanvasLifestyleCarousel,
-  CANVAS_LIFESTYLE_IMAGES,
-} from "@/components/specialty/CanvasLifestyleCarousel";
-// TODO: Extract printCompositor service to @framecraft/core in future ticket
-// This is an app-specific dependency that will be extracted in a future ticket
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore - Module '@/services/printCompositor' does not exist in monorepo yet, will be extracted
+import { apiRequest } from "@framecraft/core";
+import { addToCart, isShopifyEnabled } from "@framecraft/core";
+import { useToast } from "../../hooks/use-toast";
+import { getRandomStockImage } from "@framecraft/core";
+import { TrustBadges } from "../marketing/TrustBadges";
+import { TrustBox } from "../marketing/TrustBox";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import { CanvasLifestyleCarousel, CANVAS_LIFESTYLE_IMAGES } from "./CanvasLifestyleCarousel";
 import {
   calculateCanvasPrintDimensions,
   generateCanvasPrintFile,
   checkImageResolution,
-} from "@/services/printCompositor";
+} from "@framecraft/core";
 
 // Get canvas float frames from products service
 const canvasFrames = getFramesByCategory("canvas");

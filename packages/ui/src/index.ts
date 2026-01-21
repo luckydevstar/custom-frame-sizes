@@ -296,6 +296,9 @@ export {
   PhotoUploadOptions,
   ImageEditor,
   ARViewer,
+  FrameDetailCarousel,
+  FrameCornerSwatch,
+  FrameProfileDiagram,
 } from "./components/shared";
 export type { GalleryImage } from "./components/shared";
 
@@ -353,6 +356,50 @@ export { CanvasFrameDesigner } from "./components/specialty/CanvasFrameDesigner"
 export { PuzzleFrameDesigner } from "./components/specialty/PuzzleFrameDesigner";
 export { ComicBookFrameDesigner } from "./components/specialty/ComicBookFrameDesigner";
 export { PlaybillFrameDesigner } from "./components/specialty/PlaybillFrameDesigner";
+
+// Specialty shared components
+export {
+  BaseLifestyleCarousel,
+  useCarouselScroll,
+  HangingHardwareSection,
+  BottomWeightedMatting,
+  BOTTOM_WEIGHTED_EXTRA,
+} from "./components/specialty/shared";
+export type { LifestyleImage } from "./components/specialty/shared";
+
+// Specialty lifestyle carousels
+export { PuzzleLifestyleCarousel } from "./components/specialty/PuzzleLifestyleCarousel";
+export { PlaybillLifestyleCarousel } from "./components/specialty/PlaybillLifestyleCarousel";
+export { JerseyLifestyleCarousel } from "./components/specialty/JerseyLifestyleCarousel";
+export { ComicLifestyleCarousel } from "./components/specialty/ComicLifestyleCarousel";
+export {
+  CanvasLifestyleCarousel,
+  CANVAS_LIFESTYLE_IMAGES,
+} from "./components/specialty/CanvasLifestyleCarousel";
+
+// Specialty layout galleries
+export { PlaybillLayoutGallery } from "./components/specialty/PlaybillLayoutGallery";
+export { ComicLayoutGallery } from "./components/specialty/ComicLayoutGallery";
+
+// Specialty preview components
+export { JerseyPreviewCanvas } from "./components/specialty/JerseyPreviewCanvas";
+export { PlaybillPreview } from "./components/specialty/PlaybillPreview";
+export {
+  ComicPreviewCanvas,
+  useComicPreviewState,
+} from "./components/specialty/ComicPreviewCanvas";
+
+// Brass nameplate components
+export {
+  BrassNameplateSection,
+  BrassNameplateDesigner,
+  BrassNameplatePreview,
+  BrassNameplatePlaceholder,
+  BrassNameplateOrderModule,
+  StandaloneNameplatePreview,
+} from "./components/brass-nameplate";
+export type { BrassNameplateSectionProps } from "./components/brass-nameplate";
+export * from "./components/brass-nameplate/StandaloneNameplateTypes";
 
 // Providers
 export { ThemeProvider, useThemeContext } from "./providers/ThemeProvider";

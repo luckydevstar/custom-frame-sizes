@@ -1,29 +1,24 @@
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { useLocation } from "wouter";
 import { Copy, Maximize, Eye, Settings, Info } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
 // Badge not currently used
-// import { Badge } from "@/components/ui/badge";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+// import { Badge } from "../ui/badge";
+import { Label } from "../ui/label";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 // Select components not currently used
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 // Separator not currently used
-// import { Separator } from "@/components/ui/separator";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+// import { Separator } from "../ui/separator";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 // Alert components not currently used
-// import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { QuantitySelector } from "@/components/ui/quantity-selector";
-import { PriceBox } from "@/components/ui/PriceBox";
-import type { PriceLineItem } from "@/components/ui/PriceBox";
+// import { Alert, AlertDescription } from "../ui/alert";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { PriceBox } from "../ui/PriceBox";
+import type { PriceLineItem } from "../ui/PriceBox";
 // Import types from @framecraft/types
 import type { FrameStyle } from "@framecraft/types";
 
@@ -51,26 +46,23 @@ import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
 // - TrustBadges component
 // - PlaybillLifestyleCarousel component
 // - HangingHardwareSection, BottomWeightedMatting components
-import { useToast } from "@/hooks/use-toast";
-import { useIntelligentPreviewSizing } from "@/hooks/useIntelligentPreviewSizing";
-import { BrassNameplateSection } from "@/components/brass-nameplate/BrassNameplateSection";
-import type { BrassNameplateConfig } from "@shared/schema";
-// import { BRASS_NAMEPLATE_SPECS, getTypeABottomBorder } from "@shared/schema";
+import { useToast } from "../../hooks/use-toast";
+import { useIntelligentPreviewSizing } from "@framecraft/core";
+import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
+import type { BrassNameplateConfig } from "@framecraft/types";
+// import { BRASS_NAMEPLATE_SPECS, getTypeABottomBorder } from "@framecraft/types";
 import {
   PLAYBILL_LAYOUTS,
   PLAQUE_FRAME_EXTENSION,
   type PlaybillLayoutType,
-} from "@/lib/specialty/playbillLayouts";
-import { PlaybillPreview } from "@/components/specialty/PlaybillPreview";
-import { usePlaybillPricing } from "@/lib/specialty/usePlaybillPricing";
-import { PlaybillLayoutGallery } from "@/components/specialty/PlaybillLayoutGallery";
-import { PlaybillLifestyleCarousel } from "@/components/specialty/PlaybillLifestyleCarousel";
-import { TrustBadges } from "@/components/TrustBadges";
-import { HangingHardwareSection } from "@/components/specialty/shared/HangingHardwareSection";
-import {
-  BottomWeightedMatting,
-  BOTTOM_WEIGHTED_EXTRA,
-} from "@/components/specialty/shared/BottomWeightedMatting";
+} from "@framecraft/core";
+import { PlaybillPreview } from "./PlaybillPreview";
+import { usePlaybillPricing } from "@framecraft/core";
+import { PlaybillLayoutGallery } from "./PlaybillLayoutGallery";
+import { PlaybillLifestyleCarousel } from "./PlaybillLifestyleCarousel";
+import { TrustBadges } from "../marketing/TrustBadges";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
 
 // Get product data from services
 const shadowboxFrames = getFramesByCategory("shadowbox");
@@ -538,7 +530,7 @@ export function PlaybillFrameDesigner({
     }
 
     return items;
-  }, [pricing, selectedLayout, selectedGlass, hardware, matType, brassNameplateConfig.enabled]);
+  }, [pricing, selectedGlass, hardware, matType, brassNameplateConfig.enabled]);
 
   return (
     <TooltipProvider>

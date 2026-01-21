@@ -12,3 +12,4 @@ export * from "./mat-tiling";
 export * from "./jersey-layouts";
 export * from "./jersey-mat-paths";
 export * from "./jersey-teams";
+export * from "./collage-math";

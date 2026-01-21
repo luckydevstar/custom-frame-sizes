@@ -14,7 +14,7 @@ import {
   Puzzle,
   CheckCircle2,
 } from "lucide-react";
-import { TermsOfServiceModal } from "@/components/TermsOfServiceModal";
+import { TermsOfServiceModal } from "../shared/TermsOfServiceModal";
 import { useMutation } from "@tanstack/react-query";
 // Import UI components from same package (relative imports)
 import { Button } from "../ui/button";
@@ -34,9 +34,9 @@ import { Separator } from "../ui/separator";
 import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
 import { Checkbox } from "../ui/checkbox";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
-import { PhotoUploadOptions } from "@/components/PhotoUploadOptions";
+import { PhotoUploadOptions } from "../shared/PhotoUploadOptions";
 import type { UploadResult } from "@uppy/core";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest } from "@framecraft/core";
 // Import types from @framecraft/types
 import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
 
@@ -54,26 +54,26 @@ import { useIsMobile, useMobileViewToggle, useIntersectionVisible } from "@frame
 import { ALL_MATS, getMatsInDisplayOrder, getMatById, type Mat } from "@framecraft/config";
 
 // TODO: App-specific dependencies - these need to be extracted or made injectable
-import { addToCart, isShopifyEnabled } from "@/services/shopify";
-import { useToast } from "@/hooks/use-toast";
-import { getRandomStockImage } from "@/lib/stockImages";
+import { addToCart, isShopifyEnabled } from "@framecraft/core";
+import { useToast } from "../../hooks/use-toast";
+import { getRandomStockImage } from "@framecraft/core";
 import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
-import { exportFramePreview, convertImageToDataURL, downloadImage } from "@/utils/exportPreview";
-import { RecommendationCarousel } from "@/components/RecommendationCarousel";
-import type { DesignRecommendation, DesignRecommendationResponse } from "@shared/schema";
-import { ARViewer } from "@/components/ARViewer";
-import { getMatTilingStyle, getMatBevelColor } from "@/lib/specialty/matTiling";
-import { BrassNameplateSection } from "@/components/brass-nameplate/BrassNameplateSection";
-import { BrassNameplatePreview } from "@/components/brass-nameplate/BrassNameplatePreview";
-import type { BrassNameplateConfig } from "@shared/schema";
-import { BRASS_NAMEPLATE_SPECS, getTypeBBottomBorder } from "@shared/schema";
-import { HangingHardwareSection } from "@/components/specialty/shared/HangingHardwareSection";
+import { exportFramePreview, convertImageToDataURL, downloadImage } from "@framecraft/core";
+import { RecommendationCarousel } from "../marketing/RecommendationCarousel";
+import type { DesignRecommendation, DesignRecommendationResponse } from "@framecraft/types";
+import { ARViewer } from "../shared/ARViewer";
+import { getMatTilingStyle, getMatBevelColor } from "@framecraft/core";
+import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
+import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+import type { BrassNameplateConfig } from "@framecraft/types";
+import { BRASS_NAMEPLATE_SPECS, getTypeBBottomBorder } from "@framecraft/types";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
 import {
   calculatePrintDimensions,
   generatePrintFile,
   downloadPrintFile,
   checkImageResolution,
-} from "@/services/printCompositor";
+} from "@framecraft/core";
 
 // Get product data from services
 const frameStyles = getFramesByCategory("picture");

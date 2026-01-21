@@ -12,28 +12,23 @@ import {
   Shield,
   ShoppingCart,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { Badge } from "../ui/badge";
+import { Label } from "../ui/label";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 // Select components not currently used
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Input } from "../ui/input";
+import { Separator } from "../ui/separator";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 // Alert components not currently used
-// import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { QuantitySelector } from "@/components/ui/quantity-selector";
-import { PriceBox } from "@/components/ui/PriceBox";
-import type { PriceLineItem } from "@/components/ui/PriceBox";
+// import { Alert, AlertDescription } from "../ui/alert";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { PriceBox } from "../ui/PriceBox";
+import type { PriceLineItem } from "../ui/PriceBox";
 // Import types from @framecraft/types
 import type { FrameStyle, GlassType } from "@framecraft/types";
 
@@ -62,32 +57,26 @@ import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
 // - TrustBadges component
 // - ComicLifestyleCarousel component
 // - HangingHardwareSection, BottomWeightedMatting components
-import { useToast } from "@/hooks/use-toast";
-import { BrassNameplateSection } from "@/components/brass-nameplate/BrassNameplateSection";
-import type { BrassNameplateConfig } from "@shared/schema";
-// import { BRASS_NAMEPLATE_SPECS, getTypeABottomBorder } from "@shared/schema";
-import { COMIC_FORMATS, getComicFormatById } from "@/lib/specialty/comicFormats";
+import { useToast } from "../../hooks/use-toast";
+import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
+import type { BrassNameplateConfig } from "@framecraft/types";
+// import { BRASS_NAMEPLATE_SPECS, getTypeABottomBorder } from "@framecraft/types";
+import { COMIC_FORMATS, getComicFormatById } from "@framecraft/core";
 import {
   COMIC_LAYOUTS,
   getComicLayout,
   calculateComicFrameSize,
   calculateComicPreviewDimensions,
   type ComicLayoutType,
-} from "@/lib/specialty/comicLayouts";
-import { getCoversForConfig } from "@/constants/comic-cover-images";
-import {
-  ComicPreviewCanvas,
-  useComicPreviewState,
-} from "@/components/specialty/ComicPreviewCanvas";
-import { useComicPricing } from "@/lib/specialty/useComicPricing";
-import { ComicLayoutGallery } from "@/components/specialty/ComicLayoutGallery";
-import { TrustBadges } from "@/components/TrustBadges";
-import { ComicLifestyleCarousel } from "@/components/specialty/ComicLifestyleCarousel";
-import { HangingHardwareSection } from "@/components/specialty/shared/HangingHardwareSection";
-import {
-  BottomWeightedMatting,
-  BOTTOM_WEIGHTED_EXTRA,
-} from "@/components/specialty/shared/BottomWeightedMatting";
+} from "@framecraft/core";
+import { getCoversForConfig } from "@framecraft/core";
+import { ComicPreviewCanvas, useComicPreviewState } from "./ComicPreviewCanvas";
+import { useComicPricing } from "@framecraft/core";
+import { ComicLayoutGallery } from "./ComicLayoutGallery";
+import { TrustBadges } from "../marketing/TrustBadges";
+import { ComicLifestyleCarousel } from "./ComicLifestyleCarousel";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
 
 // Get product data from services
 const shadowboxFrames = getFramesByCategory("shadowbox");

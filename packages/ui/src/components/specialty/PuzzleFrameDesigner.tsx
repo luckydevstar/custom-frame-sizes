@@ -1,30 +1,19 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useLocation } from "wouter";
 import { Info, Maximize, Settings, Eye, Copy } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { QuantitySelector } from "@/components/ui/quantity-selector";
-import { PriceBox } from "@/components/ui/PriceBox";
-import type { PriceLineItem } from "@/components/ui/PriceBox";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { Label } from "../ui/label";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Input } from "../ui/input";
+import { Separator } from "../ui/separator";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { PriceBox } from "../ui/PriceBox";
+import type { PriceLineItem } from "../ui/PriceBox";
 // Import types from @framecraft/types
 import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
 
@@ -58,10 +47,10 @@ import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
 // - BrassNameplateSection, BrassNameplatePreview components
 // - matTiling utilities (getMatTilingStyle, getMatBevelColor)
 // - @shared/schema types
-import { useToast } from "@/hooks/use-toast";
-import { useIntelligentPreviewSizing } from "@/hooks/useIntelligentPreviewSizing";
-import { TrustBox } from "@/components/TrustBox";
-import { isOversizeMat } from "@/lib/materials/matRules";
+import { useToast } from "../../hooks/use-toast";
+import { useIntelligentPreviewSizing } from "@framecraft/core";
+import { TrustBox } from "../marketing/TrustBox";
+import { isOversizeMat } from "@framecraft/core";
 import {
   PUZZLE_SIZES as _PUZZLE_SIZES,
   getPuzzleSizesByCategory,
@@ -69,24 +58,21 @@ import {
   createRoundMatOpening,
   validatePuzzleDimensions,
   type PuzzleSize,
-} from "@/lib/specialty/puzzleSizes";
-import { getRandomPuzzleImage } from "@/lib/stockImages";
-import { Slider } from "@/components/ui/slider";
-import { getMatBevelColor } from "@/lib/specialty/matTiling";
-import { getRandomPuzzlePhoto } from "@/constants/puzzle-lifestyle-photos";
-import { PuzzleLifestyleCarousel } from "@/components/specialty/PuzzleLifestyleCarousel";
-import { HangingHardwareSection } from "@/components/specialty/shared/HangingHardwareSection";
-import {
-  BottomWeightedMatting,
-  BOTTOM_WEIGHTED_EXTRA,
-} from "@/components/specialty/shared/BottomWeightedMatting";
-import { BrassNameplateSection } from "@/components/brass-nameplate/BrassNameplateSection";
-import { BrassNameplatePreview } from "@/components/brass-nameplate/BrassNameplatePreview";
+} from "@framecraft/core";
+import { getRandomPuzzleImage } from "@framecraft/core";
+import { Slider } from "../ui/slider";
+import { getMatBevelColor } from "@framecraft/core";
+import { getRandomPuzzlePhoto } from "@framecraft/core";
+import { PuzzleLifestyleCarousel } from "./PuzzleLifestyleCarousel";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
+import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
+import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
 import {
   BRASS_NAMEPLATE_SPECS,
   getTypeBBottomBorder,
   type BrassNameplateConfig,
-} from "@shared/schema";
+} from "@framecraft/types";
 
 // Get picture frames and glass types
 const pictureFrames = getFramesByCategory("picture");
@@ -315,7 +301,7 @@ export function PuzzleFrameDesigner({
         setMatBorderWidth(newDefaultBorder.toString());
       }
     }
-  }, [selectedPuzzleSize?.id]);
+  }, [selectedPuzzleSize, matBorderWidth]);
 
   // UI state
   const [_showShareDialog, _setShowShareDialog] = useState(false);
@@ -637,6 +623,8 @@ export function PuzzleFrameDesigner({
     glassType,
     hardware,
     brassNameplateConfig.enabled,
+    matBorder,
+    matReveal,
   ]);
 
   // Build itemized pricing structure for PriceBox
@@ -779,9 +767,9 @@ export function PuzzleFrameDesigner({
   };
 
   // Handle share - copy link to clipboard
-  const _handleShare = useCallback(() => {
+  const _handleShare = () => {
     handleCopyLink();
-  }, [toast]);
+  };
 
   const handleAddToCart = async () => {
     if (!selectedPuzzleSize || !pricing) return;
