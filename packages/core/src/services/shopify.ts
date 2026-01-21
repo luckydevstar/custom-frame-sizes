@@ -32,12 +32,10 @@ const isShopifyConfigured = Boolean(SHOPIFY_DOMAIN && SHOPIFY_STOREFRONT_TOKEN);
  * Shopify GraphQL client for Storefront API
  */
 class ShopifyClient {
-  private _domain: string;
   private token: string;
   private endpoint: string;
 
   constructor(domain: string, token: string) {
-    this._domain = domain; // Used in endpoint construction
     this.token = token;
     this.endpoint = `https://${domain}/api/${SHOPIFY_API_VERSION}/graphql.json`;
   }

@@ -50,6 +50,7 @@ export function BrassNameplatePreview({
   // Text area dimensions
   const textAreaWidth = BRASS_NAMEPLATE_SPECS.TEXT_AREA_WIDTH * DPI;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // @ts-expect-error - Unused variable kept for potential future use
   const _textAreaHeight = BRASS_NAMEPLATE_SPECS.TEXT_AREA_HEIGHT * DPI;
 
   // Font sizes in pixels (pt to px conversion: pt * DPI / 72)

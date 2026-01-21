@@ -77,6 +77,7 @@ const pictureFrames = getFramesByCategory("picture");
 
 // Hardware options with descriptions and pricing
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+// @ts-expect-error - Unused constant kept for potential future use
 const _HARDWARE_OPTIONS = [
   {
     id: "standard" as const,
@@ -240,7 +241,7 @@ export function PuzzleFrameDesigner({
       const mat = ALL_MATS.find((m: Mat) => m.id === urlMat);
       if (mat) return mat;
     }
-    return ALL_MATS[0]; // Default to first mat (white)
+    return ALL_MATS[0]!; // Default to first mat (white)
   });
 
   const [selectedBottomMatColor, setSelectedBottomMatColor] = useState<Mat>(() => {
@@ -249,7 +250,7 @@ export function PuzzleFrameDesigner({
       const mat = ALL_MATS.find((m: Mat) => m.id === urlBottomMat);
       if (mat) return mat;
     }
-    return ALL_MATS[1]; // Default to second mat
+    return ALL_MATS[1]!; // Default to second mat
   });
 
   const [glassTypeState, setGlassTypeState] = useState(() => {
@@ -788,6 +789,7 @@ export function PuzzleFrameDesigner({
 
   // Handle share - copy link to clipboard
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // @ts-expect-error - Unused function kept for potential future use
   const _handleShare = () => {
     handleCopyLink();
   };
@@ -816,10 +818,12 @@ export function PuzzleFrameDesigner({
 
   // Get puzzle sizes by category
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // @ts-expect-error - Unused variable kept for potential future use
   const _sizesByCategory = getPuzzleSizesByCategory();
 
   // Frame dimensions for display (uses actual totalFrameWidth/Height with reveal)
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // @ts-expect-error - Unused variable kept for potential future use
   const _frameDimensions = useMemo(() => {
     if (!selectedPuzzleSize) return null;
     return { width: totalFrameWidth, height: totalFrameHeight };
@@ -1670,6 +1674,7 @@ function PuzzlePreview({
   const matBorderPx = matBorder * INCHES_TO_PX * scale;
   const bottomMatBorderPx = matBottomBorder * INCHES_TO_PX * scale;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // @ts-expect-error - Unused variable kept for potential future use
   const _matRevealPx = matReveal * INCHES_TO_PX * scale;
 
   // Calculate brass nameplate positioning

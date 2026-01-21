@@ -63,6 +63,7 @@ export function TestimonialCarousel({
         section.removeEventListener("touchend", handleTouchEnd as EventListener);
       };
     }
+    return undefined;
   }, [goToNext, goToPrev]);
 
   // Generate JSON-LD schema for active review

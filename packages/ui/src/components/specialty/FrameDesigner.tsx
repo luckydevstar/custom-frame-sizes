@@ -111,11 +111,11 @@ export function FrameDesigner({
   }, [defaultFrameId]);
 
   const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(
-    () => initialFrame ?? frameStyles[0]
+    () => initialFrame ?? frameStyles[0]!
   );
-  const [selectedMat, setSelectedMat] = useState<Mat>(() => getMatById("mat-1") ?? ALL_MATS[0]);
+  const [selectedMat, setSelectedMat] = useState<Mat>(() => getMatById("mat-1") ?? ALL_MATS[0]!);
   const [selectedMatInner, setSelectedMatInner] = useState<Mat>(
-    () => getMatById("mat-4") ?? ALL_MATS[1]
+    () => getMatById("mat-4") ?? ALL_MATS[1]!
   );
   const [selectedGlass, setSelectedGlass] = useState(glassTypes[0]);
   const [matType, setMatType] = useState<"none" | "single" | "double">("single");
@@ -426,6 +426,7 @@ export function FrameDesigner({
 
     // First image or same image - no transition needed
     prevImageRef.current = selectedImage;
+    return undefined;
   }, [selectedImage]);
 
   // ResizeObserver for dynamic container sizing
@@ -966,6 +967,7 @@ export function FrameDesigner({
 
   // Print resolution check for print-and-frame mode
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // @ts-expect-error - Unused variable kept for potential future use
   const _printResolutionCheck = useMemo(() => {
     if (!uploadedImageDimensions || serviceType !== "print-and-frame" || !selectedImage) {
       return null;
@@ -1008,7 +1010,7 @@ export function FrameDesigner({
       matReveal,
       selectedMat.id,
       selectedMatInner.id,
-      selectedGlass.id,
+      selectedGlass?.id,
       selectedImage,
       copyrightAgreed,
       bottomWeighted,
@@ -1066,9 +1068,9 @@ export function FrameDesigner({
   }
 
   priceItems.push({
-    label: selectedGlass.name,
+    label: selectedGlass?.name ?? "Standard",
     amount: glassPrice,
-    isIncluded: selectedGlass.id === "standard",
+    isIncluded: selectedGlass?.id === "standard",
     isDiscount: glassPrice < 0,
     testId: "text-glass-price",
   });

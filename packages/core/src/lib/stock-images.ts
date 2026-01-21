@@ -83,10 +83,11 @@ function getDefaultLibrary(): StockImageLibrary {
   if (!defaultLibraryInstance) {
     // Create a minimal default library - app should provide proper config
     defaultLibraryInstance = createStockImageLibrary({
-      photoInsertImages: [],
-      canvasImages: [],
-      puzzleInsertImages: [],
-      sonogramInsertImages: [],
+      photoInserts: {},
+      canvasPaintings: {},
+      puzzleInserts: {},
+      sonogramInserts: {},
+      seasonalImages: {},
       needleworkInserts: [],
     });
   }

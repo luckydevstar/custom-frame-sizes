@@ -19,7 +19,12 @@ import { PriceBox } from "../ui/PriceBox";
 import { QuantitySelector } from "../ui/quantity-selector";
 import type { PriceLineItem } from "../ui/PriceBox";
 // Import types from @framecraft/types
-import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
+import type {
+  FrameStyle,
+  FrameConfiguration,
+  ShadowboxJerseyMount,
+  ShadowboxAccessory,
+} from "@framecraft/types";
 
 // Import services from @framecraft/core
 import { getFramesByCategory, getMatColors, getGlassTypes } from "@framecraft/core";
@@ -129,11 +134,11 @@ export function ShadowboxDesigner({
     ? (frameStyles.find((f) => f.id === defaultFrameId) ?? frameStyles[0])
     : frameStyles[0];
   const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(
-    () => initialFrame ?? frameStyles[0]
+    () => initialFrame ?? frameStyles[0]!
   );
-  const [selectedMat, setSelectedMat] = useState<Mat>(() => getMatById("mat-1") ?? MAT_PALETTE[0]);
+  const [selectedMat, setSelectedMat] = useState<Mat>(() => getMatById("mat-1") ?? MAT_PALETTE[0]!);
   const [selectedMatInner, setSelectedMatInner] = useState<Mat>(
-    () => getMatById("mat-4") ?? MAT_PALETTE[1]
+    () => getMatById("mat-4") ?? MAT_PALETTE[1]!
   );
   const [selectedGlass, setSelectedGlass] = useState(glassTypes[0]);
   const [matType, setMatType] = useState<"none" | "single" | "double">("single");
@@ -375,14 +380,14 @@ export function ShadowboxDesigner({
         },
         matBorderWidth,
         matRevealWidth,
-        selectedGlass: selectedGlass ?? glassTypes[0],
+        selectedGlass: selectedGlass ?? glassTypes[0]!,
         selectedBacking,
         selectedBackingColor, // Preserve original color for round-trip
         hangingHardware,
         depth,
         matPalette: MAT_PALETTE.map((m) => ({ id: m.id, color: m.hexColor || "#FFFFFF" })), // Pass palette for resolving backing colors
-        jerseyMount, // Passthrough unsupported features
-        accessories, // Passthrough unsupported features
+        jerseyMount: jerseyMount as ShadowboxJerseyMount | undefined, // Passthrough unsupported features
+        accessories: accessories as ShadowboxAccessory[] | undefined, // Passthrough unsupported features
         rawMatColor, // Preserve raw color for round-trip
         rawMatInnerColor, // Preserve raw color for round-trip
         unknownFields: unknownConfigFields, // Forward compatibility
@@ -646,7 +651,7 @@ export function ShadowboxDesigner({
       matRevealWidth: matReveal,
       matColorId: selectedMat.id,
       matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
-      glassTypeId: selectedGlass.id,
+      glassTypeId: selectedGlass?.id ?? "standard",
       bottomWeighted,
     }),
     [
@@ -658,7 +663,7 @@ export function ShadowboxDesigner({
       matReveal,
       selectedMat.id,
       selectedMatInner.id,
-      selectedGlass.id,
+      selectedGlass?.id,
       bottomWeighted,
     ]
   );
@@ -714,23 +719,23 @@ export function ShadowboxDesigner({
     }
 
     // Glass
-    if (selectedGlass.id === "standard") {
+    if (selectedGlass?.id === "standard") {
       items.push({
-        label: selectedGlass.name,
+        label: selectedGlass.name ?? "Standard",
         amount: 0,
         isIncluded: true,
         testId: "text-glass-price",
       });
-    } else if (selectedGlass.id === "none") {
+    } else if (selectedGlass?.id === "none") {
       items.push({
-        label: selectedGlass.name,
+        label: selectedGlass.name ?? "No Glass",
         amount: 0,
         isDiscount: true,
         testId: "text-glass-price",
       });
     } else {
       items.push({
-        label: selectedGlass.name,
+        label: selectedGlass?.name ?? "Glass",
         amount: glassPrice,
         isDiscount: glassPrice < 0,
         testId: "text-glass-price",
@@ -1687,7 +1692,7 @@ export function ShadowboxDesigner({
                         max={8}
                         step={0.25}
                         value={[matBorder]}
-                        onValueChange={(values) => setMatBorderWidth(values[0].toString())}
+                        onValueChange={(values) => setMatBorderWidth((values[0] ?? 2.5).toString())}
                         data-testid="slider-mat-border"
                         disabled={readonly}
                       />
@@ -1767,7 +1772,9 @@ export function ShadowboxDesigner({
                             max={1}
                             step={0.25}
                             value={[matReveal]}
-                            onValueChange={(values) => setMatRevealWidth(values[0].toString())}
+                            onValueChange={(values) =>
+                              setMatRevealWidth((values[0] ?? 0.25).toString())
+                            }
                             data-testid="slider-mat-reveal"
                             disabled={readonly}
                           />
@@ -1821,7 +1828,7 @@ export function ShadowboxDesigner({
               <AccordionTrigger data-testid="accordion-glass">Glazing</AccordionTrigger>
               <AccordionContent>
                 <RadioGroup
-                  value={selectedGlass.id}
+                  value={selectedGlass?.id ?? "standard"}
                   onValueChange={(id) => setSelectedGlass(glassTypes.find((g) => g.id === id)!)}
                   disabled={readonly}
                 >
@@ -2414,7 +2421,7 @@ export function ShadowboxDesigner({
             matRevealWidth: parseFraction(matRevealWidth),
             matColorId: selectedMat.id,
             matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
-            glassTypeId: selectedGlass.id,
+            glassTypeId: selectedGlass?.id ?? "standard",
             imageUrl: undefined, // Shadowboxes typically don't have photos
             copyrightAgreed: true,
           }}

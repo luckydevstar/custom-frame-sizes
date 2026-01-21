@@ -159,7 +159,7 @@ export function JerseyFrameDesigner({
   };
 
   const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(
-    () => initialFrame ?? jerseyFrames[0]
+    () => initialFrame ?? jerseyFrames[0]!
   );
 
   // Mat color selections (top, bottom, backing)
@@ -550,6 +550,7 @@ export function JerseyFrameDesigner({
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // @ts-expect-error - Unused variable kept for potential future use
   const _availableLayouts = getAllJerseyLayouts();
 
   return (
@@ -690,6 +691,7 @@ export function JerseyFrameDesigner({
                           {(["small", "regular", "large"] as const).map((size) => {
                             const layoutId: JerseyLayoutType = `${selectedLayoutType}-${size}`;
                             // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                            // @ts-expect-error - Unused variable kept for potential future use
                             const _layout = JERSEY_LAYOUTS[layoutId];
 
                             // Clear, action-oriented labels
@@ -999,6 +1001,7 @@ export function JerseyFrameDesigner({
                           {(["small", "regular", "large"] as const).map((size) => {
                             const layoutId: JerseyLayoutType = `${selectedLayoutType}-${size}`;
                             // eslint-disable-next-line @typescript-eslint/no-unused-vars
+                            // @ts-expect-error - Unused variable kept for potential future use
                             const _layout = JERSEY_LAYOUTS[layoutId];
 
                             const headline =

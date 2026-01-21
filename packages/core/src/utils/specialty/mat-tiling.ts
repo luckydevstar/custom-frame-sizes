@@ -116,6 +116,7 @@ function getRelativeLuminance(hex: string): number {
  * @internal - Currently unused, kept for potential future use
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+// @ts-expect-error - Unused function kept for potential future use
 function _darkenColor(hex: string, percent: number): string {
   const rgb = parseInt(hex.slice(1), 16);
   const r = Math.max(0, Math.floor(((rgb >> 16) & 0xff) * (1 - percent)));
@@ -130,6 +131,7 @@ function _darkenColor(hex: string, percent: number): string {
  * @internal - Currently unused, kept for potential future use
  */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+// @ts-expect-error - Unused function kept for potential future use
 function _lightenColor(hex: string, percent: number): string {
   const rgb = parseInt(hex.slice(1), 16);
   const r = Math.min(

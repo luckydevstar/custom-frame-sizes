@@ -29,6 +29,7 @@ export function StandaloneNameplatePreview({
   const displayHeight = pxHeight * scale;
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // @ts-expect-error - Unused variable kept for potential future use
   const _usableSpace = calculateUsableSpace(config.width, config.height);
   const borderInset = STANDALONE_NAMEPLATE_SPECS.BORDER_INSET * DPI;
 

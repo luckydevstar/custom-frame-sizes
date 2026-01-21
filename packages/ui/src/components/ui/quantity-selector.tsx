@@ -45,6 +45,7 @@ export function QuantitySelector({
       // Cleanup: clear timeout if component unmounts
       return () => clearTimeout(timeoutId);
     }
+    return undefined;
   }, [isCustom]);
 
   const handleSelectChange = (val: string) => {

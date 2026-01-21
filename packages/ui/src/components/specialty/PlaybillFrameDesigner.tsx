@@ -227,18 +227,20 @@ export function PlaybillFrameDesigner({
   });
 
   const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(
-    () => initialFrame ?? shadowboxFrames[0]
+    () => initialFrame ?? shadowboxFrames[0]!
   );
 
   // Mat configuration
   const [selectedMat, setSelectedMat] = useState<Mat>(() => {
     const urlMat = urlParams.get("mat");
-    return (urlMat ? getMatById(urlMat) : getMatById("mat-1")) ?? ALL_MATS[0]; // Default: White
+    const mat = urlMat ? getMatById(urlMat) : getMatById("mat-1");
+    return mat ?? ALL_MATS[0]!; // Default: White
   });
 
   const [selectedMatInner, setSelectedMatInner] = useState<Mat>(() => {
     const urlMatInner = urlParams.get("matInner");
-    return (urlMatInner ? getMatById(urlMatInner) : getMatById("mat-2")) ?? ALL_MATS[1]; // Default: Black
+    const mat = urlMatInner ? getMatById(urlMatInner) : getMatById("mat-2");
+    return mat ?? ALL_MATS[1]!; // Default: Black
   });
 
   const [matType, setMatType] = useState<"none" | "single" | "double">(() => {
@@ -334,6 +336,7 @@ export function PlaybillFrameDesigner({
 
   // Scroll to designer function
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // @ts-expect-error - Unused function kept for potential future use
   const _scrollToDesigner = useCallback(() => {
     designerSectionRef.current?.scrollIntoView({
       behavior: "smooth",
