@@ -285,6 +285,8 @@ export {
   type NavigationConfig,
   type NavigationItem,
 } from "./components/layout/Navigation";
+export { Hero, type HeroProps, type HeroImage, type HeroConfig } from "./components/layout/Hero";
+export { Seo, type SeoProps, type BrandConfig } from "./components/layout/Seo";
 
 // Specialty components
 export { FrameDesigner } from "./components/specialty/FrameDesigner";

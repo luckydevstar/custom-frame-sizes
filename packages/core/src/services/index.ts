@@ -19,5 +19,5 @@ export * from "./pricing";
 export * from "./validation";
 export * from "./logging";
 export * from "./mat-catalog";
-// export * from "./shopify"; // Exported from shopify module
-// export * from "./printCompositor"; // Phase 2
+export * from "./print-compositor";
+export * from "./shopify";

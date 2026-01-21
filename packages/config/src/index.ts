@@ -6,10 +6,17 @@
  * This package contains:
  * - Palette configuration: Mat board palette and display order
  * - Navigation configuration: Site navigation structure and menu items
+ * - Animation configuration: Animation settings for scroll animations, parallax, etc.
+ * - Theme configuration: Base theme and theme utilities
+ * - Feature flags configuration: Feature toggles
+ * - Brand configuration: Store-specific brand configuration
  * - Other configuration constants used across the monorepo
  *
  * @packageDocumentation
  */
+
+// Animation configuration
+export * from "./animations";
 
 // Palette configuration
 export * from "./palette";
