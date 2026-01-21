@@ -288,6 +288,63 @@ export {
 export { Hero, type HeroProps, type HeroImage, type HeroConfig } from "./components/layout/Hero";
 export { Seo, type SeoProps, type BrandConfig } from "./components/layout/Seo";
 
+// Shared components
+export {
+  TermsOfServiceModal,
+  ObjectUploader,
+  ImageGallery,
+  PhotoUploadOptions,
+  ImageEditor,
+  ARViewer,
+} from "./components/shared";
+export type { GalleryImage } from "./components/shared";
+
+// Marketing components
+export {
+  TestimonialCarousel,
+  RecommendationCarousel,
+  RotatingImage,
+  TrustBadges,
+  TrustBox,
+  FrameCard,
+  FramePreview,
+} from "./components/marketing";
+export type { TestimonialCarouselProps } from "./components/marketing";
+
+// Home page components
+export {
+  HowItWorks,
+  ValueProps,
+  TrustBar,
+  InspirationGallery,
+  FaqMini,
+  SeoTextBlock,
+  FrameStylesShowcase,
+  ShadowboxShowcase,
+  CanvasFramesShowcase,
+} from "./components/home";
+export type {
+  HowItWorksProps,
+  HowItWorksConfig,
+  HowItWorksStep,
+  ValuePropsProps,
+  WhyChooseUsConfig,
+  WhyChooseUsCard,
+  TrustBarProps,
+  TrustBarItem,
+  InspirationGalleryProps,
+  FaqMiniProps,
+  FAQ,
+  SeoTextBlockProps,
+  FrameStylesShowcaseProps,
+  ShadowboxShowcaseProps,
+  CanvasFramesShowcaseProps,
+} from "./components/home";
+
+// Navigation components
+export { SearchBar } from "./components/navigation";
+export type { SearchBarProps } from "./components/navigation";
+
 // Specialty components
 export { FrameDesigner } from "./components/specialty/FrameDesigner";
 export { ShadowboxDesigner } from "./components/specialty/ShadowboxDesigner";
