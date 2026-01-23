@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { StoreProvider } from "@framecraft/core";
 import { brandConfig } from "../brand.config";
+import { QueryProvider } from "../components/providers/query-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,7 +39,9 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <StoreProvider config={brandConfig}>{children}</StoreProvider>
+        <QueryProvider>
+          <StoreProvider config={brandConfig}>{children}</StoreProvider>
+        </QueryProvider>
       </body>
     </html>
   );
