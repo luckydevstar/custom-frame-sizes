@@ -3,11 +3,13 @@
  *
  * React context for accessing current store configuration.
  * Provides store ID, configuration, and utilities to child components.
+ *
+ * SIMPLIFIED: Accepts config directly instead of using global registry.
+ * This makes each store independent and easier to reason about.
  */
 
 import { createContext, useContext, useMemo, type ReactNode } from "react";
 import type { BrandConfig } from "@framecraft/config";
-import { getBrandConfig, isStoreActive } from "@framecraft/config";
 import { useTheme } from "../hooks/use-theme";
 import { useFeatureFlag } from "../hooks/use-feature-flag";
 
@@ -42,9 +44,9 @@ const StoreContext = createContext<StoreContextValue | null>(null);
 
 export interface StoreProviderProps {
   /**
-   * Store ID
+   * Store configuration (passed directly, no registry lookup needed)
    */
-  storeId: string;
+  config: BrandConfig;
 
   /**
    * Children components
@@ -55,36 +57,30 @@ export interface StoreProviderProps {
 /**
  * StoreProvider component
  *
- * Provides store context to child components
+ * Provides store context to child components.
+ * Accepts config directly for simplicity and independence.
  */
-export function StoreProvider({ storeId, children }: StoreProviderProps): JSX.Element {
-  // Get store configuration
-  const config = useMemo(() => {
-    try {
-      return getBrandConfig(storeId);
-    } catch (error) {
-      throw new Error(`Store configuration not found for store: ${storeId}`, { cause: error });
-    }
-  }, [storeId]);
-
+export function StoreProvider({ config, children }: StoreProviderProps): JSX.Element {
   // Check if store is active
-  const isActive = useMemo(() => isStoreActive(storeId), [storeId]);
+  const isActive = useMemo(() => {
+    return config.metadata?.isActive !== false; // Default to true if not specified
+  }, [config.metadata?.isActive]);
 
   // Get theme utilities
-  const theme = useTheme({ storeId, applyToDocument: true });
+  const theme = useTheme({ storeId: config.storeId, applyToDocument: true });
 
   // Get feature flag utilities
-  const features = useFeatureFlag({ storeId });
+  const features = useFeatureFlag({ storeId: config.storeId });
 
   const value: StoreContextValue = useMemo(
     () => ({
-      storeId,
+      storeId: config.storeId,
       config,
       isActive,
       theme,
       features,
     }),
-    [storeId, config, isActive, theme, features]
+    [config, isActive, theme, features]
   );
 
   return <StoreContext.Provider value={value}>{children}</StoreContext.Provider>;

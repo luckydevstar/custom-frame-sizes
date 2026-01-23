@@ -1,14 +1,14 @@
 // Test imports from @framecraft packages
 import { defaultTheme } from "@framecraft/config";
 import type { ThemeConfig } from "@framecraft/config";
-import { getStoreConfig } from "@/lib/config";
+import { useStoreConfig } from "@framecraft/core";
 
 export default function HomePage() {
   // Verify theme import works
   const theme: ThemeConfig = defaultTheme;
 
-  // Get store configuration
-  const storeConfig = getStoreConfig();
+  // Get store configuration from context
+  const storeConfig = useStoreConfig();
 
   // Use theme to avoid unused variable warning
   const primaryColor = theme.brand.primary;
@@ -58,33 +58,31 @@ export default function HomePage() {
           </div>
         </div>
 
-        {storeConfig && (
-          <div className="mt-8 p-8 bg-card rounded-lg border shadow-sm">
-            <h2 className="text-2xl font-semibold mb-4">Store Configuration</h2>
-            <div className="space-y-2 text-left text-sm">
-              <div>
-                <span className="font-semibold">Store Name:</span> {storeConfig.name}
-              </div>
-              <div>
-                <span className="font-semibold">Store ID:</span> {storeConfig.storeId}
-              </div>
-              <div>
-                <span className="font-semibold">Domain:</span> {storeConfig.domain}
-              </div>
-              <div>
-                <span className="font-semibold">Tagline:</span> {storeConfig.branding?.tagline}
-              </div>
-              <div>
-                <span className="font-semibold">Primary Color:</span>{" "}
-                <span
-                  className="inline-block w-4 h-4 rounded border"
-                  style={{ backgroundColor: storeConfig.theme?.brandColors?.primary }}
-                ></span>{" "}
-                {storeConfig.theme?.brandColors?.primary}
-              </div>
+        <div className="mt-8 p-8 bg-card rounded-lg border shadow-sm">
+          <h2 className="text-2xl font-semibold mb-4">Store Configuration</h2>
+          <div className="space-y-2 text-left text-sm">
+            <div>
+              <span className="font-semibold">Store Name:</span> {storeConfig.name}
+            </div>
+            <div>
+              <span className="font-semibold">Store ID:</span> {storeConfig.storeId}
+            </div>
+            <div>
+              <span className="font-semibold">Domain:</span> {storeConfig.domain}
+            </div>
+            <div>
+              <span className="font-semibold">Tagline:</span> {storeConfig.branding?.tagline}
+            </div>
+            <div>
+              <span className="font-semibold">Primary Color:</span>{" "}
+              <span
+                className="inline-block w-4 h-4 rounded border"
+                style={{ backgroundColor: storeConfig.theme?.brandColors?.primary }}
+              ></span>{" "}
+              {storeConfig.theme?.brandColors?.primary}
             </div>
           </div>
-        )}
+        </div>
 
         <div className="mt-8 text-sm text-muted-foreground">
           <p>Development server running on http://localhost:3000</p>

@@ -1,19 +1,13 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { initializeStoreConfig, getStoreConfig } from "@/lib/config";
-
-// Initialize store configuration
-initializeStoreConfig();
+import { StoreProvider } from "@framecraft/core";
+import { brandConfig } from "../brand.config";
 
 const inter = Inter({ subsets: ["latin"] });
 
 // Get SEO metadata from brand config
-const storeConfig = getStoreConfig();
-const seoConfig = storeConfig?.seo || {
-  title: "Store A - Custom Picture Frames",
-  description: "Custom picture frames and framing services",
-};
+const seoConfig = brandConfig.seo;
 
 export const metadata: Metadata = {
   title: seoConfig.title,
@@ -43,7 +37,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <StoreProvider config={brandConfig}>{children}</StoreProvider>
+      </body>
     </html>
   );
 }
