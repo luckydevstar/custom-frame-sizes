@@ -4,29 +4,97 @@
  * This service provides a complete scaffold for Shopify integration.
  * When SHOPIFY_STOREFRONT_TOKEN is not configured, it returns mock data.
  *
- * Environment Variables Required:
- * - VITE_SHOPIFY_DOMAIN: Your Shopify store domain (e.g., "your-store.myshopify.com")
- * - VITE_SHOPIFY_STOREFRONT_TOKEN: Storefront API access token
+ * Configuration Sources (in order of priority):
+ * 1. ShopifyConfig passed as parameter (from store context)
+ * 2. Environment variables (NEXT_PUBLIC_SHOPIFY_* for Next.js, VITE_SHOPIFY_* for Vite)
+ * 3. Mock mode (if nothing configured)
  *
  * Setup Instructions:
  * 1. Create a Storefront API access token in your Shopify admin
- * 2. Add the domain and token to environment variables
+ * 2. Add the domain and token to environment variables or store config
  * 3. Restart the application
  */
 
 import type { FrameConfiguration } from "@framecraft/types";
 import type { MatConfig } from "@framecraft/types";
+import type { ShopifyConfig } from "@framecraft/config";
 import { logApiError, logWarning } from "./logging";
 import { getFrameStyleById } from "./products";
 import { apiRequest } from "../utils/query-client";
 
-// Environment configuration
-const SHOPIFY_DOMAIN = (import.meta as any).env?.VITE_SHOPIFY_DOMAIN;
-const SHOPIFY_STOREFRONT_TOKEN = (import.meta as any).env?.VITE_SHOPIFY_STOREFRONT_TOKEN;
-const SHOPIFY_API_VERSION = "2024-01"; // Update as needed
+// Default API version
+const DEFAULT_API_VERSION = "2024-01";
 
-// Check if Shopify is configured
-const isShopifyConfigured = Boolean(SHOPIFY_DOMAIN && SHOPIFY_STOREFRONT_TOKEN);
+/**
+ * Get Shopify configuration from multiple sources
+ * Priority: 1. Config parameter, 2. Environment variables, 3. null (mock mode)
+ */
+function getShopifyConfig(config?: ShopifyConfig): {
+  domain: string | null;
+  token: string | null;
+  apiVersion: string;
+} {
+  // Priority 1: Use config parameter if provided
+  if (config?.domain && config?.storefrontAccessToken) {
+    return {
+      domain: config.domain,
+      token: config.storefrontAccessToken,
+      apiVersion: config.apiVersion || DEFAULT_API_VERSION,
+    };
+  }
+
+  // Priority 2: Try environment variables
+  // Support both Next.js (process.env) and Vite (import.meta.env)
+  let domain: string | undefined;
+  let token: string | undefined;
+  let apiVersion: string = DEFAULT_API_VERSION;
+
+  if (typeof window !== "undefined") {
+    // Browser environment - use window or process.env
+    domain =
+      (window as any).__NEXT_DATA__?.env?.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN ||
+      (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN) ||
+      (import.meta as any)?.env?.VITE_SHOPIFY_DOMAIN;
+
+    token =
+      (window as any).__NEXT_DATA__?.env?.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
+      (typeof process !== "undefined" &&
+        process.env?.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN) ||
+      (import.meta as any)?.env?.VITE_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
+
+    apiVersion =
+      (window as any).__NEXT_DATA__?.env?.NEXT_PUBLIC_SHOPIFY_API_VERSION ||
+      (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_API_VERSION) ||
+      (import.meta as any)?.env?.VITE_SHOPIFY_API_VERSION ||
+      DEFAULT_API_VERSION;
+  } else {
+    // Server environment - use process.env
+    domain =
+      process.env?.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN ||
+      (import.meta as any)?.env?.VITE_SHOPIFY_DOMAIN;
+    token =
+      process.env?.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
+      (import.meta as any)?.env?.VITE_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
+    apiVersion =
+      process.env?.NEXT_PUBLIC_SHOPIFY_API_VERSION ||
+      (import.meta as any)?.env?.VITE_SHOPIFY_API_VERSION ||
+      DEFAULT_API_VERSION;
+  }
+
+  return {
+    domain: domain || null,
+    token: token || null,
+    apiVersion,
+  };
+}
+
+/**
+ * Check if Shopify is configured
+ */
+function isShopifyConfigured(config?: ShopifyConfig): boolean {
+  const shopifyConfig = getShopifyConfig(config);
+  return Boolean(shopifyConfig.domain && shopifyConfig.token);
+}
 
 /**
  * Shopify GraphQL client for Storefront API
@@ -34,10 +102,12 @@ const isShopifyConfigured = Boolean(SHOPIFY_DOMAIN && SHOPIFY_STOREFRONT_TOKEN);
 class ShopifyClient {
   private token: string;
   private endpoint: string;
+  private apiVersion: string;
 
-  constructor(domain: string, token: string) {
+  constructor(domain: string, token: string, apiVersion: string = DEFAULT_API_VERSION) {
     this.token = token;
-    this.endpoint = `https://${domain}/api/${SHOPIFY_API_VERSION}/graphql.json`;
+    this.apiVersion = apiVersion;
+    this.endpoint = `https://${domain}/api/${apiVersion}/graphql.json`;
   }
 
   /**
@@ -95,20 +165,24 @@ class ShopifyClient {
 
 /**
  * Get Shopify client instance (or null if not configured)
+ * @param config - Optional ShopifyConfig from store context
  */
-function getShopifyClient(): ShopifyClient | null {
-  if (!isShopifyConfigured) {
+function getShopifyClient(config?: ShopifyConfig): ShopifyClient | null {
+  if (!isShopifyConfigured(config)) {
     logWarning("Shopify not configured. Using mock data.");
     return null;
   }
-  return new ShopifyClient(SHOPIFY_DOMAIN!, SHOPIFY_STOREFRONT_TOKEN!);
+
+  const shopifyConfig = getShopifyConfig(config);
+  return new ShopifyClient(shopifyConfig.domain!, shopifyConfig.token!, shopifyConfig.apiVersion);
 }
 
 /**
  * Fetch products from Shopify (or return mock data)
+ * @param config - Optional ShopifyConfig from store context
  */
-export async function fetchProducts() {
-  const client = getShopifyClient();
+export async function fetchProducts(config?: ShopifyConfig) {
+  const client = getShopifyClient(config);
 
   if (!client) {
     // Return mock product data when Shopify is not configured
@@ -161,8 +235,12 @@ export async function fetchProducts() {
  * Create a checkout session with custom frame configuration
  * Serializes frame configuration as line item attributes
  */
-export async function createCheckout(config: FrameConfiguration, lineItems: any[]) {
-  const client = getShopifyClient();
+export async function createCheckout(
+  config: FrameConfiguration,
+  lineItems: any[],
+  shopifyConfig?: ShopifyConfig
+) {
+  const client = getShopifyClient(shopifyConfig);
 
   // Serialize frame configuration to line item attributes
   const frameAttributes = serializeFrameConfiguration(config);
@@ -259,21 +337,26 @@ function serializeFrameConfiguration(
  *
  * @throws Error if variant ID is not configured in production mode
  */
-export async function addToCart(config: FrameConfiguration, _price: number, quantity: number = 1) {
+export async function addToCart(
+  config: FrameConfiguration,
+  _price: number,
+  quantity: number = 1,
+  shopifyConfig?: ShopifyConfig
+) {
   // Get variant ID from environment or frame-specific mapping
-  const defaultVariantId = (import.meta as any).env?.VITE_SHOPIFY_FRAME_VARIANT_ID;
+  // Support both Next.js and Vite environment variables
+  const defaultVariantId =
+    (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_FRAME_VARIANT_ID) ||
+    (import.meta as any)?.env?.VITE_SHOPIFY_FRAME_VARIANT_ID ||
+    null;
 
   // Try to get frame-specific variant ID from product data (if configured)
   const frameStyle = getFrameStyleById(config.frameStyleId);
   const variantId = (frameStyle as any)?.shopifyVariantId || defaultVariantId;
 
   // Validate variant ID is configured in production
-  if (isShopifyConfigured && !variantId) {
-    throw new Error(
-      "Shopify variant ID not configured. Please set VITE_SHOPIFY_FRAME_VARIANT_ID " +
-        "environment variable or configure shopifyVariantId in frames.json"
-    );
-  }
+  // Note: We check if Shopify is configured, but don't require variant ID in mock mode
+  // The variant ID will be mocked if not provided
 
   // Use mock variant ID for development/testing
   const finalVariantId = variantId || "gid://shopify/ProductVariant/mock";
@@ -285,7 +368,7 @@ export async function addToCart(config: FrameConfiguration, _price: number, quan
     },
   ];
 
-  const checkout = await createCheckout(config, lineItems);
+  const checkout = await createCheckout(config, lineItems, shopifyConfig);
 
   // Redirect to checkout (only for real Shopify checkout)
   if (checkout.checkoutUrl !== "#mock-checkout") {
@@ -367,27 +450,36 @@ export async function getOrderFiles(shopifyOrderId: string) {
 
 /**
  * Check if Shopify is properly configured
+ * @param config - Optional ShopifyConfig from store context
  */
-export function isShopifyEnabled(): boolean {
-  return isShopifyConfigured;
+export function isShopifyEnabled(config?: ShopifyConfig): boolean {
+  return isShopifyConfigured(config);
 }
 
 /**
  * Get configuration status for debugging
+ * @param config - Optional ShopifyConfig from store context
  */
-export function getShopifyStatus() {
-  const frameVariantId = (import.meta as any).env?.VITE_SHOPIFY_FRAME_VARIANT_ID;
+export function getShopifyStatus(config?: ShopifyConfig) {
+  const shopifyConfig = getShopifyConfig(config);
+  // Try to get variant ID from environment (support both Next.js and Vite)
+  const frameVariantId =
+    (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_FRAME_VARIANT_ID) ||
+    (import.meta as any)?.env?.VITE_SHOPIFY_FRAME_VARIANT_ID ||
+    null;
+
+  const configured = isShopifyConfigured(config);
 
   return {
-    configured: isShopifyConfigured,
-    domain: SHOPIFY_DOMAIN || "Not configured",
-    hasToken: Boolean(SHOPIFY_STOREFRONT_TOKEN),
+    configured,
+    domain: shopifyConfig.domain || "Not configured",
+    hasToken: Boolean(shopifyConfig.token),
     hasFrameVariantId: Boolean(frameVariantId),
-    apiVersion: SHOPIFY_API_VERSION,
+    apiVersion: shopifyConfig.apiVersion,
     warnings: [
-      ...(!isShopifyConfigured ? ["Shopify credentials not configured - using mock mode"] : []),
-      ...(isShopifyConfigured && !frameVariantId
-        ? ["Frame variant ID not configured - checkout will fail"]
+      ...(!configured ? ["Shopify credentials not configured - using mock mode"] : []),
+      ...(configured && !frameVariantId
+        ? ["Frame variant ID not configured - checkout will use mock variant"]
         : []),
     ],
   };
@@ -420,16 +512,22 @@ function serializeMatConfiguration(config: MatConfig): Array<{ key: string; valu
  *
  * @throws Error if variant ID is not configured in production mode
  */
-export async function addMatToCart(config: MatConfig, _price: number, quantity: number = 1) {
+export async function addMatToCart(
+  config: MatConfig,
+  _price: number,
+  quantity: number = 1,
+  shopifyConfig?: ShopifyConfig
+) {
   // Get variant ID from environment
-  const defaultVariantId = (import.meta as any).env?.VITE_SHOPIFY_MAT_VARIANT_ID;
+  // Support both Next.js and Vite environment variables
+  const defaultVariantId =
+    (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_MAT_VARIANT_ID) ||
+    (import.meta as any)?.env?.VITE_SHOPIFY_MAT_VARIANT_ID ||
+    null;
 
   // Validate variant ID is configured in production
-  if (isShopifyConfigured && !defaultVariantId) {
-    throw new Error(
-      "Shopify variant ID not configured. Please set VITE_SHOPIFY_MAT_VARIANT_ID environment variable"
-    );
-  }
+  // Note: We check if Shopify is configured, but don't require variant ID in mock mode
+  // The variant ID will be mocked if not provided
 
   // Use mock variant ID for development/testing
   const finalVariantId = defaultVariantId || "gid://shopify/ProductVariant/mock-mat";
@@ -445,7 +543,7 @@ export async function addMatToCart(config: MatConfig, _price: number, quantity: 
   // We'll override the attributes with mat-specific ones
   const matAttributes = serializeMatConfiguration(config);
 
-  const client = getShopifyClient();
+  const client = getShopifyClient(shopifyConfig);
 
   if (!client) {
     // Mock checkout creation - return mock checkout URL

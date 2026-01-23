@@ -20,11 +20,11 @@ export const env = {
   // Site Configuration
   siteId: getEnvVar("NEXT_PUBLIC_SITE_ID", "store-a"),
 
-  // Shopify Storefront API
+  // Shopify Storefront API (optional - will use mock mode if not configured)
   shopify: {
-    storeDomain: getEnvVar("NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN"),
-    storefrontAccessToken: getEnvVar("NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN"),
-    apiVersion: getEnvVar("NEXT_PUBLIC_SHOPIFY_API_VERSION", "2024-01"),
+    storeDomain: getOptionalEnvVar("NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN"),
+    storefrontAccessToken: getOptionalEnvVar("NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN"),
+    apiVersion: getOptionalEnvVar("NEXT_PUBLIC_SHOPIFY_API_VERSION", "2024-01"),
   },
 
   // API Endpoints

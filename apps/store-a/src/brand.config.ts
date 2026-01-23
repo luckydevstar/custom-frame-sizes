@@ -15,7 +15,7 @@ export const brandConfig: BrandConfig = {
 
   shopify: {
     domain: env.shopify.storeDomain || "store-a.myshopify.com",
-    storefrontAccessToken: env.shopify.storefrontAccessToken,
+    storefrontAccessToken: env.shopify.storefrontAccessToken || "",
     apiVersion: env.shopify.apiVersion || "2024-01",
   },
 
