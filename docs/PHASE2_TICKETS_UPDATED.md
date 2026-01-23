@@ -1,118 +1,86 @@
-# Phase 2: Store Launches & Iteration - Kanban Board Tickets
+# Phase 2: Store Launches & Iteration - Updated Tickets
 
-**Created**: January 16, 2026  
+**Created**: January 2026  
+**Last Updated**: January 2026  
 **Phase**: Phase 2 - Store Launches & Iteration  
-**Estimated Duration**: 8-10 weeks  
-**Total Estimated Hours**: 320-400 hours
+**Estimated Duration**: 10-12 weeks  
+**Total Estimated Hours**: 400-480 hours
 
 ---
 
 ## Phase 2 Overview
 
-Phase 2 focuses on launching production stores, validating the multi-store architecture built in Phase 1, optimizing performance, and preparing for SEO migration. This phase will prove the architecture works in production and establish patterns for future store rollouts.
+Phase 2 focuses on **migrating all pages from the original CustomFrameSizes-CODE** into the new monorepo architecture, launching the first production store (Store A), and validating the multi-store architecture. This phase will prove the architecture works in production while preserving all existing functionality and SEO value.
+
+### Key Principles
+
+1. **Preserve All Functionality** - Every page from the original must be migrated
+2. **Maintain SEO** - All URLs, meta tags, and structured data preserved
+3. **Restructure for Multi-Store** - Use shared packages, but allow per-store customization
+4. **Incremental Migration** - Build and test pages incrementally
+5. **Next.js App Router** - Migrate from Wouter to Next.js App Router
 
 ### Prerequisites from Phase 1
 
 All Phase 1 deliverables are complete:
 
 - ✅ Monorepo infrastructure with Turborepo
-- ✅ All shared packages (@framecraft/ui, @framecraft/core, @framecraft/config, @framecraft/types, @framecraft/data, @framecraft/db)
-- ✅ Shopify Storefront API integration
+- ✅ All shared packages (@framecraft/ui, @framecraft/core, @framecraft/config, @framecraft/types, @framecraft/data)
+- ✅ Shopify Storefront API integration (basic)
 - ✅ Shopify Admin API integration (apps/api)
 - ✅ Multi-store configuration system
+- ✅ StoreProvider with direct config passing
 - ✅ Database multi-tenancy with siteId
 - ✅ Cart state management with Zustand
-- ✅ Configuration serialization for all frame types
-- ✅ Sentry monitoring integration
-- ✅ Comprehensive test coverage
 
 ---
 
-## Kanban Board Column Structure
+## Section 2.1: First Store Setup (Store A - Complete Migration)
 
-```
-┌─────────────┬──────────────┬──────────────┬──────────────┬─────────────┐
-│   Backlog   │    Ready     │  In Progress │   Review     │    Done     │
-│             │              │              │              │             │
-│  (Phase 2)  │  (Next Up)   │  (Active)    │  (Testing)   │ (Completed) │
-└─────────────┴──────────────┴──────────────┴──────────────┴─────────────┘
-```
+**Goal**: Migrate all pages from CustomFrameSizes-CODE to Store A, maintaining all functionality while using the new architecture.
 
-### Labels/Tags
-
-- `phase-2.1` - First Store Setup (Store A)
-- `phase-2.2` - Second Store Setup (Store B)
-- `phase-2.3` - Pricing Integration
-- `phase-2.4` - Performance Optimization
-- `phase-2.5` - SEO Migration
-- `phase-2.6` - Additional Store Rollouts
-- `priority-critical` - Must be done first, blocks everything
-- `priority-high` - Critical path items
-- `priority-medium` - Important but not blocking
-- `priority-low` - Can be deferred
-- `blocked` - Waiting on dependency
-- `infrastructure` - Infrastructure setup
-- `frontend` - Frontend work
-- `backend` - Backend/API work
-- `shopify` - Shopify configuration
-- `testing` - Testing/QA tasks
-- `documentation` - Documentation tasks
-- `seo` - SEO related
-
----
-
-## Section 2.1: First Store Setup (Store A - Proof of Concept)
-
-**Goal**: Launch the first production store to validate the entire architecture end-to-end.
-
-### Ticket P2-001: Create Store A Application Scaffold
+### Ticket P2-001: Create Store A Application Scaffold ✅
 
 **Labels**: `phase-2.1`, `priority-critical`, `frontend`
+
+**Status**: ✅ COMPLETE
 
 **Estimated Hours**: 6 hours
 
 **Description**:
-Set up the first production store application in the monorepo. This will be the flagship store that validates all Phase 1 work.
+Set up the first production store application in the monorepo with Next.js 14+ App Router.
 
 **Tasks**:
 
-- Create `apps/store-a/` directory with Next.js 14+ App Router
-- Initialize package.json with name `@framecraft/store-a`
-- Install all @framecraft/\* package dependencies
-- Configure TypeScript extending workspace base config
-- Set up Next.js configuration (next.config.js)
-- Configure Tailwind CSS with theme from @framecraft/config
-- Create basic app directory structure (app/, components/, lib/)
-- Set up environment variable loading
-- Create initial layout.tsx with providers
-- Test development server starts correctly
+- ✅ Create `apps/store-a/` directory with Next.js 14+ App Router
+- ✅ Initialize package.json with name `@framecraft/store-a`
+- ✅ Install all @framecraft/\* package dependencies
+- ✅ Configure TypeScript extending workspace base config
+- ✅ Set up Next.js configuration (next.config.js)
+- ✅ Configure Tailwind CSS with theme from @framecraft/config
+- ✅ Create basic app directory structure (app/, components/, lib/)
+- ✅ Set up environment variable loading
+- ✅ Create initial layout.tsx with StoreProvider
+- ✅ Test development server starts correctly
 
 **Acceptance Criteria**:
 
-- [ ] `apps/store-a/` exists with proper Next.js structure
-- [ ] All @framecraft/\* packages installed and importable
-- [ ] Development server runs: `npm run dev --filter=@framecraft/store-a`
-- [ ] Basic page renders with store-specific styling
-- [ ] Environment variables load correctly
-- [ ] TypeScript compilation works without errors
-
-**Files to Create/Modify**:
-
-- `apps/store-a/package.json` (new)
-- `apps/store-a/tsconfig.json` (new)
-- `apps/store-a/next.config.js` (new)
-- `apps/store-a/tailwind.config.js` (new)
-- `apps/store-a/app/layout.tsx` (new)
-- `apps/store-a/app/page.tsx` (new)
-- `apps/store-a/.env.local.example` (new)
+- ✅ `apps/store-a/` exists with proper Next.js structure
+- ✅ All @framecraft/\* packages installed and importable
+- ✅ Development server runs: `npm run dev --filter=@framecraft/store-a`
+- ✅ Basic page renders with store-specific styling
+- ✅ Environment variables load correctly
+- ✅ TypeScript compilation works without errors
 
 **Dependencies**: None (first ticket)
 
 ---
 
-### Ticket P2-002: Configure Store A Brand Identity
+### Ticket P2-002: Configure Store A Brand Identity ✅
 
 **Labels**: `phase-2.1`, `priority-critical`, `frontend`
+
+**Status**: ✅ COMPLETE
 
 **Estimated Hours**: 4 hours
 
@@ -121,38 +89,33 @@ Create the brand configuration file for Store A with all identity elements, them
 
 **Tasks**:
 
-- Create `apps/store-a/src/brand.config.ts`
-- Define brand identity (store name, legal name, URLs)
-- Configure theme colors (primary, secondary, accent)
-- Configure typography (heading font, body font)
-- Set up navigation structure
-- Configure feature flags based on store focus
-- Set up SEO defaults (title, description, OG images)
-- Add Shopify store credentials configuration
-- Document all configuration choices
+- ✅ Create `apps/store-a/src/brand.config.ts`
+- ✅ Define brand identity (store name, legal name, URLs)
+- ✅ Configure theme colors (primary, secondary, accent)
+- ✅ Configure typography (heading font, body font)
+- ✅ Set up navigation structure
+- ✅ Configure feature flags based on store focus
+- ✅ Set up SEO defaults (title, description, OG images)
+- ✅ Add Shopify store credentials configuration
 
 **Acceptance Criteria**:
 
-- [ ] `brand.config.ts` follows BrandConfig interface from @framecraft/config
-- [ ] Theme colors apply correctly to components
-- [ ] Typography renders with specified fonts
-- [ ] Feature flags control component visibility
-- [ ] SEO defaults render in page metadata
-- [ ] Configuration validated at build time
-
-**Files to Create/Modify**:
-
-- `apps/store-a/src/brand.config.ts` (new)
-- `apps/store-a/src/lib/config.ts` (new - configuration loader)
-- `apps/store-a/app/layout.tsx` (update - apply config)
+- ✅ `brand.config.ts` follows BrandConfig interface from @framecraft/config
+- ✅ Theme colors apply correctly to components
+- ✅ Typography renders with specified fonts
+- ✅ Feature flags control component visibility
+- ✅ SEO defaults render in page metadata
+- ✅ Configuration validated at build time
 
 **Dependencies**: P2-001
 
 ---
 
-### Ticket P2-003: Set Up Store A Providers and Context
+### Ticket P2-003: Set Up Store A Providers and Context ✅
 
 **Labels**: `phase-2.1`, `priority-critical`, `frontend`
+
+**Status**: ✅ COMPLETE
 
 **Estimated Hours**: 4 hours
 
@@ -161,139 +124,156 @@ Configure all React providers (Store Context, Theme, Query Client, Cart) for Sto
 
 **Tasks**:
 
-- Create providers wrapper component
-- Set up StoreConfigProvider with brand config
-- Configure ThemeProvider with merged theme
-- Set up TanStack Query provider
-- Initialize cart store with store-specific configuration
-- Set up error boundary provider
-- Configure Sentry provider for error tracking
-- Test all providers work together
+- ✅ Create providers wrapper component
+- ✅ Set up StoreProvider with brand config (direct config passing)
+- ✅ Configure ThemeProvider with merged theme
+- ✅ Set up TanStack Query provider
+- ✅ Initialize cart store with store-specific configuration
+- ✅ Set up error boundary provider
+- ✅ Configure Sentry provider for error tracking
 
 **Acceptance Criteria**:
 
-- [ ] All providers wrap the application correctly
-- [ ] Store context accessible throughout app
-- [ ] Theme applies to all components
-- [ ] TanStack Query works for data fetching
-- [ ] Cart store initializes with correct storeId
-- [ ] Error boundaries catch and report errors
-- [ ] Sentry captures errors in production mode
-
-**Files to Create/Modify**:
-
-- `apps/store-a/src/providers/Providers.tsx` (new)
-- `apps/store-a/app/layout.tsx` (update)
+- ✅ All providers wrap the application correctly
+- ✅ Store context accessible throughout app
+- ✅ Theme applies to all components
+- ✅ TanStack Query works for data fetching
+- ✅ Cart store initializes with correct storeId
+- ✅ Error boundaries catch and report errors
 
 **Dependencies**: P2-002
 
 ---
 
-### Ticket P2-004: Implement Store A Navigation and Layout
+### Ticket P2-004: Migrate Shared Layout Components (Header & Footer)
 
 **Labels**: `phase-2.1`, `priority-high`, `frontend`
 
-**Estimated Hours**: 6 hours
+**Estimated Hours**: 8 hours
 
 **Description**:
-Build the navigation structure and layout for Store A using shared components from @framecraft/ui.
+Migrate Header and Footer components from original codebase to shared packages, then use in Store A.
 
 **Tasks**:
 
-- Implement Header component with store branding
-- Configure navigation items from brand config
-- Implement Footer component with store info
-- Create mobile navigation (hamburger menu)
-- Add cart icon with item count
-- Implement breadcrumb navigation
-- Create loading states for navigation
-- Test responsive behavior on all breakpoints
+- Review original Header component (`CustomFrameSizes-CODE/client/src/components/Header.tsx`)
+- Review original Footer component (`CustomFrameSizes-CODE/client/src/components/Footer.tsx`)
+- Extract to `packages/ui/src/components/layout/Header.tsx`
+- Extract to `packages/ui/src/components/layout/Footer.tsx`
+- Make components store-config aware (use `useStoreConfig()`)
+- Update navigation to use config from context
+- Update branding/logos to use config from context
+- Test responsive behavior
+- Add to Store A layout
 
 **Acceptance Criteria**:
 
-- [ ] Header displays store logo and branding
+- [ ] Header displays store logo and branding from config
 - [ ] Navigation items match brand config
 - [ ] Footer shows correct store information
 - [ ] Mobile navigation works smoothly
 - [ ] Cart icon shows correct item count
 - [ ] All navigation is accessible (keyboard, screen readers)
 - [ ] Responsive design works on mobile, tablet, desktop
+- [ ] Components work with different store configs
 
 **Files to Create/Modify**:
 
-- `apps/store-a/src/components/layout/Header.tsx` (new)
-- `apps/store-a/src/components/layout/Footer.tsx` (new)
-- `apps/store-a/src/components/layout/Navigation.tsx` (new)
-- `apps/store-a/src/components/layout/MobileNav.tsx` (new)
-- `apps/store-a/app/layout.tsx` (update)
+- `packages/ui/src/components/layout/Header.tsx` (new - migrated)
+- `packages/ui/src/components/layout/Footer.tsx` (new - migrated)
+- `packages/ui/src/components/layout/MobileNav.tsx` (new - if needed)
+- `apps/store-a/app/layout.tsx` (update - add Header/Footer)
 
 **Dependencies**: P2-003
 
 ---
 
-### Ticket P2-005: Implement Store A Homepage
+### Ticket P2-005: Build Complete Homepage with All Sections
 
-**Labels**: `phase-2.1`, `priority-high`, `frontend`
+**Labels**: `phase-2.1`, `priority-critical`, `frontend`
 
-**Estimated Hours**: 8 hours
+**Estimated Hours**: 16 hours
 
 **Description**:
-Create the homepage for Store A with hero section, featured products, and calls to action.
+Migrate the complete homepage from original, including all sections: Hero, FrameDesigner, testimonials, showcases, and more.
 
 **Tasks**:
 
-- Design homepage layout structure
-- Implement hero section with primary CTA
-- Create featured products section
-- Implement specialty framing categories grid
-- Add testimonials/reviews section (optional)
-- Create "How it works" section
-- Implement trust badges/guarantees section
+- Review original Home page (`CustomFrameSizes-CODE/client/src/pages/Home.tsx`)
+- Migrate Hero component to `packages/ui/src/components/home/Hero.tsx`
+- Migrate TestimonialCarousel to `packages/ui/src/components/home/TestimonialCarousel.tsx`
+- Migrate FrameDesigner integration (already in packages/ui)
+- Migrate HowItWorks section
+- Migrate ValueProps section
+- Migrate InspirationGallery section
+- Migrate EducationTeasers section
+- Migrate FaqMini section
+- Migrate SeoTextBlock section
+- Migrate FrameStylesShowcase section
+- Migrate ShadowboxShowcase section
+- Migrate CanvasFramesShowcase section
+- Migrate GlazingShowcase section
+- Migrate MatDesignerShowcase section
+- Migrate SpecialtyDesignersShowcase section
+- Migrate PrintAndFrameService section
+- Create `apps/store-a/app/page.tsx` with all sections
+- Configure home sections via brand config
 - Add SEO metadata and structured data
-- Optimize images and lazy loading
-- Test page load performance
+- Test all sections render correctly
+- Test responsive design
 
 **Acceptance Criteria**:
 
 - [ ] Homepage loads in < 2 seconds
 - [ ] Hero section displays with store branding
-- [ ] Featured products load from Shopify
+- [ ] FrameDesigner embedded and functional
+- [ ] All showcase sections display correctly
+- [ ] Testimonials rotate (if enabled)
 - [ ] All CTAs link to correct pages
 - [ ] SEO metadata renders correctly
 - [ ] Structured data validates (Schema.org)
 - [ ] Page is fully responsive
 - [ ] Images are optimized and lazy loaded
+- [ ] Feature flags control section visibility
 
 **Files to Create/Modify**:
 
-- `apps/store-a/app/page.tsx` (update)
-- `apps/store-a/src/components/home/Hero.tsx` (new)
-- `apps/store-a/src/components/home/FeaturedProducts.tsx` (new)
-- `apps/store-a/src/components/home/Categories.tsx` (new)
-- `apps/store-a/src/components/home/HowItWorks.tsx` (new)
+- `packages/ui/src/components/home/Hero.tsx` (new - migrated)
+- `packages/ui/src/components/home/TestimonialCarousel.tsx` (new - migrated)
+- `packages/ui/src/components/home/HowItWorks.tsx` (new - migrated)
+- `packages/ui/src/components/home/ValueProps.tsx` (new - migrated)
+- `packages/ui/src/components/home/InspirationGallery.tsx` (new - migrated)
+- `packages/ui/src/components/home/EducationTeasers.tsx` (new - migrated)
+- `packages/ui/src/components/home/FaqMini.tsx` (new - migrated)
+- `packages/ui/src/components/home/SeoTextBlock.tsx` (new - migrated)
+- `packages/ui/src/components/home/FrameStylesShowcase.tsx` (new - migrated)
+- `packages/ui/src/components/home/ShadowboxShowcase.tsx` (new - migrated)
+- `packages/ui/src/components/home/CanvasFramesShowcase.tsx` (new - migrated)
+- `packages/ui/src/components/home/GlazingShowcase.tsx` (new - migrated)
+- `packages/ui/src/components/home/MatDesignerShowcase.tsx` (new - migrated)
+- `packages/ui/src/components/home/SpecialtyDesignersShowcase.tsx` (new - migrated)
+- `packages/ui/src/components/home/PrintAndFrameService.tsx` (new - migrated)
+- `apps/store-a/app/page.tsx` (update - complete homepage)
 
 **Dependencies**: P2-004
 
 ---
 
-### Ticket P2-006: Integrate Frame Designer into Store A
+### Ticket P2-006: Migrate Frame Designer Page
 
 **Labels**: `phase-2.1`, `priority-critical`, `frontend`
 
-**Estimated Hours**: 8 hours
+**Estimated Hours**: 4 hours
 
 **Description**:
-Integrate the FrameDesigner component from @framecraft/ui into Store A with full functionality.
+Create dedicated frame designer page route (separate from homepage).
 
 **Tasks**:
 
-- Create frame designer page route
-- Import and configure FrameDesigner component
-- Connect to product data from @framecraft/data
-- Integrate pricing engine from @framecraft/core
-- Connect to cart store for add-to-cart
-- Implement configuration serialization for cart
-- Add loading states and error handling
+- Review original Designer page (`CustomFrameSizes-CODE/client/src/pages/Designer.tsx`)
+- Create `apps/store-a/app/designer/page.tsx`
+- Import FrameDesigner from `@framecraft/ui`
+- Add page metadata and SEO
 - Test all frame configuration options
 - Test image upload functionality
 - Verify pricing calculations are accurate
@@ -306,64 +286,269 @@ Integrate the FrameDesigner component from @framecraft/ui into Store A with full
 - [ ] Glass selection works
 - [ ] Dimension inputs validate correctly
 - [ ] Pricing updates in real-time
-- [ ] Add to cart creates correct line items
 - [ ] Image upload works
 - [ ] Configuration persists during session
 
 **Files to Create/Modify**:
 
 - `apps/store-a/app/designer/page.tsx` (new)
-- `apps/store-a/app/designer/layout.tsx` (new)
-- `apps/store-a/src/components/designer/DesignerContainer.tsx` (new)
-- `apps/store-a/src/hooks/use-frame-designer.ts` (new)
 
-**Dependencies**: P2-003
+**Dependencies**: P2-005
 
 ---
 
-### Ticket P2-007: Integrate Specialty Designers (Based on Feature Flags)
+### Ticket P2-007: Migrate Specialty Designer Pages
 
 **Labels**: `phase-2.1`, `priority-high`, `frontend`
 
-**Estimated Hours**: 6 hours
+**Estimated Hours**: 12 hours
 
 **Description**:
-Integrate specialty designers (Shadowbox, Jersey, etc.) based on Store A's feature flags.
+Migrate all specialty designer pages (Shadowbox, Jersey, Canvas, Puzzle, Comic, Playbill, etc.).
 
 **Tasks**:
 
-- Check feature flags to determine enabled designers
-- Create routes for enabled specialty designers
-- Integrate ShadowboxDesigner if enabled
-- Integrate JerseyDesigner if enabled
-- Integrate CanvasFloatDesigner if enabled
-- Integrate PuzzleDesigner if enabled
-- Integrate ComicBookDesigner if enabled
-- Integrate PlaybillDesigner if enabled
+- Review all specialty designer pages from original
+- Create dynamic route: `apps/store-a/app/designer/[type]/page.tsx`
+- Migrate ShadowboxDesigner page
+- Migrate JerseyFrames page
+- Migrate Canvas page
+- Migrate PuzzleFrames page
+- Migrate ComicBookFrames page
+- Migrate PlaybillFrames page (if exists)
+- Migrate other specialty pages
 - Connect all designers to cart with proper serialization
 - Add navigation items for enabled designers
+- Test each designer type
 
 **Acceptance Criteria**:
 
-- [ ] Only enabled specialty designers are accessible
+- [ ] All specialty designers accessible via `/designer/[type]`
+- [ ] Only enabled specialty designers are accessible (feature flags)
 - [ ] Disabled designers return 404 or redirect
 - [ ] Each enabled designer functions correctly
 - [ ] Add to cart works for each designer type
 - [ ] Configuration serialization is correct per type
 - [ ] Navigation shows only enabled designers
-- [ ] Feature flag changes reflect immediately
 
 **Files to Create/Modify**:
 
 - `apps/store-a/app/designer/[type]/page.tsx` (new - dynamic route)
 - `apps/store-a/src/components/designer/SpecialtyDesignerRouter.tsx` (new)
-- `apps/store-a/src/lib/feature-flags.ts` (new)
 
 **Dependencies**: P2-006
 
 ---
 
-### Ticket P2-008: Implement Cart Page
+### Ticket P2-008: Migrate Gateway Pages (Frames by Style/Color/Size)
+
+**Labels**: `phase-2.1`, `priority-high`, `frontend`, `seo`
+
+**Estimated Hours**: 10 hours
+
+**Description**:
+Migrate SEO-optimized gateway pages for browsing frames by style, color, and size.
+
+**Tasks**:
+
+- Review original gateway pages:
+  - `FramesByStyle.tsx` and `FramesByStyleDetail.tsx`
+  - `FramesByColor.tsx` and `FramesByColorDetail.tsx`
+  - `FramesBySize.tsx` and `FrameSizePage.tsx`
+- Create routes:
+  - `/frames/styles` - List all frame styles
+  - `/frames/styles/[slug]` - Individual style detail
+  - `/frames/colors` - List all frame colors
+  - `/frames/colors/[slug]` - Individual color detail
+  - `/frames/sizes` - List all frame sizes
+  - `/frames/sizes/[slug]` - Individual size detail
+- Migrate gateway components to `packages/ui`
+- Ensure SEO metadata is preserved
+- Test all gateway pages render correctly
+
+**Acceptance Criteria**:
+
+- [ ] All gateway pages accessible
+- [ ] SEO metadata preserved
+- [ ] Structured data included
+- [ ] Images load correctly
+- [ ] Links to designers work
+- [ ] Responsive design works
+
+**Files to Create/Modify**:
+
+- `apps/store-a/app/frames/styles/page.tsx` (new)
+- `apps/store-a/app/frames/styles/[slug]/page.tsx` (new)
+- `apps/store-a/app/frames/colors/page.tsx` (new)
+- `apps/store-a/app/frames/colors/[slug]/page.tsx` (new)
+- `apps/store-a/app/frames/sizes/page.tsx` (new)
+- `apps/store-a/app/frames/sizes/[slug]/page.tsx` (new)
+- `packages/ui/src/components/gateway/` (new - gateway components)
+
+**Dependencies**: P2-005
+
+---
+
+### Ticket P2-009: Migrate Individual Frame Style Pages
+
+**Labels**: `phase-2.1`, `priority-medium`, `frontend`, `seo`
+
+**Estimated Hours**: 16 hours
+
+**Description**:
+Migrate all individual frame style pages (ModernBlack, WideBlack, MuseumBronze, etc.) - these are important for SEO.
+
+**Tasks**:
+
+- Review all individual frame pages from original (50+ pages)
+- Create dynamic route: `apps/store-a/app/frames/[style-slug]/page.tsx`
+- Generate pages from frame data in `@framecraft/data`
+- Preserve all SEO metadata
+- Preserve structured data
+- Test a sample of pages
+- Verify all frame pages are accessible
+
+**Note**: Many individual frame pages can be generated programmatically from frame data rather than creating 50+ separate files.
+
+**Acceptance Criteria**:
+
+- [ ] All frame style pages accessible
+- [ ] SEO metadata preserved
+- [ ] Structured data included
+- [ ] Images load correctly
+- [ ] "Design in this style" CTA works
+- [ ] Responsive design works
+
+**Files to Create/Modify**:
+
+- `apps/store-a/app/frames/[style-slug]/page.tsx` (new - dynamic route)
+- `apps/store-a/app/frames/[style-slug]/generateStaticParams.ts` (new - for static generation)
+
+**Dependencies**: P2-008
+
+---
+
+### Ticket P2-010: Migrate Content Pages (About, Contact, Learn, etc.)
+
+**Labels**: `phase-2.1`, `priority-high`, `frontend`
+
+**Estimated Hours**: 8 hours
+
+**Description**:
+Migrate all content pages: About, Contact, Learn, Blog, Generic pages (FAQ, policies, etc.).
+
+**Tasks**:
+
+- Review original content pages:
+  - `AboutPage.tsx`
+  - `ContactPage.tsx`
+  - `LearnPage.tsx`
+  - `BlogIndexPage.tsx`
+  - `BlogPostPage.tsx`
+  - `GenericPage.tsx` (for markdown content)
+- Create routes:
+  - `/about` - About page
+  - `/contact` - Contact page
+  - `/learn` - Learning hub
+  - `/blog` - Blog index
+  - `/blog/[slug]` - Individual blog posts
+  - `/[slug]` - Generic markdown pages (FAQ, policies, etc.)
+- Migrate markdown content from `content/` directory
+- Preserve SEO metadata
+- Test all content pages
+
+**Acceptance Criteria**:
+
+- [ ] All content pages accessible
+- [ ] Markdown content renders correctly
+- [ ] SEO metadata preserved
+- [ ] Contact form works (if applicable)
+- [ ] Blog posts display correctly
+- [ ] Generic pages work
+
+**Files to Create/Modify**:
+
+- `apps/store-a/app/about/page.tsx` (new)
+- `apps/store-a/app/contact/page.tsx` (new)
+- `apps/store-a/app/learn/page.tsx` (new)
+- `apps/store-a/app/blog/page.tsx` (new)
+- `apps/store-a/app/blog/[slug]/page.tsx` (new)
+- `apps/store-a/app/[slug]/page.tsx` (new - generic markdown pages)
+- `content/` directory (migrate from original)
+
+**Dependencies**: P2-004
+
+---
+
+### Ticket P2-011: Migrate Resource Pages
+
+**Labels**: `phase-2.1`, `priority-medium`, `frontend`, `seo`
+
+**Estimated Hours**: 6 hours
+
+**Description**:
+Migrate all resource/guide pages (how-to-measure, mat-cutting-guide, etc.).
+
+**Tasks**:
+
+- Review original resource pages in `pages/resources/`
+- Create route: `apps/store-a/app/resources/[slug]/page.tsx`
+- Migrate all resource markdown files
+- Preserve SEO metadata
+- Test all resource pages
+
+**Acceptance Criteria**:
+
+- [ ] All resource pages accessible
+- [ ] Content renders correctly
+- [ ] SEO metadata preserved
+- [ ] Internal links work
+
+**Files to Create/Modify**:
+
+- `apps/store-a/app/resources/[slug]/page.tsx` (new - dynamic route)
+- `content/resources/` (migrate from original)
+
+**Dependencies**: P2-010
+
+---
+
+### Ticket P2-012: Migrate Gallery and Achievements Pages
+
+**Labels**: `phase-2.1`, `priority-medium`, `frontend`
+
+**Estimated Hours**: 4 hours
+
+**Description**:
+Migrate Gallery and Achievements pages (if feature flags enabled).
+
+**Tasks**:
+
+- Review original Gallery page
+- Review original Achievements page
+- Create routes:
+  - `/gallery` - Saved designs gallery
+  - `/achievements` - Gamification achievements
+- Connect to database (when ready)
+- Test with feature flags
+
+**Acceptance Criteria**:
+
+- [ ] Gallery page accessible (if enabled)
+- [ ] Achievements page accessible (if enabled)
+- [ ] Feature flags control visibility
+- [ ] Pages work correctly
+
+**Files to Create/Modify**:
+
+- `apps/store-a/app/gallery/page.tsx` (new)
+- `apps/store-a/app/achievements/page.tsx` (new)
+
+**Dependencies**: P2-010
+
+---
+
+### Ticket P2-013: Implement Cart Page
 
 **Labels**: `phase-2.1`, `priority-critical`, `frontend`
 
@@ -374,7 +559,7 @@ Build the cart page with full cart management functionality.
 
 **Tasks**:
 
-- Create cart page route
+- Create cart page route: `/cart`
 - Display cart items with configurations
 - Show frame preview images for each item
 - Implement quantity update functionality
@@ -400,15 +585,15 @@ Build the cart page with full cart management functionality.
 **Files to Create/Modify**:
 
 - `apps/store-a/app/cart/page.tsx` (new)
-- `apps/store-a/src/components/cart/CartItem.tsx` (new)
-- `apps/store-a/src/components/cart/CartSummary.tsx` (new)
-- `apps/store-a/src/components/cart/EmptyCart.tsx` (new)
+- `packages/ui/src/components/cart/CartItem.tsx` (new)
+- `packages/ui/src/components/cart/CartSummary.tsx` (new)
+- `packages/ui/src/components/cart/EmptyCart.tsx` (new)
 
 **Dependencies**: P2-006
 
 ---
 
-### Ticket P2-009: Implement Checkout Flow
+### Ticket P2-014: Implement Checkout Flow
 
 **Labels**: `phase-2.1`, `priority-critical`, `frontend`, `backend`
 
@@ -420,7 +605,7 @@ Implement the checkout flow that redirects to Shopify checkout.
 **Tasks**:
 
 - Create checkout initiation page/component
-- Implement checkout API call to /api/checkout
+- Implement checkout API call to `/api/checkout`
 - Handle discount code input (optional)
 - Collect customer email for cart recovery
 - Redirect to Shopify checkout URL
@@ -446,42 +631,88 @@ Implement the checkout flow that redirects to Shopify checkout.
 - `apps/store-a/src/hooks/use-checkout.ts` (new)
 - `apps/store-a/app/checkout/page.tsx` (new - optional intermediate page)
 
-**Dependencies**: P2-008
+**Dependencies**: P2-013
 
 ---
 
-### Ticket P2-010: Create Shopify Store for Store A
+### Ticket P2-015: Set Up Redirects for Legacy URLs
 
-**Labels**: `phase-2.1`, `priority-critical`, `shopify`, `infrastructure`
+**Labels**: `phase-2.1`, `priority-critical`, `seo`, `infrastructure`
 
-**Estimated Hours**: 8 hours
+**Estimated Hours**: 4 hours
 
 **Description**:
-Set up the Shopify store account and configure it for headless operation.
+Implement 301 redirects for all legacy URLs from original site to preserve SEO.
 
 **Tasks**:
 
+- Review all redirects from original App.tsx
+- Create redirect map (JSON file)
+- Implement redirects in `next.config.js`
+- Test all redirects work correctly
+- Verify 301 status codes
+- Document redirect strategy
+
+**Acceptance Criteria**:
+
+- [ ] All legacy URLs redirect correctly
+- [ ] 301 status codes used
+- [ ] Redirects preserve query parameters
+- [ ] No redirect loops
+- [ ] Redirects tested and verified
+
+**Files to Create/Modify**:
+
+- `apps/store-a/next.config.js` (update - add redirects)
+- `apps/store-a/lib/redirects.ts` (new - redirect map)
+
+**Dependencies**: P2-009
+
+---
+
+### Ticket P2-016: Create Shopify Store for Store A (Early Setup)
+
+**Labels**: `phase-2.1`, `priority-critical`, `shopify`, `infrastructure`
+
+**Estimated Hours**: 4 hours (Basic setup) + 4 hours (Full configuration) = 8 hours total
+
+**Description**:
+Set up the Shopify store account and configure it for headless operation. This should be done EARLY (Week 1) to validate architecture, but full configuration can be done later.
+
+**Phase 1: Basic Setup (Do This First - Week 1)**
+
 - Create Shopify store account (Development or Plus)
+- Create private app for API access
+- Generate Storefront API access token
+- Generate Admin API access token
+- Create "Custom Frame" product (placeholder, $0 price)
+- Test API tokens work
+- Document credentials
+
+**Phase 2: Full Configuration (Can Do Later - Week 5+)**
+
 - Configure store settings (name, address, currency)
 - Set up payment gateways (Stripe, PayPal, etc.)
 - Configure shipping rates and zones
 - Set up tax settings
-- Create private app for API access
-- Generate Storefront API access token
-- Generate Admin API access token (if needed)
 - Configure checkout customization
 - Set up order notification emails
 - Document all Shopify configuration
 
-**Acceptance Criteria**:
+**Acceptance Criteria - Phase 1 (Week 1):**
 
 - [ ] Shopify store created and accessible
+- [ ] Storefront API token generated and tested
+- [ ] Admin API token generated and tested
+- [ ] Custom Frame product created
+- [ ] API tokens work (can fetch products)
+- [ ] Credentials documented
+
+**Acceptance Criteria - Phase 2 (Week 5+):**
+
 - [ ] Payment gateways configured and tested
 - [ ] Shipping rates configured
 - [ ] Tax settings configured
-- [ ] Storefront API token generated
-- [ ] Admin API token generated
-- [ ] API tokens tested and working
 - [ ] Checkout customization applied
 - [ ] All settings documented
 
@@ -490,35 +721,49 @@ Set up the Shopify store account and configure it for headless operation.
 - Shopify store configuration document
 - API credentials (stored securely)
 
-**Dependencies**: None (can be done in parallel)
+**Dependencies**: None (can be done in parallel with UI development)
+
+**Note**: Basic setup (Phase 1) should be done early to validate architecture. Full configuration (Phase 2) can wait until UI is ready for integration testing.
 
 ---
 
-### Ticket P2-011: Create Custom Frame Product in Shopify
+### Ticket P2-017: Create Custom Frame Product in Shopify
 
 **Labels**: `phase-2.1`, `priority-critical`, `shopify`
 
-**Estimated Hours**: 4 hours
+**Estimated Hours**: 2 hours (Basic) + 2 hours (Enhanced) = 4 hours total
 
 **Description**:
-Create the custom frame product(s) in Shopify that will be used for all frame orders.
+Create the custom frame product(s) in Shopify that will be used for all frame orders. Basic product can be created early, enhancements can be added later.
 
-**Tasks**:
+**Phase 1: Basic Product (Week 1)**
 
 - Create "Custom Frame" product
-- Set up product variants for different base price tiers (if needed)
-- Configure product to allow custom pricing via line item properties
-- Add product images (placeholder)
-- Write product description and SEO metadata
-- Set up product collections (optional)
+- Create one variant (placeholder)
+- Set price to $0.00 (pricing is dynamic)
 - Configure inventory settings (do not track)
 - Test product appears in Storefront API
+- Document variant ID
+
+**Phase 2: Enhanced Product (Week 5+)**
+
+- Add product images (placeholder)
+- Write product description and SEO metadata
+- Set up product variants for different base price tiers (if needed)
+- Configure product to allow custom pricing via line item properties
+- Set up product collections (optional)
+- Test line item properties work correctly
 - Document product configuration
 
-**Acceptance Criteria**:
+**Acceptance Criteria - Phase 1:**
 
 - [ ] Custom frame product created in Shopify
 - [ ] Product accessible via Storefront API
+- [ ] Variant ID documented
+- [ ] Can fetch product via API
+
+**Acceptance Criteria - Phase 2:**
+
 - [ ] Line item properties work correctly
 - [ ] Product can be added to cart with custom price
 - [ ] Product appears in checkout correctly
@@ -528,11 +773,57 @@ Create the custom frame product(s) in Shopify that will be used for all frame or
 
 - Documentation: `docs/shopify/store-a-products.md` (new)
 
-**Dependencies**: P2-010
+**Dependencies**: P2-016 (Phase 1 can be done with P2-016 Phase 1)
 
 ---
 
-### Ticket P2-012: Configure Store A Environment Variables
+### Ticket P2-017.5: Set Up Backend API Structure (Early Setup)
+
+**Labels**: `phase-2.1`, `priority-high`, `backend`, `infrastructure`
+
+**Estimated Hours**: 4 hours
+
+**Description**:
+Deploy the backend API structure early (Week 1) with placeholder/mock endpoints. This establishes the architecture and allows UI to connect to API endpoints even before full Shopify integration is ready.
+
+**Tasks**:
+
+- Deploy `apps/api` to Vercel
+- Set up basic Vercel project configuration
+- Create placeholder endpoints that return mock data:
+  - `POST /api/cart` - Returns mock cart
+  - `PATCH /api/cart/lines` - Returns mock updated cart
+  - `POST /api/checkout` - Returns mock checkout URL
+  - `POST /api/orders/files` - Returns mock success
+- Set up environment variable structure
+- Configure CORS (if needed)
+- Test API endpoints are accessible
+- Document API structure
+- Update UI to use API endpoints (can use mock responses initially)
+
+**Acceptance Criteria**:
+
+- [ ] Backend API deployed to Vercel
+- [ ] All placeholder endpoints return mock data
+- [ ] API endpoints are accessible
+- [ ] Environment variables structure documented
+- [ ] UI can connect to API (even with mock data)
+- [ ] API structure documented
+
+**Files to Create/Modify**:
+
+- `apps/api/vercel.json` (update)
+- `apps/api/src/routes/cart/route.ts` (update - add mock mode)
+- `apps/api/src/routes/checkout/route.ts` (update - add mock mode)
+- `docs/api/structure.md` (new)
+
+**Dependencies**: None (can be done in parallel with UI development)
+
+**Note**: This establishes the API architecture early. Real Shopify integration can be added later when UI is ready.
+
+---
+
+### Ticket P2-018: Configure Store A Environment Variables
 
 **Labels**: `phase-2.1`, `priority-critical`, `infrastructure`
 
@@ -565,13 +856,13 @@ Set up all environment variables for Store A in local development and prepare fo
 
 - `apps/store-a/.env.local` (new - git ignored)
 - `apps/store-a/.env.example` (update)
-- `apps/store-a/src/lib/env.ts` (new - env validation)
+- `apps/store-a/src/lib/env.ts` (update - env validation)
 
-**Dependencies**: P2-010
+**Dependencies**: P2-016
 
 ---
 
-### Ticket P2-013: Configure Store A Domain
+### Ticket P2-019: Configure Store A Domain
 
 **Labels**: `phase-2.1`, `priority-high`, `infrastructure`
 
@@ -610,11 +901,11 @@ Set up domain configuration for Store A including DNS and SSL.
 
 ---
 
-### Ticket P2-014: Full Integration Testing - Store A
+### Ticket P2-020: Full Integration Testing - Store A
 
 **Labels**: `phase-2.1`, `priority-critical`, `testing`
 
-**Estimated Hours**: 8 hours
+**Estimated Hours**: 12 hours
 
 **Description**:
 Comprehensive testing of all Store A functionality before production deployment.
@@ -628,10 +919,13 @@ Comprehensive testing of all Store A functionality before production deployment.
 - Test cart operations (add, update, remove)
 - Test checkout flow end-to-end
 - Test order appears correctly in Shopify
+- Test all page routes work correctly
+- Test redirects work correctly
 - Test responsive design on mobile devices
 - Test cross-browser compatibility (Chrome, Firefox, Safari, Edge)
 - Test accessibility (keyboard navigation, screen readers)
 - Test dark mode (if enabled)
+- Test SEO metadata on all pages
 - Document all test results
 - Create bug reports for any issues found
 
@@ -644,9 +938,12 @@ Comprehensive testing of all Store A functionality before production deployment.
 - [ ] Cart operations work
 - [ ] Checkout completes successfully
 - [ ] Orders appear in Shopify correctly
+- [ ] All pages accessible and functional
+- [ ] Redirects work correctly
 - [ ] Mobile experience is good
 - [ ] Cross-browser compatible
 - [ ] Accessibility meets WCAG 2.1 AA
+- [ ] SEO metadata correct on all pages
 - [ ] All bugs documented and triaged
 
 **Deliverables**:
@@ -654,11 +951,11 @@ Comprehensive testing of all Store A functionality before production deployment.
 - Test results document
 - Bug report list
 
-**Dependencies**: P2-001 through P2-012
+**Dependencies**: P2-001 through P2-019
 
 ---
 
-### Ticket P2-015: Deploy Store A to Vercel Production
+### Ticket P2-021: Deploy Store A to Vercel Production
 
 **Labels**: `phase-2.1`, `priority-critical`, `infrastructure`
 
@@ -697,11 +994,11 @@ Deploy Store A to Vercel production environment and verify everything works.
 - `apps/store-a/vercel.json` (new - if custom config needed)
 - `docs/deployment/store-a.md` (new)
 
-**Dependencies**: P2-013, P2-014
+**Dependencies**: P2-019, P2-020
 
 ---
 
-### Ticket P2-016: Post-Launch Monitoring Setup - Store A
+### Ticket P2-022: Post-Launch Monitoring Setup - Store A
 
 **Labels**: `phase-2.1`, `priority-high`, `infrastructure`
 
@@ -736,7 +1033,7 @@ Set up monitoring and alerting for Store A production deployment.
 - Monitoring configuration document
 - Incident response procedure
 
-**Dependencies**: P2-015
+**Dependencies**: P2-021
 
 ---
 
@@ -744,7 +1041,7 @@ Set up monitoring and alerting for Store A production deployment.
 
 **Goal**: Launch a second store with different branding to validate the multi-store architecture is flexible and reusable.
 
-### Ticket P2-017: Create Store B Application (Clone from Store A)
+### Ticket P2-023: Create Store B Application (Clone from Store A)
 
 **Labels**: `phase-2.2`, `priority-high`, `frontend`
 
@@ -776,11 +1073,11 @@ Create Store B by cloning Store A structure and updating configuration.
 - `apps/store-b/` (new - copy of store-a)
 - `apps/store-b/package.json` (update)
 
-**Dependencies**: P2-015 (Store A complete)
+**Dependencies**: P2-021 (Store A complete)
 
 ---
 
-### Ticket P2-018: Configure Store B Brand Identity (Different Focus)
+### Ticket P2-024: Configure Store B Brand Identity (Different Focus)
 
 **Labels**: `phase-2.2`, `priority-high`, `frontend`
 
@@ -813,11 +1110,11 @@ Create a distinctly different brand configuration for Store B to test architectu
 
 - `apps/store-b/src/brand.config.ts` (update)
 
-**Dependencies**: P2-017
+**Dependencies**: P2-023
 
 ---
 
-### Ticket P2-019: Create Shopify Store for Store B
+### Ticket P2-025: Create Shopify Store for Store B
 
 **Labels**: `phase-2.2`, `priority-high`, `shopify`, `infrastructure`
 
@@ -842,11 +1139,11 @@ Set up a separate Shopify store for Store B (can reuse process from Store A).
 - [ ] Custom frame product created
 - [ ] Configuration documented
 
-**Dependencies**: P2-017
+**Dependencies**: P2-023
 
 ---
 
-### Ticket P2-020: Configure Store B Environment and Deploy
+### Ticket P2-026: Configure Store B Environment and Deploy
 
 **Labels**: `phase-2.2`, `priority-high`, `infrastructure`
 
@@ -872,11 +1169,11 @@ Configure environment variables and deploy Store B to Vercel.
 - [ ] Production deployment successful
 - [ ] All functionality works
 
-**Dependencies**: P2-018, P2-019
+**Dependencies**: P2-024, P2-025
 
 ---
 
-### Ticket P2-021: Validate Shared Code Reusability
+### Ticket P2-027: Validate Shared Code Reusability
 
 **Labels**: `phase-2.2`, `priority-high`, `testing`
 
@@ -910,11 +1207,11 @@ Verify that shared packages work correctly across both stores.
 - Shared code reusability report
 - Future store guidelines
 
-**Dependencies**: P2-020
+**Dependencies**: P2-026
 
 ---
 
-### Ticket P2-022: Verify Data Isolation Between Stores
+### Ticket P2-028: Verify Data Isolation Between Stores
 
 **Labels**: `phase-2.2`, `priority-critical`, `testing`, `backend`
 
@@ -941,7 +1238,7 @@ Verify that database data is properly isolated between stores via siteId.
 - [ ] No data leakage between stores
 - [ ] Verification documented
 
-**Dependencies**: P2-020
+**Dependencies**: P2-026
 
 ---
 
@@ -949,7 +1246,7 @@ Verify that database data is properly isolated between stores via siteId.
 
 **Goal**: Ensure pricing calculations are accurate and consistent across all stores.
 
-### Ticket P2-023: Validate Pricing Calculations
+### Ticket P2-029: Validate Pricing Calculations
 
 **Labels**: `phase-2.3`, `priority-high`, `testing`
 
@@ -987,11 +1284,11 @@ Comprehensive testing of pricing calculations for all frame configurations.
 - Pricing test case spreadsheet
 - Pricing verification report
 
-**Dependencies**: P2-015
+**Dependencies**: P2-021
 
 ---
 
-### Ticket P2-024: Implement Store-Specific Pricing Overrides
+### Ticket P2-030: Implement Store-Specific Pricing Overrides
 
 **Labels**: `phase-2.3`, `priority-medium`, `frontend`, `backend`
 
@@ -1026,11 +1323,11 @@ Create system for per-store pricing adjustments (markup, discounts).
 - `packages/core/src/services/pricing.ts` (update)
 - Brand config files (update)
 
-**Dependencies**: P2-023
+**Dependencies**: P2-029
 
 ---
 
-### Ticket P2-025: Integrate Pricing with Shopify Checkout
+### Ticket P2-031: Integrate Pricing with Shopify Checkout
 
 **Labels**: `phase-2.3`, `priority-high`, `shopify`
 
@@ -1058,7 +1355,7 @@ Verify calculated prices match Shopify checkout and handle dynamic pricing.
 - [ ] Price discrepancies handled gracefully
 - [ ] Integration documented
 
-**Dependencies**: P2-023
+**Dependencies**: P2-029
 
 ---
 
@@ -1066,7 +1363,7 @@ Verify calculated prices match Shopify checkout and handle dynamic pricing.
 
 **Goal**: Ensure the system performs well under load and provides excellent user experience.
 
-### Ticket P2-026: Implement Product Catalog Caching
+### Ticket P2-032: Implement Product Catalog Caching
 
 **Labels**: `phase-2.4`, `priority-high`, `backend`
 
@@ -1099,11 +1396,11 @@ Add caching layer for product catalog data to reduce Shopify API calls.
 - `packages/core/src/services/cache.ts` (new)
 - `packages/core/src/services/products.ts` (update)
 
-**Dependencies**: P2-015
+**Dependencies**: P2-021
 
 ---
 
-### Ticket P2-027: Implement Shopify API Response Caching
+### Ticket P2-033: Implement Shopify API Response Caching
 
 **Labels**: `phase-2.4`, `priority-high`, `backend`
 
@@ -1130,11 +1427,11 @@ Cache Shopify Storefront API responses to reduce latency and API calls.
 - [ ] Cache invalidation works correctly
 - [ ] User experience improved
 
-**Dependencies**: P2-026
+**Dependencies**: P2-032
 
 ---
 
-### Ticket P2-028: Optimize Bundle Sizes
+### Ticket P2-034: Optimize Bundle Sizes
 
 **Labels**: `phase-2.4`, `priority-high`, `frontend`
 
@@ -1168,11 +1465,11 @@ Analyze and optimize JavaScript bundle sizes for better load times.
 - Bundle analysis report
 - Optimization results
 
-**Dependencies**: P2-015
+**Dependencies**: P2-021
 
 ---
 
-### Ticket P2-029: Implement Image Optimization
+### Ticket P2-035: Implement Image Optimization
 
 **Labels**: `phase-2.4`, `priority-medium`, `frontend`
 
@@ -1200,11 +1497,11 @@ Optimize image loading for faster page loads.
 - [ ] Below-fold images lazy loaded
 - [ ] LCP improved
 
-**Dependencies**: P2-028
+**Dependencies**: P2-034
 
 ---
 
-### Ticket P2-030: Implement Performance Monitoring
+### Ticket P2-036: Implement Performance Monitoring
 
 **Labels**: `phase-2.4`, `priority-high`, `infrastructure`
 
@@ -1233,11 +1530,11 @@ Set up comprehensive performance monitoring and alerting.
 - [ ] Baselines established
 - [ ] Monitoring documented
 
-**Dependencies**: P2-015
+**Dependencies**: P2-021
 
 ---
 
-### Ticket P2-031: Conduct Load Testing
+### Ticket P2-037: Conduct Load Testing
 
 **Labels**: `phase-2.4`, `priority-medium`, `testing`
 
@@ -1271,7 +1568,7 @@ Test system performance under load to identify bottlenecks.
 - Load testing report
 - Performance improvement recommendations
 
-**Dependencies**: P2-015
+**Dependencies**: P2-021
 
 ---
 
@@ -1279,7 +1576,7 @@ Test system performance under load to identify bottlenecks.
 
 **Goal**: Prepare for SEO-safe migration of the existing site to the new platform.
 
-### Ticket P2-032: Pre-Migration SEO Audit
+### Ticket P2-038: Pre-Migration SEO Audit
 
 **Labels**: `phase-2.5`, `priority-high`, `seo`
 
@@ -1321,7 +1618,7 @@ Conduct comprehensive SEO audit of the existing site before migration.
 
 ---
 
-### Ticket P2-033: Create URL Mapping Strategy
+### Ticket P2-039: Create URL Mapping Strategy
 
 **Labels**: `phase-2.5`, `priority-critical`, `seo`
 
@@ -1355,11 +1652,11 @@ Map all old URLs to new URL structure and create redirect plan.
 - URL mapping spreadsheet
 - Redirect map JSON file
 
-**Dependencies**: P2-032
+**Dependencies**: P2-038
 
 ---
 
-### Ticket P2-034: Implement Redirect Infrastructure
+### Ticket P2-040: Implement Redirect Infrastructure
 
 **Labels**: `phase-2.5`, `priority-critical`, `seo`, `infrastructure`
 
@@ -1392,13 +1689,13 @@ Implement 301 redirects in Next.js/Vercel configuration.
 
 - `apps/store-a/next.config.js` (update)
 - `apps/store-a/middleware.ts` (new - if complex redirects)
-- `apps/store-a/lib/redirects.ts` (new)
+- `apps/store-a/lib/redirects.ts` (update)
 
-**Dependencies**: P2-033
+**Dependencies**: P2-039
 
 ---
 
-### Ticket P2-035: Prepare Content Migration
+### Ticket P2-041: Prepare Content Migration
 
 **Labels**: `phase-2.5`, `priority-high`, `seo`
 
@@ -1433,11 +1730,11 @@ Prepare content pages for migration to the new platform.
 - Content migration checklist
 - Content mapping document
 
-**Dependencies**: P2-032
+**Dependencies**: P2-038
 
 ---
 
-### Ticket P2-036: Configure SEO Monitoring for Migration
+### Ticket P2-042: Configure SEO Monitoring for Migration
 
 **Labels**: `phase-2.5`, `priority-high`, `seo`, `infrastructure`
 
@@ -1471,7 +1768,7 @@ Set up monitoring to track SEO impact during and after migration.
 - SEO monitoring dashboard
 - Post-migration checklist
 
-**Dependencies**: P2-032
+**Dependencies**: P2-038
 
 ---
 
@@ -1479,7 +1776,7 @@ Set up monitoring to track SEO impact during and after migration.
 
 **Goal**: Streamline the process for launching additional stores.
 
-### Ticket P2-037: Create Store Scaffolding Script
+### Ticket P2-043: Create Store Scaffolding Script
 
 **Labels**: `phase-2.6`, `priority-medium`, `infrastructure`
 
@@ -1515,11 +1812,11 @@ Create a script/CLI tool to scaffold new stores quickly.
 - `scripts/templates/store-template/` (new)
 - `package.json` (update - add script)
 
-**Dependencies**: P2-021
+**Dependencies**: P2-027
 
 ---
 
-### Ticket P2-038: Create Store Launch Checklist
+### Ticket P2-044: Create Store Launch Checklist
 
 **Labels**: `phase-2.6`, `priority-medium`, `documentation`
 
@@ -1552,11 +1849,11 @@ Document the complete store launch process as a repeatable checklist.
 - Store launch checklist document
 - Launch day runbook
 
-**Dependencies**: P2-016, P2-020
+**Dependencies**: P2-022, P2-026
 
 ---
 
-### Ticket P2-039: Create Store C Application
+### Ticket P2-045: Create Store C Application
 
 **Labels**: `phase-2.6`, `priority-low`, `frontend`
 
@@ -1583,11 +1880,11 @@ Launch Store C using the streamlined process.
 - [ ] Deployed and functional
 - [ ] Challenges documented
 
-**Dependencies**: P2-037, P2-038
+**Dependencies**: P2-043, P2-044
 
 ---
 
-### Ticket P2-040: Create Store D Application
+### Ticket P2-046: Create Store D Application
 
 **Labels**: `phase-2.6`, `priority-low`, `frontend`
 
@@ -1613,11 +1910,11 @@ Launch Store D using the streamlined process.
 - [ ] Architecture validated at scale
 - [ ] No performance degradation
 
-**Dependencies**: P2-039
+**Dependencies**: P2-045
 
 ---
 
-### Ticket P2-041: Implement Cross-Store Analytics Dashboard
+### Ticket P2-047: Implement Cross-Store Analytics Dashboard
 
 **Labels**: `phase-2.6`, `priority-low`, `infrastructure`
 
@@ -1646,19 +1943,19 @@ Create a dashboard to monitor all stores from a single interface.
 - [ ] Alerts configured
 - [ ] Documentation complete
 
-**Dependencies**: P2-040
+**Dependencies**: P2-046
 
 ---
 
 ## Phase 2 Summary
 
-**Total Tickets**: 41 tickets  
-**Estimated Total Hours**: 194-220 hours  
-**Estimated Duration**: 8-10 weeks (assuming 25-30 hours/week on Phase 2)
+**Total Tickets**: 47 tickets  
+**Estimated Total Hours**: 240-280 hours  
+**Estimated Duration**: 10-12 weeks (assuming 25-30 hours/week on Phase 2)
 
 ### Tickets by Section
 
-- **Section 2.1** (Store A Setup): 16 tickets (~95 hours)
+- **Section 2.1** (Store A Complete Migration): 22 tickets (~140 hours)
 - **Section 2.2** (Store B Setup): 6 tickets (~22 hours)
 - **Section 2.3** (Pricing Integration): 3 tickets (~15 hours)
 - **Section 2.4** (Performance Optimization): 6 tickets (~29 hours)
@@ -1667,36 +1964,61 @@ Create a dashboard to monitor all stores from a single interface.
 
 ### Priority Distribution
 
-- **Critical Priority**: 15 tickets (must complete, blocks production)
-- **High Priority**: 18 tickets (important for launch)
-- **Medium Priority**: 6 tickets (important but can defer)
+- **Critical Priority**: 18 tickets (must complete, blocks production)
+- **High Priority**: 20 tickets (important for launch)
+- **Medium Priority**: 7 tickets (important but can defer)
 - **Low Priority**: 2 tickets (nice to have)
 
-### Suggested Sprint Plan
+### Key Changes from Original Phase 2
 
-**Sprint 1 (Weeks 1-2)**: Store A Setup - Core
+1. **Added Complete Page Migration** - All pages from original must be migrated
+2. **Homepage is Comprehensive** - Full homepage with all sections, not just basic scaffold
+3. **Gateway Pages Included** - SEO-optimized gateway pages for frames by style/color/size
+4. **Individual Frame Pages** - All 50+ individual frame style pages migrated
+5. **Content Pages** - All content pages (About, Contact, Blog, Resources) migrated
+6. **Redirects** - Explicit ticket for legacy URL redirects
+7. **More Realistic Estimates** - Increased hours to account for full migration
 
-- P2-001 through P2-009 (App scaffold through checkout)
-- P2-010, P2-011 (Shopify setup)
+### Suggested Sprint Plan (Updated with Hybrid Approach)
 
-**Sprint 2 (Weeks 3-4)**: Store A Launch
+**Week 1: Foundation + Early Setup**
 
-- P2-012 through P2-016 (Environment, domain, testing, deployment, monitoring)
+- P2-001 through P2-003 (Already complete ✅)
+- **P2-016 Phase 1: Basic Shopify Setup** (4 hours) - Do this early!
+- **P2-017 Phase 1: Basic Product** (2 hours) - Do this early!
+- **Backend API Structure** (4 hours) - Deploy apps/api with mock endpoints
+- **Database Setup** (Optional, 4 hours)
 
-**Sprint 3 (Weeks 5-6)**: Store B + Pricing
+**Sprint 1 (Weeks 2-3)**: Store A UI Development
 
-- P2-017 through P2-022 (Store B complete setup)
-- P2-023 through P2-025 (Pricing validation)
+- P2-004 through P2-006 (Layout, Homepage, Designer)
+- P2-007 through P2-009 (Specialty designers, Gateway pages)
+- Use mock mode for Shopify (already built-in)
 
-**Sprint 4 (Weeks 7-8)**: Performance + SEO
+**Sprint 2 (Weeks 4-5)**: Store A Pages & Integration
 
-- P2-026 through P2-031 (Performance optimization)
-- P2-032 through P2-033 (SEO audit and mapping)
+- P2-010 through P2-012 (Content pages, Resources, Gallery)
+- P2-013 through P2-014 (Cart, Checkout - with mock mode)
+- **P2-016 Phase 2: Full Shopify Configuration** (when ready)
+- **P2-017 Phase 2: Enhanced Product** (when ready)
+- Connect real Shopify integration
 
-**Sprint 5 (Weeks 9-10)**: SEO Migration + Additional Stores
+**Sprint 3 (Weeks 6-7)**: Store A Testing & Launch
 
-- P2-034 through P2-036 (SEO implementation)
-- P2-037 through P2-041 (Store rollout automation)
+- P2-015: Redirects
+- P2-018 through P2-022 (Environment, Domain, Testing, Deployment, Monitoring)
+
+**Sprint 4 (Weeks 7-8)**: Store B + Pricing
+
+- P2-023 through P2-031 (Store B complete, Pricing validation)
+
+**Sprint 5 (Weeks 9-10)**: Performance + SEO
+
+- P2-032 through P2-042 (Performance optimization, SEO migration prep)
+
+**Sprint 6 (Weeks 11-12)**: Additional Stores + Polish
+
+- P2-043 through P2-047 (Store rollout automation, Additional stores)
 
 ---
 
@@ -1704,6 +2026,7 @@ Create a dashboard to monitor all stores from a single interface.
 
 **The phase is complete when**:
 
+- [ ] All pages from original CustomFrameSizes-CODE migrated to Store A
 - [ ] Two production stores (A and B) live and accepting orders
 - [ ] Shared configurator working identically across stores
 - [ ] Data isolation verified between stores
@@ -1724,6 +2047,7 @@ Create a dashboard to monitor all stores from a single interface.
 
 | Metric                | Target     | How to Measure             |
 | --------------------- | ---------- | -------------------------- |
+| Pages Migrated        | 100%       | Count of migrated pages    |
 | Stores Live           | 2+         | Count of production stores |
 | Uptime                | 99.9%      | Uptime monitoring          |
 | Page Load Time        | < 2s (P75) | Vercel Analytics           |
@@ -1734,6 +2058,6 @@ Create a dashboard to monitor all stores from a single interface.
 
 ---
 
-**End of Phase 2 Tickets**
+**End of Phase 2 Tickets (Updated)**
 
 **Next Phase**: Phase 3 - Ongoing Support & System Ownership
