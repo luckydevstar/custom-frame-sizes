@@ -58,12 +58,34 @@ const themeOverrideSchema = z.object({
     .optional(),
   logo: z
     .object({
-      src: z.string().url("Logo src must be a valid URL"),
+      // Allow both absolute URLs and relative paths (starting with /)
+      src: z.string().refine(
+        (val) => {
+          // Allow absolute URLs
+          if (val.startsWith("http://") || val.startsWith("https://")) {
+            try {
+              new URL(val);
+              return true;
+            } catch {
+              return false;
+            }
+          }
+          // Allow relative paths starting with /
+          if (val.startsWith("/")) {
+            return true;
+          }
+          return false;
+        },
+        {
+          message: "Logo src must be a valid URL or a relative path starting with /",
+        }
+      ),
       alt: z.string().min(1, "Logo alt text is required"),
       width: z.string().optional(),
       height: z.string().optional(),
     })
-    .optional(),
+    .optional()
+    .nullable(), // Make logo completely optional
 });
 
 /**
