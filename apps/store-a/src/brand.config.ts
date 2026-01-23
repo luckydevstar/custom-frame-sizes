@@ -10,7 +10,7 @@ import { env } from "./lib/env";
 
 export const brandConfig: BrandConfig = {
   storeId: "store-a",
-  name: "Store A",
+  name: "CustomFrameSizes.com",
   domain: env.shopify.storeDomain || "store-a.example.com",
 
   shopify: {
@@ -33,12 +33,11 @@ export const brandConfig: BrandConfig = {
       },
     },
     // Logo configuration
-    // Using SVG placeholders for now - replace with actual logos when available
-    // See ASSETS_SETUP.md for details on adding proper brand assets
+    // Using real logos from original CustomFrameSizes.com
     logo: {
-      src: "/assets/brand/logo-blue.svg", // SVG placeholder - replace with PNG when available
-      alt: "Store A Logo",
-      width: "150px",
+      src: "/assets/brand/logo-blue.png", // Light mode logo
+      alt: "CustomFrameSizes.com",
+      width: "auto",
       height: "40px",
     },
   },
@@ -63,23 +62,24 @@ export const brandConfig: BrandConfig = {
   },
 
   seo: {
-    title: "Store A - Custom Picture Frames",
-    description: "Premium custom picture frames and framing services. Museum-quality frames with expert craftsmanship.",
+    title: "Custom Frame Sizes - Exact Dimensions | CustomFrameSizes",
+    description: "Design picture frames in custom sizes with live preview, mats, and glazing options. Professional framing with exact measurements down to 1/8 inch and instant pricing.",
     keywords: [
       "custom frames",
       "picture frames",
       "custom framing",
       "frame designer",
-      "Store A",
+      "exact dimensions",
+      "CustomFrameSizes",
     ],
     canonicalUrl: `https://${env.shopify.storeDomain || "store-a.example.com"}`,
-    ogImage: `https://${env.shopify.storeDomain || "store-a.example.com"}/assets/brand/og-image.jpg`,
-    twitterImage: `https://${env.shopify.storeDomain || "store-a.example.com"}/assets/brand/twitter-image.jpg`,
+    ogImage: `https://${env.shopify.storeDomain || "store-a.example.com"}/assets/og-image.jpg`,
+    twitterImage: `https://${env.shopify.storeDomain || "store-a.example.com"}/assets/og-image.jpg`,
   },
 
   branding: {
-    tagline: "Premium Custom Framing",
-    valueProposition: "Museum-quality frames with expert craftsmanship",
+    tagline: "Custom Frame Sizes - Exact Dimensions",
+    valueProposition: "Design picture frames in custom sizes with live preview, mats, and glazing options. Professional framing with exact measurements down to 1/8 inch and instant pricing.",
     targetAudience: "Art collectors, galleries, and framing enthusiasts",
   },
 
@@ -87,6 +87,9 @@ export const brandConfig: BrandConfig = {
     isActive: true,
     createdAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
+    // Contact information for header/footer
+    contactPhone: "1 (888) 874-7156",
+    contactEmail: "hello@CustomFrameSizes.com",
   },
 };
 

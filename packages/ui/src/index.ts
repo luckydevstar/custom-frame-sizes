@@ -271,11 +271,10 @@ export { Toggle, toggleVariants } from "./components/ui/toggle";
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "./components/ui/tooltip";
 
 // Layout components
-export { Header, type HeaderProps, type HeaderConfig } from "./components/layout/Header";
+export { Header, type HeaderProps } from "./components/layout/Header";
 export {
   Footer,
   type FooterProps,
-  type FooterConfig,
   type FooterLink,
   type FooterLinks,
 } from "./components/layout/Footer";
@@ -286,7 +285,8 @@ export {
   type NavigationItem,
 } from "./components/layout/Navigation";
 export { Hero, type HeroProps, type HeroImage, type HeroConfig } from "./components/layout/Hero";
-export { Seo, type SeoProps, type BrandConfig } from "./components/layout/Seo";
+// Seo component not exported - use Next.js metadata API instead
+// export { Seo, type SeoProps, type BrandConfig } from "./components/layout/Seo";
 
 // Shared components
 export {
@@ -403,3 +403,6 @@ export * from "./components/brass-nameplate/StandaloneNameplateTypes";
 
 // Providers
 export { ThemeProvider, useThemeContext } from "./providers/ThemeProvider";
+
+// Brand components
+export * from "./components/brand";

@@ -102,11 +102,10 @@ function isShopifyConfigured(config?: ShopifyConfig): boolean {
 class ShopifyClient {
   private token: string;
   private endpoint: string;
-  private apiVersion: string;
 
   constructor(domain: string, token: string, apiVersion: string = DEFAULT_API_VERSION) {
     this.token = token;
-    this.apiVersion = apiVersion;
+    // apiVersion is used in endpoint construction
     this.endpoint = `https://${domain}/api/${apiVersion}/graphql.json`;
   }
 

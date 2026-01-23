@@ -4,6 +4,7 @@ import "./globals.css";
 import { StoreProvider } from "@framecraft/core";
 import { brandConfig } from "../brand.config";
 import { QueryProvider } from "../components/providers/query-provider";
+import { Header, Footer } from "@framecraft/ui/components/layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,7 +41,13 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <QueryProvider>
-          <StoreProvider config={brandConfig}>{children}</StoreProvider>
+          <StoreProvider config={brandConfig}>
+            <div className="flex min-h-screen flex-col">
+              <Header />
+              <main className="flex-1">{children}</main>
+              <Footer />
+            </div>
+          </StoreProvider>
         </QueryProvider>
       </body>
     </html>

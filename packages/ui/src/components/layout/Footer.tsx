@@ -2,17 +2,18 @@
  * Footer Component
  *
  * Layout component for site footer with links, newsletter signup, and contact info.
+ * Updated for Next.js App Router and store-config awareness (P2-004).
  *
- * NOTE: This is a simplified version created for P1-012. The full Footer component
- * has dependencies on config files (footerLinks, brandConfig) that will be extracted
- * to the @framecraft/config package in future tickets (P1-024, etc.). This component
- * will be enhanced once those dependencies are available.
+ * @packageDocumentation
  */
 
-import { Link } from "wouter";
+"use client";
+
+import Link from "next/link";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Phone, Mail } from "lucide-react";
+import { useStoreConfig } from "@framecraft/core";
 
 export interface FooterLink {
   label: string;
@@ -26,64 +27,64 @@ export interface FooterLinks {
   support?: FooterLink[];
 }
 
-export interface FooterConfig {
-  /**
-   * Site/brand name for copyright
-   */
-  siteName?: string;
-
-  /**
-   * Contact phone number
-   */
-  contactPhone?: string;
-
-  /**
-   * Contact email address
-   */
-  contactEmail?: string;
-
+export interface FooterProps {
   /**
    * Footer link groups
+   * If not provided, will use defaults or empty
    */
   links?: FooterLinks;
 
   /**
    * Newsletter signup handler
+   * If not provided, form will submit but do nothing
    */
   onNewsletterSubmit?: (email: string) => void;
 }
 
-export interface FooterProps {
-  /**
-   * Footer configuration
-   */
-  config?: FooterConfig;
-}
-
-const defaultConfig: FooterConfig = {
-  siteName: "CustomFrameSizes.com",
-  contactPhone: "1 (888) 874-7156",
-  contactEmail: "hello@CustomFrameSizes.com",
-  links: {
-    shop: [],
-    learn: [],
-    company: [],
-    support: [],
-  },
+// Default footer links (can be overridden via props or store config)
+const defaultLinks: FooterLinks = {
+  shop: [
+    { label: "Frame Designer", path: "/" },
+    { label: "Shop by Color", path: "/frames/colors" },
+    { label: "Frame Styles", path: "/picture-frames" },
+  ],
+  learn: [
+    { label: "All Guides", path: "/learn" },
+    { label: "How to Measure", path: "/how-to-measure" },
+    { label: "Mat Board Guide", path: "/mat-board-guide" },
+  ],
+  company: [
+    { label: "About Us", path: "/about" },
+    { label: "Contact", path: "/contact" },
+  ],
+  support: [
+    { label: "FAQ", path: "/faq" },
+    { label: "Shipping Policy", path: "/shipping-policy" },
+    { label: "Returns & Exchanges", path: "/returns-exchanges" },
+  ],
 };
 
-export function Footer({ config = defaultConfig }: FooterProps) {
+export function Footer({ links, onNewsletterSubmit }: FooterProps) {
   const currentYear = new Date().getFullYear();
-  const footerConfig = { ...defaultConfig, ...config };
+  const storeConfig = useStoreConfig();
+
+  // Get contact info from store config
+  const siteName = storeConfig.name || "Store";
+  const contactPhone = (storeConfig.metadata?.contactPhone as string) || undefined;
+  const contactEmail = (storeConfig.metadata?.contactEmail as string) || undefined;
+
+  // Use provided links or defaults
+  const footerLinks = links || defaultLinks;
 
   const handleNewsletterSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email") as string;
 
-    if (footerConfig.onNewsletterSubmit) {
-      footerConfig.onNewsletterSubmit(email);
+    if (onNewsletterSubmit) {
+      onNewsletterSubmit(email);
     }
+    // TODO: Wire to email service when ready
   };
 
   const renderLinkColumn = (title: string, links: FooterLink[] = []) => {
@@ -113,10 +114,10 @@ export function Footer({ config = defaultConfig }: FooterProps) {
     <footer className="border-t bg-card mt-auto" role="contentinfo">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
-          {renderLinkColumn("Shop", footerConfig.links?.shop)}
-          {renderLinkColumn("Learn", footerConfig.links?.learn)}
-          {renderLinkColumn("Company", footerConfig.links?.company)}
-          {renderLinkColumn("Support", footerConfig.links?.support)}
+          {renderLinkColumn("Shop", footerLinks.shop)}
+          {renderLinkColumn("Learn", footerLinks.learn)}
+          {renderLinkColumn("Company", footerLinks.company)}
+          {renderLinkColumn("Support", footerLinks.support)}
 
           {/* Newsletter Column */}
           <div>
@@ -152,26 +153,26 @@ export function Footer({ config = defaultConfig }: FooterProps) {
         </div>
 
         {/* Contact Info Row */}
-        {(footerConfig.contactPhone || footerConfig.contactEmail) && (
+        {(contactPhone || contactEmail) && (
           <div className="border-t mt-8 pt-8 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 text-sm">
-            {footerConfig.contactPhone && (
+            {contactPhone && (
               <a
-                href={`tel:${footerConfig.contactPhone.replace(/\D/g, "")}`}
+                href={`tel:${contactPhone.replace(/\D/g, "")}`}
                 className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
                 data-testid="link-footer-phone"
               >
                 <Phone className="h-4 w-4" />
-                <span>{footerConfig.contactPhone}</span>
+                <span>{contactPhone}</span>
               </a>
             )}
-            {footerConfig.contactEmail && (
+            {contactEmail && (
               <a
-                href={`mailto:${footerConfig.contactEmail}`}
+                href={`mailto:${contactEmail}`}
                 className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
                 data-testid="link-footer-email"
               >
                 <Mail className="h-4 w-4" />
-                <span>{footerConfig.contactEmail}</span>
+                <span>{contactEmail}</span>
               </a>
             )}
           </div>
@@ -179,11 +180,9 @@ export function Footer({ config = defaultConfig }: FooterProps) {
 
         {/* Bottom Bar */}
         <div className="border-t mt-6 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          {footerConfig.siteName && (
-            <p className="text-sm text-muted-foreground" data-testid="text-copyright">
-              © {currentYear} {footerConfig.siteName}. All rights reserved.
-            </p>
-          )}
+          <p className="text-sm text-muted-foreground" data-testid="text-copyright">
+            © {currentYear} {siteName}. All rights reserved.
+          </p>
           <div className="flex gap-4 text-sm">
             <Link
               href="/privacy-policy"

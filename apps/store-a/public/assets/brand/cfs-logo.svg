@@ -1,0 +1,10 @@
+<svg width="320" height="60" viewBox="0 0 320 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Frame icon with brand blue color -->
+  <rect x="8" y="8" width="44" height="44" stroke="#1D7BC7" stroke-width="3" fill="none" rx="1"/>
+  
+  <!-- "Custom Frame" text -->
+  <text x="68" y="32" font-family="Inter, system-ui, sans-serif" font-size="28" font-weight="600" fill="currentColor">Custom Frame</text>
+  
+  <!-- "Sizes.com" text -->
+  <text x="68" y="52" font-family="Inter, system-ui, sans-serif" font-size="24" font-weight="400" fill="currentColor">Sizes.com</text>
+</svg>

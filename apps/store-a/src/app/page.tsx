@@ -1,19 +1,19 @@
 // Test imports from @framecraft packages
 import { defaultTheme } from "@framecraft/config";
 import type { ThemeConfig } from "@framecraft/config";
-import { useStoreConfig } from "@framecraft/core";
+import { brandConfig } from "../brand.config";
 
 export default function HomePage() {
   // Verify theme import works
   const theme: ThemeConfig = defaultTheme;
 
-  // Get store configuration from context
-  const storeConfig = useStoreConfig();
+  // Get store configuration directly (server component - no hooks needed)
+  const storeConfig = brandConfig;
 
   // Use theme to avoid unused variable warning
   const primaryColor = theme.brand.primary;
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24 bg-gradient-to-b from-background to-muted">
+    <div className="container mx-auto px-4 py-12">
       <div className="z-10 max-w-5xl w-full items-center justify-between text-center space-y-8">
         <div className="space-y-4">
           <h1 className="text-6xl font-bold tracking-tight">
@@ -91,6 +91,6 @@ export default function HomePage() {
           <p className="mt-2">Theme Primary Color: {primaryColor}</p>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
