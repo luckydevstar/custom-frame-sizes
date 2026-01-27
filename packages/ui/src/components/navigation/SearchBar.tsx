@@ -1,7 +1,9 @@
+"use client";
+
 import { useState } from "react";
 import { Search } from "lucide-react";
 import { Input } from "../ui/input";
-import { useLocation } from "wouter";
+import { useRouter } from "next/navigation";
 
 export interface SearchBarProps {
   placeholder?: string;
@@ -10,7 +12,7 @@ export interface SearchBarProps {
 
 export function SearchBar({ placeholder = "Search frames...", onSearch }: SearchBarProps) {
   const [searchQuery, setSearchQuery] = useState("");
-  const [, navigate] = useLocation();
+  const router = useRouter();
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,7 +21,7 @@ export function SearchBar({ placeholder = "Search frames...", onSearch }: Search
         onSearch(searchQuery.trim());
       } else {
         // Default behavior: navigate to /picture-frames with search query
-        navigate(`/picture-frames?search=${encodeURIComponent(searchQuery.trim())}`);
+        router.push(`/picture-frames?search=${encodeURIComponent(searchQuery.trim())}`);
       }
     }
   };

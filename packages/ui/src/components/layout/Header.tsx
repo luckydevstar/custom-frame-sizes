@@ -10,6 +10,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { ShoppingCart, Phone, Mail, Menu } from "lucide-react";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
@@ -18,6 +19,13 @@ import { useState, type ReactNode } from "react";
 import { useStoreConfig } from "@framecraft/core";
 import { useCartStore, cartSelectors } from "@framecraft/core/stores";
 import { Logo } from "../brand/Logo";
+import { ThemeToggle } from "./ThemeToggle";
+import { MegaMenu } from "../navigation/MegaMenu";
+import { PictureFramesMegaMenu } from "../navigation/PictureFramesMegaMenu";
+import { ShadowboxMegaMenu } from "../navigation/ShadowboxMegaMenu";
+import { ComponentsMegaMenu } from "../navigation/ComponentsMegaMenu";
+import { SearchBar } from "../navigation/SearchBar";
+import { MobileNavigation } from "../navigation/MobileNavigation";
 
 export interface HeaderProps {
   /**
@@ -72,6 +80,7 @@ export function Header({
   showUtilityBar = true,
 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
   const storeConfig = useStoreConfig();
 
   // Get cart count from cart store
@@ -81,6 +90,12 @@ export function Header({
   const phone = (storeConfig.metadata?.contactPhone as string) || undefined;
   const email = (storeConfig.metadata?.contactEmail as string) || undefined;
 
+  // Helper to check if a nav link is active
+  const isActive = (path: string) => {
+    if (path === "/") return pathname === "/";
+    return pathname.startsWith(path);
+  };
+
   // Default logo if not provided - use Logo component with theme awareness
   const displayLogo = logo || (
     <Logo
@@ -89,6 +104,85 @@ export function Header({
       logoSrcLight={storeConfig.theme?.logo?.src}
     />
   );
+
+  // Default theme toggle
+  const displayThemeToggle = themeToggle !== undefined ? themeToggle : <ThemeToggle />;
+
+  // Default desktop navigation
+  const displayDesktopNavigation =
+    desktopNavigation !== undefined ? (
+      desktopNavigation
+    ) : (
+      <>
+        <MegaMenu
+          label="Picture Frames"
+          isActive={
+            isActive("/picture-frames") ||
+            isActive("/frames/") ||
+            isActive("/diploma-certificate-frames") ||
+            isActive("/puzzle-frames") ||
+            pathname.includes("/specialty/record")
+          }
+        >
+          <PictureFramesMegaMenu />
+        </MegaMenu>
+
+        <MegaMenu
+          label="Shadowboxes"
+          isActive={
+            isActive("/shadowbox") ||
+            isActive("/jersey-frames") ||
+            isActive("/military-frames") ||
+            isActive("/newspaper-frames") ||
+            isActive("/playbill-frames")
+          }
+        >
+          <ShadowboxMegaMenu />
+        </MegaMenu>
+
+        <Button
+          variant={isActive("/canvas-frames") ? "secondary" : "ghost"}
+          asChild
+          data-testid="link-nav-canvas-frames"
+        >
+          <Link href="/canvas-frames">Canvas Frames</Link>
+        </Button>
+
+        <MegaMenu
+          label="Components"
+          isActive={isActive("/components") || isActive("/mat-board-guide")}
+        >
+          <ComponentsMegaMenu />
+        </MegaMenu>
+
+        <Button
+          variant={isActive("/learn") ? "secondary" : "ghost"}
+          asChild
+          data-testid="link-nav-learn"
+        >
+          <Link href="/learn">Learn</Link>
+        </Button>
+
+        <Button
+          variant={isActive("/contact") ? "secondary" : "ghost"}
+          asChild
+          data-testid="link-nav-contact"
+        >
+          <Link href="/contact">Contact</Link>
+        </Button>
+      </>
+    );
+
+  // Default search bar
+  const displaySearchBar = searchBar !== undefined ? searchBar : <SearchBar />;
+
+  // Default mobile navigation
+  const displayMobileNavigation =
+    mobileNavigation !== undefined ? (
+      mobileNavigation
+    ) : (
+      <MobileNavigation onNavigate={() => setMobileMenuOpen(false)} />
+    );
 
   // Default cart click handler
   const handleCartClick = () => {
@@ -141,40 +235,36 @@ export function Header({
           </Link>
 
           {/* Desktop Navigation */}
-          {desktopNavigation && (
-            <nav
-              className="hidden lg:flex items-center gap-1 flex-shrink-0"
-              aria-label="Main navigation"
-            >
-              {desktopNavigation}
-            </nav>
-          )}
+          <nav
+            className="hidden lg:flex items-center gap-1 flex-shrink-0"
+            aria-label="Main navigation"
+          >
+            {displayDesktopNavigation}
+          </nav>
 
           {/* Desktop Search */}
-          {searchBar && <div className="hidden lg:flex flex-1 max-w-md">{searchBar}</div>}
+          <div className="hidden lg:flex flex-1 max-w-md">{displaySearchBar}</div>
 
           <div className="flex items-center gap-2" role="toolbar" aria-label="User actions">
-            {mobileNavigation && (
-              <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
-                <SheetTrigger asChild>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="lg:hidden"
-                    data-testid="button-mobile-menu"
-                    aria-label="Open navigation menu"
-                  >
-                    <Menu className="h-5 w-5" />
-                  </Button>
-                </SheetTrigger>
-                <SheetContent side="left" className="w-[340px] sm:w-[380px] overflow-y-auto">
-                  <SheetHeader className="mb-4">
-                    <SheetTitle className="text-left">Navigation</SheetTitle>
-                  </SheetHeader>
-                  {mobileNavigation}
-                </SheetContent>
-              </Sheet>
-            )}
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="lg:hidden"
+                  data-testid="button-mobile-menu"
+                  aria-label="Open navigation menu"
+                >
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="left" className="w-[340px] sm:w-[380px] overflow-y-auto">
+                <SheetHeader className="mb-4">
+                  <SheetTitle className="text-left">Navigation</SheetTitle>
+                </SheetHeader>
+                {displayMobileNavigation}
+              </SheetContent>
+            </Sheet>
 
             <Button
               variant="ghost"
@@ -196,7 +286,7 @@ export function Header({
               )}
             </Button>
 
-            {themeToggle}
+            {displayThemeToggle}
           </div>
         </div>
       </div>

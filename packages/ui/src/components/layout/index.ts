@@ -15,5 +15,6 @@
 export * from "./Header";
 export * from "./Footer";
 export * from "./Hero";
+export { ThemeToggle } from "./ThemeToggle";
 // Seo component not exported - use Next.js metadata API instead
 // export * from "./Seo";
