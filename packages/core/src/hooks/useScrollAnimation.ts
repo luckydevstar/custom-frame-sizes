@@ -3,6 +3,8 @@
  * Provides hooks for scroll-triggered animations using IntersectionObserver
  */
 
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import { animations } from "@framecraft/config";
 

@@ -1,4 +1,6 @@
-import { Link } from "wouter";
+"use client";
+
+import Link from "next/link";
 import { Button } from "../ui/button";
 import { ArrowRight } from "lucide-react";
 import type { FrameStyle } from "@framecraft/types";
@@ -10,7 +12,7 @@ export interface FrameStylesShowcaseProps {
 }
 
 export function FrameStylesShowcase({
-  frames,
+  frames = [],
   curatedOrder,
   allFramesLink = "/picture-frames",
 }: FrameStylesShowcaseProps) {

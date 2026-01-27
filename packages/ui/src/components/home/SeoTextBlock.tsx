@@ -1,3 +1,5 @@
+"use client";
+
 import { useIntersectionAnimation } from "@framecraft/core";
 
 export interface SeoTextBlockProps {

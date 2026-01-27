@@ -1,4 +1,5 @@
-import { Helmet } from "react-helmet-async";
+"use client";
+
 import { Star, ChevronLeft, ChevronRight, Shield, Flag, RotateCcw } from "lucide-react";
 import { useRotatingTestimonial } from "@framecraft/core";
 import { Skeleton } from "../ui/skeleton";
@@ -106,9 +107,10 @@ export function TestimonialCarousel({
     <>
       {/* JSON-LD Schema for active review */}
       {jsonLdSchema && (
-        <Helmet>
-          <script type="application/ld+json">{JSON.stringify(jsonLdSchema)}</script>
-        </Helmet>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdSchema) }}
+        />
       )}
 
       <section

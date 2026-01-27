@@ -1,4 +1,6 @@
-import { Link } from "wouter";
+"use client";
+
+import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Button } from "../ui/button";
 import { useRotatingImages } from "@framecraft/core";

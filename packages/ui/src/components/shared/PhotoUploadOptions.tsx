@@ -8,9 +8,11 @@ import { Separator } from "../ui/separator";
 import { useToast } from "../../hooks/use-toast";
 import Uppy from "@uppy/core";
 import { DashboardModal } from "@uppy/react";
-import "@uppy/core/css/style.css";
-import "@uppy/dashboard/css/style.css";
 import AwsS3 from "@uppy/aws-s3";
+// Note: CSS imports should be handled in the app's global CSS or _app.tsx
+// These are commented out to avoid build errors - add to app CSS:
+// @import '@uppy/core/dist/style.css';
+// @import '@uppy/dashboard/dist/style.css';
 import type { UploadResult } from "@uppy/core";
 import { ImageEditor } from "./ImageEditor";
 import { FrameSpinner } from "../ui/frame-spinner";

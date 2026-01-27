@@ -7,6 +7,8 @@
  * The data file should be available via @framecraft/data package or similar.
  */
 
+"use client";
+
 import { useState, useEffect, useMemo } from "react";
 
 // TODO: Import from @framecraft/data when data package is set up

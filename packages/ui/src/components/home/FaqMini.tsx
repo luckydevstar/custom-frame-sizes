@@ -1,5 +1,6 @@
-import { Link } from "wouter";
-import { Helmet } from "react-helmet-async";
+"use client";
+
+import Link from "next/link";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import { Button } from "../ui/button";
 import { useIntersectionAnimation } from "@framecraft/core";
@@ -63,9 +64,10 @@ export function FaqMini({ faqs = defaultFaqs, faqPageLink = "/faq" }: FaqMiniPro
   return (
     <>
       {/* FAQPage JSON-LD Schema */}
-      <Helmet>
-        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
-      </Helmet>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
 
       <section className="max-w-4xl mx-auto px-6 py-8 md:py-12" data-testid="section-faq-mini">
         <div ref={titleRef} className="text-center mb-12">

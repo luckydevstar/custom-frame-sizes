@@ -8,7 +8,17 @@
  */
 
 import * as SentryReact from "@sentry/react";
-import * as SentryNode from "@sentry/node";
+// Dynamic import for server-side Sentry to avoid bundling in client
+let SentryNode: typeof import("@sentry/node") | null = null;
+if (typeof window === "undefined") {
+  // Only import on server-side
+  try {
+    SentryNode = require("@sentry/node");
+  } catch {
+    // @sentry/node not available (e.g., in client bundle)
+    SentryNode = null;
+  }
+}
 
 /**
  * Sentry configuration options
@@ -153,6 +163,11 @@ export function initSentryServer(config: SentryConfig): void {
     return;
   }
 
+  if (!SentryNode) {
+    console.warn("[Sentry] @sentry/node not available (client-side or not installed)");
+    return;
+  }
+
   try {
     SentryNode.init({
       dsn: config.dsn,
@@ -172,7 +187,7 @@ export function initSentryServer(config: SentryConfig): void {
     // Set additional tags if provided
     if (config.tags) {
       Object.entries(config.tags).forEach(([key, value]) => {
-        SentryNode.setTag(key, value);
+        SentryNode!.setTag(key, value);
       });
     }
 
@@ -211,8 +226,11 @@ export function withSentry<T extends (...args: unknown[]) => Promise<unknown>>(
       return await fn(...args);
     } catch (error) {
       if (sentryInitialized) {
-        const Sentry = isBrowser ? SentryReact : SentryNode;
-        Sentry.captureException(error, { extra: context });
+        if (isBrowser) {
+          SentryReact.captureException(error, { extra: context });
+        } else if (SentryNode) {
+          SentryNode.captureException(error, { extra: context });
+        }
       }
       throw error;
     }
@@ -238,8 +256,11 @@ export function withSentry<T extends (...args: unknown[]) => Promise<unknown>>(
  */
 export function captureException(error: Error, context?: Record<string, unknown>): void {
   if (sentryInitialized) {
-    const Sentry = isBrowser ? SentryReact : SentryNode;
-    Sentry.captureException(error, { extra: context });
+    if (isBrowser) {
+      SentryReact.captureException(error, { extra: context });
+    } else if (SentryNode) {
+      SentryNode.captureException(error, { extra: context });
+    }
   } else {
     // Fallback to console logging if Sentry is not initialized
     console.error(
@@ -270,11 +291,17 @@ export function captureMessage(
   context?: Record<string, unknown>
 ): void {
   if (sentryInitialized) {
-    const Sentry = isBrowser ? SentryReact : SentryNode;
-    Sentry.captureMessage(message, {
-      level,
-      extra: context,
-    });
+    if (isBrowser) {
+      SentryReact.captureMessage(message, {
+        level,
+        extra: context,
+      });
+    } else if (SentryNode) {
+      SentryNode.captureMessage(message, {
+        level,
+        extra: context,
+      });
+    }
   } else {
     // Fallback to console logging if Sentry is not initialized
     if (context) {
@@ -299,8 +326,11 @@ export function captureMessage(
  */
 export function setUser(user: { id?: string; email?: string; username?: string } | null): void {
   if (sentryInitialized) {
-    const Sentry = isBrowser ? SentryReact : SentryNode;
-    Sentry.setUser(user);
+    if (isBrowser) {
+      SentryReact.setUser(user);
+    } else if (SentryNode) {
+      SentryNode.setUser(user);
+    }
   }
 }
 
@@ -312,8 +342,11 @@ export function setUser(user: { id?: string; email?: string; username?: string }
  */
 export function setTag(key: string, value: string): void {
   if (sentryInitialized) {
-    const Sentry = isBrowser ? SentryReact : SentryNode;
-    Sentry.setTag(key, value);
+    if (isBrowser) {
+      SentryReact.setTag(key, value);
+    } else if (SentryNode) {
+      SentryNode.setTag(key, value);
+    }
   }
 }
 
@@ -329,8 +362,11 @@ export function addBreadcrumb(breadcrumb: {
   data?: Record<string, unknown>;
 }): void {
   if (sentryInitialized) {
-    const Sentry = isBrowser ? SentryReact : SentryNode;
-    Sentry.addBreadcrumb(breadcrumb);
+    if (isBrowser) {
+      SentryReact.addBreadcrumb(breadcrumb);
+    } else if (SentryNode) {
+      SentryNode.addBreadcrumb(breadcrumb);
+    }
   }
 }
 

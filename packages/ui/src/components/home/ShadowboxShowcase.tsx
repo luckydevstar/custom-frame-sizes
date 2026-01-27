@@ -1,4 +1,6 @@
-import { Link } from "wouter";
+"use client";
+
+import Link from "next/link";
 import { Button } from "../ui/button";
 import { ArrowRight } from "lucide-react";
 import type { FrameStyle } from "@framecraft/types";
@@ -9,7 +11,7 @@ export interface ShadowboxShowcaseProps {
 }
 
 export function ShadowboxShowcase({
-  frames,
+  frames = [],
   shadowboxLink = "/shadowbox",
 }: ShadowboxShowcaseProps) {
   // Get all shadowbox frames

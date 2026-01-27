@@ -44,7 +44,7 @@ function getShopifyConfig(config?: ShopifyConfig): {
   }
 
   // Priority 2: Try environment variables
-  // Support both Next.js (process.env) and Vite (import.meta.env)
+  // Use process.env for Next.js (both server and client)
   let domain: string | undefined;
   let token: string | undefined;
   let apiVersion: string = DEFAULT_API_VERSION;
@@ -53,32 +53,21 @@ function getShopifyConfig(config?: ShopifyConfig): {
     // Browser environment - use window or process.env
     domain =
       (window as any).__NEXT_DATA__?.env?.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN ||
-      (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN) ||
-      (import.meta as any)?.env?.VITE_SHOPIFY_DOMAIN;
+      (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN);
 
     token =
       (window as any).__NEXT_DATA__?.env?.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
-      (typeof process !== "undefined" &&
-        process.env?.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN) ||
-      (import.meta as any)?.env?.VITE_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
+      (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN);
 
     apiVersion =
       (window as any).__NEXT_DATA__?.env?.NEXT_PUBLIC_SHOPIFY_API_VERSION ||
       (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_API_VERSION) ||
-      (import.meta as any)?.env?.VITE_SHOPIFY_API_VERSION ||
       DEFAULT_API_VERSION;
   } else {
     // Server environment - use process.env
-    domain =
-      process.env?.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN ||
-      (import.meta as any)?.env?.VITE_SHOPIFY_DOMAIN;
-    token =
-      process.env?.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN ||
-      (import.meta as any)?.env?.VITE_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
-    apiVersion =
-      process.env?.NEXT_PUBLIC_SHOPIFY_API_VERSION ||
-      (import.meta as any)?.env?.VITE_SHOPIFY_API_VERSION ||
-      DEFAULT_API_VERSION;
+    domain = process.env?.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
+    token = process.env?.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
+    apiVersion = process.env?.NEXT_PUBLIC_SHOPIFY_API_VERSION || DEFAULT_API_VERSION;
   }
 
   return {
@@ -343,11 +332,9 @@ export async function addToCart(
   shopifyConfig?: ShopifyConfig
 ) {
   // Get variant ID from environment or frame-specific mapping
-  // Support both Next.js and Vite environment variables
+  // Use process.env for Next.js
   const defaultVariantId =
-    (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_FRAME_VARIANT_ID) ||
-    (import.meta as any)?.env?.VITE_SHOPIFY_FRAME_VARIANT_ID ||
-    null;
+    (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_FRAME_VARIANT_ID) || null;
 
   // Try to get frame-specific variant ID from product data (if configured)
   const frameStyle = getFrameStyleById(config.frameStyleId);
@@ -461,11 +448,9 @@ export function isShopifyEnabled(config?: ShopifyConfig): boolean {
  */
 export function getShopifyStatus(config?: ShopifyConfig) {
   const shopifyConfig = getShopifyConfig(config);
-  // Try to get variant ID from environment (support both Next.js and Vite)
+  // Try to get variant ID from environment
   const frameVariantId =
-    (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_FRAME_VARIANT_ID) ||
-    (import.meta as any)?.env?.VITE_SHOPIFY_FRAME_VARIANT_ID ||
-    null;
+    (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_FRAME_VARIANT_ID) || null;
 
   const configured = isShopifyConfigured(config);
 
@@ -518,11 +503,9 @@ export async function addMatToCart(
   shopifyConfig?: ShopifyConfig
 ) {
   // Get variant ID from environment
-  // Support both Next.js and Vite environment variables
+  // Use process.env for Next.js
   const defaultVariantId =
-    (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_MAT_VARIANT_ID) ||
-    (import.meta as any)?.env?.VITE_SHOPIFY_MAT_VARIANT_ID ||
-    null;
+    (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_MAT_VARIANT_ID) || null;
 
   // Validate variant ID is configured in production
   // Note: We check if Shopify is configured, but don't require variant ID in mock mode

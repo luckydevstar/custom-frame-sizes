@@ -1,5 +1,7 @@
-import { useState, useEffect, useMemo, useRef, useCallback } from "react";
-import { useLocation } from "wouter";
+"use client";
+
+import { useState, useEffect, useMemo, useRef, useCallback, lazy, Suspense } from "react";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import {
   Upload,
   Copy,
@@ -61,7 +63,10 @@ import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
 import { exportFramePreview, convertImageToDataURL, downloadImage } from "@framecraft/core";
 import { RecommendationCarousel } from "../marketing/RecommendationCarousel";
 import type { DesignRecommendation, DesignRecommendationResponse } from "@framecraft/types";
-import { ARViewer } from "../shared/ARViewer";
+
+const ARViewer = lazy(() =>
+  import("../shared/ARViewer").then((mod) => ({ default: mod.ARViewer }))
+);
 import { getMatTilingStyle, getMatBevelColor } from "@framecraft/core";
 import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
@@ -90,25 +95,20 @@ export function FrameDesigner({
   embedded: _embedded = false,
   hideMobileSticky = false,
 }: FrameDesignerProps = {}) {
-  const [location] = useLocation();
-  const [searchParams, setSearchParams] = useState(window.location.search);
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const [serviceType, setServiceType] = useState<"frame-only" | "print-and-frame">("frame-only");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  // Watch for URL changes (both path and query params)
-  useEffect(() => {
-    setSearchParams(window.location.search);
-  }, [location]);
 
   // Initialize frame selection based on defaultFrameId prop or URL parameter
   const initialFrame = useMemo(() => {
     if (defaultFrameId) {
       return getFrameStyleById(defaultFrameId) ?? frameStyles[0];
     }
-    const params = new URLSearchParams(window.location.search);
-    const frameParam = params.get("frame");
+    const frameParam = searchParams.get("frame");
     return frameParam ? (getFrameStyleById(frameParam) ?? frameStyles[0]) : frameStyles[0];
-  }, [defaultFrameId]);
+  }, [defaultFrameId, searchParams]);
 
   const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(
     () => initialFrame ?? frameStyles[0]!
@@ -142,15 +142,14 @@ export function FrameDesigner({
 
   // Brass nameplate configuration (Type B behavior)
   const [brassNameplateConfig, setBrassNameplateConfig] = useState<BrassNameplateConfig>(() => {
-    const params = new URLSearchParams(window.location.search);
-    const enabled = params.get("nameplateEnabled") === "true";
+    const enabled = searchParams.get("nameplateEnabled") === "true";
     return {
       enabled,
-      line1: params.get("nameplateLine1") || "",
-      line2: params.get("nameplateLine2") || "",
-      line3: params.get("nameplateLine3") || "",
-      font: (params.get("nameplateFont") as BrassNameplateConfig["font"]) || "georgia",
-      color: (params.get("nameplateColor") as BrassNameplateConfig["color"]) || "brass-black",
+      line1: searchParams.get("nameplateLine1") || "",
+      line2: searchParams.get("nameplateLine2") || "",
+      line3: searchParams.get("nameplateLine3") || "",
+      font: (searchParams.get("nameplateFont") as BrassNameplateConfig["font"]) || "georgia",
+      color: (searchParams.get("nameplateColor") as BrassNameplateConfig["color"]) || "brass-black",
       includeFlag: false,
     };
   });
@@ -350,8 +349,8 @@ export function FrameDesigner({
       params.set("nameplateColor", brassNameplateConfig.color);
     }
 
-    const newUrl = `${window.location.pathname}?${params.toString()}`;
-    window.history.replaceState({}, "", newUrl);
+    const newUrl = `${pathname}?${params.toString()}`;
+    router.replace(newUrl, { scroll: false });
   }, [
     isInitialLoadComplete,
     selectedFrame,
@@ -369,6 +368,8 @@ export function FrameDesigner({
     selectedImage,
     quantity,
     brassNameplateConfig,
+    pathname,
+    router,
   ]);
 
   // Fetch frame photos from local storage when frame changes
@@ -2455,23 +2456,25 @@ export function FrameDesigner({
                           >
                             Bottom-Weighted Matting
                           </Label>
-                          <Tooltip delayDuration={200}>
-                            <TooltipTrigger asChild>
-                              <button
-                                type="button"
-                                className="text-muted-foreground hover:text-foreground transition-colors"
-                                data-testid="button-bottom-weighted-info"
-                              >
-                                <Info className="h-4 w-4" />
-                              </button>
-                            </TooltipTrigger>
-                            <TooltipContent className="max-w-xs">
-                              <p className="text-sm">
-                                Adds 0.5&quot; to the bottom border for visual balance. This
-                                professional standard prevents artwork from appearing to sink.
-                              </p>
-                            </TooltipContent>
-                          </Tooltip>
+                          <TooltipProvider>
+                            <Tooltip delayDuration={200}>
+                              <TooltipTrigger asChild>
+                                <button
+                                  type="button"
+                                  className="text-muted-foreground hover:text-foreground transition-colors"
+                                  data-testid="button-bottom-weighted-info"
+                                >
+                                  <Info className="h-4 w-4" />
+                                </button>
+                              </TooltipTrigger>
+                              <TooltipContent className="max-w-xs">
+                                <p className="text-sm">
+                                  Adds 0.5&quot; to the bottom border for visual balance. This
+                                  professional standard prevents artwork from appearing to sink.
+                                </p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
                         </div>
                       </div>
                     </div>
@@ -2782,15 +2785,22 @@ export function FrameDesigner({
                 {isValidDimensions &&
                   (() => {
                     // Calculate larger display dimensions for dialog - use much larger artwork scale
-                    const isMobile = window.innerWidth < 768;
-                    const dialogArtworkScale = isMobile ? 200 : 150; // Larger scale on mobile for bigger preview
+                    // Use the existing isMobile hook value, with safe fallback for SSR
+                    const dialogIsMobile = typeof window !== "undefined" ? isMobile : false;
+                    const dialogArtworkScale = dialogIsMobile ? 200 : 150; // Larger scale on mobile for bigger preview
                     const dialogBorderScale = 40; // Separate smaller scale for borders
-                    const dialogMaxWidth = isMobile
-                      ? window.innerWidth * 0.98
-                      : window.innerWidth * 0.9;
-                    const dialogMaxHeight = isMobile
-                      ? window.innerHeight * 0.98
-                      : window.innerHeight * 0.85;
+                    const dialogMaxWidth =
+                      typeof window !== "undefined"
+                        ? dialogIsMobile
+                          ? window.innerWidth * 0.98
+                          : window.innerWidth * 0.9
+                        : 1200; // Default fallback for SSR
+                    const dialogMaxHeight =
+                      typeof window !== "undefined"
+                        ? dialogIsMobile
+                          ? window.innerHeight * 0.98
+                          : window.innerHeight * 0.85
+                        : 800; // Default fallback for SSR
 
                     // Calculate borders using smaller scale to prevent them eating up space
                     // If no mat, set mat border to 0
@@ -3370,12 +3380,14 @@ export function FrameDesigner({
                 variant="outline"
                 size="icon"
                 onClick={() => {
-                  const url = window.location.href;
-                  navigator.clipboard.writeText(url);
-                  toast({
-                    title: "Link copied!",
-                    description: "Design link copied to clipboard",
-                  });
+                  if (typeof window !== "undefined") {
+                    const url = `${window.location.origin}${pathname}${searchParams.toString() ? `?${searchParams.toString()}` : ""}`;
+                    navigator.clipboard.writeText(url);
+                    toast({
+                      title: "Link copied!",
+                      description: "Design link copied to clipboard",
+                    });
+                  }
                 }}
                 data-testid="button-mobile-copy-link"
                 className="h-11 w-11"
@@ -3451,34 +3463,42 @@ export function FrameDesigner({
 
       {/* AR Viewer Modal */}
       {showARViewer && (
-        <ARViewer
-          config={{
-            serviceType,
-            artworkWidth: parseFraction(artworkWidth),
-            artworkHeight: parseFraction(artworkHeight),
-            frameStyleId: selectedFrame.id,
-            matType,
-            matBorderWidth: parseFraction(matBorderWidth),
-            matRevealWidth: parseFraction(matRevealWidth),
-            matColorId: selectedMat.id,
-            matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
-            glassTypeId: selectedGlass?.id ?? "",
-            imageUrl: displayImage,
-            copyrightAgreed,
-          }}
-          onClose={() => setShowARViewer(false)}
-          onSizeUpdate={(newWidth: number, newHeight: number) => {
-            // Update dimensions from AR resize
-            setArtworkWidth(newWidth.toString());
-            setArtworkHeight(newHeight.toString());
+        <Suspense
+          fallback={
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+              <FrameSpinner />
+            </div>
+          }
+        >
+          <ARViewer
+            config={{
+              serviceType,
+              artworkWidth: parseFraction(artworkWidth),
+              artworkHeight: parseFraction(artworkHeight),
+              frameStyleId: selectedFrame.id,
+              matType,
+              matBorderWidth: parseFraction(matBorderWidth),
+              matRevealWidth: parseFraction(matRevealWidth),
+              matColorId: selectedMat.id,
+              matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
+              glassTypeId: selectedGlass?.id ?? "",
+              imageUrl: displayImage,
+              copyrightAgreed,
+            }}
+            onClose={() => setShowARViewer(false)}
+            onSizeUpdate={(newWidth: number, newHeight: number) => {
+              // Update dimensions from AR resize
+              setArtworkWidth(newWidth.toString());
+              setArtworkHeight(newHeight.toString());
 
-            // Show success toast
-            toast({
-              title: "Size Updated",
-              description: `Frame size updated to ${newWidth}" × ${newHeight}" from AR preview`,
-            });
-          }}
-        />
+              // Show success toast
+              toast({
+                title: "Size Updated",
+                description: `Frame size updated to ${newWidth}" × ${newHeight}" from AR preview`,
+              });
+            }}
+          />
+        </Suspense>
       )}
     </>
   );

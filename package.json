@@ -59,5 +59,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/luckydevstar/custom-frame-sizes.git"
+  },
+  "dependencies": {
+    "async_hooks": "^1.0.0"
   }
 }

@@ -1,96 +1,179 @@
-// Test imports from @framecraft packages
-import { defaultTheme } from "@framecraft/config";
-import type { ThemeConfig } from "@framecraft/config";
 import { brandConfig } from "../brand.config";
+import {
+  Hero,
+  FrameDesigner,
+  TestimonialCarousel,
+  HowItWorks,
+  ValueProps,
+  InspirationGallery,
+  FaqMini,
+  SeoTextBlock,
+  FrameStylesShowcase,
+  ShadowboxShowcase,
+  CanvasFramesShowcase,
+} from "@framecraft/ui";
+import { getFramesByCategory } from "@framecraft/core";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: brandConfig.seo.title,
+  description: brandConfig.seo.description,
+  keywords: brandConfig.seo.keywords?.join(", "),
+  openGraph: {
+    title: brandConfig.seo.title,
+    description: brandConfig.seo.description,
+    images: brandConfig.seo.ogImage ? [brandConfig.seo.ogImage] : [],
+    type: "website",
+    url: brandConfig.seo.canonicalUrl,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: brandConfig.seo.title,
+    description: brandConfig.seo.description,
+    images: brandConfig.seo.twitterImage ? [brandConfig.seo.twitterImage] : [],
+  },
+  alternates: {
+    canonical: brandConfig.seo.canonicalUrl,
+  },
+};
 
 export default function HomePage() {
-  // Verify theme import works
-  const theme: ThemeConfig = defaultTheme;
+  const showTestimonial = brandConfig.features?.showHomeTestimonial ?? true;
 
-  // Get store configuration directly (server component - no hooks needed)
-  const storeConfig = brandConfig;
+  // Get frames data for showcase components
+  const pictureFrames = getFramesByCategory("picture");
+  const shadowboxFrames = getFramesByCategory("shadowbox");
 
-  // Use theme to avoid unused variable warning
-  const primaryColor = theme.brand.primary;
   return (
-    <div className="container mx-auto px-4 py-12">
-      <div className="z-10 max-w-5xl w-full items-center justify-between text-center space-y-8">
-        <div className="space-y-4">
-          <h1 className="text-6xl font-bold tracking-tight">
-            Welcome to <span className="text-primary">Store A</span>
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            FrameCraft multi-store platform - First production storefront
+    <>
+      {/* Structured Data - Product Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Product",
+            name: "Custom Frame",
+            brand: {
+              "@type": "Brand",
+              name: brandConfig.name,
+            },
+            material: "Wood (premium hardwoods)",
+            additionalProperty: {
+              "@type": "PropertyValue",
+              name: "Sizing Granularity",
+              value: "1/8 inch",
+            },
+            offers: {
+              "@type": "AggregateOffer",
+              priceCurrency: "USD",
+              lowPrice: "25",
+              highPrice: "300",
+              availability: "https://schema.org/InStock",
+              url: brandConfig.seo.canonicalUrl,
+            },
+          }),
+        }}
+      />
+
+      {/* Structured Data - Organization Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: brandConfig.name,
+            url: brandConfig.seo.canonicalUrl,
+            logo: brandConfig.seo.ogImage,
+            contactPoint: {
+              "@type": "ContactPoint",
+              telephone: brandConfig.metadata?.contactPhone,
+              email: brandConfig.metadata?.contactEmail,
+              contactType: "Customer Service",
+            },
+          }),
+        }}
+      />
+
+      {/* Structured Data - WebSite Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: brandConfig.name,
+            url: brandConfig.seo.canonicalUrl,
+            potentialAction: {
+              "@type": "SearchAction",
+              target: {
+                "@type": "EntryPoint",
+                urlTemplate: `${brandConfig.seo.canonicalUrl}/picture-frames?search={search_term_string}`,
+              },
+              "query-input": "required name=search_term_string",
+            },
+          }),
+        }}
+      />
+
+      <Hero
+        title={brandConfig.branding?.tagline || "Custom Picture Frames in Any Size"}
+        subtitle={
+          brandConfig.branding?.valueProposition ||
+          "Design your custom frame in minutes with exact dimensions"
+        }
+        ctaPrimary={{ label: "Start Designing", href: "#designer" }}
+        ctaSecondary={{ label: "Browse Frames", href: "/picture-frames" }}
+      />
+
+      {showTestimonial && <TestimonialCarousel />}
+
+      {/* Frame Designer Section */}
+      <div id="designer" className="max-w-7xl mx-auto px-6 py-16">
+        <div className="text-center mb-8">
+          {/* Desktop text */}
+          <p className="hidden md:block text-lg text-muted-foreground max-w-2xl mx-auto">
+            Upload your image and customize every detail to create a frame that&apos;s uniquely
+            yours
+          </p>
+          {/* Mobile text */}
+          <p className="md:hidden text-base text-muted-foreground max-w-2xl mx-auto">
+            Start by tapping Customize to adjust your size, mat, and finish. Switch to Preview
+            anytime to see it in real time.
           </p>
         </div>
+        <FrameDesigner />
 
-        <div className="mt-12 p-8 bg-card rounded-lg border shadow-sm">
-          <h2 className="text-2xl font-semibold mb-4">P2-001 Status</h2>
-          <div className="space-y-2 text-left">
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span>Next.js 14+ App Router</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span>Tailwind CSS configured</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span>TypeScript setup complete</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span>Monorepo integration ready</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span>@framecraft packages configured</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span>Environment variables template created</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              <span>P2-002: Brand configuration complete ✅</span>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-8 p-8 bg-card rounded-lg border shadow-sm">
-          <h2 className="text-2xl font-semibold mb-4">Store Configuration</h2>
-          <div className="space-y-2 text-left text-sm">
-            <div>
-              <span className="font-semibold">Store Name:</span> {storeConfig.name}
-            </div>
-            <div>
-              <span className="font-semibold">Store ID:</span> {storeConfig.storeId}
-            </div>
-            <div>
-              <span className="font-semibold">Domain:</span> {storeConfig.domain}
-            </div>
-            <div>
-              <span className="font-semibold">Tagline:</span> {storeConfig.branding?.tagline}
-            </div>
-            <div>
-              <span className="font-semibold">Primary Color:</span>{" "}
-              <span
-                className="inline-block w-4 h-4 rounded border"
-                style={{ backgroundColor: storeConfig.theme?.brandColors?.primary }}
-              ></span>{" "}
-              {storeConfig.theme?.brandColors?.primary}
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-8 text-sm text-muted-foreground">
-          <p>Development server running on http://localhost:3000</p>
-          <p className="mt-2">P2-001: Application scaffold complete ✅</p>
-          <p className="mt-2">P2-002: Brand configuration complete ✅</p>
-          <p className="mt-2">Theme Primary Color: {primaryColor}</p>
+        {/* Mid-page SEO content */}
+        <div className="text-center mt-16 max-w-2xl mx-auto">
+          <h2 className="font-serif text-2xl font-semibold mb-4" data-testid="text-why-builder">
+            Picture Frames in Custom Sizes with Professional Precision
+          </h2>
+          <p className="text-base text-muted-foreground leading-relaxed">
+            Design custom picture frames in any size—from standard 8x10 and 16x20 frames to
+            oversized 24x36 and 30x40 picture frames. Enter your exact dimensions down to 1/8&quot;
+            increments, visualize your frame in real-time with our photo-based rendering, and
+            configure every detail with professional-grade accuracy. Whether you need picture
+            frames, shadowbox frames, or mat boards, what you see is exactly what you&apos;ll
+            receive.
+          </p>
         </div>
       </div>
-    </div>
+
+      {/* Showcase Sections */}
+      <div className="flex flex-col gap-12 md:gap-16">
+        <FrameStylesShowcase frames={pictureFrames} />
+        <ShadowboxShowcase frames={shadowboxFrames} />
+        <CanvasFramesShowcase />
+
+        {/* Conditional Sections */}
+        {brandConfig.features?.showHomeTestimonial && <HowItWorks />}
+        <ValueProps />
+        {brandConfig.features?.enableGallery && <InspirationGallery />}
+        <FaqMini />
+        <SeoTextBlock />
+      </div>
+    </>
   );
 }

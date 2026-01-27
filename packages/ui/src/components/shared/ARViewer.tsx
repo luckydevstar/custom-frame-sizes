@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, useRef } from "react";
 import "@google/model-viewer";
 import type { FrameConfiguration, FrameStyle, MatColor } from "@framecraft/types";

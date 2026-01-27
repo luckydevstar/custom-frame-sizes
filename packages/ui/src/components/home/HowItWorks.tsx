@@ -1,3 +1,5 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { useIntersectionAnimation } from "@framecraft/core";
 import type { LucideIcon } from "lucide-react";
@@ -33,18 +35,18 @@ export function HowItWorks({ config }: HowItWorksProps) {
           style={{ fontSize: "clamp(1.5rem, 6vw, 2.75rem)" }}
           data-testid="text-how-it-works-title"
         >
-          {config.headline}
+          {config?.headline}
         </h2>
         <p
           className="text-muted-foreground max-w-2xl mx-auto"
           style={{ fontSize: "clamp(0.875rem, 3.5vw, 1.125rem)" }}
         >
-          {config.subhead}
+          {config?.subhead}
         </p>
       </div>
 
       <div ref={cardsRef} className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        {config.steps.map((step, index) => {
+        {(config?.steps ?? []).map((step, index) => {
           const Icon = step.icon;
           return (
             <Card
