@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { getFrameStyleById } from "@framecraft/core";
 import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
 import type { LifestyleImage } from "./shared/BaseLifestyleCarousel";
+import type { AlternateImage } from "@framecraft/types";
 
 interface JerseyLifestyleCarouselProps {
   onImageClick?: (imageUrl: string, imageAlt: string) => void;
@@ -20,8 +21,9 @@ export function JerseyLifestyleCarousel({ onImageClick }: JerseyLifestyleCarouse
       const frame = getFrameStyleById(frameId);
       if (frame) {
         const jerseyLifestyleImages =
-          frame.alternateImages?.filter((img) => img.type === "jersey_lifestyle") || [];
-        jerseyLifestyleImages.forEach((img) => {
+          frame.alternateImages?.filter((img: AlternateImage) => img.type === "jersey_lifestyle") ||
+          [];
+        jerseyLifestyleImages.forEach((img: AlternateImage) => {
           allImages.push({
             url: img.url,
             alt: img.alt,

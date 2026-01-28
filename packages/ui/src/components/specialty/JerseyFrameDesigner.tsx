@@ -11,13 +11,13 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import { QuantitySelector } from "../ui/quantity-selector";
 // Import types from @framecraft/types
-import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
+import type { FrameStyle, FrameConfiguration, AlternateImage } from "@framecraft/types";
 
 // Import services from @framecraft/core
 import { getFrameStyleById, calculatePricing } from "@framecraft/core";
 
 // Import utilities from @framecraft/core
-import { computePreviewLayout } from "@framecraft/core";
+import { computePreviewLayout, getSharedAssetUrl } from "@framecraft/core";
 
 // Import hooks from @framecraft/core
 import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
@@ -267,7 +267,9 @@ export function JerseyFrameDesigner({
   // Random jersey lifestyle image for the selected frame (re-select when frame changes)
   const randomLifestyleImage = useMemo(() => {
     const lifestyleImages =
-      selectedFrame.alternateImages?.filter((img) => img.type === "jersey_lifestyle") || [];
+      selectedFrame.alternateImages?.filter(
+        (img: AlternateImage) => img.type === "jersey_lifestyle"
+      ) || [];
     if (lifestyleImages.length === 0) return null;
     const randomIndex = Math.floor(Math.random() * lifestyleImages.length);
     return lifestyleImages[randomIndex];
@@ -796,7 +798,8 @@ export function JerseyFrameDesigner({
                       {/* Corner Detail */}
                       {(() => {
                         const cornerImage = selectedFrame.alternateImages?.find(
-                          (img) => img.type === "corner" && img.url.includes("corner_a")
+                          (img: AlternateImage) =>
+                            img.type === "corner" && img.url.includes("corner_a")
                         );
                         return cornerImage ? (
                           <div className="aspect-square rounded-md border overflow-hidden bg-background">
@@ -828,7 +831,7 @@ export function JerseyFrameDesigner({
                       {/* Profile View */}
                       {(() => {
                         const profileImage = selectedFrame.alternateImages?.find(
-                          (img) =>
+                          (img: AlternateImage) =>
                             img.type === "profile" &&
                             (img.url.includes("profile_a") ||
                               img.url.includes("pro-a") ||
@@ -1085,9 +1088,14 @@ export function JerseyFrameDesigner({
                         {jerseyFrames.map((frame) => {
                           // Find first corner image from alternateImages
                           const cornerImage = frame.alternateImages?.find(
-                            (img) => img.type === "corner"
+                            (img: AlternateImage) => img.type === "corner"
                           );
-                          const swatchImage = cornerImage?.url || frame.thumbnail;
+                          const localPath = cornerImage?.url || frame.thumbnail;
+                          const swatchImage = localPath
+                            ? getSharedAssetUrl(
+                                localPath.startsWith("/") ? localPath.slice(1) : localPath
+                              )
+                            : "";
 
                           return (
                             <button

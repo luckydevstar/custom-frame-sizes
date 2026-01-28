@@ -3,6 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { useIntersectionAnimation } from "@framecraft/core";
 import type { LucideIcon } from "lucide-react";
+import { Upload, Palette, Ruler, Package } from "lucide-react";
 
 export interface HowItWorksStep {
   icon: LucideIcon;
@@ -17,10 +18,37 @@ export interface HowItWorksConfig {
 }
 
 export interface HowItWorksProps {
-  config: HowItWorksConfig;
+  config?: HowItWorksConfig;
 }
 
-export function HowItWorks({ config }: HowItWorksProps) {
+const defaultConfig: HowItWorksConfig = {
+  headline: "How It Works",
+  subhead: "Design your custom frame in four simple steps",
+  steps: [
+    {
+      icon: Upload,
+      title: "Upload Your Art",
+      description: "Upload your photo or artwork to see it in your custom frame",
+    },
+    {
+      icon: Ruler,
+      title: "Choose Your Size",
+      description: "Enter exact dimensions down to 1/8 inch increments",
+    },
+    {
+      icon: Palette,
+      title: "Customize Details",
+      description: "Select frame style, mat colors, and glass options",
+    },
+    {
+      icon: Package,
+      title: "We Build & Ship",
+      description: "Expertly crafted and shipped directly to your door",
+    },
+  ],
+};
+
+export function HowItWorks({ config = defaultConfig }: HowItWorksProps) {
   const titleRef = useIntersectionAnimation({ animationClass: "motion-fade-rise" });
   const cardsRef = useIntersectionAnimation({ stagger: true, animationClass: "motion-scale-in" });
 

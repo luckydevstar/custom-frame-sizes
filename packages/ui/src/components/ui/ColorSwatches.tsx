@@ -4,6 +4,8 @@
  * Includes keyboard accessibility, tooltips, and disabled state support
  */
 
+import { getSharedAssetUrl } from "@framecraft/core";
+
 // Note: matNeedsBorder and Mat type removed - config dependency not yet extracted
 // import { matNeedsBorder, type Mat } from "@/config/palette.config";
 // Temporary type until config is extracted
@@ -101,7 +103,8 @@ export function ColorSwatches({
             : [40, 41, 42, 43].includes(color.lineNumber)
               ? "?v=2"
               : "";
-        const swatchImagePath = `/mats/swatches/${color.lineNumber}.jpg${cacheBuster}`;
+        const swatchImagePath =
+          getSharedAssetUrl(`mats/swatches/${color.lineNumber}.jpg`) + cacheBuster;
 
         return (
           <button

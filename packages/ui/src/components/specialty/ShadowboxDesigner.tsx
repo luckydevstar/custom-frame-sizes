@@ -24,6 +24,7 @@ import type {
   FrameConfiguration,
   ShadowboxJerseyMount,
   ShadowboxAccessory,
+  AlternateImage,
 } from "@framecraft/types";
 
 // Import services from @framecraft/core
@@ -52,7 +53,12 @@ import { TrustBox } from "../marketing/TrustBox";
 import { addToCart, isShopifyEnabled } from "@framecraft/core";
 import { useToast } from "../../hooks/use-toast";
 import { toShadowboxConfig, fromShadowboxConfig } from "@framecraft/core";
-import { getMatTilingStyle, getMatBevelColor } from "@framecraft/core";
+import {
+  getMatTilingStyle,
+  getMatBevelColor,
+  getStoreAssetUrl,
+  getSharedAssetUrl,
+} from "@framecraft/core";
 import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
 import type { BrassNameplateConfig } from "@framecraft/types";
@@ -86,8 +92,8 @@ interface ShadowboxDesignerProps {
 }
 
 // Upscaled plywood texture for realistic backing (4x upscaled via Real-ESRGAN)
-// Now served locally for better performance and caching
-const PLYWOOD_TEXTURE_URL = "/assets/plywood-texture.png";
+// Now served from CDN or locally for better performance and caching
+const PLYWOOD_TEXTURE_URL = getStoreAssetUrl("plywood-texture.png");
 
 // Helper function to get backing styles (DRY - eliminates code duplication)
 // Returns style object with proper fallback color for graceful degradation
@@ -1377,7 +1383,7 @@ export function ShadowboxDesigner({
               {/* Corner Detail */}
               {(() => {
                 const cornerImage = selectedFrame.alternateImages?.find(
-                  (img) =>
+                  (img: AlternateImage) =>
                     img.type === "corner" &&
                     (img.url.includes("corner_a") || img.url.includes("corner-a"))
                 );
@@ -1401,7 +1407,7 @@ export function ShadowboxDesigner({
               {/* Profile View */}
               {(() => {
                 const profileImage = selectedFrame.alternateImages?.find(
-                  (img) =>
+                  (img: AlternateImage) =>
                     img.type === "profile" &&
                     (img.url.includes("profile_a") ||
                       img.url.includes("pro-a") ||
@@ -1427,7 +1433,7 @@ export function ShadowboxDesigner({
               {/* Lifestyle */}
               {(() => {
                 const lifestyleImage = selectedFrame.alternateImages?.find(
-                  (img) => img.type === "lifestyle"
+                  (img: AlternateImage) => img.type === "lifestyle"
                 );
                 return lifestyleImage ? (
                   <div className="aspect-square rounded-md border overflow-hidden bg-background">
@@ -1538,7 +1544,11 @@ export function ShadowboxDesigner({
                         {frame.thumbnail ? (
                           <div className="h-12 w-full rounded mb-2 overflow-hidden">
                             <img
-                              src={frame.thumbnail}
+                              src={getSharedAssetUrl(
+                                frame.thumbnail.startsWith("/")
+                                  ? frame.thumbnail.slice(1)
+                                  : frame.thumbnail
+                              )}
                               alt={frame.name}
                               className="h-full w-full object-cover"
                             />

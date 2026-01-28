@@ -15,7 +15,7 @@ import { QuantitySelector } from "../ui/quantity-selector";
 import { PriceBox } from "../ui/PriceBox";
 import type { PriceLineItem } from "../ui/PriceBox";
 // Import types from @framecraft/types
-import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
+import type { FrameStyle, FrameConfiguration, AlternateImage } from "@framecraft/types";
 
 // Import services from @framecraft/core
 import { getFramesByCategory, getGlassTypes, calculatePricing } from "@framecraft/core";
@@ -932,15 +932,20 @@ export function PuzzleFrameDesigner({
                 {selectedFrame.alternateImages && selectedFrame.alternateImages.length > 0 && (
                   <div className="grid grid-cols-3 gap-3 pt-4">
                     {/* First two alternate images */}
-                    {selectedFrame.alternateImages.slice(0, 2).map((image, idx) => (
-                      <div key={idx} className="aspect-square rounded-md overflow-hidden bg-muted">
-                        <img
-                          src={image.url}
-                          alt={image.alt}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                    ))}
+                    {selectedFrame.alternateImages
+                      .slice(0, 2)
+                      .map((image: AlternateImage, idx: number) => (
+                        <div
+                          key={idx}
+                          className="aspect-square rounded-md overflow-hidden bg-muted"
+                        >
+                          <img
+                            src={image.url}
+                            alt={image.alt}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ))}
                     {/* Third slot: Rotating lifestyle photo with fade transition */}
                     <div className="aspect-square rounded-md overflow-hidden bg-muted">
                       <img

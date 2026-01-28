@@ -20,10 +20,10 @@ import { QuantitySelector } from "../ui/quantity-selector";
 import { PriceBox } from "../ui/PriceBox";
 import type { PriceLineItem } from "../ui/PriceBox";
 // Import types from @framecraft/types
-import type { FrameStyle } from "@framecraft/types";
+import type { FrameStyle, AlternateImage } from "@framecraft/types";
 
 // Import services from @framecraft/core
-import { getFramesByCategory, getGlassTypes } from "@framecraft/core";
+import { getFramesByCategory, getGlassTypes, getSharedAssetUrl } from "@framecraft/core";
 
 // Import hooks from @framecraft/core
 import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
@@ -657,7 +657,8 @@ export function PlaybillFrameDesigner({
                     {/* Corner Detail */}
                     {(() => {
                       const cornerImage = selectedFrame.alternateImages?.find(
-                        (img) => img.type === "corner" && img.url.includes("corner_a")
+                        (img: AlternateImage) =>
+                          img.type === "corner" && img.url.includes("corner_a")
                       );
                       return cornerImage ? (
                         <button
@@ -701,7 +702,7 @@ export function PlaybillFrameDesigner({
                     {/* Profile View */}
                     {(() => {
                       const profileImage = selectedFrame.alternateImages?.find(
-                        (img) => img.type === "profile"
+                        (img: AlternateImage) => img.type === "profile"
                       );
                       return profileImage ? (
                         <button
@@ -862,7 +863,11 @@ export function PlaybillFrameDesigner({
                               {frame.thumbnail ? (
                                 <div className="h-12 w-full rounded mb-2 overflow-hidden">
                                   <img
-                                    src={frame.thumbnail}
+                                    src={getSharedAssetUrl(
+                                      frame.thumbnail.startsWith("/")
+                                        ? frame.thumbnail.slice(1)
+                                        : frame.thumbnail
+                                    )}
                                     alt={frame.name}
                                     className="h-full w-full object-cover"
                                   />

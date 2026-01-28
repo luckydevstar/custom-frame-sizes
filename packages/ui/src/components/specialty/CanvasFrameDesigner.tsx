@@ -34,7 +34,12 @@ import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
 import { getFramesByCategory, calculatePricing } from "@framecraft/core";
 
 // Import utilities from @framecraft/core
-import { parseFraction, validateArtworkSize, computePreviewLayout } from "@framecraft/core";
+import {
+  parseFraction,
+  validateArtworkSize,
+  computePreviewLayout,
+  getSharedAssetUrl,
+} from "@framecraft/core";
 
 // Import hooks from @framecraft/core
 import { useIsMobile, useMobileViewToggle, useIntersectionVisible } from "@framecraft/core";
@@ -55,8 +60,8 @@ import { useIsMobile, useMobileViewToggle, useIntersectionVisible } from "@frame
 // - @uppy/core types
 import { TermsOfServiceModal } from "../shared/TermsOfServiceModal";
 // Asset imports need to be handled at app level - placeholder for now
-// @ts-expect-error - Asset import needs to be handled at app level
-import floaterFrameDiagram from "@assets/image_1765893431262.png";
+// TODO: Add canvas floater diagram image
+// import floaterFrameDiagram from "@assets/image_1765893431262.png";
 import { ARViewer } from "../shared/ARViewer";
 import { PhotoUploadOptions } from "../shared/PhotoUploadOptions";
 import type { UploadResult } from "@uppy/core";
@@ -1335,14 +1340,14 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
             data-testid="info-float-frame"
           >
             <div className="flex flex-col sm:flex-row items-center gap-4">
-              {/* Visual Image */}
-              <div className="flex-shrink-0 w-full sm:w-56">
+              {/* Visual Image - TODO: Add diagram image */}
+              {/* <div className="flex-shrink-0 w-full sm:w-56">
                 <img
                   src={floaterFrameDiagram}
                   alt="Canvas floater frame diagram showing floating frame and stretched canvas"
                   className="w-full h-auto rounded-lg shadow-sm"
                 />
-              </div>
+              </div> */}
 
               {/* Text Content */}
               <div className="flex-1 space-y-2">
@@ -1480,7 +1485,11 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                                   {frame.thumbnail ? (
                                     <div className="h-12 w-full rounded mb-2 overflow-hidden">
                                       <img
-                                        src={frame.thumbnail}
+                                        src={getSharedAssetUrl(
+                                          frame.thumbnail.startsWith("/")
+                                            ? frame.thumbnail.slice(1)
+                                            : frame.thumbnail
+                                        )}
                                         alt={frame.name}
                                         className="h-full w-full object-cover"
                                       />
@@ -1488,7 +1497,11 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                                   ) : frame.swatchImage ? (
                                     <div className="h-12 w-full rounded mb-2 overflow-hidden">
                                       <img
-                                        src={frame.swatchImage}
+                                        src={getSharedAssetUrl(
+                                          frame.swatchImage.startsWith("/")
+                                            ? frame.swatchImage.slice(1)
+                                            : frame.swatchImage
+                                        )}
                                         alt={frame.name}
                                         className="h-full w-full object-cover"
                                       />
@@ -1527,7 +1540,11 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                           {frame.thumbnail ? (
                             <div className="h-12 w-full rounded mb-2 overflow-hidden">
                               <img
-                                src={frame.thumbnail}
+                                src={getSharedAssetUrl(
+                                  frame.thumbnail.startsWith("/")
+                                    ? frame.thumbnail.slice(1)
+                                    : frame.thumbnail
+                                )}
                                 alt={frame.name}
                                 className="h-full w-full object-cover"
                               />
@@ -1535,7 +1552,11 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                           ) : frame.swatchImage ? (
                             <div className="h-12 w-full rounded mb-2 overflow-hidden">
                               <img
-                                src={frame.swatchImage}
+                                src={getSharedAssetUrl(
+                                  frame.swatchImage.startsWith("/")
+                                    ? frame.swatchImage.slice(1)
+                                    : frame.swatchImage
+                                )}
                                 alt={frame.name}
                                 className="h-full w-full object-cover"
                               />

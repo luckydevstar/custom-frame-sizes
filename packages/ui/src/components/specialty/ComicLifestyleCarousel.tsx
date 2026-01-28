@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { getFramesByCategory } from "@framecraft/core";
 import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
 import type { LifestyleImage } from "./shared/BaseLifestyleCarousel";
+import type { AlternateImage } from "@framecraft/types";
 
 interface ComicLifestyleCarouselProps {
   onImageClick?: (imageUrl: string, imageAlt: string) => void;
@@ -14,8 +15,9 @@ export function ComicLifestyleCarousel({ onImageClick }: ComicLifestyleCarouselP
 
     shadowboxFrames.forEach((frame) => {
       const comicLifestyleImages =
-        frame.alternateImages?.filter((img) => img.type === "comic_lifestyle") || [];
-      comicLifestyleImages.forEach((img) => {
+        frame.alternateImages?.filter((img: AlternateImage) => img.type === "comic_lifestyle") ||
+        [];
+      comicLifestyleImages.forEach((img: AlternateImage) => {
         if (!imageMap.has(img.url)) {
           const filename = img.url.split("/").pop() || "";
           const imageNumber = filename.match(/\((\d+)\)/)?.[1] || "";

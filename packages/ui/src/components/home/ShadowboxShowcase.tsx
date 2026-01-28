@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { ArrowRight } from "lucide-react";
 import type { FrameStyle } from "@framecraft/types";
+import { getSharedAssetUrl } from "@framecraft/core";
 
 export interface ShadowboxShowcaseProps {
   frames: FrameStyle[];
@@ -21,12 +22,16 @@ export function ShadowboxShowcase({
   const shadowboxStyles = shadowboxFrames.map((frame) => {
     // Find first corner image from alternateImages
     const cornerImage = frame.alternateImages?.find((img) => img.type === "corner");
+    const localPath = cornerImage?.url || frame.thumbnail;
+    const cdnPath = localPath
+      ? getSharedAssetUrl(localPath.startsWith("/") ? localPath.slice(1) : localPath)
+      : "";
 
     return {
       id: frame.id,
       name: frame.name,
       description: frame.shortDescription || "Custom deep frame for memorabilia",
-      image: cornerImage?.url || frame.thumbnail,
+      image: cdnPath,
       alt: cornerImage?.alt || `${frame.name} corner detail`,
       usableDepth: frame.usableDepth,
     };

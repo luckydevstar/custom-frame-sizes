@@ -203,8 +203,8 @@ export async function getMatsBySize(
   const allColors = catalog.mats.map(matBoardToPaletteColor);
 
   // Separate standard and premium
-  const standard = allColors.filter((c) => c.type === "Regular");
-  const premium = allColors.filter((c) => c.type === "Premium");
+  const standard = allColors.filter((c: MatPaletteColor) => c.type === "Regular");
+  const premium = allColors.filter((c: MatPaletteColor) => c.type === "Premium");
 
   return { standard, premium, all: allColors };
 }
@@ -231,7 +231,7 @@ export async function getMatById(
   baseUrl: string = "/api/mats"
 ): Promise<MatBoard | null> {
   const catalog = await fetchMatCatalog(undefined, baseUrl);
-  return catalog.mats.find((m) => m.id === matId) || null;
+  return catalog.mats.find((m: MatBoard) => m.id === matId) || null;
 }
 
 /**
@@ -256,7 +256,7 @@ export async function getMatByColorName(
   baseUrl: string = "/api/mats"
 ): Promise<MatBoard | null> {
   const catalog = await fetchMatCatalog(undefined, baseUrl);
-  return catalog.mats.find((m) => m.colorName === colorName) || null;
+  return catalog.mats.find((m: MatBoard) => m.colorName === colorName) || null;
 }
 
 /**

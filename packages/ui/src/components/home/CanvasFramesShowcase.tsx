@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { ArrowRight } from "lucide-react";
+import { getCanvasImageUrl } from "@framecraft/core";
 
 interface CanvasStyle {
   id: string;
@@ -24,7 +25,7 @@ const defaultCanvasStyles: CanvasStyle[] = [
     sku: "10117",
     name: "Black Canvas Float Frame",
     description: "Clean lines for modern art",
-    image: "/assets/canvas/10117-lifestyle-a.jpg",
+    image: getCanvasImageUrl("10117-lifestyle-a.jpg"),
     keywords: "black canvas frame, float frame, gallery canvas",
   },
   {
@@ -32,7 +33,7 @@ const defaultCanvasStyles: CanvasStyle[] = [
     sku: "10764",
     name: "White Canvas Float Frame",
     description: "Bright and airy display",
-    image: "/assets/canvas/10764-lifestyle-a.jpg",
+    image: getCanvasImageUrl("10764-lifestyle-a.jpg"),
     keywords: "white canvas frame, float frame, modern canvas",
   },
   {
@@ -40,7 +41,7 @@ const defaultCanvasStyles: CanvasStyle[] = [
     sku: "10694",
     name: "Natural Wood Canvas Frame",
     description: "Warm wood grain finish",
-    image: "/assets/canvas/10694-lifestyle-a.jpg",
+    image: getCanvasImageUrl("10694-lifestyle-a.jpg"),
     keywords: "wood canvas frame, natural float frame",
   },
   {
@@ -48,7 +49,7 @@ const defaultCanvasStyles: CanvasStyle[] = [
     sku: "11345",
     name: "Gold Canvas Float Frame",
     description: "Classic elegance for any space",
-    image: "/assets/canvas/11345-lifestyle-a.jpg",
+    image: getCanvasImageUrl("11345-lifestyle-a.jpg"),
     keywords: "gold canvas frame, metallic canvas frame",
   },
 ];

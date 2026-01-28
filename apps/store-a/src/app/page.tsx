@@ -14,6 +14,7 @@ import {
 } from "@framecraft/ui";
 import { getFramesByCategory } from "@framecraft/core";
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: brandConfig.seo.title,
@@ -143,7 +144,15 @@ export default function HomePage() {
             anytime to see it in real time.
           </p>
         </div>
-        <FrameDesigner />
+        <Suspense
+          fallback={
+            <div className="min-h-[600px] flex items-center justify-center">
+              Loading designer...
+            </div>
+          }
+        >
+          <FrameDesigner />
+        </Suspense>
 
         {/* Mid-page SEO content */}
         <div className="text-center mt-16 max-w-2xl mx-auto">

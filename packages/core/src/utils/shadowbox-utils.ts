@@ -3,7 +3,7 @@
  * Pure functions for serialization, pricing, and layout calculations
  */
 
-import type { ShadowboxConfig, ShadowboxLayout } from "@framecraft/types";
+import type { ShadowboxConfig, ShadowboxLayout, ShadowboxMatLayer } from "@framecraft/types";
 import { calculatePricing } from "../services/pricing";
 
 /**
@@ -83,7 +83,10 @@ export function layoutShadowbox(config: ShadowboxConfig): ShadowboxLayout {
   const mouldingWidth = 0.75; // Could be looked up from frame data
 
   // Calculate mat border width
-  const totalMatBorder = matLayers.reduce((sum, layer) => sum + layer.thicknessIn, 0);
+  const totalMatBorder = matLayers.reduce(
+    (sum: number, layer: ShadowboxMatLayer) => sum + layer.thicknessIn,
+    0
+  );
 
   // Window size is the interior opening
   const windowW = widthIn;

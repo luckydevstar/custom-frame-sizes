@@ -3,6 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { useIntersectionAnimation } from "@framecraft/core";
 import type { LucideIcon } from "lucide-react";
+import { Ruler, Award, Sparkles, DollarSign, Clock } from "lucide-react";
 
 export interface WhyChooseUsCard {
   icon: LucideIcon;
@@ -17,10 +18,42 @@ export interface WhyChooseUsConfig {
 }
 
 export interface ValuePropsProps {
-  config: WhyChooseUsConfig;
+  config?: WhyChooseUsConfig;
 }
 
-export function ValueProps({ config }: ValuePropsProps) {
+const defaultConfig: WhyChooseUsConfig = {
+  headline: "Why Choose Custom Frame Sizes",
+  subhead: "Professional quality frames made to your exact specifications",
+  cards: [
+    {
+      icon: Ruler,
+      title: "Any Size",
+      description: "1/8 inch precision sizing for perfect fit every time",
+    },
+    {
+      icon: Award,
+      title: "Premium Quality",
+      description: "Museum-grade materials and expert craftsmanship",
+    },
+    {
+      icon: Sparkles,
+      title: "Easy Design",
+      description: "Visualize your frame in real-time as you customize",
+    },
+    {
+      icon: DollarSign,
+      title: "Fair Pricing",
+      description: "No hidden fees - instant pricing as you design",
+    },
+    {
+      icon: Clock,
+      title: "Fast Turnaround",
+      description: "Quick production and shipping to your door",
+    },
+  ],
+};
+
+export function ValueProps({ config = defaultConfig }: ValuePropsProps) {
   const titleRef = useIntersectionAnimation({ animationClass: "motion-fade-rise" });
   const cardsRef = useIntersectionAnimation({ stagger: true, animationClass: "motion-scale-in" });
 

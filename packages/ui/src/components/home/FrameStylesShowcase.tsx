@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { ArrowRight } from "lucide-react";
 import type { FrameStyle } from "@framecraft/types";
+import { getSharedAssetUrl } from "@framecraft/core";
 
 export interface FrameStylesShowcaseProps {
   frames: FrameStyle[];
@@ -71,13 +72,17 @@ export function FrameStylesShowcase({
     .map((frame) => {
       // Find corner image from alternateImages
       const cornerImage = frame.alternateImages?.find((img) => img.type === "corner");
+      const localPath = cornerImage?.url || frame.thumbnail;
+      const cdnPath = localPath
+        ? getSharedAssetUrl(localPath.startsWith("/") ? localPath.slice(1) : localPath)
+        : "";
 
       return {
         id: frame.id,
         name: frame.name,
         description:
           frame.shortDescription || frame.featuredDescription || "Premium custom framing",
-        image: cornerImage?.url || frame.thumbnail,
+        image: cdnPath,
         alt: cornerImage?.alt || `${frame.name} corner detail`,
         keywords: `${frame.name.toLowerCase()}, custom ${frame.name.toLowerCase()}`,
       };

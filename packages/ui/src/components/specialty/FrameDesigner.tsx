@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef, useCallback, lazy, Suspense } from "react";
+import { useState, useEffect, useMemo, useRef, lazy, Suspense } from "react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import {
   Upload,
@@ -47,7 +47,12 @@ import { getFramesByCategory, getGlassTypes, getFrameStyleById } from "@framecra
 import { calculatePricing } from "@framecraft/core";
 
 // Import utilities from @framecraft/core
-import { parseFraction, validateArtworkSize, computePreviewLayout } from "@framecraft/core";
+import {
+  parseFraction,
+  validateArtworkSize,
+  computePreviewLayout,
+  getSharedAssetUrl,
+} from "@framecraft/core";
 
 // Import hooks from @framecraft/core
 import { useIsMobile, useMobileViewToggle, useIntersectionVisible } from "@framecraft/core";
@@ -219,20 +224,6 @@ export function FrameDesigner({
     rightUrl?: string; // Pre-oriented right piece (decorative edge facing left)
   }>({});
 
-  // Get random lifestyle image from alternateImages array
-  const getRandomLifestyleImage = useCallback((frameId: string) => {
-    const frame = frameStyles.find((f) => f.id === frameId);
-    if (!frame?.alternateImages) return undefined;
-
-    const lifestyleImages = frame.alternateImages.filter(
-      (img: { type: string; url: string }) => img.type === "lifestyle"
-    );
-    if (lifestyleImages.length === 0) return "";
-
-    const randomIndex = Math.floor(Math.random() * lifestyleImages.length);
-    return lifestyleImages[randomIndex]?.url ?? "";
-  }, []);
-
   // navigate not currently used but may be needed in future
   // const [, navigate] = useLocation();
 
@@ -387,8 +378,7 @@ export function FrameDesigner({
         const response = await fetch(`/api/frames/${selectedFrame.sku}/photos`);
         if (response.ok) {
           const photoSet = await response.json();
-          // Get random lifestyle image from alternateImages array, fallback to API response
-          const randomLifestyle = getRandomLifestyleImage(selectedFrame.id);
+          // Use API response directly - it already generates random lifestyle URLs
           setFramePhotos({
             topUrl: photoSet.topUrl,
             bottomUrl: photoSet.bottomUrl,
@@ -396,7 +386,7 @@ export function FrameDesigner({
             rightUrl: photoSet.rightUrl,
             cornerUrl: photoSet.cornerUrl,
             profileUrl: photoSet.profileUrl,
-            lifestyleUrl: randomLifestyle || photoSet.lifestyleUrl,
+            lifestyleUrl: photoSet.lifestyleUrl,
           });
         }
         // Note: No need to clear on error since we already cleared at the start
@@ -407,7 +397,7 @@ export function FrameDesigner({
     }
 
     fetchFramePhotos();
-  }, [selectedFrame, getRandomLifestyleImage]);
+  }, [selectedFrame]);
 
   // Cross-fade animation when selectedImage changes
   useEffect(() => {
@@ -2037,7 +2027,11 @@ export function FrameDesigner({
                         className="p-0 border-0 bg-transparent shadow-lg"
                       >
                         <img
-                          src={selectedFrame.dimensionalDiagram}
+                          src={getSharedAssetUrl(
+                            selectedFrame.dimensionalDiagram.startsWith("/")
+                              ? selectedFrame.dimensionalDiagram.slice(1)
+                              : selectedFrame.dimensionalDiagram
+                          )}
                           alt={`${selectedFrame.name} dimensional diagram`}
                           className="w-64 rounded-lg border-2 border-border bg-background"
                           data-testid="img-dimensional-diagram"
@@ -2327,7 +2321,11 @@ export function FrameDesigner({
                         {frame.thumbnail ? (
                           <div className="h-12 w-full rounded mb-2 overflow-hidden">
                             <img
-                              src={frame.thumbnail}
+                              src={getSharedAssetUrl(
+                                frame.thumbnail.startsWith("/")
+                                  ? frame.thumbnail.slice(1)
+                                  : frame.thumbnail
+                              )}
                               alt={frame.name}
                               className="h-full w-full object-cover"
                             />
