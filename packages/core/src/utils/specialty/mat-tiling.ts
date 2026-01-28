@@ -9,6 +9,7 @@
 
 import type React from "react";
 import { getMatByName, ALL_MATS } from "@framecraft/config";
+import { getSharedAssetUrl } from "../asset-urls";
 
 // Build hex-to-mat-name lookup table once at module scope
 const HEX_TO_MAT_NAME: Record<string, string> = {};
@@ -76,8 +77,11 @@ export function getMatTilingStyle(
   // Cache-busting for updated mat images (v=4 to force fresh reload of all mats)
   const cacheBustParam = "?v=4";
 
+  // Use CDN URL if configured, otherwise use local path
+  const matImageUrl = getSharedAssetUrl(`mats/${mat.lineNumber}.jpg`);
+
   return {
-    backgroundImage: `url('/mats/${mat.lineNumber}.jpg${cacheBustParam}')`,
+    backgroundImage: `url('${matImageUrl}${cacheBustParam}')`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
@@ -283,7 +287,11 @@ export function getMatSVGPatternData(
   // Return image path for use in SVG (SVG will handle cover sizing via preserveAspectRatio)
   // Cache-busting for updated mat images (v=4 to force fresh reload of all mats)
   const cacheBustParam = "?v=4";
+
+  // Use CDN URL if configured, otherwise use local path
+  const matImageUrl = getSharedAssetUrl(`mats/${mat.lineNumber}.jpg`);
+
   return {
-    imagePath: `/mats/${mat.lineNumber}.jpg${cacheBustParam}`,
+    imagePath: `${matImageUrl}${cacheBustParam}`,
   };
 }

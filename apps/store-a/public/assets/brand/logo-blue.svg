@@ -1,8 +1,0 @@
-<svg width="150" height="40" xmlns="http://www.w3.org/2000/svg">
-  <!-- Simple placeholder logo for Store A -->
-  <rect width="150" height="40" fill="#1D7BC7" rx="4"/>
-  <text x="75" y="25" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">
-    Store A
-  </text>
-</svg>
-

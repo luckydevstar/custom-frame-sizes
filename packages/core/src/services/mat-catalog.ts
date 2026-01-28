@@ -149,7 +149,7 @@ export function matBoardToPaletteColor(mat: MatBoard): MatPaletteColor {
     lineNumber: 0, // Not applicable for new catalog system
     type,
     name: mat.colorName,
-    swatchFile: `/mats/${mat.id}/swatch.jpg`,
+    swatchFile: getSharedAssetUrl(`mats/${mat.id}/swatch.jpg`),
     hexColor: mat.colorHex,
     sizes: {
       "32x40": sizes32x40,

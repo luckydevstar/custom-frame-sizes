@@ -20,6 +20,7 @@
 export * from "./dimensions";
 export * from "./geometry";
 export * from "./shadowbox-utils";
+export * from "./asset-urls";
 export * from "./markdown";
 export * from "./schemas";
 export * from "./query-client";

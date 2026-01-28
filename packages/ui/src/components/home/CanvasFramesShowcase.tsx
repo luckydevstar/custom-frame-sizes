@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { ArrowRight } from "lucide-react";
+import { getCanvasImageUrl } from "@framecraft/core";
 
 interface CanvasStyle {
   id: string;
@@ -18,45 +19,50 @@ export interface CanvasFramesShowcaseProps {
   canvasLink?: string;
 }
 
-const defaultCanvasStyles: CanvasStyle[] = [
-  {
-    id: "canvas-black",
-    sku: "10117",
-    name: "Black Canvas Float Frame",
-    description: "Clean lines for modern art",
-    image: "/assets/canvas/10117-lifestyle-a.jpg",
-    keywords: "black canvas frame, float frame, gallery canvas",
-  },
-  {
-    id: "canvas-white",
-    sku: "10764",
-    name: "White Canvas Float Frame",
-    description: "Bright and airy display",
-    image: "/assets/canvas/10764-lifestyle-a.jpg",
-    keywords: "white canvas frame, float frame, modern canvas",
-  },
-  {
-    id: "canvas-natural",
-    sku: "10694",
-    name: "Natural Wood Canvas Frame",
-    description: "Warm wood grain finish",
-    image: "/assets/canvas/10694-lifestyle-a.jpg",
-    keywords: "wood canvas frame, natural float frame",
-  },
-  {
-    id: "canvas-gold",
-    sku: "11345",
-    name: "Gold Canvas Float Frame",
-    description: "Classic elegance for any space",
-    image: "/assets/canvas/11345-lifestyle-a.jpg",
-    keywords: "gold canvas frame, metallic canvas frame",
-  },
-];
+// Helper to get default canvas styles with CDN URLs
+function getDefaultCanvasStyles(): CanvasStyle[] {
+  return [
+    {
+      id: "canvas-black",
+      sku: "10117",
+      name: "Black Canvas Float Frame",
+      description: "Clean lines for modern art",
+      image: getCanvasImageUrl("10117-lifestyle-a.jpg"),
+      keywords: "black canvas frame, float frame, gallery canvas",
+    },
+    {
+      id: "canvas-white",
+      sku: "10764",
+      name: "White Canvas Float Frame",
+      description: "Bright and airy display",
+      image: getCanvasImageUrl("10764-lifestyle-a.jpg"),
+      keywords: "white canvas frame, float frame, modern canvas",
+    },
+    {
+      id: "canvas-natural",
+      sku: "10694",
+      name: "Natural Wood Canvas Frame",
+      description: "Warm wood grain finish",
+      image: getCanvasImageUrl("10694-lifestyle-a.jpg"),
+      keywords: "wood canvas frame, natural float frame",
+    },
+    {
+      id: "canvas-gold",
+      sku: "11345",
+      name: "Gold Canvas Float Frame",
+      description: "Classic elegance for any space",
+      image: getCanvasImageUrl("11345-lifestyle-a.jpg"),
+      keywords: "gold canvas frame, metallic canvas frame",
+    },
+  ];
+}
 
 export function CanvasFramesShowcase({
-  canvasStyles = defaultCanvasStyles,
+  canvasStyles,
   canvasLink = "/canvas-frames",
 }: CanvasFramesShowcaseProps) {
+  // Use provided styles or default with CDN URLs
+  const styles = canvasStyles || getDefaultCanvasStyles();
   return (
     <section className="py-10 sm:py-12 bg-muted/30" data-testid="section-canvas-frames">
       <div className="container mx-auto px-6">
@@ -73,7 +79,7 @@ export function CanvasFramesShowcase({
 
         {/* Canvas Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {canvasStyles.map((canvas) => (
+          {styles.map((canvas) => (
             <Link key={canvas.id} href={`${canvasLink}?frame=${canvas.sku}`} className="group">
               <div
                 className="relative rounded-lg overflow-hidden hover-elevate active-elevate-2 cursor-pointer"

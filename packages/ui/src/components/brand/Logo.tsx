@@ -1,6 +1,6 @@
 "use client";
 
-import { useTheme } from "@framecraft/core";
+import { useTheme, getBrandAssetUrl } from "@framecraft/core";
 import Image from "next/image";
 
 interface LogoProps {
@@ -42,9 +42,9 @@ export function Logo({
 }: LogoProps) {
   const { isDark } = useTheme({ applyToDocument: false });
 
-  // Default logo paths (matching original implementation)
-  const defaultLight = "/assets/brand/logo-blue.png";
-  const defaultDark = "/assets/brand/logo-dark.png";
+  // Default logo paths (using CDN URLs if configured)
+  const defaultLight = getBrandAssetUrl("logo-blue.png");
+  const defaultDark = getBrandAssetUrl("logo-dark.png");
 
   const logoSrc = isDark ? logoSrcDark || defaultDark : logoSrcLight || defaultLight;
 

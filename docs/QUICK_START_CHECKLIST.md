@@ -227,8 +227,6 @@ Use this space to track issues, learnings, and decisions:
 
 ### Week 4 Notes:
 
--
+- ***
 
----
-
-**Remember**: This is a marathon, not a sprint. Take breaks, test incrementally, and celebrate small wins!
+  **Remember**: This is a marathon, not a sprint. Take breaks, test incrementally, and celebrate small wins!

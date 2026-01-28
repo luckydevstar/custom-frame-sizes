@@ -82,6 +82,9 @@ export function getMatByName(name: string): Mat | undefined {
  * Get swatch image path for a mat
  */
 export function getMatSwatchPath(mat: Mat): string {
+  // Use CDN URL if configured, otherwise use local path
+  // Note: This function is used in config, so we need to import the helper
+  // For now, return the path and let the caller handle CDN conversion
   return `/mats/${mat.swatchFile}`;
 }
 

@@ -52,7 +52,7 @@ import { TrustBox } from "../marketing/TrustBox";
 import { addToCart, isShopifyEnabled } from "@framecraft/core";
 import { useToast } from "../../hooks/use-toast";
 import { toShadowboxConfig, fromShadowboxConfig } from "@framecraft/core";
-import { getMatTilingStyle, getMatBevelColor } from "@framecraft/core";
+import { getMatTilingStyle, getMatBevelColor, getStoreAssetUrl } from "@framecraft/core";
 import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
 import type { BrassNameplateConfig } from "@framecraft/types";
@@ -86,8 +86,8 @@ interface ShadowboxDesignerProps {
 }
 
 // Upscaled plywood texture for realistic backing (4x upscaled via Real-ESRGAN)
-// Now served locally for better performance and caching
-const PLYWOOD_TEXTURE_URL = "/assets/plywood-texture.png";
+// Now served from CDN or locally for better performance and caching
+const PLYWOOD_TEXTURE_URL = getStoreAssetUrl("plywood-texture.png");
 
 // Helper function to get backing styles (DRY - eliminates code duplication)
 // Returns style object with proper fallback color for graceful degradation
