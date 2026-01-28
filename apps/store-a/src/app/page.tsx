@@ -11,10 +11,22 @@ import {
   FrameStylesShowcase,
   ShadowboxShowcase,
   CanvasFramesShowcase,
+  PrintAndFrameService,
+  MatDesignerShowcase,
+  GlazingShowcase,
+  SpecialtyDesignersShowcase,
+  EducationTeasers,
 } from "@framecraft/ui";
 import { getFramesByCategory } from "@framecraft/core";
 import type { Metadata } from "next";
 import { Suspense } from "react";
+// Import store-specific data
+import heroImagesDataRaw from "../data/heroImages.json";
+import testimonialsData from "../data/testimonials.json";
+import type { HeroImage } from "@framecraft/core";
+
+// Type assertion for hero images data
+const heroImagesData = heroImagesDataRaw as HeroImage[];
 
 export const metadata: Metadata = {
   title: brandConfig.seo.title,
@@ -126,9 +138,10 @@ export default function HomePage() {
         }
         ctaPrimary={{ label: "Start Designing", href: "#designer" }}
         ctaSecondary={{ label: "Browse Frames", href: "/picture-frames" }}
+        heroImagesData={heroImagesData}
       />
 
-      {showTestimonial && <TestimonialCarousel />}
+      {showTestimonial && <TestimonialCarousel testimonialsData={testimonialsData} />}
 
       {/* Frame Designer Section */}
       <div id="designer" className="max-w-7xl mx-auto px-6 py-16">
@@ -170,16 +183,23 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Showcase Sections */}
-      <div className="flex flex-col gap-12 md:gap-16">
-        <FrameStylesShowcase frames={pictureFrames} />
-        <ShadowboxShowcase frames={shadowboxFrames} />
-        <CanvasFramesShowcase />
+      {/* Print & Frame Service */}
+      <PrintAndFrameService />
 
-        {/* Conditional Sections */}
+      {/* Frame Styles Showcase */}
+      <FrameStylesShowcase frames={pictureFrames} />
+
+      {/* Showcase Sections */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "var(--section-gap)" }}>
         {brandConfig.features?.showHomeTestimonial && <HowItWorks />}
+        <ShadowboxShowcase frames={shadowboxFrames} />
+        <MatDesignerShowcase />
+        <CanvasFramesShowcase />
+        <GlazingShowcase />
+        <SpecialtyDesignersShowcase />
         <ValueProps />
         {brandConfig.features?.enableGallery && <InspirationGallery />}
+        <EducationTeasers />
         <FaqMini />
         <SeoTextBlock />
       </div>

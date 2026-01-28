@@ -22,3 +22,8 @@ export { ShadowboxShowcase } from "./ShadowboxShowcase";
 export type { ShadowboxShowcaseProps } from "./ShadowboxShowcase";
 export { CanvasFramesShowcase } from "./CanvasFramesShowcase";
 export type { CanvasFramesShowcaseProps } from "./CanvasFramesShowcase";
+export { PrintAndFrameService } from "./PrintAndFrameService";
+export { MatDesignerShowcase } from "./MatDesignerShowcase";
+export { GlazingShowcase } from "./GlazingShowcase";
+export { SpecialtyDesignersShowcase } from "./SpecialtyDesignersShowcase";
+export { EducationTeasers } from "./EducationTeasers";

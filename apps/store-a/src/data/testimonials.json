@@ -1,0 +1,100 @@
+[
+  {
+    "id": "testimonial-1",
+    "quote": "The preview made choosing so easy, and the finished product looks like it came from a gallery.",
+    "author": "Elena V.",
+    "location": "CA",
+    "rating": 5
+  },
+  {
+    "id": "testimonial-2",
+    "quote": "Exact sizing down to 1/8\" is a game-changer. My print fits perfectly—no gaps, no guesswork.",
+    "author": "Ravi S.",
+    "location": "NY",
+    "rating": 5
+  },
+  {
+    "id": "testimonial-3",
+    "quote": "Beautiful walnut grain, flawless corners, packed like a museum shipment. I'm impressed.",
+    "author": "Maya L.",
+    "location": "FL",
+    "rating": 5
+  },
+  {
+    "id": "testimonial-4",
+    "quote": "Designed in minutes, delivered ready to hang. The non-glare glazing was worth it.",
+    "author": "Jon P.",
+    "location": "TX",
+    "rating": 5
+  },
+  {
+    "id": "testimonial-5",
+    "quote": "Color-matched mat made my photo pop. It looks custom because it is.",
+    "author": "Tara K.",
+    "location": "WA",
+    "rating": 5
+  },
+  {
+    "id": "testimonial-6",
+    "quote": "Large format was no problem—the frame arrived square, solid, and perfectly protected.",
+    "author": "Marcus D.",
+    "location": "IL",
+    "rating": 5
+  },
+  {
+    "id": "testimonial-7",
+    "quote": "Live preview took the stress out of ordering. The matte black is timeless.",
+    "author": "Sophie R.",
+    "location": "MA",
+    "rating": 5
+  },
+  {
+    "id": "testimonial-8",
+    "quote": "Quality rivals the local shop at a fraction of the time. I'll be back for more.",
+    "author": "Noah G.",
+    "location": "CO",
+    "rating": 5
+  },
+  {
+    "id": "testimonial-9",
+    "quote": "I needed frames in odd sizes for my gallery wall, and this was the only place that could do exactly what I needed. The live preview was incredibly helpful!",
+    "author": "Sarah M.",
+    "location": "Portland, OR",
+    "rating": 5
+  },
+  {
+    "id": "testimonial-10",
+    "quote": "The exact sizing feature is a game-changer. I had artwork in an unusual size, and they nailed it perfectly. No more compromising on standard sizes!",
+    "author": "Michael R.",
+    "location": "Austin, TX",
+    "rating": 5
+  },
+  {
+    "id": "testimonial-11",
+    "quote": "Finally, a framing service that understands precision! My print fits perfectly. The quality is exceptional and the pricing was transparent from the start.",
+    "author": "Jennifer K.",
+    "location": "Seattle, WA",
+    "rating": 5
+  },
+  {
+    "id": "testimonial-12",
+    "quote": "I was skeptical about ordering custom frames online, but the instant pricing and live preview gave me confidence. My frame arrived exactly as shown. Highly recommend!",
+    "author": "David L.",
+    "location": "Chicago, IL",
+    "rating": 5
+  },
+  {
+    "id": "testimonial-13",
+    "quote": "As a photographer, I need frames in non-standard sizes constantly. This site makes it so easy—just enter my exact dimensions and see the price instantly. No more back-and-forth emails!",
+    "author": "Emma T.",
+    "location": "Boston, MA",
+    "rating": 5
+  },
+  {
+    "id": "testimonial-14",
+    "quote": "The ability to design frames in any size is exactly what I needed for my art collection. The mat customization and glass options are top-notch. Will definitely order again!",
+    "author": "Robert H.",
+    "location": "Denver, CO",
+    "rating": 5
+  }
+]

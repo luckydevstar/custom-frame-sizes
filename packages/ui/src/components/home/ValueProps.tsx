@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { useIntersectionAnimation } from "@framecraft/core";
 import type { LucideIcon } from "lucide-react";
-import { Ruler, Award, Sparkles, DollarSign, Clock } from "lucide-react";
+import { Flag, Award, Ruler, Package, RotateCcw } from "lucide-react";
 
 export interface WhyChooseUsCard {
   icon: LucideIcon;
@@ -22,33 +22,35 @@ export interface ValuePropsProps {
 }
 
 const defaultConfig: WhyChooseUsConfig = {
-  headline: "Why Choose Custom Frame Sizes",
-  subhead: "Professional quality frames made to your exact specifications",
+  headline: "Why Choose Us",
+  subhead: "Quality craftsmanship and customer service you can trust.",
   cards: [
     {
-      icon: Ruler,
-      title: "Any Size",
-      description: "1/8 inch precision sizing for perfect fit every time",
+      icon: Flag,
+      title: "Made in the USA",
+      description:
+        "Handcrafted in our U.S. workshop with American materials and skilled craftsmanship.",
     },
     {
       icon: Award,
-      title: "Premium Quality",
-      description: "Museum-grade materials and expert craftsmanship",
+      title: "Museum-Grade Materials",
+      description:
+        "Premium woods and metals with archival mats and acid-free backing to protect your art.",
     },
     {
-      icon: Sparkles,
-      title: "Easy Design",
-      description: "Visualize your frame in real-time as you customize",
+      icon: Ruler,
+      title: "Exact Sizing",
+      description: "Built to your exact measurements (down to 1/8 inch) for a perfect fit.",
     },
     {
-      icon: DollarSign,
-      title: "Fair Pricing",
-      description: "No hidden fees - instant pricing as you design",
+      icon: Package,
+      title: "Safe Shipping",
+      description: "Engineered packaging and insured delivery keep your frame safe to your door.",
     },
     {
-      icon: Clock,
-      title: "Fast Turnaround",
-      description: "Quick production and shipping to your door",
+      icon: RotateCcw,
+      title: "Easy Returns",
+      description: "Hassle-free 30-day returns and a lifetime craftsmanship guarantee.",
     },
   ],
 };

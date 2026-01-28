@@ -36,3 +36,4 @@ export * from "./use-scroll-to-top";
 export * from "./use-print-frame";
 export * from "./use-rotating-images";
 export * from "./use-rotating-testimonial";
+export * from "./use-hero-image";

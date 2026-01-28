@@ -1,7 +1,7 @@
 "use client";
 
 import { Star, ChevronLeft, ChevronRight, Shield, Flag, RotateCcw } from "lucide-react";
-import { useRotatingTestimonial } from "@framecraft/core";
+import { useRotatingTestimonial, type Testimonial } from "@framecraft/core";
 import { Skeleton } from "../ui/skeleton";
 import { Button } from "../ui/button";
 import { useEffect } from "react";
@@ -9,11 +9,13 @@ import { useEffect } from "react";
 export interface TestimonialCarouselProps {
   showTrustIndicators?: boolean;
   autoRotateInterval?: number;
+  testimonialsData?: Testimonial[];
 }
 
 export function TestimonialCarousel({
   showTrustIndicators = true,
   autoRotateInterval = 7000,
+  testimonialsData,
 }: TestimonialCarouselProps) {
   const {
     testimonial,
@@ -27,7 +29,7 @@ export function TestimonialCarousel({
     goToIndex,
     setPaused,
     totalCount: _totalCount,
-  } = useRotatingTestimonial(autoRotateInterval);
+  } = useRotatingTestimonial(autoRotateInterval, testimonialsData);
 
   // Touch handling for swipe on mobile
   useEffect(() => {
@@ -44,6 +46,8 @@ export function TestimonialCarousel({
         handleSwipe();
       }
     };
+
+    console.log("touchStartX", touchStartX);
 
     const handleSwipe = () => {
       const swipeThreshold = 50;

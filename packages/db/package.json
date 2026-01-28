@@ -11,7 +11,7 @@
     "dev": "tsc --build --watch",
     "type-check": "tsc --noEmit",
     "lint": "eslint . --ext .ts",
-    "clean": "rm -rf dist",
+    "clean": "rimraf dist",
     "db:push": "drizzle-kit push",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate"

@@ -284,7 +284,7 @@ export {
   type NavigationConfig,
   type NavigationItem,
 } from "./components/layout/Navigation";
-export { Hero, type HeroProps, type HeroImage, type HeroConfig } from "./components/layout/Hero";
+export { Hero, type HeroProps, type HeroConfig } from "./components/layout/Hero";
 // Seo component not exported - use Next.js metadata API instead
 // export { Seo, type SeoProps, type BrandConfig } from "./components/layout/Seo";
 
@@ -325,6 +325,11 @@ export {
   FrameStylesShowcase,
   ShadowboxShowcase,
   CanvasFramesShowcase,
+  PrintAndFrameService,
+  MatDesignerShowcase,
+  GlazingShowcase,
+  SpecialtyDesignersShowcase,
+  EducationTeasers,
 } from "./components/home";
 export type {
   HowItWorksProps,

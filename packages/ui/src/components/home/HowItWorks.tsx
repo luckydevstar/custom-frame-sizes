@@ -3,7 +3,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { useIntersectionAnimation } from "@framecraft/core";
 import type { LucideIcon } from "lucide-react";
-import { Upload, Palette, Ruler, Package } from "lucide-react";
+import { Edit3, Sparkles, Eye, ShoppingBag } from "lucide-react";
 
 export interface HowItWorksStep {
   icon: LucideIcon;
@@ -23,27 +23,28 @@ export interface HowItWorksProps {
 
 const defaultConfig: HowItWorksConfig = {
   headline: "How It Works",
-  subhead: "Design your custom frame in four simple steps",
+  subhead: "Designing your perfect frame is easy. Here's how we make it happen:",
   steps: [
     {
-      icon: Upload,
-      title: "Upload Your Art",
-      description: "Upload your photo or artwork to see it in your custom frame",
+      icon: Edit3,
+      title: "Enter Your Size",
+      description:
+        "Type your artwork width and height (down to 1/8 in). We'll build the frame to fit.",
     },
     {
-      icon: Ruler,
-      title: "Choose Your Size",
-      description: "Enter exact dimensions down to 1/8 inch increments",
+      icon: Sparkles,
+      title: "Make It Yours",
+      description: "Pick frame style, mat color, and glazing to match your space.",
     },
     {
-      icon: Palette,
-      title: "Customize Details",
-      description: "Select frame style, mat colors, and glass options",
+      icon: Eye,
+      title: "Preview Instantly",
+      description: "Watch your frame update live as you customize.",
     },
     {
-      icon: Package,
-      title: "We Build & Ship",
-      description: "Expertly crafted and shipped directly to your door",
+      icon: ShoppingBag,
+      title: "Place Your Order",
+      description: "We handcraft every frame and deliver it ready to hang.",
     },
   ],
 };

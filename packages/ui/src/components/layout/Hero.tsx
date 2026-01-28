@@ -3,18 +3,21 @@
 import { useMemo } from "react";
 import { Button } from "../ui/button";
 import { ArrowRight } from "lucide-react";
-import { useParallax } from "@framecraft/core";
+import { useParallax, useHeroImage, type HeroImage } from "@framecraft/core";
 import { Skeleton } from "../ui/skeleton";
 
-export interface HeroImage {
+export interface HeroImageData {
+  id: string;
   src: string;
   alt: string;
-  mediaType: "image" | "video";
-  overlay?: {
-    title?: string;
-    subtitle?: string;
+  weight: number;
+  overlay: {
+    title: string;
+    subtitle: string;
   };
-  luminance?: "bright" | "medium" | "dark";
+  credit: string;
+  luminance: "bright" | "medium" | "dark";
+  mediaType?: "image" | "video";
 }
 
 export interface HeroConfig {
@@ -49,6 +52,7 @@ export interface HeroProps {
   isLoading?: boolean;
   error?: Error | null;
   config?: HeroConfig;
+  heroImagesData?: HeroImageData[];
 }
 
 export function Hero({
@@ -62,12 +66,26 @@ export function Hero({
   maxHeightPx = 600,
   objectPosition = "center center",
   showTrustIndicators = true,
-  image,
-  isLoading = false,
-  error = null,
+  image: imageProp,
+  isLoading: isLoadingProp,
+  error: errorProp,
   config,
+  heroImagesData,
 }: HeroProps) {
   const { ref: parallaxRef, transform } = useParallax<HTMLDivElement>();
+
+  // Use hook if image prop is not provided (matches original behavior)
+  // Pass heroImagesData to hook if provided
+  const {
+    image: hookImage,
+    isLoading: hookIsLoading,
+    error: hookError,
+  } = useHeroImage(heroImagesData);
+
+  // Use prop values if provided, otherwise use hook values
+  const image = imageProp ?? hookImage;
+  const isLoading = isLoadingProp ?? hookIsLoading;
+  const error = errorProp ?? hookError;
 
   // Use config if provided, otherwise use props
   const effectiveConfig = config
@@ -165,7 +183,7 @@ export function Hero({
       ) : image ? (
         image.mediaType === "video" ? (
           <video
-            className={`parallax-container object-cover ${transitionClass}`}
+            className={`absolute inset-0 parallax-container object-cover ${transitionClass}`}
             style={{
               objectPosition: effectiveConfig.objectPosition,
               width: "100%",
@@ -183,7 +201,7 @@ export function Hero({
         ) : (
           <div
             ref={parallaxRef}
-            className={`parallax-container bg-cover bg-center ${transitionClass}`}
+            className={`absolute inset-0 parallax-container bg-cover bg-center ${transitionClass}`}
             style={{
               backgroundImage: `url(${image.src})`,
               objectPosition: effectiveConfig.objectPosition,

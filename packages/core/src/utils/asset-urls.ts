@@ -11,29 +11,30 @@
  */
 
 /**
- * Get environment variable (works in both client and server)
- */
-function getEnvVar(key: string): string | undefined {
-  if (typeof process !== "undefined" && process.env) {
-    return process.env[key];
-  }
-  return undefined;
-}
-
-/**
  * Get the shared assets CDN URL
+ * In Next.js, NEXT_PUBLIC_* variables are replaced at build time by webpack
+ * We need to access them directly (not through a function) for webpack to replace them
  */
 function getSharedCdnUrl(): string | null {
-  const value = getEnvVar("NEXT_PUBLIC_CDN_SHARED_URL");
-  return value || null;
+  // Direct access so webpack can replace at build time
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (typeof process !== "undefined" && process.env) {
+    return process.env.NEXT_PUBLIC_CDN_SHARED_URL || null;
+  }
+  return null;
 }
 
 /**
  * Get the store-a assets CDN URL
+ * In Next.js, NEXT_PUBLIC_* variables are replaced at build time by webpack
  */
 function getStoreCdnUrl(): string | null {
-  const value = getEnvVar("NEXT_PUBLIC_CDN_STORE_A_URL");
-  return value || null;
+  // Direct access so webpack can replace at build time
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (typeof process !== "undefined" && process.env) {
+    return process.env.NEXT_PUBLIC_CDN_STORE_A_URL || null;
+  }
+  return null;
 }
 
 /**
@@ -62,7 +63,13 @@ export function getSharedAssetUrl(path: string): string {
     return `${normalizedUrl}/${cleanPath}`;
   }
 
-  // Fallback to local path
+  // Fallback to local path (warn in development)
+  if (process.env.NODE_ENV === "development") {
+    console.warn(
+      `[getSharedAssetUrl] CDN URL not configured. Using local path: ${path}. ` +
+        `Set NEXT_PUBLIC_CDN_SHARED_URL environment variable.`
+    );
+  }
   return path.startsWith("/") ? path : `/${path}`;
 }
 

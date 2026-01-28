@@ -1,0 +1,106 @@
+[
+  {
+    "id": "workshop-video",
+    "src": "assets/hero/workshop.mp4",
+    "alt": "Professional framing workshop with craftsman at work",
+    "weight": 1,
+    "overlay": {
+      "title": "Frame Your Memories",
+      "subtitle": "Design your custom frame in minutes."
+    },
+    "credit": "User provided",
+    "luminance": "medium",
+    "mediaType": "video"
+  },
+  {
+    "id": "modern-living-room-video",
+    "src": "assets/hero/modern-living-room.mp4",
+    "alt": "Modern living room interior with elegant decor and natural lighting",
+    "weight": 1,
+    "overlay": {
+      "title": "Frame Your Memories",
+      "subtitle": "Design your custom frame in minutes."
+    },
+    "credit": "User provided",
+    "luminance": "medium",
+    "mediaType": "video"
+  },
+  {
+    "id": "office-maps-video",
+    "src": "assets/hero/office-maps.mp4",
+    "alt": "Modern office workspace with framed maps and artwork on walls",
+    "weight": 1,
+    "overlay": {
+      "title": "Frame Your Memories",
+      "subtitle": "Design your custom frame in minutes."
+    },
+    "credit": "User provided",
+    "luminance": "medium",
+    "mediaType": "video"
+  },
+  {
+    "id": "bedroom-collage-video",
+    "src": "assets/hero/bedroom-collage.mp4",
+    "alt": "Bedroom gallery wall with beautiful collage of framed photographs",
+    "weight": 1,
+    "overlay": {
+      "title": "Frame Your Memories",
+      "subtitle": "Design your custom frame in minutes."
+    },
+    "credit": "User provided",
+    "luminance": "medium",
+    "mediaType": "video"
+  },
+  {
+    "id": "collage-wall-1-video",
+    "src": "assets/hero/collage-wall-1.mp4",
+    "alt": "Stunning gallery wall with coordinated picture frames and artwork",
+    "weight": 1,
+    "overlay": {
+      "title": "Frame Your Memories",
+      "subtitle": "Design your custom frame in minutes."
+    },
+    "credit": "User provided",
+    "luminance": "medium",
+    "mediaType": "video"
+  },
+  {
+    "id": "collage-wall-2-video",
+    "src": "assets/hero/collage-wall-2.mp4",
+    "alt": "Contemporary collage wall featuring diverse framed memories",
+    "weight": 1,
+    "overlay": {
+      "title": "Frame Your Memories",
+      "subtitle": "Design your custom frame in minutes."
+    },
+    "credit": "User provided",
+    "luminance": "medium",
+    "mediaType": "video"
+  },
+  {
+    "id": "dark-collage-wall-video",
+    "src": "assets/hero/dark-collage-wall.mp4",
+    "alt": "Dramatic dark wall with elegant framed photo collage display",
+    "weight": 1,
+    "overlay": {
+      "title": "Frame Your Memories",
+      "subtitle": "Design your custom frame in minutes."
+    },
+    "credit": "User provided",
+    "luminance": "dark",
+    "mediaType": "video"
+  },
+  {
+    "id": "hallway-video",
+    "src": "assets/hero/hallway.mp4",
+    "alt": "Elegant hallway with professionally framed artwork and photos",
+    "weight": 1,
+    "overlay": {
+      "title": "Frame Your Memories",
+      "subtitle": "Design your custom frame in minutes."
+    },
+    "credit": "User provided",
+    "luminance": "medium",
+    "mediaType": "video"
+  }
+]
