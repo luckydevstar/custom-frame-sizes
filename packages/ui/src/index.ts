@@ -363,6 +363,21 @@ export { ComicBookFrameDesigner } from "./components/specialty/ComicBookFrameDes
 export { PlaybillFrameDesigner } from "./components/specialty/PlaybillFrameDesigner";
 export { CertificateFrameDesigner } from "./components/specialty/CertificateFrameDesigner";
 export { DiplomaFrameDesigner } from "./components/specialty/DiplomaFrameDesigner";
+export { CardFrameDesigner } from "./components/specialty/CardFrameDesigner";
+export { MagazineFrameDesigner } from "./components/specialty/MagazineFrameDesigner";
+export { MagazineLayoutGallery } from "./components/specialty/MagazineLayoutGallery";
+export {
+  MagazineLifestyleCarousel,
+  MAGAZINE_LIFESTYLE_IMAGES,
+  getRandomMagazineLifestyleImage,
+} from "./components/specialty/MagazineLifestyleCarousel";
+export {
+  MagazinePreviewCanvas,
+  useMagazinePreviewState,
+} from "./components/specialty/MagazinePreviewCanvas";
+export { MoviePosterFrameDesigner } from "./components/specialty/MoviePosterFrameDesigner";
+export { NeedleworkFrameDesigner } from "./components/specialty/NeedleworkFrameDesigner";
+export { NewspaperFrameDesigner } from "./components/specialty/NewspaperFrameDesigner";
 export { DiplomaLifestyleCarousel } from "./components/specialty/DiplomaLifestyleCarousel";
 export { RecordAlbumDesigner } from "./components/specialty/RecordAlbumDesigner";
 export { RecordAlbumPreview } from "./components/specialty/RecordAlbumPreview";
@@ -382,6 +397,7 @@ export { PuzzleLifestyleCarousel } from "./components/specialty/PuzzleLifestyleC
 export { PlaybillLifestyleCarousel } from "./components/specialty/PlaybillLifestyleCarousel";
 export { JerseyLifestyleCarousel } from "./components/specialty/JerseyLifestyleCarousel";
 export { ComicLifestyleCarousel } from "./components/specialty/ComicLifestyleCarousel";
+export { GradedCardLifestyleCarousel } from "./components/specialty/GradedCardLifestyleCarousel";
 export {
   CanvasLifestyleCarousel,
   CANVAS_LIFESTYLE_IMAGES,
@@ -390,6 +406,7 @@ export {
 // Specialty layout galleries
 export { PlaybillLayoutGallery } from "./components/specialty/PlaybillLayoutGallery";
 export { ComicLayoutGallery } from "./components/specialty/ComicLayoutGallery";
+export { CardLayoutGallery } from "./components/specialty/CardLayoutGallery";
 
 // Specialty preview components
 export { JerseyPreviewCanvas } from "./components/specialty/JerseyPreviewCanvas";
@@ -398,6 +415,7 @@ export {
   ComicPreviewCanvas,
   useComicPreviewState,
 } from "./components/specialty/ComicPreviewCanvas";
+export { CardPreviewCanvas, useCardPreviewState } from "./components/specialty/CardPreviewCanvas";
 
 // Brass nameplate components
 export {

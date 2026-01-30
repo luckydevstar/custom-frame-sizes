@@ -75,6 +75,47 @@ After migration, verify:
 
 ---
 
+## Five specialty pages (root-level only)
+
+The following pages use **root-level routes** only (no `/designer/<type>` sub-routes), same as `certificate-frames`, `cd-frames`, `comic-book-frames`, and `diploma-certificate-frames`:
+
+| Route                   | Page location                                | Designer component                       |
+| ----------------------- | -------------------------------------------- | ---------------------------------------- |
+| `/card-frames`          | `apps/store-a/src/app/card-frames/`          | `CardFrameDesigner` (stub → full)        |
+| `/magazine-frames`      | `apps/store-a/src/app/magazine-frames/`      | `MagazineFrameDesigner` (stub → full)    |
+| `/movie-poster-frames`  | `apps/store-a/src/app/movie-poster-frames/`  | `MoviePosterFrameDesigner` (stub → full) |
+| `/specialty/needlework` | `apps/store-a/src/app/specialty/needlework/` | `NeedleworkFrameDesigner` (stub → full)  |
+| `/newspaper-frames`     | `apps/store-a/src/app/newspaper-frames/`     | `NewspaperFrameDesigner` (stub → full)   |
+
+**Current state (as of migration doc update):**
+
+- Each of the 5 pages has full static content: hero, benefit/features bar, “designer” section, key content (What’s Included, Why Choose, About, Popular Sizes, FAQ, etc.), Related Products, and JSON-LD (Product, FAQ, Breadcrumb where applicable).
+- The designer section uses the **stub** designer from `@framecraft/ui` (e.g. `CardFrameDesigner`), which renders a “Designer coming soon” message and a link to `/designer`.
+- SEO metadata (title, description, OG, canonical) and section structure match the intended final page; only the designer is still a stub.
+
+**Completion step (per page):**
+
+1. **Migrate the full designer** from the original React app into `packages/ui/src/components/specialty/` (e.g. copy and adapt `CardFrameDesigner.tsx` from `CustomFrameSizes-CODE`, same process as Certificate/Diploma/CD/Comic).
+2. **Move any shared logic** (formats, layouts, pricing, preview helpers, image URLs) into `@framecraft/core` or `@framecraft/config` as needed.
+3. **Replace the stub** in the UI package: swap the “coming soon” implementation for the real designer in the same file (e.g. `CardFrameDesigner.tsx`), so the export and props stay the same.
+4. **Verify** on the root-level page: designer loads, options work, URL sync, pricing, and add-to-cart behave correctly; re-check sections and SEO per step 3 above.
+
+Do **not** add routes under `apps/store-a/src/app/designer/[type]/` for these five; they are only at the root-level paths above. The main frame designer remains at `/designer` (`apps/store-a/src/app/designer/page.tsx`).
+
+### Migration status for the 5 pages (in progress)
+
+| Page             | Core / lib                                                                    | Preview / gallery / carousel                                                                                                     | Full designer                                                                                                                                  |
+| ---------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Card**         | ✅ `card-formats`, `card-layouts`, `card-insert-images` in `@framecraft/core` | ✅ `GradedCardLifestyleCarousel`, `CardLayoutGallery` in `@framecraft/ui`. Pending: `CardPreviewCanvas` + `useCardPreviewState`. | Pending: replace stub with full `CardFrameDesigner` (original: `CustomFrameSizes-CODE/client/src/components/specialty/CardFrameDesigner.tsx`). |
+| **Magazine**     | Pending: magazine sizes, layouts, cover images in core.                       | Pending: `MagazinePreviewCanvas`, `MagazineLayoutGallery`, `MagazineLifestyleCarousel`.                                          | Pending: replace stub with full `MagazineFrameDesigner`.                                                                                       |
+| **Movie poster** | Pending: poster sizes / formats in core (if any).                             | Pending: preview, lifestyle if present.                                                                                          | Pending: replace stub with full `MoviePosterFrameDesigner`.                                                                                    |
+| **Needlework**   | Pending: needlework helpers, lifestyle images in core.                        | Pending: preview, `NeedleworkLifestyleCarousel`.                                                                                 | Pending: replace stub with full `NeedleworkFrameDesigner`.                                                                                     |
+| **Newspaper**    | Pending: newspaper layouts, inserts in core.                                  | Pending: `NewspaperLayoutGallery`, `NewspaperLifestyleCarousel`.                                                                 | Pending: replace stub with full `NewspaperFrameDesigner`.                                                                                      |
+
+For each designer, follow **Step 1** (scan original sections + deps), then **Step 2** (migrate core/lib → preview/gallery/carousel → full designer with `"use client"`, Next-friendly imports, no `wouter`/`Helmet`), then **Step 3** and **Step 4**.
+
+---
+
 ## Quick checklist (per page)
 
 - [ ] Step 1: Scan original — sections and functionality listed

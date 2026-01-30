@@ -19,6 +19,14 @@ export * from "./services";
 // Utilities
 export * from "./utils";
 
+// Explicit re-exports for magazine designer (avoids barrel optimization issues)
+export {
+  MAGAZINE_SIZES,
+  getMagazineSizeById,
+  getMagazineSizesByCategory,
+  type MagazineSize,
+} from "./utils/specialty/magazine-sizes";
+
 // Lib utilities
 export * from "./lib";
 

@@ -27,7 +27,10 @@ export function getRandomizedCDLifestyleImages(
   const indices = Array.from({ length: CD_LIFESTYLE_COUNT }, (_, i) => i + 1);
   for (let i = indices.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [indices[i], indices[j]] = [indices[j], indices[i]];
+    const a = indices[i]!;
+    const b = indices[j]!;
+    indices[i] = b;
+    indices[j] = a;
   }
   return indices.slice(0, count).map((index) => ({
     url: getCDLifestyleImageUrl(index),

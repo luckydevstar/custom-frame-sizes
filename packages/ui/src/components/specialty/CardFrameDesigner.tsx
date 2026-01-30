@@ -1,131 +1,86 @@
 "use client";
 
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
-// Removed wouter useLocation - not needed in Next.js
 import {
   Copy,
   Maximize,
+  ShoppingCart,
   Eye,
   Settings,
-  BookOpen,
   LayoutGrid,
+  Sparkles,
   Award,
+  Share2,
   Info,
   Shield,
-  ShoppingCart,
+  CheckCircle2,
+  Package,
+  Ruler,
+  Layers,
+  Tag,
 } from "lucide-react";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 import { Badge } from "../ui/badge";
 import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-// Select components not currently used
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Input } from "../ui/input";
 import { Separator } from "../ui/separator";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-// Alert components not currently used
-// import { Alert, AlertDescription } from "../ui/alert";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 import { QuantitySelector } from "../ui/quantity-selector";
 import { PriceBox } from "../ui/PriceBox";
 import type { PriceLineItem } from "../ui/PriceBox";
-// Import types from @framecraft/types
-import type { FrameStyle, GlassType, AlternateImage } from "@framecraft/types";
-
-// Import services from @framecraft/core
-import { getFramesByCategory, getGlassTypes, getSharedAssetUrl } from "@framecraft/core";
-
-// Import hooks from @framecraft/core
-import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
-
-// Import config from @framecraft/config
-import { ALL_MATS, getMatById, getAvailableMatsForSize, type Mat } from "@framecraft/config";
-
-// Import UI components from same package
-import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
-
-// TODO: Extract these app-specific dependencies or make them injectable
-// - useToast hook
-// - BrassNameplateSection component
-// - @shared/schema types
-// - ComicPreviewCanvas component and useComicPreviewState hook
-// - TrustBadges component
-// - ComicLifestyleCarousel component
-// - HangingHardwareSection, BottomWeightedMatting components
 import { useToast } from "../../hooks/use-toast";
-import { getComicCoversForConfig } from "@framecraft/core";
+import { getFramesByCategory, getGlassTypes, getSharedAssetUrl } from "@framecraft/core";
+import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
+import type { FrameStyle, GlassType } from "@framecraft/types";
+import type { FrameConfiguration } from "@framecraft/types";
+import { ALL_MATS, getMatById, getAvailableMatsForSize, type Mat } from "@framecraft/config";
+import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
 import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
 import type { BrassNameplateConfig } from "@framecraft/types";
-// import { BRASS_NAMEPLATE_SPECS, getTypeABottomBorder } from "@framecraft/types";
-import { COMIC_FORMATS, getComicFormatById } from "@framecraft/core";
+import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import {
-  COMIC_LAYOUTS,
-  getComicLayout,
-  calculateComicFrameSize,
-  calculateComicPreviewDimensions,
-  type ComicLayoutType,
+  getCardFormatById,
+  CARD_LAYOUTS,
+  getCardLayout,
+  calculateCardFrameSize,
+  type CardLayoutType,
 } from "@framecraft/core";
-import { ComicPreviewCanvas, useComicPreviewState } from "./ComicPreviewCanvas";
-import { useComicPricing } from "@framecraft/core";
-import { ComicLayoutGallery } from "./ComicLayoutGallery";
+import {
+  getShuffledCardsForFormat,
+  getRandomCategory,
+  getAllCategories,
+  type CardCategory,
+} from "@framecraft/core";
+import { calculatePricing } from "@framecraft/core";
+import { CardPreviewCanvas, useCardPreviewState } from "./CardPreviewCanvas";
+import { CardLayoutGallery } from "./CardLayoutGallery";
 import { TrustBadges } from "../marketing/TrustBadges";
-import { ComicLifestyleCarousel } from "./ComicLifestyleCarousel";
+import { GradedCardLifestyleCarousel } from "./GradedCardLifestyleCarousel";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
-import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
+import { BottomWeightedMatting } from "./shared/BottomWeightedMatting";
 
 // Get product data from services
 const shadowboxFrames = getFramesByCategory("shadowbox");
 const allGlassTypes = getGlassTypes();
-// Filter to only Regular and Non-glare for comic frames
+// Filter to only Regular and Non-glare for card frames
 const glassTypes = allGlassTypes.filter((g) => g.id === "standard" || g.id === "non-glare");
 
-interface ComicBookFrameDesignerProps {
+interface CardFrameDesignerProps {
   defaultFrameId?: string;
   embedded?: boolean;
-  /**
-   * Optional: function to get comic cover images for a given configuration.
-   * If not provided, uses default from @framecraft/core.
-   *
-   * @param formatId - Comic format ID (e.g., "modern-age", "slabbed-cgc")
-   * @param layoutId - Layout ID (e.g., "comic-single", "comic-double")
-   * @param count - Number of covers needed
-   * @returns Array of cover image paths
-   */
-  getCoversForConfig?: (formatId: string, layoutId: string, count: number) => string[];
 }
 
-export function ComicBookFrameDesigner({
-  defaultFrameId,
-  embedded = false,
-  getCoversForConfig: getCoversForConfigProp,
-}: ComicBookFrameDesignerProps) {
-  const getCoversForConfig = getCoversForConfigProp ?? getComicCoversForConfig;
-  // Removed useLocation() - not needed in Next.js
+export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFrameDesignerProps) {
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const { mobileView, setMobileView, showMobileBar, previewCardRef, controlsHeadingRef } =
     useMobileViewToggle({ isMobile });
 
-  // Controlled accordion state - all sections expanded by default
-  const [accordionValue, setAccordionValue] = useState<string[]>([
-    "comic-format-layout",
-    "frame-style",
-    "mat-options",
-    "nameplate",
-    "glazing",
-    "hardware",
-  ]);
-
-  // Auto-expand mat-options on mobile
-  useEffect(() => {
-    if (isMobile && !accordionValue.includes("mat-options")) {
-      setAccordionValue((prev) => [...prev, "mat-options"]);
-    }
-  }, [isMobile, accordionValue]);
-
-  // URL parameters (SSR-safe: no window on server)
+  // URL parameters (SSR-safe)
   const urlParams = useMemo(
     () =>
       typeof window !== "undefined"
@@ -152,35 +107,51 @@ export function ComicBookFrameDesigner({
     return defaultFrame || shadowboxFrames[0];
   }, [defaultFrameId, urlParams]);
 
-  // Designer state - Three-step flow: Format → Layout → Presentation
-  const [selectedFormat, setSelectedFormat] = useState<string>(() => {
-    return urlParams.get("format") || "modern-age";
+  // Card category - randomly selected on page load, persisted to URL
+  const [cardCategory, setCardCategory] = useState<CardCategory>(() => {
+    const urlCategory = urlParams.get("category") as CardCategory;
+    // Validate URL category - must be a valid available category
+    const availableCategories = getAllCategories();
+    if (urlCategory && availableCategories.includes(urlCategory)) {
+      return urlCategory;
+    }
+    // Default to random category on first load
+    return getRandomCategory();
   });
 
-  const [selectedLayout, setSelectedLayout] = useState<ComicLayoutType>(() => {
+  // Designer state - Three-step flow: Format → Layout → Presentation
+  const [selectedFormat, setSelectedFormat] = useState<string>(() => {
+    const urlFormat = urlParams.get("format");
+    // Validate URL format - must be a valid card format
+    if (urlFormat && getCardFormatById(urlFormat)) {
+      return urlFormat;
+    }
+    // Default to PSA format (most common)
+    return "psa";
+  });
+
+  const [selectedLayout, setSelectedLayout] = useState<CardLayoutType>(() => {
     const urlLayout = urlParams.get("layout");
-    if (urlLayout && COMIC_LAYOUTS.find((l) => l.id === urlLayout)) {
-      return urlLayout as ComicLayoutType;
+    if (urlLayout && CARD_LAYOUTS.find((l) => l.id === urlLayout)) {
+      return urlLayout as CardLayoutType;
     }
     // Start with empty string - desktop will get default via useEffect
     return "";
   });
 
   const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(
-    initialFrame ?? shadowboxFrames[0]!
+    () => initialFrame ?? shadowboxFrames[0]!
   );
 
   // Mat configuration
   const [selectedMat, setSelectedMat] = useState<Mat>(() => {
     const urlMat = urlParams.get("mat");
-    const mat = urlMat ? getMatById(urlMat) : getMatById("mat-2");
-    return mat ?? ALL_MATS[1]!;
+    return (urlMat ? getMatById(urlMat) : getMatById("mat-1")) ?? ALL_MATS[0]!;
   });
 
   const [selectedMatInner, setSelectedMatInner] = useState<Mat>(() => {
     const urlMatInner = urlParams.get("matInner");
-    const mat = urlMatInner ? getMatById(urlMatInner) : getMatById("mat-1");
-    return mat ?? ALL_MATS[0]!;
+    return (urlMatInner ? getMatById(urlMatInner) : getMatById("mat-2")) ?? ALL_MATS[1]!;
   });
 
   const [matType, setMatType] = useState<"none" | "single" | "double">(() => {
@@ -192,9 +163,9 @@ export function ComicBookFrameDesigner({
     return urlParams.get("bottomWeighted") === "true";
   });
 
-  // Fixed mat dimensions (not user-adjustable for comic frames)
+  // Fixed mat dimensions (not user-adjustable for card frames)
   const MAT_BORDER = 2.0; // inches
-  const MAT_REVEAL = 0.25; // inches
+  const MAT_REVEAL = 0.25; // inches - 0.25" reveal to show bottom mat color
 
   // Glazing and hardware
   const [selectedGlass, setSelectedGlass] = useState<GlassType>(() => {
@@ -202,10 +173,7 @@ export function ComicBookFrameDesigner({
     const found = urlGlass
       ? glassTypes.find((g) => g.id === urlGlass) || glassTypes[0]
       : glassTypes[0];
-    if (!found) {
-      throw new Error("No glass types available");
-    }
-    return found;
+    return found!;
   });
 
   const [hardware, setHardware] = useState<"standard" | "security">(() => {
@@ -221,7 +189,7 @@ export function ComicBookFrameDesigner({
       line3: "",
       font: "georgia",
       color: "brass-black",
-      includeFlag: false, // No flag for comic frames
+      includeFlag: false, // No flag for card frames
     };
 
     try {
@@ -242,7 +210,7 @@ export function ComicBookFrameDesigner({
           (urlParams.get("nameplateColor") as BrassNameplateConfig["color"]) ||
           (urlParams.get("plaqueColor") as BrassNameplateConfig["color"]) ||
           "brass-black",
-        includeFlag: false, // Always false for comic frames
+        includeFlag: false, // Always false for card frames
       };
     } catch {
       return defaultConfig;
@@ -258,179 +226,47 @@ export function ComicBookFrameDesigner({
   const [fullscreenLifestyleUrl, setFullscreenLifestyleUrl] = useState<string>("");
   const [fullscreenLifestyleAlt, setFullscreenLifestyleAlt] = useState<string>("");
   const [quantity, setQuantity] = useState(1);
-  const [_priceBoxExpanded, _setPriceBoxExpanded] = useState(false);
   const customizationPaneRef = useRef<HTMLDivElement>(null);
-
-  // Track if initial load is complete (for URL writing)
-  const [isInitialLoadComplete, setIsInitialLoadComplete] = useState(false);
 
   // New UX improvement states
   const [smartDefaultApplied, setSmartDefaultApplied] = useState<string | null>(null);
-  const [_advancedOptionsExpanded, _setAdvancedOptionsExpanded] = useState(false);
 
-  // Phase 2 Mobile Enhancement states
-  const [_matPresetSelected, _setMatPresetSelected] = useState<string | null>(null);
-  const [_showCustomMatColors, _setShowCustomMatColors] = useState(false);
-  const [_showDimensionsOverlay, _setShowDimensionsOverlay] = useState(false);
-
-  // Frame photos state (corner, profile images + texture slices)
-  const [framePhotos, setFramePhotos] = useState<{
-    cornerUrl?: string;
-    profileUrl?: string;
-    topUrl?: string;
-    bottomUrl?: string;
-    leftUrl?: string;
-    rightUrl?: string;
-  }>({});
-
-  // Random lifestyle photo - picked once on mount and when frame changes
-  const [randomLifestylePhoto, setRandomLifestylePhoto] = useState<{ url: string; alt: string }>({
-    url: "",
-    alt: "Comic display lifestyle photo",
-  });
+  // Deterministic first lifestyle photo (avoids hydration mismatch; previewState.framePhotos used for frame)
+  const LIFESTYLE_IMAGES = useMemo(
+    () => [
+      {
+        url: getSharedAssetUrl("lifestyle/graded-card/lifestyle_1.jpg"),
+        alt: "PSA graded sports cards in custom shadowbox frame",
+      },
+      {
+        url: getSharedAssetUrl("lifestyle/graded-card/lifestyle_2.jpg"),
+        alt: "BGS graded basketball cards in shadowbox frame",
+      },
+      {
+        url: getSharedAssetUrl("lifestyle/graded-card/lifestyle_3.jpg"),
+        alt: "Graded Pokemon cards in professional frame display",
+      },
+      {
+        url: getSharedAssetUrl("lifestyle/graded-card/lifestyle_4.jpg"),
+        alt: "PSA 10 gem mint cards in custom shadowbox",
+      },
+    ],
+    []
+  );
+  const randomLifestylePhoto = LIFESTYLE_IMAGES[0]!;
 
   // Refs
   const containerRef = useRef<HTMLDivElement>(null);
+  const designerSectionRef = useRef<HTMLDivElement>(null);
   const [containerSize, setContainerSize] = useState({ width: 400, height: 400 });
 
-  // Mark initial load as complete after mount
-  useEffect(() => {
-    setIsInitialLoadComplete(true);
-  }, []);
-
-  // Update URL when configuration changes (for sharing)
-  useEffect(() => {
-    if (!isInitialLoadComplete) return;
-
-    const params = new URLSearchParams();
-
-    // Core settings
-    if (selectedFormat !== "modern-age") params.set("format", selectedFormat);
-    if (selectedLayout) params.set("layout", selectedLayout);
-    if (initialFrame && selectedFrame.id !== initialFrame.id) params.set("frame", selectedFrame.id);
-
-    // Mat settings
-    if (matType !== "double") params.set("matType", matType);
-    if (matType !== "none") {
-      if (selectedMat.id !== "mat-2") params.set("mat", selectedMat.id);
-      if (matType === "double" && selectedMatInner.id !== "mat-1")
-        params.set("matInner", selectedMatInner.id);
-      if (bottomWeighted) {
-        params.set("bottomWeighted", "true");
-      } else {
-        params.delete("bottomWeighted");
-      }
-    }
-
-    // Glazing and hardware
-    if (selectedGlass && selectedGlass.id !== "standard") params.set("glass", selectedGlass.id);
-    if (hardware !== "standard") params.set("hardware", hardware);
-
-    // Brass nameplate
-    if (brassNameplateConfig.enabled) {
-      params.set("nameplateEnabled", "true");
-      if (brassNameplateConfig.line1) params.set("nameplateLine1", brassNameplateConfig.line1);
-      if (brassNameplateConfig.line2) params.set("nameplateLine2", brassNameplateConfig.line2);
-      if (brassNameplateConfig.line3) params.set("nameplateLine3", brassNameplateConfig.line3);
-      if (brassNameplateConfig.font !== "georgia")
-        params.set("nameplateFont", brassNameplateConfig.font);
-      if (brassNameplateConfig.color !== "brass-black")
-        params.set("nameplateColor", brassNameplateConfig.color);
-    }
-
-    if (typeof window === "undefined") return;
-    const paramString = params.toString();
-    const newUrl = paramString
-      ? `${window.location.pathname}?${paramString}`
-      : window.location.pathname;
-    window.history.replaceState({}, "", newUrl);
-  }, [
-    isInitialLoadComplete,
-    selectedFormat,
-    selectedLayout,
-    selectedFrame.id,
-    initialFrame,
-    matType,
-    selectedMat.id,
-    selectedMatInner.id,
-    bottomWeighted,
-    selectedGlass,
-    hardware,
-    brassNameplateConfig,
-  ]);
-
-  // Load frame photos when selectedFrame changes
-  useEffect(() => {
-    async function fetchFramePhotos() {
-      try {
-        const response = await fetch(`/api/frames/${selectedFrame.sku}/photos`);
-        if (response.ok) {
-          const photoSet = await response.json();
-          setFramePhotos(photoSet);
-        }
-      } catch (error) {
-        console.error("Failed to fetch frame photos:", error);
-      }
-    }
-
-    fetchFramePhotos();
-  }, [selectedFrame.sku]);
-
-  // Select random lifestyle photo on mount and when frame changes
-  useEffect(() => {
-    // Get all comic_lifestyle images from all shadowbox frames
-    const allLifestyleImages: Array<{ url: string; alt: string }> = [];
-
-    shadowboxFrames.forEach((frame) => {
-      const lifestyleImages =
-        frame.alternateImages?.filter((img: AlternateImage) => img.type === "comic_lifestyle") ||
-        [];
-      lifestyleImages.forEach((img: AlternateImage) => {
-        allLifestyleImages.push({
-          url: img.url,
-          alt: img.alt,
-        });
-      });
+  // Scroll to designer function for CTA button
+  const scrollToDesigner = useCallback(() => {
+    designerSectionRef.current?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
     });
-
-    // Pick a random one
-    if (allLifestyleImages.length > 0) {
-      const randomIndex = Math.floor(Math.random() * allLifestyleImages.length);
-      const selectedPhoto = allLifestyleImages[randomIndex];
-      if (selectedPhoto) {
-        setRandomLifestylePhoto(selectedPhoto);
-      }
-    }
-  }, [selectedFrame.sku]);
-
-  // Calculate bottom weighted extra height
-  const bottomWeightedExtra = bottomWeighted ? BOTTOM_WEIGHTED_EXTRA : 0;
-
-  // Calculate preview dimensions using dynamic layout calculation
-  // This ensures comics display properly centered and sized in the preview
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // @ts-expect-error - Unused variable kept for potential future use
-  const _previewFrameDimensions = useMemo(() => {
-    // Return default dimensions if no layout selected yet
-    if (!selectedLayout) {
-      return {
-        width: 16,
-        height: 20 + bottomWeightedExtra,
-      };
-    }
-
-    const dimensions = calculateComicPreviewDimensions(
-      selectedLayout,
-      selectedFormat,
-      MAT_BORDER,
-      brassNameplateConfig.enabled
-    );
-
-    return {
-      width: dimensions.width,
-      height: dimensions.height + bottomWeightedExtra,
-    };
-  }, [selectedLayout, selectedFormat, brassNameplateConfig.enabled, bottomWeightedExtra]);
+  }, []);
 
   // Calculate manufacturing dimensions using exact interior dimension lookup table
   // This provides accurate dimensions for pricing and "Overall Size" display text
@@ -439,25 +275,26 @@ export function ComicBookFrameDesigner({
     if (!selectedLayout) {
       return {
         width: 16,
-        height: 20 + bottomWeightedExtra,
+        height: 20,
       };
     }
 
-    const dimensions = calculateComicFrameSize(
+    const dimensions = calculateCardFrameSize(
       selectedLayout,
       selectedFormat,
       MAT_BORDER,
       brassNameplateConfig.enabled
     );
 
+    const bottomWeightedExtra = bottomWeighted ? 0.5 : 0;
     return {
       width: dimensions.width,
       height: dimensions.height + bottomWeightedExtra,
     };
-  }, [selectedLayout, selectedFormat, brassNameplateConfig.enabled, bottomWeightedExtra]);
+  }, [selectedLayout, selectedFormat, brassNameplateConfig.enabled, bottomWeighted]);
 
   // Calculate FIXED container height using MAXIMUM aspect ratio to prevent layout shifts
-  // This prevents bouncing when brass plaque is toggled or layout changes
+  // This prevents bouncing when brass plaque is toggled (26" → 27.5" height change)
   // Strategy: Reserve space for tallest possible frame so container never resizes
   const previewContainerHeight = useMemo(() => {
     const viewportHeight = typeof window !== "undefined" ? window.innerHeight : 800;
@@ -468,9 +305,9 @@ export function ComicBookFrameDesigner({
       containerSize.width > 0 ? containerSize.width : Math.min(viewportWidth * 0.94, 600);
 
     // Use MAXIMUM aspect ratio (tallest frame configuration with plaque)
-    // Comics can be quite tall with vertical layouts + plaque
-    // Using 2.0 to ensure all layouts fit comfortably
-    const maxAspectRatio = 2.0;
+    // This is approximately 1.72 (27.5" / 16" for 16-card grid with plaque)
+    // Using 1.75 to ensure all layouts fit comfortably
+    const maxAspectRatio = 1.75;
 
     // Calculate height based on maximum aspect ratio
     const calculatedHeight = availableWidth * maxAspectRatio;
@@ -482,37 +319,40 @@ export function ComicBookFrameDesigner({
     return Math.max(minHeight, Math.min(calculatedHeight, maxHeight));
   }, [containerSize.width, isMobile]);
 
-  // Get comic covers for preview
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // @ts-expect-error - Unused variable kept for potential future use
-  const _comicCovers = useMemo(() => {
-    // Return empty array if no layout selected yet
-    if (!selectedLayout) {
-      return [];
+  // Re-randomize card category when layout changes (PSA and SGC/CGC/BGS formats)
+  // This ensures variety across layouts - users will see Monsters, Heroes, Baseball, Football rotating
+  useEffect(() => {
+    // Re-randomize for PSA and SGC/CGC/BGS formats (both use thematic card sets)
+    // Pack slabs don't use category system - they have their own dedicated pack images
+    if ((selectedFormat === "psa" || selectedFormat === "sgc-cgc-bgs") && selectedLayout) {
+      const newCategory = getRandomCategory();
+      setCardCategory(newCategory);
     }
+  }, [selectedFormat, selectedLayout]);
 
-    const layout = getComicLayout(selectedLayout);
-    return getCoversForConfig(selectedFormat, selectedLayout, layout.count);
-  }, [selectedFormat, selectedLayout, getCoversForConfig]);
+  // Get card covers for preview - shuffled based on format selection (CDN URLs)
+  const cardImages = useMemo(() => {
+    if (!selectedLayout) return [];
+    const layout = getCardLayout(selectedLayout);
+    const cardCount = layout.count;
+    const raw = getShuffledCardsForFormat(
+      selectedFormat as "psa" | "sgc-cgc-bgs" | "psa-pack-slabs",
+      cardCategory,
+      cardCount,
+      ""
+    );
+    return raw.map((p) => getSharedAssetUrl("card-inserts" + p));
+  }, [selectedFormat, cardCategory, selectedLayout]);
 
-  // Get current format details
-  const currentFormat = useMemo(() => getComicFormatById(selectedFormat), [selectedFormat]);
-
-  // Get current layout details
-  const currentLayout = useMemo(() => {
-    // Return null if no layout selected yet
-    if (!selectedLayout) {
-      return null;
-    }
-    return getComicLayout(selectedLayout);
-  }, [selectedLayout]);
+  // Get current format details (for dimensions display)
+  const currentFormat = useMemo(() => getCardFormatById(selectedFormat), [selectedFormat]);
 
   // Track container WIDTH ONLY for preview scaling (height is fixed to prevent feedback loop)
   // This breaks the oscillation cycle that caused layout cards to bounce when plaque toggled
   useEffect(() => {
     if (!containerRef.current) return;
 
-    let timeoutId: ReturnType<typeof setTimeout>;
+    let timeoutId: NodeJS.Timeout;
 
     const resizeObserver = new ResizeObserver((entries) => {
       // Debounce to avoid processing every frame
@@ -545,41 +385,37 @@ export function ComicBookFrameDesigner({
   }, [selectedLayout]);
 
   // Get preview state using the hook
-  const previewState = useComicPreviewState({
+  const previewState = useCardPreviewState({
     formatId: selectedFormat,
     layoutId: selectedLayout,
     matBorder: MAT_BORDER,
     matReveal: MAT_REVEAL,
     matType,
-    matId: selectedMat.id,
-    matInnerId: matType === "double" ? selectedMatInner.id : undefined,
     brassNameplateConfig,
     selectedFrame,
     containerWidth: containerSize.width,
     containerHeight: containerSize.height,
-    bottomWeightedExtra,
-    getCoversForConfig,
+    cardImages,
+    bottomWeightedExtra: bottomWeighted ? 0.5 : 0,
   });
 
   // Get fullscreen preview state with larger dimensions
-  const fullscreenPreviewState = useComicPreviewState({
+  const fullscreenPreviewState = useCardPreviewState({
     formatId: selectedFormat,
     layoutId: selectedLayout,
     matBorder: MAT_BORDER,
     matReveal: MAT_REVEAL,
     matType,
-    matId: selectedMat.id,
-    matInnerId: matType === "double" ? selectedMatInner.id : undefined,
     brassNameplateConfig,
     selectedFrame,
     containerWidth: typeof window !== "undefined" ? window.innerWidth - 100 : 1000,
     containerHeight: typeof window !== "undefined" ? window.innerHeight - 100 : 800,
-    bottomWeightedExtra,
-    getCoversForConfig,
+    cardImages,
+    bottomWeightedExtra: bottomWeighted ? 0.5 : 0,
   });
 
   // Get mats filtered by frame size to hide mats that don't have required sheet sizes
-  // Hide Terracotta on desktop only (show on mobile)
+  // On desktop, filter out Terracotta (only show on mobile)
   const standardMats = useMemo(() => {
     const availableMats = getAvailableMatsForSize(
       manufacturingFrameDimensions.width,
@@ -611,135 +447,146 @@ export function ComicBookFrameDesigner({
     // Check if top mat is still available
     const isTopMatAvailable = allAvailableMats.some((mat) => mat.id === selectedMat.id);
     if (!isTopMatAvailable && allAvailableMats.length > 0) {
-      // Default to black (mat-2) if available, otherwise first available mat
       const blackMat = allAvailableMats.find((mat) => mat.id === "mat-2");
-      if (blackMat) {
-        setSelectedMat(blackMat);
-      } else if (allAvailableMats[0]) {
-        setSelectedMat(allAvailableMats[0]);
-      }
+      setSelectedMat(blackMat ?? allAvailableMats[0]!);
     }
 
-    // Check if bottom mat is still available (for double mat)
     if (matType === "double") {
       const isBottomMatAvailable = allAvailableMats.some((mat) => mat.id === selectedMatInner.id);
       if (!isBottomMatAvailable && allAvailableMats.length > 0) {
-        // Default to white (mat-1) if available, otherwise first available mat
         const whiteMat = allAvailableMats.find((mat) => mat.id === "mat-1");
-        if (whiteMat) {
-          setSelectedMatInner(whiteMat);
-        } else if (allAvailableMats[0]) {
-          setSelectedMatInner(allAvailableMats[0]);
-        }
+        setSelectedMatInner(whiteMat ?? allAvailableMats[0]!);
       }
     }
   }, [standardMats, premiumMats, selectedMat.id, selectedMatInner.id, matType]);
 
-  // Reset bottomWeighted when mat is disabled
-  useEffect(() => {
-    if (matType === "none" && bottomWeighted) {
-      setBottomWeighted(false);
+  // Calculate pricing using the new pricing engine v2
+  // Hardware pricing constant (security hardware add-on)
+  const SECURITY_HARDWARE_UPCHARGE = 8.95;
+
+  const pricing = useMemo(() => {
+    // Return zero pricing if no layout selected yet
+    if (!selectedLayout) {
+      return {
+        framePrice: 0,
+        matPrice: 0,
+        glassPrice: 0,
+        hardwarePrice: 0,
+        nameplatePrice: 0,
+        subtotal: 0,
+        total: 0,
+      };
     }
-  }, [matType, bottomWeighted]);
 
-  // Calculate pricing using the hook
-  const pricing = useComicPricing({
-    frame: selectedFrame,
-    layoutId: selectedLayout,
-    formatId: selectedFormat,
+    // Calculate artwork dimensions (frame interior minus mat borders)
+    // calculatePricing adds mat border back to get frame dimensions
+    const bottomWeightedExtra = bottomWeighted ? 0.5 : 0;
+    const artworkWidth = manufacturingFrameDimensions.width - MAT_BORDER * 2;
+    const artworkHeight =
+      manufacturingFrameDimensions.height - bottomWeightedExtra - MAT_BORDER * 2;
+
+    // Build FrameConfiguration for pricing engine
+    const config: FrameConfiguration = {
+      serviceType: "frame-only",
+      artworkWidth,
+      artworkHeight,
+      frameStyleId: selectedFrame.id,
+      matType,
+      matBorderWidth: MAT_BORDER,
+      matRevealWidth: MAT_REVEAL,
+      matColorId: selectedMat.id,
+      matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
+      glassTypeId: selectedGlass.id,
+      bottomWeighted,
+    };
+
+    // Get frame + glazing + mat pricing from new engine v2
+    const basePricing = calculatePricing(config);
+
+    // Add hardware pricing (security hardware is an add-on)
+    const hardwarePrice = hardware === "security" ? SECURITY_HARDWARE_UPCHARGE : 0;
+
+    // Add nameplate pricing (brass nameplate is an add-on)
+    const nameplatePrice = brassNameplateConfig.enabled ? BRASS_NAMEPLATE_SPECS.PRICE : 0;
+
+    // Combine all pricing
+    const subtotal = basePricing.total + hardwarePrice + nameplatePrice;
+
+    return {
+      framePrice: basePricing.framePrice,
+      matPrice: basePricing.matPrice,
+      glassPrice: basePricing.glassPrice,
+      hardwarePrice,
+      nameplatePrice,
+      subtotal,
+      total: subtotal,
+    };
+  }, [
+    selectedLayout,
+    selectedFrame.id,
     matType,
-    matBorder: MAT_BORDER,
-    glass: selectedGlass,
+    selectedMat.id,
+    selectedMatInner.id,
+    selectedGlass.id,
     hardware,
-    brassPlaqueEnabled: brassNameplateConfig.enabled,
-  });
+    brassNameplateConfig.enabled,
+    manufacturingFrameDimensions.width,
+    manufacturingFrameDimensions.height,
+    bottomWeighted,
+  ]);
 
-  // Build itemized pricing breakdown for PriceBox
-  const priceItems = useMemo((): PriceLineItem[] => {
+  // Build itemized price breakdown for PriceBox
+  const priceItems: PriceLineItem[] = useMemo(() => {
     const items: PriceLineItem[] = [];
 
-    // Frame base price
+    // Frame price
     items.push({
-      label: "Shadowbox Frame",
+      label: "Frame",
       amount: pricing.framePrice,
-      testId: "price-frame",
+      testId: "text-frame-price",
     });
 
-    // Mat surcharge (for multi-opening layouts)
-    if (pricing.matPrice > 0 && currentLayout) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      // @ts-expect-error - Unused variable kept for potential future use
-      const _additionalOpenings = currentLayout.count - 1;
+    // Mat price (if applicable)
+    if (matType !== "none" && pricing.matPrice > 0) {
       items.push({
-        label: `Mat Board (${currentLayout.count} openings)`,
+        label: matType === "double" ? "Double Mat" : "Single Mat",
         amount: pricing.matPrice,
-        testId: "price-mat",
-      });
-    } else if (matType !== "none") {
-      items.push({
-        label: matType === "double" ? "Mat Board (double)" : "Mat Board (single)",
-        amount: 0,
-        isIncluded: true,
-        testId: "price-mat",
+        testId: "text-mat-price",
       });
     }
 
-    // Slab depth modifier (for graded comics)
-    if (pricing.slabModifier > 0) {
-      items.push({
-        label: "Slab Depth Upgrade",
-        amount: pricing.slabModifier,
-        testId: "price-slab",
-      });
-    }
+    // Glass/Glazing - included in frame price with new pricing engine v2
+    // Show the selected glass type as "Included" since cost is bundled in frame price
+    items.push({
+      label: selectedGlass.name || "Standard Acrylic",
+      amount: 0,
+      isIncluded: true,
+      testId: "text-glass-price",
+    });
 
-    // Glass upgrade
-    if (pricing.glassPrice > 0) {
-      items.push({
-        label: selectedGlass?.name ?? "Standard",
-        amount: pricing.glassPrice,
-        testId: "price-glass",
-      });
-    } else {
-      items.push({
-        label: selectedGlass?.name ?? "Standard",
-        amount: 0,
-        isIncluded: true,
-        testId: "price-glass",
-      });
-    }
-
-    // Hardware upgrade
-    if (pricing.hardwarePrice > 0) {
+    // Hardware price (security hardware)
+    if (hardware === "security" && pricing.hardwarePrice > 0) {
       items.push({
         label: "Security Hardware",
         amount: pricing.hardwarePrice,
-        testId: "price-hardware",
-      });
-    } else {
-      items.push({
-        label: "Standard Hardware",
-        amount: 0,
-        isIncluded: true,
-        testId: "price-hardware",
+        testId: "text-hardware-price",
       });
     }
 
-    // Brass plaque
-    if (pricing.nameplatePrice > 0) {
+    // Brass plaque (if enabled)
+    if (brassNameplateConfig.enabled && pricing.nameplatePrice > 0) {
       items.push({
         label: "Engraved Brass Nameplate",
         amount: pricing.nameplatePrice,
-        testId: "price-nameplate",
+        testId: "text-plaque-price",
       });
     }
 
     return items;
-  }, [pricing, matType, selectedGlass, currentLayout]);
+  }, [pricing, matType, selectedGlass, hardware, brassNameplateConfig.enabled]);
 
   // Share configuration
   const handleShare = useCallback(() => {
-    if (typeof window === "undefined") return;
     const url = window.location.href;
     navigator.clipboard.writeText(url);
     toast({
@@ -749,83 +596,24 @@ export function ComicBookFrameDesigner({
   }, [toast]);
 
   // Add to cart handler
-  const handleAddToCart = useCallback(async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // @ts-expect-error - Unused variable kept for potential future use
-    const _currentFormat = getComicFormatById(selectedFormat);
-    const currentLayout = getComicLayout(selectedLayout);
-
-    // Build complete frame specification for cart/checkout
-    // manufacturingFrameDimensions already includes bottomWeightedExtra in height calculation
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // @ts-expect-error - Unused variable kept for potential future use
-    const _frameSpec = {
-      productType: "comic-frame",
-      format: selectedFormat,
-      layout: selectedLayout,
-      frameId: selectedFrame.id,
-      frameSku: selectedFrame.sku,
-      // Frame dimensions include bottomWeightedExtra for accurate manufacturing
-      frameWidth: manufacturingFrameDimensions.width,
-      frameHeight: manufacturingFrameDimensions.height,
-      // Mat configuration
-      matType,
-      matColorId: selectedMat.id,
-      matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
-      matBorder: MAT_BORDER,
-      bottomWeighted, // Include bottom-weighted flag for manufacturing
-      // Glass and hardware
-      glassTypeId: selectedGlass?.id ?? "standard",
-      hardware,
-      // Brass nameplate
-      brassNameplate: brassNameplateConfig.enabled
-        ? {
-            line1: brassNameplateConfig.line1,
-            line2: brassNameplateConfig.line2,
-            line3: brassNameplateConfig.line3,
-            font: brassNameplateConfig.font,
-            color: brassNameplateConfig.color,
-          }
-        : undefined,
-      // Pricing
-      unitPrice: pricing.total,
-      quantity,
-    };
-
+  const handleAddToCart = useCallback(() => {
+    const currentLayout = getCardLayout(selectedLayout);
     toast({
       title: "Added to cart!",
-      description: `${quantity}× Comic Frame - ${currentLayout?.displayName || "Custom"} (${manufacturingFrameDimensions.width.toFixed(1)}" × ${manufacturingFrameDimensions.height.toFixed(1)}")`,
+      description: `${quantity}× Card Frame - ${currentLayout?.displayName ?? "Custom"}`,
     });
-  }, [
-    quantity,
-    selectedLayout,
-    selectedFormat,
-    selectedFrame,
-    manufacturingFrameDimensions,
-    matType,
-    selectedMat,
-    selectedMatInner,
-    MAT_BORDER,
-    bottomWeighted,
-    selectedGlass,
-    hardware,
-    brassNameplateConfig,
-    pricing.total,
-    toast,
-  ]);
+  }, [quantity, selectedLayout, toast]);
 
-  // Apply preset configuration
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // @ts-expect-error - Unused function kept for potential future use
-  const _applyPreset = (presetName: "signature" | "vault") => {
+  // Apply preset configuration (reserved for future preset buttons; kept for API)
+  function applyPreset(presetName: "signature" | "vault") {
     if (presetName === "signature") {
       // Signature Wall Display preset
-      setSelectedFormat("modern-age");
+      setSelectedFormat("psa"); // PSA format (most popular)
       // Mobile: reset layout to force selection; Desktop: set it directly
       if (isMobile) {
         setSelectedLayout("");
       } else {
-        setSelectedLayout("single");
+        setSelectedLayout("1x1");
       }
       // Find black frame
       const blackFrame = shadowboxFrames.find((f) => f.name.toLowerCase().includes("black"));
@@ -838,8 +626,7 @@ export function ComicBookFrameDesigner({
       const goldMat = getMatById("mat-11"); // Metallic Gold (premium)
       if (goldMat) setSelectedMatInner(goldMat);
       // UV-protective glass (standard)
-      const uvGlass = glassTypes.find((g) => g.id === "standard");
-      if (uvGlass) setSelectedGlass(uvGlass);
+      setSelectedGlass(glassTypes.find((g) => g.id === "standard") ?? glassTypes[0]!);
       // Enable brass plaque
       setBrassNameplateConfig({
         enabled: true,
@@ -860,12 +647,12 @@ export function ComicBookFrameDesigner({
       });
     } else if (presetName === "vault") {
       // Vault Preservation preset
-      setSelectedFormat("slabbed-cgc");
+      setSelectedFormat("psa"); // PSA format (most popular)
       // Mobile: reset layout to force selection; Desktop: set it directly
       if (isMobile) {
         setSelectedLayout("");
       } else {
-        setSelectedLayout("single");
+        setSelectedLayout("1x1");
       }
       // Find black frame
       const blackFrame = shadowboxFrames.find((f) => f.name.toLowerCase().includes("black"));
@@ -875,8 +662,7 @@ export function ComicBookFrameDesigner({
       const blackMat = getMatById("mat-3"); // Black
       if (blackMat) setSelectedMat(blackMat);
       // Museum glass (non-glare)
-      const museumGlass = glassTypes.find((g) => g.id === "non-glare");
-      if (museumGlass) setSelectedGlass(museumGlass);
+      setSelectedGlass(glassTypes.find((g) => g.id === "non-glare") ?? glassTypes[0]!);
       // Disable brass plaque
       setBrassNameplateConfig({
         enabled: false,
@@ -893,39 +679,16 @@ export function ComicBookFrameDesigner({
         title: "Applied Vault Preservation",
         description: isMobile
           ? "Preset applied. Now choose your layout."
-          : "Museum-quality protection for graded slabs",
+          : "Professional protection for graded slabs",
       });
     }
-  };
-
-  // Scroll detection for desktop price box expansion - expands when scrolling down page
-  useEffect(() => {
-    if (isMobile) return;
-
-    const handleScroll = () => {
-      const scrolled = window.scrollY;
-      const windowHeight = window.innerHeight;
-      const docHeight = document.documentElement.scrollHeight;
-
-      const scrollPercentage = (scrolled + windowHeight) / docHeight;
-
-      // Expand when scrolled past 50% of page
-      _setPriceBoxExpanded(scrollPercentage > 0.5);
-    };
-
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll(); // Check initial state
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [isMobile]);
+  }
 
   // Default layout - set 'single' for all users if no selection (ensures preview on mobile)
   useEffect(() => {
     // Both desktop and mobile users get auto-default layout to ensure preview shows immediately
     if (!selectedLayout && !urlParams.get("layout")) {
-      setSelectedLayout("single");
+      setSelectedLayout("1x1");
     }
   }, [selectedLayout, urlParams]);
 
@@ -938,69 +701,190 @@ export function ComicBookFrameDesigner({
     if (smartDefaultApplied === selectedFormat) return;
 
     // Apply smart defaults based on format
-    // All formats now use consistent mat defaults: Black (VB221/mat-2) top + White (VB222/mat-1) bottom
-    if (selectedFormat === "modern-age") {
-      // Auto-select single comic layout for all users (desktop + mobile)
-      setSelectedLayout("single");
-      // Use Matte Black Standard Depth (SKU 8693) as default
-      const blackFrame =
-        shadowboxFrames.find((f) => f.sku === "8693") ||
-        shadowboxFrames.find((f) => f.name.toLowerCase().includes("black"));
+    // All formats use consistent mat defaults: White (VB222/mat-1) top + Black (VB221/mat-2) bottom
+    if (selectedFormat === "psa") {
+      // PSA format - auto-select single card layout for all users (desktop + mobile)
+      setSelectedLayout("1x1");
+      const blackFrame = shadowboxFrames.find((f) => f.name.toLowerCase().includes("black"));
       if (blackFrame) setSelectedFrame(blackFrame);
       setMatType("double");
-      const blackMat = getMatById("mat-2"); // Black VB221
-      if (blackMat) setSelectedMat(blackMat);
       const whiteMat = getMatById("mat-1"); // White VB222
-      if (whiteMat) setSelectedMatInner(whiteMat);
-      setSmartDefaultApplied("modern-age");
-    } else if (
-      selectedFormat === "golden-age" ||
-      selectedFormat === "silver-age" ||
-      selectedFormat === "bronze-age"
-    ) {
-      // Vintage formats - auto-select single comic layout for all users
-      setSelectedLayout("single");
-      // Use Matte Black Standard Depth (SKU 8693) as default for all formats
-      const blackFrame =
-        shadowboxFrames.find((f) => f.sku === "8693") ||
-        shadowboxFrames.find((f) => f.name.toLowerCase().includes("black"));
+      if (whiteMat) setSelectedMat(whiteMat);
+      const blackMat = getMatById("mat-2"); // Black VB221
+      if (blackMat) setSelectedMatInner(blackMat);
+      setSmartDefaultApplied("psa");
+    } else if (selectedFormat === "sgc-cgc-bgs") {
+      // SGC/CGC/BGS format - auto-select single card layout for all users
+      setSelectedLayout("1x1");
+      const blackFrame = shadowboxFrames.find((f) => f.name.toLowerCase().includes("black"));
       if (blackFrame) setSelectedFrame(blackFrame);
       setMatType("double");
-      const blackMat = getMatById("mat-2"); // Black VB221
-      if (blackMat) setSelectedMat(blackMat);
       const whiteMat = getMatById("mat-1"); // White VB222
-      if (whiteMat) setSelectedMatInner(whiteMat);
-      setSmartDefaultApplied(selectedFormat);
-    } else if (selectedFormat === "slabbed-cgc") {
-      // Slabbed format - auto-select single comic layout for all users
-      setSelectedLayout("single");
-      // Use Matte Black Standard Depth (SKU 8693) as default
-      const blackFrame =
-        shadowboxFrames.find((f) => f.sku === "8693") ||
-        shadowboxFrames.find((f) => f.name.toLowerCase().includes("black"));
-      if (blackFrame) setSelectedFrame(blackFrame);
-      setMatType("double");
+      if (whiteMat) setSelectedMat(whiteMat);
       const blackMat = getMatById("mat-2"); // Black VB221
-      if (blackMat) setSelectedMat(blackMat);
-      const whiteMat = getMatById("mat-1"); // White VB222
-      if (whiteMat) setSelectedMatInner(whiteMat);
-      setSmartDefaultApplied("slabbed-cgc");
+      if (blackMat) setSelectedMatInner(blackMat);
+      setSmartDefaultApplied("sgc-cgc-bgs");
     }
   }, [selectedFormat, smartDefaultApplied, isMobile, urlParams]);
 
+  // Sync configuration to URL for shareability (client-only)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams();
+
+    // Add all configuration parameters to URL
+    params.set("category", cardCategory);
+    params.set("format", selectedFormat);
+    if (selectedLayout) params.set("layout", selectedLayout);
+    params.set("frame", selectedFrame.id);
+    params.set("mat", selectedMat.id);
+    params.set("matType", matType);
+    if (matType === "double") {
+      params.set("matInner", selectedMatInner.id);
+    }
+    if (matType !== "none") {
+      if (bottomWeighted) {
+        params.set("bottomWeighted", "true");
+      } else {
+        params.delete("bottomWeighted");
+      }
+    }
+    params.set("glass", selectedGlass.id);
+    params.set("hardware", hardware);
+    params.set("quantity", quantity.toString());
+
+    // Add brass plaque config if enabled
+    if (brassNameplateConfig.enabled) {
+      params.set("nameplateEnabled", "true");
+      if (brassNameplateConfig.line1) params.set("nameplateLine1", brassNameplateConfig.line1);
+      if (brassNameplateConfig.line2) params.set("nameplateLine2", brassNameplateConfig.line2);
+      if (brassNameplateConfig.line3) params.set("nameplateLine3", brassNameplateConfig.line3);
+      params.set("nameplateFont", brassNameplateConfig.font);
+      params.set("nameplateColor", brassNameplateConfig.color);
+    }
+
+    const newUrl = `${window.location.pathname}?${params.toString()}`;
+    window.history.replaceState({}, "", newUrl);
+  }, [
+    cardCategory,
+    selectedFormat,
+    selectedLayout,
+    selectedFrame,
+    selectedMat,
+    selectedMatInner,
+    matType,
+    bottomWeighted,
+    selectedGlass,
+    hardware,
+    quantity,
+    brassNameplateConfig,
+  ]);
+
+  // Reset bottomWeighted when mat is disabled
+  useEffect(() => {
+    if (matType === "none" && bottomWeighted) {
+      setBottomWeighted(false);
+    }
+  }, [matType, bottomWeighted]);
+
   return (
     <TooltipProvider>
-      <div className="min-h-screen bg-background pb-24 lg:pb-0">
-        {/* Mobile Header */}
-        {isMobile && (
+      <div className="min-h-screen bg-gradient-to-b from-background to-muted/30 pb-24 lg:pb-0">
+        {/* Hero Section - Only shown when not embedded */}
+        {!embedded && (
+          <>
+            <section className="container mx-auto px-4 pt-6 pb-4 md:pt-8 md:pb-6">
+              <div className="max-w-4xl mx-auto text-center">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-muted border border-border mb-3">
+                  <Shield className="w-3 h-3" />
+                  <span className="text-xs font-medium" data-testid="text-badge">
+                    Protect Your Graded Card Collection
+                  </span>
+                </div>
+
+                <h1
+                  className="text-3xl md:text-4xl lg:text-5xl font-bold mb-3 md:mb-4"
+                  data-testid="text-hero-title"
+                >
+                  Picture Frames in Custom Sizes for Graded Sports Cards & TCG Cards
+                </h1>
+
+                <p
+                  className="text-base md:text-lg text-muted-foreground mb-4 md:mb-6 max-w-2xl mx-auto"
+                  data-testid="text-hero-subtitle"
+                >
+                  Professional shadowbox frames for PSA, SGC, CGC, and BGS graded cards. Custom
+                  layouts from single cards to 8-card displays with double mat systems, brass
+                  plaques, and archival protection.
+                </p>
+
+                <Button
+                  size="lg"
+                  onClick={scrollToDesigner}
+                  className="gap-2"
+                  data-testid="button-scroll-to-designer"
+                >
+                  Design Your Frame
+                  <Sparkles className="w-4 h-4" />
+                </Button>
+              </div>
+            </section>
+
+            <section className="border-y bg-muted/20">
+              <div className="container mx-auto px-2 md:px-4 py-4 md:py-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 max-w-4xl mx-auto">
+                  <div className="text-center" data-testid="feature-custom-size">
+                    <Ruler className="w-4 h-4 md:w-5 md:h-5 mx-auto mb-1 md:mb-1.5 text-primary" />
+                    <p className="text-[0.7rem] md:text-sm font-medium leading-tight">
+                      Custom Sizes
+                    </p>
+                    <p className="text-[0.65rem] md:text-xs text-muted-foreground mt-0.5 leading-tight">
+                      Built to fit your slabs
+                    </p>
+                  </div>
+                  <div className="text-center" data-testid="feature-handcrafted">
+                    <Sparkles className="w-4 h-4 md:w-5 md:h-5 mx-auto mb-1 md:mb-1.5 text-primary" />
+                    <p className="text-[0.7rem] md:text-sm font-medium leading-tight">
+                      Handcrafted
+                    </p>
+                    <p className="text-[0.65rem] md:text-xs text-muted-foreground mt-0.5 leading-tight">
+                      Skilled artisans
+                    </p>
+                  </div>
+                  <div className="text-center" data-testid="feature-professional-grade">
+                    <Shield className="w-4 h-4 md:w-5 md:h-5 mx-auto mb-1 md:mb-1.5 text-primary" />
+                    <p className="text-[0.7rem] md:text-sm font-medium leading-tight">
+                      Professional-Grade
+                    </p>
+                    <p className="text-[0.65rem] md:text-xs text-muted-foreground mt-0.5 leading-tight">
+                      Archival materials
+                    </p>
+                  </div>
+                  <div className="text-center" data-testid="feature-instant-pricing">
+                    <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 mx-auto mb-1 md:mb-1.5 text-primary" />
+                    <p className="text-[0.7rem] md:text-sm font-medium leading-tight">
+                      Instant Pricing
+                    </p>
+                    <p className="text-[0.65rem] md:text-xs text-muted-foreground mt-0.5 leading-tight">
+                      See cost as you customize
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </>
+        )}
+
+        {/* Mobile Header - Only shown on mobile when embedded */}
+        {isMobile && embedded && (
           <div className="lg:hidden border-b bg-card/50 sticky top-0 z-40">
             <div className="px-4 py-3">
-              <h1 className="text-lg font-bold">Comic Frame Designer</h1>
+              <h1 className="text-lg font-bold">Card Frame Designer</h1>
             </div>
           </div>
         )}
 
-        <div className="container mx-auto px-4 py-6 lg:py-8">
+        <div ref={designerSectionRef} className="container mx-auto px-4 py-6 lg:py-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
             {/* Left: Preview - Hidden on mobile when viewing controls */}
             <div
@@ -1008,6 +892,60 @@ export function ComicBookFrameDesigner({
             >
               <Card ref={previewCardRef} className="p-6" data-testid="card-preview">
                 <div className="space-y-4">
+                  {/* Mobile Quick Actions Bar */}
+                  {isMobile && (
+                    <div className="flex items-center justify-between gap-2 pb-2 border-b">
+                      <h3 className="font-semibold text-base">Preview</h3>
+                      <div className="flex items-center gap-1">
+                        {/* Fullscreen */}
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => {
+                                  setFullscreenImage("preview");
+                                  setShowFullscreenPreview(true);
+                                }}
+                                data-testid="button-mobile-fullscreen"
+                                className="h-9 w-9"
+                              >
+                                <Maximize className="h-4 w-4" />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>Fullscreen</TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+
+                        {/* Share */}
+                        <TooltipProvider>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <Button
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => {
+                                  const url = window.location.href;
+                                  navigator.clipboard.writeText(url);
+                                  toast({
+                                    title: "Link copied!",
+                                    description: "Design link copied to clipboard",
+                                  });
+                                }}
+                                data-testid="button-mobile-share"
+                                className="h-9 w-9"
+                              >
+                                <Share2 className="h-4 w-4" />
+                              </Button>
+                            </TooltipTrigger>
+                            <TooltipContent>Share</TooltipContent>
+                          </Tooltip>
+                        </TooltipProvider>
+                      </div>
+                    </div>
+                  )}
+
                   {/* Frame Preview */}
                   <div
                     ref={containerRef}
@@ -1031,7 +969,7 @@ export function ComicBookFrameDesigner({
                       </div>
                     )}
                     {selectedLayout ? (
-                      <ComicPreviewCanvas
+                      <CardPreviewCanvas
                         framePhotos={previewState.framePhotos}
                         selectedFrame={selectedFrame}
                         topMatColor={selectedMat}
@@ -1047,7 +985,7 @@ export function ComicBookFrameDesigner({
                         previewHeight={previewState.previewHeight}
                         frameFaceWidth={previewState.frameFaceWidth}
                         isMobile={previewState.isMobile}
-                        comicCovers={previewState.comicCovers}
+                        cardImages={previewState.cardImages}
                         brassNameplateConfig={brassNameplateConfig}
                       />
                     ) : (
@@ -1082,14 +1020,14 @@ export function ComicBookFrameDesigner({
                         <TooltipContent className="max-w-xs">
                           <p>
                             Outer frame dimensions including moulding. Interior dimensions
-                            accommodate your comics with the selected mat border.
+                            accommodate your graded cards with the selected mat border.
                           </p>
                         </TooltipContent>
                       </Tooltip>
                     </div>
                     <p className="text-xs text-muted-foreground">
                       {currentFormat
-                        ? `Comic: ${currentFormat.comicWidth}&quot; × ${currentFormat.comicHeight}&quot;`
+                        ? `Card: ${currentFormat.cardWidth}\u0022 × ${currentFormat.cardHeight}\u0022`
                         : ""}{" "}
                       • Mat Border: {MAT_BORDER}&quot;
                     </p>
@@ -1105,8 +1043,7 @@ export function ComicBookFrameDesigner({
                     {/* Corner Detail */}
                     {(() => {
                       const cornerImage = selectedFrame.alternateImages?.find(
-                        (img: AlternateImage) =>
-                          img.type === "corner" && img.url.includes("corner_a")
+                        (img) => img.type === "corner" && img.url.includes("corner_a")
                       );
                       return cornerImage ? (
                         <button
@@ -1122,7 +1059,7 @@ export function ComicBookFrameDesigner({
                             className="w-full h-full object-cover"
                           />
                         </button>
-                      ) : framePhotos.cornerUrl ? (
+                      ) : previewState.framePhotos.cornerUrl ? (
                         <button
                           onClick={() => {
                             setFullscreenImage("corner");
@@ -1131,7 +1068,7 @@ export function ComicBookFrameDesigner({
                           className="aspect-square rounded-md border overflow-hidden bg-background hover-elevate active-elevate-2"
                         >
                           <img
-                            src={framePhotos.cornerUrl}
+                            src={previewState.framePhotos.cornerUrl}
                             alt="Frame corner detail"
                             className="w-full h-full object-cover"
                           />
@@ -1148,7 +1085,7 @@ export function ComicBookFrameDesigner({
                     {/* Profile View */}
                     {(() => {
                       const profileImage = selectedFrame.alternateImages?.find(
-                        (img: AlternateImage) => img.type === "profile"
+                        (img) => img.type === "profile"
                       );
                       return profileImage ? (
                         <button
@@ -1164,7 +1101,7 @@ export function ComicBookFrameDesigner({
                             className="w-full h-full object-cover"
                           />
                         </button>
-                      ) : framePhotos.profileUrl ? (
+                      ) : previewState.framePhotos.profileUrl ? (
                         <button
                           onClick={() => {
                             setFullscreenImage("profile");
@@ -1173,7 +1110,7 @@ export function ComicBookFrameDesigner({
                           className="aspect-square rounded-md border overflow-hidden bg-background hover-elevate active-elevate-2"
                         >
                           <img
-                            src={framePhotos.profileUrl}
+                            src={previewState.framePhotos.profileUrl}
                             alt="Frame profile view"
                             className="w-full h-full object-cover"
                           />
@@ -1217,10 +1154,11 @@ export function ComicBookFrameDesigner({
                   {/* Copyright Disclaimer */}
                   <div className="pt-4 mt-4 border-t">
                     <p className="text-xs text-muted-foreground leading-relaxed">
-                      All comic book covers displayed are for illustrative purposes only to show how
-                      our frames look in use. We do not sell or reproduce any comic book artwork.
-                      All characters, logos, and artwork remain the property of their respective
-                      copyright holders and are used here under fair use for demonstration.
+                      All graded card covers displayed are for illustrative purposes only to show
+                      how our frames look in use. We do not sell or reproduce any graded card
+                      artwork. All characters, logos, and artwork remain the property of their
+                      respective copyright holders and are used here under fair use for
+                      demonstration.
                     </p>
                   </div>
                 </div>
@@ -1235,145 +1173,123 @@ export function ComicBookFrameDesigner({
               <h2 ref={controlsHeadingRef} className="text-2xl font-bold mb-2 lg:hidden">
                 Customize Your Frame
               </h2>
+
               <Card className="p-6">
                 <h2 className="text-2xl font-semibold mb-4 hidden lg:block">
-                  Configure Your Comic Frame
+                  Configure Your Card Frame
                 </h2>
 
                 {/* Consolidated Accordions for Better Mobile Flow */}
                 <Accordion
                   type="multiple"
-                  value={accordionValue}
-                  onValueChange={setAccordionValue}
+                  defaultValue={[
+                    "card-format-layout",
+                    "frame-style",
+                    "mat-options",
+                    "nameplate",
+                    "glazing",
+                    "hardware",
+                  ]}
                   className="space-y-4"
                 >
-                  {/* Section 1: Comic Format & Layout */}
+                  {/* Section 1: Card Format & Layout */}
                   <AccordionItem
-                    value="comic-format-layout"
+                    value="card-format-layout"
                     className="border rounded-lg px-4 lg:px-6"
                   >
                     <AccordionTrigger
                       className="text-base font-semibold hover:no-underline py-4"
                       data-testid="accordion-setup"
                     >
-                      Comic Format & Layout
+                      Card Format & Layout
                     </AccordionTrigger>
                     <AccordionContent className="space-y-6 pt-4">
                       {/* Format Selection - Hero Cards */}
                       <div className="space-y-3">
                         <div className="flex items-center gap-2">
-                          <Label className="text-base font-semibold">Comic Era & Format</Label>
+                          <Label className="text-base font-semibold">
+                            Grading Company & Card Type
+                          </Label>
                           <Tooltip>
                             <TooltipTrigger asChild>
                               <Info className="w-4 h-4 text-muted-foreground cursor-help" />
                             </TooltipTrigger>
                             <TooltipContent className="max-w-xs">
                               <p>
-                                Select your comic&apos;s era to ensure proper sizing. Different eras
+                                Select your card&apos;s era to ensure proper sizing. Different eras
                                 have slightly different dimensions.
                               </p>
                             </TooltipContent>
                           </Tooltip>
                         </div>
 
-                        {/* Mobile: Compact 3-column Chip Selector (all eras accessible) */}
-                        <div className="lg:hidden grid grid-cols-3 gap-1.5">
+                        {/* Mobile: Card Format Selector */}
+                        <div className="lg:hidden grid grid-cols-3 gap-2">
                           <Button
                             type="button"
-                            variant={selectedFormat === "modern-age" ? "default" : "outline"}
+                            variant={selectedFormat === "psa" ? "default" : "outline"}
                             size="sm"
-                            onClick={() => setSelectedFormat("modern-age")}
-                            className="flex-col h-auto py-1.5 px-2"
-                            aria-pressed={selectedFormat === "modern-age"}
-                            data-testid="button-format-modern-mobile"
+                            onClick={() => setSelectedFormat("psa")}
+                            className="flex-col h-auto py-2 px-2"
+                            aria-pressed={selectedFormat === "psa"}
+                            data-testid="button-format-psa-mobile"
                           >
-                            <span className="text-xs font-semibold leading-tight">Modern</span>
-                            <span className="text-[0.6rem] opacity-70">1985+</span>
+                            <span className="text-xs font-semibold leading-tight">PSA</span>
+                            <span className="text-[0.6rem] opacity-70">3&quot; × 5.25&quot;</span>
                           </Button>
                           <Button
                             type="button"
-                            variant={selectedFormat === "golden-age" ? "default" : "outline"}
+                            variant={selectedFormat === "sgc-cgc-bgs" ? "default" : "outline"}
                             size="sm"
-                            onClick={() => setSelectedFormat("golden-age")}
-                            className="flex-col h-auto py-1.5 px-2"
-                            aria-pressed={selectedFormat === "golden-age"}
-                            data-testid="button-format-golden-mobile"
+                            onClick={() => setSelectedFormat("sgc-cgc-bgs")}
+                            className="flex-col h-auto py-2 px-2"
+                            aria-pressed={selectedFormat === "sgc-cgc-bgs"}
+                            data-testid="button-format-sgc-mobile"
                           >
-                            <span className="text-xs font-semibold leading-tight">Golden</span>
-                            <span className="text-[0.6rem] opacity-70">1938-56</span>
-                          </Button>
-                          <Button
-                            type="button"
-                            variant={selectedFormat === "silver-age" ? "default" : "outline"}
-                            size="sm"
-                            onClick={() => setSelectedFormat("silver-age")}
-                            className="flex-col h-auto py-1.5 px-2"
-                            aria-pressed={selectedFormat === "silver-age"}
-                            data-testid="button-format-silver-mobile"
-                          >
-                            <span className="text-xs font-semibold leading-tight">Silver</span>
-                            <span className="text-[0.6rem] opacity-70">1956-70</span>
-                          </Button>
-                          <Button
-                            type="button"
-                            variant={selectedFormat === "bronze-age" ? "default" : "outline"}
-                            size="sm"
-                            onClick={() => setSelectedFormat("bronze-age")}
-                            className="flex-col h-auto py-1.5 px-2"
-                            aria-pressed={selectedFormat === "bronze-age"}
-                            data-testid="button-format-bronze-mobile"
-                          >
-                            <span className="text-xs font-semibold leading-tight">Bronze</span>
-                            <span className="text-[0.6rem] opacity-70">1970-85</span>
-                          </Button>
-                          <Button
-                            type="button"
-                            variant={selectedFormat === "slabbed-cgc" ? "default" : "outline"}
-                            size="sm"
-                            onClick={() => setSelectedFormat("slabbed-cgc")}
-                            className="flex-col h-auto py-1.5 px-2 col-span-2"
-                            aria-pressed={selectedFormat === "slabbed-cgc"}
-                            data-testid="button-format-slabbed-mobile"
-                          >
-                            <span className="text-xs font-semibold leading-tight">
-                              Graded Slabs
+                            <span className="text-xs font-semibold leading-tight text-center">
+                              SGC | CGC | BGS
                             </span>
-                            <span className="text-[0.6rem] opacity-70">CGC, PGX, CBCS</span>
+                            <span className="text-[0.6rem] opacity-70">
+                              3.25&quot; × 5.375&quot;
+                            </span>
+                          </Button>
+                          <Button
+                            type="button"
+                            variant={selectedFormat === "psa-pack-slabs" ? "default" : "outline"}
+                            size="sm"
+                            onClick={() => setSelectedFormat("psa-pack-slabs")}
+                            className="flex-col h-auto py-2 px-2"
+                            aria-pressed={selectedFormat === "psa-pack-slabs"}
+                            data-testid="button-format-pack-slabs-mobile"
+                          >
+                            <span className="text-xs font-semibold leading-tight">Pack Slabs</span>
+                            <span className="text-[0.6rem] opacity-70">4.4&quot; × 7.4&quot;</span>
                           </Button>
                         </div>
 
-                        {/* Measurement Reminder */}
-                        <div className="p-3 bg-muted/50 rounded-lg border border-border/50 text-sm text-muted-foreground italic">
-                          <p>Please measure your comic before ordering.</p>
-                          <p className="mt-1">
-                            Comic sizes can vary, even from the same era. A quick check with a ruler
-                            ensures your frame fits perfectly.
-                          </p>
-                        </div>
-
-                        {/* Desktop: Hero Cards - Simplified Choice */}
+                        {/* Desktop: Card Format Selection */}
                         <div className="hidden lg:grid grid-cols-1 gap-3">
-                          {/* Modern (1985-Present) */}
+                          {/* PSA Format */}
                           <button
-                            onClick={() => setSelectedFormat("modern-age")}
-                            className={`text-left p-4 rounded-lg border-2 transition-all hover-elevate active-elevate-2 ${
-                              selectedFormat === "modern-age"
+                            onClick={() => setSelectedFormat("psa")}
+                            className={`text-left p-4 rounded-lg border-2 hover-elevate active-elevate-2 ${
+                              selectedFormat === "psa"
                                 ? "border-primary bg-primary/5"
                                 : "border-border bg-card"
                             }`}
-                            data-testid="button-format-modern"
+                            data-testid="button-format-psa"
                           >
                             <div className="flex items-start justify-between mb-2">
                               <div>
                                 <h4 className="font-semibold flex items-center gap-2">
-                                  <BookOpen className="w-4 h-4" />
-                                  Modern (1985–Present)
+                                  <Shield className="w-4 h-4" />
+                                  PSA Graded Card Frames
                                 </h4>
                                 <p className="text-sm text-muted-foreground mt-1">
-                                  Contemporary comics and graphic novels
+                                  Standard PSA graded card frames
                                 </p>
                                 <p className="text-xs text-muted-foreground mt-1">
-                                  6.625&quot; × 10.25&quot;
+                                  3.0&quot; × 5.25&quot; × 0.3&quot; depth
                                 </p>
                               </div>
                               <Badge variant="default" className="text-xs">
@@ -1382,73 +1298,82 @@ export function ComicBookFrameDesigner({
                             </div>
                           </button>
 
-                          {/* Vintage Eras (Golden/Silver/Bronze) */}
-                          {["golden-age", "silver-age", "bronze-age"].map((formatId) => {
-                            const format = COMIC_FORMATS.find((f) => f.id === formatId);
-                            if (!format) return null;
-                            return (
-                              <button
-                                key={formatId}
-                                onClick={() => setSelectedFormat(formatId)}
-                                className={`text-left p-4 rounded-lg border-2 transition-all hover-elevate active-elevate-2 ${
-                                  selectedFormat === formatId
-                                    ? "border-primary bg-primary/5"
-                                    : "border-border bg-card"
-                                }`}
-                                data-testid={`button-format-${formatId}`}
-                              >
-                                <div className="flex items-start justify-between mb-2">
-                                  <div>
-                                    <h4 className="font-semibold flex items-center gap-2">
-                                      <Award className="w-4 h-4" />
-                                      {format.displayName}
-                                    </h4>
-                                    <p className="text-sm text-muted-foreground mt-1">
-                                      {format.notes}
-                                    </p>
-                                    <p className="text-xs text-muted-foreground mt-1">
-                                      {format.comicWidth}&quot; × {format.comicHeight}&quot;
-                                    </p>
-                                  </div>
-                                  {formatId === "golden-age" && (
-                                    <Badge variant="secondary" className="text-xs">
-                                      Collector&apos;s Choice
-                                    </Badge>
-                                  )}
-                                </div>
-                              </button>
-                            );
-                          })}
-
-                          {/* Slabbed/Graded */}
+                          {/* SGC/CGC/BGS Format */}
                           <button
-                            onClick={() => setSelectedFormat("slabbed-cgc")}
-                            className={`text-left p-4 rounded-lg border-2 transition-all hover-elevate active-elevate-2 ${
-                              selectedFormat === "slabbed-cgc"
+                            onClick={() => setSelectedFormat("sgc-cgc-bgs")}
+                            className={`text-left p-4 rounded-lg border-2 hover-elevate active-elevate-2 ${
+                              selectedFormat === "sgc-cgc-bgs"
                                 ? "border-primary bg-primary/5"
                                 : "border-border bg-card"
                             }`}
-                            data-testid="button-format-slabbed"
+                            data-testid="button-format-sgc"
                           >
                             <div className="flex items-start justify-between mb-2">
                               <div>
                                 <h4 className="font-semibold flex items-center gap-2">
-                                  <Shield className="w-4 h-4" />
-                                  Slabbed/Graded
+                                  <Award className="w-4 h-4" />
+                                  SGC | CGC | BGS Graded Card Frames
                                 </h4>
                                 <p className="text-sm text-muted-foreground mt-1">
-                                  CGC, CBCS, PGX graded comics
+                                  SGC, CGC, and BGS graded card frames
                                 </p>
                                 <p className="text-xs text-muted-foreground mt-1">
-                                  8.25&quot; × 13.0&quot; × 0.75&quot; depth
+                                  3.25&quot; × 5.375&quot; × 0.3&quot; depth
                                 </p>
                               </div>
-                              <Badge variant="secondary" className="text-xs">
-                                Premium Protection
-                              </Badge>
+                            </div>
+                          </button>
+
+                          {/* PSA Pack Slab Frames Format */}
+                          <button
+                            onClick={() => setSelectedFormat("psa-pack-slabs")}
+                            className={`text-left p-4 rounded-lg border-2 hover-elevate active-elevate-2 ${
+                              selectedFormat === "psa-pack-slabs"
+                                ? "border-primary bg-primary/5"
+                                : "border-border bg-card"
+                            }`}
+                            data-testid="button-format-pack-slabs"
+                          >
+                            <div className="flex items-start justify-between mb-2">
+                              <div>
+                                <h4 className="font-semibold flex items-center gap-2">
+                                  <Package className="w-4 h-4" />
+                                  PSA Pack Slab Frames
+                                </h4>
+                                <p className="text-sm text-muted-foreground mt-1">
+                                  Graded wax packs (Garbage Pail Kids, etc.)
+                                </p>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  4.4&quot; × 7.4&quot; × 0.5&quot; depth
+                                </p>
+                              </div>
                             </div>
                           </button>
                         </div>
+                      </div>
+
+                      <Separator />
+
+                      {/* Quick presets */}
+                      <div className="flex flex-wrap gap-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => applyPreset("signature")}
+                          data-testid="preset-signature"
+                        >
+                          Signature Wall
+                        </Button>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => applyPreset("vault")}
+                          data-testid="preset-vault"
+                        >
+                          Vault Preservation
+                        </Button>
                       </div>
 
                       <Separator />
@@ -1463,18 +1388,21 @@ export function ComicBookFrameDesigner({
                             </TooltipTrigger>
                             <TooltipContent className="max-w-xs">
                               <p>
-                                Choose how many comics to display in your frame. Single comic
-                                layouts are most popular for showcasing valuable issues.
+                                Choose how many cards to display in your frame. Single card layouts
+                                are most popular for showcasing valuable issues.
                               </p>
                             </TooltipContent>
                           </Tooltip>
                         </div>
                         <p className="text-sm text-muted-foreground">
-                          Choose how many comics to display
+                          Choose how many cards to display
                         </p>
-                        <ComicLayoutGallery
+                        <CardLayoutGallery
                           selectedLayout={selectedLayout}
                           onLayoutChange={setSelectedLayout}
+                          formatId={selectedFormat}
+                          matBorder={MAT_BORDER}
+                          brassPlaqueEnabled={brassNameplateConfig.enabled}
                           compact={isMobile}
                         />
                       </div>
@@ -1516,11 +1444,7 @@ export function ComicBookFrameDesigner({
                               {frame.thumbnail ? (
                                 <div className="h-12 w-full rounded mb-2 overflow-hidden">
                                   <img
-                                    src={getSharedAssetUrl(
-                                      frame.thumbnail.startsWith("/")
-                                        ? frame.thumbnail.slice(1)
-                                        : frame.thumbnail
-                                    )}
+                                    src={frame.thumbnail}
                                     alt={frame.name}
                                     className="h-full w-full object-cover"
                                   />
@@ -1575,7 +1499,6 @@ export function ComicBookFrameDesigner({
                         <BottomWeightedMatting
                           checked={bottomWeighted}
                           onCheckedChange={setBottomWeighted}
-                          testIdPrefix="comic"
                         />
 
                         {/* Top Mat Color */}
@@ -1647,13 +1570,10 @@ export function ComicBookFrameDesigner({
                     </AccordionTrigger>
                     <AccordionContent className="pt-2 pb-4">
                       <RadioGroup
-                        value={selectedGlass?.id ?? glassTypes[0]?.id ?? "standard"}
-                        onValueChange={(id) => {
-                          const glass = glassTypes.find((g) => g.id === id) || glassTypes[0];
-                          if (glass) {
-                            setSelectedGlass(glass);
-                          }
-                        }}
+                        value={selectedGlass.id}
+                        onValueChange={(id) =>
+                          setSelectedGlass(glassTypes.find((g) => g.id === id) ?? glassTypes[0]!)
+                        }
                       >
                         <div className="flex flex-col md:flex-row flex-wrap gap-2">
                           {glassTypes.map((glass) => (
@@ -1698,18 +1618,18 @@ export function ComicBookFrameDesigner({
                     </AccordionContent>
                   </AccordionItem>
                 </Accordion>
-              </Card>
 
-              {/* Desktop Sticky Price Box */}
-              <PriceBox
-                totalPrice={pricing.total}
-                quantity={quantity}
-                onQuantityChange={setQuantity}
-                onAddToCart={handleAddToCart}
-                onCopyLink={handleShare}
-                priceItems={priceItems}
-                testIdPrefix="comic-"
-              />
+                {/* Desktop Pricing Sidebar - Standardized PriceBox */}
+                <PriceBox
+                  totalPrice={pricing.total}
+                  quantity={quantity}
+                  onQuantityChange={setQuantity}
+                  onAddToCart={handleAddToCart}
+                  onCopyLink={handleShare}
+                  priceItems={priceItems}
+                  testIdPrefix=""
+                />
+              </Card>
             </div>
           </div>
 
@@ -1747,22 +1667,16 @@ export function ComicBookFrameDesigner({
                 <div>
                   <Label>Shareable Link</Label>
                   <div className="flex gap-2 mt-2">
-                    <Input
-                      readOnly
-                      value={typeof window !== "undefined" ? window.location.href : ""}
-                      className="flex-1"
-                    />
+                    <Input readOnly value={window.location.href} className="flex-1" />
                     <Button
                       variant="outline"
                       size="icon"
                       onClick={() => {
-                        if (typeof window !== "undefined") {
-                          navigator.clipboard.writeText(window.location.href);
-                          toast({
-                            title: "Link copied!",
-                            description: "Share this link to show your configuration",
-                          });
-                        }
+                        navigator.clipboard.writeText(window.location.href);
+                        toast({
+                          title: "Link copied!",
+                          description: "Share this link to show your configuration",
+                        });
                       }}
                     >
                       <Copy className="h-4 w-4" />
@@ -1773,15 +1687,277 @@ export function ComicBookFrameDesigner({
             </DialogContent>
           </Dialog>
 
-          {/* Comic Lifestyle Carousel */}
-          <ComicLifestyleCarousel
-            onImageClick={(url, alt) => {
-              setFullscreenLifestyleUrl(url);
-              setFullscreenLifestyleAlt(alt);
-              setFullscreenImage("lifestyle");
-              setShowFullscreenPreview(true);
-            }}
-          />
+          {/* Card Lifestyle Carousel */}
+          <div className="mt-12">
+            <div className="mb-6 text-center">
+              <h2 className="text-2xl font-bold tracking-tight mb-2">Card Display Inspiration</h2>
+              <p className="text-muted-foreground">
+                Browse real customer frames showcasing graded cards and graded slabs
+              </p>
+            </div>
+            <GradedCardLifestyleCarousel
+              onImageClick={(url, alt) => {
+                setFullscreenLifestyleUrl(url);
+                setFullscreenLifestyleAlt(alt);
+                setFullscreenImage("lifestyle");
+                setShowFullscreenPreview(true);
+              }}
+            />
+          </div>
+
+          {/* Why Choose Section */}
+          <section className="mt-16 py-12 border-t bg-muted/20">
+            <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-10">
+                <h2 className="text-3xl md:text-4xl font-bold mb-3">
+                  Why Collectors Choose Our Graded Card Frames
+                </h2>
+                <p className="text-muted-foreground max-w-2xl mx-auto">
+                  Professional shadowbox frames made for PSA, BGS, CGC, and SGC graded cards
+                </p>
+              </div>
+
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="bg-card rounded-lg border p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-lg bg-primary/10">
+                      <Shield className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Framer&apos;s Grade Acrylic</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Professional glazing protects your slabs from dust and damage. Safer and
+                        lighter than glass.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-card rounded-lg border p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-lg bg-primary/10">
+                      <Ruler className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Fits All Grading Companies</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Built-in layouts for PSA, BGS, CGC, and SGC slabs. We size each opening to
+                        fit your cards.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-card rounded-lg border p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-lg bg-primary/10">
+                      <Layers className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Archival Materials</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Mat board and backing are archival quality. Your cards stay safe for years.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-card rounded-lg border p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-lg bg-primary/10">
+                      <Award className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Frame Shop Quality</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Each frame is handcrafted in our shop. Real wood frames with solid
+                        construction.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-card rounded-lg border p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-lg bg-primary/10">
+                      <LayoutGrid className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Multi-Card Layouts</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Display 1 to 12 graded cards in one frame. Great for sets, rookies, and team
+                        collections.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-card rounded-lg border p-6">
+                  <div className="flex items-start gap-4">
+                    <div className="p-3 rounded-lg bg-primary/10">
+                      <Tag className="w-6 h-6 text-primary" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold mb-2">Optional Nameplate</h3>
+                      <p className="text-sm text-muted-foreground">
+                        Add a brass nameplate with your player&apos;s name, card year, or collection
+                        title.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Long-Form Content Section */}
+          <section className="py-12">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">How Graded Card Frames Work</h2>
+
+              <div className="space-y-8 text-muted-foreground">
+                <div>
+                  <h3 className="text-2xl font-semibold mb-3 text-foreground">
+                    Built for Graded Slabs
+                  </h3>
+                  <p className="mb-3">
+                    Our frames use shadowbox construction. This means the frame is deep enough to
+                    hold your graded cards without pressing them against the acrylic. Each slab sits
+                    in its own precision-cut opening.
+                  </p>
+                  <p>
+                    We support all major grading companies: PSA, BGS, CGC, and SGC. Pick your
+                    grading company and we size the openings to match. The slabs drop right in.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-semibold mb-3 text-foreground">
+                    Layout Options for Every Collection
+                  </h3>
+                  <p className="mb-3">
+                    Frame a single prized card or build a display of 12 cards. Our layouts work for
+                    rookie cards, team sets, and mixed collections. Popular choices include 3-card
+                    and 6-card layouts for sets.
+                  </p>
+                  <p>
+                    Each layout shows you the final frame size so you know how it will fit on your
+                    wall.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-semibold mb-3 text-foreground">
+                    Mat Colors and Styles
+                  </h3>
+                  <p className="mb-3">
+                    Pick from single or double matting. Double mats add a thin color border around
+                    each card for extra depth. We offer black, white, and team-friendly colors.
+                  </p>
+                  <p>
+                    Black mats are most popular. They make card colors pop and give a clean, modern
+                    look.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-semibold mb-3 text-foreground">
+                    Brass Nameplate Personalization
+                  </h3>
+                  <p className="mb-3">
+                    Add a custom brass nameplate below your cards. Include the player&apos;s name,
+                    card year, or collection title. Great for gifts or awards.
+                  </p>
+                  <p>
+                    The nameplate uses engraved text on brushed brass. It adds a professional touch
+                    to any display.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="text-2xl font-semibold mb-3 text-foreground">Ready to Hang</h3>
+                  <p>
+                    Every frame ships with hanging hardware installed. Just unpack and hang. Your
+                    cards slide into the openings from the back. No tools needed.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* FAQ Section */}
+          <section className="py-12 border-t bg-muted/20">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
+                Graded Card Frame Questions
+              </h2>
+
+              <div className="space-y-6">
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">
+                    What grading companies do your frames fit?
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Our frames fit PSA, BGS (Beckett), CGC, and SGC slabs. Pick your grading company
+                    in the designer and we size each opening to fit.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">
+                    How many cards can I put in one frame?
+                  </h3>
+                  <p className="text-muted-foreground">
+                    You can frame 1 to 12 graded cards. We offer layouts for single cards, pairs,
+                    rows of 3, grids of 4 or 6, and larger displays up to 12 cards.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">Do the cards touch the acrylic?</h3>
+                  <p className="text-muted-foreground">
+                    No. Our shadowbox frames have depth. The mat board holds your slabs away from
+                    the acrylic. This protects the cards and gives the display dimension.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">
+                    Can I mix different grading companies in one frame?
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Each frame is sized for one grading company since slab sizes differ. For mixed
+                    collections, we recommend separate frames for each grading company.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">How do I install my cards?</h3>
+                  <p className="text-muted-foreground">
+                    Open the back of the frame and slide your slabs into each opening. The openings
+                    are cut slightly larger than your slabs so they drop in easily. No tools or tape
+                    needed.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">What frame materials do you use?</h3>
+                  <p className="text-muted-foreground">
+                    Frames are solid wood. Mat boards and backing are archival quality. Glazing is
+                    framer&apos;s grade acrylic - lighter and safer than glass.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-semibold text-lg mb-2">Can I add a nameplate?</h3>
+                  <p className="text-muted-foreground">
+                    Yes. Our brass nameplate option lets you add up to three lines of text. Include
+                    the player&apos;s name, card year, or any custom message.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
 
         {/* Fullscreen Dialog */}
@@ -1799,7 +1975,7 @@ export function ComicBookFrameDesigner({
               {fullscreenImage === "preview" && (
                 <div className="w-full h-full flex items-center justify-center p-8">
                   <div style={{ filter: "drop-shadow(0 8px 32px rgba(0, 0, 0, 0.15))" }}>
-                    <ComicPreviewCanvas
+                    <CardPreviewCanvas
                       framePhotos={fullscreenPreviewState.framePhotos}
                       selectedFrame={selectedFrame}
                       topMatColor={selectedMat}
@@ -1815,7 +1991,7 @@ export function ComicBookFrameDesigner({
                       previewHeight={fullscreenPreviewState.previewHeight}
                       frameFaceWidth={fullscreenPreviewState.frameFaceWidth}
                       isMobile={fullscreenPreviewState.isMobile}
-                      comicCovers={fullscreenPreviewState.comicCovers}
+                      cardImages={fullscreenPreviewState.cardImages}
                       brassNameplateConfig={brassNameplateConfig}
                     />
                   </div>
@@ -1824,9 +2000,9 @@ export function ComicBookFrameDesigner({
               {fullscreenImage === "corner" &&
                 (() => {
                   const cornerImage = selectedFrame.alternateImages?.find(
-                    (img: AlternateImage) => img.type === "corner" && img.url.includes("corner_a")
+                    (img) => img.type === "corner" && img.url.includes("corner_a")
                   );
-                  const imageUrl = cornerImage?.url || framePhotos.cornerUrl;
+                  const imageUrl = cornerImage?.url || previewState.framePhotos.cornerUrl;
                   return imageUrl ? (
                     <img
                       src={imageUrl}
@@ -1838,9 +2014,9 @@ export function ComicBookFrameDesigner({
               {fullscreenImage === "profile" &&
                 (() => {
                   const profileImage = selectedFrame.alternateImages?.find(
-                    (img: AlternateImage) => img.type === "profile"
+                    (img) => img.type === "profile"
                   );
-                  const imageUrl = profileImage?.url || framePhotos.profileUrl;
+                  const imageUrl = profileImage?.url || previewState.framePhotos.profileUrl;
                   return imageUrl ? (
                     <img
                       src={imageUrl}
@@ -1866,7 +2042,7 @@ export function ComicBookFrameDesigner({
             <div className="container mx-auto px-4 py-3">
               <div className="flex items-center justify-between gap-3">
                 <div className="flex flex-col">
-                  <span className="text-lg font-bold" data-testid="comic-mobile-total-price">
+                  <span className="text-lg font-bold" data-testid="card-mobile-total-price">
                     ${(pricing.total * quantity).toFixed(2)}
                   </span>
                   {quantity > 1 && (
@@ -1880,21 +2056,21 @@ export function ComicBookFrameDesigner({
                     value={quantity}
                     onChange={setQuantity}
                     className="w-14 h-7 text-xs text-center p-0"
-                    testId="comic-mobile-quantity"
+                    testId="card-mobile-quantity"
                   />
                   <Button
                     variant="outline"
                     size="icon"
                     onClick={handleShare}
                     className="h-11 w-11"
-                    data-testid="comic-mobile-copy-link"
+                    data-testid="card-mobile-copy-link"
                   >
                     <Copy className="h-4 w-4" />
                   </Button>
                   <Button
                     onClick={handleAddToCart}
                     className="flex-1 text-xs min-w-0 min-h-11"
-                    data-testid="comic-mobile-add-to-cart"
+                    data-testid="card-mobile-add-to-cart"
                   >
                     <ShoppingCart className="h-4 w-4 mr-1.5" />
                     Add to Cart

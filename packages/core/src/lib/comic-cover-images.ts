@@ -101,11 +101,11 @@ export function getRandomComicCover(formatId: string, seed?: number): string {
 
   if (seed !== undefined) {
     const index = seed % pool.length;
-    return pool[index];
+    return pool[index] ?? "/comic/placeholder-comic.jpg";
   }
 
   const randomIndex = Math.floor(Math.random() * pool.length);
-  return pool[randomIndex];
+  return pool[randomIndex] ?? "/comic/placeholder-comic.jpg";
 }
 
 /**
@@ -115,7 +115,7 @@ export function getRandomComicCovers(formatId: string, count: number, baseSeed?:
   const pool = getComicCoverPool(formatId);
 
   if (pool.length === 0) {
-    return Array(count).fill("/comic/placeholder-comic.jpg");
+    return Array(count).fill("/comic/placeholder-comic.jpg") as string[];
   }
 
   const covers: string[] = [];
@@ -133,7 +133,8 @@ export function getRandomComicCovers(formatId: string, count: number, baseSeed?:
     }
 
     usedIndices.add(index);
-    covers.push(pool[index]);
+    const cover = pool[index];
+    if (cover) covers.push(cover);
   }
 
   return covers;
@@ -155,7 +156,7 @@ export function createCoverSeed(configString: string): number {
 /**
  * Get covers for a specific configuration
  */
-export function getCoversForConfig(formatId: string, layoutId: string, count: number): string[] {
+export function getCoversForConfig(formatId: string, _layoutId: string, count: number): string[] {
   const pool = getComicCoverPool(formatId);
 
   if (pool.length === 0 || count === 0) {

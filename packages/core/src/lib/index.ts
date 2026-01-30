@@ -41,4 +41,25 @@ export * from "./diploma-insert-images";
 export * from "./diploma-lifestyle-images";
 export * from "./cd-lifestyle-images";
 export * from "./record-album-lifestyle-images";
-export * from "./comic-cover-images";
+export {
+  GOLD_SILVER_BRONZE_COVERS,
+  MODERN_COVERS,
+  SLABBED_COVERS,
+  getComicCoverPool,
+  getRandomComicCover,
+  getRandomComicCovers,
+  createCoverSeed,
+  getCoversForConfig as getComicCoversForConfig,
+} from "./comic-cover-images";
+export * from "./card-insert-images";
+export type { MagazineInsertSet } from "./magazine-cover-images";
+export {
+  MAGAZINE_INSERT_SETS,
+  GENERIC_MAGAZINE_COVERS,
+  getInsertSetsForSize,
+  getMagazineCoverPool,
+  getRandomMagazineCover,
+  getRandomMagazineCovers,
+  getCoversForConfig as getMagazineCoversForConfig,
+} from "./magazine-cover-images";
+export * from "./magazine-reference-data";

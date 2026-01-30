@@ -31,6 +31,7 @@ export * from "./useIntelligentPreviewSizing";
 export * from "./useScrollAnimation";
 export * from "./useParallax";
 export * from "./useComicPricing";
+export * from "./useMagazinePricing";
 export * from "./usePlaybillPricing";
 export * from "./use-scroll-to-top";
 export * from "./use-print-frame";

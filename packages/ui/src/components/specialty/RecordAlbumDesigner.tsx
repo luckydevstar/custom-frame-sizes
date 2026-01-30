@@ -442,14 +442,16 @@ export function RecordAlbumDesigner({
     return layoutType === "vinyl" ? "single-with-cover" : "disc-with-cover";
   });
 
-  const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(initialFrame);
+  const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(
+    () => initialFrame ?? frameStyles[0]!
+  );
   const [selectedMat, setSelectedMat] = useState<Mat>(() => {
     const urlMatId = urlParams.get("mat");
     if (urlMatId) {
       const found = ALL_MATS.find((m) => m.id === urlMatId);
       if (found) return found;
     }
-    return ALL_MATS[0];
+    return ALL_MATS[0]!;
   });
   const [selectedBottomMat, setSelectedBottomMat] = useState<Mat>(() => {
     const urlMatId = urlParams.get("bottomMat");
@@ -457,13 +459,13 @@ export function RecordAlbumDesigner({
       const found = ALL_MATS.find((m) => m.id === urlMatId);
       if (found) return found;
     }
-    return ALL_MATS[0];
+    return ALL_MATS[0]!;
   });
   const [matType, setMatType] = useState<"single" | "double" | "none">(
     (urlParams.get("matType") as "single" | "double" | "none") || "single"
   );
   const [selectedGlass, setSelectedGlass] = useState<GlassType>(
-    glassTypes.find((g) => g.id === urlParams.get("glass")) ?? glassTypes[0]
+    glassTypes.find((g) => g.id === urlParams.get("glass")) ?? glassTypes[0]!
   );
   const [hardware, setHardware] = useState<"standard" | "security">(
     (urlParams.get("hardware") as "standard" | "security") || "standard"
@@ -845,12 +847,12 @@ export function RecordAlbumDesigner({
     layout?: RecordAlbumLayoutType | CDLayoutType
   ) => {
     const targetLayout = "layout" in preset ? preset.layout : (layout ?? selectedLayout);
-    const frame = frameStyles.find((f) => f.id === preset.frameId) ?? frameStyles[0];
-    const mat = ALL_MATS.find((m) => m.id === preset.matId) ?? ALL_MATS[0];
+    const frame = frameStyles.find((f) => f.id === preset.frameId) ?? frameStyles[0]!;
+    const mat = ALL_MATS.find((m) => m.id === preset.matId) ?? ALL_MATS[0]!;
     const bottomMat = preset.bottomMatId
-      ? (ALL_MATS.find((m) => m.id === preset.bottomMatId) ?? ALL_MATS[0])
-      : ALL_MATS[0];
-    const glass = glassTypes.find((g) => g.id === preset.glassId) ?? glassTypes[0];
+      ? (ALL_MATS.find((m) => m.id === preset.bottomMatId) ?? ALL_MATS[0]!)
+      : ALL_MATS[0]!;
+    const glass = glassTypes.find((g) => g.id === preset.glassId) ?? glassTypes[0]!;
     setSelectedLayout(targetLayout);
     setSelectedFrame(frame);
     setMatType(preset.matType);
@@ -869,7 +871,7 @@ export function RecordAlbumDesigner({
     });
   };
 
-  const _handleLayoutPreset = (layout: RecordAlbumLayoutType | CDLayoutType) => {
+  const handleLayoutPreset = (layout: RecordAlbumLayoutType | CDLayoutType) => {
     if (layoutType === "vinyl") {
       const vinylLayout = layout as RecordAlbumLayoutType;
       if (!VINYL_LAYOUT_PRESETS[vinylLayout]) return;
@@ -880,6 +882,7 @@ export function RecordAlbumDesigner({
       applyPreset(CD_LAYOUT_PRESETS[cdLayout], layout);
     }
   };
+  void handleLayoutPreset;
 
   const handleAddToCart = async () => {
     setIsCheckingOut(true);
@@ -1325,9 +1328,9 @@ export function RecordAlbumDesigner({
                   </AccordionTrigger>
                   <AccordionContent className="pt-2 pb-4">
                     <RadioGroup
-                      value={selectedGlass.id}
+                      value={selectedGlass?.id ?? glassTypes[0]?.id ?? ""}
                       onValueChange={(id) =>
-                        setSelectedGlass(glassTypes.find((g) => g.id === id) ?? glassTypes[0])
+                        setSelectedGlass(glassTypes.find((g) => g.id === id) ?? glassTypes[0]!)
                       }
                     >
                       <div className="flex flex-col md:flex-row flex-wrap gap-2">
