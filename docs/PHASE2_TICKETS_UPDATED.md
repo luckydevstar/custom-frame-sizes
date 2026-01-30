@@ -347,6 +347,7 @@ Migrate all specialty designer pages (Shadowbox, Jersey, Canvas, Puzzle, Comic, 
   - Sonogram Frames (`/sonogram-frames`) — original: `SonogramFrames.tsx` + `SonogramFrameDesigner.tsx`
   - Bouquet Frames (`/bouquet-frames`) — original: `BouquetFrames.tsx` + `BouquetFrameDesigner.tsx`
 - **Recommended approach:** Migrate one specialty type at a time (e.g. Certificate first): add designer + deps to `packages/ui`, then replace the placeholder page in store-a with the full page content and designer embed.
+- **Process:** For each page migration, follow the steps in **[PAGE_MIGRATION_PROCESS.md](./PAGE_MIGRATION_PROCESS.md)**: (1) scan original structure and functionality, (2) migrate with Next.js-friendly code and `"use client"` where needed, (3) re-check sections/SEO/designer/styles/lint, (4) manual review and fix. Apply common fixes in advance (e.g. unescaped double quotes in JSX → `&quot;`).
 
 **Acceptance Criteria**:
 
