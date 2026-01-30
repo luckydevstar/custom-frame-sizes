@@ -364,6 +364,8 @@ export { PlaybillFrameDesigner } from "./components/specialty/PlaybillFrameDesig
 export { CertificateFrameDesigner } from "./components/specialty/CertificateFrameDesigner";
 export { DiplomaFrameDesigner } from "./components/specialty/DiplomaFrameDesigner";
 export { DiplomaLifestyleCarousel } from "./components/specialty/DiplomaLifestyleCarousel";
+export { RecordAlbumDesigner } from "./components/specialty/RecordAlbumDesigner";
+export { RecordAlbumPreview } from "./components/specialty/RecordAlbumPreview";
 
 // Specialty shared components
 export {

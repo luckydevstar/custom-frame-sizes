@@ -16,6 +16,7 @@ import {
   calculateComicFrameSize,
   calculateComicPreviewDimensions,
   getComicFormatById,
+  getFrameImageUrl,
 } from "@framecraft/core";
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
 
@@ -774,16 +775,16 @@ export function useComicPreviewState({
     return [];
   }, [comicCovers, getCoversForConfig, formatId, layoutId, layout]);
 
-  // Get frame photo URLs (use SKU for file paths)
+  // Get frame photo URLs (CDN via getFrameImageUrl)
   const framePhotos = useMemo(() => {
-    const frameSku = selectedFrame.sku || selectedFrame.id;
+    const frameSku = String(selectedFrame.sku || selectedFrame.id);
     return {
-      cornerUrl: `/frames/${frameSku}/corner.jpg`,
-      profileUrl: `/frames/${frameSku}/profile.jpg`,
-      topUrl: `/frames/${frameSku}/top.jpg`,
-      bottomUrl: `/frames/${frameSku}/bottom.jpg`,
-      leftUrl: `/frames/${frameSku}/left.jpg`,
-      rightUrl: `/frames/${frameSku}/right.jpg`,
+      cornerUrl: getFrameImageUrl(frameSku, "corner"),
+      profileUrl: getFrameImageUrl(frameSku, "profile"),
+      topUrl: getFrameImageUrl(frameSku, "top"),
+      bottomUrl: getFrameImageUrl(frameSku, "bottom"),
+      leftUrl: getFrameImageUrl(frameSku, "left"),
+      rightUrl: getFrameImageUrl(frameSku, "right"),
     };
   }, [selectedFrame.sku, selectedFrame.id]);
 

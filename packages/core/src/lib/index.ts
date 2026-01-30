@@ -39,3 +39,6 @@ export type { Frame as StyleGatewayFrame } from "./style-gateway-images";
 export * from "./stock-images";
 export * from "./diploma-insert-images";
 export * from "./diploma-lifestyle-images";
+export * from "./cd-lifestyle-images";
+export * from "./record-album-lifestyle-images";
+export * from "./comic-cover-images";

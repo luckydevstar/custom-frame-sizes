@@ -15,3 +15,6 @@ export * from "./jersey-teams";
 export * from "./collage-math";
 export * from "./certificate-sizes";
 export * from "./diploma-sizes";
+export * from "./cd-layouts";
+export * from "./record-album-layouts";
+export * from "./svg-path-generator";

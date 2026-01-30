@@ -50,16 +50,12 @@ import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
 // - useToast hook
 // - BrassNameplateSection component
 // - @shared/schema types
-// - comicFormats utilities (COMIC_FORMATS, getComicFormatById)
-// - comicLayouts utilities (COMIC_LAYOUTS, getComicLayout, etc.)
-// - comic-cover-images constants (getCoversForConfig)
 // - ComicPreviewCanvas component and useComicPreviewState hook
-// - useComicPricing hook
-// - ComicLayoutGallery component
 // - TrustBadges component
 // - ComicLifestyleCarousel component
 // - HangingHardwareSection, BottomWeightedMatting components
 import { useToast } from "../../hooks/use-toast";
+import { getCoversForConfig as getCoversForConfigFromCore } from "@framecraft/core";
 import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
 import type { BrassNameplateConfig } from "@framecraft/types";
 // import { BRASS_NAMEPLATE_SPECS, getTypeABottomBorder } from "@framecraft/types";
@@ -89,22 +85,23 @@ interface ComicBookFrameDesignerProps {
   defaultFrameId?: string;
   embedded?: boolean;
   /**
-   * Function to get comic cover images for a given configuration.
-   * Should be provided by the app level.
+   * Optional: function to get comic cover images for a given configuration.
+   * If not provided, uses default from @framecraft/core.
    *
    * @param formatId - Comic format ID (e.g., "modern-age", "slabbed-cgc")
    * @param layoutId - Layout ID (e.g., "comic-single", "comic-double")
    * @param count - Number of covers needed
    * @returns Array of cover image paths
    */
-  getCoversForConfig: (formatId: string, layoutId: string, count: number) => string[];
+  getCoversForConfig?: (formatId: string, layoutId: string, count: number) => string[];
 }
 
 export function ComicBookFrameDesigner({
   defaultFrameId,
   embedded = false,
-  getCoversForConfig,
+  getCoversForConfig: getCoversForConfigProp,
 }: ComicBookFrameDesignerProps) {
+  const getCoversForConfig = getCoversForConfigProp ?? getCoversForConfigFromCore;
   // Removed useLocation() - not needed in Next.js
   const { toast } = useToast();
   const isMobile = useIsMobile();
@@ -128,8 +125,14 @@ export function ComicBookFrameDesigner({
     }
   }, [isMobile, accordionValue]);
 
-  // URL parameters
-  const urlParams = useMemo(() => new URLSearchParams(window.location.search), []);
+  // URL parameters (SSR-safe: no window on server)
+  const urlParams = useMemo(
+    () =>
+      typeof window !== "undefined"
+        ? new URLSearchParams(window.location.search)
+        : new URLSearchParams(),
+    []
+  );
 
   // Initialize frame selection
   const initialFrame = useMemo(() => {
@@ -335,6 +338,7 @@ export function ComicBookFrameDesigner({
         params.set("nameplateColor", brassNameplateConfig.color);
     }
 
+    if (typeof window === "undefined") return;
     const paramString = params.toString();
     const newUrl = paramString
       ? `${window.location.pathname}?${paramString}`
@@ -735,6 +739,7 @@ export function ComicBookFrameDesigner({
 
   // Share configuration
   const handleShare = useCallback(() => {
+    if (typeof window === "undefined") return;
     const url = window.location.href;
     navigator.clipboard.writeText(url);
     toast({
@@ -1742,16 +1747,22 @@ export function ComicBookFrameDesigner({
                 <div>
                   <Label>Shareable Link</Label>
                   <div className="flex gap-2 mt-2">
-                    <Input readOnly value={window.location.href} className="flex-1" />
+                    <Input
+                      readOnly
+                      value={typeof window !== "undefined" ? window.location.href : ""}
+                      className="flex-1"
+                    />
                     <Button
                       variant="outline"
                       size="icon"
                       onClick={() => {
-                        navigator.clipboard.writeText(window.location.href);
-                        toast({
-                          title: "Link copied!",
-                          description: "Share this link to show your configuration",
-                        });
+                        if (typeof window !== "undefined") {
+                          navigator.clipboard.writeText(window.location.href);
+                          toast({
+                            title: "Link copied!",
+                            description: "Share this link to show your configuration",
+                          });
+                        }
                       }}
                     >
                       <Copy className="h-4 w-4" />
