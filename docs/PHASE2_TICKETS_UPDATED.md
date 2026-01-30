@@ -301,10 +301,10 @@ Create dedicated frame designer page route (separate from homepage).
 
 **Labels**: `phase-2.1`, `priority-high`, `frontend`
 
-**Estimated Hours**: 12 hours
+**Estimated Hours**: 12 hours (core designers); additional hours for "other specialty pages" (see status below).
 
 **Description**:
-Migrate all specialty designer pages (Shadowbox, Jersey, Canvas, Puzzle, Comic, Playbill, etc.).
+Migrate all specialty designer pages (Shadowbox, Jersey, Canvas, Puzzle, Comic, Playbill, etc.) as **real pages** from CustomFrameSizes-CODE — not placeholders.
 
 **Tasks**:
 
@@ -321,20 +321,49 @@ Migrate all specialty designer pages (Shadowbox, Jersey, Canvas, Puzzle, Comic, 
 - Add navigation items for enabled designers
 - Test each designer type
 
+**P2-007 Migration Status**:
+
+- **Core specialty designers (real pages, done):** Shadowbox, Jersey, Canvas, Puzzle, Comic, Playbill. Each has a full store-a page (e.g. `/shadowbox-frames`, `/jersey-frames`, `/canvas-frames`, `/puzzle-frames`, `/comic-book-frames`, `/playbill-frames`) and is available via `/designer/[type]`. Designers live in `packages/ui` and are wired to cart.
+- **Other specialty pages (must be real, not placeholders):** In the original codebase, each of the following has a full page component and a designer component. Store A currently has **placeholder** ("Coming Soon") pages for these routes. P2-007 requires migrating them to **real** pages by:
+  1. Migrating the designer component (and any specialty libs: sizes, layouts, lifestyle images) from `CustomFrameSizes-CODE/client` into `packages/ui` (or store-a) with imports adapted to `@framecraft/core`, `@framecraft/data`, `@framecraft/types`, `@framecraft/config`.
+  2. Replacing the placeholder page in store-a with a full page: hero, benefit bar, designer embed, "What you can frame" / features, FAQ, structured data (Product/FAQ/Service schema), matching the original page structure and SEO.
+  - Certificate Frames (`/certificate-frames`) — original: `CertificateFrames.tsx` + `CertificateFrameDesigner.tsx`
+  - Diploma Frames (`/diploma-certificate-frames`) — original: `DiplomaCertificateFrames.tsx` + `DiplomaFrameDesigner.tsx`
+  - CD Frames (`/cd-frames`, `/specialty/cd-frames`) — original: `CDFrames.tsx` + `RecordAlbumDesigner.tsx` (or CD-specific flow)
+  - Ticket Frames (`/ticket-frames`) — original: `TicketFrames.tsx` + `TicketStubFrameDesigner.tsx`
+  - Wedding Invitation Frames (`/wedding-invitation-frames`) — original: `WeddingInvitationFrames.tsx` + `WeddingInvitationFrameDesigner.tsx`
+  - Signature Frames (`/signature-frames`) — original: `SignatureFrames.tsx` + `SignatureFrameDesigner.tsx`
+  - Collage Frames (`/collage-frames`) — original: `CollageFrames.tsx` + `CollageFrameDesigner.tsx`
+  - Newspaper Frames (`/newspaper-frames`) — original: `NewspaperFrames.tsx` + `NewspaperFrameDesigner.tsx`
+  - Magazine Frames (`/magazine-frames`) — original: `MagazineFrames.tsx` + `MagazineFrameDesigner.tsx`
+  - Movie Poster Frames (`/movie-poster-frames`) — original: `MoviePosterFrames.tsx` + `MoviePosterFrameDesigner.tsx`
+  - Military Frames (`/military-frames`) — original: `MilitaryFrames.tsx` + `MilitaryFrameDesigner.tsx`
+  - Stamp Frames (`/stamp-frames`) — original: `StampFrames.tsx` + `StampFrameDesigner.tsx`
+  - Currency Frames (`/currency-frames`) — original: `CurrencyFrames.tsx` + `CurrencyFrameDesigner.tsx`
+  - Card / Graded Card Frames (`/card-frames`) — original: `CardFrameDesigner.tsx` (page uses designer)
+  - Needlework Frames (`/specialty/needlework`) — original: `NeedleworkFrames.tsx` + `NeedleworkFrameDesigner.tsx`
+  - Record Album Frames (`/record-album-frames`, `/specialty/record-album-frames`) — original: `RecordAlbumFrames.tsx` + `RecordAlbumDesigner.tsx`
+  - Hockey Puck Frames (`/hockey-puck-frame-designer`) — original: `HockeyPuckFrames.tsx` + `PuckFrameDesigner.tsx`
+  - Sonogram Frames (`/sonogram-frames`) — original: `SonogramFrames.tsx` + `SonogramFrameDesigner.tsx`
+  - Bouquet Frames (`/bouquet-frames`) — original: `BouquetFrames.tsx` + `BouquetFrameDesigner.tsx`
+- **Recommended approach:** Migrate one specialty type at a time (e.g. Certificate first): add designer + deps to `packages/ui`, then replace the placeholder page in store-a with the full page content and designer embed.
+
 **Acceptance Criteria**:
 
-- [ ] All specialty designers accessible via `/designer/[type]`
+- [ ] All specialty designers accessible via `/designer/[type]` (where applicable)
 - [ ] Only enabled specialty designers are accessible (feature flags)
 - [ ] Disabled designers return 404 or redirect
 - [ ] Each enabled designer functions correctly
 - [ ] Add to cart works for each designer type
 - [ ] Configuration serialization is correct per type
 - [ ] Navigation shows only enabled designers
+- [ ] **All menu-linked specialty routes are real migrated pages, not "Coming Soon" placeholders.**
 
 **Files to Create/Modify**:
 
 - `apps/store-a/app/designer/[type]/page.tsx` (new - dynamic route)
 - `apps/store-a/src/components/designer/SpecialtyDesignerRouter.tsx` (new)
+- For each "other specialty" type: designer in `packages/ui`, full page in `apps/store-a/src/app/<route>/page.tsx` (replace placeholder)
 
 **Dependencies**: P2-006
 

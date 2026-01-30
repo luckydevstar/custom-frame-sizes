@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useId, ReactNode } from "react";
 import { ShoppingCart, Copy, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "./button";

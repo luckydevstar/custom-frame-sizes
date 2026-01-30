@@ -1,3 +1,5 @@
+"use client";
+
 // Reference: blueprint:javascript_object_storage
 import { useState } from "react";
 import type { ReactNode } from "react";

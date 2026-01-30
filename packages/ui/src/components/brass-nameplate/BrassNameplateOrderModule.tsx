@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";

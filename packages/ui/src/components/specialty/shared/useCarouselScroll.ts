@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useRef, useLayoutEffect, useEffect, useCallback } from "react";
 
 interface UseCarouselScrollReturn {

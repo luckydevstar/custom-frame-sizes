@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useRef, useEffect } from "react";
 import { Image as ImageIcon, Link as LinkIcon } from "lucide-react";
 import { Button } from "../ui/button";

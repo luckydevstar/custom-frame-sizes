@@ -361,6 +361,8 @@ export { CanvasFrameDesigner } from "./components/specialty/CanvasFrameDesigner"
 export { PuzzleFrameDesigner } from "./components/specialty/PuzzleFrameDesigner";
 export { ComicBookFrameDesigner } from "./components/specialty/ComicBookFrameDesigner";
 export { PlaybillFrameDesigner } from "./components/specialty/PlaybillFrameDesigner";
+export { CertificateFrameDesigner } from "./components/specialty/CertificateFrameDesigner";
+export { DiplomaLifestyleCarousel } from "./components/specialty/DiplomaLifestyleCarousel";
 
 // Specialty shared components
 export {

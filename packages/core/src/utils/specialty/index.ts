@@ -13,3 +13,4 @@ export * from "./jersey-layouts";
 export * from "./jersey-mat-paths";
 export * from "./jersey-teams";
 export * from "./collage-math";
+export * from "./certificate-sizes";
