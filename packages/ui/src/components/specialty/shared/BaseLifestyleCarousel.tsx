@@ -1,3 +1,5 @@
+"use client";
+
 import { useMemo } from "react";
 import { Button } from "../../ui/button";
 import { ChevronLeft, ChevronRight, Maximize } from "lucide-react";

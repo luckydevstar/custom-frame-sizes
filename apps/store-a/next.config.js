@@ -26,6 +26,14 @@ const nextConfig = {
     optimizePackageImports: ['@framecraft/ui', '@framecraft/core'],
   },
   webpack: (config, { isServer }) => {
+    // Suppress "Critical dependency" warnings from Sentry/OpenTelemetry node_modules
+    // (dynamic require in @sentry/node and require-in-the-middle; harmless in our setup)
+    config.ignoreWarnings = [
+      ...(config.ignoreWarnings || []),
+      { module: /node_modules\/@opentelemetry\/instrumentation/ },
+      { module: /node_modules\/require-in-the-middle/ },
+    ];
+
     // Resolve TypeScript source files for @framecraft packages
     config.resolve.alias = {
       ...config.resolve.alias,

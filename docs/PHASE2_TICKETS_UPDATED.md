@@ -823,6 +823,127 @@ Deploy the backend API structure early (Week 1) with placeholder/mock endpoints.
 
 ---
 
+### Ticket P2-017.6: Implement Image Upload API Endpoints
+
+**Labels**: `phase-2.1`, `priority-critical`, `backend`, `api`
+
+**Estimated Hours**: 6 hours
+
+**Description**:
+Implement API endpoints for image upload functionality required by FrameDesigner and specialty designers. These endpoints handle getting signed upload URLs and storing image metadata.
+
+**Tasks**:
+
+- Review original implementation (`CustomFrameSizes-CODE/server/routes.ts`):
+  - `POST /api/objects/upload` - Generate signed upload URL for Cloudflare R2
+  - `PUT /api/frame-images` - Store uploaded image metadata and normalize paths
+- Create `POST /api/objects/upload` endpoint in `apps/api`:
+  - Integrate with Cloudflare R2 (or configured object storage)
+  - Generate presigned upload URLs with appropriate expiration
+  - Handle object storage service errors gracefully
+  - Return upload URL in response
+- Create `PUT /api/frame-images` endpoint:
+  - Accept `imageURL` in request body
+  - Normalize object path (remove query params, normalize structure)
+  - Store image metadata in database (if tracking enabled)
+  - Support optional width/height tracking for upscaling
+  - Return normalized object path
+- Add request validation and sanitization
+- Implement error handling for storage failures
+- Add rate limiting for upload endpoints
+- Write unit tests for both endpoints
+- Document API usage and response formats
+
+**Acceptance Criteria**:
+
+- [ ] `POST /api/objects/upload` generates valid signed URLs
+- [ ] Signed URLs work with Cloudflare R2 (or configured storage)
+- [ ] `PUT /api/frame-images` normalizes and stores image paths
+- [ ] Image metadata stored in database (if enabled)
+- [ ] Request validation works correctly
+- [ ] Error handling graceful (503 for storage unavailable)
+- [ ] Rate limiting configured
+- [ ] Unit tests pass
+- [ ] API documented
+
+**Files to Create/Modify**:
+
+- `apps/api/src/routes/objects/upload/route.ts` (new)
+- `apps/api/src/routes/frame-images/route.ts` (new)
+- `apps/api/src/lib/object-storage.ts` (new - Cloudflare R2 integration)
+- `apps/api/src/lib/image-utils.ts` (new - path normalization)
+- `apps/api/__tests__/objects-upload.test.ts` (new)
+- `apps/api/__tests__/frame-images.test.ts` (new)
+- `docs/api/image-upload.md` (new)
+
+**Dependencies**: P2-017.5 (API structure should be set up first)
+
+**Note**: These endpoints are critical for FrameDesigner functionality. Can be implemented with mock/stub responses initially, then connected to real Cloudflare R2 later.
+
+---
+
+### Ticket P2-017.7: Implement Designer Recommendation API
+
+**Labels**: `phase-2.1`, `priority-medium`, `backend`, `api`, `ai`
+
+**Estimated Hours**: 8 hours
+
+**Description**:
+Implement AI-powered design recommendation API that analyzes uploaded images and suggests frame/mat combinations using OpenAI Vision API.
+
+**Tasks**:
+
+- Review original implementation (`CustomFrameSizes-CODE/server/routes.ts`):
+  - `POST /api/design-recommendations` - AI frame/mat recommendations
+- Create `POST /api/design-recommendations` endpoint:
+  - Accept `imageBase64`, `imageMimeType`, `imageWidth`, `imageHeight` in request body
+  - Validate all required inputs
+  - Load frame and mat catalogs from `@framecraft/data`
+  - Calculate frame sizes based on image aspect ratio (small, standard, large)
+  - Integrate with OpenAI Vision API (or alternative AI service)
+  - Create structured prompt with available frames and mats
+  - Request 2-3 distinct frame/mat recommendations
+  - Parse AI response and validate frame/mat IDs exist
+  - Return structured recommendations with analysis
+- Implement error handling:
+  - Handle OpenAI API errors
+  - Validate AI response structure
+  - Fallback if AI service unavailable
+- Add rate limiting (AI calls can be expensive)
+- Add request size limits (base64 images can be large)
+- Write unit tests (can mock OpenAI responses)
+- Document API usage and response format
+- Add feature flag for enabling/disabling recommendations
+
+**Acceptance Criteria**:
+
+- [ ] `POST /api/design-recommendations` accepts image data
+- [ ] Validates all required inputs
+- [ ] Loads frame/mat catalogs correctly
+- [ ] Calculates frame sizes based on aspect ratio
+- [ ] Integrates with OpenAI Vision API
+- [ ] Returns 2-3 distinct recommendations
+- [ ] Validates returned frame/mat IDs exist
+- [ ] Error handling works correctly
+- [ ] Rate limiting configured
+- [ ] Feature flag controls availability
+- [ ] Unit tests pass (with mocked AI responses)
+- [ ] API documented
+
+**Files to Create/Modify**:
+
+- `apps/api/src/routes/design-recommendations/route.ts` (new)
+- `apps/api/src/lib/ai-recommendations.ts` (new - OpenAI integration)
+- `apps/api/src/lib/frame-size-calculator.ts` (new - aspect ratio calculations)
+- `apps/api/__tests__/design-recommendations.test.ts` (new)
+- `docs/api/design-recommendations.md` (new)
+
+**Dependencies**: P2-017.5, P2-017.6 (image upload should work first)
+
+**Note**: This is a nice-to-have feature that enhances UX. Can be implemented after core functionality is working. Requires OpenAI API key in environment variables. Feature flag allows disabling if AI service is unavailable or too expensive.
+
+---
+
 ### Ticket P2-018: Configure Store A Environment Variables
 
 **Labels**: `phase-2.1`, `priority-critical`, `infrastructure`
@@ -1949,13 +2070,13 @@ Create a dashboard to monitor all stores from a single interface.
 
 ## Phase 2 Summary
 
-**Total Tickets**: 47 tickets  
-**Estimated Total Hours**: 240-280 hours  
+**Total Tickets**: 49 tickets  
+**Estimated Total Hours**: 254-294 hours  
 **Estimated Duration**: 10-12 weeks (assuming 25-30 hours/week on Phase 2)
 
 ### Tickets by Section
 
-- **Section 2.1** (Store A Complete Migration): 22 tickets (~140 hours)
+- **Section 2.1** (Store A Complete Migration): 24 tickets (~154 hours)
 - **Section 2.2** (Store B Setup): 6 tickets (~22 hours)
 - **Section 2.3** (Pricing Integration): 3 tickets (~15 hours)
 - **Section 2.4** (Performance Optimization): 6 tickets (~29 hours)
@@ -1964,9 +2085,9 @@ Create a dashboard to monitor all stores from a single interface.
 
 ### Priority Distribution
 
-- **Critical Priority**: 18 tickets (must complete, blocks production)
+- **Critical Priority**: 19 tickets (must complete, blocks production)
 - **High Priority**: 20 tickets (important for launch)
-- **Medium Priority**: 7 tickets (important but can defer)
+- **Medium Priority**: 8 tickets (important but can defer)
 - **Low Priority**: 2 tickets (nice to have)
 
 ### Key Changes from Original Phase 2
@@ -1978,6 +2099,8 @@ Create a dashboard to monitor all stores from a single interface.
 5. **Content Pages** - All content pages (About, Contact, Blog, Resources) migrated
 6. **Redirects** - Explicit ticket for legacy URL redirects
 7. **More Realistic Estimates** - Increased hours to account for full migration
+8. **Image Upload API** - Added P2-017.6 for image upload endpoints (critical for FrameDesigner)
+9. **Designer Recommendation API** - Added P2-017.7 for AI-powered frame recommendations (optional feature)
 
 ### Suggested Sprint Plan (Updated with Hybrid Approach)
 
@@ -1986,7 +2109,8 @@ Create a dashboard to monitor all stores from a single interface.
 - P2-001 through P2-003 (Already complete ✅)
 - **P2-016 Phase 1: Basic Shopify Setup** (4 hours) - Do this early!
 - **P2-017 Phase 1: Basic Product** (2 hours) - Do this early!
-- **Backend API Structure** (4 hours) - Deploy apps/api with mock endpoints
+- **P2-017.5: Backend API Structure** (4 hours) - Deploy apps/api with mock endpoints
+- **P2-017.6: Image Upload API** (6 hours) - Critical for FrameDesigner functionality
 - **Database Setup** (Optional, 4 hours)
 
 **Sprint 1 (Weeks 2-3)**: Store A UI Development
@@ -1999,6 +2123,7 @@ Create a dashboard to monitor all stores from a single interface.
 
 - P2-010 through P2-012 (Content pages, Resources, Gallery)
 - P2-013 through P2-014 (Cart, Checkout - with mock mode)
+- **P2-017.7: Designer Recommendation API** (8 hours) - Optional AI feature
 - **P2-016 Phase 2: Full Shopify Configuration** (when ready)
 - **P2-017 Phase 2: Enhanced Product** (when ready)
 - Connect real Shopify integration

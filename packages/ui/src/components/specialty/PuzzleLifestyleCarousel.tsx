@@ -1,3 +1,5 @@
+"use client";
+
 import { useMemo } from "react";
 import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
 import type { LifestyleImage } from "./shared/BaseLifestyleCarousel";

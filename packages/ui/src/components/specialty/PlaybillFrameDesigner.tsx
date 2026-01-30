@@ -1,5 +1,7 @@
+"use client";
+
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
-import { useLocation } from "wouter";
+// Removed wouter useLocation - not needed in Next.js
 import { Copy, Maximize, Eye, Settings, Info } from "lucide-react";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
@@ -189,7 +191,7 @@ export function PlaybillFrameDesigner({
   defaultFrameId,
   embedded = false,
 }: PlaybillFrameDesignerProps) {
-  useLocation(); // Location hook - navigate not currently used
+  // Removed useLocation() - not needed in Next.js
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const { mobileView, setMobileView, showMobileBar, previewCardRef, controlsHeadingRef } =

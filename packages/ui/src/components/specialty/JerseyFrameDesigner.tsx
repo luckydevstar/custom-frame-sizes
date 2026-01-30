@@ -1,5 +1,7 @@
+"use client";
+
 import { useState, useEffect, useMemo, useRef } from "react";
-import { useLocation } from "wouter";
+// Removed wouter useLocation - using window.location directly in Next.js
 import { Share2, Shirt, Info, Maximize, Settings, Eye, Copy, Palette, Shield } from "lucide-react";
 import { useIntelligentPreviewSizing } from "@framecraft/core";
 import { Button } from "../ui/button";
@@ -94,14 +96,19 @@ export function JerseyFrameDesigner({
   defaultFrameId,
   embedded = false,
 }: JerseyFrameDesignerProps) {
-  useLocation(); // Location hook - navigate not currently used
+  // Removed useLocation() - not needed in Next.js, using window.location directly where needed
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const { mobileView, setMobileView, showMobileBar, previewCardRef, controlsHeadingRef } =
     useMobileViewToggle({ isMobile });
 
-  // Read URL parameters on mount
-  const urlParams = useMemo(() => new URLSearchParams(window.location.search), []);
+  // Read URL parameters on mount (client-side only)
+  const urlParams = useMemo(() => {
+    if (typeof window !== "undefined" && window.location) {
+      return new URLSearchParams(window.location.search);
+    }
+    return new URLSearchParams();
+  }, []);
 
   // Initialize frame selection
   const initialFrame = useMemo(() => {
@@ -352,8 +359,10 @@ export function JerseyFrameDesigner({
       params.delete("bottomWeighted");
     }
 
-    const newUrl = `${window.location.pathname}?${params.toString()}`;
-    window.history.replaceState({}, "", newUrl);
+    if (typeof window !== "undefined" && window.location) {
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+      window.history.replaceState({}, "", newUrl);
+    }
   }, [
     selectedLayout,
     selectedFrame?.sku,
@@ -513,6 +522,7 @@ export function JerseyFrameDesigner({
   }, [selectedLayout, currentLayout, layout.scale, bottomWeightedExtra]);
 
   const handleShare = () => {
+    if (typeof window === "undefined" || !window.location) return;
     const url = window.location.href;
     navigator.clipboard.writeText(url);
     toast({
@@ -523,6 +533,7 @@ export function JerseyFrameDesigner({
   };
 
   const handleCopyLink = () => {
+    if (typeof window === "undefined" || !window.location) return;
     const url = window.location.href;
     navigator.clipboard.writeText(url);
     toast({
@@ -1358,7 +1369,9 @@ export function JerseyFrameDesigner({
               </p>
               <div className="flex gap-2">
                 <Input
-                  value={window.location.href}
+                  value={
+                    typeof window !== "undefined" && window.location ? window.location.href : ""
+                  }
                   readOnly
                   className="flex-1"
                   data-testid="input-share-url"

@@ -1,5 +1,7 @@
+"use client";
+
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
-import { useLocation } from "wouter";
+// Removed wouter useLocation - not needed in Next.js
 import {
   Upload,
   Copy,
@@ -258,7 +260,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
   const configuratorRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
 
-  const [,] = useLocation();
+  // Removed useLocation() - not needed in Next.js
 
   // Load configuration from URL parameters on mount
   useEffect(() => {

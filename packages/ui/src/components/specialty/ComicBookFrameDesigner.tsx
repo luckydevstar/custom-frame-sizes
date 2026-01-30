@@ -1,5 +1,7 @@
+"use client";
+
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
-import { useLocation } from "wouter";
+// Removed wouter useLocation - not needed in Next.js
 import {
   Copy,
   Maximize,
@@ -103,7 +105,7 @@ export function ComicBookFrameDesigner({
   embedded = false,
   getCoversForConfig,
 }: ComicBookFrameDesignerProps) {
-  useLocation(); // Location hook - navigate not currently used
+  // Removed useLocation() - not needed in Next.js
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const { mobileView, setMobileView, showMobileBar, previewCardRef, controlsHeadingRef } =

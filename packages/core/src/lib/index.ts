@@ -14,15 +14,7 @@
 export * from "./holiday-calculator";
 export * from "./seasonal-collections";
 export * from "./nameplate-positioning";
-// Export color-gateway-images functions but avoid duplicate Frame type
-export {
-  getColorLifestyleImages,
-  getColorHeroImage,
-  getColorFAQSidebarImages,
-  getColorGalleryImages,
-  getColorHubImage,
-  isUsingPlaceholderImages,
-} from "./color-gateway-images";
+// Color gateway functions are exported from services/gateway-colors only (single source of truth)
 export type { Frame as ColorGatewayFrame } from "./color-gateway-images";
 // Export shadowbox-color-images functions but avoid duplicate Frame type
 export {

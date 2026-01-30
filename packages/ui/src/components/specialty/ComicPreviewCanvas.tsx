@@ -1,3 +1,5 @@
+"use client";
+
 import { memo, useMemo } from "react";
 import { BookOpen } from "lucide-react";
 import type { FrameStyle } from "@framecraft/types";

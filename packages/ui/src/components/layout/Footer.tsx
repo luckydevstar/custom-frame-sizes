@@ -42,25 +42,36 @@ export interface FooterProps {
 }
 
 // Default footer links (can be overridden via props or store config)
+// These match the original project's footer-links.json structure
 const defaultLinks: FooterLinks = {
   shop: [
     { label: "Frame Designer", path: "/" },
     { label: "Shop by Color", path: "/frames/colors" },
     { label: "Frame Styles", path: "/picture-frames" },
+    { label: "Order Samples", path: "/samples" },
+    { label: "Gallery Wall Guide", path: "/gallery-wall-guide" },
+    { label: "Frame Size Chart", path: "/frame-size-chart" },
   ],
   learn: [
     { label: "All Guides", path: "/learn" },
     { label: "How to Measure", path: "/how-to-measure" },
     { label: "Mat Board Guide", path: "/mat-board-guide" },
+    { label: "Glazing Guide", path: "/glazing-guide" },
+    { label: "Care Instructions", path: "/care-instructions" },
   ],
   company: [
     { label: "About Us", path: "/about" },
+    { label: "Blog", path: "/blog" },
+    { label: "Business Services", path: "/business" },
     { label: "Contact", path: "/contact" },
+    { label: "Frame Quality Guarantee", path: "/warranty" },
   ],
   support: [
     { label: "FAQ", path: "/faq" },
     { label: "Shipping Policy", path: "/shipping-policy" },
     { label: "Returns & Exchanges", path: "/returns-exchanges" },
+    { label: "Privacy Policy", path: "/privacy-policy" },
+    { label: "Terms of Service", path: "/terms" },
   ],
 };
 

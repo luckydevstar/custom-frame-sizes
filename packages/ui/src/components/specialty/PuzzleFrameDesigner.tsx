@@ -1,5 +1,7 @@
+"use client";
+
 import { useState, useEffect, useMemo } from "react";
-import { useLocation } from "wouter";
+// Removed wouter useLocation - not needed in Next.js
 import { Info, Maximize, Settings, Eye, Copy } from "lucide-react";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
@@ -126,7 +128,7 @@ export function PuzzleFrameDesigner({
   getRandomPuzzlePhoto,
   getRandomPuzzleImage,
 }: PuzzleFrameDesignerProps) {
-  const [,] = useLocation();
+  // Removed useLocation() - not needed in Next.js
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const { mobileView, setMobileView, showMobileBar, previewCardRef, controlsHeadingRef } =

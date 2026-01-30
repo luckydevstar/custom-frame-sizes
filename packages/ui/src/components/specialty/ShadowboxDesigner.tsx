@@ -1,5 +1,7 @@
+"use client";
+
 import { useState, useEffect, useMemo, useRef } from "react";
-import { useLocation } from "wouter";
+// Removed wouter useLocation - not needed in Next.js
 import { Maximize, X, Eye, Settings, Info, Smartphone, Copy } from "lucide-react";
 import { Button } from "../ui/button";
 import { ARViewer } from "../shared/ARViewer";
@@ -214,7 +216,7 @@ export function ShadowboxDesigner({
     rightUrl?: string;
   }>({});
 
-  useLocation(); // Location hook - navigate not currently used
+  // Removed useLocation() - not needed in Next.js
 
   // Load configuration from URL parameters on mount
   useEffect(() => {
