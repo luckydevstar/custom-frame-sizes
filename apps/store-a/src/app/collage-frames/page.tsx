@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 import {
   Grid3X3,
   Images,
@@ -14,9 +15,15 @@ import {
   Camera,
   Gift,
 } from "lucide-react";
-import { Card, Button, ComingSoonDesigner } from "@framecraft/ui";
+import { Card } from "@framecraft/ui";
+import { CollageLifestyleSection } from "./CollageLifestyleSection";
 import { brandConfig } from "../../brand.config";
 import { ScrollToDesignerButton } from "./scroll-button";
+
+const CollageFrameDesigner = dynamic(
+  () => import("@framecraft/ui").then((mod) => ({ default: mod.CollageFrameDesigner })),
+  { ssr: false }
+);
 
 export const metadata: Metadata = {
   title: "Multi Opening Frames | Multi Photo Frames & Collage Mats | Custom Frame Sizes",
@@ -253,30 +260,21 @@ export default function CollageFramesPage() {
         <section
           id="design-tool"
           className="container mx-auto px-4 py-12 md:py-16 border-t scroll-mt-20"
+          data-testid="designer-section"
         >
-          <ComingSoonDesigner
-            title="Collage frame designer coming soon"
-            description="Use our main frame designer to choose your size, frame style, and options. We'll add a dedicated multi-opening designer for this category soon."
-            buttonLabel="Design your frame"
-          />
+          <Suspense
+            fallback={
+              <div className="min-h-[400px] flex items-center justify-center">
+                <p className="text-muted-foreground">Loading designer...</p>
+              </div>
+            }
+          >
+            <CollageFrameDesigner />
+          </Suspense>
         </section>
 
-        {/* Lifestyle / Gallery Section */}
-        <section className="container mx-auto px-4 py-12 md:py-16 border-t">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4" data-testid="heading-gallery">
-              Multi Opening Frame Gallery
-            </h2>
-            <p className="text-muted-foreground mb-6">
-              See how families display wedding photos, baby milestones, and travel memories in one
-              multi photo frame. Professional layouts with archival matting and framer&apos;s grade
-              acrylic.
-            </p>
-            <Button asChild variant="outline" size="lg">
-              <Link href="/designer">Open frame designer</Link>
-            </Button>
-          </div>
-        </section>
+        {/* Lifestyle Carousel Section */}
+        <CollageLifestyleSection />
 
         {/* What Is a Multi Opening Frame */}
         <section className="container mx-auto px-4 py-12 md:py-16 border-t bg-muted/20">

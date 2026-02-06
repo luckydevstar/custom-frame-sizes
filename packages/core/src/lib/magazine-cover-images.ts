@@ -2,7 +2,7 @@
  * Magazine Cover Image Management
  *
  * Provides deterministic magazine cover selection for preview rendering.
- * Returns relative paths (e.g. magazine/inserts/foo.png) for use with getSharedAssetUrl.
+ * Returns relative paths (e.g. magazine/insert-images/foo.png) for use with getSharedAssetUrl.
  */
 
 export interface MagazineInsertSet {
@@ -43,12 +43,12 @@ export function getMagazineCoverPool(): string[] {
   return GENERIC_MAGAZINE_COVERS;
 }
 
-/** Returns relative path (magazine/inserts/filename) for use with getSharedAssetUrl. */
+/** Returns relative path (magazine/insert-images/filename) for use with getSharedAssetUrl. */
 export function getRandomMagazineCover(seed?: number): string {
   const pool = getMagazineCoverPool();
   if (pool.length === 0) return "magazine/placeholder-magazine.jpg";
   const index = seed !== undefined ? seed % pool.length : Math.floor(Math.random() * pool.length);
-  return `magazine/inserts/${pool[index]}`;
+  return `magazine/insert-images/${pool[index]}`;
 }
 
 /** Returns relative paths for use with getSharedAssetUrl. */
@@ -71,12 +71,12 @@ export function getRandomMagazineCovers(count: number, baseSeed?: number): strin
       }
     }
     usedIndices.add(index);
-    covers.push(`magazine/inserts/${pool[index]}`);
+    covers.push(`magazine/insert-images/${pool[index]}`);
   }
   return covers;
 }
 
-/** Returns relative paths (magazine/inserts/...) for use with getSharedAssetUrl. */
+/** Returns relative paths (magazine/insert-images/...) for use with getSharedAssetUrl. */
 export function getCoversForConfig(sizeId: string, _layoutId: string, count: number): string[] {
   if (count === 0) return [];
   const setsForSize = getInsertSetsForSize(sizeId);
@@ -87,15 +87,15 @@ export function getCoversForConfig(sizeId: string, _layoutId: string, count: num
       if (!selectedSet)
         return Array(count)
           .fill("magazine/placeholder-magazine.jpg")
-          .map((c) => `magazine/inserts/${c}`);
+          .map((c) => `magazine/insert-images/${c}`);
       const shuffled = [...selectedSet.covers].sort(() => Math.random() - 0.5);
-      return shuffled.slice(0, count).map((c) => `magazine/inserts/${c}`);
+      return shuffled.slice(0, count).map((c) => `magazine/insert-images/${c}`);
     }
     const allCoversForSize: string[] = [];
     setsForSize.forEach((set) => allCoversForSize.push(...set.covers));
     if (allCoversForSize.length >= count) {
       const shuffled = [...allCoversForSize].sort(() => Math.random() - 0.5);
-      return shuffled.slice(0, count).map((c) => `magazine/inserts/${c}`);
+      return shuffled.slice(0, count).map((c) => `magazine/insert-images/${c}`);
     }
   }
   const genericPool = [...GENERIC_MAGAZINE_COVERS];
@@ -103,7 +103,7 @@ export function getCoversForConfig(sizeId: string, _layoutId: string, count: num
   const shuffled = genericPool.sort(() => Math.random() - 0.5);
   const selected: string[] = [];
   for (let i = 0; i < count; i++) {
-    selected.push(`magazine/inserts/${shuffled[i % shuffled.length]}`);
+    selected.push(`magazine/insert-images/${shuffled[i % shuffled.length]}`);
   }
   return selected;
 }

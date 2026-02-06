@@ -56,6 +56,9 @@ import type { BrassNameplateConfig } from "@framecraft/types";
 import {
   PLAYBILL_LAYOUTS,
   PLAQUE_FRAME_EXTENSION,
+  getRandomPlaybillInserts,
+  getRandomTicketInserts,
+  createPlaybillInsertSeed,
   type PlaybillLayoutType,
 } from "@framecraft/core";
 import { PlaybillPreview } from "./PlaybillPreview";
@@ -388,6 +391,19 @@ export function PlaybillFrameDesigner({
     return layout || PLAYBILL_LAYOUTS.find((l) => l.id === "playbill-single")!;
   }, [selectedLayout]);
 
+  const insertSeed = useMemo(
+    () => createPlaybillInsertSeed(selectedLayout, selectedFrame.id, matType),
+    [selectedLayout, selectedFrame.id, matType]
+  );
+  const playbillInserts = useMemo(
+    () => getRandomPlaybillInserts(currentLayout.playbillCount, insertSeed),
+    [currentLayout.playbillCount, insertSeed]
+  );
+  const ticketInserts = useMemo(
+    () => getRandomTicketInserts(currentLayout.ticketCount, insertSeed),
+    [currentLayout.ticketCount, insertSeed]
+  );
+
   // Check if current layout is single-opening (allows No Mat option)
   const isSingleOpeningLayout = useMemo(() => {
     return (
@@ -608,6 +624,8 @@ export function PlaybillFrameDesigner({
                       brassNameplateConfig={brassNameplateConfig}
                       isMobile={isMobile}
                       bottomWeightedExtra={bottomWeightedExtra}
+                      playbillInserts={playbillInserts}
+                      ticketInserts={ticketInserts}
                     />
                   </div>
 
@@ -1085,9 +1103,8 @@ export function PlaybillFrameDesigner({
             </div>
           </div>
 
-          {/* Lifestyle Photo Carousel */}
+          {/* Lifestyle Photo Carousel (eyebrow + title in carousel) */}
           <section className="mt-12">
-            <h2 className="text-2xl font-bold mb-6">See Our Playbill Frames in Action</h2>
             <PlaybillLifestyleCarousel />
           </section>
         </div>
@@ -1199,6 +1216,8 @@ export function PlaybillFrameDesigner({
                       brassNameplateConfig={brassNameplateConfig}
                       isMobile={false}
                       bottomWeightedExtra={bottomWeightedExtra}
+                      playbillInserts={playbillInserts}
+                      ticketInserts={ticketInserts}
                     />
                   </div>
                 </div>

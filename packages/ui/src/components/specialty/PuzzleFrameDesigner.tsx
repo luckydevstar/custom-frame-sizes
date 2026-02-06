@@ -59,11 +59,12 @@ import {
   getPuzzleSizeById,
   createRoundMatOpening,
   validatePuzzleDimensions,
+  getRandomPuzzlePhoto as getDefaultRandomPuzzlePhoto,
+  getRandomPuzzleImage as getDefaultRandomPuzzleImage,
   type PuzzleSize,
 } from "@framecraft/core";
 import { Slider } from "../ui/slider";
 import { getMatBevelColor } from "@framecraft/core";
-import { PuzzleLifestyleCarousel } from "./PuzzleLifestyleCarousel";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
 import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
 import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
@@ -106,36 +107,37 @@ interface PuzzleFrameDesignerProps {
   defaultFrameId?: string;
   embedded?: boolean;
   /**
-   * Function to get a random puzzle lifestyle photo.
-   * Should be provided by the app level.
-   *
-   * @returns A random puzzle lifestyle photo object with url and alt text
+   * Optional. Defaults to core getRandomPuzzlePhoto when not provided.
    */
-  getRandomPuzzlePhoto: () => PuzzleLifestylePhoto;
+  getRandomPuzzlePhoto?: () => PuzzleLifestylePhoto;
   /**
-   * Function to get a random puzzle insert image for preview.
-   * Should be provided by the app level (from StockImageLibrary factory).
-   *
-   * @param seed - Optional seed for deterministic randomization
-   * @returns Path to a random puzzle insert image
+   * Optional. Defaults to core getRandomPuzzleImage when not provided.
    */
-  getRandomPuzzleImage: (seed?: string | number) => string;
+  getRandomPuzzleImage?: (seed?: string | number) => string;
 }
 
 export function PuzzleFrameDesigner({
   defaultFrameId,
   embedded: _embedded = false,
-  getRandomPuzzlePhoto,
-  getRandomPuzzleImage,
+  getRandomPuzzlePhoto: getRandomPuzzlePhotoProp,
+  getRandomPuzzleImage: getRandomPuzzleImageProp,
 }: PuzzleFrameDesignerProps) {
-  // Removed useLocation() - not needed in Next.js
+  const getRandomPuzzlePhoto = getRandomPuzzlePhotoProp ?? getDefaultRandomPuzzlePhoto;
+  const getRandomPuzzleImage = getRandomPuzzleImageProp ?? getDefaultRandomPuzzleImage;
+
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const { mobileView, setMobileView, showMobileBar, previewCardRef, controlsHeadingRef } =
     useMobileViewToggle({ isMobile });
 
-  // Read URL parameters on mount
-  const urlParams = useMemo(() => new URLSearchParams(window.location.search), []);
+  // Read URL parameters (SSR-safe: no window on server)
+  const urlParams = useMemo(
+    () =>
+      typeof window === "undefined"
+        ? new URLSearchParams()
+        : new URLSearchParams(window.location.search),
+    []
+  );
 
   // Initialize frame selection
   const initialFrame = useMemo(() => {
@@ -330,6 +332,7 @@ export function PuzzleFrameDesigner({
   const [_showShareDialog, _setShowShareDialog] = useState(false);
   const [showFullscreenPreview, setShowFullscreenPreview] = useState(false);
   const [quantity, setQuantity] = useState(() => {
+    if (typeof window === "undefined") return 1;
     const params = new URLSearchParams(window.location.search);
     const qty = params.get("quantity");
     return qty ? Math.max(1, parseInt(qty, 10)) : 1;
@@ -1456,12 +1459,6 @@ export function PuzzleFrameDesigner({
               />
             )}
           </div>
-        </div>
-
-        {/* Lifestyle Images Carousel */}
-        <div className="mt-12 pt-12 border-t">
-          <h2 className="text-2xl font-bold mb-6">Puzzle Frame Display Ideas</h2>
-          <PuzzleLifestyleCarousel />
         </div>
       </div>
 

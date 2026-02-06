@@ -33,6 +33,7 @@ export * from "./useParallax";
 export * from "./useComicPricing";
 export * from "./useMagazinePricing";
 export * from "./usePlaybillPricing";
+export * from "./useCollagePricing";
 export * from "./use-scroll-to-top";
 export * from "./use-print-frame";
 export * from "./use-rotating-images";

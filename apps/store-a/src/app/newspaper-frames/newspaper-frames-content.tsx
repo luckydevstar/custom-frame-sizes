@@ -1,10 +1,8 @@
 "use client";
 
 import { Newspaper, Shield, Award, Sparkles, Check, Frame, ArrowDown } from "lucide-react";
-import { Button } from "@framecraft/ui";
-import { Card, CardContent } from "@framecraft/ui";
-import { NewspaperFrameDesigner } from "@framecraft/ui";
-import { RelatedProducts } from "@/components/RelatedProducts";
+import { Button, Card, CardContent, NewspaperFrameDesigner } from "@framecraft/ui";
+import { NewspaperLifestyleCarousel } from "@framecraft/ui/components/specialty/NewspaperLifestyleCarousel";
 
 const faqData = [
   {
@@ -120,6 +118,10 @@ export function NewspaperFramesContent() {
         <NewspaperFrameDesigner />
       </section>
 
+      <section className="container mx-auto px-4 py-12 md:py-16 border-t">
+        <NewspaperLifestyleCarousel />
+      </section>
+
       <section className="container mx-auto px-4 py-12 md:py-16 border-t bg-muted/20">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10">
@@ -171,6 +173,21 @@ export function NewspaperFramesContent() {
                     <h3 className="font-semibold mb-2">Archival Mat Board</h3>
                     <p className="text-sm text-muted-foreground">
                       Professional-grade materials slow yellowing and damage over time.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card data-testid="card-feature-hardware">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <div className="p-3 rounded-lg bg-primary/10">
+                    <Check className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold mb-2">Secure Hanging Hardware</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Professional mounting hardware included for safe wall display.
                     </p>
                   </div>
                 </div>
@@ -284,10 +301,28 @@ export function NewspaperFramesContent() {
         </div>
       </section>
 
-      <RelatedProducts
-        productKeys={["magazine-frames", "certificate-frames", "picture-frames", "diploma-frames"]}
-        columns={4}
-      />
+      <section className="container mx-auto px-4 py-16 md:py-20 border-t">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4" data-testid="heading-final-cta">
+            Ready to Frame Your Newspaper?
+          </h2>
+          <p className="text-lg text-muted-foreground mb-8">
+            Use the designer above to pick your size, mat, and frame style. See instant pricing.
+          </p>
+          <Button
+            size="lg"
+            onClick={scrollToDesigner}
+            className="text-lg px-10 h-14 rounded-full"
+            data-testid="button-scroll-to-designer"
+          >
+            Back to Designer
+            <ArrowDown className="ml-2 h-5 w-5" />
+          </Button>
+          <p className="text-sm text-muted-foreground mt-4">
+            No account needed. Instant pricing. Professional-grade materials.
+          </p>
+        </div>
+      </section>
     </div>
   );
 }

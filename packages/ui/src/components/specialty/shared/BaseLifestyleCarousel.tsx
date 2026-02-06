@@ -11,6 +11,8 @@ export interface LifestyleImage {
 }
 
 interface BaseLifestyleCarouselProps {
+  /** Optional label above the title (e.g. "See Our Newspaper Frames in Action") */
+  eyebrow?: string;
   title: string;
   subtitle?: string;
   images: LifestyleImage[];
@@ -21,10 +23,17 @@ interface BaseLifestyleCarouselProps {
   maxImages?: number;
 }
 
-function shuffleArray<T>(array: T[]): T[] {
+/** Seeded shuffle so server and client render the same order (avoids wrong image in modal on click). */
+function seededShuffle<T>(array: T[], seed: string): T[] {
   const shuffled = [...array];
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) h = (Math.imul(31, h) + seed.charCodeAt(i)) | 0;
+  const next = () => {
+    h = (Math.imul(1664525, h) + 1013904223) | 0;
+    return (h >>> 0) / (0xffffffff + 1);
+  };
   for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = Math.floor(next() * (i + 1));
     const temp = shuffled[i]!;
     shuffled[i] = shuffled[j]!;
     shuffled[j] = temp;
@@ -33,6 +42,7 @@ function shuffleArray<T>(array: T[]): T[] {
 }
 
 export function BaseLifestyleCarousel({
+  eyebrow,
   title,
   subtitle,
   images,
@@ -43,9 +53,9 @@ export function BaseLifestyleCarousel({
   maxImages = 30,
 }: BaseLifestyleCarouselProps) {
   const displayImages = useMemo(() => {
-    const processed = randomize ? shuffleArray(images) : images;
+    const processed = randomize ? seededShuffle(images, testIdPrefix) : images;
     return processed.slice(0, maxImages);
-  }, [images, randomize, maxImages]);
+  }, [images, randomize, maxImages, testIdPrefix]);
 
   const {
     scrollContainerRef,
@@ -65,6 +75,11 @@ export function BaseLifestyleCarousel({
   return (
     <section className="py-8 md:py-12" data-testid={`${testIdPrefix}-section`}>
       <div className="text-center mb-6">
+        {eyebrow && (
+          <p className="text-lg text-muted-foreground mb-2" data-testid={`${testIdPrefix}-eyebrow`}>
+            {eyebrow}
+          </p>
+        )}
         <h2
           className="text-2xl md:text-3xl font-semibold mb-2"
           data-testid={`${testIdPrefix}-heading`}

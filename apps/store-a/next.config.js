@@ -6,7 +6,7 @@ const assetPrefixes = [
   'frames', 'mats', 'canvas', 'magazine', 'comic', 'playbill', 'newspaper',
   'collage', 'card-frames', 'diploma', 'cd', 'ticket-frames', 'invitation-frames',
   'needlework', 'signature-frames', 'record-album', 'puzzle', 'sonogram', 'military',
-  'blog', 'components', 'stock',
+  'blog', 'components', 'stock', 'movie-poster',
 ];
 const assetRewrites = assetPrefixes.map((prefix) => ({
   source: `/${prefix}/:path*`,

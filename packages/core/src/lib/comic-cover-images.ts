@@ -2,7 +2,7 @@
  * Comic Book Cover Image Management
  *
  * Provides comic cover selection for preview rendering.
- * Images are organized by era in public/comic/inserts/
+ * Images are organized by era in shared_assets/comic/insert-images/ (modern/ and slabbed/)
  */
 
 /**
@@ -166,8 +166,8 @@ export function getCoversForConfig(formatId: string, _layoutId: string, count: n
   const shuffled = [...pool].sort(() => Math.random() - 0.5);
   const selected = shuffled.slice(0, count);
 
-  // All non-slabbed formats use images from the 'modern' folder
+  // All non-slabbed formats use images from the 'modern' folder (path matches shared_assets/comic/insert-images/)
   const folder = formatId === "slabbed-cgc" ? "slabbed" : "modern";
 
-  return selected.map((cover) => `/comic/inserts/${folder}/${cover}`);
+  return selected.map((cover) => `/comic/insert-images/${folder}/${cover}`);
 }

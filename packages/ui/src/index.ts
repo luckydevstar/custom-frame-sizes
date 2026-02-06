@@ -378,6 +378,10 @@ export {
 export { MoviePosterFrameDesigner } from "./components/specialty/MoviePosterFrameDesigner";
 export { NeedleworkFrameDesigner } from "./components/specialty/NeedleworkFrameDesigner";
 export { NewspaperFrameDesigner } from "./components/specialty/NewspaperFrameDesigner";
+export { NewspaperLifestyleCarousel } from "./components/specialty/NewspaperLifestyleCarousel";
+export { CollageFrameDesigner } from "./components/specialty/CollageFrameDesigner";
+export { CollagePreviewCanvas } from "./components/specialty/CollagePreviewCanvas";
+export { CollageLayoutGallery } from "./components/specialty/CollageLayoutGallery";
 export { ComingSoonDesigner } from "./components/specialty/ComingSoonDesigner";
 export { DiplomaLifestyleCarousel } from "./components/specialty/DiplomaLifestyleCarousel";
 export { RecordAlbumDesigner } from "./components/specialty/RecordAlbumDesigner";
@@ -397,6 +401,7 @@ export type { LifestyleImage } from "./components/specialty/shared";
 export { PuzzleLifestyleCarousel } from "./components/specialty/PuzzleLifestyleCarousel";
 export { PlaybillLifestyleCarousel } from "./components/specialty/PlaybillLifestyleCarousel";
 export { JerseyLifestyleCarousel } from "./components/specialty/JerseyLifestyleCarousel";
+export { CollageLifestyleCarousel } from "./components/specialty/CollageLifestyleCarousel";
 export { ComicLifestyleCarousel } from "./components/specialty/ComicLifestyleCarousel";
 export { GradedCardLifestyleCarousel } from "./components/specialty/GradedCardLifestyleCarousel";
 export {

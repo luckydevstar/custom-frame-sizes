@@ -136,6 +136,7 @@ interface PlaybillLifestyleCarouselProps {
 export function PlaybillLifestyleCarousel({ onImageClick }: PlaybillLifestyleCarouselProps = {}) {
   return (
     <BaseLifestyleCarousel
+      eyebrow="See Our Playbill Frames in Action"
       title="Playbill Frames in Real Homes"
       subtitle="See how theater fans display their Broadway memories."
       images={PLAYBILL_LIFESTYLE_IMAGES}

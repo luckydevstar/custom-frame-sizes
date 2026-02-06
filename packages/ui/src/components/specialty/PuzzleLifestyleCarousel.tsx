@@ -1,37 +1,35 @@
 "use client";
 
 import { useMemo } from "react";
+import { getPuzzleLifestyleImages } from "@framecraft/core/lib/puzzle-lifestyle-images";
 import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
 import type { LifestyleImage } from "./shared/BaseLifestyleCarousel";
 
 interface PuzzleLifestyleCarouselProps {
   onImageClick?: (imageUrl: string, imageAlt: string) => void;
-  // Images should be provided from app level or via props
   images?: LifestyleImage[];
 }
+
+const DEFAULT_IMAGES = getPuzzleLifestyleImages();
 
 export function PuzzleLifestyleCarousel({
   onImageClick,
   images,
 }: PuzzleLifestyleCarouselProps = {}) {
-  // If images are provided, use them; otherwise use empty array (app should provide via factory or context)
-  const lifestyleImages = useMemo(() => {
-    return images || [];
-  }, [images]);
+  const lifestyleImages = useMemo(() => images ?? DEFAULT_IMAGES, [images]);
 
-  if (lifestyleImages.length === 0) {
-    return null;
-  }
+  if (lifestyleImages.length === 0) return null;
 
   return (
     <BaseLifestyleCarousel
+      eyebrow="See Our Puzzle Frames in Action"
       title="Puzzle Frames in Real Homes"
       subtitle="See how completed puzzles become permanent wall art."
       images={lifestyleImages}
       onImageClick={onImageClick}
       testIdPrefix="puzzle-lifestyle"
       ariaLabel="Puzzle frame lifestyle photo gallery"
-      randomize={false}
+      randomize={true}
       maxImages={30}
     />
   );

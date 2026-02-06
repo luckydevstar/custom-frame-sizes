@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useMemo } from "react";
+import { useSearchParams } from "next/navigation";
 import { Disc3, Eye, Settings, Maximize, Copy } from "lucide-react";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
@@ -414,22 +415,19 @@ export function RecordAlbumDesigner({
   const { mobileView, setMobileView, showMobileBar, previewCardRef, controlsHeadingRef } =
     useMobileViewToggle({ isMobile });
 
-  const urlParams = useMemo(
-    () => new URLSearchParams(typeof window !== "undefined" ? window.location.search : ""),
-    []
-  );
+  const searchParams = useSearchParams();
 
   const initialFrame = useMemo(() => {
     if (defaultFrameId) {
       return getFrameStyleById(defaultFrameId) ?? frameStyles[0];
     }
-    const frameParam = urlParams.get("frame");
+    const frameParam = searchParams.get("frame");
     return frameParam ? (getFrameStyleById(frameParam) ?? frameStyles[0]) : frameStyles[0];
-  }, [defaultFrameId, urlParams]);
+  }, [defaultFrameId, searchParams]);
 
   const [selectedLayout, setSelectedLayout] = useState<RecordAlbumLayoutType | CDLayoutType>(() => {
-    const urlLayout = urlParams.get("layout");
-    const urlLayoutType = urlParams.get("layoutType") as "vinyl" | "cd" | null;
+    const urlLayout = searchParams.get("layout");
+    const urlLayoutType = searchParams.get("layoutType") as "vinyl" | "cd" | null;
     const effectiveLayoutType = urlLayoutType ?? layoutType;
     if (urlLayout && effectiveLayoutType === layoutType) {
       if (effectiveLayoutType === "vinyl") {
@@ -447,7 +445,7 @@ export function RecordAlbumDesigner({
     () => initialFrame ?? frameStyles[0]!
   );
   const [selectedMat, setSelectedMat] = useState<Mat>(() => {
-    const urlMatId = urlParams.get("mat");
+    const urlMatId = searchParams.get("mat");
     if (urlMatId) {
       const found = ALL_MATS.find((m) => m.id === urlMatId);
       if (found) return found;
@@ -455,7 +453,7 @@ export function RecordAlbumDesigner({
     return ALL_MATS[0]!;
   });
   const [selectedBottomMat, setSelectedBottomMat] = useState<Mat>(() => {
-    const urlMatId = urlParams.get("bottomMat");
+    const urlMatId = searchParams.get("bottomMat");
     if (urlMatId) {
       const found = ALL_MATS.find((m) => m.id === urlMatId);
       if (found) return found;
@@ -463,23 +461,26 @@ export function RecordAlbumDesigner({
     return ALL_MATS[0]!;
   });
   const [matType, setMatType] = useState<"single" | "double" | "none">(
-    (urlParams.get("matType") as "single" | "double" | "none") || "single"
+    (searchParams.get("matType") as "single" | "double" | "none") || "single"
   );
   const [selectedGlass, setSelectedGlass] = useState<GlassType>(
-    glassTypes.find((g) => g.id === urlParams.get("glass")) ?? glassTypes[0]!
+    glassTypes.find((g) => g.id === searchParams.get("glass")) ?? glassTypes[0]!
   );
   const [hardware, setHardware] = useState<"standard" | "security">(
-    (urlParams.get("hardware") as "standard" | "security") || "standard"
+    (searchParams.get("hardware") as "standard" | "security") || "standard"
   );
-  const [bottomWeighted, setBottomWeighted] = useState(urlParams.get("bottomWeighted") === "true");
+  const [bottomWeighted, setBottomWeighted] = useState(
+    searchParams.get("bottomWeighted") === "true"
+  );
   const [brassNameplateConfig, setBrassNameplateConfig] = useState<BrassNameplateConfig>(() => {
-    const enabled = urlParams.get("plaqueEnabled") === "true";
-    const line1 = urlParams.get("plaqueLine1") ?? "";
-    const line2 = urlParams.get("plaqueLine2") ?? "";
-    const line3 = urlParams.get("plaqueLine3") ?? "";
-    const font = (urlParams.get("plaqueFont") ?? "georgia") as BrassNameplateConfig["font"];
-    const color = (urlParams.get("plaqueColor") ?? "brass-black") as BrassNameplateConfig["color"];
-    const includeFlag = urlParams.get("plaqueIncludeFlag") === "true";
+    const enabled = searchParams.get("plaqueEnabled") === "true";
+    const line1 = searchParams.get("plaqueLine1") ?? "";
+    const line2 = searchParams.get("plaqueLine2") ?? "";
+    const line3 = searchParams.get("plaqueLine3") ?? "";
+    const font = (searchParams.get("plaqueFont") ?? "georgia") as BrassNameplateConfig["font"];
+    const color = (searchParams.get("plaqueColor") ??
+      "brass-black") as BrassNameplateConfig["color"];
+    const includeFlag = searchParams.get("plaqueIncludeFlag") === "true";
     return { enabled, line1, line2, line3, font, color, includeFlag };
   });
 
