@@ -20,12 +20,12 @@
     "alternateImages": [
       {
         "type": "corner",
-        "url": "/frames/8446/corner.jpg",
+        "url": "/frames/8446/corner_a.jpg",
         "alt": "Wide Black picture frame corner detail showing clean 1.125 inch block profile with rich black finish and precision mitered joint"
       },
       {
         "type": "profile",
-        "url": "/frames/8446/profile.jpg",
+        "url": "/frames/8446/profile_a.jpg",
         "alt": "Wide Black picture frame profile view showing substantial block-style moulding with deep black finish perfect for statement artwork"
       },
       {
@@ -108,7 +108,8 @@
         "url": "/frames/8446/lifestyle3.jpg",
         "alt": "Wide Black lifestyle image"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "modern-black",
@@ -131,12 +132,12 @@
     "alternateImages": [
       {
         "type": "corner",
-        "url": "/frames/6711/corner.jpg",
+        "url": "/frames/6711/corner_a.jpg",
         "alt": "Modern Black picture frame corner detail showing substantial 1.5 inch stepped profile with rich black finish and precision craftsmanship"
       },
       {
         "type": "profile",
-        "url": "/frames/6711/profile.jpg",
+        "url": "/frames/6711/profile_a.jpg",
         "alt": "Modern Black picture frame profile view showing bold 1.5 inch moulding width with contemporary stepped design perfect for statement art"
       },
       {
@@ -254,7 +255,8 @@
         "url": "/frames/6711/lifestyle2.jpg",
         "alt": "Modern Black lifestyle image"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "black-wood",
@@ -277,12 +279,12 @@
     "alternateImages": [
       {
         "type": "corner",
-        "url": "/frames/8694/corner.jpg",
+        "url": "/frames/8694/corner_a.jpg",
         "alt": "Black Wood picture frame corner detail showing clean minimalist profile with precision mitered joint and sleek matte black finish"
       },
       {
         "type": "profile",
-        "url": "/frames/8694/profile.jpg",
+        "url": "/frames/8694/profile_a.jpg",
         "alt": "Black Wood picture frame profile view showing sleek black finish and contemporary 0.75 inch moulding width for modern art display"
       },
       {
@@ -475,7 +477,8 @@
         "url": "/frames/8694/lifestyle3.png",
         "alt": "Black Wood lifestyle image"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "white-wood",
@@ -498,12 +501,12 @@
     "alternateImages": [
       {
         "type": "corner",
-        "url": "/frames/8989/corner.jpg",
+        "url": "/frames/8989/corner_a.jpg",
         "alt": "White Wood picture frame corner detail showing clean white finish with precision mitered joint and classic wood grain texture"
       },
       {
         "type": "profile",
-        "url": "/frames/8989/profile.jpg",
+        "url": "/frames/8989/profile_a.jpg",
         "alt": "White Wood picture frame profile view showing elegant white painted finish and 0.75 inch moulding width for versatile home décor"
       },
       {
@@ -641,7 +644,8 @@
         "url": "/frames/8989/lifestyle3.jpg",
         "alt": "White Wood lifestyle image"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "pink-wood",
@@ -664,12 +668,12 @@
     "alternateImages": [
       {
         "type": "corner",
-        "url": "/frames/206/corner.jpg",
+        "url": "/frames/206/corner_a.jpg",
         "alt": "Pink Wood picture frame corner detail showing vibrant pink finish with clean modern profile and precision craftsmanship"
       },
       {
         "type": "profile",
-        "url": "/frames/206/profile.jpg",
+        "url": "/frames/206/profile_a.jpg",
         "alt": "Pink Wood picture frame profile view showing bright pink painted finish and 0.75 inch moulding width for playful décor"
       },
       {
@@ -782,7 +786,8 @@
         "url": "/frames/206/lifestyle_17.jpg",
         "alt": "Pink Wood frames in modern living room with contemporary art prints featuring colorful portraits geometric designs and photography above gray sofa demonstrating versatile bold styling"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "silver-wood",
@@ -805,12 +810,12 @@
     "alternateImages": [
       {
         "type": "corner",
-        "url": "/frames/9935/corner.jpg",
+        "url": "/frames/9935/corner_a.jpg",
         "alt": "Silver Wood picture frame corner detail showing sleek metallic silver finish with clean modern profile and precision craftsmanship"
       },
       {
         "type": "profile",
-        "url": "/frames/9935/profile.jpg",
+        "url": "/frames/9935/profile_a.jpg",
         "alt": "Silver Wood picture frame profile view showing contemporary silver painted finish and 0.75 inch moulding width for modern displays"
       },
       {
@@ -958,7 +963,8 @@
         "url": "/frames/9935/lifestyle3.jpg",
         "alt": "Silver Wood lifestyle image"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "museum-bronze",
@@ -981,12 +987,12 @@
     "alternateImages": [
       {
         "type": "corner",
-        "url": "/frames/6301/corner.jpg",
+        "url": "/frames/6301/corner_a.jpg",
         "alt": "Museum Bronze picture frame corner detail showing ornate hand-carved scrollwork pattern with rich gold finish and precision mitered joint craftsmanship"
       },
       {
         "type": "profile",
-        "url": "/frames/6301/profile.jpg",
+        "url": "/frames/6301/profile_a.jpg",
         "alt": "Museum Bronze picture frame profile view showing substantial 1.25 inch moulding depth with intricate ornamental detailing and golden bronze finish"
       },
       {
@@ -1079,7 +1085,8 @@
         "url": "/frames/6301/lifestyle4.jpg",
         "alt": "Museum Bronze lifestyle image"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "brown-bamboo",
@@ -1102,12 +1109,12 @@
     "alternateImages": [
       {
         "type": "corner",
-        "url": "/frames/8575/corner.jpg",
+        "url": "/frames/8575/corner_a.jpg",
         "alt": "Brown Bamboo picture frame corner detail showing natural bamboo texture with warm brown finish and precision mitered joint"
       },
       {
         "type": "profile",
-        "url": "/frames/8575/profile.jpg",
+        "url": "/frames/8575/profile_a.jpg",
         "alt": "Brown Bamboo picture frame profile view showing distinctive bamboo texture and 0.75 inch moulding width for tropical and natural artwork"
       },
       {
@@ -1200,7 +1207,8 @@
         "url": "/frames/8575/lifestyle18.jpg",
         "alt": "Woman in white t-shirt carefully positions large Brown Bamboo picture frame displaying vibrant alcohol ink abstract art in turquoise, purple, pink, emerald, and gold metallic tones above beige tufted sofa with navy pillows, geometric black and white rug, and potted plant in bright minimalist living room demonstrating professional art installation for contemporary fluid artwork"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "gold-bamboo",
@@ -1223,12 +1231,12 @@
     "alternateImages": [
       {
         "type": "corner",
-        "url": "/frames/8576/corner.jpg",
+        "url": "/frames/8576/corner_a.jpg",
         "alt": "Gold Bamboo picture frame corner detail showing luxurious gold finish bamboo texture with precision mitered joint and metallic luster"
       },
       {
         "type": "profile",
-        "url": "/frames/8576/profile.jpg",
+        "url": "/frames/8576/profile_a.jpg",
         "alt": "Gold Bamboo picture frame profile view showing distinctive bamboo-style segments with rich gold finish and 0.75 inch moulding width for elegant formal artwork"
       },
       {
@@ -1341,7 +1349,8 @@
         "url": "/frames/8576/lifestyle21.jpg",
         "alt": "Gold Bamboo picture frame with white mat displaying serene watercolor landscape painting featuring winding river valley through blue-gray mountains beneath golden orange sunset sky with delicate gold speckles, emerald green forest vegetation along riverbanks, and soft peachy mountain ridges mounted on textured white wall in dramatic diagonal shadow pattern showcasing luxurious gold bamboo texture perfect for tranquil nature artwork and contemporary landscape paintings"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "light-oak",
@@ -1364,12 +1373,12 @@
     "alternateImages": [
       {
         "type": "corner",
-        "url": "/frames/8744/corner.jpg",
+        "url": "/frames/8744/corner_a.jpg",
         "alt": "Light Oak Frame picture frame corner detail showing warm light oak finish with natural wood grain and precision mitered joint in 0.75 inch profile"
       },
       {
         "type": "profile",
-        "url": "/frames/8744/profile.jpg",
+        "url": "/frames/8744/profile_a.jpg",
         "alt": "Light Oak Frame picture frame profile view showing simple block design with honey-toned oak finish and clean lines perfect for casual framing applications"
       },
       {
@@ -1467,7 +1476,8 @@
         "url": "/frames/8744/lifestyle_19.jpg",
         "alt": "Sophisticated asymmetric gallery wall featuring fifteen Light Oak picture frames displaying surreal fantasy mushroom landscape with purple pink sky as centerpiece, vibrant Neo-Tokyo cyberpunk city posters in magenta and teal, delicate purple orchid botanical illustrations, minimalist coffee cup line art, colorful geometric circles, vintage airship technical blueprint, monochrome Japanese garden bridge photograph, whimsical cat among flowers line drawing, and simple rocket illustration in dramatic diagonal window light showcasing versatile warm wood frame styling for eclectic art collections"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "brown-picture-frame",
@@ -1490,32 +1500,32 @@
     "alternateImages": [
       {
         "type": "corner",
-        "url": "/frames/8745/corner-a.jpg",
+        "url": "/frames/8745/corner_a.jpg",
         "alt": "Brown Picture Frame corner detail showing rich brown finish with natural wood grain and precision mitered joint in 0.75 inch profile"
       },
       {
         "type": "corner",
-        "url": "/frames/8745/corner-b.jpg",
+        "url": "/frames/8745/corner_b.jpg",
         "alt": "Brown Picture Frame alternate corner view displaying espresso-toned wood finish and clean block design perfect for traditional framing"
       },
       {
         "type": "corner",
-        "url": "/frames/8745/corner-c.jpg",
+        "url": "/frames/8745/corner_c.jpg",
         "alt": "Brown Picture Frame corner detail close-up showing natural wood texture and warm brown finish ideal for classic home décor"
       },
       {
         "type": "profile",
-        "url": "/frames/8745/profile-a.jpg",
+        "url": "/frames/8745/profile_a.jpg",
         "alt": "Brown Picture Frame profile view showing simple block design with rich brown wood finish and 0.75 inch moulding width for versatile applications"
       },
       {
         "type": "profile",
-        "url": "/frames/8745/profile-b.jpg",
+        "url": "/frames/8745/profile_b.jpg",
         "alt": "Brown Picture Frame alternate profile view displaying natural wood grain texture and warm espresso tones perfect for traditional framing"
       },
       {
         "type": "profile",
-        "url": "/frames/8745/profile-c.jpg",
+        "url": "/frames/8745/profile_c.jpg",
         "alt": "Brown Picture Frame detailed profile perspective showing solid wood construction and rich brown finish for classic picture framing"
       },
       {
@@ -1638,7 +1648,8 @@
         "url": "/frames/8745/lifestyle_24.jpg",
         "alt": "Smiling senior woman in cream cable-knit cardigan sitting on beige damask sofa holds Brown Wood picture frame displaying stunning macro botanical photography of deep magenta fuchsia dahlia flower with perfectly layered pointed petals radiating from golden center against soft green bokeh garden background demonstrating elegant custom framing for fine art nature photography and vibrant floral macro images with classic espresso wood grain finish perfect for cherished botanical artwork and garden photography"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "natural-picture-frame",
@@ -1661,32 +1672,32 @@
     "alternateImages": [
       {
         "type": "corner",
-        "url": "/frames/8750/corner-a.jpg",
+        "url": "/frames/8750/corner_a.jpg",
         "alt": "Natural Picture Frame corner detail showing pale natural wood finish with minimal grain and precision mitered joint in 0.75 inch profile"
       },
       {
         "type": "corner",
-        "url": "/frames/8750/corner-b.jpg",
+        "url": "/frames/8750/corner_b.jpg",
         "alt": "Natural Picture Frame alternate corner view displaying light wood finish and clean block design perfect for minimalist framing"
       },
       {
         "type": "corner",
-        "url": "/frames/8750/corner-c.jpg",
+        "url": "/frames/8750/corner_c.jpg",
         "alt": "Natural Picture Frame corner detail close-up showing subtle wood texture and pale natural finish ideal for Scandinavian interiors"
       },
       {
         "type": "profile",
-        "url": "/frames/8750/profile-a.jpg",
+        "url": "/frames/8750/profile_a.jpg",
         "alt": "Natural Picture Frame profile view showing simple block design with pale natural wood finish and 0.75 inch moulding width for minimal applications"
       },
       {
         "type": "profile",
-        "url": "/frames/8750/profile-b.jpg",
+        "url": "/frames/8750/profile_b.jpg",
         "alt": "Natural Picture Frame alternate profile view displaying light wood grain texture and understated tones perfect for modern framing"
       },
       {
         "type": "profile",
-        "url": "/frames/8750/profile-c.jpg",
+        "url": "/frames/8750/profile_c.jpg",
         "alt": "Natural Picture Frame detailed profile perspective showing solid wood construction and pale natural finish for contemporary picture framing"
       },
       {
@@ -1834,7 +1845,8 @@
         "url": "/frames/8750/lifestyle_29.jpg",
         "alt": "Woman in olive green athletic wear performing forearm stand headstand yoga pose on gray round mat in serene modern home yoga studio with dramatic Natural Wood custom frames displaying vibrant turquoise and gold abstract swirl fluid art painting with copper metallic accents alongside smaller coastal seascape on sophisticated navy blue accent wall with white sheer curtains, modern credenza, and succulent plants demonstrating pale natural wood finish for wellness spaces and yoga rooms with contemporary abstract artwork"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "wide-museum-gold",
@@ -1857,32 +1869,32 @@
     "alternateImages": [
       {
         "type": "corner",
-        "url": "/frames/8838/corner-a.jpg",
+        "url": "/frames/8838/corner_a.jpg",
         "alt": "Wide Picture Frame corner detail showing ornate hand-carved floral patterns with metallic gold finish and precision mitered joint in 2.5 inch profile"
       },
       {
         "type": "corner",
-        "url": "/frames/8838/corner-b.jpg",
+        "url": "/frames/8838/corner_b.jpg",
         "alt": "Wide Picture Frame alternate corner view displaying elaborate decorative carving and rich gold finish perfect for luxury framing"
       },
       {
         "type": "corner",
-        "url": "/frames/8838/corner-c.jpg",
+        "url": "/frames/8838/corner_c.jpg",
         "alt": "Wide Picture Frame corner detail close-up showing intricate leaf motifs and metallic gold highlights ideal for ornate presentations"
       },
       {
         "type": "profile",
-        "url": "/frames/8838/profile-a.jpg",
+        "url": "/frames/8838/profile_a.jpg",
         "alt": "Wide Picture Frame profile view showing substantial 2.5 inch carved moulding with ornate gold finish for museum-quality applications"
       },
       {
         "type": "profile",
-        "url": "/frames/8838/profile-b.jpg",
+        "url": "/frames/8838/profile_b.jpg",
         "alt": "Wide Picture Frame alternate profile view displaying deep relief carving and metallic finish perfect for fine art framing"
       },
       {
         "type": "profile",
-        "url": "/frames/8838/profile-c.jpg",
+        "url": "/frames/8838/profile_c.jpg",
         "alt": "Wide Picture Frame detailed profile perspective showing solid wood construction with elaborate carved details and luxurious gold finish for formal picture framing"
       },
       {
@@ -1990,7 +2002,8 @@
         "url": "/frames/8838/lifestyle_21.png",
         "alt": "Wide Museum Gold lifestyle image"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "simple-picture-frame",
@@ -2013,32 +2026,32 @@
     "alternateImages": [
       {
         "type": "corner",
-        "url": "/frames/9135/corner-a.jpg",
+        "url": "/frames/9135/corner_a.jpg",
         "alt": "Simple Picture Frame corner detail showing elegant beaded inner lip with gold finish and warm wood grain in 0.75 inch profile"
       },
       {
         "type": "corner",
-        "url": "/frames/9135/corner-b.jpg",
+        "url": "/frames/9135/corner_b.jpg",
         "alt": "Simple Picture Frame alternate corner view displaying refined beading detail and natural wood texture perfect for classic framing"
       },
       {
         "type": "corner",
-        "url": "/frames/9135/corner-c.jpg",
+        "url": "/frames/9135/corner_c.jpg",
         "alt": "Simple Picture Frame corner detail close-up showing precision beaded lip and warm gold tones ideal for formal presentations"
       },
       {
         "type": "profile",
-        "url": "/frames/9135/profile-a.jpg",
+        "url": "/frames/9135/profile_a.jpg",
         "alt": "Simple Picture Frame profile view showing distinctive beaded detail and wood grain finish in 0.75 inch moulding for elegant applications"
       },
       {
         "type": "profile",
-        "url": "/frames/9135/profile-b.jpg",
+        "url": "/frames/9135/profile_b.jpg",
         "alt": "Simple Picture Frame alternate profile view displaying refined beaded lip and natural wood texture perfect for sophisticated framing"
       },
       {
         "type": "profile",
-        "url": "/frames/9135/profile-c.jpg",
+        "url": "/frames/9135/profile_c.jpg",
         "alt": "Simple Picture Frame detailed profile perspective showing solid wood construction with elegant beaded detail and warm gold finish for classic picture framing"
       },
       {
@@ -2146,7 +2159,8 @@
         "url": "/frames/9135/lifestyle_21.png",
         "alt": "Black dog sits on white sofa before navy accent wall featuring curated Simple Gold Wood beaded frames gallery with teal watercolor abstract vintage street scene and retro rocket poster"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "bronz-picture-frame",
@@ -2169,32 +2183,32 @@
     "alternateImages": [
       {
         "type": "corner",
-        "url": "/frames/9932/corner-a.jpg",
+        "url": "/frames/9932/corner_a.jpg",
         "alt": "Bronz Picture Frame corner detail showing smooth contemporary profile with warm bronze metallic finish in clean 0.75 inch moulding"
       },
       {
         "type": "corner",
-        "url": "/frames/9932/corner-b.jpg",
+        "url": "/frames/9932/corner_b.jpg",
         "alt": "Bronz Picture Frame alternate corner view displaying sleek bronze finish and modern minimalist design perfect for contemporary framing"
       },
       {
         "type": "corner",
-        "url": "/frames/9932/corner-c.jpg",
+        "url": "/frames/9932/corner_c.jpg",
         "alt": "Bronz Picture Frame corner detail close-up showing refined metallic sheen and clean lines ideal for modern interiors"
       },
       {
         "type": "profile",
-        "url": "/frames/9932/profile-a.jpg",
+        "url": "/frames/9932/profile_a.jpg",
         "alt": "Bronz Picture Frame profile view showing smooth bronze finish and contemporary 0.75 inch moulding for modern art display"
       },
       {
         "type": "profile",
-        "url": "/frames/9932/profile-b.jpg",
+        "url": "/frames/9932/profile_b.jpg",
         "alt": "Bronz Picture Frame alternate profile view displaying clean modern design with warm bronze metallic finish perfect for professional spaces"
       },
       {
         "type": "profile",
-        "url": "/frames/9932/profile-c.jpg",
+        "url": "/frames/9932/profile_c.jpg",
         "alt": "Bronz Picture Frame detailed profile perspective showing solid wood construction with contemporary bronze finish for sophisticated modern framing"
       },
       {
@@ -2297,7 +2311,8 @@
         "url": "/frames/9932/lifestyle_20.png",
         "alt": "Smiling man holds light maple picture frame with watercolor koi fish painting standing beside black lamp in minimalist modern interior"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "barnwood-brown",
@@ -2488,7 +2503,8 @@
         "url": "/frames/10570/lifestyle_28.png",
         "alt": "Smiling woman with curly hair in beige sweater holds Barnwood Brown custom frame displaying vibrant turquoise and gold abstract swirl painting with white mat in bright modern living room with large bay windows cream sofas and indoor plants showcasing rustic farmhouse 1.5 inch authentic barnwood moulding for contemporary fluid art and coastal abstract artwork framing"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "barnwood-black",
@@ -2709,7 +2725,8 @@
         "url": "/frames/10588/lifestyle_9.png",
         "alt": "Barnwood Black lifestyle image"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "barnwood-white",
@@ -2945,7 +2962,8 @@
         "url": "/frames/10587/lifestyle_37.png",
         "alt": "Professional presenting large Barnwood White picture frame displaying coastal beach dune oil painting with white sandy path golden sea grass swaying in breeze turquoise ocean horizon gentle waves and bright blue sky in bright modern gallery setting demonstrating soft coastal white finish and substantial 1.5 inch rustic barnwood moulding for professional coastal landscape and seascape artwork framing"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "white-wash-wood",
@@ -3096,7 +3114,8 @@
         "url": "/frames/10485/lifestyle_20.png",
         "alt": "Woman kneeling on gray sofa arranges playful gallery wall of white wash picture frames featuring botanical prints Paris sketches and colorful abstract art"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "barnwood-gray",
@@ -3277,7 +3296,8 @@
         "url": "/frames/10569/lifestyle_2.png",
         "alt": "Barnwood Gray lifestyle image"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "museum-gold",
@@ -3453,7 +3473,8 @@
         "url": "/frames/10712/lifestyle_25.png",
         "alt": "Hand holding Museum Gold picture frame displaying vibrant Italian coastal village oil painting with colorful Cinque Terre architecture including pink yellow orange terracotta buildings beside turquoise Mediterranean harbor with traditional fishing boats and mountain backdrop on neutral wall with natural window light shadows showcasing rich ornate gold finish with museum-quality 1.125 inch stepped profile hand-carved acanthus leaf moulding and delicate beading for European travel artwork and Mediterranean coastal landscape framing"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "modern-red",
@@ -3594,7 +3615,8 @@
         "url": "/frames/10827/lifestyle_18.jpg",
         "alt": "Smiling woman in beige cable-knit sweater holds large distressed black and red accent picture frame with generous white mat displaying enchanted fantasy forest landscape painting featuring ethereal turquoise and teal trees with glowing foliage, vibrant hot pink and magenta flowering bushes, luminous aqua stream with small waterfall and gentle white deer drinking water with magical firefly sparkles on white background in bright minimalist living room with white sheer curtains and dramatic window shadow patterns and black adjustable desk lamp demonstrating elegant custom framing for fantasy landscape art and whimsical nature paintings with bold modern industrial-chic picture frame finish perfect for contemporary spaces and urban loft interiors"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "modern-white",
@@ -3770,7 +3792,8 @@
         "url": "/frames/10828/lifestyle_15.jpg",
         "alt": "Smiling woman in cream knit sweater gestures toward oversized distressed white picture frame displaying explosive paint splatter artwork with radiating magenta, cyan, and yellow bursts on cream background in modern apartment with industrial window, fiddle leaf fig plant, and mid-century armchair"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "modern-blue",
@@ -3946,7 +3969,8 @@
         "url": "/frames/10829/lifestyle_25.png",
         "alt": "Smiling woman in cream sweater holding large distressed blue wood picture frame with white mat board displaying vibrant alcohol ink fluid art in turquoise, teal, lime green, blue, magenta, and gold swirling abstract patterns in bright minimalist living room with beige sofa demonstrating custom framing for contemporary fluid art and resin paintings"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "modern-gold",
@@ -4147,7 +4171,8 @@
         "url": "/frames/10832/lifestyle_30.jpg",
         "alt": "Man surrounded by collection of ornate gold picture frames featuring modern abstract art including geometric black and white chevrons, moody cityscape paintings, succulent botanical pencil drawing, and vibrant abstract expressionist compositions in art studio setting"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "modern-silver",
@@ -4343,7 +4368,8 @@
         "url": "/frames/10833/lifestyle_29.jpg",
         "alt": "Man in denim jacket presenting textured silver picture frame displaying bold abstract expressionist painting with dynamic red, yellow, blue, and white gestural brushstrokes on dark charcoal background in modern minimalist living room with snake plant and mid-century side table"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "iron-ore-silver",
@@ -4519,7 +4545,8 @@
         "url": "/frames/11153/lifestyle_25.jpg",
         "alt": "Professional woman holding classical fruit still life painting featuring pineapple and grapes in ornate baroque gold picture frame in elegant home library - illustrating traditional gold picture frames for still life artwork, classical paintings, and formal dining room art requiring elaborate carved moulding details"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "royal-gold",
@@ -4665,7 +4692,8 @@
         "url": "/frames/11239/lifestyle_19.jpg",
         "alt": "Colorful Latin American colonial street scene painting with festive banners and church tower in Royal Gold ornate baroque picture frame with dramatic window light and shadows - showcasing traditional decorative gold picture frames for travel artwork, cultural paintings, architectural scenes, and vibrant international art requiring elaborate 1 inch scrollwork moulding with classical baroque detailing"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "red-wood",
@@ -4846,7 +4874,8 @@
         "url": "/frames/9163/lifestyle_26.jpg",
         "alt": "Woman in gray sweater sits cross-legged on wooden floor holding red wood picture frame displaying colorful geometric block art surrounded by collection of framed artwork including black and white portrait, architectural photography, vintage cityscape, and sunset skyline demonstrating versatile custom framing options for art collectors"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "blue-wood",
@@ -5007,7 +5036,8 @@
         "url": "/frames/9160/lifestyle_22.png",
         "alt": "Woman kneels on gray sofa arranging Blue Wood frames gallery wall featuring black-and-white Eiffel Tower photograph geometric abstract art hot air balloon illustration rainbow watercolor leaf and minimalist line drawing cat sketch"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "coastal-white",
@@ -5188,7 +5218,8 @@
         "url": "/frames/10928/lifestyle_38.png",
         "alt": "Coastal White lifestyle image"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "wide-brown",
@@ -5374,7 +5405,8 @@
         "url": "/frames/8752/lifestyle_27.png",
         "alt": "Man in gallery viewing cosmic spiral galaxy painting with blue and purple nebula in brown wood frame displayed in modern art gallery with skylight and multiple framed works"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "wide-museum-silver",
@@ -5525,7 +5557,8 @@
         "url": "/frames/8837/lifestyle_20.png",
         "alt": "Wide Museum Silver lifestyle image"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "antique-silver",
@@ -5681,7 +5714,8 @@
         "url": "/frames/8981/lifestyle_21.jpg",
         "alt": "Hands displaying charming red panda watercolor illustration in bamboo forest setting with glowing fireflies professionally framed in antique silver picture frame with wide white mat"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "wide-brown-bamboo",
@@ -5837,7 +5871,8 @@
         "url": "/frames/9667/lifestyle_21.jpg",
         "alt": "Woman displaying Japanese cherry blossom bridge scene painting with traditional architecture, pink sakura blossoms, and tranquil pond in wide brown bamboo picture frame with authentic Asian-inspired segment joint detailing"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "black-peak",
@@ -5978,7 +6013,8 @@
         "url": "/frames/9885/lifestyle_18.jpg",
         "alt": "Woman on wooden stool arranging nature-inspired gallery wall with black picture frames featuring watercolor foggy forest landscape, delicate iris botanical print, abstract teal moon phases, vintage compass diagram above credenza with cascading pothos plants"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "executive-brown",
@@ -6169,7 +6205,8 @@
         "url": "/frames/10618/lifestyle_28.png",
         "alt": "Woman arranging comprehensive mixed finish gallery wall above gray sofa with sleeping white Samoyed dog featuring Executive Brown and black picture frames with large Mediterranean coastal village oil painting centerpiece showing white stucco buildings terracotta roofs and turquoise Aegean sea surrounded by monochromatic architectural photography and delicate orchid botanical illustrations creating sophisticated travel inspired display demonstrating how traditional mahogany brown Executive Brown frames with 1.25 inch stepped moulding coordinate beautifully with black frames for eclectic gallery wall arrangements"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "museum-black",
@@ -6360,7 +6397,8 @@
         "url": "/frames/10713/lifestyle_28.png",
         "alt": "Woman arranging comprehensive mixed finish TV gallery wall featuring Museum Black ornate gold custom frame displaying large vibrant watercolor sunset lake landscape painting centerpiece with orange yellow pink purple sky reflecting over water and silhouetted treeline surrounded by modern black picture frames with architectural etchings geometric prints and botanical watercolors demonstrating how museum-quality ornate gold finish with 1.125 inch moulding and classical black accent detailing coordinates beautifully with contemporary black frames for eclectic mixed finish gallery wall arrangements"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "museum-silver",
@@ -6556,7 +6594,8 @@
         "url": "/frames/10714/lifestyle_29.png",
         "alt": "Museum Silver lifestyle image"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "antique-gold",
@@ -6697,7 +6736,8 @@
         "url": "/frames/10783/lifestyle_18.png",
         "alt": "Antique gold frame with opulent scrollwork patterns and classical ornamental vine detailing displayed in luxury setting featuring wide 2 inch moulding with antique gold finish perfect for museum-quality presentations and prestigious displays"
       }
-    ]
+    ],
+    "frameClass": "picture"
   },
   {
     "id": "standard-depth-matte-black",
@@ -7019,7 +7059,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Standard Depth Matte Black Shadowbox Frame"
+    "displayName": "Standard Depth Matte Black Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "standard-depth-bright-white",
@@ -7336,7 +7377,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Standard Depth Bright White Shadowbox Frame"
+    "displayName": "Standard Depth Bright White Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "deep-wide-profile-black",
@@ -7718,7 +7760,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Deep Wide-Profile Black Shadowbox Frame"
+    "displayName": "Deep Wide-Profile Black Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "ultra-deep-two-tone-walnut",
@@ -7985,7 +8028,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Ultra Deep Two-Tone Walnut Shadowbox Frame"
+    "displayName": "Ultra Deep Two-Tone Walnut Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "deep-slim-matte-black",
@@ -8392,7 +8436,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Deep Slim Matte Black Shadowbox Frame"
+    "displayName": "Deep Slim Matte Black Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "standard-depth-honey-oak",
@@ -8724,7 +8769,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Standard Depth Honey Oak Shadowbox Frame"
+    "displayName": "Standard Depth Honey Oak Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "deep-rustic-walnut",
@@ -9076,7 +9122,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Deep Rustic Walnut Shadowbox Frame"
+    "displayName": "Deep Rustic Walnut Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "deep-architectural-matte-black",
@@ -9388,7 +9435,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Deep Architectural Matte Black Shadowbox Frame"
+    "displayName": "Deep Architectural Matte Black Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "extra-deep-bright-white",
@@ -9875,7 +9923,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Extra Deep Bright White Shadowbox Frame"
+    "displayName": "Extra Deep Bright White Shadowbox Frame",
+    "frameClass": "shadowbox-subset"
   },
   {
     "id": "extra-deep-rich-walnut",
@@ -10332,7 +10381,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Extra Deep Rich Walnut Shadowbox Frame"
+    "displayName": "Extra Deep Rich Walnut Shadowbox Frame",
+    "frameClass": "shadowbox-subset"
   },
   {
     "id": "standard-depth-coastal-whitewash",
@@ -10664,7 +10714,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Standard Depth Coastal Whitewash Shadowbox Frame"
+    "displayName": "Standard Depth Coastal Whitewash Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "extra-deep-matte-black",
@@ -11036,7 +11087,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Extra Deep Matte Black Shadowbox Frame"
+    "displayName": "Extra Deep Matte Black Shadowbox Frame",
+    "frameClass": "shadowbox-subset"
   },
   {
     "id": "medium-depth-gloss-white",
@@ -11344,7 +11396,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Medium Depth Gloss White Shadowbox Frame"
+    "displayName": "Medium Depth Gloss White Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "deep-charcoal-satin",
@@ -11726,7 +11779,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Deep Charcoal Satin Shadowbox Frame"
+    "displayName": "Deep Charcoal Satin Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "deep-natural-maple",
@@ -12089,7 +12143,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Deep Natural Maple Shadowbox Frame"
+    "displayName": "Deep Natural Maple Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "standard-depth-barn-black",
@@ -12472,7 +12527,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Standard Depth Barn Black Shadowbox Frame"
+    "displayName": "Standard Depth Barn Black Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "medium-depth-glossy-black",
@@ -12516,17 +12572,17 @@
       },
       {
         "type": "corner",
-        "url": "/frames/10779/10779_corner-a.jpg",
+        "url": "/frames/10779/10779_corner_a.jpg",
         "alt": "Glossy Black Sh Shadowbox corner detail showing precision mitered joint with mirror-like glossy finish 1 inch moulding width and 1.5 inch usable depth perfect for luxury contemporary shadowbox displays"
       },
       {
         "type": "corner",
-        "url": "/frames/10779/10779_corner-b.jpg",
+        "url": "/frames/10779/10779_corner_b.jpg",
         "alt": "Glossy Black Sh Shadowbox alternate corner view displaying seamless miter construction with flawless polished ebony surface 1 inch moulding width and 1.5 inch usable depth capacity"
       },
       {
         "type": "corner",
-        "url": "/frames/10779/10779_corner-c.jpg",
+        "url": "/frames/10779/10779_corner_c.jpg",
         "alt": "Glossy Black Sh Shadowbox detailed corner perspective showing expert joinery with sophisticated high-gloss black finish 1 inch moulding width and 1.5 inch usable depth for quality modern shadowbox framing"
       },
       {
@@ -12780,7 +12836,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Medium Depth Glossy Black Shadowbox Frame"
+    "displayName": "Medium Depth Glossy Black Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "medium-depth-stainless-silver",
@@ -12823,17 +12880,17 @@
       },
       {
         "type": "corner",
-        "url": "/frames/10781/10781_corner-a.jpg",
+        "url": "/frames/10781/10781_corner_a.jpg",
         "alt": "Stainless Steel S Shadowbox corner detail showing precision mitered joint with brushed stainless finish 1 inch moulding width and 1.5 inch usable depth perfect for professional collectible shadowbox displays"
       },
       {
         "type": "corner",
-        "url": "/frames/10781/10781_corner-b.jpg",
+        "url": "/frames/10781/10781_corner_b.jpg",
         "alt": "Stainless Steel S Shadowbox alternate corner view displaying seamless miter construction with refined brushed metallic surface 1 inch moulding width and 1.5 inch usable depth capacity"
       },
       {
         "type": "corner",
-        "url": "/frames/10781/10781_corner-c.jpg",
+        "url": "/frames/10781/10781_corner_c.jpg",
         "alt": "Stainless Steel S Shadowbox detailed corner perspective showing expert joinery with sophisticated brushed steel finish 1 inch moulding width and 1.5 inch usable depth for quality modern shadowbox framing"
       },
       {
@@ -13097,7 +13154,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Medium Depth Stainless Silver Shadowbox Frame"
+    "displayName": "Medium Depth Stainless Silver Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "medium-depth-gold",
@@ -13140,17 +13198,17 @@
       },
       {
         "type": "corner",
-        "url": "/frames/10897/10897_corner-a.jpg",
+        "url": "/frames/10897/10897_corner_a.jpg",
         "alt": "Gold Shadowbox corner detail showing precision mitered joint with radiant gold finish 1 inch moulding width and 1.5 inch usable depth perfect for prestigious award shadowbox displays"
       },
       {
         "type": "corner",
-        "url": "/frames/10897/10897_corner-b.jpg",
+        "url": "/frames/10897/10897_corner_b.jpg",
         "alt": "Gold Shadowbox alternate corner view displaying seamless miter construction with luxurious metallic gold surface 1 inch moulding width and 1.5 inch usable depth capacity"
       },
       {
         "type": "corner",
-        "url": "/frames/10897/10897_corner-c.jpg",
+        "url": "/frames/10897/10897_corner_c.jpg",
         "alt": "Gold Shadowbox detailed corner perspective showing expert joinery with distinguished gold finish 1 inch moulding width and 1.5 inch usable depth for quality ceremonial shadowbox framing"
       },
       {
@@ -13454,7 +13512,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Medium Depth Gold Shadowbox Frame"
+    "displayName": "Medium Depth Gold Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "standard-depth-barn-blue",
@@ -13497,17 +13556,17 @@
       },
       {
         "type": "corner",
-        "url": "/frames/10960/10960_corner-a.jpg",
+        "url": "/frames/10960/10960_corner_a.jpg",
         "alt": "Barn Blue Standard Shadowbox corner detail showing precision mitered joint with weathered barn blue finish 0.75 inch moulding width and 1 inch usable depth perfect for coastal collectible shadowbox displays"
       },
       {
         "type": "corner",
-        "url": "/frames/10960/10960_corner-b.jpg",
+        "url": "/frames/10960/10960_corner_b.jpg",
         "alt": "Barn Blue Standard Shadowbox alternate corner view displaying seamless miter construction with rustic coastal blue surface 0.75 inch moulding width and 1 inch usable depth capacity"
       },
       {
         "type": "corner",
-        "url": "/frames/10960/10960_corner-c.jpg",
+        "url": "/frames/10960/10960_corner_c.jpg",
         "alt": "Barn Blue Standard Shadowbox detailed corner perspective showing expert joinery with authentic weathered blue finish 0.75 inch moulding width and 1 inch usable depth for quality rustic shadowbox framing"
       },
       {
@@ -13761,7 +13820,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Standard Depth Barn Blue Shadowbox Frame"
+    "displayName": "Standard Depth Barn Blue Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "standard-depth-natural-wood",
@@ -13804,17 +13864,17 @@
       },
       {
         "type": "corner",
-        "url": "/frames/84154/84154_corner-a.jpg",
+        "url": "/frames/84154/84154_corner_a.jpg",
         "alt": "Natural Wood Standard Shadowbox corner detail showing precision mitered joint with natural wood grain 0.75 inch moulding width and 1 inch usable depth perfect for botanical shadowbox displays"
       },
       {
         "type": "corner",
-        "url": "/frames/84154/84154_corner-b.jpg",
+        "url": "/frames/84154/84154_corner_b.jpg",
         "alt": "Natural Wood Standard Shadowbox alternate corner view displaying seamless miter construction with organic wood surface 0.75 inch moulding width and 1 inch usable depth capacity"
       },
       {
         "type": "corner",
-        "url": "/frames/84154/84154_corner-c.jpg",
+        "url": "/frames/84154/84154_corner_c.jpg",
         "alt": "Natural Wood Standard Shadowbox detailed corner perspective showing expert joinery with authentic unfinished wood 0.75 inch moulding width and 1 inch usable depth for quality minimalist shadowbox framing"
       },
       {
@@ -14058,7 +14118,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Standard Depth Natural Wood Shadowbox Frame"
+    "displayName": "Standard Depth Natural Wood Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "standard-depth-modern-white",
@@ -14101,17 +14162,17 @@
       },
       {
         "type": "corner",
-        "url": "/frames/84159/84159_corner-a.jpg",
+        "url": "/frames/84159/84159_corner_a.jpg",
         "alt": "Modern White Standard Shadowbox corner detail showing precision mitered joint with white painted finish 1 inch moulding width and 1 inch usable depth perfect for wedding shadowbox displays"
       },
       {
         "type": "corner",
-        "url": "/frames/84159/84159_corner-b.jpg",
+        "url": "/frames/84159/84159_corner_b.jpg",
         "alt": "Modern White Standard Shadowbox alternate corner view displaying seamless miter construction with contemporary white surface 1 inch moulding width and 1 inch usable depth capacity"
       },
       {
         "type": "corner",
-        "url": "/frames/84159/84159_corner-c.jpg",
+        "url": "/frames/84159/84159_corner_c.jpg",
         "alt": "Modern White Standard Shadowbox detailed corner perspective showing expert joinery with clean white finish 1 inch moulding width and 1 inch usable depth for quality modern shadowbox framing"
       },
       {
@@ -14325,7 +14386,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Standard Depth Modern White Shadowbox Frame"
+    "displayName": "Standard Depth Modern White Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "standard-depth-modern-black",
@@ -14368,17 +14430,17 @@
       },
       {
         "type": "corner",
-        "url": "/frames/84161/84161_corner-a.jpg",
+        "url": "/frames/84161/84161_corner_a.jpg",
         "alt": "Modern Black Standard Shadowbox corner detail showing precision mitered joint with black textured finish 1 inch moulding width and 1 inch usable depth perfect for art shadowbox displays"
       },
       {
         "type": "corner",
-        "url": "/frames/84161/84161_corner-b.jpg",
+        "url": "/frames/84161/84161_corner_b.jpg",
         "alt": "Modern Black Standard Shadowbox alternate corner view displaying seamless miter construction with sophisticated black surface 1 inch moulding width and 1 inch usable depth capacity"
       },
       {
         "type": "corner",
-        "url": "/frames/84161/84161_corner-c.jpg",
+        "url": "/frames/84161/84161_corner_c.jpg",
         "alt": "Modern Black Standard Shadowbox detailed corner perspective showing expert joinery with refined black finish 1 inch moulding width and 1 inch usable depth for quality modern shadowbox framing"
       },
       {
@@ -14577,7 +14639,8 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Standard Depth Modern Black Shadowbox Frame"
+    "displayName": "Standard Depth Modern Black Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
   {
     "id": "standard-depth-modern-brown",
@@ -14620,17 +14683,17 @@
       },
       {
         "type": "corner",
-        "url": "/frames/84162/84162_corner-a.jpg",
+        "url": "/frames/84162/84162_corner_a.jpg",
         "alt": "Modern Brown Standard Shadowbox corner detail showing precision mitered joint with textured brown wood grain finish 1 inch moulding width and 1 inch usable depth perfect for rustic shadowbox displays"
       },
       {
         "type": "corner",
-        "url": "/frames/84162/84162_corner-b.jpg",
+        "url": "/frames/84162/84162_corner_b.jpg",
         "alt": "Modern Brown Standard Shadowbox alternate corner view displaying seamless miter construction with warm brown surface 1 inch moulding width and 1 inch usable depth capacity"
       },
       {
         "type": "corner",
-        "url": "/frames/84162/84162_corner-c.jpg",
+        "url": "/frames/84162/84162_corner_c.jpg",
         "alt": "Modern Brown Standard Shadowbox detailed corner perspective showing expert joinery with natural brown wood finish 1 inch moulding width and 1 inch usable depth for quality rustic shadowbox framing"
       },
       {
@@ -14879,9 +14942,9 @@
         "alt": "Professional comic book framing - comic collection in premium shadowbox frame gallery"
       }
     ],
-    "displayName": "Standard Depth Modern Brown Shadowbox Frame"
+    "displayName": "Standard Depth Modern Brown Shadowbox Frame",
+    "frameClass": "shadowbox-full"
   },
-
   {
     "id": "canvas-1in-black-black",
     "name": "Black Canvas Float Frame",
@@ -14892,7 +14955,7 @@
     "pricePerInch": 0.87,
     "borderColor": "#000000",
     "mouldingWidth": 0.25,
-    "usableDepth": 1.0,
+    "usableDepth": 1,
     "category": "canvas",
     "shopifyVariantId": null,
     "sku": "10117",
@@ -14901,8 +14964,8 @@
     "shortDescription": "1\" depth black canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-1in.png",
-    "cornerImage": "/assets/canvas/10117-corner-a.jpg",
-    "profileImage": "/assets/canvas/10117-profile-a.jpg",
+    "cornerImage": "/assets/canvas/10117-corner_a.jpg",
+    "profileImage": "/assets/canvas/10117-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/10117-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-black.jpg",
     "photos": {
@@ -14910,7 +14973,8 @@
       "bottomUrl": "/assets/canvas/textures/10117_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/10117_left.jpg",
       "rightUrl": "/assets/canvas/textures/10117_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   },
   {
     "id": "canvas-1in-black-gold",
@@ -14922,7 +14986,7 @@
     "pricePerInch": 0.8,
     "borderColor": "#d4af37",
     "mouldingWidth": 0.25,
-    "usableDepth": 1.0,
+    "usableDepth": 1,
     "category": "canvas",
     "shopifyVariantId": null,
     "sku": "10494",
@@ -14931,8 +14995,8 @@
     "shortDescription": "1\" depth black/gold canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-1in.png",
-    "cornerImage": "/assets/canvas/10494-corner-a.jpg",
-    "profileImage": "/assets/canvas/10494-profile-a.jpg",
+    "cornerImage": "/assets/canvas/10494-corner_a.jpg",
+    "profileImage": "/assets/canvas/10494-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/10494-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-gold.jpg",
     "photos": {
@@ -14940,7 +15004,8 @@
       "bottomUrl": "/assets/canvas/textures/10494_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/10494_left.jpg",
       "rightUrl": "/assets/canvas/textures/10494_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   },
   {
     "id": "canvas-1in-black-silver",
@@ -14952,7 +15017,7 @@
     "pricePerInch": 0.8,
     "borderColor": "#c0c0c0",
     "mouldingWidth": 0.25,
-    "usableDepth": 1.0,
+    "usableDepth": 1,
     "category": "canvas",
     "shopifyVariantId": null,
     "sku": "10495",
@@ -14961,8 +15026,8 @@
     "shortDescription": "1\" depth black/silver canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-1in.png",
-    "cornerImage": "/assets/canvas/10495-corner-a.jpg",
-    "profileImage": "/assets/canvas/10495-profile-a.jpg",
+    "cornerImage": "/assets/canvas/10495-corner_a.jpg",
+    "profileImage": "/assets/canvas/10495-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/10495-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-silver.jpg",
     "photos": {
@@ -14970,9 +15035,9 @@
       "bottomUrl": "/assets/canvas/textures/10495_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/10495_left.jpg",
       "rightUrl": "/assets/canvas/textures/10495_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   },
-
   {
     "id": "canvas-1375in-black-black",
     "name": "Black Canvas Float Frame",
@@ -14992,8 +15057,8 @@
     "shortDescription": "1.375\" depth black canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-1375in.png",
-    "cornerImage": "/assets/canvas/10426-corner-a.jpg",
-    "profileImage": "/assets/canvas/10426-profile-a.jpg",
+    "cornerImage": "/assets/canvas/10426-corner_a.jpg",
+    "profileImage": "/assets/canvas/10426-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/10426-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-black.jpg",
     "photos": {
@@ -15001,7 +15066,8 @@
       "bottomUrl": "/assets/canvas/textures/10426_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/10426_left.jpg",
       "rightUrl": "/assets/canvas/textures/10426_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   },
   {
     "id": "canvas-1375in-black-silver",
@@ -15022,8 +15088,8 @@
     "shortDescription": "1.375\" depth black/silver canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-1375in.png",
-    "cornerImage": "/assets/canvas/10427-corner-a.jpg",
-    "profileImage": "/assets/canvas/10427-profile-a.jpg",
+    "cornerImage": "/assets/canvas/10427-corner_a.jpg",
+    "profileImage": "/assets/canvas/10427-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/10427-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-silver.jpg",
     "photos": {
@@ -15031,7 +15097,8 @@
       "bottomUrl": "/assets/canvas/textures/10427_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/10427_left.jpg",
       "rightUrl": "/assets/canvas/textures/10427_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   },
   {
     "id": "canvas-1375in-black-gold",
@@ -15052,8 +15119,8 @@
     "shortDescription": "1.375\" depth black/gold canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-1375in.png",
-    "cornerImage": "/assets/canvas/10428-corner-a.jpg",
-    "profileImage": "/assets/canvas/10428-profile-a.jpg",
+    "cornerImage": "/assets/canvas/10428-corner_a.jpg",
+    "profileImage": "/assets/canvas/10428-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/10428-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-gold.jpg",
     "photos": {
@@ -15061,7 +15128,8 @@
       "bottomUrl": "/assets/canvas/textures/10428_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/10428_left.jpg",
       "rightUrl": "/assets/canvas/textures/10428_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   },
   {
     "id": "canvas-1375in-natural",
@@ -15082,8 +15150,8 @@
     "shortDescription": "1.375\" depth natural canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-10694.png",
-    "cornerImage": "/assets/canvas/10694-corner-a.jpg",
-    "profileImage": "/assets/canvas/10694-profile-a.jpg",
+    "cornerImage": "/assets/canvas/10694-corner_a.jpg",
+    "profileImage": "/assets/canvas/10694-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/10694-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-natural.jpg",
     "photos": {
@@ -15091,9 +15159,9 @@
       "bottomUrl": "/assets/canvas/textures/10694_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/10694_left.jpg",
       "rightUrl": "/assets/canvas/textures/10694_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   },
-
   {
     "id": "canvas-15in-black-gold",
     "name": "Black/Gold Canvas Float Frame",
@@ -15113,8 +15181,8 @@
     "shortDescription": "1.5\" depth black/gold canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-15in.png",
-    "cornerImage": "/assets/canvas/10564-corner-a.jpg",
-    "profileImage": "/assets/canvas/10564-profile-a.jpg",
+    "cornerImage": "/assets/canvas/10564-corner_a.jpg",
+    "profileImage": "/assets/canvas/10564-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/10564-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-gold.jpg",
     "photos": {
@@ -15122,7 +15190,8 @@
       "bottomUrl": "/assets/canvas/textures/10564_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/10564_left.jpg",
       "rightUrl": "/assets/canvas/textures/10564_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   },
   {
     "id": "canvas-15in-black-silver",
@@ -15143,8 +15212,8 @@
     "shortDescription": "1.5\" depth black/silver canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-15in.png",
-    "cornerImage": "/assets/canvas/10565-corner-a.jpg",
-    "profileImage": "/assets/canvas/10565-profile-a.jpg",
+    "cornerImage": "/assets/canvas/10565-corner_a.jpg",
+    "profileImage": "/assets/canvas/10565-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/10565-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-silver.jpg",
     "photos": {
@@ -15152,7 +15221,8 @@
       "bottomUrl": "/assets/canvas/textures/10565_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/10565_left.jpg",
       "rightUrl": "/assets/canvas/textures/10565_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   },
   {
     "id": "canvas-15in-black-black",
@@ -15173,8 +15243,8 @@
     "shortDescription": "1.5\" depth black canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-15in.png",
-    "cornerImage": "/assets/canvas/10627-corner-a.jpg",
-    "profileImage": "/assets/canvas/10627-profile-a.jpg",
+    "cornerImage": "/assets/canvas/10627-corner_a.jpg",
+    "profileImage": "/assets/canvas/10627-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/10627-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-black.jpg",
     "photos": {
@@ -15182,9 +15252,9 @@
       "bottomUrl": "/assets/canvas/textures/10627_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/10627_left.jpg",
       "rightUrl": "/assets/canvas/textures/10627_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   },
-
   {
     "id": "canvas-1625in-black-gold",
     "name": "Black/Gold Canvas Float Frame",
@@ -15205,8 +15275,8 @@
     "shortDescription": "1.625\" depth black/gold canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-1625in-classic.png",
-    "cornerImage": "/assets/canvas/10104-corner-a.jpg",
-    "profileImage": "/assets/canvas/10104-profile-a.jpg",
+    "cornerImage": "/assets/canvas/10104-corner_a.jpg",
+    "profileImage": "/assets/canvas/10104-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/10104-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-gold.jpg",
     "photos": {
@@ -15214,7 +15284,8 @@
       "bottomUrl": "/assets/canvas/textures/10104_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/10104_left.jpg",
       "rightUrl": "/assets/canvas/textures/10104_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   },
   {
     "id": "canvas-1625in-black-silver",
@@ -15236,8 +15307,8 @@
     "shortDescription": "1.625\" depth black/silver canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-1625in-classic.png",
-    "cornerImage": "/assets/canvas/10105-corner-a.jpg",
-    "profileImage": "/assets/canvas/10105-profile-a.jpg",
+    "cornerImage": "/assets/canvas/10105-corner_a.jpg",
+    "profileImage": "/assets/canvas/10105-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/10105-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-silver.jpg",
     "photos": {
@@ -15245,7 +15316,8 @@
       "bottomUrl": "/assets/canvas/textures/10105_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/10105_left.jpg",
       "rightUrl": "/assets/canvas/textures/10105_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   },
   {
     "id": "canvas-1625in-barnwood-white",
@@ -15267,8 +15339,8 @@
     "shortDescription": "1.625\" depth barnwood white canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-1625in-barnwood.png",
-    "cornerImage": "/assets/canvas/10764-corner-a.jpg",
-    "profileImage": "/assets/canvas/10764-profile-a.jpg",
+    "cornerImage": "/assets/canvas/10764-corner_a.jpg",
+    "profileImage": "/assets/canvas/10764-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/10764-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-barnwood-white.jpg",
     "photos": {
@@ -15276,7 +15348,8 @@
       "bottomUrl": "/assets/canvas/textures/10764_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/10764_left.jpg",
       "rightUrl": "/assets/canvas/textures/10764_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   },
   {
     "id": "canvas-1625in-barnwood-gray",
@@ -15298,8 +15371,8 @@
     "shortDescription": "1.625\" depth barnwood gray canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-1625in-barnwood.png",
-    "cornerImage": "/assets/canvas/10765-corner-a.jpg",
-    "profileImage": "/assets/canvas/10765-profile-a.jpg",
+    "cornerImage": "/assets/canvas/10765-corner_a.jpg",
+    "profileImage": "/assets/canvas/10765-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/10765-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-barnwood-gray.jpg",
     "photos": {
@@ -15307,7 +15380,8 @@
       "bottomUrl": "/assets/canvas/textures/10765_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/10765_left.jpg",
       "rightUrl": "/assets/canvas/textures/10765_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   },
   {
     "id": "canvas-1625in-barnwood-brown",
@@ -15329,8 +15403,8 @@
     "shortDescription": "1.625\" depth barnwood brown canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-1625in-barnwood.png",
-    "cornerImage": "/assets/canvas/10766-corner-a.jpg",
-    "profileImage": "/assets/canvas/10766-profile-a.jpg",
+    "cornerImage": "/assets/canvas/10766-corner_a.jpg",
+    "profileImage": "/assets/canvas/10766-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/10766-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-barnwood-brown.jpg",
     "photos": {
@@ -15338,7 +15412,8 @@
       "bottomUrl": "/assets/canvas/textures/10766_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/10766_left.jpg",
       "rightUrl": "/assets/canvas/textures/10766_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   },
   {
     "id": "canvas-1625in-barnwood-black",
@@ -15360,8 +15435,8 @@
     "shortDescription": "1.625\" depth barnwood black canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-1625in-barnwood.png",
-    "cornerImage": "/assets/canvas/10767-corner-a.jpg",
-    "profileImage": "/assets/canvas/10767-profile-a.jpg",
+    "cornerImage": "/assets/canvas/10767-corner_a.jpg",
+    "profileImage": "/assets/canvas/10767-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/10767-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-barnwood-black.jpg",
     "photos": {
@@ -15369,7 +15444,8 @@
       "bottomUrl": "/assets/canvas/textures/10767_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/10767_left.jpg",
       "rightUrl": "/assets/canvas/textures/10767_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   },
   {
     "id": "canvas-1625in-gold",
@@ -15391,8 +15467,8 @@
     "shortDescription": "1.625\" depth gold canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-1625in-metallic.png",
-    "cornerImage": "/assets/canvas/11345-corner-a.jpg",
-    "profileImage": "/assets/canvas/11345-profile-a.jpg",
+    "cornerImage": "/assets/canvas/11345-corner_a.jpg",
+    "profileImage": "/assets/canvas/11345-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/11345-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-gold.jpg",
     "photos": {
@@ -15400,7 +15476,8 @@
       "bottomUrl": "/assets/canvas/textures/11345_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/11345_left.jpg",
       "rightUrl": "/assets/canvas/textures/11345_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   },
   {
     "id": "canvas-1625in-silver",
@@ -15422,8 +15499,8 @@
     "shortDescription": "1.625\" depth silver canvas float frame",
     "alternateImages": [],
     "dimensionalDiagram": "/assets/canvas-dims-1625in-metallic.png",
-    "cornerImage": "/assets/canvas/11351-corner-a.jpg",
-    "profileImage": "/assets/canvas/11351-profile-a.jpg",
+    "cornerImage": "/assets/canvas/11351-corner_a.jpg",
+    "profileImage": "/assets/canvas/11351-profile_a.jpg",
     "lifestyleImage": "/assets/canvas/11351-lifestyle-a.jpg",
     "swatchImage": "/assets/canvas/swatch-silver.jpg",
     "photos": {
@@ -15431,6 +15508,7 @@
       "bottomUrl": "/assets/canvas/textures/11351_bottom.jpg",
       "leftUrl": "/assets/canvas/textures/11351_left.jpg",
       "rightUrl": "/assets/canvas/textures/11351_right.jpg"
-    }
+    },
+    "frameClass": "canvas"
   }
 ]

@@ -18,6 +18,10 @@ import matsData from "./mats.json";
 import glassData from "./glass.json";
 import pricingConfigData from "./pricing-config.json";
 
+// Frame class map (SKU → frameClass from xlsx)
+export { getFrameClass, FRAME_CLASS_SKUS } from "./frame-class-map";
+export type { FrameClass } from "./frame-class-map";
+
 // Re-export data with proper typing
 export { framesData };
 export { matsData };

@@ -4,8 +4,9 @@
  * These images serve as placeholder diploma examples in the frame designer.
  * They help users visualize how their diploma will look in the custom frame.
  *
- * Images are stored in app public: /diploma/inserts/
- * Naming convention: diploma_insert_1.jpg, diploma_insert_2.jpg, ... diploma_insert_24.jpg
+ * Images live under shared_assets: diploma/insert-images/
+ * Naming: diploma_insert_1.jpg ... diploma_insert_24.jpg
+ * Consumers should use getSharedAssetUrl(url) when using as img src.
  */
 
 export interface DiplomaInsertImage {
@@ -14,14 +15,14 @@ export interface DiplomaInsertImage {
 }
 
 /**
- * Array of 24 diploma insert image paths
+ * Array of 24 diploma insert image paths (relative to shared assets).
  */
 export const DIPLOMA_INSERT_IMAGES: DiplomaInsertImage[] = Array.from(
   { length: 24 },
   (_, index) => {
     const num = index + 1;
     return {
-      url: `/diploma/inserts/diploma_insert_${num}.jpg`,
+      url: `diploma/insert-images/diploma_insert_${num}.jpg`,
       alt: `Diploma insert placeholder ${num}`,
     };
   }

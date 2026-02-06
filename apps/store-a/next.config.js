@@ -1,8 +1,27 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
 
+// Rewrite asset URLs to local API (assets_to_use). Path goes in URL so it is passed reliably.
+const assetPrefixes = [
+  'frames', 'mats', 'canvas', 'magazine', 'comic', 'playbill', 'newspaper',
+  'collage', 'card-frames', 'diploma', 'cd', 'ticket-frames', 'invitation-frames',
+  'needlework', 'signature-frames', 'record-album', 'puzzle', 'sonogram', 'military',
+  'blog', 'components', 'stock',
+];
+const assetRewrites = assetPrefixes.map((prefix) => ({
+  source: `/${prefix}/:path*`,
+  destination: `/api/asset/${prefix}/:path*`,
+}));
+const assetsRewrite = {
+  source: '/assets/:path*',
+  destination: '/api/asset/assets/:path*',
+};
+
 const nextConfig = {
   reactStrictMode: true,
+  async rewrites() {
+    return [...assetRewrites, assetsRewrite];
+  },
   transpilePackages: [
     '@framecraft/ui',
     '@framecraft/core',

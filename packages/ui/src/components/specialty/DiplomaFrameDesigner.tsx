@@ -42,6 +42,7 @@ import {
   apiRequest,
   getRandomDiplomaInsert,
   getRandomDiplomaLifestyle,
+  getSharedAssetUrl,
   getMatTilingStyle,
   getMatBevelColor,
   DIPLOMA_SIZES,
@@ -306,8 +307,11 @@ export function DiplomaFrameDesigner({
   const randomSeed = useMemo(() => Math.floor(Math.random() * 10000), []);
 
   // Get stable placeholder image from diploma insert library (diploma-specific)
-  // Uses random seed so different images appear on each page load
-  const placeholderImage = useMemo(() => getRandomDiplomaInsert(randomSeed), [randomSeed]);
+  const placeholderImagePath = useMemo(() => getRandomDiplomaInsert(randomSeed), [randomSeed]);
+  const placeholderImage = useMemo(
+    () => (placeholderImagePath ? getSharedAssetUrl(placeholderImagePath) : ""),
+    [placeholderImagePath]
+  );
 
   // Use uploaded image if available, otherwise use placeholder
   const displayImage = selectedImage || placeholderImage;
@@ -325,9 +329,10 @@ export function DiplomaFrameDesigner({
     rightUrl?: string; // Pre-oriented right piece (decorative edge facing left)
   }>({});
 
-  // Get random lifestyle image from shared diploma lifestyle pool
+  // Get random lifestyle image from shared diploma lifestyle pool (resolve to URL for img src)
   const getRandomLifestyleImage = useCallback((frameId: string) => {
-    return getRandomDiplomaLifestyle(frameId);
+    const path = getRandomDiplomaLifestyle(frameId);
+    return path ? getSharedAssetUrl(path) : undefined;
   }, []);
 
   // Track if initial load is complete

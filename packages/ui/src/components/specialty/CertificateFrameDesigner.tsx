@@ -43,6 +43,7 @@ import {
   apiRequest,
   getRandomDiplomaInsert,
   getRandomDiplomaLifestyle,
+  getSharedAssetUrl,
   exportFramePreview,
   convertImageToDataURL,
   downloadImage,
@@ -187,7 +188,11 @@ export function CertificateFrameDesigner({
   const hardwareSectionRef = useRef<HTMLDivElement>(null);
 
   const randomSeed = useMemo(() => Math.floor(Math.random() * 10000), []);
-  const placeholderImage = useMemo(() => getRandomDiplomaInsert(randomSeed), [randomSeed]);
+  const placeholderImagePath = useMemo(() => getRandomDiplomaInsert(randomSeed), [randomSeed]);
+  const placeholderImage = useMemo(
+    () => (placeholderImagePath ? getSharedAssetUrl(placeholderImagePath) : ""),
+    [placeholderImagePath]
+  );
   const displayImage = selectedImage || placeholderImage;
 
   const configuratorRef = useRef<HTMLDivElement>(null);
@@ -202,7 +207,8 @@ export function CertificateFrameDesigner({
   }>({});
 
   const getRandomLifestyleImage = useCallback((frameId: string) => {
-    return getRandomDiplomaLifestyle(frameId);
+    const path = getRandomDiplomaLifestyle(frameId);
+    return path ? getSharedAssetUrl(path) : undefined;
   }, []);
 
   const [isInitialLoadComplete, setIsInitialLoadComplete] = useState(false);

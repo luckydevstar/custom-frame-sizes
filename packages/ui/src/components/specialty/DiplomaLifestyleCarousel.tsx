@@ -1,6 +1,6 @@
 "use client";
 
-import { DIPLOMA_LIFESTYLE_IMAGES } from "@framecraft/core";
+import { DIPLOMA_LIFESTYLE_IMAGES, getSharedAssetUrl } from "@framecraft/core";
 import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
 
 interface DiplomaLifestyleCarouselProps {
@@ -8,11 +8,15 @@ interface DiplomaLifestyleCarouselProps {
 }
 
 export function DiplomaLifestyleCarousel({ onImageClick }: DiplomaLifestyleCarouselProps = {}) {
+  const images = DIPLOMA_LIFESTYLE_IMAGES.map((img) => ({
+    ...img,
+    url: getSharedAssetUrl(img.url),
+  }));
   return (
     <BaseLifestyleCarousel
       title="Style Inspiration"
       subtitle="See how our diploma frames look in real homes and offices."
-      images={DIPLOMA_LIFESTYLE_IMAGES}
+      images={images}
       onImageClick={onImageClick}
       testIdPrefix="diploma-lifestyle"
       ariaLabel="Diploma frame lifestyle photo gallery"

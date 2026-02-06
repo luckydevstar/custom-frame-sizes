@@ -235,19 +235,19 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
   const LIFESTYLE_IMAGES = useMemo(
     () => [
       {
-        url: getSharedAssetUrl("lifestyle/graded-card/lifestyle_1.jpg"),
+        url: getSharedAssetUrl("card-frames/lifestyle/lifestyle_1.jpg"),
         alt: "PSA graded sports cards in custom shadowbox frame",
       },
       {
-        url: getSharedAssetUrl("lifestyle/graded-card/lifestyle_2.jpg"),
+        url: getSharedAssetUrl("card-frames/lifestyle/lifestyle_2.jpg"),
         alt: "BGS graded basketball cards in shadowbox frame",
       },
       {
-        url: getSharedAssetUrl("lifestyle/graded-card/lifestyle_3.jpg"),
+        url: getSharedAssetUrl("card-frames/lifestyle/lifestyle_3.jpg"),
         alt: "Graded Pokemon cards in professional frame display",
       },
       {
-        url: getSharedAssetUrl("lifestyle/graded-card/lifestyle_4.jpg"),
+        url: getSharedAssetUrl("card-frames/lifestyle/lifestyle_4.jpg"),
         alt: "PSA 10 gem mint cards in custom shadowbox",
       },
     ],
@@ -341,7 +341,7 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
       cardCount,
       ""
     );
-    return raw.map((p) => getSharedAssetUrl("card-inserts" + p));
+    return raw.map((p) => getSharedAssetUrl("card-frames/insert-images/card-inserts" + p));
   }, [selectedFormat, cardCategory, selectedLayout]);
 
   // Get current format details (for dimensions display)

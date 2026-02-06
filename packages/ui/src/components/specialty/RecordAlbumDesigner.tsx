@@ -39,6 +39,7 @@ import {
   getCDPricingDimensions,
   getCDLifestyleImageUrl,
   getRecordAlbumLifestyleImageUrl,
+  getSharedAssetUrl,
   type RecordAlbumLayoutType,
   type CDLayoutType,
 } from "@framecraft/core";
@@ -502,9 +503,11 @@ export function RecordAlbumDesigner({
   const lifestyleImage = useMemo(() => {
     const totalImages = layoutType === "cd" ? 55 : 49;
     const randomIndex = Math.floor(Math.random() * totalImages) + 1;
-    return layoutType === "cd"
-      ? getCDLifestyleImageUrl(randomIndex)
-      : getRecordAlbumLifestyleImageUrl(randomIndex);
+    const path =
+      layoutType === "cd"
+        ? getCDLifestyleImageUrl(randomIndex)
+        : getRecordAlbumLifestyleImageUrl(randomIndex);
+    return getSharedAssetUrl(path);
   }, [layoutType]);
 
   useEffect(() => {

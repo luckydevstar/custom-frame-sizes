@@ -7,41 +7,49 @@ import { useState, useEffect } from "react";
 import { getSharedAssetUrl } from "@framecraft/core";
 
 export function MatDesignerShowcase() {
-  // Use one of the mat lifestyle images from CDN (attached_assets path)
-  const [currentImage, setCurrentImage] = useState({
-    url: getSharedAssetUrl("attached_assets/Mat_Lifestyle_(1)_1765923321072.jpeg"),
-    alt: "Family selecting mat boards for photos at dining table",
-  });
+  // Mat lifestyle images from shared_assets (signature-frames lifestyle used for mat/photo framing vibe)
+  const matImages = [
+    {
+      url: getSharedAssetUrl(
+        "signature-frames/lifestyle/Signature_Frame_Lifestyle (1)_1763780813534.jpeg"
+      ),
+      alt: "Family selecting mat boards for photos at dining table",
+    },
+    {
+      url: getSharedAssetUrl(
+        "signature-frames/lifestyle/Signature_Frame_Lifestyle (2)_1763780813534.jpeg"
+      ),
+      alt: "Family reviewing matted photographs on coffee table",
+    },
+    {
+      url: getSharedAssetUrl(
+        "signature-frames/lifestyle/Signature_Frame_Lifestyle (3)_1763780813535.jpeg"
+      ),
+      alt: "Couple laughing while sorting matted photos on floor",
+    },
+    {
+      url: getSharedAssetUrl(
+        "signature-frames/lifestyle/Signature_Frame_Lifestyle (10)_1763780813539.jpeg"
+      ),
+      alt: "Family with toddler looking at matted photos",
+    },
+    {
+      url: getSharedAssetUrl(
+        "signature-frames/lifestyle/Signature_Frame_Lifestyle (15)_1763780813540.jpeg"
+      ),
+      alt: "Family working on mat cutting project at dining table",
+    },
+  ];
+  const [currentImage, setCurrentImage] = useState(matImages[0]!);
 
   useEffect(() => {
-    // Randomly select from mat lifestyle images (using attached_assets path structure)
-    const matImages = [
-      {
-        url: getSharedAssetUrl("attached_assets/Mat_Lifestyle_(1)_1765923321072.jpeg"),
-        alt: "Family selecting mat boards for photos at dining table",
-      },
-      {
-        url: getSharedAssetUrl("attached_assets/Mat_Lifestyle_(2)_1765923321072.jpeg"),
-        alt: "Family reviewing matted photographs on coffee table",
-      },
-      {
-        url: getSharedAssetUrl("attached_assets/Mat_Lifestyle_(3)_1765923321072.jpeg"),
-        alt: "Couple laughing while sorting matted photos on floor",
-      },
-      {
-        url: getSharedAssetUrl("attached_assets/Mat_Lifestyle_(10)_1765923321069.jpeg"),
-        alt: "Family with toddler looking at matted photos",
-      },
-      {
-        url: getSharedAssetUrl("attached_assets/Mat_Lifestyle_(15)_1765923298425.jpeg"),
-        alt: "Family working on mat cutting project at dining table",
-      },
-    ];
+    // Randomly select from mat lifestyle images
     const randomIndex = Math.floor(Math.random() * matImages.length);
     const selectedImage = matImages[randomIndex];
     if (selectedImage) {
       setCurrentImage(selectedImage);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const features = [

@@ -4,8 +4,9 @@
  * These images showcase diploma frames in real-world settings.
  * They're randomized for display across all diploma frame styles.
  *
- * Images are stored in app public: /diploma/lifestyle/
- * Naming convention: Diploma_Frame_Lifestyle (1).png, ... Diploma_Frame_Lifestyle (57).png
+ * Images live under shared_assets: diploma/lifestyle/
+ * Naming: Diploma_Frame_Lifestyle (1).png ... (57).png
+ * Consumers should use getSharedAssetUrl(url) when using as img src.
  */
 
 export interface DiplomaLifestyleImage {
@@ -14,14 +15,14 @@ export interface DiplomaLifestyleImage {
 }
 
 /**
- * Array of 57 diploma lifestyle image paths
+ * Array of 57 diploma lifestyle image paths (relative to shared assets).
  */
 export const DIPLOMA_LIFESTYLE_IMAGES: DiplomaLifestyleImage[] = Array.from(
   { length: 57 },
   (_, index) => {
     const num = index + 1;
     return {
-      url: `/diploma/lifestyle/Diploma_Frame_Lifestyle (${num}).png`,
+      url: `diploma/lifestyle/Diploma_Frame_Lifestyle (${num}).png`,
       alt: `Diploma frame lifestyle example ${num}`,
     };
   }

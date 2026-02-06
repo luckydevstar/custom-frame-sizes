@@ -63,13 +63,7 @@ export function getSharedAssetUrl(path: string): string {
     return `${normalizedUrl}/${cleanPath}`;
   }
 
-  // Fallback to local path (warn in development)
-  if (process.env.NODE_ENV === "development") {
-    console.warn(
-      `[getSharedAssetUrl] CDN URL not configured. Using local path: ${path}. ` +
-        `Set NEXT_PUBLIC_CDN_SHARED_URL environment variable.`
-    );
-  }
+  // Fallback to local path (served by app via /api/asset rewrites when using assets_to_use)
   return path.startsWith("/") ? path : `/${path}`;
 }
 
@@ -133,21 +127,13 @@ export function getHeroAssetUrl(filename: string): string {
 }
 
 /**
- * Get CDN URL for a canvas lifestyle image
+ * Get CDN URL for a canvas frame image (shared_assets/canvas/images)
  *
  * @param filename - Canvas image filename (e.g., "10117-lifestyle-a.jpg")
  * @returns Full CDN URL or local path
- *
- * Note: Canvas images are stored in frames/{sku}/ directory
- * Format: frames/10117/lifestyle-a.jpg
  */
 export function getCanvasImageUrl(filename: string): string {
-  // Extract SKU from filename (e.g., "10117-lifestyle-a.jpg" -> "10117")
-  const sku = filename.split("-")[0];
-  // Extract the rest (e.g., "lifestyle-a.jpg")
-  const imageName = filename.substring(sku?.length ?? 0 + 1);
-
-  return getSharedAssetUrl(`frames/${sku}/${imageName}`);
+  return getSharedAssetUrl(`canvas/images/${filename}`);
 }
 
 /**

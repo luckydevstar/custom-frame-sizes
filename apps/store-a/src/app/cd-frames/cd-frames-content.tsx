@@ -13,16 +13,16 @@ import {
   Disc3,
 } from "lucide-react";
 import { Button, Card, CardContent, Separator } from "@framecraft/ui";
-import { getCDLifestyleImageUrl } from "@framecraft/core";
+import { getCDLifestyleImageUrl, getSharedAssetUrl } from "@framecraft/core";
 import { ScrollToDesignerButton } from "./scroll-button";
 import { CdFrameDesignerSection } from "./cd-frame-designer-section";
 
 // Deterministic breakup photos so server and client render the same (avoids hydration mismatch)
 const BREAKUP_PHOTOS = [
-  getCDLifestyleImageUrl(1),
-  getCDLifestyleImageUrl(2),
-  getCDLifestyleImageUrl(3),
-  getCDLifestyleImageUrl(4),
+  getSharedAssetUrl(getCDLifestyleImageUrl(1)),
+  getSharedAssetUrl(getCDLifestyleImageUrl(2)),
+  getSharedAssetUrl(getCDLifestyleImageUrl(3)),
+  getSharedAssetUrl(getCDLifestyleImageUrl(4)),
 ];
 
 export function CdFramesContent() {

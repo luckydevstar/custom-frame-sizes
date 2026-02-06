@@ -26,6 +26,7 @@
  */
 
 import { getActiveSeasonalCollections } from "./seasonal-collections";
+import { getSharedAssetUrl } from "../utils/asset-urls";
 
 export interface StockImageLibraryConfig {
   photoInserts: Record<string, string>;
@@ -421,10 +422,42 @@ export function createStockImageLibrary(config: StockImageLibraryConfig): StockI
   };
 }
 
+// Fallback: when the app never injects stock image data, use these filenames from stock/photo_inserts
+// (same as original app's attached_assets/stock_images/photo_inserts). Ensures frame designer
+// preview always shows a real placeholder image.
+const STOCK_PHOTO_INSERT_FALLBACK_FILES = [
+  "african_savanna_acacia.jpg",
+  "city_skyline_urban_a_08ab40a7.jpg",
+  "city_skyline_urban_a_7a5ece30.jpg",
+  "colorful_row_houses.jpg",
+  "glacier_mountain_lake.jpg",
+  "ocean_beach_coastal__104a1917.jpg",
+  "panoramic_landscape__4407e9a0.jpg",
+  "rolling_hills_countr_12ef7445.jpg",
+  "lake_mountain_reflec_0b32a4b1.jpg",
+  "mountain_landscape_s_164226d0.jpg",
+  "nyc_skyline_empire_state.jpg",
+  "forested_mountain_sunset.jpg",
+  "desert_canyon_rock_f_30df2c98.jpg",
+  "dinosaurs_at_water.jpg",
+];
+
 // Export a convenience function that uses the default library
 export function getRandomStockImage(
   seed?: string | number,
   subfolder?: "photo_inserts" | "canvas_paintings"
 ): string {
-  return getDefaultLibrary().getRandomStockImage(seed, subfolder);
+  const url = getDefaultLibrary().getRandomStockImage(seed, subfolder);
+  if (url) return url;
+  // Library was never initialized with image data (e.g. no createStockImageLibrary).
+  // Return a deterministic placeholder from stock/photo_inserts so frame designer preview is not empty.
+  const seedNum =
+    seed === undefined
+      ? Math.floor(Math.random() * 1000)
+      : typeof seed === "string"
+        ? seed.split("").reduce((acc, char) => acc + char.charCodeAt(0), 0)
+        : seed;
+  const index = Math.abs(seedNum) % STOCK_PHOTO_INSERT_FALLBACK_FILES.length;
+  const filename = STOCK_PHOTO_INSERT_FALLBACK_FILES[index]!;
+  return getSharedAssetUrl(`stock/photo_inserts/${filename}`);
 }

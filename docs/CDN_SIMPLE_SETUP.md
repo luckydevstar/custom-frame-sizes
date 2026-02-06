@@ -35,7 +35,7 @@ The helper functions automatically prepend the CDN URL to paths:
 
 - `getStoreAssetUrl("plywood-texture.png")` → `https://pub-e7bceef7c942453b92d35da77e807c44.r2.dev/assets/plywood-texture.png`
 - `getBrandAssetUrl("logo-blue.png")` → `https://pub-e7bceef7c942453b92d35da77e807c44.r2.dev/assets/brand/logo-blue.png`
-- `getCanvasImageUrl("10117-lifestyle-a.jpg")` → `https://pub-e7bceef7c942453b92d35da77e807c44.r2.dev/assets/canvas/10117-lifestyle-a.jpg`
+- `getCanvasImageUrl("10117-lifestyle-a.jpg")` → `{NEXT_PUBLIC_CDN_SHARED_URL}/canvas/images/10117-lifestyle-a.jpg` (shared bucket; see docs/ASSET_PATHS_AND_CDN.md)
 
 ### Fallback Behavior
 

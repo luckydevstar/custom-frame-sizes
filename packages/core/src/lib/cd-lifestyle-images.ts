@@ -1,14 +1,15 @@
 /**
  * CD Lifestyle Images - Used for breakup photos and carousels on CD frames page.
- * Images are stored in app public: /cd/lifestyle/
+ * Images live under shared_assets: cd/lifestyle/
  * Naming: cd-frame-lifestyle-1.jpg ... cd-frame-lifestyle-55.jpg
+ * Consumers should use getSharedAssetUrl(url) when using as img src.
  */
 
 const CD_LIFESTYLE_COUNT = 55;
-const BASE_PATH = "/cd/lifestyle/cd-frame-lifestyle";
+const BASE_PATH = "cd/lifestyle/cd-frame-lifestyle";
 
 /**
- * Get CD lifestyle image URL by index (1-based).
+ * Get CD lifestyle image path by index (1-based). Use getSharedAssetUrl(result) for img src.
  */
 export function getCDLifestyleImageUrl(index: number): string {
   if (index < 1 || index > CD_LIFESTYLE_COUNT) {

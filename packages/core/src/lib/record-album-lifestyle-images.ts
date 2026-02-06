@@ -1,11 +1,13 @@
 /**
  * Record Album (Vinyl) Lifestyle Images
  * Used in RecordAlbumDesigner for background/lifestyle photo.
+ * Images live under shared_assets: record-album/lifestyle/
  * Naming: Record_Frame_Lifestyle (1).png ... (49).png; images 43-48 use .jpg.
+ * Consumers should use getSharedAssetUrl(url) when using as img src.
  */
 
 const RECORD_ALBUM_LIFESTYLE_COUNT = 49;
-const BASE_PATH = "/images/record-album-lifestyle/Record_Frame_Lifestyle";
+const BASE_PATH = "record-album/lifestyle/Record_Frame_Lifestyle";
 const EXTENSION_OVERRIDES: Record<number, string> = {
   43: "jpg",
   44: "jpg",

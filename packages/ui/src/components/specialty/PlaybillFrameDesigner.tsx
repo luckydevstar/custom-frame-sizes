@@ -71,113 +71,122 @@ const shadowboxFrames = getFramesByCategory("shadowbox");
 const allGlassTypes = getGlassTypes();
 const glassTypes = allGlassTypes.filter((g) => g.id === "standard" || g.id === "non-glare");
 
-// Playbill lifestyle images (29 total)
+// Playbill lifestyle images (29 total) – paths under shared_assets/playbill/lifestyle
 const PLAYBILL_LIFESTYLE_IMAGES: Array<{ url: string; alt: string }> = [
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-1.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-1.jpg"),
     alt: "Hamilton, Lion King, and Wicked Playbills in black frame",
   },
-  { url: "/lifestyle/playbill/playbill-lifestyle-2.jpg", alt: "Wicked Playbill in black frame" },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-3.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-2.jpg"),
+    alt: "Wicked Playbill in black frame",
+  },
+  {
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-3.jpg"),
     alt: "Hamilton Playbill in natural wood frame",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-4.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-4.jpg"),
     alt: "Book of Mormon Playbill in black frame",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-5.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-5.jpg"),
     alt: "Hamilton Playbill with ticket stub in dark frame",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-6.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-6.jpg"),
     alt: "Twelve Playbill collection in black frame",
   },
-  { url: "/lifestyle/playbill/playbill-lifestyle-7.jpg", alt: "Lion King Playbill in black frame" },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-8.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-7.jpg"),
+    alt: "Lion King Playbill in black frame",
+  },
+  {
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-8.jpg"),
     alt: "Wicked Playbill with ticket in black frame",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-9.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-9.jpg"),
     alt: "Dear Evan Hansen, Hadestown, and Six Playbills in black frame",
   },
-  { url: "/lifestyle/playbill/playbill-lifestyle-10.jpg", alt: "Hamilton Playbill in dark frame" },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-11.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-10.jpg"),
+    alt: "Hamilton Playbill in dark frame",
+  },
+  {
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-11.jpg"),
     alt: "Cats Playbill in natural wood frame",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-12.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-12.jpg"),
     alt: "Wicked Playbill with ticket stub in black frame",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-13.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-13.jpg"),
     alt: "Lion King Playbill in black frame greenhouse setting",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-14.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-14.jpg"),
     alt: "Hamilton Playbill with ticket stub in black frame cafe setting",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-15.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-15.jpg"),
     alt: "Hamilton, Wicked, Lion King triple Playbill in black frame",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-16.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-16.jpg"),
     alt: "Phantom of the Opera Playbill with ticket in dark frame",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-17.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-17.jpg"),
     alt: "Wicked Playbill with ticket in natural wood frame park setting",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-18.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-18.jpg"),
     alt: "Les Miserables, Phantom, Chicago triple Playbill in black frame",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-19.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-19.jpg"),
     alt: "Phantom, Wicked, Hamilton triple Playbill in black frame",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-20.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-20.jpg"),
     alt: "Phantom of the Opera Playbill in natural wood frame library setting",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-21.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-21.jpg"),
     alt: "Hamilton, Phantom, Hadestown triple Playbill in walnut frame outdoor cafe",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-22.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-22.jpg"),
     alt: "Wicked Playbill in black frame cozy living room",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-23.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-23.jpg"),
     alt: "Wicked Playbill in walnut frame Central Park setting",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-24.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-24.jpg"),
     alt: "Phantom, Hadestown, Come From Away triple Playbill in walnut frame library",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-25.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-25.jpg"),
     alt: "Phantom of the Opera Playbill with ticket in black frame art studio",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-26.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-26.jpg"),
     alt: "Hamilton, Wicked, Lion King triple Playbill in black frame library",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-27.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-27.jpg"),
     alt: "Wicked Playbill in black frame vintage theater decor",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-28.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-28.jpg"),
     alt: "Hamilton Playbill in black frame Central Park",
   },
   {
-    url: "/lifestyle/playbill/playbill-lifestyle-29.jpg",
+    url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-29.jpg"),
     alt: "Phantom of the Opera Playbill in black frame coffee shop",
   },
 ];

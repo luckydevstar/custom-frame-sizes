@@ -201,11 +201,19 @@ export function FrameDesigner({
 
   const hardwareSectionRef = useRef<HTMLDivElement>(null);
 
-  // Generate stable random seed for placeholder image (only changes on page load)
-  const [placeholderSeed] = useState(() => Math.floor(Math.random() * 1000));
+  // Random seed per page load (matches original app: different placeholder image on each refresh).
+  // Use null until after mount so server and first client paint both use seed 0 (avoids hydration mismatch).
+  const [placeholderSeed, setPlaceholderSeed] = useState<number | null>(null);
+  useEffect(() => {
+    setPlaceholderSeed(Math.floor(Math.random() * 1000));
+  }, []);
+  const seedForPlaceholder = placeholderSeed !== null ? placeholderSeed : 0;
 
-  // Get stable placeholder image from local stock library
-  const placeholderImage = useMemo(() => getRandomStockImage(placeholderSeed), [placeholderSeed]);
+  // Get placeholder image from stock library (or stock/photo_inserts fallback)
+  const placeholderImage = useMemo(
+    () => getRandomStockImage(seedForPlaceholder),
+    [seedForPlaceholder]
+  );
 
   // Use uploaded image if available, otherwise use placeholder
   const displayImage = selectedImage || placeholderImage;
