@@ -378,6 +378,7 @@ export {
 export { MoviePosterFrameDesigner } from "./components/specialty/MoviePosterFrameDesigner";
 export { NeedleworkFrameDesigner } from "./components/specialty/NeedleworkFrameDesigner";
 export { NewspaperFrameDesigner } from "./components/specialty/NewspaperFrameDesigner";
+export { ComingSoonDesigner } from "./components/specialty/ComingSoonDesigner";
 export { DiplomaLifestyleCarousel } from "./components/specialty/DiplomaLifestyleCarousel";
 export { RecordAlbumDesigner } from "./components/specialty/RecordAlbumDesigner";
 export { RecordAlbumPreview } from "./components/specialty/RecordAlbumPreview";

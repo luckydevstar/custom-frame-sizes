@@ -10,6 +10,7 @@
  *   attached_assets/stock_images/sonogram_inserts → shared_assets/sonogram/insert-images
  *   attached_assets/specialty/ticket_frame_lifestyle   → shared_assets/ticket-frames/lifestyle
  *   attached_assets/specialty/invitation_frame_lifestyle → shared_assets/invitation-frames/lifestyle
+ *   attached_assets/image_1766069659840.png → shared_assets/diploma/tassel.png (diploma designer tassel)
  *
  * Does not move or delete; leaves attached_assets unchanged.
  * Run from repo root: node scripts/populate-from-attached-assets.mjs
@@ -37,6 +38,11 @@ const COPY_RULES = [
   { from: "specialty/invitation_frame_lifestyle", to: "invitation-frames/lifestyle" },
 ];
 
+// Single files: attached_assets path → shared_assets path
+const FILE_COPY_RULES = [
+  { from: "image_1766069659840.png", to: "diploma/tassel.png" },
+];
+
 function copyDir(src, dest) {
   if (!fs.existsSync(src)) return 0;
   const stat = fs.statSync(src);
@@ -54,6 +60,14 @@ function copyDir(src, dest) {
     }
   }
   return n;
+}
+
+function copyFile(src, dest) {
+  if (!fs.existsSync(src)) return 0;
+  if (!fs.statSync(src).isFile()) return 0;
+  fs.mkdirSync(path.dirname(dest), { recursive: true });
+  fs.copyFileSync(src, dest);
+  return 1;
 }
 
 if (!fs.existsSync(attachedDir)) {
@@ -75,6 +89,15 @@ for (const rule of COPY_RULES) {
   const n = copyDir(src, dest);
   if (n > 0) {
     console.log(`${rule.from} → ${rule.to} (${n} items)`);
+    total += n;
+  }
+}
+for (const rule of FILE_COPY_RULES) {
+  const src = path.join(attachedDir, rule.from);
+  const dest = path.join(sharedDir, rule.to);
+  const n = copyFile(src, dest);
+  if (n > 0) {
+    console.log(`${rule.from} → ${rule.to}`);
     total += n;
   }
 }

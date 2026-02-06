@@ -29,6 +29,7 @@ export {
 export type { Frame as ShadowboxColorFrame } from "./shadowbox-color-images";
 // Export style-gateway-images functions but avoid duplicate Frame type
 export {
+  STYLE_METADATA,
   getStyleLifestyleImages,
   getStyleHeroImage,
   getStyleHubImage,

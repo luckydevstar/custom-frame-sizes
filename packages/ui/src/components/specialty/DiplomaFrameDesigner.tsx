@@ -70,7 +70,8 @@ import type { PriceLineItem } from "../ui/PriceBox";
 import { BottomWeightedMatting } from "./shared/BottomWeightedMatting";
 import { DiplomaLifestyleCarousel } from "./DiplomaLifestyleCarousel";
 
-const TASSEL_IMAGE = "/diploma/tassel.png";
+// Tassel image: served from shared_assets/diploma/tassel.png when present (add file to assets_to_use or run populate script)
+const TASSEL_IMAGE_URL = getSharedAssetUrl("diploma/tassel.png");
 
 // Get product data from services
 const pictureFrames = getFramesByCategory("picture");
@@ -97,20 +98,44 @@ interface DiplomaLayoutConfig {
   icon: typeof GraduationCap;
 }
 
-// Tassel image component for realistic rendering
-const TasselIcon = ({ className, style }: { className?: string; style?: React.CSSProperties }) => (
-  <img
-    src={TASSEL_IMAGE}
-    alt="Graduation tassel with 2026 charm"
-    className={className}
-    style={{
-      objectFit: "cover",
-      width: "100%",
-      height: "100%",
-      ...style,
-    }}
-  />
-);
+// Tassel image component: uses shared asset URL; shows placeholder if image is missing (e.g. tassel.png not yet in assets_to_use)
+function TasselIcon({ className, style }: { className?: string; style?: React.CSSProperties }) {
+  const [loadError, setLoadError] = useState(false);
+  if (loadError) {
+    return (
+      <div
+        className={className}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: "100%",
+          height: "100%",
+          backgroundColor: "var(--muted)",
+          color: "var(--muted-foreground)",
+          ...style,
+        }}
+        title="Graduation tassel"
+      >
+        <GraduationCap className="w-2/3 h-2/3" style={{ maxWidth: "80%", maxHeight: "80%" }} />
+      </div>
+    );
+  }
+  return (
+    <img
+      src={TASSEL_IMAGE_URL}
+      alt="Graduation tassel with 2026 charm"
+      className={className}
+      style={{
+        objectFit: "cover",
+        width: "100%",
+        height: "100%",
+        ...style,
+      }}
+      onError={() => setLoadError(true)}
+    />
+  );
+}
 
 // Layout configurations
 const DIPLOMA_LAYOUTS: DiplomaLayoutConfig[] = [

@@ -49,6 +49,7 @@ const COPY_RULES = [
   // diploma
   { from: "diploma/inserts", to: "diploma/insert-images" },
   { from: "diploma/lifestyle", to: "diploma/lifestyle" },
+  { from: "diploma/tassel.png", to: "diploma/tassel.png" },
   // playbill: inserts + tickets
   { from: "playbill/inserts", to: "playbill/insert-images/inserts" },
   { from: "playbill/tickets", to: "playbill/insert-images/tickets" },
