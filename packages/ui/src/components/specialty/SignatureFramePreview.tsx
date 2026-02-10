@@ -78,8 +78,6 @@ export function SignatureFramePreview({
   const frameLipPx = frameWidthPx * (frame.rabbetInsetRatio ?? 0.92);
   const matAreaWidthPx = previewWidth - frameLipPx * 2;
   const matAreaHeightPx = previewHeight - frameLipPx * 2;
-  const _matBorderPx = matBorder * scale;
-  const _bottomWeightedExtraPx = frameDimensions.bottomWeightedExtra * scale;
   const matRevealPx = matReveal * scale;
   const openingPx = openingSizeNum * scale;
 
