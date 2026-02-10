@@ -70,11 +70,23 @@ export default withRouteHandler({
 
 ## Environment Variables
 
-Required environment variables (set in Vercel):
+Set these in Vercel (Project → Settings → Environment Variables).
 
-- `SHOPIFY_ADMIN_API_TOKEN_<STORE_ID>` - Admin API tokens
-- `SHOPIFY_STORE_DOMAIN_<STORE_ID>` - Store domains
-- `NODE_ENV` - Environment (development/production)
+**Required for cart/checkout (Storefront API):**
+
+- `SHOPIFY_STORE_DOMAIN` – Shopify store domain (e.g. `your-store.myshopify.com`)
+- `SHOPIFY_STOREFRONT_TOKEN` – Storefront API access token (from Shopify Admin → Settings → Apps → Develop apps → [App] → Storefront API)
+
+**Optional:**
+
+- `SHOPIFY_API_VERSION` – API version (default `2024-01`)
+
+**Multi-store:** For multiple stores (e.g. store-a, store-b), use per-store vars. Store ID in the key uses underscores (e.g. `store-a` → `store_a`):
+
+- `SHOPIFY_STORE_DOMAIN_store_a` – domain for store "store-a"
+- `SHOPIFY_STOREFRONT_TOKEN_store_a` – Storefront token for store "store-a"
+
+The API registers store config from these env vars when handling requests (see `src/lib/store-config.ts`).
 
 ## Deployment
 

@@ -10,6 +10,7 @@ import { validationError, notFoundError } from "@/lib/errors";
 import { getCookie, CART_ID_COOKIE } from "@/lib/cookies";
 import { UpdateCartLinesRequestSchema } from "@/types/requests";
 import { addLinesToCart, updateLinesInCart, removeLinesFromCart } from "@/lib/cart-utils";
+import { ensureStoreConfig } from "@/lib/store-config";
 import { applyRateLimit } from "@/lib/rate-limit-middleware";
 import { sanitizeStoreId, sanitizeAttributes } from "@/lib/sanitization";
 import { validateStoreIdOrThrow } from "@/lib/validation";
@@ -45,6 +46,9 @@ const handler = withRouteHandler({
     // Sanitize and validate store ID
     storeId = sanitizeStoreId(storeId);
     validateStoreIdOrThrow(storeId);
+
+    // Register store config from env so core Storefront API can run
+    ensureStoreConfig(storeId);
 
     // Execute operation based on type
     let cart;

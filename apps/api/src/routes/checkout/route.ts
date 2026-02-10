@@ -10,6 +10,7 @@ import { validationError, notFoundError } from "@/lib/errors";
 import { getCookie, CART_ID_COOKIE } from "@/lib/cookies";
 import { CheckoutRequestSchema } from "@/lib/validation";
 import { createCheckoutUrl } from "@/lib/checkout-utils";
+import { ensureStoreConfig } from "@/lib/store-config";
 import { applyRateLimit } from "@/lib/rate-limit-middleware";
 import { sanitizeStoreId, sanitizeEmail } from "@/lib/sanitization";
 import { validateStoreIdOrThrow } from "@/lib/validation";
@@ -36,6 +37,9 @@ const handler = withRouteHandler({
     // Sanitize and validate store ID
     storeId = sanitizeStoreId(storeId);
     validateStoreIdOrThrow(storeId);
+
+    // Register store config from env so core Storefront API can run
+    ensureStoreConfig(storeId);
 
     // Sanitize discount code if provided
     if (discountCode) {
