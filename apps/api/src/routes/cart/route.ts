@@ -21,8 +21,8 @@ const handler = withRouteHandler({
     const validationResult = CreateCartRequestSchema.safeParse(req.body);
     if (!validationResult.success) {
       throw validationError("Invalid request", {
-        field: validationResult.error.errors[0]?.path.join("."),
-        reason: validationResult.error.errors[0]?.message,
+        field: validationResult.error.errors[0]?.path?.join(".") ?? "unknown",
+        reason: validationResult.error.errors[0]?.message ?? "Validation failed",
       });
     }
 

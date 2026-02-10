@@ -1983,10 +1983,6 @@ export function ShadowboxDesigner({
                       ((dialogDisplayWidth + dialogDisplayHeight) / 2);
                     const dialogMatRevealDisplay = (dialogMatBorder / matBorder) * matReveal;
 
-                    // Calculate actual pixels-per-inch scale after viewport clamping (replaces stale dialogArtworkScale for V-groove)
-                    const _dialogScalePxPerIn = dialogDisplayWidth / artWidth;
-                    void _dialogScalePxPerIn; // Currently unused but may be needed for future enhancements
-
                     return framePhotos.topUrl &&
                       framePhotos.bottomUrl &&
                       framePhotos.leftUrl &&

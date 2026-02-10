@@ -44,9 +44,6 @@ export const metadata: Metadata = {
 };
 
 export default function DiplomaCertificateFramesPage() {
-  const _pageUrl = `${brandConfig.seo?.canonicalUrl || ""}/diploma-certificate-frames`;
-  const _ogImage = `${brandConfig.seo?.canonicalUrl || ""}/assets/diploma-frames-og.jpg`;
-
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",

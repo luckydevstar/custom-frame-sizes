@@ -11,7 +11,6 @@ import {
   buildMatManifest,
   getPreviewScale,
   getMatTilingStyle,
-  getMatBevelColor,
   getComicLayout,
   calculateComicFrameSize,
   calculateComicPreviewDimensions,
@@ -126,13 +125,6 @@ export const ComicPreviewCanvas = memo(function ComicPreviewCanvas({
       manifest.openings.every((opening) => opening.width > 0 && opening.height > 0)
     );
   }, [previewWidth, previewHeight, frameFaceWidth, manifest.openings]);
-
-  // Bevel color based on bottom mat (the mat that shows at opening edges)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // @ts-expect-error - Unused variable kept for potential future use
-  const _bevelColor = useMemo(() => {
-    return getMatBevelColor(bottomMatColor.name);
-  }, [bottomMatColor.name]);
 
   // Frame lip positioning - accounts for frame rabbet inset ratio
   const frameLipPx = useMemo(() => {

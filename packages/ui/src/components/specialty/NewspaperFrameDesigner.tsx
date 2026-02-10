@@ -572,7 +572,7 @@ export function NewspaperFrameDesigner({
                 }}
               >
                 <img
-                  src={displayImageUrls[index] ?? displayImageUrls[0]}
+                  src={displayImageUrls[index] ?? displayImageUrls[0] ?? ""}
                   alt={`Newspaper ${index + 1}`}
                   style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   data-testid={`img-newspaper-preview-${index}`}

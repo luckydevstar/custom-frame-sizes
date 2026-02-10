@@ -78,12 +78,7 @@ import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview"
 import type { BrassNameplateConfig } from "@framecraft/types";
 import { BRASS_NAMEPLATE_SPECS, getTypeBBottomBorder } from "@framecraft/types";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
-import {
-  calculatePrintDimensions,
-  generatePrintFile,
-  downloadPrintFile,
-  checkImageResolution,
-} from "@framecraft/core";
+import { calculatePrintDimensions, generatePrintFile, downloadPrintFile } from "@framecraft/core";
 
 // Get product data from services
 const frameStyles = getFramesByCategory("picture");
@@ -129,7 +124,7 @@ export function FrameDesigner({
   const [bottomWeighted, setBottomWeighted] = useState(false);
   const [copyrightAgreed, setCopyrightAgreed] = useState(false);
   const [uploadedImageAspectRatio, setUploadedImageAspectRatio] = useState<number | null>(null);
-  const [uploadedImageDimensions, setUploadedImageDimensions] = useState<{
+  const [_uploadedImageDimensions, setUploadedImageDimensions] = useState<{
     width: number;
     height: number;
   } | null>(null);
@@ -963,24 +958,6 @@ export function FrameDesigner({
   // Validation - prevent invalid calculations
   const isValidDimensions =
     artWidth > 0 && artHeight > 0 && (!artworkSizeValidation || artworkSizeValidation.valid);
-
-  // Print resolution check for print-and-frame mode
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // @ts-expect-error - Unused variable kept for potential future use
-  const _printResolutionCheck = useMemo(() => {
-    if (!uploadedImageDimensions || serviceType !== "print-and-frame" || !selectedImage) {
-      return null;
-    }
-    // Target print area is artwork size + 1" bleed (1/2" on each side)
-    const targetWidth = artWidth + 1;
-    const targetHeight = artHeight + 1;
-    return checkImageResolution(
-      uploadedImageDimensions.width,
-      uploadedImageDimensions.height,
-      targetWidth,
-      targetHeight
-    );
-  }, [uploadedImageDimensions, serviceType, selectedImage, artWidth, artHeight]);
 
   // Create frame configuration for pricing calculation
   const frameConfig: FrameConfiguration = useMemo(

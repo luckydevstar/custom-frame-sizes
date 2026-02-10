@@ -64,7 +64,6 @@ import {
   COMIC_LAYOUTS,
   getComicLayout,
   calculateComicFrameSize,
-  calculateComicPreviewDimensions,
   type ComicLayoutType,
 } from "@framecraft/core";
 import { ComicPreviewCanvas, useComicPreviewState } from "./ComicPreviewCanvas";
@@ -406,32 +405,6 @@ export function ComicBookFrameDesigner({
   // Calculate bottom weighted extra height
   const bottomWeightedExtra = bottomWeighted ? BOTTOM_WEIGHTED_EXTRA : 0;
 
-  // Calculate preview dimensions using dynamic layout calculation
-  // This ensures comics display properly centered and sized in the preview
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // @ts-expect-error - Unused variable kept for potential future use
-  const _previewFrameDimensions = useMemo(() => {
-    // Return default dimensions if no layout selected yet
-    if (!selectedLayout) {
-      return {
-        width: 16,
-        height: 20 + bottomWeightedExtra,
-      };
-    }
-
-    const dimensions = calculateComicPreviewDimensions(
-      selectedLayout,
-      selectedFormat,
-      MAT_BORDER,
-      brassNameplateConfig.enabled
-    );
-
-    return {
-      width: dimensions.width,
-      height: dimensions.height + bottomWeightedExtra,
-    };
-  }, [selectedLayout, selectedFormat, brassNameplateConfig.enabled, bottomWeightedExtra]);
-
   // Calculate manufacturing dimensions using exact interior dimension lookup table
   // This provides accurate dimensions for pricing and "Overall Size" display text
   const manufacturingFrameDimensions = useMemo(() => {
@@ -481,19 +454,6 @@ export function ComicBookFrameDesigner({
 
     return Math.max(minHeight, Math.min(calculatedHeight, maxHeight));
   }, [containerSize.width, isMobile]);
-
-  // Get comic covers for preview
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // @ts-expect-error - Unused variable kept for potential future use
-  const _comicCovers = useMemo(() => {
-    // Return empty array if no layout selected yet
-    if (!selectedLayout) {
-      return [];
-    }
-
-    const layout = getComicLayout(selectedLayout);
-    return getCoversForConfig(selectedFormat, selectedLayout, layout.count);
-  }, [selectedFormat, selectedLayout, getCoversForConfig]);
 
   // Get current format details
   const currentFormat = useMemo(() => getComicFormatById(selectedFormat), [selectedFormat]);
@@ -667,9 +627,6 @@ export function ComicBookFrameDesigner({
 
     // Mat surcharge (for multi-opening layouts)
     if (pricing.matPrice > 0 && currentLayout) {
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      // @ts-expect-error - Unused variable kept for potential future use
-      const _additionalOpenings = currentLayout.count - 1;
       items.push({
         label: `Mat Board (${currentLayout.count} openings)`,
         amount: pricing.matPrice,
@@ -750,153 +707,13 @@ export function ComicBookFrameDesigner({
 
   // Add to cart handler
   const handleAddToCart = useCallback(async () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // @ts-expect-error - Unused variable kept for potential future use
-    const _currentFormat = getComicFormatById(selectedFormat);
     const currentLayout = getComicLayout(selectedLayout);
-
-    // Build complete frame specification for cart/checkout
-    // manufacturingFrameDimensions already includes bottomWeightedExtra in height calculation
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    // @ts-expect-error - Unused variable kept for potential future use
-    const _frameSpec = {
-      productType: "comic-frame",
-      format: selectedFormat,
-      layout: selectedLayout,
-      frameId: selectedFrame.id,
-      frameSku: selectedFrame.sku,
-      // Frame dimensions include bottomWeightedExtra for accurate manufacturing
-      frameWidth: manufacturingFrameDimensions.width,
-      frameHeight: manufacturingFrameDimensions.height,
-      // Mat configuration
-      matType,
-      matColorId: selectedMat.id,
-      matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
-      matBorder: MAT_BORDER,
-      bottomWeighted, // Include bottom-weighted flag for manufacturing
-      // Glass and hardware
-      glassTypeId: selectedGlass?.id ?? "standard",
-      hardware,
-      // Brass nameplate
-      brassNameplate: brassNameplateConfig.enabled
-        ? {
-            line1: brassNameplateConfig.line1,
-            line2: brassNameplateConfig.line2,
-            line3: brassNameplateConfig.line3,
-            font: brassNameplateConfig.font,
-            color: brassNameplateConfig.color,
-          }
-        : undefined,
-      // Pricing
-      unitPrice: pricing.total,
-      quantity,
-    };
 
     toast({
       title: "Added to cart!",
       description: `${quantity}× Comic Frame - ${currentLayout?.displayName || "Custom"} (${manufacturingFrameDimensions.width.toFixed(1)}" × ${manufacturingFrameDimensions.height.toFixed(1)}")`,
     });
-  }, [
-    quantity,
-    selectedLayout,
-    selectedFormat,
-    selectedFrame,
-    manufacturingFrameDimensions,
-    matType,
-    selectedMat,
-    selectedMatInner,
-    MAT_BORDER,
-    bottomWeighted,
-    selectedGlass,
-    hardware,
-    brassNameplateConfig,
-    pricing.total,
-    toast,
-  ]);
-
-  // Apply preset configuration
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // @ts-expect-error - Unused function kept for potential future use
-  const _applyPreset = (presetName: "signature" | "vault") => {
-    if (presetName === "signature") {
-      // Signature Wall Display preset
-      setSelectedFormat("modern-age");
-      // Mobile: reset layout to force selection; Desktop: set it directly
-      if (isMobile) {
-        setSelectedLayout("");
-      } else {
-        setSelectedLayout("single");
-      }
-      // Find black frame
-      const blackFrame = shadowboxFrames.find((f) => f.name.toLowerCase().includes("black"));
-      if (blackFrame) setSelectedFrame(blackFrame);
-      setMatType("double");
-      // White top mat
-      const whiteMat = getMatById("mat-1"); // White
-      if (whiteMat) setSelectedMat(whiteMat);
-      // Metallic gold bottom mat
-      const goldMat = getMatById("mat-11"); // Metallic Gold (premium)
-      if (goldMat) setSelectedMatInner(goldMat);
-      // UV-protective glass (standard)
-      const uvGlass = glassTypes.find((g) => g.id === "standard");
-      if (uvGlass) setSelectedGlass(uvGlass);
-      // Enable brass plaque
-      setBrassNameplateConfig({
-        enabled: true,
-        line1: "",
-        line2: "",
-        line3: "",
-        font: "georgia",
-        color: "brass-black",
-        includeFlag: false,
-      });
-      setHardware("standard");
-      setSmartDefaultApplied(null); // Clear smart default banner
-      toast({
-        title: "Applied Signature Wall Display",
-        description: isMobile
-          ? "Preset applied. Now choose your layout."
-          : "Premium configuration for showcase display",
-      });
-    } else if (presetName === "vault") {
-      // Vault Preservation preset
-      setSelectedFormat("slabbed-cgc");
-      // Mobile: reset layout to force selection; Desktop: set it directly
-      if (isMobile) {
-        setSelectedLayout("");
-      } else {
-        setSelectedLayout("single");
-      }
-      // Find black frame
-      const blackFrame = shadowboxFrames.find((f) => f.name.toLowerCase().includes("black"));
-      if (blackFrame) setSelectedFrame(blackFrame);
-      setMatType("single");
-      // Black mat
-      const blackMat = getMatById("mat-3"); // Black
-      if (blackMat) setSelectedMat(blackMat);
-      // Museum glass (non-glare)
-      const museumGlass = glassTypes.find((g) => g.id === "non-glare");
-      if (museumGlass) setSelectedGlass(museumGlass);
-      // Disable brass plaque
-      setBrassNameplateConfig({
-        enabled: false,
-        line1: "",
-        line2: "",
-        line3: "",
-        font: "georgia",
-        color: "brass-black",
-        includeFlag: false,
-      });
-      setHardware("standard");
-      setSmartDefaultApplied(null); // Clear smart default banner
-      toast({
-        title: "Applied Vault Preservation",
-        description: isMobile
-          ? "Preset applied. Now choose your layout."
-          : "Museum-quality protection for graded slabs",
-      });
-    }
-  };
+  }, [quantity, selectedLayout, manufacturingFrameDimensions, toast]);
 
   // Scroll detection for desktop price box expansion - expands when scrolling down page
   useEffect(() => {

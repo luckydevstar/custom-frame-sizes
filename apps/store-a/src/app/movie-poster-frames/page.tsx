@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { MoviePosterFramesContent } from "./movie-poster-frames-content";
 
 const baseUrl = "https://customframesizes.com";
@@ -36,6 +37,14 @@ const productSchema = {
   },
 };
 
+function MoviePosterFallback() {
+  return (
+    <div className="min-h-[400px] flex items-center justify-center bg-muted/20">
+      <div className="animate-spin rounded-full h-10 w-10 border-2 border-primary border-t-transparent" />
+    </div>
+  );
+}
+
 export default function MoviePosterFramesPage() {
   return (
     <>
@@ -43,7 +52,9 @@ export default function MoviePosterFramesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
       />
-      <MoviePosterFramesContent />
+      <Suspense fallback={<MoviePosterFallback />}>
+        <MoviePosterFramesContent />
+      </Suspense>
     </>
   );
 }

@@ -42,12 +42,7 @@ import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
 import { useToast } from "../../hooks/use-toast";
 import { TrustBox } from "../marketing/TrustBox";
 import { type MatOption } from "@framecraft/core";
-import {
-  getJerseyLayout,
-  getAllJerseyLayouts,
-  JERSEY_LAYOUTS,
-  type JerseyLayoutType,
-} from "@framecraft/core";
+import { getJerseyLayout, type JerseyLayoutType } from "@framecraft/core";
 import { generateDoubleMatPaths } from "@framecraft/core";
 import { JerseyPreviewCanvas } from "./JerseyPreviewCanvas";
 import { JerseyLifestyleCarousel } from "./JerseyLifestyleCarousel";
@@ -562,10 +557,6 @@ export function JerseyFrameDesigner({
     );
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // @ts-expect-error - Unused variable kept for potential future use
-  const _availableLayouts = getAllJerseyLayouts();
-
   return (
     <>
       {/* Sentinel element for mobile floating button - triggers when scrolled out of view */}
@@ -702,11 +693,6 @@ export function JerseyFrameDesigner({
                         </div>
                         <div className="grid grid-cols-3 gap-2">
                           {(["small", "regular", "large"] as const).map((size) => {
-                            const layoutId: JerseyLayoutType = `${selectedLayoutType}-${size}`;
-                            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                            // @ts-expect-error - Unused variable kept for potential future use
-                            const _layout = JERSEY_LAYOUTS[layoutId];
-
                             // Clear, action-oriented labels
                             const headline =
                               size === "small"
@@ -1013,11 +999,6 @@ export function JerseyFrameDesigner({
                       <AccordionContent className="space-y-4 pt-2 pb-4">
                         <div className="grid grid-cols-3 gap-2">
                           {(["small", "regular", "large"] as const).map((size) => {
-                            const layoutId: JerseyLayoutType = `${selectedLayoutType}-${size}`;
-                            // eslint-disable-next-line @typescript-eslint/no-unused-vars
-                            // @ts-expect-error - Unused variable kept for potential future use
-                            const _layout = JERSEY_LAYOUTS[layoutId];
-
                             const headline =
                               size === "small"
                                 ? "Youth Jerseys"

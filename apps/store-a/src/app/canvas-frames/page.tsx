@@ -1,8 +1,21 @@
 import type { Metadata } from "next";
+import nextDynamic from "next/dynamic";
 import { Suspense } from "react";
 import { Sparkles, Frame, Palette, Brush, Shield } from "lucide-react";
-import { CanvasFrameDesigner, CanvasLifestyleCarousel } from "@framecraft/ui";
 import { ScrollToDesignerButton } from "./scroll-button";
+
+const CanvasFrameDesigner = nextDynamic(
+  () => import("@framecraft/ui").then((m) => m.CanvasFrameDesigner),
+  { ssr: false }
+);
+
+const CanvasLifestyleCarousel = nextDynamic(
+  () => import("@framecraft/ui").then((m) => m.CanvasLifestyleCarousel),
+  { ssr: false }
+);
+
+// Avoid static prerender: designer deps (e.g. recharts/framer-motion) reference `self` at module load
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Custom Canvas Float Frames | Any Size | CustomFrameSizes.com",

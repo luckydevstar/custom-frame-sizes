@@ -289,7 +289,7 @@ export default function RecordAlbumFramesPage() {
 
               <div className="my-8 relative w-full aspect-video rounded-lg overflow-hidden">
                 <Image
-                  src={breakupUrls[0]}
+                  src={breakupUrls[0]!}
                   alt="Custom framed vinyl record album displayed in modern interior"
                   fill
                   className="object-cover"
@@ -370,7 +370,7 @@ export default function RecordAlbumFramesPage() {
 
               <div className="my-8 relative w-full aspect-video rounded-lg overflow-hidden">
                 <Image
-                  src={breakupUrls[1]}
+                  src={breakupUrls[1]!}
                   alt="Professional vinyl record framing showcasing professional-grade materials"
                   fill
                   className="object-cover"
@@ -440,7 +440,7 @@ export default function RecordAlbumFramesPage() {
 
               <div className="my-8 relative w-full aspect-video rounded-lg overflow-hidden">
                 <Image
-                  src={breakupUrls[2]}
+                  src={breakupUrls[2]!}
                   alt="Vinyl LP record frame installation in curated music collection"
                   fill
                   className="object-cover"
@@ -495,7 +495,7 @@ export default function RecordAlbumFramesPage() {
 
               <div className="my-8 relative w-full aspect-video rounded-lg overflow-hidden">
                 <Image
-                  src={breakupUrls[3]}
+                  src={breakupUrls[3]!}
                   alt="Custom record album frames enhancing home decor and music appreciation"
                   fill
                   className="object-cover"

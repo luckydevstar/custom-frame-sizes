@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { Readable } from "stream";
 
 /**
  * GET /api/asset/frames/8446/corner_a.jpg (path in URL via rewrites)
@@ -97,8 +98,9 @@ export async function GET(
   const ext = path.extname(resolvedPath).toLowerCase();
   const contentType = MIME[ext] ?? "application/octet-stream";
 
-  const stream = fs.createReadStream(resolvedPath);
-  return new NextResponse(stream, {
+  const nodeStream = fs.createReadStream(resolvedPath);
+  const webStream = Readable.toWeb(nodeStream) as ReadableStream<Uint8Array>;
+  return new NextResponse(webStream, {
     headers: {
       "Content-Type": contentType,
       "Cache-Control": "public, max-age=86400",

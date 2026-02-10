@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import nextDynamic from "next/dynamic";
 import { Suspense } from "react";
 import {
   Theater,
@@ -12,8 +13,12 @@ import {
   Users,
   Archive,
 } from "lucide-react";
-import { PlaybillFrameDesigner } from "@framecraft/ui";
 import { Card } from "@framecraft/ui";
+
+const PlaybillFrameDesigner = nextDynamic(
+  () => import("@framecraft/ui").then((m) => m.PlaybillFrameDesigner),
+  { ssr: false }
+);
 import { ScrollToDesignerButton } from "./scroll-button";
 import { PLAYBILL_DIMENSIONS, TICKET_DIMENSIONS } from "@framecraft/core";
 

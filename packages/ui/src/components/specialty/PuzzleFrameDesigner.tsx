@@ -54,8 +54,6 @@ import { useIntelligentPreviewSizing } from "@framecraft/core";
 import { TrustBox } from "../marketing/TrustBox";
 import {
   isOversizeMat,
-  PUZZLE_SIZES as _PUZZLE_SIZES,
-  getPuzzleSizesByCategory,
   getPuzzleSizeById,
   createRoundMatOpening,
   validatePuzzleDimensions,
@@ -77,26 +75,6 @@ import {
 
 // Get picture frames and glass types
 const pictureFrames = getFramesByCategory("picture");
-
-// Hardware options with descriptions and pricing
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-// @ts-expect-error - Unused constant kept for potential future use
-const _HARDWARE_OPTIONS = [
-  {
-    id: "standard" as const,
-    title: "Standard Hanging Hardware",
-    description: "Includes wire and D-rings for secure wall mounting",
-    price: 0,
-    priceLabel: "Included",
-  },
-  {
-    id: "security" as const,
-    title: "Security Hanging Hardware",
-    description: "Tamper-resistant hardware for high-security environments",
-    price: 8.95,
-    priceLabel: "+$8.95",
-  },
-];
 
 interface PuzzleLifestylePhoto {
   url: string;
@@ -792,13 +770,6 @@ export function PuzzleFrameDesigner({
     });
   };
 
-  // Handle share - copy link to clipboard
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // @ts-expect-error - Unused function kept for potential future use
-  const _handleShare = () => {
-    handleCopyLink();
-  };
-
   const handleAddToCart = async () => {
     if (!selectedPuzzleSize || !pricing) return;
 
@@ -820,19 +791,6 @@ export function PuzzleFrameDesigner({
       setIsCheckingOut(false);
     }
   };
-
-  // Get puzzle sizes by category
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // @ts-expect-error - Unused variable kept for potential future use
-  const _sizesByCategory = getPuzzleSizesByCategory();
-
-  // Frame dimensions for display (uses actual totalFrameWidth/Height with reveal)
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // @ts-expect-error - Unused variable kept for potential future use
-  const _frameDimensions = useMemo(() => {
-    if (!selectedPuzzleSize) return null;
-    return { width: totalFrameWidth, height: totalFrameHeight };
-  }, [selectedPuzzleSize, totalFrameWidth, totalFrameHeight]);
 
   return (
     <div className="min-h-screen bg-background">
@@ -1677,9 +1635,6 @@ function PuzzlePreview({
   // Mat border creates padding around puzzle - use asymmetric borders for Type B nameplate behavior
   const matBorderPx = matBorder * INCHES_TO_PX * scale;
   const bottomMatBorderPx = matBottomBorder * INCHES_TO_PX * scale;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // @ts-expect-error - Unused variable kept for potential future use
-  const _matRevealPx = matReveal * INCHES_TO_PX * scale;
 
   // Calculate brass nameplate positioning
   const plaquePositioning = (() => {

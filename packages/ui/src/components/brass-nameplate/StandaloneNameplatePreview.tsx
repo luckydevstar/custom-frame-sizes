@@ -4,7 +4,6 @@ import {
   STANDALONE_NAMEPLATE_SPECS,
   FONT_OPTIONS,
   COLOR_OPTIONS,
-  calculateUsableSpace,
 } from "./StandaloneNameplateTypes";
 
 interface StandaloneNameplatePreviewProps {
@@ -28,9 +27,6 @@ export function StandaloneNameplatePreview({
   const displayWidth = pxWidth * scale;
   const displayHeight = pxHeight * scale;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // @ts-expect-error - Unused variable kept for potential future use
-  const _usableSpace = calculateUsableSpace(config.width, config.height);
   const borderInset = STANDALONE_NAMEPLATE_SPECS.BORDER_INSET * DPI;
 
   const colorOption = COLOR_OPTIONS.find((c) => c.id === config.color) || COLOR_OPTIONS[0];

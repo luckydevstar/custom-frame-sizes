@@ -28,7 +28,6 @@ import {
   MAGAZINE_LAYOUTS,
   getMagazineLayout,
   calculateMagazineFrameSize,
-  calculateMagazinePreviewDimensions,
   getAvailableLayoutsForSize,
   type MagazineLayoutType,
 } from "@framecraft/core";
@@ -280,27 +279,6 @@ export function MagazineFrameDesigner({
       }
     }
   }, [selectedSize, availableLayouts, selectedLayout, toast]);
-
-  // Calculate preview dimensions using dynamic layout calculation (reserved for overlay/dimensions UI)
-  const _previewFrameDimensions = useMemo(() => {
-    // Return default dimensions if no layout selected yet
-    if (!selectedLayout) {
-      return {
-        width: 16,
-        height: 20,
-      };
-    }
-
-    const dimensions = calculateMagazinePreviewDimensions(
-      selectedLayout,
-      selectedSize,
-      MAT_BORDER,
-      brassNameplateConfig.enabled
-    );
-
-    return dimensions;
-  }, [selectedLayout, selectedSize, brassNameplateConfig.enabled]);
-  void _previewFrameDimensions;
 
   // Calculate manufacturing dimensions using exact interior dimension lookup table
   // This provides accurate dimensions for pricing and "Overall Size" display text
@@ -608,89 +586,6 @@ export function MagazineFrameDesigner({
       description: `${quantity}× Magazine Frame - ${currentLayout?.displayName || "Custom"}`,
     });
   }, [quantity, selectedLayout, toast]);
-
-  // Apply preset configuration (reserved for future use)
-  const _applyPreset = (presetName: "signature" | "vault") => {
-    if (presetName === "signature") {
-      // Signature Wall Display preset
-      setSelectedSize("standard-8x105");
-      // Mobile: reset layout to force selection; Desktop: set it directly
-      if (isMobile) {
-        setSelectedLayout("");
-      } else {
-        setSelectedLayout("single");
-      }
-      // Find black frame
-      const blackFrame = shadowboxFrames.find((f) => f.name.toLowerCase().includes("black"));
-      if (blackFrame) setSelectedFrame(blackFrame);
-      setMatType("single");
-      // White top mat
-      const whiteMat = getMatById("mat-1"); // White
-      if (whiteMat) setSelectedMat(whiteMat);
-      // Metallic gold bottom mat
-      const goldMat = getMatById("mat-11"); // Metallic Gold (premium)
-      if (goldMat) setSelectedMatInner(goldMat);
-      // Standard glass
-      const uvGlass = glassTypes.find((g) => g.id === "standard");
-      if (uvGlass) setSelectedGlass(uvGlass);
-      // Enable brass plaque
-      setBrassNameplateConfig({
-        enabled: true,
-        line1: "",
-        line2: "",
-        line3: "",
-        font: "georgia",
-        color: "brass-black",
-        includeFlag: false,
-      });
-      setHardware("standard");
-      setSmartDefaultApplied(null); // Clear smart default banner
-      toast({
-        title: "Applied Signature Wall Display",
-        description: isMobile
-          ? "Preset applied. Now choose your layout."
-          : "Premium configuration for showcase display",
-      });
-    } else if (presetName === "vault") {
-      // Vault Preservation preset
-      setSelectedSize("standard-letter");
-      // Mobile: reset layout to force selection; Desktop: set it directly
-      if (isMobile) {
-        setSelectedLayout("");
-      } else {
-        setSelectedLayout("single");
-      }
-      // Find black frame
-      const blackFrame = shadowboxFrames.find((f) => f.name.toLowerCase().includes("black"));
-      if (blackFrame) setSelectedFrame(blackFrame);
-      setMatType("single");
-      // Black mat
-      const blackMat = getMatById("mat-3"); // Black
-      if (blackMat) setSelectedMat(blackMat);
-      // Non-glare glass
-      const museumGlass = glassTypes.find((g) => g.id === "non-glare");
-      if (museumGlass) setSelectedGlass(museumGlass);
-      // Disable brass plaque
-      setBrassNameplateConfig({
-        enabled: false,
-        line1: "",
-        line2: "",
-        line3: "",
-        font: "georgia",
-        color: "brass-black",
-        includeFlag: false,
-      });
-      setHardware("standard");
-      setSmartDefaultApplied(null); // Clear smart default banner
-      toast({
-        title: "Applied Vault Preservation",
-        description: isMobile
-          ? "Preset applied. Now choose your layout."
-          : "Professional-grade protection for your collection",
-      });
-    }
-  };
-  void _applyPreset;
 
   // Scroll detection for desktop price box expansion - expands when scrolling down page
   useEffect(() => {

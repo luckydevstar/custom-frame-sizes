@@ -348,16 +348,6 @@ export function PlaybillFrameDesigner({
   const designerSectionRef = useRef<HTMLDivElement>(null);
   const hardwareSectionRef = useRef<HTMLDivElement>(null);
 
-  // Scroll to designer function
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // @ts-expect-error - Unused function kept for potential future use
-  const _scrollToDesigner = useCallback(() => {
-    designerSectionRef.current?.scrollIntoView({
-      behavior: "smooth",
-      block: "start",
-    });
-  }, []);
-
   // Load frame photos
   useEffect(() => {
     async function fetchFramePhotos() {

@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
+import nextDynamic from "next/dynamic";
 import { Suspense } from "react";
 import { Sparkles, Box, Palette, Layers, Shield } from "lucide-react";
-import { ShadowboxDesigner } from "@framecraft/ui";
 import { ScrollToDesignerButton } from "./scroll-button";
+
+const ShadowboxDesigner = nextDynamic(
+  () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
+  { ssr: false }
+);
+
+// Avoid static prerender: designer deps reference `self` at module load
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Custom Shadowbox Frames | Memorabilia & 3D Display | CustomFrameSizes.com",

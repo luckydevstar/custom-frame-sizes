@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { NewspaperFramesContent } from "./newspaper-frames-content";
 
 const baseUrl = "https://customframesizes.com";
@@ -67,6 +68,14 @@ export const metadata: Metadata = {
   alternates: { canonical: pageUrl },
 };
 
+function NewspaperFallback() {
+  return (
+    <div className="min-h-[400px] flex items-center justify-center bg-muted/20">
+      <div className="animate-spin rounded-full h-10 w-10 border-2 border-primary border-t-transparent" />
+    </div>
+  );
+}
+
 export default function NewspaperFramesPage() {
   return (
     <>
@@ -74,7 +83,9 @@ export default function NewspaperFramesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <NewspaperFramesContent />
+      <Suspense fallback={<NewspaperFallback />}>
+        <NewspaperFramesContent />
+      </Suspense>
     </>
   );
 }

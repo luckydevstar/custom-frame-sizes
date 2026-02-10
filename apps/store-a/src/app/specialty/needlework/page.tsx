@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { NeedleworkFramesContent } from "./needlework-frames-content";
 
 const baseUrl = "https://customframesizes.com";
@@ -97,7 +98,15 @@ export default function NeedleworkFramesPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <NeedleworkFramesContent />
+      <Suspense
+        fallback={
+          <div className="min-h-[400px] flex items-center justify-center bg-muted/20">
+            <div className="animate-spin rounded-full h-10 w-10 border-2 border-primary border-t-transparent" />
+          </div>
+        }
+      >
+        <NeedleworkFramesContent />
+      </Suspense>
     </>
   );
 }

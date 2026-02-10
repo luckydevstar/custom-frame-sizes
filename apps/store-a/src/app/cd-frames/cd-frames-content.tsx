@@ -259,7 +259,7 @@ export function CdFramesContent() {
 
               <div className="my-8 rounded-lg overflow-hidden relative aspect-[4/3] w-full">
                 <Image
-                  src={breakupPhotos[0]}
+                  src={breakupPhotos[0]!}
                   alt="Framed CD album with jewel case and disc mounted on living room wall near music collection"
                   fill
                   className="object-cover"
@@ -322,7 +322,7 @@ export function CdFramesContent() {
 
               <div className="my-8 rounded-lg overflow-hidden relative aspect-[4/3] w-full">
                 <Image
-                  src={breakupPhotos[1]}
+                  src={breakupPhotos[1]!}
                   alt="Close-up of custom CD frame showing archival mat board and framer's grade acrylic glazing"
                   fill
                   className="object-cover"
@@ -387,7 +387,7 @@ export function CdFramesContent() {
 
               <div className="my-8 rounded-lg overflow-hidden relative aspect-[4/3] w-full">
                 <Image
-                  src={breakupPhotos[2]}
+                  src={breakupPhotos[2]!}
                   alt="Multiple CD frames arranged on music room wall showing artist collection display"
                   fill
                   className="object-cover"
@@ -424,7 +424,7 @@ export function CdFramesContent() {
 
               <div className="my-8 rounded-lg overflow-hidden relative aspect-[4/3] w-full">
                 <Image
-                  src={breakupPhotos[3]}
+                  src={breakupPhotos[3]!}
                   alt="CD frame with shadowbox depth displaying both jewel case artwork and disc in home office"
                   fill
                   className="object-cover"

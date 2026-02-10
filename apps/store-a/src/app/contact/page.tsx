@@ -16,8 +16,9 @@ export const metadata: Metadata = {
 };
 
 export default function ContactPage() {
-  const contactEmail = brandConfig.metadata?.contactEmail ?? "hello@customframesizes.com";
-  const contactPhone = brandConfig.metadata?.contactPhone ?? "1 (888) 874-7156";
+  const contactEmail = (brandConfig.metadata?.contactEmail ??
+    "hello@customframesizes.com") as string;
+  const contactPhone = (brandConfig.metadata?.contactPhone ?? "1 (888) 874-7156") as string;
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">

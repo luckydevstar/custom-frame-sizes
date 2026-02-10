@@ -148,9 +148,19 @@ export function RelatedProducts({
   title = "Related Products",
   columns = 3,
 }: RelatedProductsProps) {
-  const products = productKeys
-    .map((key) => ({ ...PRODUCT_CATALOG[key], key }))
-    .filter((p) => p.href);
+  const products: (RelatedProduct & { key: string })[] = productKeys
+    .filter((key): key is keyof typeof PRODUCT_CATALOG => key in PRODUCT_CATALOG)
+    .map((key) => {
+      const catalogEntry = PRODUCT_CATALOG[key]!;
+      return {
+        href: catalogEntry.href,
+        icon: catalogEntry.icon,
+        title: catalogEntry.title,
+        subtitle: catalogEntry.subtitle,
+        testId: catalogEntry.testId,
+        key,
+      };
+    });
 
   if (products.length === 0) return null;
 
@@ -166,25 +176,28 @@ export function RelatedProducts({
       <div className="container mx-auto px-4">
         <h2 className="text-2xl font-bold text-center mb-8">{title}</h2>
         <div className={`grid grid-cols-1 ${gridCols} gap-4 max-w-5xl mx-auto`}>
-          {products.map((product) => (
-            <Link key={product.key} href={product.href}>
-              <Card
-                className="p-5 hover:shadow-md transition-shadow cursor-pointer h-full"
-                data-testid={product.testId ?? `related-${product.key}`}
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <product.icon className="w-6 h-6 text-primary" />
+          {products.map((product) => {
+            const Icon = product.icon;
+            return (
+              <Link key={product.key} href={product.href}>
+                <Card
+                  className="p-5 hover:shadow-md transition-shadow cursor-pointer h-full"
+                  data-testid={product.testId ?? `related-${product.key}`}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <Icon className="w-6 h-6 text-primary" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="font-semibold text-sm leading-tight">{product.title}</div>
+                      <div className="text-xs text-muted-foreground mt-0.5">{product.subtitle}</div>
+                    </div>
+                    <ArrowRight className="w-4 h-4 text-muted-foreground flex-shrink-0" />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <div className="font-semibold text-sm leading-tight">{product.title}</div>
-                    <div className="text-xs text-muted-foreground mt-0.5">{product.subtitle}</div>
-                  </div>
-                  <ArrowRight className="w-4 h-4 text-muted-foreground flex-shrink-0" />
-                </div>
-              </Card>
-            </Link>
-          ))}
+                </Card>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>
