@@ -19,18 +19,19 @@ export function QuantitySelector({
   disabled = false,
   testId,
 }: QuantitySelectorProps) {
-  const [isCustom, setIsCustom] = useState(value >= 10);
-  const [customValue, setCustomValue] = useState(value >= 10 ? value.toString() : "");
+  const numValue = typeof value === "number" && !Number.isNaN(value) ? Math.max(1, value) : 1;
+  const [isCustom, setIsCustom] = useState(numValue >= 10);
+  const [customValue, setCustomValue] = useState(numValue >= 10 ? String(numValue) : "");
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    if (value < 10) {
+    if (numValue < 10) {
       setIsCustom(false);
     } else {
       setIsCustom(true);
-      setCustomValue(value.toString());
+      setCustomValue(String(numValue));
     }
-  }, [value]);
+  }, [numValue]);
 
   // Auto-select text when switching to custom input mode
   useEffect(() => {
@@ -102,7 +103,7 @@ export function QuantitySelector({
   }
 
   return (
-    <Select value={value.toString()} onValueChange={handleSelectChange} disabled={disabled}>
+    <Select value={String(numValue)} onValueChange={handleSelectChange} disabled={disabled}>
       <SelectTrigger className={className} data-testid={testId}>
         <SelectValue />
       </SelectTrigger>

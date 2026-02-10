@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Ticket, Shield, Grid3x3, Camera, Music, LayoutGrid } from "lucide-react";
-import { ComingSoonDesigner } from "@framecraft/ui";
+import { TicketStubFrameDesigner } from "@framecraft/ui";
 import { ScrollToDesignerButton } from "./scroll-button";
 
 export const metadata: Metadata = {
@@ -170,14 +170,10 @@ export default function TicketFramesPage() {
           </div>
         </section>
 
-        {/* Designer Section */}
+        {/* Designer */}
         <section className="container mx-auto px-4 pb-8 md:pb-12">
           <div id="design-tool" className="scroll-mt-20" data-testid="designer-section">
-            <ComingSoonDesigner
-              title="Ticket frame designer coming soon"
-              description="Use our main frame designer to choose your size and options. We'll add a dedicated ticket stub designer with 6 layouts soon."
-              buttonLabel="Design your frame"
-            />
+            <TicketStubFrameDesigner embedded />
           </div>
         </section>
 

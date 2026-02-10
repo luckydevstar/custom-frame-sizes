@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Heart, Shield, Award, Frame, Sparkles, Gift, Calendar, Users, Camera } from "lucide-react";
-import { Card, ComingSoonDesigner } from "@framecraft/ui";
+import { Card, WeddingInvitationFrameDesigner } from "@framecraft/ui";
 import { RelatedProducts } from "@/components/RelatedProducts";
 import { ScrollToDesignerButton } from "./scroll-button";
 
@@ -172,14 +172,9 @@ export default function WeddingInvitationFramesPage() {
           </div>
         </section>
 
-        {/* Designer Section */}
         <section id="design-tool" className="py-8 lg:py-12 scroll-mt-20">
           <div className="container mx-auto px-4">
-            <ComingSoonDesigner
-              title="Wedding invitation designer coming soon"
-              description="Use our main frame designer to choose your size and mat options. We'll add a dedicated wedding invitation designer with invite + photo layouts soon."
-              buttonLabel="Design your frame"
-            />
+            <WeddingInvitationFrameDesigner embedded />
           </div>
         </section>
 

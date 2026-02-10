@@ -1,9 +1,52 @@
 import type { Metadata } from "next";
 import { Heart } from "lucide-react";
-import { Card, ComingSoonDesigner, Separator } from "@framecraft/ui";
+import { Card, SignatureFrameDesigner, Separator, TrustBox } from "@framecraft/ui";
+import { getSharedAssetUrl } from "@framecraft/core";
 import { RelatedProducts } from "@/components/RelatedProducts";
 import { ScrollToDesignerButton } from "./scroll-button";
+import { SignatureLifestyleSection } from "./SignatureLifestyleSection";
 import { brandConfig } from "../../brand.config";
+import type { GalleryImage } from "@framecraft/ui";
+
+const SIGNATURE_LIFESTYLE_PATHS: Array<{ path: string; alt: string }> = [
+  {
+    path: "signature-frames/lifestyle/Signature_Frame_Lifestyle (1)_1763780813534.jpeg",
+    alt: "Wedding signature frame at real wedding",
+  },
+  {
+    path: "signature-frames/lifestyle/Signature_Frame_Lifestyle (2)_1763780813534.jpeg",
+    alt: "Guest signing wedding frame",
+  },
+  {
+    path: "signature-frames/lifestyle/Signature_Frame_Lifestyle (3)_1763780813535.jpeg",
+    alt: "Wedding frame with signatures",
+  },
+  {
+    path: "signature-frames/lifestyle/Signature_Frame_Lifestyle (4)_1763780813535.jpeg",
+    alt: "Signature frame display",
+  },
+  {
+    path: "signature-frames/lifestyle/Signature_Frame_Lifestyle (5)_1763780813536.jpeg",
+    alt: "Wedding guest book alternative frame",
+  },
+  {
+    path: "signature-frames/lifestyle/Signature_Frame_Lifestyle (6)_1763780813536.jpeg",
+    alt: "Couple with signature frame",
+  },
+  {
+    path: "signature-frames/lifestyle/Signature_Frame_Lifestyle (7)_1763780813537.jpeg",
+    alt: "Reception signature frame",
+  },
+  {
+    path: "signature-frames/lifestyle/Signature_Frame_Lifestyle (8)_1763780813537.jpeg",
+    alt: "Wedding frames in real weddings",
+  },
+];
+const signatureLifestyleImages: GalleryImage[] = SIGNATURE_LIFESTYLE_PATHS.map(({ path, alt }) => ({
+  url: getSharedAssetUrl(path),
+  alt,
+  type: "lifestyle",
+}));
 
 export const metadata: Metadata = {
   title: "Wedding Frame for Guest Signatures - Replace Your Guest Book | Custom Frame Sizes",
@@ -165,33 +208,17 @@ export default function SignatureFramesPage() {
         </section>
 
         {/* Designer */}
-        <section id="design-tool" className="py-6 md:py-8 scroll-mt-20">
+        <section
+          id="design-tool"
+          className="py-6 md:py-8 scroll-mt-20"
+          data-testid="designer-section"
+        >
           <div className="container mx-auto px-4">
-            <ComingSoonDesigner
-              title="Signature frame designer coming soon"
-              description="Use our main frame designer to choose your size and mat. We'll add a dedicated wedding signature frame designer with 5×5 and 8×8 openings soon."
-              buttonLabel="Design your wedding frame"
-            />
+            <SignatureFrameDesigner embedded />
           </div>
         </section>
 
-        {/* Lifestyle heading */}
-        <section className="py-12 px-4 border-t">
-          <div className="container mx-auto max-w-7xl text-center mb-8">
-            <h2
-              className="text-2xl md:text-3xl font-bold mb-3"
-              data-testid="text-lifestyle-heading"
-            >
-              Wedding Frames at Real Weddings
-            </h2>
-            <p
-              className="text-sm md:text-base text-muted-foreground max-w-2xl mx-auto"
-              data-testid="text-lifestyle-description"
-            >
-              Real wedding photos showing couples using signature frames instead of guest books
-            </p>
-          </div>
-        </section>
+        <SignatureLifestyleSection images={signatureLifestyleImages} />
 
         {/* Popular Uses */}
         <section className="py-12 px-4 border-t bg-muted/30">
@@ -205,14 +232,16 @@ export default function SignatureFramesPage() {
                 <p className="text-sm text-muted-foreground">
                   Put your engagement photo in the center. Set the frame at your reception entrance
                   or guest book table. Wedding guests sign the white mat border with the included
-                  colored pens.
+                  colored pens. Collect signatures and messages from everyone who celebrates with
+                  you.
                 </p>
               </Card>
               <Card className="p-6 space-y-3">
                 <h3 className="font-semibold text-lg">Display in Your Home</h3>
                 <p className="text-sm text-muted-foreground">
                   After your wedding, the signed mat goes back in the frame. Hang your wedding
-                  signature frame in your bedroom, hallway, or living room.
+                  signature frame in your bedroom, hallway, or living room. See your wedding
+                  guests&apos; names and messages every day. A lasting reminder of your special day.
                 </p>
               </Card>
               <Card className="p-6 space-y-3">
@@ -220,13 +249,15 @@ export default function SignatureFramesPage() {
                 <p className="text-sm text-muted-foreground">
                   Use the same signature frame concept for graduation parties. Display your
                   graduation photo. Collect signatures from classmates, teachers, and family.
+                  Messages of congratulations and encouragement for your next chapter.
                 </p>
               </Card>
               <Card className="p-6 space-y-3">
                 <h3 className="font-semibold text-lg">Baby Showers &amp; Birthdays</h3>
                 <p className="text-sm text-muted-foreground">
                   Signature frames work for any celebration. Baby showers, milestone birthdays,
-                  retirement parties, anniversaries. Collect advice, wishes, and memories.
+                  retirement parties, anniversaries. Collect advice, wishes, and memories. A
+                  personalized keepsake from your event.
                 </p>
               </Card>
             </div>
@@ -295,6 +326,13 @@ export default function SignatureFramesPage() {
           ]}
           columns={4}
         />
+
+        {/* Trust section — matches original order (after RelatedProducts) */}
+        <section className="py-12 px-4 border-t">
+          <div className="container mx-auto max-w-5xl">
+            <TrustBox />
+          </div>
+        </section>
       </div>
     </>
   );

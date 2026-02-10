@@ -36,6 +36,19 @@ Migrate from placeholder (ComingSoonPlaceholder) to full pages with designer, he
 
 **Process per page:** Follow [PAGE_MIGRATION_PROCESS.md](./PAGE_MIGRATION_PROCESS.md): scan original → migrate to `apps/store-a/src/app/<route>/page.tsx` (and optional `*-content.tsx`) → metadata, dynamic designer import, scroll-to-designer, JSON-LD, `getSharedAssetUrl` for images.
 
+### Specialty pages with placeholder designers
+
+These pages have **full content and section structure** from the original repo (hero, benefit bar, features, lifestyle, FAQ, related products, etc.) but use **ComingSoonDesigner** until the real designer components are migrated from `CustomFrameSizes-CODE`:
+
+| Page                      | Route                        | Original designer to migrate     | Notes                                              |
+| ------------------------- | ---------------------------- | -------------------------------- | -------------------------------------------------- |
+| Signature Frames          | `/signature-frames`          | `SignatureFrameDesigner`         | 5×5 / 8×8 openings, mat, frame, brass nameplate.   |
+| Sonogram Frames           | `/sonogram-frames`           | `SonogramFrameDesigner`          | Preset sizes, pen tool, multi-image layouts.       |
+| Ticket Frames             | `/ticket-frames`             | `TicketStubFrameDesigner`        | 6 layouts, 2×5 tickets, poster combos.             |
+| Wedding Invitation Frames | `/wedding-invitation-frames` | `WeddingInvitationFrameDesigner` | Invite sizes, dual opening, double mat, nameplate. |
+
+Each designer in the CODE repo is 1000–1700+ lines and depends on pricing, products, palette, layout libs, and (for Signature) print compositor. Migrating them requires porting those dependencies into the monorepo or adapting to `@framecraft/core` equivalents.
+
 ---
 
 ## Phase 2: Browse-by pages (size, style)

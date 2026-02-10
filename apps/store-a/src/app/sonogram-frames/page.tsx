@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Baby, Heart, Shield, Sparkles, Check, Frame, PenTool } from "lucide-react";
-import { Card, ComingSoonDesigner } from "@framecraft/ui";
+import { Card, SonogramFrameDesigner } from "@framecraft/ui";
 import { ScrollToDesignerButton } from "./scroll-button";
 
 export const metadata: Metadata = {
@@ -136,16 +136,13 @@ export default function SonogramFramesPage() {
           </div>
         </section>
 
-        {/* Designer Section */}
+        {/* Designer */}
         <section
           id="designer"
           className="container mx-auto px-4 py-12 md:py-16 border-t scroll-mt-20"
+          data-testid="designer-section"
         >
-          <ComingSoonDesigner
-            title="Sonogram frame designer coming soon"
-            description="Use our main frame designer to choose your size and options. We'll add a dedicated sonogram designer with handwritten text and multi-image layouts soon."
-            buttonLabel="Design your frame"
-          />
+          <SonogramFrameDesigner embedded />
         </section>
 
         {/* Why Choose Our Sonogram Frames */}
@@ -180,10 +177,10 @@ export default function SonogramFramesPage() {
                     <Heart className="w-6 h-6 text-primary" aria-hidden />
                   </div>
                   <div>
-                    <h3 className="font-semibold mb-2">Keepsake Quality</h3>
+                    <h3 className="font-semibold mb-2">Multi-Image Layouts</h3>
                     <p className="text-sm text-muted-foreground">
-                      Preserve your baby&apos;s first photo with archival matting and framer&apos;s
-                      grade acrylic
+                      Display 1, 2, or 3 ultrasound images side by side to show your pregnancy
+                      journey
                     </p>
                   </div>
                 </div>

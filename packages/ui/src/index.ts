@@ -288,18 +288,18 @@ export { Hero, type HeroProps, type HeroConfig } from "./components/layout/Hero"
 // Seo component not exported - use Next.js metadata API instead
 // export { Seo, type SeoProps, type BrandConfig } from "./components/layout/Seo";
 
-// Shared components
+// Shared components (ARViewer from direct path to avoid loading @google/model-viewer in shared barrel during SSR)
 export {
   TermsOfServiceModal,
   ObjectUploader,
   ImageGallery,
   PhotoUploadOptions,
   ImageEditor,
-  ARViewer,
   FrameDetailCarousel,
   FrameCornerSwatch,
   FrameProfileDiagram,
 } from "./components/shared";
+export { ARViewer } from "./components/shared/ARViewer";
 export type { GalleryImage } from "./components/shared";
 
 // Marketing components
@@ -382,6 +382,10 @@ export { NewspaperLifestyleCarousel } from "./components/specialty/NewspaperLife
 export { CollageFrameDesigner } from "./components/specialty/CollageFrameDesigner";
 export { CollagePreviewCanvas } from "./components/specialty/CollagePreviewCanvas";
 export { CollageLayoutGallery } from "./components/specialty/CollageLayoutGallery";
+export { TicketStubFrameDesigner } from "./components/specialty/TicketStubFrameDesigner";
+export { SonogramFrameDesigner } from "./components/specialty/SonogramFrameDesigner";
+export { SignatureFrameDesigner } from "./components/specialty/SignatureFrameDesigner";
+export { WeddingInvitationFrameDesigner } from "./components/specialty/WeddingInvitationFrameDesigner";
 export { ComingSoonDesigner } from "./components/specialty/ComingSoonDesigner";
 export { DiplomaLifestyleCarousel } from "./components/specialty/DiplomaLifestyleCarousel";
 export { RecordAlbumDesigner } from "./components/specialty/RecordAlbumDesigner";
