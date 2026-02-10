@@ -68,6 +68,48 @@ export function getSharedAssetUrl(path: string): string {
 }
 
 /**
+ * Normalize frame image path to match store-a asset filenames.
+ * Prefixed frames (e.g. 10779) use hyphen in file: 10779_corner-a.jpg not 10779_corner_a.jpg.
+ * Non-prefixed frames (e.g. 8745) use underscore: corner_a.jpg - left unchanged.
+ */
+function normalizeFrameImagePath(path: string): string {
+  return path
+    .replace(/_corner_a(\.[a-z0-9]+)$/i, "_corner-a$1")
+    .replace(/_corner_b(\.[a-z0-9]+)$/i, "_corner-b$1")
+    .replace(/_corner_c(\.[a-z0-9]+)$/i, "_corner-c$1")
+    .replace(/_profile_a(\.[a-z0-9]+)$/i, "_profile-a$1")
+    .replace(/_profile_b(\.[a-z0-9]+)$/i, "_profile-b$1")
+    .replace(/_profile_c(\.[a-z0-9]+)$/i, "_profile-c$1");
+}
+
+/**
+ * Get store-a bucket base URL + path (no "assets/" prefix).
+ * Use for frame images and any store-a bucket path at root (e.g. "frames/8745/corner-a.jpg").
+ * Normalizes frame image filenames to match store-a assets (corner_a → corner-a, profile_a → profile-a).
+ */
+export function getStoreBaseAssetUrl(path: string): string {
+  const cdnUrl = getStoreCdnUrl();
+  if (cdnUrl) {
+    const cleanPath = path.startsWith("/") ? path.slice(1) : path;
+    const normalizedPath =
+      cleanPath.includes("/frames/") &&
+      (cleanPath.includes("corner_") || cleanPath.includes("profile_"))
+        ? normalizeFrameImagePath(cleanPath)
+        : cleanPath;
+    return `${normalizeCdnUrl(cdnUrl)}/${normalizedPath}`;
+  }
+  const localPath = path.startsWith("/") ? path : `/${path}`;
+  if (
+    localPath.includes("/frames/") &&
+    (localPath.includes("corner_") || localPath.includes("profile_"))
+  ) {
+    const normalized = normalizeFrameImagePath(localPath.slice(1));
+    return normalized.startsWith("/") ? normalized : `/${normalized}`;
+  }
+  return localPath;
+}
+
+/**
  * Get CDN URL for a store-a asset (assets/ directory)
  *
  * @param path - Relative path from assets directory (e.g., "brand/logo.png" or "plywood-texture.png")
@@ -93,7 +135,24 @@ export function getStoreAssetUrl(path: string): string {
 }
 
 /**
- * Get CDN URL for a frame image
+ * Map frame image type to store-a filename (assets use corner-a.jpg, profile-a.jpg, etc.).
+ */
+const FRAME_IMAGE_FILENAMES: Record<
+  "corner" | "top" | "bottom" | "left" | "right" | "profile" | "lifestyle",
+  string
+> = {
+  corner: "corner-a.jpg",
+  profile: "profile-a.jpg",
+  top: "top.jpg",
+  bottom: "bottom.jpg",
+  left: "left.jpg",
+  right: "right.jpg",
+  lifestyle: "lifestyle_1.jpg",
+};
+
+/**
+ * Get CDN URL for a frame image (uses store-a bucket).
+ * Uses store-a filename convention: corner-a.jpg, profile-a.jpg, top.jpg, etc.
  *
  * @param sku - Frame SKU
  * @param imageType - Type of frame image (corner, top, bottom, left, right, profile, lifestyle)
@@ -103,7 +162,8 @@ export function getFrameImageUrl(
   sku: string,
   imageType: "corner" | "top" | "bottom" | "left" | "right" | "profile" | "lifestyle"
 ): string {
-  return getSharedAssetUrl(`frames/${sku}/${imageType}.jpg`);
+  const filename = FRAME_IMAGE_FILENAMES[imageType];
+  return getStoreBaseAssetUrl(`frames/${sku}/${filename}`);
 }
 
 /**

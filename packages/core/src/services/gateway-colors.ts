@@ -6,7 +6,7 @@
  */
 
 import { getFrameStyles } from "./products";
-import { getSharedAssetUrl } from "../utils/asset-urls";
+import { getStoreBaseAssetUrl } from "../utils/asset-urls";
 import type { FrameStyle } from "@framecraft/types";
 
 /**
@@ -127,7 +127,7 @@ export function getColorLifestyleImages(colorName: string): Array<{
       // Convert local path to CDN URL
       const localPath = img.url.startsWith("/") ? img.url.slice(1) : img.url;
       lifestyleImages.push({
-        url: getSharedAssetUrl(localPath),
+        url: getStoreBaseAssetUrl(localPath),
         alt: img.alt,
       });
     });
@@ -168,17 +168,17 @@ export function getColorHubImage(colorName: string): string {
     const first = lifestyleImages[0];
     if (first) {
       const localPath = first.url.startsWith("/") ? first.url.slice(1) : first.url;
-      return getSharedAssetUrl(localPath);
+      return getStoreBaseAssetUrl(localPath);
     }
     if (topFrame.thumbnail) {
       const localPath = topFrame.thumbnail.startsWith("/")
         ? topFrame.thumbnail.slice(1)
         : topFrame.thumbnail;
-      return getSharedAssetUrl(localPath);
+      return getStoreBaseAssetUrl(localPath);
     }
   }
 
-  return getSharedAssetUrl("frames/8446/lifestyle_1.jpg");
+  return getStoreBaseAssetUrl("frames/8446/lifestyle_1.jpg");
 }
 
 /**

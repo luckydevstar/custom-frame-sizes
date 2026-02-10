@@ -10,7 +10,7 @@ import {
   getColorHeroImage,
   getColorGalleryImages,
   getFramesByColor,
-  getSharedAssetUrl,
+  getStoreBaseAssetUrl,
 } from "@framecraft/core";
 import { brandConfig } from "../../../../brand.config";
 import type { FrameStyle } from "@framecraft/types";
@@ -19,13 +19,13 @@ interface ColorDetailPageProps {
   params: { slug: string };
 }
 
-// Helper to get corner image for a frame
+// Helper to get corner image for a frame (store-a CDN)
 function getCornerImage(frame: FrameStyle) {
   const cornerImage = frame.alternateImages?.find((img) => img.type === "corner");
   if (cornerImage) {
     const localPath = cornerImage.url.startsWith("/") ? cornerImage.url.slice(1) : cornerImage.url;
     return {
-      url: getSharedAssetUrl(localPath),
+      url: getStoreBaseAssetUrl(localPath),
       alt: cornerImage.alt,
     };
   }
@@ -33,7 +33,7 @@ function getCornerImage(frame: FrameStyle) {
     ? (frame?.thumbnail ?? "").slice(1)
     : frame.thumbnail;
   return {
-    url: getSharedAssetUrl(localPath ?? ""),
+    url: getStoreBaseAssetUrl(localPath ?? ""),
     alt: `${frame.name} Frame corner detail`,
   };
 }

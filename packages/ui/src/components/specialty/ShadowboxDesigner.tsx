@@ -59,7 +59,7 @@ import {
   getMatTilingStyle,
   getMatBevelColor,
   getStoreAssetUrl,
-  getSharedAssetUrl,
+  getStoreBaseAssetUrl,
 } from "@framecraft/core";
 import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
@@ -1546,7 +1546,7 @@ export function ShadowboxDesigner({
                         {frame.thumbnail ? (
                           <div className="h-12 w-full rounded mb-2 overflow-hidden">
                             <img
-                              src={getSharedAssetUrl(
+                              src={getStoreBaseAssetUrl(
                                 frame.thumbnail.startsWith("/")
                                   ? frame.thumbnail.slice(1)
                                   : frame.thumbnail

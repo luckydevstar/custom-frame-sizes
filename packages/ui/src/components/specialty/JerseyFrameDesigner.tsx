@@ -19,7 +19,7 @@ import type { FrameStyle, FrameConfiguration, AlternateImage } from "@framecraft
 import { getFrameStyleById, calculatePricing } from "@framecraft/core";
 
 // Import utilities from @framecraft/core
-import { computePreviewLayout, getSharedAssetUrl } from "@framecraft/core";
+import { computePreviewLayout, getStoreBaseAssetUrl } from "@framecraft/core";
 
 // Import hooks from @framecraft/core
 import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
@@ -1084,7 +1084,7 @@ export function JerseyFrameDesigner({
                           );
                           const localPath = cornerImage?.url || frame.thumbnail;
                           const swatchImage = localPath
-                            ? getSharedAssetUrl(
+                            ? getStoreBaseAssetUrl(
                                 localPath.startsWith("/") ? localPath.slice(1) : localPath
                               )
                             : "";

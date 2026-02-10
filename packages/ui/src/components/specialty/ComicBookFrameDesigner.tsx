@@ -35,7 +35,7 @@ import type { PriceLineItem } from "../ui/PriceBox";
 import type { FrameStyle, GlassType, AlternateImage } from "@framecraft/types";
 
 // Import services from @framecraft/core
-import { getFramesByCategory, getGlassTypes, getSharedAssetUrl } from "@framecraft/core";
+import { getFramesByCategory, getGlassTypes, getStoreBaseAssetUrl } from "@framecraft/core";
 
 // Import hooks from @framecraft/core
 import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
@@ -1333,7 +1333,7 @@ export function ComicBookFrameDesigner({
                               {frame.thumbnail ? (
                                 <div className="h-12 w-full rounded mb-2 overflow-hidden">
                                   <img
-                                    src={getSharedAssetUrl(
+                                    src={getStoreBaseAssetUrl(
                                       frame.thumbnail.startsWith("/")
                                         ? frame.thumbnail.slice(1)
                                         : frame.thumbnail

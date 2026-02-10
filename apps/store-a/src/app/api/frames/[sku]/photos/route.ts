@@ -1,14 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getFrameStyles, getFrameImageUrl, getSharedAssetUrl } from "@framecraft/core";
+import { getFrameStyles, getFrameImageUrl, getStoreBaseAssetUrl } from "@framecraft/core";
 
 /**
  * GET /api/frames/[sku]/photos
  * Returns frame photo URLs for a given SKU
  *
- * Uses CDN URLs (Cloudflare R2) for all frame images
+ * Uses store-a CDN URLs for all frame images
  *
  * Randomly selects from actual lifestyle images available in frames.json
- * Converts local paths to CDN URLs using getSharedAssetUrl()
+ * Converts local paths to CDN URLs using getStoreBaseAssetUrl()
  *
  * Returns:
  * {
@@ -60,7 +60,7 @@ export async function GET(_request: NextRequest, { params }: { params: { sku: st
         const localPath = selectedImage.url.startsWith("/")
           ? selectedImage.url.slice(1)
           : selectedImage.url;
-        return getSharedAssetUrl(localPath);
+        return getStoreBaseAssetUrl(localPath);
       }
 
       return undefined;
@@ -73,13 +73,13 @@ export async function GET(_request: NextRequest, { params }: { params: { sku: st
 
     // For top/bottom/left/right, check frame.photos first, then fallback to alternateImages
     const topUrl = frame.photos?.topUrl
-      ? getSharedAssetUrl(
+      ? getStoreBaseAssetUrl(
           frame.photos.topUrl.startsWith("/") ? frame.photos.topUrl.slice(1) : frame.photos.topUrl
         )
       : getImageByType("top") || getFrameImageUrl(sku, "top");
 
     const bottomUrl = frame.photos?.bottomUrl
-      ? getSharedAssetUrl(
+      ? getStoreBaseAssetUrl(
           frame.photos.bottomUrl.startsWith("/")
             ? frame.photos.bottomUrl.slice(1)
             : frame.photos.bottomUrl
@@ -87,7 +87,7 @@ export async function GET(_request: NextRequest, { params }: { params: { sku: st
       : getImageByType("bottom") || getFrameImageUrl(sku, "bottom");
 
     const leftUrl = frame.photos?.leftUrl
-      ? getSharedAssetUrl(
+      ? getStoreBaseAssetUrl(
           frame.photos.leftUrl.startsWith("/")
             ? frame.photos.leftUrl.slice(1)
             : frame.photos.leftUrl
@@ -95,7 +95,7 @@ export async function GET(_request: NextRequest, { params }: { params: { sku: st
       : getImageByType("left") || getFrameImageUrl(sku, "left");
 
     const rightUrl = frame.photos?.rightUrl
-      ? getSharedAssetUrl(
+      ? getStoreBaseAssetUrl(
           frame.photos.rightUrl.startsWith("/")
             ? frame.photos.rightUrl.slice(1)
             : frame.photos.rightUrl

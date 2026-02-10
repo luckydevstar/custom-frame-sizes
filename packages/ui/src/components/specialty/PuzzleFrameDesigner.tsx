@@ -20,7 +20,12 @@ import type { PriceLineItem } from "../ui/PriceBox";
 import type { FrameStyle, FrameConfiguration, AlternateImage } from "@framecraft/types";
 
 // Import services from @framecraft/core
-import { getFramesByCategory, getGlassTypes, calculatePricing } from "@framecraft/core";
+import {
+  getFramesByCategory,
+  getGlassTypes,
+  calculatePricing,
+  getStoreBaseAssetUrl,
+} from "@framecraft/core";
 
 // Import hooks from @framecraft/core
 import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
@@ -1124,8 +1129,7 @@ export function PuzzleFrameDesigner({
                     <div className="grid grid-cols-2 gap-2">
                       {pictureFrames.map((frame) => {
                         // Use bottom texture image for swatches (horizontal bar view)
-                        // Construct direct URL to bottom image based on frame SKU
-                        const swatchImage = `/frames/${frame.sku}/bottom.jpg`;
+                        const swatchImage = getStoreBaseAssetUrl(`frames/${frame.sku}/bottom.jpg`);
 
                         return (
                           <button

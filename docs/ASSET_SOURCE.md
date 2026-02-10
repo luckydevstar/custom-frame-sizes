@@ -44,6 +44,8 @@ NEXT_PUBLIC_CDN_STORE_A_URL=https://pub-90cb5b0e26db4cc1b1ece8a4852edfc8.r2.dev
 - **Store-A bucket** → `NEXT_PUBLIC_CDN_STORE_A_URL`  
   Paths under `assets/`: e.g. `assets/plywood-texture.png`, `assets/brand/logo-blue.png`.
 
+**R2 key structure:** The code expects object keys **without** a `shared_assets/` or `store-a_assets/` prefix. Upload the _contents_ of each folder so that the shared bucket has keys like `frames/8446/lifestyle_1.jpg`, `mats/swatches/1.jpg`, and the store-a bucket has keys like `assets/plywood-texture.png`, `assets/brand/logo-blue.png`. If you uploaded with a parent folder (e.g. keys are `shared_assets/frames/...`), either re-upload without that prefix or add the prefix to your bucket and use the same path in the app (see [ASSET_PATHS_AND_CDN.md](./ASSET_PATHS_AND_CDN.md)).
+
 After changing `.env.local`, restart the dev server or rebuild so `NEXT_PUBLIC_*` values are picked up.
 
 ---

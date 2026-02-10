@@ -14,6 +14,8 @@
  * 2. The system will automatically use real images from frames.json
  */
 
+import { getStoreBaseAssetUrl } from "../utils/asset-urls";
+
 // ============================================================================
 // PLACEHOLDER CONFIGURATION
 // ============================================================================
@@ -27,25 +29,25 @@ const PLACEHOLDER_COLORS: string[] = [
 ];
 
 /**
- * Generic framing lifestyle images used as placeholders.
+ * Generic framing lifestyle images used as placeholders (paths relative to shared bucket).
  * These are pulled from frames with rich lifestyle collections.
  */
 const PLACEHOLDER_IMAGE_POOL = [
   // From Wide Black (8446) - Gallery walls and modern interiors
-  "/frames/8446/lifestyle_1.jpg",
-  "/frames/8446/lifestyle_2.jpg",
-  "/frames/8446/lifestyle_4.jpg",
-  "/frames/8446/lifestyle_7.jpg",
+  "frames/8446/lifestyle_1.jpg",
+  "frames/8446/lifestyle_2.jpg",
+  "frames/8446/lifestyle_4.jpg",
+  "frames/8446/lifestyle_7.jpg",
 
   // From Slim White (6712) - Clean contemporary styling
-  "/frames/6712/lifestyle_2.jpg",
-  "/frames/6712/lifestyle_5.jpg",
-  "/frames/6712/lifestyle_8.jpg",
+  "frames/6712/lifestyle_2.jpg",
+  "frames/6712/lifestyle_5.jpg",
+  "frames/6712/lifestyle_8.jpg",
 
   // From Slim Brown (6711) - Warm traditional settings
-  "/frames/6711/lifestyle_1.jpg",
-  "/frames/6711/lifestyle_3.jpg",
-  "/frames/6711/lifestyle_4.jpg",
+  "frames/6711/lifestyle_1.jpg",
+  "frames/6711/lifestyle_3.jpg",
+  "frames/6711/lifestyle_4.jpg",
 ];
 
 // ============================================================================
@@ -85,8 +87,8 @@ export function getColorLifestyleImages(
 
   if (isPlaceholder) {
     // Use placeholder images with generic alt text
-    return PLACEHOLDER_IMAGE_POOL.slice(0, 6).map((url) => ({
-      url,
+    return PLACEHOLDER_IMAGE_POOL.slice(0, 6).map((path) => ({
+      url: getStoreBaseAssetUrl(path),
       alt: `Professional custom picture framing showcasing quality craftsmanship and versatile styling options for home and office decor`,
       isPlaceholder: true,
     }));
@@ -102,8 +104,9 @@ export function getColorLifestyleImages(
   colorFrames.forEach((frame) => {
     const frameLifestyle = frame.alternateImages?.filter((img) => img.type === "lifestyle") || [];
     frameLifestyle.forEach((img) => {
+      const path = img.url.startsWith("/") ? img.url.slice(1) : img.url;
       lifestyleImages.push({
-        url: img.url,
+        url: getStoreBaseAssetUrl(path),
         alt: img.alt,
         isPlaceholder: false,
       });
@@ -128,7 +131,7 @@ export function getColorHeroImage(
   const images = getColorLifestyleImages(colorName, frames);
   return (
     images[0] || {
-      url: PLACEHOLDER_IMAGE_POOL[0] || "/frames/8446/lifestyle_1.jpg",
+      url: getStoreBaseAssetUrl(PLACEHOLDER_IMAGE_POOL[0] ?? "frames/8446/lifestyle_1.jpg"),
       alt: "Custom picture frames in professional setting",
       isPlaceholder: true,
     }
@@ -151,7 +154,7 @@ export function getColorFAQSidebarImages(
   // Select diverse images: first, middle, last from collection
   const indices = [0, Math.floor(allImages.length / 2), Math.min(allImages.length - 1, 2)];
   const firstImage = allImages[0] || {
-    url: PLACEHOLDER_IMAGE_POOL[0] || "/frames/8446/lifestyle_1.jpg",
+    url: getStoreBaseAssetUrl(PLACEHOLDER_IMAGE_POOL[0] ?? "frames/8446/lifestyle_1.jpg"),
     alt: "Custom picture frames in professional setting",
     isPlaceholder: true,
   };
@@ -217,13 +220,15 @@ export function getColorHubImage(colorName: string, frames: Frame[]): string {
   const isPlaceholder = PLACEHOLDER_COLORS.map((c) => c.toLowerCase()).includes(normalizedColor);
 
   if (isPlaceholder) {
-    return PLACEHOLDER_IMAGE_POOL[0] ?? "";
+    return getStoreBaseAssetUrl(PLACEHOLDER_IMAGE_POOL[0] ?? "frames/8446/lifestyle_1.jpg");
   }
 
   // Get all frames in this color
   const colorFrames = frames.filter(
     (f) => f.colorName?.toLowerCase() === normalizedColor && f.category === "picture"
   );
+
+  const toUrl = (raw: string) => getStoreBaseAssetUrl(raw.startsWith("/") ? raw.slice(1) : raw);
 
   // First pass: Look for preferred lifestyle image patterns (room settings)
   for (const pattern of PREFERRED_HUB_IMAGE_PATTERNS) {
@@ -232,7 +237,7 @@ export function getColorHubImage(colorName: string, frames: Frame[]): string {
         (img) => img.type === "lifestyle" && img.url.endsWith(pattern)
       );
       if (matchingImage) {
-        return matchingImage.url;
+        return toUrl(matchingImage.url);
       }
     }
   }
@@ -241,12 +246,12 @@ export function getColorHubImage(colorName: string, frames: Frame[]): string {
   for (const frame of colorFrames) {
     const firstLifestyle = frame.alternateImages?.find((img) => img.type === "lifestyle");
     if (firstLifestyle) {
-      return firstLifestyle.url;
+      return toUrl(firstLifestyle.url);
     }
   }
 
   // Final fallback
-  return PLACEHOLDER_IMAGE_POOL[0] || "/frames/8446/lifestyle_1.jpg";
+  return getStoreBaseAssetUrl(PLACEHOLDER_IMAGE_POOL[0] ?? "frames/8446/lifestyle_1.jpg");
 }
 
 // ============================================================================

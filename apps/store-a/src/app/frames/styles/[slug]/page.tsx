@@ -7,7 +7,7 @@ import {
   STYLE_METADATA,
   getFramesForStyle,
   getFrameStyles,
-  getSharedAssetUrl,
+  getStoreBaseAssetUrl,
 } from "@framecraft/core";
 import { brandConfig } from "../../../../brand.config";
 
@@ -67,12 +67,12 @@ export default async function StyleDetailPage({ params }: Props) {
     const cornerImage = frame.alternateImages?.find((img) => img.type === "corner");
     if (cornerImage) {
       const path = cornerImage.url.startsWith("/") ? cornerImage.url.slice(1) : cornerImage.url;
-      return { url: getSharedAssetUrl(path), alt: cornerImage.alt };
+      return { url: getStoreBaseAssetUrl(path), alt: cornerImage.alt };
     }
     const thumb = frame.thumbnail ?? "";
     const path = thumb.startsWith("/") ? thumb.slice(1) : thumb;
     return {
-      url: getSharedAssetUrl(path || "frames/8446/lifestyle_1.jpg"),
+      url: getStoreBaseAssetUrl(path || "frames/8446/lifestyle_1.jpg"),
       alt: `${frame.name} Frame`,
     };
   }

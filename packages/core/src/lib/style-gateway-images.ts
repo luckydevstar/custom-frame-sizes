@@ -8,6 +8,8 @@
  * Usage: import frames from '@framecraft/data/frames.json'
  */
 
+import { getStoreBaseAssetUrl } from "../utils/asset-urls";
+
 // ============================================================================
 // TYPES
 // ============================================================================
@@ -349,14 +351,16 @@ export function getStyleHeroImage(
   if (styleFrames.length > 0 && styleFrames[0]) {
     const firstFrame = styleFrames[0];
     const cornerImg = firstFrame.alternateImages?.find((img) => img.type === "corner");
+    const raw = cornerImg?.url || firstFrame.thumbnail || "frames/8446/lifestyle_1.jpg";
+    const path = raw.startsWith("/") ? raw.slice(1) : raw;
     return {
-      url: cornerImg?.url || firstFrame.thumbnail || "/frames/8446/lifestyle_1.jpg",
+      url: getStoreBaseAssetUrl(path),
       alt: `${styleName} style picture frame`,
     };
   }
 
   return {
-    url: "/frames/8446/lifestyle_1.jpg",
+    url: getStoreBaseAssetUrl("frames/8446/lifestyle_1.jpg"),
     alt: "Custom picture frames in professional setting",
   };
 }
@@ -365,20 +369,20 @@ export function getStyleHeroImage(
  * Get a representative hub image for the style.
  */
 export function getStyleHubImage(styleName: string, frames: Frame[]): string {
-  // Curated hub images per style for best visual representation
+  // Curated hub images per style for best visual representation (paths relative to shared bucket)
   const hubImages: Record<string, string> = {
-    Modern: "/frames/6711/lifestyle_10.png",
-    Rustic: "/frames/10570/lifestyle_10.png",
-    Classic: "/frames/8446/lifestyle_1.jpg",
-    Gallery: "/frames/6301/lifestyle12.jpg",
-    Vintage: "/frames/8981/lifestyle_10.jpg",
-    Natural: "/frames/8750/lifestyle_10.jpg",
-    Minimalist: "/frames/9135/lifestyle_10.png",
-    Ornate: "/frames/10783/lifestyle_10.png",
+    Modern: "frames/6711/lifestyle_10.png",
+    Rustic: "frames/10570/lifestyle_10.png",
+    Classic: "frames/8446/lifestyle_1.jpg",
+    Gallery: "frames/6301/lifestyle12.jpg",
+    Vintage: "frames/8981/lifestyle_10.jpg",
+    Natural: "frames/8750/lifestyle_10.jpg",
+    Minimalist: "frames/9135/lifestyle_10.png",
+    Ornate: "frames/10783/lifestyle_10.png",
   };
 
   if (hubImages[styleName]) {
-    return hubImages[styleName];
+    return getStoreBaseAssetUrl(hubImages[styleName]);
   }
 
   // Fallback to first available lifestyle image

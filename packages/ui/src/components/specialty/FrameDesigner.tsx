@@ -51,7 +51,7 @@ import {
   parseFraction,
   validateArtworkSize,
   computePreviewLayout,
-  getSharedAssetUrl,
+  getStoreBaseAssetUrl,
 } from "@framecraft/core";
 
 // Import hooks from @framecraft/core
@@ -2012,7 +2012,7 @@ export function FrameDesigner({
                         className="p-0 border-0 bg-transparent shadow-lg"
                       >
                         <img
-                          src={getSharedAssetUrl(
+                          src={getStoreBaseAssetUrl(
                             selectedFrame.dimensionalDiagram.startsWith("/")
                               ? selectedFrame.dimensionalDiagram.slice(1)
                               : selectedFrame.dimensionalDiagram
@@ -2306,7 +2306,7 @@ export function FrameDesigner({
                         {frame.thumbnail ? (
                           <div className="h-12 w-full rounded mb-2 overflow-hidden">
                             <img
-                              src={getSharedAssetUrl(
+                              src={getStoreBaseAssetUrl(
                                 frame.thumbnail.startsWith("/")
                                   ? frame.thumbnail.slice(1)
                                   : frame.thumbnail

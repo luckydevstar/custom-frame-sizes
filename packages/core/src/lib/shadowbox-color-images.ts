@@ -8,6 +8,8 @@
  * Usage: import frames from '@framecraft/data/frames.json'
  */
 
+import { getStoreBaseAssetUrl } from "../utils/asset-urls";
+
 // ============================================================================
 // TYPES
 // ============================================================================
@@ -29,13 +31,13 @@ export interface Frame {
 // ============================================================================
 
 /**
- * Generic shadowbox lifestyle images used when color-specific photos aren't available.
+ * Generic shadowbox lifestyle images used when color-specific photos aren't available (paths relative to shared bucket).
  * These show various memorabilia displays in shadowbox frames.
  */
 const PLACEHOLDER_IMAGE_POOL = [
-  "/frames/10478/lifestyle_1.jpg",
-  "/frames/10479/lifestyle_1.jpg",
-  "/frames/10475/lifestyle_1.jpg",
+  "frames/10478/lifestyle_1.jpg",
+  "frames/10479/lifestyle_1.jpg",
+  "frames/10475/lifestyle_1.jpg",
 ];
 
 // ============================================================================
@@ -167,11 +169,13 @@ export function getShadowboxColorHubImage(colorName: string, frames: Frame[]): s
     (f) => f.category === "shadowbox" && f.colorName?.toLowerCase() === searchColor
   );
 
+  const toUrl = (raw: string) => getStoreBaseAssetUrl(raw.startsWith("/") ? raw.slice(1) : raw);
+
   // First pass: Look for lifestyle images
   for (const frame of colorFrames) {
     const firstLifestyle = frame.alternateImages?.find((img) => img.type === "lifestyle");
     if (firstLifestyle) {
-      return firstLifestyle.url;
+      return toUrl(firstLifestyle.url);
     }
   }
 
@@ -179,12 +183,12 @@ export function getShadowboxColorHubImage(colorName: string, frames: Frame[]): s
   for (const frame of colorFrames) {
     const firstCorner = frame.alternateImages?.find((img) => img.type === "corner");
     if (firstCorner) {
-      return firstCorner.url;
+      return toUrl(firstCorner.url);
     }
   }
 
   // Final fallback to placeholder pool
-  return PLACEHOLDER_IMAGE_POOL[0] || "/frames/8446/lifestyle_1.jpg";
+  return getStoreBaseAssetUrl(PLACEHOLDER_IMAGE_POOL[0] ?? "frames/8446/lifestyle_1.jpg");
 }
 
 /**
@@ -209,11 +213,13 @@ export function getShadowboxColorLifestyleImages(
 
   const lifestyleImages: Array<{ url: string; alt: string; isPlaceholder: boolean }> = [];
 
+  const toUrl = (raw: string) => getStoreBaseAssetUrl(raw.startsWith("/") ? raw.slice(1) : raw);
+
   colorFrames.forEach((frame) => {
     const frameLifestyle = frame.alternateImages?.filter((img) => img.type === "lifestyle") || [];
     frameLifestyle.forEach((img) => {
       lifestyleImages.push({
-        url: img.url,
+        url: toUrl(img.url),
         alt: img.alt,
         isPlaceholder: false,
       });
@@ -222,8 +228,8 @@ export function getShadowboxColorLifestyleImages(
 
   // If no lifestyle images found, use placeholders
   if (lifestyleImages.length === 0) {
-    return PLACEHOLDER_IMAGE_POOL.slice(0, 3).map((url) => ({
-      url,
+    return PLACEHOLDER_IMAGE_POOL.slice(0, 3).map((path) => ({
+      url: getStoreBaseAssetUrl(path),
       alt: `Professional shadowbox frame showcasing quality memorabilia display options for collectibles and three-dimensional keepsakes`,
       isPlaceholder: true,
     }));
@@ -247,7 +253,7 @@ export function getShadowboxColorHeroImage(
   const images = getShadowboxColorLifestyleImages(colorName, frames);
   return (
     images[0] || {
-      url: PLACEHOLDER_IMAGE_POOL[0] || "/frames/8446/lifestyle_1.jpg",
+      url: getStoreBaseAssetUrl(PLACEHOLDER_IMAGE_POOL[0] ?? "frames/8446/lifestyle_1.jpg"),
       alt: "Custom shadowbox frames for professional memorabilia display",
       isPlaceholder: true,
     }
@@ -289,7 +295,7 @@ export function getShadowboxColorFAQSidebarImages(
   // Select diverse images: first, middle, last from collection
   const indices = [0, Math.floor(allImages.length / 2), Math.min(allImages.length - 1, 2)];
   const firstImage = allImages[0] || {
-    url: PLACEHOLDER_IMAGE_POOL[0] || "/frames/8446/lifestyle_1.jpg",
+    url: getStoreBaseAssetUrl(PLACEHOLDER_IMAGE_POOL[0] ?? "frames/8446/lifestyle_1.jpg"),
     alt: "Custom shadowbox frames for professional memorabilia display",
     isPlaceholder: true,
   };

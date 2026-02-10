@@ -6,7 +6,6 @@ import {
   getStyleHubImage,
   countFramesPerStyle,
   getFrameStyles,
-  getSharedAssetUrl,
 } from "@framecraft/core";
 import { brandConfig } from "../../../brand.config";
 
@@ -123,9 +122,8 @@ export default function FramesByStylePage() {
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6">
               {orderedStyles.map((style) => {
-                const imageSrc = getSharedAssetUrl(
-                  style.image.startsWith("/") ? style.image.slice(1) : style.image
-                );
+                // getStyleHubImage already returns full store-a CDN URL
+                const imageSrc = style.image;
                 return (
                   <Link key={style.styleName} href={`/frames/styles/${style.slug}`}>
                     <Card
@@ -133,7 +131,7 @@ export default function FramesByStylePage() {
                       data-testid={`card-style-${style.slug}`}
                     >
                       <div className="aspect-[16/10] md:aspect-[4/3] overflow-hidden bg-muted/20">
-                        {/* eslint-disable-next-line @next/next/no-img-element -- dynamic asset URL from getSharedAssetUrl */}
+                        {/* eslint-disable-next-line @next/next/no-img-element -- dynamic asset URL from getStyleHubImage (store-a CDN) */}
                         <img
                           src={imageSrc}
                           alt={`${style.displayName} style picture frames in custom sizes`}
