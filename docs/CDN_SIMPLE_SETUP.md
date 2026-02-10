@@ -2,21 +2,23 @@
 
 ## Overview
 
-The application now uses a simple two-bucket CDN system:
+You can serve assets from **local** or **Cloudflare R2**. See **[ASSET_SOURCE.md](./ASSET_SOURCE.md)** for the single place to switch (env vars in `apps/store-a/.env.local`).
+
+Two-bucket CDN system when using R2:
 
 - **Shared Assets**: Frames, mats, comic, diploma, etc. → `NEXT_PUBLIC_CDN_SHARED_URL`
 - **Store-A Assets**: Only the `assets/` directory → `NEXT_PUBLIC_CDN_STORE_A_URL`
 
-## Environment Variables
+## Environment Variables (Cloudflare R2)
 
-Add these to your `.env.local` file in `apps/store-a/`:
+In `apps/store-a/.env.local`, set both to your R2 public bucket URLs to use R2; leave empty for local assets:
 
 ```bash
-# Shared Assets CDN URL (frames, mats, comic, etc.)
-NEXT_PUBLIC_CDN_SHARED_URL=https://pub-d2f459227a6d44cab26325fa3d6ea821.r2.dev
+# Shared assets bucket
+NEXT_PUBLIC_CDN_SHARED_URL=https://pub-69a10dc9071244a289ce236ece9aba93.r2.dev
 
-# Store-A Assets CDN URL (assets/ directory only)
-NEXT_PUBLIC_CDN_STORE_A_URL=https://pub-e7bceef7c942453b92d35da77e807c44.r2.dev
+# Store-A assets bucket (assets/ directory)
+NEXT_PUBLIC_CDN_STORE_A_URL=https://pub-90cb5b0e26db4cc1b1ece8a4852edfc8.r2.dev
 ```
 
 ## How It Works
