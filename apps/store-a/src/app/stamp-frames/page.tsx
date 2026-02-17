@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Stamp, Clock, CheckCircle, Shield, Hexagon, Ruler, Award, Hand } from "lucide-react";
 import { Badge, ComingSoonDesigner } from "@framecraft/ui";
 import { ScrollToDesignerButton } from "./scroll-button";
+import { RelatedProducts } from "@/components/RelatedProducts";
 
 export const metadata: Metadata = {
   title: "Stamp Display Frames | Custom Shadow Box Frames for Stamp Collections",
@@ -333,6 +334,16 @@ export default function StampFramesPage() {
             </div>
           </div>
         </section>
+
+        <RelatedProducts
+          productKeys={[
+            "currency-frames",
+            "signature-frames",
+            "certificate-frames",
+            "picture-frames",
+          ]}
+          columns={4}
+        />
       </div>
     </>
   );

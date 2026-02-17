@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Award, Clock, CheckCircle, Shield } from "lucide-react";
 import { Badge, Card, ComingSoonDesigner } from "@framecraft/ui";
+import { getStoreBaseAssetUrl } from "@framecraft/core";
 import { RelatedProducts } from "@/components/RelatedProducts";
 import { ScrollToDesignerButton } from "./scroll-button";
 
@@ -153,17 +154,30 @@ export default function MilitaryFramesPage() {
           </div>
         </section>
 
-        {/* Lifestyle / gallery placeholder */}
+        {/* Lifestyle / gallery */}
         <section className="py-12 bg-muted/30">
           <div className="container mx-auto px-4">
-            <div className="max-w-7xl mx-auto text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-3">
+            <div className="max-w-7xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold mb-3 text-center">
                 Real Military Display Examples
               </h2>
-              <p className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto">
+              <p className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto text-center">
                 See how veterans display their medals, ribbons, patches, flags, and photos in our
-                shadow boxes. Each frame features branch-specific colors and 2-inch depth.
+                shadow boxes. Each frame features branch-specific colors and 2-inch depth. Choose
+                your branch in the designer to get matching mat and backing colors for Army, Navy,
+                Air Force, Marine Corps, Coast Guard, and Space Force.
               </p>
+              <div className="rounded-lg border bg-card overflow-hidden max-w-4xl mx-auto">
+                <div className="aspect-[16/10] relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={getStoreBaseAssetUrl("frames/10478/lifestyle_1.jpg")}
+                    alt="Military shadow box display with medals and ribbons in branch-specific mat colors, 2-inch depth frame"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Suspense } from "react";
-import { Shirt, Shield, Ruler, Layers, Award } from "lucide-react";
-import { JerseyFrameDesigner, JerseyLifestyleCarousel } from "@framecraft/ui";
+import { Shirt, Shield, Ruler, Layers, Award, CheckCircle2, ArrowDown } from "lucide-react";
+import { JerseyFrameDesigner, JerseyLifestyleCarousel, Card, Button } from "@framecraft/ui";
+import { getStoreBaseAssetUrl } from "@framecraft/core";
 import { brandConfig } from "../../brand.config";
 import { ScrollToDesignerButton } from "./scroll-button";
+import { RelatedProducts } from "@/components/RelatedProducts";
 
 export const metadata: Metadata = {
   title: "Custom Jersey Display Frames | Professional Sports Memorabilia Shadowbox Framing",
@@ -193,6 +196,206 @@ export default function JerseyFramesPage() {
             </div>
           </div>
         </section>
+
+        {/* Full-Width Lifestyle Feature */}
+        <section className="py-12 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <div
+                className="relative rounded-lg border bg-card overflow-hidden"
+                data-testid="jersey-lifestyle-feature-1"
+              >
+                <div className="aspect-[3/2] md:aspect-[3/2] relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={getStoreBaseAssetUrl("frames/10728/10728_jersey_lifestyle_04.jpg")}
+                    alt="Autographed Dallas Cowboys jersey frame in extra deep white shadowbox with 2 inch capacity, displaying signed #8 AIKMAN NFL jersey with navy and silver triple matting in elegant living room"
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                  <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
+                    <p className="text-white text-lg md:text-xl font-semibold max-w-3xl">
+                      Custom team color mats make your signed jerseys and championship gear look
+                      amazing
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* How We Build Your Jersey Frame */}
+        <section className="py-12">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                How We Build Your Jersey Frame
+              </h2>
+              <p className="text-muted-foreground mb-6">
+                We use archival materials and professional-grade construction to frame jerseys.
+                Design your own shadowbox frame with team colors for NHL, NBA, MLB, NFL, or concert
+                jerseys.
+              </p>
+              <h3 className="text-2xl font-semibold mb-4 mt-8">Extra-Deep Shadowbox Frames</h3>
+              <p className="text-muted-foreground mb-6">
+                Jerseys need deep frames. Ours have 2 inches of depth—the standard for jersey
+                displays. This keeps your jersey flat without squishing it. We offer three real wood
+                finishes: Matte Black, Bright White, and Rich Walnut.
+              </p>
+              <h3 className="text-2xl font-semibold mb-4 mt-8">Team Color Mats</h3>
+              <div
+                className="grid md:grid-cols-2 gap-6 mb-6 not-prose"
+                data-testid="jersey-lifestyle-feature-2"
+              >
+                <div className="rounded-lg border bg-card overflow-hidden">
+                  <div className="aspect-[4/5] relative">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={getStoreBaseAssetUrl("frames/10727/10727_jersey_lifestyle_11.jpg")}
+                      alt="Deep matte black jersey display frame with navy blue and red team color triple matting showcasing autographed baseball jersey"
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+                <div className="flex flex-col justify-center">
+                  <h4 className="text-xl font-semibold mb-4">Triple Mat Benefits</h4>
+                  <ul className="space-y-3 text-muted-foreground">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                      <span>Pick your top mat, bottom mat, and backing color</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                      <span>165+ team colors plus black and white options</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle2 className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                      <span>Archival mats keep colors bright for years</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <p className="text-muted-foreground mb-6">
+                Pick from 165+ team colors for NHL, NBA, MLB, and NFL teams. You choose three mat
+                colors: the top border, middle layer, and background. All mats are archival so they
+                won&apos;t yellow over time.
+              </p>
+              <h3 className="text-2xl font-semibold mb-4 mt-8">Protection From Fading</h3>
+              <p className="text-muted-foreground mb-6">
+                Sunlight fades jersey colors over time. Our frames use framer&apos;s grade acrylic
+                that blocks 99% of UV rays. The 2-inch depth also keeps the fabric away from the
+                acrylic surface.
+              </p>
+              <h3 className="text-2xl font-semibold mb-4 mt-8">Add a Brass Plaque</h3>
+              <p className="text-muted-foreground mb-6">
+                Add a brass plaque with custom text. Great for player names, jersey numbers, game
+                dates, or special messages. Plaques are mounted on the mat so they don&apos;t cover
+                your jersey.
+              </p>
+              <h3 className="text-2xl font-semibold mb-4 mt-8">Standard and Oversize Frames</h3>
+              <p className="text-muted-foreground mb-6">
+                Standard frames fit most jerseys up to 32×40 inches. Larger jerseys or wider mat
+                borders need oversize frames. Our designer shows you the price for your exact size.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ Section */}
+        <section className="py-12 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
+                Frequently Asked Questions
+              </h2>
+              <div className="space-y-6">
+                <Card className="p-6">
+                  <h3 className="text-xl font-semibold mb-3">
+                    What depth shadowbox do I need for jersey framing?
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Our frames have 2 inches of depth. This is the standard for jersey displays and
+                    keeps your jersey flat without squishing it.
+                  </p>
+                </Card>
+                <Card className="p-6">
+                  <h3 className="text-xl font-semibold mb-3">
+                    Can I customize mat colors to match my team?
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Yes! Pick from 165+ team colors. You choose three layers: top mat, bottom mat,
+                    and backing color. All mats are archival to protect your jersey.
+                  </p>
+                </Card>
+                <Card className="p-6">
+                  <h3 className="text-xl font-semibold mb-3">
+                    What frame finishes are available for jersey displays?
+                  </h3>
+                  <p className="text-muted-foreground">
+                    We offer three real wood finishes: Matte Black, Bright White, and Rich Walnut.
+                    All have 2-inch depth, professional-grade construction, and framer&apos;s grade
+                    acrylic.
+                  </p>
+                </Card>
+                <Card className="p-6">
+                  <h3 className="text-xl font-semibold mb-3">
+                    How do I add a brass plaque to my jersey frame?
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Add a plaque in our designer. Type your custom text and we mount it on the mat.
+                    It won&apos;t cover your jersey.
+                  </p>
+                </Card>
+                <Card className="p-6">
+                  <h3 className="text-xl font-semibold mb-3">
+                    What&apos;s the difference between standard and oversize jersey frames?
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Standard frames fit most jerseys up to 32×40 inches. Larger jerseys need
+                    oversize frames. Our designer shows pricing for both.
+                  </p>
+                </Card>
+                <Card className="p-6">
+                  <h3 className="text-xl font-semibold mb-3">
+                    Are these frames suitable for both sports and concert jerseys?
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Yes! Frame any jersey—sports, concert, school, or personal. Use team colors or
+                    pick black and white mats for custom designs.
+                  </p>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="py-12">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                Ready to Design Your Jersey Frame?
+              </h2>
+              <p className="text-lg text-muted-foreground mb-8">
+                Pick your team colors and size. Get instant pricing.
+              </p>
+              <Button size="lg" className="text-lg" asChild data-testid="button-design-cta-final">
+                <Link href="#jersey-designer">
+                  <ArrowDown className="w-5 h-5 mr-2" />
+                  Start Designing Now
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </section>
+
+        <RelatedProducts
+          productKeys={["signature-frames", "ticket-frames", "comic-frames", "picture-frames"]}
+          columns={4}
+        />
       </div>
     </>
   );

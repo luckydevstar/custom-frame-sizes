@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sparkles, Shield, Package, Layers, Target } from "lucide-react";
 import { ComingSoonDesigner } from "@framecraft/ui";
+import { RelatedProducts } from "@/components/RelatedProducts";
 import { ScrollToDesignerButton } from "./scroll-button";
 
 export const metadata: Metadata = {
@@ -140,6 +141,38 @@ export default function HockeyPuckFrameDesignerPage() {
             />
           </div>
         </section>
+
+        {/* How It Works / What's Included */}
+        <section className="py-12 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6">How Puck Display Frames Work</h2>
+              <p className="text-muted-foreground mb-6">
+                Our hockey puck frames are deep shadowbox frames with a custom-cut foam insert. You
+                receive the frame and a nesting foam panel with circular cutouts sized for standard
+                NHL pucks. Pucks friction-fit into the holes—no adhesives, no hardware that could
+                damage autographs or the puck surface. Layouts are available for 1 to 12 pucks, with
+                optional openings for a photo or nameplate.
+              </p>
+              <h3 className="text-xl font-semibold mb-3">What&apos;s Included</h3>
+              <ul className="text-muted-foreground space-y-2 list-disc list-inside mb-6">
+                <li>Deep shadowbox frame in your chosen size and finish</li>
+                <li>Precision-cut foam insert with puck cutouts (friction-fit)</li>
+                <li>Framer&apos;s grade acrylic glazing</li>
+                <li>Hanging hardware</li>
+              </ul>
+              <p className="text-muted-foreground">
+                Design your frame above to choose dimensions and finish. We build each kit to order
+                in our frame shop.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <RelatedProducts
+          productKeys={["jersey-frames", "signature-frames", "comic-frames", "picture-frames"]}
+          columns={4}
+        />
       </div>
     </>
   );

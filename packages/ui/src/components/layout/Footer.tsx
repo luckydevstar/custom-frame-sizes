@@ -48,6 +48,7 @@ const defaultLinks: FooterLinks = {
     { label: "Frame Designer", path: "/" },
     { label: "Shop by Color", path: "/frames/colors" },
     { label: "Frame Styles", path: "/picture-frames" },
+    { label: "Components", path: "/components" },
     { label: "Order Samples", path: "/samples" },
     { label: "Gallery Wall Guide", path: "/gallery-wall-guide" },
     { label: "Frame Size Chart", path: "/frame-size-chart" },

@@ -5,6 +5,7 @@ import {
   ArrowRight,
   Frame,
   Award,
+  Banknote,
   Layers,
   Heart,
   Flower2,
@@ -128,6 +129,12 @@ const PRODUCT_CATALOG: Record<string, RelatedProduct> = {
     icon: Shirt,
     title: "Jersey Frames",
     subtitle: "Sports jerseys",
+  },
+  "currency-frames": {
+    href: "/currency-frames",
+    icon: Banknote,
+    title: "Currency Display Frames",
+    subtitle: "Paper money & collections",
   },
   "mat-boards": {
     href: "/picture-frames",
