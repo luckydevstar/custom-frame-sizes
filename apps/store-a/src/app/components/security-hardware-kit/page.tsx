@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: "Professional Security Hardware Kit - Museum-Grade Anti-Theft",
     description:
       "Museum-grade T-screws, locking brackets, tamper-resistant mounting. Complete kit from $8.95.",
-    type: "product",
+    type: "website",
   },
 };
 

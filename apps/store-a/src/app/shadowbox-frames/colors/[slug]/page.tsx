@@ -65,7 +65,6 @@ export default async function ShadowboxColorDetailPage({ params }: ShadowboxColo
   const colorFrames = getShadowboxFramesByColor(colorName);
   const heroImage = getShadowboxColorHeroImage(colorName, frames);
   const galleryImages = getShadowboxColorGalleryImages(colorName, frames);
-  const _featuredFrame = colorFrames.length > 0 ? colorFrames[0] : null;
   const baseUrl = brandConfig.seo?.canonicalUrl || "https://customframesizes.com";
 
   const breadcrumbSchema = {

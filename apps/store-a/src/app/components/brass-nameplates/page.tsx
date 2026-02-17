@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     title: "Custom Brass Nameplates - Laser Engraved Plaques",
     description:
       'Custom brass nameplates 1.5" to 12". Laser-engraved text, fonts, and decorative icons.',
-    type: "product",
+    type: "website",
   },
 };
 

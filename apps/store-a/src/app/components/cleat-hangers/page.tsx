@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     title: '12" Heavy-Duty Metal Cleat Bar Hanging System',
     description:
       "French cleat system for large frames. Heavy-duty support, perfect leveling. From $8.95.",
-    type: "product",
+    type: "website",
   },
 };
 

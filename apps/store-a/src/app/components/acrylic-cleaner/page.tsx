@@ -8,7 +8,9 @@ const PRODUCT_IMAGES = [
   "https://novuspolish.com/cdn/shop/files/NPP-1---8-oz_Front_1946x.jpg?v=1731410582",
   "https://novuspolish.com/cdn/shop/files/NPP-1---8-oz-Back_1946x.jpg?v=1731410582",
   "https://novuspolish.com/cdn/shop/files/NPP1_Group_square_20240916_1946x.jpg?v=1731411664",
-];
+] as const;
+
+const MAIN_PRODUCT_IMAGE = PRODUCT_IMAGES[0];
 
 const PRICE = 9.95;
 
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
     title: "Acrylic Cleaner & Polish – Safe for Frame Glazing",
     description:
       "Professional acrylic cleaner for picture frame glazing. Anti-static, streak-free formula. 8oz bottle – $9.95.",
-    type: "product",
+    type: "website",
   },
 };
 
@@ -42,7 +44,7 @@ export default function AcrylicCleanerPage() {
             <div className="space-y-4">
               <div className="aspect-square rounded-lg overflow-hidden bg-white border relative">
                 <Image
-                  src={PRODUCT_IMAGES[0]}
+                  src={MAIN_PRODUCT_IMAGE}
                   alt="NOVUS Acrylic Cleaner 8oz bottle"
                   fill
                   className="object-contain p-4"
