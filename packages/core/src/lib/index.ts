@@ -18,6 +18,7 @@ export * from "./nameplate-positioning";
 export type { Frame as ColorGatewayFrame } from "./color-gateway-images";
 // Export shadowbox-color-images functions but avoid duplicate Frame type
 export {
+  SHADOWBOX_COLOR_METADATA,
   getShadowboxColorLifestyleImages,
   getShadowboxColorHeroImage,
   getShadowboxColorFAQSidebarImages,
