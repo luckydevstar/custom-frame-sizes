@@ -17,6 +17,7 @@ import framesData from "./frames.json";
 import matsData from "./mats.json";
 import glassData from "./glass.json";
 import pricingConfigData from "./pricing-config.json";
+import frameSizesData from "./frame-sizes.json";
 
 // Frame class map (SKU → frameClass from xlsx)
 export { getFrameClass, FRAME_CLASS_SKUS } from "./frame-class-map";
@@ -27,6 +28,7 @@ export { framesData };
 export { matsData };
 export { glassData };
 export { pricingConfigData };
+export { frameSizesData };
 
 // Export as default for convenience
 export default {
@@ -34,4 +36,5 @@ export default {
   mats: matsData,
   glass: glassData,
   pricingConfig: pricingConfigData,
+  frameSizes: frameSizesData,
 };

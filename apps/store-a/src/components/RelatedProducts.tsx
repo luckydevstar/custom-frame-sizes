@@ -21,6 +21,11 @@ import {
   GraduationCap,
   Shirt,
   Grid3x3,
+  SquareStack,
+  Lock,
+  Shield,
+  Sparkles,
+  Droplets,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Card } from "@framecraft/ui";
@@ -141,6 +146,42 @@ const PRODUCT_CATALOG: Record<string, RelatedProduct> = {
     icon: Grid3x3,
     title: "Custom Mat Boards",
     subtitle: "Matting only",
+  },
+  acrylic: {
+    href: "/components/acrylic",
+    icon: Layers,
+    title: "Acrylic Sheets",
+    subtitle: "Custom-cut glazing",
+  },
+  "foam-board": {
+    href: "/components/foam-board",
+    icon: SquareStack,
+    title: "Foam Board",
+    subtitle: "Mounting & backing",
+  },
+  "security-hardware-kit": {
+    href: "/components/security-hardware-kit",
+    icon: Lock,
+    title: "Security Hardware Kit",
+    subtitle: "Museum-grade anti-theft",
+  },
+  "cleat-hangers": {
+    href: "/components/cleat-hangers",
+    icon: Shield,
+    title: "Cleat Hangers",
+    subtitle: "Heavy-duty hanging",
+  },
+  "brass-nameplates": {
+    href: "/components/brass-nameplates",
+    icon: Sparkles,
+    title: "Brass Nameplates",
+    subtitle: "Laser-engraved plaques",
+  },
+  "acrylic-cleaner": {
+    href: "/components/acrylic-cleaner",
+    icon: Droplets,
+    title: "Acrylic Cleaner",
+    subtitle: "Safe for frame glazing",
   },
 };
 

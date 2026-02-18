@@ -1,8 +1,16 @@
 import type { Metadata } from "next";
+import nextDynamic from "next/dynamic";
+import { Suspense } from "react";
 import { Sparkles, Shield, Package, Layers, Target } from "lucide-react";
-import { ComingSoonDesigner } from "@framecraft/ui";
 import { RelatedProducts } from "@/components/RelatedProducts";
 import { ScrollToDesignerButton } from "./scroll-button";
+
+const ShadowboxDesigner = nextDynamic(
+  () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
+  { ssr: false }
+);
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Hockey Puck Display Frames – Complete Kit with Foam Insert | Custom Frame Sizes",
@@ -134,11 +142,20 @@ export default function HockeyPuckFrameDesignerPage() {
         {/* Designer */}
         <section id="design-tool" className="py-4 md:py-6 scroll-mt-20">
           <div className="container mx-auto px-4">
-            <ComingSoonDesigner
-              title="Hockey puck frame designer coming soon"
-              description="Use our main frame designer to choose your size and options. We'll add a dedicated puck display designer with foam insert layouts soon."
-              buttonLabel="Design your frame"
-            />
+            <div className="scroll-mt-20" data-testid="designer-section">
+              <Suspense
+                fallback={
+                  <div className="min-h-[600px] flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
+                      <p className="text-muted-foreground">Loading designer...</p>
+                    </div>
+                  </div>
+                }
+              >
+                <ShadowboxDesigner />
+              </Suspense>
+            </div>
           </div>
         </section>
 

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { ArrowLeft, Lock, Shield, Building2 } from "lucide-react";
+import { ArrowLeft, Lock, Shield, Building2, Check, Wrench } from "lucide-react";
 import { Card, CardContent, Button } from "@framecraft/ui";
+import { RelatedProducts } from "@/components/RelatedProducts";
 
 export const metadata: Metadata = {
   title:
@@ -23,7 +24,7 @@ export default function SecurityHardwareKitPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-6 md:py-10">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <Link
             href="/components"
             className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-6"
@@ -32,7 +33,7 @@ export default function SecurityHardwareKitPage() {
             All Components
           </Link>
 
-          <div className="grid md:grid-cols-2 gap-8 items-start">
+          <div className="grid md:grid-cols-2 gap-8 items-start mb-12">
             <div className="aspect-square bg-muted rounded-lg overflow-hidden relative">
               <Image
                 src="/images/blog/botanical-frame-hero.png"
@@ -83,6 +84,45 @@ export default function SecurityHardwareKitPage() {
               </Card>
             </div>
           </div>
+
+          <section className="py-8 border-t">
+            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+              <Wrench className="h-5 w-5 text-primary" />
+              How It Works
+            </h2>
+            <p className="text-muted-foreground mb-4">
+              The kit uses T-screws that require a special security wrench to remove. Mount the wall
+              brackets first, then attach the frame with the T-screws. Only someone with the
+              included wrench can take the frame down—ideal for galleries, hotels, lobbies, and
+              high-traffic areas.
+            </p>
+            <ul className="space-y-2 text-sm text-muted-foreground">
+              <li className="flex items-start gap-2">
+                <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                <span>
+                  Wall brackets mount to the wall; frame hardware attaches to the frame back.
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                <span>
+                  Tamper-proof T-screws lock the frame to the bracket. Security wrench included.
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Check className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                <span>
+                  Bulk pricing for 10, 25, or 100 kits—ideal for commercial installations.
+                </span>
+              </li>
+            </ul>
+          </section>
+
+          <RelatedProducts
+            productKeys={["cleat-hangers", "brass-nameplates", "acrylic"]}
+            title="Related Components"
+            columns={3}
+          />
         </div>
       </div>
     </div>

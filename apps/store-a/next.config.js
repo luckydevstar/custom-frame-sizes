@@ -2,8 +2,10 @@
 const path = require('path');
 
 // Rewrite asset URLs to local API (assets_to_use). Path goes in URL so it is passed reliably.
+// Note: 'frames' is NOT included here because /frames/colors, /frames/styles, /frames/sizes are
+// app routes. Frames asset rewriting is done in middleware so we can exclude those paths.
 const assetPrefixes = [
-  'frames', 'mats', 'canvas', 'magazine', 'comic', 'playbill', 'newspaper',
+  'mats', 'canvas', 'magazine', 'comic', 'playbill', 'newspaper',
   'collage', 'card-frames', 'diploma', 'cd', 'ticket-frames', 'invitation-frames',
   'needlework', 'signature-frames', 'record-album', 'puzzle', 'sonogram', 'military',
   'blog', 'components', 'stock', 'movie-poster',

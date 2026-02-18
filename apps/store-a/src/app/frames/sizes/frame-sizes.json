@@ -1,0 +1,182 @@
+[
+  {
+    "size": "24x36",
+    "width": 24,
+    "height": 36,
+    "primaryUseCase": "Movie posters, concert posters, large art prints"
+  },
+  {
+    "size": "18x24",
+    "width": 18,
+    "height": 24,
+    "primaryUseCase": "Medium art prints, photography, decorative posters"
+  },
+  {
+    "size": "20x20",
+    "width": 20,
+    "height": 20,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography"
+  },
+  {
+    "size": "16x20",
+    "width": 16,
+    "height": 20,
+    "primaryUseCase": "Professional portraits, medium art prints"
+  },
+  {
+    "size": "11x14",
+    "width": 11,
+    "height": 14,
+    "primaryUseCase": "Diplomas, certificates, small portraits"
+  },
+  {
+    "size": "12x16",
+    "width": 12,
+    "height": 16,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "8x10",
+    "width": 8,
+    "height": 10,
+    "primaryUseCase": "Family photos, portraits, desk frames"
+  },
+  {
+    "size": "10x10",
+    "width": 10,
+    "height": 10,
+    "primaryUseCase": "Square photos, album art, Instagram prints"
+  },
+  {
+    "size": "30x40",
+    "width": 30,
+    "height": 40,
+    "primaryUseCase": "Large art prints, statement pieces, commercial displays"
+  },
+  {
+    "size": "24x30",
+    "width": 24,
+    "height": 30,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "16x40",
+    "width": 16,
+    "height": 40,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "6x6",
+    "width": 6,
+    "height": 6,
+    "primaryUseCase": "Small square art, coasters, mini prints"
+  },
+  {
+    "size": "12x12",
+    "width": 12,
+    "height": 12,
+    "primaryUseCase": "Square photos, album art, Instagram prints"
+  },
+  {
+    "size": "8x8",
+    "width": 8,
+    "height": 8,
+    "primaryUseCase": "Small square art, coasters, mini prints"
+  },
+  {
+    "size": "20x30",
+    "width": 20,
+    "height": 30,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "18x18",
+    "width": 18,
+    "height": 18,
+    "primaryUseCase": "Square photos, album art, Instagram prints"
+  },
+  {
+    "size": "30x30",
+    "width": 30,
+    "height": 30,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography"
+  },
+  {
+    "size": "24x24",
+    "width": 24,
+    "height": 24,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography"
+  },
+  {
+    "size": "14x24",
+    "width": 14,
+    "height": 24,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "9x12",
+    "width": 9,
+    "height": 12,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "12x24",
+    "width": 12,
+    "height": 24,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "22x28",
+    "width": 22,
+    "height": 28,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "6x9",
+    "width": 6,
+    "height": 9,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "13x13",
+    "width": 13,
+    "height": 13,
+    "primaryUseCase": "Square photos, album art, Instagram prints"
+  },
+  {
+    "size": "4x4",
+    "width": 4,
+    "height": 4,
+    "primaryUseCase": "Small square art, coasters, mini prints"
+  },
+  {
+    "size": "6x8",
+    "width": 6,
+    "height": 8,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "20x24",
+    "width": 20,
+    "height": 24,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "7x7",
+    "width": 7,
+    "height": 7,
+    "primaryUseCase": "Small square art, coasters, mini prints"
+  },
+  {
+    "size": "11x17",
+    "width": 11,
+    "height": 17,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "19x25",
+    "width": 19,
+    "height": 25,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  }
+]

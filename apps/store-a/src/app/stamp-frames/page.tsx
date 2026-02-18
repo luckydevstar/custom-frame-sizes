@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
+import nextDynamic from "next/dynamic";
+import { Suspense } from "react";
 import { Stamp, Clock, CheckCircle, Shield, Hexagon, Ruler, Award, Hand } from "lucide-react";
-import { Badge, ComingSoonDesigner } from "@framecraft/ui";
+import { Badge } from "@framecraft/ui";
 import { ScrollToDesignerButton } from "./scroll-button";
 import { RelatedProducts } from "@/components/RelatedProducts";
+
+const ShadowboxDesigner = nextDynamic(
+  () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
+  { ssr: false }
+);
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Stamp Display Frames | Custom Shadow Box Frames for Stamp Collections",
@@ -206,11 +215,20 @@ export default function StampFramesPage() {
         {/* Designer Section */}
         <section id="stamp-designer" className="py-8 scroll-mt-20">
           <div className="container mx-auto px-4">
-            <ComingSoonDesigner
-              title="Stamp frame designer coming soon"
-              description="Use our main frame designer to choose your size, backing color, and mat options. We'll add a dedicated stamp display designer with White on Black mat presets soon."
-              buttonLabel="Design your frame"
-            />
+            <div className="scroll-mt-20" data-testid="designer-section">
+              <Suspense
+                fallback={
+                  <div className="min-h-[600px] flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
+                      <p className="text-muted-foreground">Loading designer...</p>
+                    </div>
+                  </div>
+                }
+              >
+                <ShadowboxDesigner />
+              </Suspense>
+            </div>
           </div>
         </section>
 

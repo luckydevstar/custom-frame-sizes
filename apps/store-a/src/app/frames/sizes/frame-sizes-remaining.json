@@ -1,0 +1,417 @@
+[
+  {
+    "size": "5x7",
+    "width": 5,
+    "height": 7,
+    "primaryUseCase": "Wallet photos, small prints, gift frames"
+  },
+  {
+    "size": "15x20",
+    "width": 15,
+    "height": 20,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "10x20",
+    "width": 10,
+    "height": 20,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "14x14",
+    "width": 14,
+    "height": 14,
+    "primaryUseCase": "Square photos, album art, Instagram prints"
+  },
+  {
+    "size": "16x16",
+    "width": 16,
+    "height": 16,
+    "primaryUseCase": "Square photos, album art, Instagram prints"
+  },
+  {
+    "size": "32x40",
+    "width": 32,
+    "height": 40,
+    "primaryUseCase": "Large art prints, statement pieces, commercial displays"
+  },
+  {
+    "size": "15x27",
+    "width": 15,
+    "height": 27,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "32x42",
+    "width": 32,
+    "height": 42,
+    "primaryUseCase": "Large art prints, statement pieces, commercial displays"
+  },
+  {
+    "size": "16x24",
+    "width": 16,
+    "height": 24,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "8.5x11",
+    "width": 8.5,
+    "height": 11,
+    "primaryUseCase": "Letter size documents, certificates"
+  },
+  {
+    "size": "12x18",
+    "width": 12,
+    "height": 18,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "26.5x38.5",
+    "width": 26.5,
+    "height": 38.5,
+    "primaryUseCase": "Custom artwork, oversize prints"
+  },
+  {
+    "size": "11x15",
+    "width": 11,
+    "height": 15,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "22x22",
+    "width": 22,
+    "height": 22,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography"
+  },
+  {
+    "size": "28x40",
+    "width": 28,
+    "height": 40,
+    "primaryUseCase": "Custom artwork, oversize prints"
+  },
+  {
+    "size": "4x10",
+    "width": 4,
+    "height": 10,
+    "primaryUseCase": "Custom artwork, specialty prints"
+  },
+  {
+    "size": "12x14",
+    "width": 12,
+    "height": 14,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "34x34",
+    "width": 34,
+    "height": 34,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography"
+  },
+  {
+    "size": "13x17",
+    "width": 13,
+    "height": 17,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "16x42",
+    "width": 16,
+    "height": 42,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "12x17",
+    "width": 12,
+    "height": 17,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "10x12",
+    "width": 10,
+    "height": 12,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "13x19",
+    "width": 13,
+    "height": 19,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "19x24",
+    "width": 19,
+    "height": 24,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "18x22",
+    "width": 18,
+    "height": 22,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "8x18",
+    "width": 8,
+    "height": 18,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "16x26",
+    "width": 16,
+    "height": 26,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "32x32",
+    "width": 32,
+    "height": 32,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography"
+  },
+  {
+    "size": "17x17",
+    "width": 17,
+    "height": 17,
+    "primaryUseCase": "Square photos, album art, Instagram prints"
+  },
+  {
+    "size": "4x12",
+    "width": 4,
+    "height": 12,
+    "primaryUseCase": "Custom artwork, specialty prints"
+  },
+  {
+    "size": "8x12",
+    "width": 8,
+    "height": 12,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "9x9",
+    "width": 9,
+    "height": 9,
+    "primaryUseCase": "Small square art, coasters, mini prints"
+  },
+  {
+    "size": "5x5",
+    "width": 5,
+    "height": 5,
+    "primaryUseCase": "Small square art, coasters, mini prints"
+  },
+  {
+    "size": "13x39",
+    "width": 13,
+    "height": 39,
+    "primaryUseCase": "Custom artwork, panoramic, specialty prints"
+  },
+  {
+    "size": "12x15",
+    "width": 12,
+    "height": 15,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "10x14",
+    "width": 10,
+    "height": 14,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "9x13",
+    "width": 9,
+    "height": 13,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "6x12",
+    "width": 6,
+    "height": 12,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "15x15",
+    "width": 15,
+    "height": 15,
+    "primaryUseCase": "Square photos, album art, Instagram prints"
+  },
+  {
+    "size": "17x22",
+    "width": 17,
+    "height": 22,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "24x32",
+    "width": 24,
+    "height": 32,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  { "size": "4x8", "width": 4, "height": 8, "primaryUseCase": "Custom artwork, specialty prints" },
+  {
+    "size": "4x6",
+    "width": 4,
+    "height": 6,
+    "primaryUseCase": "Wallet photos, small prints, gift frames"
+  },
+  {
+    "size": "14x17",
+    "width": 14,
+    "height": 17,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "8x11",
+    "width": 8,
+    "height": 11,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "26x38",
+    "width": 26,
+    "height": 38,
+    "primaryUseCase": "Custom artwork, oversize prints"
+  },
+  {
+    "size": "14x22",
+    "width": 14,
+    "height": 22,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "5x10",
+    "width": 5,
+    "height": 10,
+    "primaryUseCase": "Custom artwork, specialty prints"
+  },
+  {
+    "size": "22x30",
+    "width": 22,
+    "height": 30,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "13x16",
+    "width": 13,
+    "height": 16,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "20x28",
+    "width": 20,
+    "height": 28,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "14x19",
+    "width": 14,
+    "height": 19,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "14x18",
+    "width": 14,
+    "height": 18,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "6x10",
+    "width": 6,
+    "height": 10,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "7x10",
+    "width": 7,
+    "height": 10,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "3x5",
+    "width": 3,
+    "height": 5,
+    "primaryUseCase": "Wallet photos, small prints, gift frames"
+  },
+  {
+    "size": "17x21",
+    "width": 17,
+    "height": 21,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "3x4",
+    "width": 3,
+    "height": 4,
+    "primaryUseCase": "Wallet photos, small prints, gift frames"
+  },
+  {
+    "size": "4x5",
+    "width": 4,
+    "height": 5,
+    "primaryUseCase": "Wallet photos, small prints, gift frames"
+  },
+  {
+    "size": "10x16",
+    "width": 10,
+    "height": 16,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "3x3",
+    "width": 3,
+    "height": 3,
+    "primaryUseCase": "Small square art, coasters, mini prints"
+  },
+  {
+    "size": "9x11",
+    "width": 9,
+    "height": 11,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "12x36",
+    "width": 12,
+    "height": 36,
+    "primaryUseCase": "Custom artwork, panoramic, specialty prints"
+  },
+  {
+    "size": "11.7x16.5",
+    "width": 11.7,
+    "height": 16.5,
+    "primaryUseCase": "A3 international, custom artwork"
+  },
+  {
+    "size": "15x18",
+    "width": 15,
+    "height": 18,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "15x21",
+    "width": 15,
+    "height": 21,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "11x11",
+    "width": 11,
+    "height": 11,
+    "primaryUseCase": "Square photos, album art, Instagram prints"
+  },
+  {
+    "size": "5.5x8.5",
+    "width": 5.5,
+    "height": 8.5,
+    "primaryUseCase": "Custom artwork, invitation size"
+  },
+  {
+    "size": "15x19",
+    "width": 15,
+    "height": 19,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  },
+  {
+    "size": "5x8",
+    "width": 5,
+    "height": 8,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints"
+  }
+]

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, Shield, Star } from "lucide-react";
+import { ArrowLeft, Shield, Star, Ruler, Check } from "lucide-react";
 import { Card, CardContent, Button } from "@framecraft/ui";
+import { RelatedProducts } from "@/components/RelatedProducts";
 
 export const metadata: Metadata = {
   title:
@@ -22,7 +23,7 @@ export default function CleatHangersPage() {
   return (
     <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-6 md:py-10">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-4xl mx-auto">
           <Link
             href="/components"
             className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mb-6"
@@ -31,7 +32,7 @@ export default function CleatHangersPage() {
             All Components
           </Link>
 
-          <div className="grid md:grid-cols-2 gap-8 items-start">
+          <div className="grid md:grid-cols-2 gap-8 items-start mb-12">
             <div className="aspect-square bg-muted rounded-lg flex items-center justify-center">
               <Shield className="w-24 h-24 text-muted-foreground/50" />
             </div>
@@ -82,6 +83,41 @@ export default function CleatHangersPage() {
               </Card>
             </div>
           </div>
+
+          <section className="py-8 border-t">
+            <h2 className="text-xl font-semibold mb-4 flex items-center gap-2">
+              <Ruler className="h-5 w-5 text-primary" />
+              How to Use
+            </h2>
+            <ul className="space-y-2 text-muted-foreground mb-6">
+              <li className="flex items-start gap-2">
+                <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <span>
+                  Mount the wall half of the cleat level on the wall with screws into studs or
+                  anchors.
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <span>
+                  Attach the frame half to the back of your frame with the included hardware.
+                </span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                <span>
+                  Hang the frame by sliding the two cleat halves together. The interlocking design
+                  keeps the frame level and secure.
+                </span>
+              </li>
+            </ul>
+          </section>
+
+          <RelatedProducts
+            productKeys={["security-hardware-kit", "brass-nameplates", "acrylic"]}
+            title="Related Components"
+            columns={3}
+          />
         </div>
       </div>
     </div>

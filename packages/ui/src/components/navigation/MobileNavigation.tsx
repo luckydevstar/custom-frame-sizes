@@ -154,7 +154,7 @@ export function MobileNavigation({ onNavigate }: MobileNavigationProps) {
                   asChild
                   onClick={handleNavigate}
                 >
-                  <Link href="/shadowbox/designer" data-testid="link-mobile-shadowboxes">
+                  <Link href="/shadowbox" data-testid="link-mobile-shadowboxes">
                     <Box className="h-4 w-4 mr-3 text-muted-foreground" />
                     <span>All Shadowboxes</span>
                   </Link>

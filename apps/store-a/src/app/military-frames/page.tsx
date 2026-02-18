@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
+import nextDynamic from "next/dynamic";
+import { Suspense } from "react";
 import { Award, Clock, CheckCircle, Shield } from "lucide-react";
-import { Badge, Card, ComingSoonDesigner } from "@framecraft/ui";
+import { Badge, Card } from "@framecraft/ui";
 import { getStoreBaseAssetUrl } from "@framecraft/core";
 import { RelatedProducts } from "@/components/RelatedProducts";
 import { ScrollToDesignerButton } from "./scroll-button";
+
+const ShadowboxDesigner = nextDynamic(
+  () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
+  { ssr: false }
+);
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title:
@@ -146,11 +155,20 @@ export default function MilitaryFramesPage() {
         {/* Designer */}
         <section id="military-designer" className="py-8 scroll-mt-20">
           <div className="container mx-auto px-4">
-            <ComingSoonDesigner
-              title="Military shadow box designer coming soon"
-              description="Use our main frame designer or shadowbox options to choose your size and mat. We'll add a dedicated military branch color designer soon."
-              buttonLabel="Design your frame"
-            />
+            <div className="scroll-mt-20" data-testid="designer-section">
+              <Suspense
+                fallback={
+                  <div className="min-h-[600px] flex items-center justify-center">
+                    <div className="text-center">
+                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
+                      <p className="text-muted-foreground">Loading designer...</p>
+                    </div>
+                  </div>
+                }
+              >
+                <ShadowboxDesigner />
+              </Suspense>
+            </div>
           </div>
         </section>
 

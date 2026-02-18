@@ -1,10 +1,19 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowLeft, Sparkles, Ruler, Palette, Type } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@framecraft/ui";
-import { Badge } from "@framecraft/ui";
-import { Button } from "@framecraft/ui";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@framecraft/ui";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+  Badge,
+  Button,
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@framecraft/ui";
+import { RelatedProducts } from "@/components/RelatedProducts";
 
 export const metadata: Metadata = {
   title: "Custom Brass Nameplates - Laser Engraved Plaques | Custom Frame Sizes",
@@ -104,7 +113,13 @@ export default function BrassNameplatesPage() {
             </Button>
           </section>
 
-          <section>
+          <RelatedProducts
+            productKeys={["acrylic-cleaner", "cleat-hangers", "picture-frames"]}
+            title="Related Components & Frames"
+            columns={3}
+          />
+
+          <section className="mt-12">
             <h2 className="text-xl font-semibold mb-4">Common Questions</h2>
             <Accordion type="single" collapsible className="w-full">
               {faqItems.map((item, index) => (

@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowLeft, Shield, Sparkles, Droplets, Package, Check } from "lucide-react";
 import { Card, Button } from "@framecraft/ui";
+import { RelatedProducts } from "@/components/RelatedProducts";
 
 const PRODUCT_IMAGES = [
   "https://novuspolish.com/cdn/shop/files/NPP-1---8-oz_Front_1946x.jpg?v=1731410582",
@@ -173,6 +174,12 @@ export default function AcrylicCleanerPage() {
               </div>
             </div>
           </div>
+
+          <RelatedProducts
+            productKeys={["acrylic", "foam-board", "picture-frames"]}
+            title="Related Components & Frames"
+            columns={3}
+          />
         </div>
       </div>
     </div>

@@ -59,7 +59,7 @@ export function ShadowboxMegaMenu() {
         {/* Browse Options */}
         <div>
           {/* View All - Featured Link */}
-          <Link href="/shadowbox/designer" data-testid="link-megamenu-view-all-shadowboxes">
+          <Link href="/shadowbox" data-testid="link-megamenu-view-all-shadowboxes">
             <div className="flex items-center justify-between px-3 py-3 mb-3 rounded-md bg-primary/5 border border-primary/20 hover-elevate active-elevate-2">
               <div>
                 <div className="font-bold text-sm text-primary">View All Shadowboxes</div>

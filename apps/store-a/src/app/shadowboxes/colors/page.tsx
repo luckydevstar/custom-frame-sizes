@@ -38,12 +38,12 @@ export const metadata: Metadata = {
       "Professional shadowbox frames in 7 color finishes for sports jerseys, military medals, and memorabilia. Professional-grade preservation with UV protection.",
     type: "website",
   },
-  alternates: { canonical: "/shadowbox-frames/colors" },
+  alternates: { canonical: "/shadowboxes/colors" },
 };
 
 const baseUrl = brandConfig.seo?.canonicalUrl || "https://customframesizes.com";
 
-export default function ShadowboxColorsPage() {
+export default function ShadowboxesColorsPage() {
   const breadcrumbSchema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -53,7 +53,7 @@ export default function ShadowboxColorsPage() {
         "@type": "ListItem",
         position: 2,
         name: "Shadowboxes by Color",
-        item: `${baseUrl}/shadowbox-frames/colors`,
+        item: `${baseUrl}/shadowboxes/colors`,
       },
     ],
   };
@@ -83,7 +83,7 @@ export default function ShadowboxColorsPage() {
         name: "Do dark shadowboxes protect memorabilia better than light ones?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "Frame color does not affect UV protection or preservation quality—these depend on glazing selection and archival materials. Choose frame colors based on design preferences while selecting UV-protective glazing for proper memorabilia preservation.",
+          text: "Frame color does not affect UV protection or preservation quality—these depend on glazing selection and archival materials. Choose shadowbox colors based on design preferences while selecting UV-protective glazing for proper memorabilia preservation.",
         },
       },
       {
@@ -111,7 +111,7 @@ export default function ShadowboxColorsPage() {
     name: "Shadowbox Frames by Color",
     description:
       "Browse custom shadowbox frames by color: black, white, brown, silver, gold, blue, and natural finishes. Deep-profile frames for memorabilia, jerseys, medals, and three-dimensional collectibles.",
-    url: `${baseUrl}/shadowbox-frames/colors`,
+    url: `${baseUrl}/shadowboxes/colors`,
     inLanguage: "en-US",
     mainEntity: {
       "@type": "ItemList",
@@ -121,7 +121,7 @@ export default function ShadowboxColorsPage() {
         "@type": "ListItem",
         position: index + 1,
         name: `${color.displayName} Shadowbox Frames`,
-        url: `${baseUrl}/shadowbox-frames/colors/${color.slug}`,
+        url: `${baseUrl}/shadowboxes/colors/${color.slug}`,
         description: color.description,
       })),
     },
@@ -164,7 +164,7 @@ export default function ShadowboxColorsPage() {
               {orderedColors.map((color) => (
                 <Link
                   key={color.colorName}
-                  href={`/shadowbox-frames/colors/${color.slug}`}
+                  href={`/shadowboxes/colors/${color.slug}`}
                   data-testid={`card-color-${color.slug}`}
                 >
                   <Card className="hover-elevate active-elevate-2 overflow-hidden h-full cursor-pointer">
@@ -230,21 +230,26 @@ export default function ShadowboxColorsPage() {
               <div className="prose prose-gray max-w-none">
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-4">
                   Frame color dramatically impacts how your memorabilia integrates with your
-                  interior. Dark shadowbox colors like black and brown create professional-grade
-                  presentation with dramatic depth. Light colors including white and natural wood
-                  suggest contemporary gallery styling.
+                  interior while influencing the emotional tone of displayed collectibles. Dark
+                  shadowbox colors like black and brown create professional-grade presentation with
+                  dramatic depth, drawing viewer attention to the three-dimensional items inside
+                  while minimizing frame distraction. Light colors including white and natural wood
+                  suggest contemporary gallery styling, offering clean backgrounds that brighten
+                  spaces and complement modern décor aesthetics.
                 </p>
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed mb-4">
                   Consider whether your shadowbox should match or contrast with memorabilia
                   colors—matching creates cohesive thematic displays ideal for team collections,
-                  while contrasting emphasizes individual items. Metallic finishes like gold and
-                  silver add formal elegance for awards and championship memorabilia.
+                  while contrasting emphasizes individual items as focal points on gallery walls.
+                  Metallic finishes like gold and silver add formal elegance perfect for awards and
+                  championship memorabilia requiring prestigious presentation.
                 </p>
                 <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                  Frame color operates independently from preservation quality—UV protection depends
-                  on glazing selection. Choose shadowbox colors based on design preferences while
-                  selecting proper archival materials and UV-protective glazing for optimal
-                  memorabilia preservation.
+                  Remember that frame color operates independently from preservation quality—UV
+                  protection depends on glazing selection rather than finish. Choose shadowbox
+                  colors based on design preferences and room integration while selecting proper
+                  archival materials and UV-protective glass for optimal memorabilia preservation
+                  regardless of aesthetic choices.
                 </p>
               </div>
             </div>
@@ -262,10 +267,18 @@ export default function ShadowboxColorsPage() {
                   <CardContent className="pt-6">
                     <Trophy className="w-10 h-10 text-primary mb-4" />
                     <h3 className="text-xl font-bold mb-3">Sports Jerseys & Uniforms</h3>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Black shadowboxes deliver professional stadium-style presentation perfect for
+                      team jerseys, creating dramatic displays that emphasize uniform colors and
+                      player signatures. White frames provide clean gallery aesthetics ideal for
+                      light-colored jerseys and signed memorabilia requiring bright contemporary
+                      styling.
+                    </p>
                     <p className="text-sm text-muted-foreground">
-                      Black shadowboxes deliver professional stadium-style presentation. White
-                      frames provide clean gallery aesthetics for light-colored jerseys. Brown and
-                      natural wood add traditional warmth to vintage jerseys.
+                      Consider your display location—use team-color-matching frames for dedicated
+                      fan caves where thematic consistency matters, or select neutral colors for
+                      living spaces requiring broader décor integration. Brown and natural wood
+                      frames add traditional warmth to vintage jerseys and retro uniforms.
                     </p>
                   </CardContent>
                 </Card>
@@ -273,10 +286,17 @@ export default function ShadowboxColorsPage() {
                   <CardContent className="pt-6">
                     <Shield className="w-10 h-10 text-primary mb-4" />
                     <h3 className="text-xl font-bold mb-3">Military Medals & Awards</h3>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Gold and brown shadowbox frames offer traditional formal elegance appropriate
+                      for military honors, campaign medals, and service awards requiring dignified
+                      presentation. These classic finishes echo military tradition while providing
+                      sophisticated backdrop for ribbon colors and metallic insignia.
+                    </p>
                     <p className="text-sm text-muted-foreground">
-                      Gold and brown shadowbox frames offer traditional formal elegance for military
-                      honors. Black shadowboxes modernize military displays for contemporary
-                      interiors. Silver frames add refined metallic sophistication.
+                      Black shadowboxes modernize military displays for contemporary interiors,
+                      creating sleek professional presentation suitable for office environments and
+                      modern homes. Silver frames add refined metallic sophistication perfect for
+                      air force memorabilia and modern service recognition.
                     </p>
                   </CardContent>
                 </Card>
@@ -284,10 +304,17 @@ export default function ShadowboxColorsPage() {
                   <CardContent className="pt-6">
                     <Music className="w-10 h-10 text-primary mb-4" />
                     <h3 className="text-xl font-bold mb-3">Music Memorabilia</h3>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Natural wood and brown shadowboxes complement vintage vinyl records with warm
+                      organic tones that echo classic album era aesthetics. These finishes work
+                      beautifully for jazz collections, classic rock memorabilia, and retro music
+                      displays requiring period-appropriate presentation.
+                    </p>
                     <p className="text-sm text-muted-foreground">
-                      Natural wood and brown shadowboxes complement vintage vinyl records. Black
-                      frames modernize concert posters and signed guitars. White shadowboxes create
-                      gallery-quality presentation for album artwork.
+                      Black frames modernize concert posters, signed guitars, and contemporary music
+                      collectibles with bold dramatic styling. White shadowboxes create
+                      gallery-quality presentation for album artwork and signed photographs
+                      requiring clean contemporary aesthetics that work in modern listening rooms.
                     </p>
                   </CardContent>
                 </Card>
@@ -295,11 +322,171 @@ export default function ShadowboxColorsPage() {
                   <CardContent className="pt-6">
                     <Heart className="w-10 h-10 text-primary mb-4" />
                     <h3 className="text-xl font-bold mb-3">Personal Heirlooms</h3>
+                    <p className="text-sm text-muted-foreground mb-3">
+                      Match shadowbox colors to family décor for seamless interior integration—brown
+                      frames suit traditional homes with wood furniture, while white complements
+                      modern minimalist spaces. Natural wood finishes bridge styles, working equally
+                      well in transitional and contemporary settings.
+                    </p>
                     <p className="text-sm text-muted-foreground">
-                      Match shadowbox colors to family décor for seamless integration. White
-                      shadowboxes excel for wedding memorabilia including preserved bouquets and
-                      invitations. Gold frames add formal sophistication to family crests and
-                      ceremonial items.
+                      White shadowboxes excel for wedding memorabilia including preserved bouquets,
+                      invitations, and dress fabrics requiring pristine elegant presentation. Gold
+                      frames add formal sophistication to family crests, genealogy documents, and
+                      ceremonial items deserving prestigious display treatment.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Shadowbox Color Gallery Wall Combinations - from original */}
+        <section className="py-12 md:py-16 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+                Shadowbox Color Gallery Wall Combinations
+              </h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                <Card>
+                  <CardContent className="pt-6">
+                    <h3 className="text-xl font-bold mb-3">Matching Color Series</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Create cohesive themed displays using identical shadowbox colors throughout
+                      your gallery wall. All-black sports memorabilia walls deliver professional
+                      stadium aesthetics perfect for team shrines featuring jerseys, signed balls,
+                      and championship collectibles. Matching color series emphasize collection
+                      unity while maintaining clean visual consistency across multiple frames and
+                      varied memorabilia types.
+                    </p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-6">
+                    <h3 className="text-xl font-bold mb-3">Complementary Contrast</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Alternate black and white shadowboxes in checkerboard patterns for dynamic
+                      visual interest across diverse memorabilia collections. This high-contrast
+                      approach works beautifully mixing dark and light collectibles, creating rhythm
+                      through frame color variation while maintaining professional gallery
+                      presentation. Establish clear alternating patterns rather than random
+                      distribution for intentional design impact.
+                    </p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-6">
+                    <h3 className="text-xl font-bold mb-3">Metallic Accent Walls</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Gold and silver shadowboxes create prestigious award walls perfect for
+                      displaying medals, trophies, and championship memorabilia requiring formal
+                      elegant presentation. Mix metallic finishes strategically—cluster similar
+                      colors in groups or alternate metallics with neutral frames for sophisticated
+                      variation. Metallic accent walls work particularly well in offices, trophy
+                      rooms, and formal display spaces.
+                    </p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-6">
+                    <h3 className="text-xl font-bold mb-3">Natural Wood Warmth</h3>
+                    <p className="text-sm text-muted-foreground">
+                      Brown and natural wood shadowboxes create inviting warm gallery walls perfect
+                      for vintage heirloom collections, family memorabilia, and traditional
+                      displays. These organic tones work beautifully in living rooms and bedrooms
+                      requiring cozy intimate presentation. Mix different wood tones subtly or
+                      maintain consistent finish for unified traditional elegance across your
+                      shadowbox collection.
+                    </p>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-12 md:py-16 bg-background">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
+                Frequently Asked Questions
+              </h2>
+              <div className="space-y-6">
+                <Card>
+                  <CardContent className="pt-6">
+                    <h3 className="text-lg font-bold mb-3">
+                      What&apos;s the best shadowbox color for sports jerseys?
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      Black shadowbox frames are most popular for sports jerseys, creating
+                      professional stadium-style displays that emphasize team colors and signatures.
+                      White shadowboxes work beautifully for light-colored jerseys and signed
+                      memorabilia requiring clean gallery presentation. Consider matching your frame
+                      color to dominant team colors for cohesive displays, or select contrasting
+                      colors to make jerseys stand out as focal points on your wall.
+                    </p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-6">
+                    <h3 className="text-lg font-bold mb-3">
+                      Should I match shadowbox color to team colors or room décor?
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      Prioritize room décor integration for shadowboxes displayed in living spaces,
+                      bedrooms, and offices where interior design consistency matters most. Use
+                      team-color-matching frames for dedicated fan caves, sports rooms, and trophy
+                      walls where memorabilia theme takes precedence. For versatile displays that
+                      work anywhere, select neutral black, white, or brown shadowboxes that
+                      complement both your collectibles and surrounding furnishings.
+                    </p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-6">
+                    <h3 className="text-lg font-bold mb-3">
+                      Do dark shadowboxes protect memorabilia better than light ones?
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      Frame color does not affect UV protection or preservation quality—these depend
+                      on glazing selection and archival materials used inside the shadowbox.
+                      However, darker frame colors visually minimize dust visibility on glass
+                      surfaces and create professional-grade presentation aesthetics. Choose frame
+                      colors based on design preferences while selecting UV-protective glazing and
+                      acid-free backing materials for proper memorabilia preservation regardless of
+                      finish.
+                    </p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-6">
+                    <h3 className="text-lg font-bold mb-3">
+                      Can I mix different shadowbox colors on the same wall?
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      Mixing shadowbox colors creates dynamic gallery walls when executed with
+                      intentional strategy. Alternate two complementary colors in checkerboard
+                      patterns, group similar colors in thematic clusters, or create visual rhythm
+                      with repeating color sequences. Maintain consistent frame widths and depth
+                      profiles across different colors to preserve visual unity. Avoid random color
+                      distribution—establish clear organizational patterns for professional gallery
+                      wall presentation.
+                    </p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="pt-6">
+                    <h3 className="text-lg font-bold mb-3">
+                      What shadowbox color works best for vintage memorabilia?
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      Brown and natural wood shadowbox frames complement vintage memorabilia with
+                      warm traditional elegance that echoes antique styling. These finishes work
+                      particularly well for vinyl records, vintage photographs, heirloom textiles,
+                      and aged collectibles requiring period-appropriate presentation. Gold frames
+                      add formal sophistication to vintage military medals and formal awards, while
+                      black frames modernize vintage items for contemporary interior integration.
                     </p>
                   </CardContent>
                 </Card>
@@ -354,88 +541,6 @@ export default function ShadowboxColorsPage() {
         </section>
 
         <section className="py-12 md:py-16 bg-background">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
-                Frequently Asked Questions
-              </h2>
-              <div className="space-y-6">
-                <Card>
-                  <CardContent className="pt-6">
-                    <h3 className="text-lg font-bold mb-3">
-                      What&apos;s the best shadowbox color for sports jerseys?
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Black shadowbox frames are most popular for sports jerseys, creating
-                      professional stadium-style displays. White shadowboxes work beautifully for
-                      light-colored jerseys and signed memorabilia. Consider matching your frame
-                      color to dominant team colors or select contrasting colors to make jerseys
-                      stand out.
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="pt-6">
-                    <h3 className="text-lg font-bold mb-3">
-                      Should I match shadowbox color to team colors or room décor?
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Prioritize room décor integration for shadowboxes in living spaces, bedrooms,
-                      and offices. Use team-color-matching frames for dedicated fan caves and sports
-                      rooms. For versatile displays, select neutral black, white, or brown
-                      shadowboxes that complement both your collectibles and surrounding
-                      furnishings.
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="pt-6">
-                    <h3 className="text-lg font-bold mb-3">
-                      Do dark shadowboxes protect memorabilia better than light ones?
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Frame color does not affect UV protection or preservation quality—these depend
-                      on glazing selection and archival materials. Darker frame colors visually
-                      minimize dust visibility and create professional presentation. Choose frame
-                      colors based on design preferences while selecting UV-protective glazing and
-                      acid-free backing for proper preservation.
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="pt-6">
-                    <h3 className="text-lg font-bold mb-3">
-                      Can I mix different shadowbox colors on the same wall?
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Mixing shadowbox colors creates dynamic gallery walls when executed with
-                      intentional strategy. Alternate two complementary colors in checkerboard
-                      patterns, group similar colors in thematic clusters, or create visual rhythm
-                      with repeating sequences. Maintain consistent frame widths and depth profiles
-                      to preserve visual unity.
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="pt-6">
-                    <h3 className="text-lg font-bold mb-3">
-                      What shadowbox color works best for vintage memorabilia?
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      Brown and natural wood shadowbox frames complement vintage memorabilia with
-                      warm traditional elegance. These finishes work well for vinyl records, vintage
-                      photographs, heirloom textiles, and aged collectibles. Gold frames add formal
-                      sophistication to vintage military medals and formal awards. Black frames
-                      modernize vintage items for contemporary interior integration.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-12 md:py-16 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-2xl md:text-3xl font-bold mb-8 text-center">
