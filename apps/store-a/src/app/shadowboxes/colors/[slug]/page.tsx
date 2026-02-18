@@ -102,7 +102,7 @@ export default async function ShadowboxColorDetailPage({ params }: ShadowboxColo
   const complementaryNames = COMPLEMENTARY_COLORS_MAP[colorName] ?? [];
   const complementaryColors = complementaryNames
     .map((name) => SHADOWBOX_COLOR_METADATA[name as keyof typeof SHADOWBOX_COLOR_METADATA])
-    .filter(Boolean);
+    .filter((c): c is NonNullable<typeof c> => c != null);
 
   const faqItems = SHADOWBOX_COLOR_FAQ[colorName] ?? [];
   const frameMaterialsCopy = FRAME_MATERIALS_COPY[colorName] ?? "Premium hardwood construction.";
