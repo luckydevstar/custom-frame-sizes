@@ -1,11 +1,13 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo, useRef, lazy, Suspense } from "react";
 // Removed wouter useLocation - not needed in Next.js
 import { Maximize, X, Eye, Settings, Info, Smartphone, Copy } from "lucide-react";
 import { Button } from "../ui/button";
-import { ARViewer } from "../shared/ARViewer";
 import { Card } from "../ui/card";
+
+// Lazy-load ARViewer so @google/model-viewer (uses `self`) is never loaded on the server
+const ARViewer = lazy(() => import("../shared/ARViewer").then((m) => ({ default: m.ARViewer })));
 import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Checkbox } from "../ui/checkbox";
@@ -1392,7 +1394,9 @@ export function ShadowboxDesigner({
                 return cornerImage ? (
                   <div className="aspect-square rounded-md border overflow-hidden bg-background">
                     <img
-                      src={cornerImage.url}
+                      src={getStoreBaseAssetUrl(
+                        cornerImage.url.startsWith("/") ? cornerImage.url.slice(1) : cornerImage.url
+                      )}
                       alt={cornerImage.alt || `${selectedFrame.name} corner detail`}
                       className="w-full h-full object-cover"
                     />
@@ -1418,7 +1422,11 @@ export function ShadowboxDesigner({
                 return profileImage ? (
                   <div className="aspect-square rounded-md border overflow-hidden bg-background">
                     <img
-                      src={profileImage.url}
+                      src={getStoreBaseAssetUrl(
+                        profileImage.url.startsWith("/")
+                          ? profileImage.url.slice(1)
+                          : profileImage.url
+                      )}
                       alt={profileImage.alt || `${selectedFrame.name} profile view`}
                       className="w-full h-full object-cover"
                     />
@@ -1440,7 +1448,11 @@ export function ShadowboxDesigner({
                 return lifestyleImage ? (
                   <div className="aspect-square rounded-md border overflow-hidden bg-background">
                     <img
-                      src={lifestyleImage.url}
+                      src={getStoreBaseAssetUrl(
+                        lifestyleImage.url.startsWith("/")
+                          ? lifestyleImage.url.slice(1)
+                          : lifestyleImage.url
+                      )}
                       alt={lifestyleImage.alt || `${selectedFrame.name} lifestyle`}
                       className="w-full h-full object-cover"
                     />
@@ -2418,34 +2430,40 @@ export function ShadowboxDesigner({
 
       {/* AR Viewer Modal */}
       {showARViewer && (
-        <ARViewer
-          config={{
-            serviceType: "frame-only",
-            artworkWidth: parseFraction(artworkWidth),
-            artworkHeight: parseFraction(artworkHeight),
-            frameStyleId: selectedFrame.id,
-            matType,
-            matBorderWidth: parseFraction(matBorderWidth),
-            matRevealWidth: parseFraction(matRevealWidth),
-            matColorId: selectedMat.id,
-            matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
-            glassTypeId: selectedGlass?.id ?? "standard",
-            imageUrl: undefined, // Shadowboxes typically don't have photos
-            copyrightAgreed: true,
-          }}
-          onClose={() => setShowARViewer(false)}
-          onSizeUpdate={(newWidth, newHeight) => {
-            // Update dimensions from AR resize
-            setArtworkWidth(newWidth.toString());
-            setArtworkHeight(newHeight.toString());
+        <Suspense
+          fallback={
+            <div className="flex items-center justify-center p-8">Loading AR viewer...</div>
+          }
+        >
+          <ARViewer
+            config={{
+              serviceType: "frame-only",
+              artworkWidth: parseFraction(artworkWidth),
+              artworkHeight: parseFraction(artworkHeight),
+              frameStyleId: selectedFrame.id,
+              matType,
+              matBorderWidth: parseFraction(matBorderWidth),
+              matRevealWidth: parseFraction(matRevealWidth),
+              matColorId: selectedMat.id,
+              matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
+              glassTypeId: selectedGlass?.id ?? "standard",
+              imageUrl: undefined, // Shadowboxes typically don't have photos
+              copyrightAgreed: true,
+            }}
+            onClose={() => setShowARViewer(false)}
+            onSizeUpdate={(newWidth, newHeight) => {
+              // Update dimensions from AR resize
+              setArtworkWidth(newWidth.toString());
+              setArtworkHeight(newHeight.toString());
 
-            // Show success toast
-            toast({
-              title: "Size Updated",
-              description: `Shadowbox size updated to ${newWidth}" × ${newHeight}" from AR preview`,
-            });
-          }}
-        />
+              // Show success toast
+              toast({
+                title: "Size Updated",
+                description: `Shadowbox size updated to ${newWidth}" × ${newHeight}" from AR preview`,
+              });
+            }}
+          />
+        </Suspense>
       )}
     </>
   );

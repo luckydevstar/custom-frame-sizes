@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Mobile View Toggle Hook with Scroll Position Memory
  *

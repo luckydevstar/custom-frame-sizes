@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Button } from "../ui/button";
 import { ArrowRight, Shirt, GraduationCap, LayoutGrid, Disc3, BookOpen, Film } from "lucide-react";
 import { useState, useEffect } from "react";
-import { getSharedAssetUrl, getStoreBaseAssetUrl } from "@framecraft/core";
+import { getSharedAssetUrl, getJerseyLifestyleImages } from "@framecraft/core";
 import type { LucideIcon } from "lucide-react";
 
 interface SpecialtyDesigner {
@@ -30,7 +30,7 @@ const SPECIALTY_DESIGNERS: SpecialtyDesigner[] = [
     href: "/jersey-frames",
     icon: Shirt,
     features: ["Multiple depths available", "Jersey mounting included", "Team color mats"],
-    image: getStoreBaseAssetUrl("frames/10727/10727_jersey_lifestyle_01.jpg"),
+    image: getJerseyLifestyleImages()[0]?.url ?? "",
     imageAlt: "Framed sports jersey displayed in home office",
     category: "memorabilia",
   },

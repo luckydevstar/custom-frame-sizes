@@ -1,16 +1,28 @@
 import type { Metadata } from "next";
 import nextDynamic from "next/dynamic";
 import { Suspense } from "react";
-import { Heart, Flower2, Shield, Calendar, Award, Sparkles } from "lucide-react";
-import { Card } from "@framecraft/ui";
+import Link from "next/link";
+import { Heart, Flower2, Shield, Calendar, Award, Sparkles, ArrowDown } from "lucide-react";
+import { Card, Button } from "@framecraft/ui";
 import { RelatedProducts } from "@/components/RelatedProducts";
 import { ScrollToDesignerButton } from "./scroll-button";
 import { brandConfig } from "../../brand.config";
+import type { ShadowboxConfig } from "@framecraft/types";
 
 const ShadowboxDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
   { ssr: false }
 );
+
+/** Bouquet-page defaults: 20×24", 2" depth for preserved bouquets, white mat, light backing. */
+const BOUQUET_INITIAL_CONFIG: ShadowboxConfig = {
+  widthIn: 20,
+  heightIn: 24,
+  depthIn: 2,
+  matLayers: [{ color: "#FFFFFF", thicknessIn: 2.5 }],
+  background: { material: "mat-color", color: "#F5F5F0" },
+  glazing: "acrylic",
+};
 
 export const dynamic = "force-dynamic";
 
@@ -237,7 +249,7 @@ export default function BouquetFramesPage() {
                 </div>
               }
             >
-              <ShadowboxDesigner />
+              <ShadowboxDesigner embedded initialConfig={BOUQUET_INITIAL_CONFIG} />
             </Suspense>
           </div>
         </section>
@@ -348,6 +360,22 @@ export default function BouquetFramesPage() {
                 </p>
               </Card>
             </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="container mx-auto px-4 py-12 border-t">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">Ready to Frame Your Bouquet?</h2>
+            <p className="text-muted-foreground mb-6">
+              Choose your size and finish. Get instant pricing.
+            </p>
+            <Button size="lg" asChild>
+              <Link href="#bouquet-designer">
+                <ArrowDown className="w-4 h-4 mr-2" />
+                Start Designing
+              </Link>
+            </Button>
           </div>
         </section>
 

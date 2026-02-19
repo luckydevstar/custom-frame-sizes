@@ -2,11 +2,10 @@ import type { Metadata } from "next";
 import nextDynamic from "next/dynamic";
 import { Suspense } from "react";
 import { Sparkles, Shield, Package, Layers, Target } from "lucide-react";
-import { RelatedProducts } from "@/components/RelatedProducts";
 import { ScrollToDesignerButton } from "./scroll-button";
 
-const ShadowboxDesigner = nextDynamic(
-  () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
+const PuckFrameDesigner = nextDynamic(
+  () => import("@framecraft/ui").then((m) => m.PuckFrameDesigner),
   { ssr: false }
 );
 
@@ -153,43 +152,99 @@ export default function HockeyPuckFrameDesignerPage() {
                   </div>
                 }
               >
-                <ShadowboxDesigner />
+                <PuckFrameDesigner embedded />
               </Suspense>
             </div>
           </div>
         </section>
 
-        {/* How It Works / What's Included */}
-        <section className="py-12 bg-muted/30">
+        {/* What's Included */}
+        <section className="py-12 md:py-16 border-t">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
-              <h2 className="text-2xl md:text-3xl font-bold mb-6">How Puck Display Frames Work</h2>
-              <p className="text-muted-foreground mb-6">
-                Our hockey puck frames are deep shadowbox frames with a custom-cut foam insert. You
-                receive the frame and a nesting foam panel with circular cutouts sized for standard
-                NHL pucks. Pucks friction-fit into the holes—no adhesives, no hardware that could
-                damage autographs or the puck surface. Layouts are available for 1 to 12 pucks, with
-                optional openings for a photo or nameplate.
-              </p>
-              <h3 className="text-xl font-semibold mb-3">What&apos;s Included</h3>
-              <ul className="text-muted-foreground space-y-2 list-disc list-inside mb-6">
-                <li>Deep shadowbox frame in your chosen size and finish</li>
-                <li>Precision-cut foam insert with puck cutouts (friction-fit)</li>
-                <li>Framer&apos;s grade acrylic glazing</li>
-                <li>Hanging hardware</li>
-              </ul>
-              <p className="text-muted-foreground">
-                Design your frame above to choose dimensions and finish. We build each kit to order
-                in our frame shop.
-              </p>
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">
+                What&apos;s Included
+              </h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="p-5 rounded-lg border bg-card">
+                  <h3 className="font-semibold mb-2">Extra-Deep Frame</h3>
+                  <p className="text-sm text-muted-foreground">
+                    2&quot; usable depth in matte black, bright white, or walnut brown wood finish.
+                  </p>
+                </div>
+                <div className="p-5 rounded-lg border bg-card">
+                  <h3 className="font-semibold mb-2">Mat Board with Precision Openings</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Archival mat with 3&quot; diameter circular cutouts for each puck. Choose any
+                    mat color.
+                  </p>
+                </div>
+                <div className="p-5 rounded-lg border bg-card">
+                  <h3 className="font-semibold mb-2">Framer&apos;s Grade Acrylic</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Crystal-clear protection that helps prevent fading of autographs and logos.
+                  </p>
+                </div>
+                <div className="p-5 rounded-lg border bg-card">
+                  <h3 className="font-semibold mb-2">Hanging Hardware</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Sawtooth hanger included. Security hardware available for public display.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        <RelatedProducts
-          productKeys={["jersey-frames", "signature-frames", "comic-frames", "picture-frames"]}
-          columns={4}
-        />
+        {/* Hockey Puck Frame FAQ */}
+        <section className="py-12 md:py-16 border-t bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">
+                Hockey Puck Frame FAQ
+              </h2>
+              <div className="space-y-4">
+                <div className="p-5 rounded-lg border bg-card">
+                  <h3 className="font-semibold mb-2">What size are the puck openings?</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Each opening is exactly 3&quot; in diameter, sized for standard hockey pucks
+                    (3&quot; wide × 1&quot; thick).
+                  </p>
+                </div>
+                <div className="p-5 rounded-lg border bg-card">
+                  <h3 className="font-semibold mb-2">How deep is the frame?</h3>
+                  <p className="text-sm text-muted-foreground">
+                    The frame has 2&quot; usable depth, providing ample room for pucks plus the mat
+                    and acrylic.
+                  </p>
+                </div>
+                <div className="p-5 rounded-lg border bg-card">
+                  <h3 className="font-semibold mb-2">Will autographed pucks be protected?</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Yes. Framer&apos;s grade acrylic helps prevent fading of signatures. Display
+                    away from direct sunlight for best results.
+                  </p>
+                </div>
+                <div className="p-5 rounded-lg border bg-card">
+                  <h3 className="font-semibold mb-2">Can I add a brass nameplate?</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Yes. Add custom text (player name, game date, team) on a polished brass
+                    nameplate with your choice of font.
+                  </p>
+                </div>
+                <div className="p-5 rounded-lg border bg-card">
+                  <h3 className="font-semibold mb-2">
+                    What&apos;s the difference between single and double mat?
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Single mat uses one color around the puck openings. Double mat adds a second
+                    color visible as a thin reveal ring around each opening.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );

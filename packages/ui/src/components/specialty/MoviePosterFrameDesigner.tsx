@@ -27,6 +27,7 @@ import {
   getSharedAssetUrl,
   getMatTilingStyle,
   getMatBevelColor,
+  getStoreBaseAssetUrl,
 } from "@framecraft/core";
 import { useToast } from "../../hooks/use-toast";
 import { ALL_MATS, getMatsInDisplayOrder, getMatById, type Mat } from "@framecraft/config";
@@ -1048,7 +1049,11 @@ export function MoviePosterFrameDesigner({
                         {frame.thumbnail ? (
                           <div className="h-12 w-full rounded mb-2 overflow-hidden">
                             <img
-                              src={frame.thumbnail}
+                              src={getStoreBaseAssetUrl(
+                                frame.thumbnail.startsWith("/")
+                                  ? frame.thumbnail.slice(1)
+                                  : frame.thumbnail
+                              )}
                               alt={frame.name}
                               className="h-full w-full object-cover"
                               loading="lazy"

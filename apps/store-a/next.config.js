@@ -18,7 +18,6 @@ const assetsRewrite = {
   source: '/assets/:path*',
   destination: '/api/asset/assets/:path*',
 };
-
 const nextConfig = {
   reactStrictMode: true,
   async rewrites() {

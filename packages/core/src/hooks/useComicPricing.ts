@@ -10,6 +10,8 @@
  * - Brass plaque addon
  */
 
+"use client";
+
 import { useMemo } from "react";
 import {
   getComicLayout,

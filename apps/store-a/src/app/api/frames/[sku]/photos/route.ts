@@ -66,17 +66,31 @@ export async function GET(_request: NextRequest, { params }: { params: { sku: st
       return undefined;
     };
 
+    // Many frames (e.g. shadowbox 9448) use type "designer" with edge_top.jpg, edge_bottom.jpg, etc.
+    // Resolve top/bottom/left/right from these when type "top"/"bottom" is not present.
+    const getDesignerEdgeUrl = (
+      edgeName: "edge_top" | "edge_bottom" | "edge_left" | "edge_right"
+    ): string | undefined => {
+      const img = frame.alternateImages?.find(
+        (i: { type: string; url: string }) =>
+          i.type === "designer" && i.url && i.url.includes(edgeName)
+      );
+      if (!img?.url) return undefined;
+      const localPath = img.url.startsWith("/") ? img.url.slice(1) : img.url;
+      return getStoreBaseAssetUrl(localPath);
+    };
+
     // Get image URLs from alternateImages
     const cornerUrl = getImageByType("corner");
     const profileUrl = getImageByType("profile");
     const lifestyleUrl = getImageByType("lifestyle", true); // Random lifestyle
 
-    // For top/bottom/left/right, check frame.photos first, then fallback to alternateImages
+    // For top/bottom/left/right: frame.photos > type "top"/"bottom"/... > designer edge_* > getFrameImageUrl (top.jpg etc.)
     const topUrl = frame.photos?.topUrl
       ? getStoreBaseAssetUrl(
           frame.photos.topUrl.startsWith("/") ? frame.photos.topUrl.slice(1) : frame.photos.topUrl
         )
-      : getImageByType("top") || getFrameImageUrl(sku, "top");
+      : getImageByType("top") || getDesignerEdgeUrl("edge_top") || getFrameImageUrl(sku, "top");
 
     const bottomUrl = frame.photos?.bottomUrl
       ? getStoreBaseAssetUrl(
@@ -84,7 +98,9 @@ export async function GET(_request: NextRequest, { params }: { params: { sku: st
             ? frame.photos.bottomUrl.slice(1)
             : frame.photos.bottomUrl
         )
-      : getImageByType("bottom") || getFrameImageUrl(sku, "bottom");
+      : getImageByType("bottom") ||
+        getDesignerEdgeUrl("edge_bottom") ||
+        getFrameImageUrl(sku, "bottom");
 
     const leftUrl = frame.photos?.leftUrl
       ? getStoreBaseAssetUrl(
@@ -92,7 +108,7 @@ export async function GET(_request: NextRequest, { params }: { params: { sku: st
             ? frame.photos.leftUrl.slice(1)
             : frame.photos.leftUrl
         )
-      : getImageByType("left") || getFrameImageUrl(sku, "left");
+      : getImageByType("left") || getDesignerEdgeUrl("edge_left") || getFrameImageUrl(sku, "left");
 
     const rightUrl = frame.photos?.rightUrl
       ? getStoreBaseAssetUrl(
@@ -100,7 +116,9 @@ export async function GET(_request: NextRequest, { params }: { params: { sku: st
             ? frame.photos.rightUrl.slice(1)
             : frame.photos.rightUrl
         )
-      : getImageByType("right") || getFrameImageUrl(sku, "right");
+      : getImageByType("right") ||
+        getDesignerEdgeUrl("edge_right") ||
+        getFrameImageUrl(sku, "right");
 
     return NextResponse.json({
       sku,

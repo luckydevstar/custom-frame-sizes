@@ -390,6 +390,15 @@ export { ComingSoonDesigner } from "./components/specialty/ComingSoonDesigner";
 export { DiplomaLifestyleCarousel } from "./components/specialty/DiplomaLifestyleCarousel";
 export { RecordAlbumDesigner } from "./components/specialty/RecordAlbumDesigner";
 export { RecordAlbumPreview } from "./components/specialty/RecordAlbumPreview";
+export { CurrencyFrameDesigner } from "./components/specialty/CurrencyFrameDesigner";
+export { CurrencyPreviewCanvas } from "./components/specialty/CurrencyPreviewCanvas";
+export type {
+  CurrencyPreviewCanvasLayout,
+  CurrencyAdjustedLayout,
+} from "./components/specialty/CurrencyPreviewCanvas";
+export { PuckFrameDesigner } from "./components/specialty/PuckFrameDesigner";
+export { PuckPreviewCanvas } from "./components/specialty/PuckPreviewCanvas";
+export { PuckLifestyleCarousel } from "./components/specialty/PuckLifestyleCarousel";
 
 // Specialty shared components
 export {
@@ -405,6 +414,7 @@ export type { LifestyleImage } from "./components/specialty/shared";
 export { PuzzleLifestyleCarousel } from "./components/specialty/PuzzleLifestyleCarousel";
 export { PlaybillLifestyleCarousel } from "./components/specialty/PlaybillLifestyleCarousel";
 export { JerseyLifestyleCarousel } from "./components/specialty/JerseyLifestyleCarousel";
+export { MilitaryLifestyleCarousel } from "./components/specialty/MilitaryLifestyleCarousel";
 export { CollageLifestyleCarousel } from "./components/specialty/CollageLifestyleCarousel";
 export { ComicLifestyleCarousel } from "./components/specialty/ComicLifestyleCarousel";
 export { GradedCardLifestyleCarousel } from "./components/specialty/GradedCardLifestyleCarousel";

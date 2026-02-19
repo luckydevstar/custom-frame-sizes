@@ -3,6 +3,8 @@
  * Uses core pricing engine for frame + glazing; adds collage-specific surcharges.
  */
 
+"use client";
+
 import { useMemo } from "react";
 import type { FrameStyle, GlassType, FrameConfiguration } from "@framecraft/types";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";

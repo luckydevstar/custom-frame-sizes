@@ -24,6 +24,7 @@ import {
   useIntelligentPreviewSizing,
   useIsMobile,
   useMobileViewToggle,
+  getStoreBaseAssetUrl,
   type TicketStubLayoutType,
 } from "@framecraft/core";
 import { ALL_MATS, getMatById, type Mat } from "@framecraft/config";
@@ -617,7 +618,11 @@ export function TicketStubFrameDesigner({
                             {frame.thumbnail ? (
                               <div className="h-12 w-full rounded mb-2 overflow-hidden">
                                 <img
-                                  src={frame.thumbnail}
+                                  src={getStoreBaseAssetUrl(
+                                    frame.thumbnail.startsWith("/")
+                                      ? frame.thumbnail.slice(1)
+                                      : frame.thumbnail
+                                  )}
                                   alt={frame.name}
                                   className="h-full w-full object-cover"
                                 />

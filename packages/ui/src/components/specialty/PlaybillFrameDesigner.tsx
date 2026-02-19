@@ -694,7 +694,11 @@ export function PlaybillFrameDesigner({
                           data-testid="button-view-corner"
                         >
                           <img
-                            src={cornerImage.url}
+                            src={getStoreBaseAssetUrl(
+                              cornerImage.url.startsWith("/")
+                                ? cornerImage.url.slice(1)
+                                : cornerImage.url
+                            )}
                             alt={cornerImage.alt || `${selectedFrame.name} corner detail`}
                             className="w-full h-full object-cover"
                           />
@@ -738,7 +742,11 @@ export function PlaybillFrameDesigner({
                           data-testid="button-view-profile"
                         >
                           <img
-                            src={profileImage.url}
+                            src={getStoreBaseAssetUrl(
+                              profileImage.url.startsWith("/")
+                                ? profileImage.url.slice(1)
+                                : profileImage.url
+                            )}
                             alt={profileImage.alt || `${selectedFrame.name} profile`}
                             className="w-full h-full object-cover"
                           />

@@ -44,6 +44,7 @@ import {
   SIGNATURE_MAT_BORDER_MAX,
   SIGNATURE_MAT_BORDER_DEFAULT,
   getSignatureOpeningSizeInches,
+  getStoreBaseAssetUrl,
   type SignatureOpeningSize,
   type SignatureOpeningShape,
 } from "@framecraft/core";
@@ -671,7 +672,11 @@ export function SignatureFrameDesigner({
                         {frame.thumbnail ? (
                           <div className="h-12 w-full rounded mb-2 overflow-hidden">
                             <img
-                              src={frame.thumbnail}
+                              src={getStoreBaseAssetUrl(
+                                frame.thumbnail.startsWith("/")
+                                  ? frame.thumbnail.slice(1)
+                                  : frame.thumbnail
+                              )}
                               alt={frame.name}
                               className="h-full w-full object-cover"
                             />

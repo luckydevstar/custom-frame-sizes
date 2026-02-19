@@ -4,6 +4,8 @@
  * Comprehensive pricing for magazine shadowbox frames.
  */
 
+"use client";
+
 import { useMemo } from "react";
 import { getMagazineLayout, type MagazineLayoutType } from "../utils/specialty/magazine-layouts";
 import { getMagazineSizeById } from "../utils/specialty/magazine-sizes";

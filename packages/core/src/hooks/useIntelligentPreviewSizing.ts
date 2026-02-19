@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Intelligent Preview Sizing Hook
  *

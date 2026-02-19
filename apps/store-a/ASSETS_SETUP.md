@@ -133,6 +133,23 @@ The validation schema accepts:
 - ✅ Relative paths starting with `/` (/assets/brand/logo.png)
 - ✅ Logo is optional (can be `null` or `undefined`)
 
+## Frame images (corner, profile, lifestyle)
+
+Designer pages (jersey, certificate, etc.) request frame images like `/frames/10727/10727_corner_a.jpg` and `/frames/10727/10727-pro-a.jpg`. Those URLs are rewritten to `/api/asset/frames/10727/...`, which serves from **`assets_to_use/store-a_assets/frames/<sku>/`** when not using the store-a CDN.
+
+To fix 404s for frame 10727 (and 10728, 10729, etc.):
+
+1. **Local dev (no CDN)**  
+   Create `assets_to_use/store-a_assets/frames/10727/` and add the image files.  
+   Use the **normalized** filenames (underscore `corner_a` → hyphen `corner-a` in file): e.g. **`10727_corner-a.jpg`**, **`10727-pro-a.jpg`**.  
+   The API route will also try `10727_corner_a.jpg` if `10727_corner-a.jpg` is missing.
+
+2. **Production (CDN)**  
+   Upload the same files to your **store-a** R2 bucket under `frames/10727/` (e.g. `frames/10727/10727_corner-a.jpg`).  
+   Set `NEXT_PUBLIC_CDN_STORE_A_URL` so the app uses the CDN for these paths.
+
+Jersey (and other) **lifestyle** images are now in the **shared** bucket under `jersey/lifestyle/`, `puck/lifestyle/`, etc. Use the upload scripts in `useful-scripts` (e.g. `r2:upload-jersey-lifestyle`) for those.
+
 ## Next Steps
 
 1. **For Development**: ✅ SVG placeholders are working - no action needed

@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Hook that uses IntersectionObserver to detect if an element is visible in the viewport.
  * Returns true if the element is visible, false if it's scrolled out of view.

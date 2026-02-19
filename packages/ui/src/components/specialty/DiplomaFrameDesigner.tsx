@@ -47,6 +47,7 @@ import {
   getMatBevelColor,
   DIPLOMA_SIZES,
   getDiplomaSizeById,
+  getStoreBaseAssetUrl,
   type DiplomaSize,
 } from "@framecraft/core";
 import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
@@ -2675,7 +2676,11 @@ export function DiplomaFrameDesigner({
                             {frame.thumbnail ? (
                               <div className="h-12 w-full rounded mb-2 overflow-hidden">
                                 <img
-                                  src={frame.thumbnail}
+                                  src={getStoreBaseAssetUrl(
+                                    frame.thumbnail.startsWith("/")
+                                      ? frame.thumbnail.slice(1)
+                                      : frame.thumbnail
+                                  )}
                                   alt={frame.name}
                                   className="h-full w-full object-cover"
                                 />

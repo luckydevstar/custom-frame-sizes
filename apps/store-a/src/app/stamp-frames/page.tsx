@@ -1,15 +1,40 @@
 import type { Metadata } from "next";
 import nextDynamic from "next/dynamic";
 import { Suspense } from "react";
-import { Stamp, Clock, CheckCircle, Shield, Hexagon, Ruler, Award, Hand } from "lucide-react";
-import { Badge } from "@framecraft/ui";
+import Link from "next/link";
+import {
+  Stamp,
+  Clock,
+  CheckCircle,
+  Shield,
+  Hexagon,
+  Ruler,
+  Award,
+  Hand,
+  ArrowDown,
+} from "lucide-react";
+import { Badge, Button } from "@framecraft/ui";
 import { ScrollToDesignerButton } from "./scroll-button";
 import { RelatedProducts } from "@/components/RelatedProducts";
+import type { ShadowboxConfig } from "@framecraft/types";
 
 const ShadowboxDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
   { ssr: false }
 );
+
+/** Stamp-page defaults: Compact 14×12", white-on-black double mat, black backing. */
+const STAMP_INITIAL_CONFIG: ShadowboxConfig = {
+  widthIn: 14,
+  heightIn: 12,
+  depthIn: 1.25,
+  matLayers: [
+    { color: "#FFFFFF", thicknessIn: 2.5 },
+    { color: "#000000", thicknessIn: 0.25 },
+  ],
+  background: { material: "mat-color", color: "#000000" },
+  glazing: "acrylic",
+};
 
 export const dynamic = "force-dynamic";
 
@@ -226,7 +251,7 @@ export default function StampFramesPage() {
                   </div>
                 }
               >
-                <ShadowboxDesigner />
+                <ShadowboxDesigner embedded initialConfig={STAMP_INITIAL_CONFIG} />
               </Suspense>
             </div>
           </div>
@@ -349,6 +374,26 @@ export default function StampFramesPage() {
                   collection names, issue dates, or descriptive labels.
                 </p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="py-12 border-t bg-muted/20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                Ready to Design Your Stamp Frame?
+              </h2>
+              <p className="text-muted-foreground mb-6">
+                Choose your size and mat colors. Get instant pricing.
+              </p>
+              <Button size="lg" asChild>
+                <Link href="#stamp-designer">
+                  <ArrowDown className="w-4 h-4 mr-2" />
+                  Start Designing
+                </Link>
+              </Button>
             </div>
           </div>
         </section>

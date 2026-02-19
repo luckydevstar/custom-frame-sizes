@@ -8,7 +8,9 @@
   "types": "./src/index.ts",
   "exports": {
     ".": "./src/index.ts",
-    "./lib/puzzle-lifestyle-images": "./src/lib/puzzle-lifestyle-images.ts"
+    "./lib/puzzle-lifestyle-images": "./src/lib/puzzle-lifestyle-images.ts",
+    "./lib/military-lifestyle-images": "./src/lib/military-lifestyle-images.ts",
+    "./utils/asset-urls": "./src/utils/asset-urls.ts"
   },
   "scripts": {
     "build": "tsc --build",

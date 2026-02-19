@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Hook for rotating testimonials with auto-advance and manual controls
  * Supports pause-on-hover and respects prefers-reduced-motion

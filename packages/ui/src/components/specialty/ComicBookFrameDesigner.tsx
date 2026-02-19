@@ -934,7 +934,11 @@ export function ComicBookFrameDesigner({
                           className="aspect-square rounded-md border overflow-hidden bg-background hover-elevate active-elevate-2"
                         >
                           <img
-                            src={cornerImage.url}
+                            src={getStoreBaseAssetUrl(
+                              cornerImage.url.startsWith("/")
+                                ? cornerImage.url.slice(1)
+                                : cornerImage.url
+                            )}
                             alt={cornerImage.alt || `${selectedFrame.name} corner detail`}
                             className="w-full h-full object-cover"
                           />
@@ -976,7 +980,11 @@ export function ComicBookFrameDesigner({
                           className="aspect-square rounded-md border overflow-hidden bg-background hover-elevate active-elevate-2"
                         >
                           <img
-                            src={profileImage.url}
+                            src={getStoreBaseAssetUrl(
+                              profileImage.url.startsWith("/")
+                                ? profileImage.url.slice(1)
+                                : profileImage.url
+                            )}
                             alt={profileImage.alt || `${selectedFrame.name} profile`}
                             className="w-full h-full object-cover"
                           />
@@ -1644,9 +1652,16 @@ export function ComicBookFrameDesigner({
                     (img: AlternateImage) => img.type === "corner" && img.url.includes("corner_a")
                   );
                   const imageUrl = cornerImage?.url || framePhotos.cornerUrl;
-                  return imageUrl ? (
+                  const resolvedUrl = imageUrl?.startsWith("http")
+                    ? imageUrl
+                    : imageUrl
+                      ? getStoreBaseAssetUrl(
+                          imageUrl.startsWith("/") ? imageUrl.slice(1) : imageUrl
+                        )
+                      : undefined;
+                  return resolvedUrl ? (
                     <img
-                      src={imageUrl}
+                      src={resolvedUrl}
                       alt="Frame corner detail"
                       className="max-w-full max-h-full object-contain"
                     />
@@ -1658,9 +1673,16 @@ export function ComicBookFrameDesigner({
                     (img: AlternateImage) => img.type === "profile"
                   );
                   const imageUrl = profileImage?.url || framePhotos.profileUrl;
-                  return imageUrl ? (
+                  const resolvedUrl = imageUrl?.startsWith("http")
+                    ? imageUrl
+                    : imageUrl
+                      ? getStoreBaseAssetUrl(
+                          imageUrl.startsWith("/") ? imageUrl.slice(1) : imageUrl
+                        )
+                      : undefined;
+                  return resolvedUrl ? (
                     <img
-                      src={imageUrl}
+                      src={resolvedUrl}
                       alt="Frame profile view"
                       className="max-w-full max-h-full object-contain"
                     />

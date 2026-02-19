@@ -1,18 +1,42 @@
 import type { Metadata } from "next";
 import nextDynamic from "next/dynamic";
 import { Suspense } from "react";
+import Link from "next/link";
 import { Award, Clock, CheckCircle, Shield } from "lucide-react";
 import { Badge, Card } from "@framecraft/ui";
-import { getStoreBaseAssetUrl } from "@framecraft/core";
+import { getStoreBaseAssetUrl } from "@framecraft/core/utils/asset-urls";
+import { getMilitaryLifestyleImageByNumber } from "@framecraft/core/lib/military-lifestyle-images";
+import { brandConfig } from "../../brand.config";
 import { RelatedProducts } from "@/components/RelatedProducts";
 import { ScrollToDesignerButton } from "./scroll-button";
+import { MilitaryLifestyleCarousel } from "@framecraft/ui";
+import type { ShadowboxConfig } from "@framecraft/types";
 
+/**
+ * Original uses MilitaryFrameDesigner (branch presets, military layouts).
+ * We use ShadowboxDesigner with military initial config until MilitaryFrameDesigner is ported.
+ */
 const ShadowboxDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
   { ssr: false }
 );
 
+/** Military-page defaults: Standard 16×20", 2" depth, double mat (Army-style green/black), suede backing. */
+const MILITARY_INITIAL_CONFIG: ShadowboxConfig = {
+  widthIn: 16,
+  heightIn: 20,
+  depthIn: 2,
+  matLayers: [
+    { color: "#4B5320", thicknessIn: 2.5 },
+    { color: "#000000", thicknessIn: 0.25 },
+  ],
+  background: { material: "suede", color: "#2C1810" },
+  glazing: "acrylic",
+};
+
 export const dynamic = "force-dynamic";
+
+const baseUrl = brandConfig.seo?.canonicalUrl ?? "https://customframesizes.com";
 
 export const metadata: Metadata = {
   title:
@@ -35,16 +59,24 @@ const productSchema = {
   "@type": "Product",
   name: "Military Shadow Box Frames",
   description:
-    "Professional shadowbox frames for military memorabilia with branch-specific color schemes (Army, Navy, Air Force, Marine Corps, Coast Guard, Space Force), premium suede backing, 2-inch usable depth, and conservation mounting.",
+    "Professional shadowbox frames for military memorabilia with branch-specific color schemes (Army, Navy, Air Force, Marine Corps, Coast Guard, Space Force), premium suede backing, 2-inch usable depth, and conservation mounting. Designed for medals, ribbons, patches, flags, and photos.",
   category: "Military Memorabilia Framing",
   sku: "MILITARY-FRAME-CUSTOM",
-  brand: { "@type": "Brand", name: "Custom Frame Sizes" },
+  brand: { "@type": "Brand", name: brandConfig.name },
+  image: getStoreBaseAssetUrl("military/lifestyle/lifestyle_01.jpg"),
+  url: `${baseUrl}/military-frames`,
   offers: {
     "@type": "AggregateOffer",
     availability: "https://schema.org/InStock",
     priceCurrency: "USD",
     lowPrice: "129",
     highPrice: "299",
+    priceSpecification: {
+      "@type": "PriceSpecification",
+      minPrice: "129",
+      maxPrice: "299",
+      priceCurrency: "USD",
+    },
   },
   aggregateRating: {
     "@type": "AggregateRating",
@@ -53,6 +85,23 @@ const productSchema = {
     bestRating: "5",
     worstRating: "1",
   },
+  additionalProperty: [
+    { "@type": "PropertyValue", name: "Frame Depth", value: "2 inches usable depth" },
+    { "@type": "PropertyValue", name: "Backing Material", value: "Premium suede in branch colors" },
+    {
+      "@type": "PropertyValue",
+      name: "Mat Configuration",
+      value: "Triple mat system with branch-specific colors",
+    },
+    {
+      "@type": "PropertyValue",
+      name: "Military Branches",
+      value: "Army, Navy, Air Force, Marine Corps, Coast Guard, Space Force",
+    },
+    { "@type": "PropertyValue", name: "Available Sizes", value: "11×14, 16×20, 20×32 inches" },
+    { "@type": "PropertyValue", name: "Production Time", value: "7-10 business days" },
+    { "@type": "PropertyValue", name: "Warranty", value: "Lifetime craftsmanship guarantee" },
+  ],
 };
 
 const faqSchema = {
@@ -110,6 +159,20 @@ const faqSchema = {
   ],
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    { "@type": "ListItem", position: 1, name: "Home", item: baseUrl },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "Military Shadow Box Frames",
+      item: `${baseUrl}/military-frames`,
+    },
+  ],
+};
+
 const branches = [
   { name: "Army", desc: "Army Green, Black, and Gold colors match Army heritage." },
   { name: "Navy", desc: "Navy Blue, Gold, and White colors for naval tradition." },
@@ -120,8 +183,20 @@ const branches = [
 ];
 
 export default function MilitaryFramesPage() {
+  const img12 = getMilitaryLifestyleImageByNumber(12);
+  const img27 = getMilitaryLifestyleImageByNumber(27);
+  const img08 = getMilitaryLifestyleImageByNumber(8);
+  const img35 = getMilitaryLifestyleImageByNumber(35);
+  const img42 = getMilitaryLifestyleImageByNumber(42);
+  const img18 = getMilitaryLifestyleImageByNumber(18);
+  const img50 = getMilitaryLifestyleImageByNumber(50);
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productSchema) }}
@@ -132,7 +207,7 @@ export default function MilitaryFramesPage() {
       />
 
       <div className="min-h-screen">
-        {/* Hero */}
+        {/* Hero Section – original */}
         <section className="relative bg-gradient-to-br from-background to-muted py-12 md:py-16">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
@@ -152,8 +227,8 @@ export default function MilitaryFramesPage() {
           </div>
         </section>
 
-        {/* Designer */}
-        <section id="military-designer" className="py-8 scroll-mt-20">
+        {/* Designer Section – original uses MilitaryFrameDesigner embedded */}
+        <section id="military-designer" className="py-8">
           <div className="container mx-auto px-4">
             <div className="scroll-mt-20" data-testid="designer-section">
               <Suspense
@@ -166,41 +241,29 @@ export default function MilitaryFramesPage() {
                   </div>
                 }
               >
-                <ShadowboxDesigner />
+                <ShadowboxDesigner embedded initialConfig={MILITARY_INITIAL_CONFIG} />
               </Suspense>
             </div>
           </div>
         </section>
 
-        {/* Lifestyle / gallery */}
+        {/* Lifestyle Gallery Section – original: Real Military Display Examples + MilitaryLifestyleCarousel */}
         <section className="py-12 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-7xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-3 text-center">
                 Real Military Display Examples
               </h2>
-              <p className="text-lg text-muted-foreground mb-8 max-w-3xl mx-auto text-center">
+              <p className="text-lg text-muted-foreground mb-8 text-center max-w-3xl mx-auto">
                 See how veterans display their medals, ribbons, patches, flags, and photos in our
-                shadow boxes. Each frame features branch-specific colors and 2-inch depth. Choose
-                your branch in the designer to get matching mat and backing colors for Army, Navy,
-                Air Force, Marine Corps, Coast Guard, and Space Force.
+                shadow boxes. Each frame features branch-specific colors and 2-inch depth.
               </p>
-              <div className="rounded-lg border bg-card overflow-hidden max-w-4xl mx-auto">
-                <div className="aspect-[16/10] relative">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={getStoreBaseAssetUrl("frames/10478/lifestyle_1.jpg")}
-                    alt="Military shadow box display with medals and ribbons in branch-specific mat colors, 2-inch depth frame"
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
+              <MilitaryLifestyleCarousel />
             </div>
           </div>
         </section>
 
-        {/* Trust */}
+        {/* Trust & Quality Section – original copy (incl. “Our materials meet professional framing standards.”) */}
         <section className="py-12">
           <div className="container mx-auto px-4">
             <div className="max-w-5xl mx-auto">
@@ -209,15 +272,19 @@ export default function MilitaryFramesPage() {
               </h2>
               <div className="grid md:grid-cols-3 gap-8 mb-12">
                 <div className="bg-card rounded-lg border p-6 text-center">
-                  <Shield className="w-12 h-12 text-primary mx-auto mb-4" />
+                  <div className="flex justify-center mb-4">
+                    <Shield className="w-12 h-12 text-primary" />
+                  </div>
                   <h3 className="text-xl font-semibold mb-2">Professional Quality</h3>
                   <p className="text-muted-foreground">
                     We use archival mats and framer&apos;s grade acrylic to protect your medals and
-                    ribbons.
+                    ribbons. Our materials meet professional framing standards.
                   </p>
                 </div>
                 <div className="bg-card rounded-lg border p-6 text-center">
-                  <Clock className="w-12 h-12 text-primary mx-auto mb-4" />
+                  <div className="flex justify-center mb-4">
+                    <Clock className="w-12 h-12 text-primary" />
+                  </div>
                   <h3 className="text-xl font-semibold mb-2">Fast Production</h3>
                   <p className="text-muted-foreground">
                     Your frame ships in 7-10 business days. We build each shadow box by hand with
@@ -225,7 +292,9 @@ export default function MilitaryFramesPage() {
                   </p>
                 </div>
                 <div className="bg-card rounded-lg border p-6 text-center">
-                  <CheckCircle className="w-12 h-12 text-primary mx-auto mb-4" />
+                  <div className="flex justify-center mb-4">
+                    <CheckCircle className="w-12 h-12 text-primary" />
+                  </div>
                   <h3 className="text-xl font-semibold mb-2">Lifetime Guarantee</h3>
                   <p className="text-muted-foreground">
                     We guarantee our work for life. If anything breaks or fails, we fix or replace
@@ -237,44 +306,162 @@ export default function MilitaryFramesPage() {
           </div>
         </section>
 
-        {/* How it works - condensed */}
-        <section className="py-12 bg-muted/30">
+        {/* How It Works Section – full original content and inline images */}
+        <section className="py-12">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 How Military Shadow Boxes Work
               </h2>
-              <p className="text-muted-foreground mb-6">
-                Our shadow boxes hold your medals, ribbons, patches, and photos with 2-inch depth.
-                You get a DIY frame that arrives ready to fill. Pick your service branch colors and
-                size in our designer tool above.
-              </p>
-              <h3 className="text-2xl font-semibold mb-4">
-                2-Inch Depth Holds Your Medals and Ribbons
-              </h3>
-              <p className="text-muted-foreground mb-6">
-                Shadow boxes need depth to hold medals without squashing them. Our frames give you 2
-                full inches of space inside. This lets you pin medals and ribbons without touching
-                the glass.
-              </p>
-              <h3 className="text-2xl font-semibold mb-4">Branch-Specific Colors</h3>
-              <p className="text-muted-foreground mb-6">
-                Pick your branch to get matching military colors. We offer Army, Navy, Air Force,
-                Marine Corps, Coast Guard, and Space Force color sets. You select three colors: top
-                mat, bottom mat, and suede backing. All mats are archival.
-              </p>
-              <h3 className="text-2xl font-semibold mb-4">Three Sizes</h3>
-              <p className="text-muted-foreground">
-                Compact (11×14 inches) fits ribbons and small medal sets. Standard (16×20 inches)
-                holds multiple medals, ribbons, patches, and photos. Large (20×32 inches) fits
-                folded flags and complete medal collections.
-              </p>
+              <div className="prose prose-lg max-w-none">
+                <p className="text-muted-foreground mb-6">
+                  Our shadow boxes hold your medals, ribbons, patches, and photos with 2-inch depth.
+                  You get a DIY frame that arrives ready to fill. Pick your service branch colors
+                  and size in our designer tool above.
+                </p>
+
+                <h3 className="text-2xl font-semibold mb-4 mt-8">
+                  2-Inch Depth Holds Your Medals and Ribbons
+                </h3>
+                <p className="text-muted-foreground mb-4">
+                  Shadow boxes need depth to hold medals without squashing them. Our frames give you
+                  2 full inches of space inside. This lets you pin medals and ribbons without
+                  touching the glass.
+                </p>
+                <p className="text-muted-foreground mb-6">
+                  Each frame uses 1-inch wide real wood in your choice of finish. Learn more about
+                  our{" "}
+                  <Link href="/shadowboxes/colors" className="text-primary hover:underline">
+                    shadowbox frame styles
+                  </Link>{" "}
+                  and sizes.
+                </p>
+                <div className="my-8 rounded-lg overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={img12.url}
+                    alt="Military shadow box displaying medals, ribbons, and patches with premium suede backing"
+                    className="w-full h-auto"
+                    loading="lazy"
+                  />
+                </div>
+
+                <h3 className="text-2xl font-semibold mb-4 mt-8">
+                  Branch-Specific Colors for Every Service
+                </h3>
+                <p className="text-muted-foreground mb-4">
+                  Pick your branch to get matching military colors. We offer Army, Navy, Air Force,
+                  Marine Corps, Coast Guard, and Space Force color sets. You select three colors:
+                  top mat, bottom mat, and suede backing.
+                </p>
+                <p className="text-muted-foreground mb-6">
+                  All mats are archival to protect your medals long-term. See all our{" "}
+                  <Link href="/designer" className="text-primary hover:underline">
+                    custom mat colors
+                  </Link>{" "}
+                  for more options.
+                </p>
+                <div className="my-8 rounded-lg overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={img27.url}
+                    alt="Branch-specific military display with coordinated mat colors and service memorabilia"
+                    className="w-full h-auto"
+                    loading="lazy"
+                  />
+                </div>
+
+                <h3 className="text-2xl font-semibold mb-4 mt-8">Premium Suede Backing</h3>
+                <p className="text-muted-foreground mb-4">
+                  The back of your shadow box uses soft suede fabric instead of plain cardboard.
+                  Suede looks better and holds pins securely. It comes in colors that match each
+                  military branch.
+                </p>
+                <p className="text-muted-foreground mb-6">
+                  Suede won&apos;t damage medals or ribbons. The texture helps pins stay in place
+                  without sliding.
+                </p>
+                <div className="my-8 rounded-lg overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={img08.url}
+                    alt="Premium suede backing in military shadow box frame with medals and ribbons"
+                    className="w-full h-auto"
+                    loading="lazy"
+                  />
+                </div>
+
+                <h3 className="text-2xl font-semibold mb-4 mt-8">
+                  Three Sizes for Different Displays
+                </h3>
+                <p className="text-muted-foreground mb-4">
+                  Compact (11×14 inches) fits ribbons and small medal sets. Standard (16×20 inches)
+                  holds multiple medals, ribbons, patches, and photos. Large (20×32 inches) fits
+                  folded flags, complete medal sets, and large photo collections.
+                </p>
+                <div className="my-8 grid md:grid-cols-2 gap-4">
+                  <div className="rounded-lg overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={img35.url}
+                      alt="Compact military shadow box with ribbons and medals"
+                      className="w-full h-auto"
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="rounded-lg overflow-hidden">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={img42.url}
+                      alt="Large military shadow box displaying folded flag with medals and photos"
+                      className="w-full h-auto"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+
+                <h3 className="text-2xl font-semibold mb-4 mt-8">How to Mount Your Medals</h3>
+                <p className="text-muted-foreground mb-4">
+                  Use pins to attach medals through the suede backing. Never use glue or tape on
+                  medals or ribbons. Pins let you remove items later without damage.
+                </p>
+                <p className="text-muted-foreground mb-6">
+                  For photos, use corner mounts that don&apos;t touch the photo surface. This
+                  protects your pictures and lets you remove them if needed.
+                </p>
+                <div className="my-8 rounded-lg overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={img18.url}
+                    alt="Professional conservation mounting of military medals and photos in shadow box"
+                    className="w-full h-auto"
+                    loading="lazy"
+                  />
+                </div>
+
+                <h3 className="text-2xl font-semibold mb-4 mt-8">
+                  Keeping Your Display Looking Good
+                </h3>
+                <p className="text-muted-foreground mb-4">
+                  Keep your shadow box away from direct sun and damp areas. UV glass helps protect
+                  ribbons from fading. Clean the glass once a year with a soft cloth.
+                </p>
+                <div className="my-8 rounded-lg overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={img50.url}
+                    alt="Well-maintained military shadow box display with preserved medals and memorabilia"
+                    className="w-full h-auto"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* Branch colors */}
-        <section className="py-12">
+        {/* Military-Inspired Mat Color Palettes – original section title in code; visible: Branch-Specific Color Options */}
+        <section className="py-12 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
@@ -295,6 +482,7 @@ export default function MilitaryFramesPage() {
           </div>
         </section>
 
+        {/* Related Products – original has no Final CTA before this */}
         <RelatedProducts
           productKeys={["jersey-frames", "signature-frames", "diploma-frames", "picture-frames"]}
           columns={4}

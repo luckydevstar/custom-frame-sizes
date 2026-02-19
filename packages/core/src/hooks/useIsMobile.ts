@@ -5,6 +5,8 @@
  * NOTE: This hook has been extracted to @framecraft/core.
  */
 
+"use client";
+
 import { useEffect, useState } from "react";
 
 export function useIsMobile() {

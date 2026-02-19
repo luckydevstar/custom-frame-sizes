@@ -38,6 +38,7 @@ import {
   PEN_TOOL_PRESETS,
   PEN_TOOL_FONTS,
   isLightMat,
+  getStoreBaseAssetUrl,
   type SonogramLayoutType,
   type PenToolConfig,
 } from "@framecraft/core";
@@ -1102,7 +1103,11 @@ export function SonogramFrameDesigner({
                             {frame.thumbnail ? (
                               <div className="h-12 w-full rounded mb-2 overflow-hidden">
                                 <img
-                                  src={frame.thumbnail}
+                                  src={getStoreBaseAssetUrl(
+                                    frame.thumbnail.startsWith("/")
+                                      ? frame.thumbnail.slice(1)
+                                      : frame.thumbnail
+                                  )}
                                   alt={frame.name}
                                   className="h-full w-full object-cover"
                                 />

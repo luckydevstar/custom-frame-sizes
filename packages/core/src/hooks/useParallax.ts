@@ -3,6 +3,8 @@
  * Provides parallax scrolling effects using requestAnimationFrame
  */
 
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import { animations } from "@framecraft/config";
 import { usePrefersReducedMotion } from "./useScrollAnimation";

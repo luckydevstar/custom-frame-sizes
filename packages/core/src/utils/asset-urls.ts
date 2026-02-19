@@ -84,19 +84,16 @@ function normalizeFrameImagePath(path: string): string {
 
 /**
  * Get store-a bucket base URL + path (no "assets/" prefix).
- * Use for frame images and any store-a bucket path at root (e.g. "frames/8745/corner-a.jpg").
- * Normalizes frame image filenames to match store-a assets (corner_a → corner-a, profile_a → profile-a).
+ * Use for frame images and any store-a bucket path at root (e.g. "frames/8745/corner_a.jpg").
+ * CDN: use path as-is so it matches R2 bucket filenames (e.g. 10727_corner_a.jpg in Cloudflare).
+ * Local: normalize corner_a → corner-a etc. for URL; API route will try both hyphen and underscore on disk.
  */
 export function getStoreBaseAssetUrl(path: string): string {
   const cdnUrl = getStoreCdnUrl();
+  const cleanPath = path.startsWith("/") ? path.slice(1) : path;
   if (cdnUrl) {
-    const cleanPath = path.startsWith("/") ? path.slice(1) : path;
-    const normalizedPath =
-      cleanPath.includes("/frames/") &&
-      (cleanPath.includes("corner_") || cleanPath.includes("profile_"))
-        ? normalizeFrameImagePath(cleanPath)
-        : cleanPath;
-    return `${normalizeCdnUrl(cdnUrl)}/${normalizedPath}`;
+    // Do not normalize for CDN — bucket filenames often use underscores (10727_corner_a.jpg)
+    return `${normalizeCdnUrl(cdnUrl)}/${cleanPath}`;
   }
   const localPath = path.startsWith("/") ? path : `/${path}`;
   if (

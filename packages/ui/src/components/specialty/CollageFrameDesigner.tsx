@@ -31,6 +31,7 @@ import {
   generateCollagePrintFile,
   uploadCollagePrintFile,
   useCollagePricing,
+  getStoreBaseAssetUrl,
 } from "@framecraft/core";
 import type { FrameStyle } from "@framecraft/types";
 import type { BrassNameplateConfig } from "@framecraft/types";
@@ -869,7 +870,11 @@ export function CollageFrameDesigner({
                           data-testid="button-view-corner"
                         >
                           <img
-                            src={cornerImage.url}
+                            src={getStoreBaseAssetUrl(
+                              cornerImage.url.startsWith("/")
+                                ? cornerImage.url.slice(1)
+                                : cornerImage.url
+                            )}
                             alt={cornerImage.alt || `${selectedFrame.name} corner detail`}
                             className="w-full h-full object-cover"
                           />
@@ -906,7 +911,11 @@ export function CollageFrameDesigner({
                           data-testid="button-view-profile"
                         >
                           <img
-                            src={profileImage.url}
+                            src={getStoreBaseAssetUrl(
+                              profileImage.url.startsWith("/")
+                                ? profileImage.url.slice(1)
+                                : profileImage.url
+                            )}
                             alt={profileImage.alt || `${selectedFrame.name} profile`}
                             className="w-full h-full object-cover"
                           />
@@ -1228,7 +1237,11 @@ export function CollageFrameDesigner({
                               {frame.thumbnail ? (
                                 <div className="h-12 w-full rounded mb-2 overflow-hidden">
                                   <img
-                                    src={frame.thumbnail}
+                                    src={getStoreBaseAssetUrl(
+                                      frame.thumbnail.startsWith("/")
+                                        ? frame.thumbnail.slice(1)
+                                        : frame.thumbnail
+                                    )}
                                     alt={frame.name}
                                     className="h-full w-full object-cover"
                                   />

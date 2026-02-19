@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { Shirt, Shield, Ruler, Layers, Award, CheckCircle2, ArrowDown } from "lucide-react";
 import { JerseyFrameDesigner, JerseyLifestyleCarousel, Card, Button } from "@framecraft/ui";
-import { getStoreBaseAssetUrl } from "@framecraft/core";
+import { getJerseyLifestyleImages } from "@framecraft/core";
 import { brandConfig } from "../../brand.config";
 import { ScrollToDesignerButton } from "./scroll-button";
 import { RelatedProducts } from "@/components/RelatedProducts";
@@ -208,7 +208,7 @@ export default function JerseyFramesPage() {
                 <div className="aspect-[3/2] md:aspect-[3/2] relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src={getStoreBaseAssetUrl("frames/10728/10728_jersey_lifestyle_04.jpg")}
+                    src={getJerseyLifestyleImages()[3]?.url ?? ""}
                     alt="Autographed Dallas Cowboys jersey frame in extra deep white shadowbox with 2 inch capacity, displaying signed #8 AIKMAN NFL jersey with navy and silver triple matting in elegant living room"
                     className="w-full h-full object-cover"
                     loading="lazy"
@@ -253,7 +253,7 @@ export default function JerseyFramesPage() {
                   <div className="aspect-[4/5] relative">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={getStoreBaseAssetUrl("frames/10727/10727_jersey_lifestyle_11.jpg")}
+                      src={getJerseyLifestyleImages()[10]?.url ?? ""}
                       alt="Deep matte black jersey display frame with navy blue and red team color triple matting showcasing autographed baseball jersey"
                       className="w-full h-full object-cover"
                       loading="lazy"

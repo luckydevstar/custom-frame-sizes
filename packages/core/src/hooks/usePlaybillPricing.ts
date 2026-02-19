@@ -5,6 +5,8 @@
  * Add-ons (nameplate, security hardware) are applied on top.
  */
 
+"use client";
+
 import { useMemo } from "react";
 import {
   type PlaybillLayoutType,

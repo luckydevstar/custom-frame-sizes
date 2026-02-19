@@ -16,7 +16,12 @@ import { QuantitySelector } from "../ui/quantity-selector";
 import { PriceBox } from "../ui/PriceBox";
 import type { PriceLineItem } from "../ui/PriceBox";
 import { useToast } from "../../hooks/use-toast";
-import { getFramesByCategory, getGlassTypes, getSharedAssetUrl } from "@framecraft/core";
+import {
+  getFramesByCategory,
+  getGlassTypes,
+  getSharedAssetUrl,
+  getStoreBaseAssetUrl,
+} from "@framecraft/core";
 import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
 import type { FrameStyle } from "@framecraft/types";
 import { ALL_MATS, getMatById, getAvailableMatsForSize, type Mat } from "@framecraft/config";
@@ -780,7 +785,11 @@ export function MagazineFrameDesigner({
                           className="aspect-square rounded-md border overflow-hidden bg-background hover-elevate active-elevate-2"
                         >
                           <img
-                            src={cornerImage.url}
+                            src={getStoreBaseAssetUrl(
+                              cornerImage.url.startsWith("/")
+                                ? cornerImage.url.slice(1)
+                                : cornerImage.url
+                            )}
                             alt={cornerImage.alt || `${selectedFrame.name} corner detail`}
                             className="w-full h-full object-cover"
                           />
@@ -822,7 +831,11 @@ export function MagazineFrameDesigner({
                           className="aspect-square rounded-md border overflow-hidden bg-background hover-elevate active-elevate-2"
                         >
                           <img
-                            src={profileImage.url}
+                            src={getStoreBaseAssetUrl(
+                              profileImage.url.startsWith("/")
+                                ? profileImage.url.slice(1)
+                                : profileImage.url
+                            )}
                             alt={profileImage.alt || `${selectedFrame.name} profile`}
                             className="w-full h-full object-cover"
                           />
@@ -1787,7 +1800,11 @@ export function MagazineFrameDesigner({
                               {frame.thumbnail ? (
                                 <div className="h-12 w-full rounded mb-2 overflow-hidden">
                                   <img
-                                    src={frame.thumbnail}
+                                    src={getStoreBaseAssetUrl(
+                                      frame.thumbnail.startsWith("/")
+                                        ? frame.thumbnail.slice(1)
+                                        : frame.thumbnail
+                                    )}
                                     alt={frame.name}
                                     className="h-full w-full object-cover"
                                     loading="lazy"
@@ -2130,9 +2147,16 @@ export function MagazineFrameDesigner({
                     (img) => img.type === "corner" && img.url.includes("corner_a")
                   );
                   const imageUrl = cornerImage?.url || previewState.framePhotos.cornerUrl;
-                  return imageUrl ? (
+                  const resolvedUrl = imageUrl?.startsWith("http")
+                    ? imageUrl
+                    : imageUrl
+                      ? getStoreBaseAssetUrl(
+                          imageUrl.startsWith("/") ? imageUrl.slice(1) : imageUrl
+                        )
+                      : undefined;
+                  return resolvedUrl ? (
                     <img
-                      src={imageUrl}
+                      src={resolvedUrl}
                       alt="Frame corner detail"
                       className="max-w-full max-h-full object-contain"
                     />
@@ -2144,9 +2168,16 @@ export function MagazineFrameDesigner({
                     (img) => img.type === "profile"
                   );
                   const imageUrl = profileImage?.url || previewState.framePhotos.profileUrl;
-                  return imageUrl ? (
+                  const resolvedUrl = imageUrl?.startsWith("http")
+                    ? imageUrl
+                    : imageUrl
+                      ? getStoreBaseAssetUrl(
+                          imageUrl.startsWith("/") ? imageUrl.slice(1) : imageUrl
+                        )
+                      : undefined;
+                  return resolvedUrl ? (
                     <img
-                      src={imageUrl}
+                      src={resolvedUrl}
                       alt="Frame profile view"
                       className="max-w-full max-h-full object-contain"
                     />

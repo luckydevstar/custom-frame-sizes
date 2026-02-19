@@ -1128,8 +1128,13 @@ export function PuzzleFrameDesigner({
                   <div className="md:max-h-[400px] md:overflow-y-auto md:pr-2">
                     <div className="grid grid-cols-2 gap-2">
                       {pictureFrames.map((frame) => {
-                        // Use bottom texture image for swatches (horizontal bar view)
-                        const swatchImage = getStoreBaseAssetUrl(`frames/${frame.sku}/bottom.jpg`);
+                        const thumbnailUrl = frame.thumbnail
+                          ? getStoreBaseAssetUrl(
+                              frame.thumbnail.startsWith("/")
+                                ? frame.thumbnail.slice(1)
+                                : frame.thumbnail
+                            )
+                          : undefined;
 
                         return (
                           <button
@@ -1142,10 +1147,10 @@ export function PuzzleFrameDesigner({
                             }`}
                             data-testid={`button-frame-${frame.id}`}
                           >
-                            {swatchImage ? (
+                            {thumbnailUrl ? (
                               <div className="h-12 w-full rounded mb-2 overflow-hidden border">
                                 <img
-                                  src={swatchImage}
+                                  src={thumbnailUrl}
                                   alt={frame.name}
                                   className="h-full w-full object-cover"
                                 />

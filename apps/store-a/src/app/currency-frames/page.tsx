@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import nextDynamic from "next/dynamic";
 import { Suspense } from "react";
-import { Sparkles, Shield, Ruler, Layers, Award } from "lucide-react";
-import { Card } from "@framecraft/ui";
+import Link from "next/link";
+import { Sparkles, Shield, Ruler, Layers, Award, ArrowDown } from "lucide-react";
+import { Card, Button } from "@framecraft/ui";
 import { RelatedProducts } from "@/components/RelatedProducts";
 import { ScrollToDesignerButton } from "./scroll-button";
 
-const ShadowboxDesigner = nextDynamic(
-  () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
+const CurrencyFrameDesigner = nextDynamic(
+  () => import("@framecraft/ui").then((m) => m.CurrencyFrameDesigner),
   { ssr: false }
 );
 
@@ -42,6 +43,12 @@ const productSchema = {
     priceCurrency: "USD",
     lowPrice: "139",
     highPrice: "299",
+    priceSpecification: {
+      "@type": "PriceSpecification",
+      minPrice: "139",
+      maxPrice: "299",
+      priceCurrency: "USD",
+    },
   },
   aggregateRating: {
     "@type": "AggregateRating",
@@ -50,6 +57,30 @@ const productSchema = {
     bestRating: "5",
     worstRating: "1",
   },
+  additionalProperty: [
+    {
+      "@type": "PropertyValue",
+      name: "Frame Depth",
+      value: "Shadowbox depth for currency presentation",
+    },
+    { "@type": "PropertyValue", name: "Matting", value: "Archival double mat (White on Black)" },
+    {
+      "@type": "PropertyValue",
+      name: "Backing Options",
+      value: "Black, White, Light Gray, Off White",
+    },
+    {
+      "@type": "PropertyValue",
+      name: "Glazing",
+      value: "Framer's grade acrylic (regular or non-glare)",
+    },
+    {
+      "@type": "PropertyValue",
+      name: "Available Sizes",
+      value: "Compact (14×12), Standard (17×13), Large (28×16), Custom",
+    },
+    { "@type": "PropertyValue", name: "Made in USA", value: "Handcrafted to order" },
+  ],
 };
 
 const faqSchema = {
@@ -202,13 +233,13 @@ export default function CurrencyFramesPage() {
                   </div>
                 }
               >
-                <ShadowboxDesigner />
+                <CurrencyFrameDesigner embedded />
               </Suspense>
             </div>
           </div>
         </section>
 
-        {/* How it works */}
+        {/* How Currency Frames Work */}
         <section className="py-12 bg-muted/30">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto">
@@ -229,7 +260,11 @@ export default function CurrencyFramesPage() {
                   <p className="text-muted-foreground mb-3">
                     The classic currency display uses a white top mat with a black bottom mat. The
                     white border frames your bills. The black accent adds depth and makes your
-                    currency stand out. Both mats are archival.
+                    currency stand out.
+                  </p>
+                  <p className="text-muted-foreground">
+                    Both mats are archival. They won&apos;t yellow or damage your currency over
+                    time.
                   </p>
                 </div>
                 <div>
@@ -253,12 +288,81 @@ export default function CurrencyFramesPage() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold mb-3">Preset and Custom Sizes</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Pick a preset size or enter your own dimensions. Compact (14×12&quot;), Standard
-                    (17×13&quot;), Large (28×16&quot;). Need a different size? Use our custom sizing
-                    option.
+                  <h3 className="text-xl font-semibold mb-3">
+                    Framer&apos;s Grade Acrylic Glazing
+                  </h3>
+                  <p className="text-muted-foreground">
+                    Choose regular acrylic for maximum clarity or non-glare acrylic to cut
+                    reflections. Acrylic is lighter and safer than glass. It won&apos;t shatter if
+                    bumped.
                   </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Preset and Custom Sizes */}
+        <section className="py-12">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6">Preset and Custom Sizes</h2>
+              <p className="text-muted-foreground mb-6">
+                Pick a preset size or enter your own dimensions. All sizes include the same archival
+                materials and construction.
+              </p>
+              <div className="grid md:grid-cols-3 gap-4 mb-6">
+                <div className="bg-card rounded-lg border p-5">
+                  <h3 className="font-semibold mb-2">Compact (14×12&quot;)</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Good for single bills or small sets. Fits a few notes with room for a nameplate.
+                  </p>
+                </div>
+                <div className="bg-card rounded-lg border p-5">
+                  <h3 className="font-semibold mb-2">Standard (17×13&quot;)</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Our most popular size. Holds multiple bills or a medium collection.
+                  </p>
+                </div>
+                <div className="bg-card rounded-lg border p-5">
+                  <h3 className="font-semibold mb-2">Large (28×16&quot;)</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Big collections or oversized currency. Room for many bills or large format
+                    notes.
+                  </p>
+                </div>
+              </div>
+              <p className="text-muted-foreground">
+                Need a different size? Enter custom dimensions from 6×6&quot; up to 48×48&quot; in
+                our designer.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* What's Included */}
+        <section className="py-12 bg-muted/30">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-2xl md:text-3xl font-bold mb-6">What&apos;s Included</h2>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h3 className="font-semibold mb-3">Every Frame Includes:</h3>
+                  <ul className="text-muted-foreground space-y-2">
+                    <li>• Shadowbox frame with depth for currency</li>
+                    <li>• Archival double mat (White on Black or custom)</li>
+                    <li>• Framer&apos;s grade acrylic glazing</li>
+                    <li>• Archival backing board</li>
+                    <li>• Hanging hardware</li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-semibold mb-3">Optional Add-Ons:</h3>
+                  <ul className="text-muted-foreground space-y-2">
+                    <li>• Brass nameplate with custom text</li>
+                    <li>• Non-glare acrylic upgrade</li>
+                    <li>• Custom mat colors</li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -300,6 +404,33 @@ export default function CurrencyFramesPage() {
                   paper and creates an elegant floating effect.
                 </p>
               </Card>
+              <Card className="p-5">
+                <h3 className="font-semibold mb-2">Are the materials archival?</h3>
+                <p className="text-sm text-muted-foreground">
+                  Yes. We use archival mats and backing that won&apos;t damage your currency. Your
+                  collection stays protected for decades.
+                </p>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        {/* Final CTA */}
+        <section className="py-12 border-t bg-muted/20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-3xl mx-auto text-center">
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">
+                Ready to Design Your Currency Frame?
+              </h2>
+              <p className="text-muted-foreground mb-6">
+                Choose your size and mat colors. Get instant pricing.
+              </p>
+              <Button size="lg" asChild>
+                <Link href="#currency-designer">
+                  <ArrowDown className="w-4 h-4 mr-2" />
+                  Start Designing
+                </Link>
+              </Button>
             </div>
           </div>
         </section>

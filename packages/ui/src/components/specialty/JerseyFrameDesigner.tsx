@@ -19,7 +19,11 @@ import type { FrameStyle, FrameConfiguration, AlternateImage } from "@framecraft
 import { getFrameStyleById, calculatePricing } from "@framecraft/core";
 
 // Import utilities from @framecraft/core
-import { computePreviewLayout, getStoreBaseAssetUrl } from "@framecraft/core";
+import {
+  computePreviewLayout,
+  getStoreBaseAssetUrl,
+  getJerseyLifestyleImages,
+} from "@framecraft/core";
 
 // Import hooks from @framecraft/core
 import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
@@ -266,16 +270,13 @@ export function JerseyFrameDesigner({
     minHeightDesktop: 625,
   });
 
-  // Random jersey lifestyle image for the selected frame (re-select when frame changes)
+  // Random jersey lifestyle image from shared assets (re-select when frame changes)
   const randomLifestyleImage = useMemo(() => {
-    const lifestyleImages =
-      selectedFrame.alternateImages?.filter(
-        (img: AlternateImage) => img.type === "jersey_lifestyle"
-      ) || [];
-    if (lifestyleImages.length === 0) return null;
-    const randomIndex = Math.floor(Math.random() * lifestyleImages.length);
-    return lifestyleImages[randomIndex];
-  }, [selectedFrame]);
+    const images = getJerseyLifestyleImages();
+    if (images.length === 0) return null;
+    const randomIndex = Math.floor(Math.random() * images.length);
+    return images[randomIndex] ?? null;
+  }, []);
 
   // Standard and premium mats for color selection
   const standardMats = useMemo(
@@ -801,7 +802,11 @@ export function JerseyFrameDesigner({
                         return cornerImage ? (
                           <div className="aspect-square rounded-md border overflow-hidden bg-background">
                             <img
-                              src={cornerImage.url}
+                              src={getStoreBaseAssetUrl(
+                                cornerImage.url.startsWith("/")
+                                  ? cornerImage.url.slice(1)
+                                  : cornerImage.url
+                              )}
                               alt={cornerImage.alt || `${selectedFrame.name} corner detail`}
                               className="w-full h-full object-cover"
                               loading="lazy"
@@ -837,7 +842,11 @@ export function JerseyFrameDesigner({
                         return profileImage ? (
                           <div className="aspect-square rounded-md border overflow-hidden bg-background">
                             <img
-                              src={profileImage.url}
+                              src={getStoreBaseAssetUrl(
+                                profileImage.url.startsWith("/")
+                                  ? profileImage.url.slice(1)
+                                  : profileImage.url
+                              )}
                               alt={profileImage.alt || `${selectedFrame.name} profile view`}
                               className="w-full h-full object-cover"
                               loading="lazy"
