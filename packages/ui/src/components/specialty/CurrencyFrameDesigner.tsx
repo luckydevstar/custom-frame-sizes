@@ -106,7 +106,9 @@ export function CurrencyFrameDesigner({
   const [customWidth, setCustomWidth] = useState(() => urlParams.get("customWidth") ?? "20");
   const [customHeight, setCustomHeight] = useState(() => urlParams.get("customHeight") ?? "16");
 
-  const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(initialFrame);
+  const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(
+    () => initialFrame ?? shadowboxFrames[0]!
+  );
 
   const [selectedBackingId, setSelectedBackingId] = useState(() => {
     const urlBacking = urlParams.get("backing");
@@ -120,7 +122,7 @@ export function CurrencyFrameDesigner({
       const glass = glassTypes.find((g) => g.id === urlGlass);
       if (glass) return glass;
     }
-    return glassTypes[0];
+    return glassTypes[0]!;
   });
 
   const [hardware, setHardware] = useState<"standard" | "security">(
