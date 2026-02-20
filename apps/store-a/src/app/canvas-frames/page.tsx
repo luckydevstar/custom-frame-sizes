@@ -20,11 +20,6 @@ const CanvasFrameDesigner = nextDynamic(
   { ssr: false }
 );
 
-const CanvasLifestyleCarousel = nextDynamic(
-  () => import("@framecraft/ui").then((m) => m.CanvasLifestyleCarousel),
-  { ssr: false }
-);
-
 // Avoid static prerender: designer deps (e.g. recharts/framer-motion) reference `self` at module load
 export const dynamic = "force-dynamic";
 
@@ -121,22 +116,6 @@ export default function CanvasFramesPage() {
           >
             <CanvasFrameDesigner />
           </Suspense>
-        </div>
-      </section>
-
-      {/* Canvas Float Frames in Real Homes (lifestyle gallery) */}
-      <section className="py-12 border-t" data-testid="section-canvas-real-homes">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-              Canvas Float Frames in Real Homes
-            </h2>
-            <p className="text-lg text-muted-foreground mb-8 text-center max-w-3xl mx-auto">
-              See how artists and collectors display their canvas artwork in professional float
-              frames.
-            </p>
-            <CanvasLifestyleCarousel />
-          </div>
         </div>
       </section>
 

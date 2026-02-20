@@ -6,10 +6,23 @@ function getCdnBase(): string | null {
   return url ? String(url).replace(/\/$/, "") : null;
 }
 
+// R2 canvas assets use hyphen (10495-corner-a.jpg); data has underscore (10495-corner_a.jpg)
+function normalizeCanvasImagePath(path: string): string {
+  return path
+    .replace(/-corner_a(\.[a-z0-9]+)$/i, "-corner-a$1")
+    .replace(/-profile_a(\.[a-z0-9]+)$/i, "-profile-a$1");
+}
+
 function toFullUrl(path: string | undefined, cdnBase: string | null): string {
   if (!path) return "";
   if (path.startsWith("http://") || path.startsWith("https://")) return path;
-  const clean = path.startsWith("/") ? path.slice(1) : path;
+  let clean = path.startsWith("/") ? path.slice(1) : path;
+  if (
+    clean.includes("assets/canvas/") &&
+    (clean.includes("corner_a") || clean.includes("profile_a"))
+  ) {
+    clean = normalizeCanvasImagePath(clean);
+  }
   if (cdnBase) return `${cdnBase}/${clean}`;
   return getStoreBaseAssetUrl(clean);
 }
@@ -100,10 +113,42 @@ export async function GET(_request: NextRequest, { params }: { params: { sku: st
       return toFullUrl(localPath, cdnBase);
     };
 
-    // Get image URLs from alternateImages
-    const cornerUrl = getImageByType("corner");
-    const profileUrl = getImageByType("profile");
-    const lifestyleUrl = getImageByType("lifestyle", true); // Random lifestyle
+    // Get image URLs: alternateImages first, then canvas-style top-level cornerImage/profileImage/lifestyleImage
+    const frameAny = frame as {
+      cornerImage?: string;
+      profileImage?: string;
+      lifestyleImage?: string;
+    };
+    const cornerUrl =
+      getImageByType("corner") ??
+      (frameAny.cornerImage
+        ? toFullUrl(
+            frameAny.cornerImage.startsWith("/")
+              ? frameAny.cornerImage.slice(1)
+              : frameAny.cornerImage,
+            cdnBase
+          )
+        : undefined);
+    const profileUrl =
+      getImageByType("profile") ??
+      (frameAny.profileImage
+        ? toFullUrl(
+            frameAny.profileImage.startsWith("/")
+              ? frameAny.profileImage.slice(1)
+              : frameAny.profileImage,
+            cdnBase
+          )
+        : undefined);
+    const lifestyleUrl =
+      getImageByType("lifestyle", true) ??
+      (frameAny.lifestyleImage
+        ? toFullUrl(
+            frameAny.lifestyleImage.startsWith("/")
+              ? frameAny.lifestyleImage.slice(1)
+              : frameAny.lifestyleImage,
+            cdnBase
+          )
+        : undefined);
 
     // For top/bottom/left/right: frame.photos > type "top"/"bottom"/... > designer edge_* > getFrameImageUrl (top.jpg etc.)
     const topUrl = frame.photos?.topUrl

@@ -83,6 +83,15 @@ function normalizeFrameImagePath(path: string): string {
 }
 
 /**
+ * Normalize canvas frame image path: R2 uses hyphen (10495-corner-a.jpg), data has underscore (10495-corner_a.jpg).
+ */
+function normalizeCanvasImagePath(path: string): string {
+  return path
+    .replace(/-corner_a(\.[a-z0-9]+)$/i, "-corner-a$1")
+    .replace(/-profile_a(\.[a-z0-9]+)$/i, "-profile-a$1");
+}
+
+/**
  * Get store-a bucket base URL + path (no "assets/" prefix).
  * Use for frame images and any store-a bucket path at root (e.g. "frames/8745/corner_a.jpg").
  * CDN: use path as-is so it matches R2 bucket filenames (e.g. 10727_corner_a.jpg in Cloudflare).
@@ -90,9 +99,15 @@ function normalizeFrameImagePath(path: string): string {
  */
 export function getStoreBaseAssetUrl(path: string): string {
   const cdnUrl = getStoreCdnUrl();
-  const cleanPath = path.startsWith("/") ? path.slice(1) : path;
+  let cleanPath = path.startsWith("/") ? path.slice(1) : path;
+  // Canvas assets in R2 use hyphen: 10495-corner-a.jpg (data has corner_a)
+  if (
+    cleanPath.includes("assets/canvas/") &&
+    (cleanPath.includes("corner_a") || cleanPath.includes("profile_a"))
+  ) {
+    cleanPath = normalizeCanvasImagePath(cleanPath);
+  }
   if (cdnUrl) {
-    // Do not normalize for CDN — bucket filenames often use underscores (10727_corner_a.jpg)
     return `${normalizeCdnUrl(cdnUrl)}/${cleanPath}`;
   }
   const localPath = path.startsWith("/") ? path : `/${path}`;
@@ -101,6 +116,13 @@ export function getStoreBaseAssetUrl(path: string): string {
     (localPath.includes("corner_") || localPath.includes("profile_"))
   ) {
     const normalized = normalizeFrameImagePath(localPath.slice(1));
+    return normalized.startsWith("/") ? normalized : `/${normalized}`;
+  }
+  if (
+    localPath.includes("/assets/canvas/") &&
+    (localPath.includes("corner_a") || localPath.includes("profile_a"))
+  ) {
+    const normalized = normalizeCanvasImagePath(localPath.slice(1));
     return normalized.startsWith("/") ? normalized : `/${normalized}`;
   }
   return localPath;
@@ -196,13 +218,13 @@ export function getHeroAssetUrl(filename: string): string {
 }
 
 /**
- * Get CDN URL for a canvas frame image (shared_assets/canvas/images)
+ * Get CDN URL for a canvas frame image (store-a assets/canvas/)
  *
- * @param filename - Canvas image filename (e.g., "10117-lifestyle-a.jpg")
+ * @param filename - Canvas image filename (e.g., "10117-lifestyle-a.jpg", "swatch-black.jpg")
  * @returns Full CDN URL or local path
  */
 export function getCanvasImageUrl(filename: string): string {
-  return getSharedAssetUrl(`canvas/images/${filename}`);
+  return getStoreBaseAssetUrl(`assets/canvas/${filename}`);
 }
 
 /**

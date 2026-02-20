@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef, useCallback } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 // Removed wouter useLocation - not needed in Next.js
 import {
   Upload,
@@ -40,7 +40,7 @@ import {
   parseFraction,
   validateArtworkSize,
   computePreviewLayout,
-  getSharedAssetUrl,
+  getStoreBaseAssetUrl,
 } from "@framecraft/core";
 
 // Import hooks from @framecraft/core
@@ -74,7 +74,7 @@ import { getRandomStockImage } from "@framecraft/core";
 import { TrustBadges } from "../marketing/TrustBadges";
 import { TrustBox } from "../marketing/TrustBox";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
-import { CanvasLifestyleCarousel, CANVAS_LIFESTYLE_IMAGES } from "./CanvasLifestyleCarousel";
+import { CanvasLifestyleCarousel } from "./CanvasLifestyleCarousel";
 import {
   calculateCanvasPrintDimensions,
   generateCanvasPrintFile,
@@ -250,12 +250,29 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
     "preview" | "corner" | "profile" | "lifestyle"
   >("preview");
 
-  // Get random lifestyle image from CANVAS_LIFESTYLE_IMAGES array
-  const getRandomLifestyleImage = useCallback(() => {
-    if (CANVAS_LIFESTYLE_IMAGES.length === 0) return "";
-    const randomIndex = Math.floor(Math.random() * CANVAS_LIFESTYLE_IMAGES.length);
-    return CANVAS_LIFESTYLE_IMAGES[randomIndex]?.url ?? "";
-  }, []);
+  // Resolve corner/profile URLs: API first, then from frame data (canvas uses cornerImage/profileImage)
+  const selectedFrameWithImages = selectedFrame as FrameStyle & {
+    cornerImage?: string;
+    profileImage?: string;
+  };
+  const resolvedCornerUrl =
+    framePhotos.cornerUrl ??
+    (selectedFrameWithImages.cornerImage
+      ? getStoreBaseAssetUrl(
+          selectedFrameWithImages.cornerImage.startsWith("/")
+            ? selectedFrameWithImages.cornerImage.slice(1)
+            : selectedFrameWithImages.cornerImage
+        )
+      : undefined);
+  const resolvedProfileUrl =
+    framePhotos.profileUrl ??
+    (selectedFrameWithImages.profileImage
+      ? getStoreBaseAssetUrl(
+          selectedFrameWithImages.profileImage.startsWith("/")
+            ? selectedFrameWithImages.profileImage.slice(1)
+            : selectedFrameWithImages.profileImage
+        )
+      : undefined);
 
   const configuratorRef = useRef<HTMLDivElement>(null);
   const sentinelRef = useRef<HTMLDivElement>(null);
@@ -347,17 +364,10 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
     window.history.replaceState({}, "", newUrl);
   }, [selectedFrame, selectedDepth, artworkWidth, artworkHeight, serviceType, hangingHardware]);
 
-  // Fetch frame photos from local storage when frame changes
+  // Fetch frame photos from API (corner, profile, lifestyle from store-a assets/canvas/)
   useEffect(() => {
-    // Get random lifestyle image from CANVAS_LIFESTYLE_IMAGES immediately
-    const randomLifestyle = getRandomLifestyleImage();
-
-    // Set lifestyle image immediately while loading corner/profile
-    setFramePhotos({
-      lifestyleUrl: randomLifestyle,
-    });
-
     if (!selectedFrame.sku) {
+      setFramePhotos({});
       return;
     }
 
@@ -366,29 +376,23 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
         const response = await fetch(`/api/frames/${selectedFrame.sku}/photos`);
         if (response.ok) {
           const photoSet = await response.json();
-          // Prefer style-specific lifestyle from API, fallback to random generic
           setFramePhotos({
             cornerUrl: photoSet.cornerUrl,
             profileUrl: photoSet.profileUrl,
-            lifestyleUrl: photoSet.lifestyleUrl || randomLifestyle,
+            lifestyleUrl: photoSet.lifestyleUrl, // From store-a assets/canvas/ (frame.lifestyleImage)
           });
         } else {
-          // API failed but keep lifestyle image
-          setFramePhotos({
-            lifestyleUrl: randomLifestyle,
-          });
+          setFramePhotos({});
         }
       } catch (error) {
         console.error("Error fetching frame photos:", error);
-        // Keep lifestyle image even on error
-        setFramePhotos({
-          lifestyleUrl: randomLifestyle,
-        });
+        setFramePhotos({});
       }
     }
 
+    setFramePhotos({});
     fetchFramePhotos();
-  }, [selectedFrame, getRandomLifestyleImage]);
+  }, [selectedFrame.sku]);
 
   // Cross-fade animation when selectedImage changes
   useEffect(() => {
@@ -940,7 +944,11 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                     <>
                       {/* Top edge */}
                       <img
-                        src={selectedFrame.photos.topUrl}
+                        src={getStoreBaseAssetUrl(
+                          selectedFrame.photos.topUrl.startsWith("/")
+                            ? selectedFrame.photos.topUrl.slice(1)
+                            : selectedFrame.photos.topUrl
+                        )}
                         alt="Frame top"
                         style={{
                           position: "absolute",
@@ -953,7 +961,11 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                       />
                       {/* Bottom edge */}
                       <img
-                        src={selectedFrame.photos.bottomUrl}
+                        src={getStoreBaseAssetUrl(
+                          (selectedFrame.photos.bottomUrl ?? "").startsWith("/")
+                            ? (selectedFrame.photos.bottomUrl ?? "").slice(1)
+                            : (selectedFrame.photos.bottomUrl ?? "")
+                        )}
                         alt="Frame bottom"
                         style={{
                           position: "absolute",
@@ -966,7 +978,11 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                       />
                       {/* Left edge */}
                       <img
-                        src={selectedFrame.photos.leftUrl}
+                        src={getStoreBaseAssetUrl(
+                          (selectedFrame.photos.leftUrl ?? "").startsWith("/")
+                            ? (selectedFrame.photos.leftUrl ?? "").slice(1)
+                            : (selectedFrame.photos.leftUrl ?? "")
+                        )}
                         alt="Frame left"
                         style={{
                           position: "absolute",
@@ -979,7 +995,11 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                       />
                       {/* Right edge */}
                       <img
-                        src={selectedFrame.photos.rightUrl}
+                        src={getStoreBaseAssetUrl(
+                          (selectedFrame.photos.rightUrl ?? "").startsWith("/")
+                            ? (selectedFrame.photos.rightUrl ?? "").slice(1)
+                            : (selectedFrame.photos.rightUrl ?? "")
+                        )}
                         alt="Frame right"
                         style={{
                           position: "absolute",
@@ -1120,7 +1140,11 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                         className="p-0 border-0 bg-transparent shadow-lg"
                       >
                         <img
-                          src={selectedFrame.dimensionalDiagram}
+                          src={getStoreBaseAssetUrl(
+                            selectedFrame.dimensionalDiagram.startsWith("/")
+                              ? selectedFrame.dimensionalDiagram.slice(1)
+                              : selectedFrame.dimensionalDiagram
+                          )}
                           alt={`${selectedFrame.name} dimensional diagram`}
                           className="w-64 rounded-lg border-2 border-border bg-background"
                           data-testid="img-dimensional-diagram"
@@ -1142,16 +1166,16 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                 <div
                   className="aspect-square rounded-md border-2 border-border flex items-center justify-center bg-muted/30 overflow-hidden relative group hover-elevate active-elevate-2 cursor-pointer"
                   onClick={() => {
-                    if (framePhotos.cornerUrl) {
+                    if (resolvedCornerUrl) {
                       setFullscreenImage("corner");
                       setFullImageOpen(true);
                     }
                   }}
                   data-testid="img-corner-detail"
                 >
-                  {framePhotos.cornerUrl ? (
+                  {resolvedCornerUrl ? (
                     <img
-                      src={framePhotos.cornerUrl}
+                      src={resolvedCornerUrl}
                       alt="Corner Detail"
                       className="w-full h-full object-cover"
                     />
@@ -1169,16 +1193,16 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                 <div
                   className="aspect-square rounded-md border-2 border-border flex items-center justify-center bg-muted/30 overflow-hidden relative group hover-elevate active-elevate-2 cursor-pointer"
                   onClick={() => {
-                    if (framePhotos.profileUrl) {
+                    if (resolvedProfileUrl) {
                       setFullscreenImage("profile");
                       setFullImageOpen(true);
                     }
                   }}
                   data-testid="img-profile-view"
                 >
-                  {framePhotos.profileUrl ? (
+                  {resolvedProfileUrl ? (
                     <img
-                      src={framePhotos.profileUrl}
+                      src={resolvedProfileUrl}
                       alt="Profile View"
                       className="w-full h-full object-cover"
                     />
@@ -1487,7 +1511,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                                   {frame.thumbnail ? (
                                     <div className="h-12 w-full rounded mb-2 overflow-hidden">
                                       <img
-                                        src={getSharedAssetUrl(
+                                        src={getStoreBaseAssetUrl(
                                           frame.thumbnail.startsWith("/")
                                             ? frame.thumbnail.slice(1)
                                             : frame.thumbnail
@@ -1499,7 +1523,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                                   ) : frame.swatchImage ? (
                                     <div className="h-12 w-full rounded mb-2 overflow-hidden">
                                       <img
-                                        src={getSharedAssetUrl(
+                                        src={getStoreBaseAssetUrl(
                                           frame.swatchImage.startsWith("/")
                                             ? frame.swatchImage.slice(1)
                                             : frame.swatchImage
@@ -1542,7 +1566,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                           {frame.thumbnail ? (
                             <div className="h-12 w-full rounded mb-2 overflow-hidden">
                               <img
-                                src={getSharedAssetUrl(
+                                src={getStoreBaseAssetUrl(
                                   frame.thumbnail.startsWith("/")
                                     ? frame.thumbnail.slice(1)
                                     : frame.thumbnail
@@ -1554,7 +1578,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                           ) : frame.swatchImage ? (
                             <div className="h-12 w-full rounded mb-2 overflow-hidden">
                               <img
-                                src={getSharedAssetUrl(
+                                src={getStoreBaseAssetUrl(
                                   frame.swatchImage.startsWith("/")
                                     ? frame.swatchImage.slice(1)
                                     : frame.swatchImage
@@ -1728,9 +1752,9 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
               <img
                 src={
                   fullscreenImage === "corner"
-                    ? framePhotos.cornerUrl
+                    ? resolvedCornerUrl
                     : fullscreenImage === "profile"
-                      ? framePhotos.profileUrl
+                      ? resolvedProfileUrl
                       : framePhotos.lifestyleUrl
                 }
                 alt={
