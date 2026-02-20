@@ -18,6 +18,8 @@ export { SeoTextBlock } from "./SeoTextBlock";
 export type { SeoTextBlockProps } from "./SeoTextBlock";
 export { FrameStylesShowcase } from "./FrameStylesShowcase";
 export type { FrameStylesShowcaseProps } from "./FrameStylesShowcase";
+export { StyleInspirationSection } from "./StyleInspirationSection";
+export type { StyleInspirationSectionProps } from "./StyleInspirationSection";
 export { ShadowboxShowcase } from "./ShadowboxShowcase";
 export type { ShadowboxShowcaseProps } from "./ShadowboxShowcase";
 export { CanvasFramesShowcase } from "./CanvasFramesShowcase";

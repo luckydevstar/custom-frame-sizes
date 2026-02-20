@@ -324,6 +324,7 @@ export {
   FaqMini,
   SeoTextBlock,
   FrameStylesShowcase,
+  StyleInspirationSection,
   ShadowboxShowcase,
   CanvasFramesShowcase,
   PrintAndFrameService,
@@ -346,6 +347,7 @@ export type {
   FAQ,
   SeoTextBlockProps,
   FrameStylesShowcaseProps,
+  StyleInspirationSectionProps,
   ShadowboxShowcaseProps,
   CanvasFramesShowcaseProps,
 } from "./components/home";

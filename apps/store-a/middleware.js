@@ -54,6 +54,12 @@ export function middleware(request) {
   }
 
   const pathAfterFrames = pathname.slice(8) || ''; // skip '/frames/'
+  const segments = pathAfterFrames.split('/').filter(Boolean);
+  // Single segment (e.g. /frames/light-oak) = frame designer page; do not rewrite to asset API
+  if (segments.length <= 1) {
+    return NextResponse.next();
+  }
+
   const url = request.nextUrl.clone();
   url.pathname = `/api/asset/frames/${pathAfterFrames}`;
   return NextResponse.rewrite(url);
