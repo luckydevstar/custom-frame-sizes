@@ -1,17 +1,36 @@
 import type { Metadata } from "next";
 import nextDynamic from "next/dynamic";
-import { Suspense } from "react";
 import Link from "next/link";
-import { Heart, Flower2, Shield, Calendar, Award, Sparkles, ArrowDown } from "lucide-react";
+import {
+  Heart,
+  Flower2,
+  Shield,
+  Calendar,
+  Award,
+  Sparkles,
+  ArrowDown,
+  Ruler,
+  CheckCircle2,
+} from "lucide-react";
 import { Card, Button } from "@framecraft/ui";
 import { RelatedProducts } from "@/components/RelatedProducts";
 import { ScrollToDesignerButton } from "./scroll-button";
 import { brandConfig } from "../../brand.config";
 import type { ShadowboxConfig } from "@framecraft/types";
 
-const ShadowboxDesigner = nextDynamic(
-  () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
-  { ssr: false }
+const BouquetFrameDesigner = nextDynamic(
+  () => import("@framecraft/ui").then((m) => m.BouquetFrameDesigner),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="min-h-[600px] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
+          <p className="text-muted-foreground">Loading designer...</p>
+        </div>
+      </div>
+    ),
+  }
 );
 
 /** Bouquet-page defaults: 20×24", 2" depth for preserved bouquets, white mat, light backing. */
@@ -205,29 +224,41 @@ export default function BouquetFramesPage() {
           </div>
         </section>
 
-        {/* Benefit bar */}
+        {/* Key Features Bar (matches original KeyFeaturesBar) */}
         <section className="border-y bg-muted/20">
           <div className="container mx-auto px-2 md:px-4 py-4 md:py-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 max-w-4xl mx-auto text-center">
-              <div>
-                <p className="text-[0.7rem] md:text-sm font-medium">2&quot; Depth</p>
-                <p className="text-[0.65rem] md:text-xs text-muted-foreground">
-                  Fits preserved bouquets
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 max-w-4xl mx-auto">
+              <div className="text-center" data-testid="feature-custom-size">
+                <Ruler className="w-4 h-4 md:w-5 md:h-5 mx-auto mb-1 md:mb-1.5 text-primary" />
+                <p className="text-[0.7rem] md:text-sm font-medium leading-tight">Custom Sizes</p>
+                <p className="text-[0.65rem] md:text-xs text-muted-foreground mt-0.5 leading-tight">
+                  Built to Fit Your Exact Art
                 </p>
               </div>
-              <div>
-                <p className="text-[0.7rem] md:text-sm font-medium">3 Finishes</p>
-                <p className="text-[0.65rem] md:text-xs text-muted-foreground">
-                  White, Black, Walnut
+              <div className="text-center" data-testid="feature-handcrafted">
+                <Sparkles className="w-4 h-4 md:w-5 md:h-5 mx-auto mb-1 md:mb-1.5 text-primary" />
+                <p className="text-[0.7rem] md:text-sm font-medium leading-tight">Handcrafted</p>
+                <p className="text-[0.65rem] md:text-xs text-muted-foreground mt-0.5 leading-tight">
+                  Skilled Artisans Build Every Frame
                 </p>
               </div>
-              <div>
-                <p className="text-[0.7rem] md:text-sm font-medium">Custom Sizing</p>
-                <p className="text-[0.65rem] md:text-xs text-muted-foreground">16×20 to 24×30+</p>
+              <div className="text-center" data-testid="feature-professional-grade">
+                <Award className="w-4 h-4 md:w-5 md:h-5 mx-auto mb-1 md:mb-1.5 text-primary" />
+                <p className="text-[0.7rem] md:text-sm font-medium leading-tight">
+                  Frame Shop Quality
+                </p>
+                <p className="text-[0.65rem] md:text-xs text-muted-foreground mt-0.5 leading-tight">
+                  To Protect Your Items
+                </p>
               </div>
-              <div>
-                <p className="text-[0.7rem] md:text-sm font-medium">Framer&apos;s Acrylic</p>
-                <p className="text-[0.65rem] md:text-xs text-muted-foreground">UV protection</p>
+              <div className="text-center" data-testid="feature-instant-pricing">
+                <CheckCircle2 className="w-4 h-4 md:w-5 md:h-5 mx-auto mb-1 md:mb-1.5 text-primary" />
+                <p className="text-[0.7rem] md:text-sm font-medium leading-tight">
+                  Instant Pricing
+                </p>
+                <p className="text-[0.65rem] md:text-xs text-muted-foreground mt-0.5 leading-tight">
+                  See Your Cost as You Customize
+                </p>
               </div>
             </div>
           </div>
@@ -239,18 +270,7 @@ export default function BouquetFramesPage() {
           className="container mx-auto px-4 py-8 md:py-12 scroll-mt-20"
         >
           <div className="scroll-mt-20" data-testid="designer-section">
-            <Suspense
-              fallback={
-                <div className="min-h-[600px] flex items-center justify-center">
-                  <div className="text-center">
-                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
-                    <p className="text-muted-foreground">Loading designer...</p>
-                  </div>
-                </div>
-              }
-            >
-              <ShadowboxDesigner embedded initialConfig={BOUQUET_INITIAL_CONFIG} />
-            </Suspense>
+            <BouquetFrameDesigner embedded initialConfig={BOUQUET_INITIAL_CONFIG} />
           </div>
         </section>
 
@@ -357,6 +377,19 @@ export default function BouquetFramesPage() {
                 <p className="text-sm text-muted-foreground pl-8">
                   Even with framer&apos;s grade acrylic, avoid hanging in direct sunlight. Choose a
                   wall with indirect light for the longest-lasting color.
+                </p>
+              </Card>
+              <Card className="p-5">
+                <h3 className="font-semibold mb-2 flex items-center gap-2">
+                  <span className="w-6 h-6 rounded-full bg-primary/10 text-primary flex items-center justify-center text-sm font-bold">
+                    4
+                  </span>
+                  Consider Professional Services
+                </h3>
+                <p className="text-sm text-muted-foreground pl-8">
+                  For complex arrangements or maximum longevity, professional preservation services
+                  use freeze-drying and specialized techniques. Our frames work perfectly with DIY
+                  or professional preservation.
                 </p>
               </Card>
             </div>

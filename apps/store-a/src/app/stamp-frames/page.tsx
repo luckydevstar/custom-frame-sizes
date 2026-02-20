@@ -16,25 +16,20 @@ import {
 import { Badge, Button } from "@framecraft/ui";
 import { ScrollToDesignerButton } from "./scroll-button";
 import { RelatedProducts } from "@/components/RelatedProducts";
-import type { ShadowboxConfig } from "@framecraft/types";
-
-const ShadowboxDesigner = nextDynamic(
-  () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
-  { ssr: false }
+const StampFrameDesigner = nextDynamic(
+  () => import("@framecraft/ui").then((m) => m.StampFrameDesigner),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="min-h-[600px] flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
+          <p className="text-muted-foreground">Loading designer...</p>
+        </div>
+      </div>
+    ),
+  }
 );
-
-/** Stamp-page defaults: Compact 14×12", white-on-black double mat, black backing. */
-const STAMP_INITIAL_CONFIG: ShadowboxConfig = {
-  widthIn: 14,
-  heightIn: 12,
-  depthIn: 1.25,
-  matLayers: [
-    { color: "#FFFFFF", thicknessIn: 2.5 },
-    { color: "#000000", thicknessIn: 0.25 },
-  ],
-  background: { material: "mat-color", color: "#000000" },
-  glazing: "acrylic",
-};
 
 export const dynamic = "force-dynamic";
 
@@ -241,17 +236,8 @@ export default function StampFramesPage() {
         <section id="stamp-designer" className="py-8 scroll-mt-20">
           <div className="container mx-auto px-4">
             <div className="scroll-mt-20" data-testid="designer-section">
-              <Suspense
-                fallback={
-                  <div className="min-h-[600px] flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4" />
-                      <p className="text-muted-foreground">Loading designer...</p>
-                    </div>
-                  </div>
-                }
-              >
-                <ShadowboxDesigner embedded initialConfig={STAMP_INITIAL_CONFIG} />
+              <Suspense fallback={null}>
+                <StampFrameDesigner embedded />
               </Suspense>
             </div>
           </div>

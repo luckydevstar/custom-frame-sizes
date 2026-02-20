@@ -1,5 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getFrameStyles, getFrameImageUrl, getStoreBaseAssetUrl } from "@framecraft/core";
+import { getFrameStyles, getStoreBaseAssetUrl } from "@framecraft/core";
+
+function getCdnBase(): string | null {
+  const url = typeof process !== "undefined" && process.env?.NEXT_PUBLIC_CDN_STORE_A_URL;
+  return url ? String(url).replace(/\/$/, "") : null;
+}
+
+function toFullUrl(path: string | undefined, cdnBase: string | null): string {
+  if (!path) return "";
+  if (path.startsWith("http://") || path.startsWith("https://")) return path;
+  const clean = path.startsWith("/") ? path.slice(1) : path;
+  if (cdnBase) return `${cdnBase}/${clean}`;
+  return getStoreBaseAssetUrl(clean);
+}
 
 /**
  * GET /api/frames/[sku]/photos
@@ -41,6 +54,8 @@ export async function GET(_request: NextRequest, { params }: { params: { sku: st
       );
     }
 
+    const cdnBase = getCdnBase();
+
     // Helper function to get image URL by type from alternateImages
     const getImageByType = (type: string, pickRandom = false): string | undefined => {
       if (!frame.alternateImages) return undefined;
@@ -60,24 +75,29 @@ export async function GET(_request: NextRequest, { params }: { params: { sku: st
         const localPath = selectedImage.url.startsWith("/")
           ? selectedImage.url.slice(1)
           : selectedImage.url;
-        return getStoreBaseAssetUrl(localPath);
+        return toFullUrl(localPath, cdnBase);
       }
 
       return undefined;
     };
 
-    // Many frames (e.g. shadowbox 9448) use type "designer" with edge_top.jpg, edge_bottom.jpg, etc.
-    // Resolve top/bottom/left/right from these when type "top"/"bottom" is not present.
+    // Many frames use type "designer" for edge images:
+    // - edge_top.jpg, edge_bottom.jpg (e.g. shadowbox 9448)
+    // - 10728_top.jpg, 10728_bottom.jpg (SKU-prefixed, e.g. bouquet frames 10727/10728/10729)
     const getDesignerEdgeUrl = (
       edgeName: "edge_top" | "edge_bottom" | "edge_left" | "edge_right"
     ): string | undefined => {
+      const patterns = [
+        edgeName, // edge_top, edge_bottom, etc.
+        edgeName.replace("edge_", "_"), // _top, _bottom, _left, _right for SKU-prefixed filenames
+      ];
       const img = frame.alternateImages?.find(
         (i: { type: string; url: string }) =>
-          i.type === "designer" && i.url && i.url.includes(edgeName)
+          i.type === "designer" && i.url && patterns.some((p) => i.url.includes(p))
       );
       if (!img?.url) return undefined;
       const localPath = img.url.startsWith("/") ? img.url.slice(1) : img.url;
-      return getStoreBaseAssetUrl(localPath);
+      return toFullUrl(localPath, cdnBase);
     };
 
     // Get image URLs from alternateImages
@@ -87,38 +107,46 @@ export async function GET(_request: NextRequest, { params }: { params: { sku: st
 
     // For top/bottom/left/right: frame.photos > type "top"/"bottom"/... > designer edge_* > getFrameImageUrl (top.jpg etc.)
     const topUrl = frame.photos?.topUrl
-      ? getStoreBaseAssetUrl(
-          frame.photos.topUrl.startsWith("/") ? frame.photos.topUrl.slice(1) : frame.photos.topUrl
+      ? toFullUrl(
+          frame.photos.topUrl.startsWith("/") ? frame.photos.topUrl.slice(1) : frame.photos.topUrl,
+          cdnBase
         )
-      : getImageByType("top") || getDesignerEdgeUrl("edge_top") || getFrameImageUrl(sku, "top");
+      : getImageByType("top") ||
+        getDesignerEdgeUrl("edge_top") ||
+        toFullUrl(`frames/${sku}/top.jpg`, cdnBase);
 
     const bottomUrl = frame.photos?.bottomUrl
-      ? getStoreBaseAssetUrl(
+      ? toFullUrl(
           frame.photos.bottomUrl.startsWith("/")
             ? frame.photos.bottomUrl.slice(1)
-            : frame.photos.bottomUrl
+            : frame.photos.bottomUrl,
+          cdnBase
         )
       : getImageByType("bottom") ||
         getDesignerEdgeUrl("edge_bottom") ||
-        getFrameImageUrl(sku, "bottom");
+        toFullUrl(`frames/${sku}/bottom.jpg`, cdnBase);
 
     const leftUrl = frame.photos?.leftUrl
-      ? getStoreBaseAssetUrl(
+      ? toFullUrl(
           frame.photos.leftUrl.startsWith("/")
             ? frame.photos.leftUrl.slice(1)
-            : frame.photos.leftUrl
+            : frame.photos.leftUrl,
+          cdnBase
         )
-      : getImageByType("left") || getDesignerEdgeUrl("edge_left") || getFrameImageUrl(sku, "left");
+      : getImageByType("left") ||
+        getDesignerEdgeUrl("edge_left") ||
+        toFullUrl(`frames/${sku}/left.jpg`, cdnBase);
 
     const rightUrl = frame.photos?.rightUrl
-      ? getStoreBaseAssetUrl(
+      ? toFullUrl(
           frame.photos.rightUrl.startsWith("/")
             ? frame.photos.rightUrl.slice(1)
-            : frame.photos.rightUrl
+            : frame.photos.rightUrl,
+          cdnBase
         )
       : getImageByType("right") ||
         getDesignerEdgeUrl("edge_right") ||
-        getFrameImageUrl(sku, "right");
+        toFullUrl(`frames/${sku}/right.jpg`, cdnBase);
 
     return NextResponse.json({
       sku,

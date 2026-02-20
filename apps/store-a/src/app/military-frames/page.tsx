@@ -4,35 +4,19 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { Award, Clock, CheckCircle, Shield } from "lucide-react";
 import { Badge, Card } from "@framecraft/ui";
-import { getStoreBaseAssetUrl } from "@framecraft/core/utils/asset-urls";
+import { getSharedAssetUrl } from "@framecraft/core/utils/asset-urls";
 import { getMilitaryLifestyleImageByNumber } from "@framecraft/core/lib/military-lifestyle-images";
 import { brandConfig } from "../../brand.config";
 import { RelatedProducts } from "@/components/RelatedProducts";
 import { ScrollToDesignerButton } from "./scroll-button";
 import { MilitaryLifestyleCarousel } from "@framecraft/ui";
-import type { ShadowboxConfig } from "@framecraft/types";
-
 /**
- * Original uses MilitaryFrameDesigner (branch presets, military layouts).
- * We use ShadowboxDesigner with military initial config until MilitaryFrameDesigner is ported.
+ * Military Frame Designer with branch presets, military layouts, brass nameplate, and hanging hardware.
  */
-const ShadowboxDesigner = nextDynamic(
-  () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
+const MilitaryFrameDesigner = nextDynamic(
+  () => import("@framecraft/ui").then((m) => m.MilitaryFrameDesigner),
   { ssr: false }
 );
-
-/** Military-page defaults: Standard 16×20", 2" depth, double mat (Army-style green/black), suede backing. */
-const MILITARY_INITIAL_CONFIG: ShadowboxConfig = {
-  widthIn: 16,
-  heightIn: 20,
-  depthIn: 2,
-  matLayers: [
-    { color: "#4B5320", thicknessIn: 2.5 },
-    { color: "#000000", thicknessIn: 0.25 },
-  ],
-  background: { material: "suede", color: "#2C1810" },
-  glazing: "acrylic",
-};
 
 export const dynamic = "force-dynamic";
 
@@ -63,7 +47,7 @@ const productSchema = {
   category: "Military Memorabilia Framing",
   sku: "MILITARY-FRAME-CUSTOM",
   brand: { "@type": "Brand", name: brandConfig.name },
-  image: getStoreBaseAssetUrl("military/lifestyle/lifestyle_01.jpg"),
+  image: getSharedAssetUrl("military/lifestyle/lifestyle_01.jpg"),
   url: `${baseUrl}/military-frames`,
   offers: {
     "@type": "AggregateOffer",
@@ -228,8 +212,8 @@ export default function MilitaryFramesPage() {
         </section>
 
         {/* Designer Section – original uses MilitaryFrameDesigner embedded */}
-        <section id="military-designer" className="py-8">
-          <div className="container mx-auto px-4">
+        <section id="military-designer" className="py-8 overflow-visible">
+          <div className="container mx-auto px-4 overflow-visible">
             <div className="scroll-mt-20" data-testid="designer-section">
               <Suspense
                 fallback={
@@ -241,7 +225,7 @@ export default function MilitaryFramesPage() {
                   </div>
                 }
               >
-                <ShadowboxDesigner embedded initialConfig={MILITARY_INITIAL_CONFIG} />
+                <MilitaryFrameDesigner embedded />
               </Suspense>
             </div>
           </div>

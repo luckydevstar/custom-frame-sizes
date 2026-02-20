@@ -107,6 +107,18 @@ export function getStoreBaseAssetUrl(path: string): string {
 }
 
 /**
+ * Resolve frame photo URL for use in designers.
+ * API may return relative paths (/frames/...) or full CDN URLs. When relative,
+ * applies getStoreBaseAssetUrl so client gets correct CDN URL (NEXT_PUBLIC_CDN_STORE_A_URL
+ * is inlined in client bundle). Use when rendering framePhotos.topUrl, bottomUrl, etc.
+ */
+export function resolveFramePhotoUrl(url: string | undefined): string {
+  if (!url) return "";
+  if (url.startsWith("http://") || url.startsWith("https://")) return url;
+  return getStoreBaseAssetUrl(url.startsWith("/") ? url.slice(1) : url);
+}
+
+/**
  * Get CDN URL for a store-a asset (assets/ directory)
  *
  * @param path - Relative path from assets directory (e.g., "brand/logo.png" or "plywood-texture.png")

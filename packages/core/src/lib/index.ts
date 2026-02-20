@@ -290,8 +290,59 @@ export type { JerseyLifestyleImage } from "./jersey-lifestyle-images";
 export {
   getMilitaryLifestyleImages,
   getMilitaryLifestyleImageByNumber,
+  getRandomMilitaryPhoto,
 } from "./military-lifestyle-images";
 export type { MilitaryLifestylePhoto } from "./military-lifestyle-images";
+export {
+  getBouquetLifestyleImages,
+  getBouquetLifestyleImageByNumber,
+  getRandomBouquetLifestyleImage,
+} from "./bouquet-lifestyle-images";
+export type { BouquetLifestylePhoto } from "./bouquet-lifestyle-images";
+export {
+  getMilitaryLayout,
+  getAllMilitaryLayouts,
+  createCustomMilitaryLayout,
+  validateMilitaryCustomDimensions,
+  getMilitaryLayoutWithBrassNameplate,
+  MILITARY_CUSTOM_SIZE_LIMITS,
+  BRASS_PLAQUE_DIMENSIONS,
+} from "./military-layouts";
+export type {
+  MilitaryLayoutType,
+  MilitaryLayout,
+  MilitaryPresetLayoutType,
+} from "./military-layouts";
+export {
+  MILITARY_BRANCHES,
+  getMilitaryBranchById,
+  getAllMilitaryBranches,
+} from "./military-branches";
+export type { MilitaryBranch, MilitaryMatOption } from "./military-branches";
+export {
+  getStampLayout,
+  getAllStampLayouts,
+  createCustomStampLayout,
+  validateStampCustomDimensions,
+  getStampLayoutWithBrassNameplate,
+  STAMP_CUSTOM_SIZE_LIMITS,
+  STAMP_BACKING_OPTIONS,
+  getStampBackingById,
+  getDefaultStampBacking,
+  STAMP_BRASS_PLAQUE_DIMENSIONS,
+} from "./stamp-layouts";
+export type {
+  StampLayoutType,
+  StampLayout,
+  StampPresetLayoutType,
+  StampBackingOption,
+} from "./stamp-layouts";
+export {
+  getStampLifestyleImages,
+  getStampLifestyleImageByNumber,
+  getRandomStampLifestyleImage,
+} from "./stamp-lifestyle-images";
+export type { StampLifestylePhoto } from "./stamp-lifestyle-images";
 export {
   PUCK_INSERTS,
   getPuckInsert,

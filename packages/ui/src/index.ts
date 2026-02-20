@@ -356,6 +356,10 @@ export type { SearchBarProps } from "./components/navigation";
 // Specialty components
 export { FrameDesigner } from "./components/specialty/FrameDesigner";
 export { ShadowboxDesigner } from "./components/specialty/ShadowboxDesigner";
+export { BouquetFrameDesigner } from "./components/specialty/BouquetFrameDesigner";
+export { MilitaryFrameDesigner } from "./components/specialty/MilitaryFrameDesigner";
+export { StampFrameDesigner } from "./components/specialty/StampFrameDesigner";
+export { MilitaryPreviewCanvas } from "./components/specialty/MilitaryPreviewCanvas";
 export { JerseyFrameDesigner } from "./components/specialty/JerseyFrameDesigner";
 export { CanvasFrameDesigner } from "./components/specialty/CanvasFrameDesigner";
 export { PuzzleFrameDesigner } from "./components/specialty/PuzzleFrameDesigner";

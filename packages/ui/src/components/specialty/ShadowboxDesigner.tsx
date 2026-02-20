@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo, useRef, lazy, Suspense } from "react";
 // Removed wouter useLocation - not needed in Next.js
-import { Maximize, X, Eye, Settings, Info, Smartphone, Copy } from "lucide-react";
+import { Maximize, X, Eye, Settings, Info, Smartphone, Copy, Flower2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 
@@ -62,6 +62,7 @@ import {
   getMatBevelColor,
   getStoreAssetUrl,
   getStoreBaseAssetUrl,
+  resolveFramePhotoUrl,
 } from "@framecraft/core";
 import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
@@ -84,8 +85,25 @@ const frameStyles =
 const matColors = getMatColors();
 const glassTypes = getGlassTypes();
 
+export interface LifestyleImageOverride {
+  url: string;
+  alt: string;
+}
+
 interface ShadowboxDesignerProps {
   defaultFrameId?: string;
+  /** When provided, restrict frame list to these SKUs (e.g. ["10727","10728","10729"] for bouquet). */
+  frameSkus?: string[];
+  /** Override for the lifestyle preview thumbnail (e.g. bouquet-specific images). */
+  getLifestyleImage?: () => LifestyleImageOverride;
+  /** When provided, lock depth to this value (e.g. 2 for bouquet frames). Used for initial state. */
+  fixedDepth?: number;
+  /** When provided, use as initial backing (e.g. "mat-1" for bouquet). Used when no initialConfig. */
+  defaultBacking?: string;
+  /** Override display names for frames by SKU (e.g. { "10727": "Deep Black Bouquet Frame" }). */
+  frameNameOverrides?: Record<string, string>;
+  /** When "bouquet", uses bouquet-specific UI: heading, Display Area labels, Flower2 placeholder, Frame Finish, hide depth, hide No Backing. */
+  variant?: "shadowbox" | "bouquet";
   embedded?: boolean;
   hideMobileSticky?: boolean;
   readonly?: boolean;
@@ -128,6 +146,12 @@ function getBackingStyles(
 
 export function ShadowboxDesigner({
   defaultFrameId,
+  frameSkus,
+  getLifestyleImage,
+  fixedDepth,
+  defaultBacking,
+  frameNameOverrides,
+  variant = "shadowbox",
   embedded = false,
   hideMobileSticky = false,
   readonly = false,
@@ -139,12 +163,24 @@ export function ShadowboxDesigner({
   // Mark unused parameters
   void featureFlags;
   void onSave;
+
+  // When frameSkus provided, filter to those SKUs (e.g. bouquet: 10727, 10728, 10729)
+  const effectiveFrameStyles = useMemo(() => {
+    if (!frameSkus?.length) return frameStyles;
+    const base = shadowboxFrames.length > 0 ? shadowboxFrames : deepRabbetFrames;
+    const filtered = base.filter(
+      (f) => (f.sku != null && frameSkus.includes(f.sku)) || frameSkus.includes(f.id)
+    );
+    return filtered.length > 0 ? filtered : frameStyles;
+  }, [frameSkus]);
+
   // Initialize selected frame with defaultFrameId if provided
   const initialFrame = defaultFrameId
-    ? (frameStyles.find((f) => f.id === defaultFrameId) ?? frameStyles[0])
-    : frameStyles[0];
+    ? (effectiveFrameStyles.find((f) => f.id === defaultFrameId || f.sku === defaultFrameId) ??
+      effectiveFrameStyles[0])
+    : effectiveFrameStyles[0];
   const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(
-    () => initialFrame ?? frameStyles[0]!
+    () => initialFrame ?? effectiveFrameStyles[0]!
   );
   const [selectedMat, setSelectedMat] = useState<Mat>(() => getMatById("mat-1") ?? MAT_PALETTE[0]!);
   const [selectedMatInner, setSelectedMatInner] = useState<Mat>(
@@ -159,9 +195,9 @@ export function ShadowboxDesigner({
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [hangingHardware, setHangingHardware] = useState<"standard" | "security">("standard");
-  const [selectedBacking, setSelectedBacking] = useState<string>("none");
+  const [selectedBacking, setSelectedBacking] = useState<string>(defaultBacking ?? "none");
   const [selectedBackingColor, setSelectedBackingColor] = useState<string | undefined>(undefined); // Preserve color for round-trip
-  const [depth, setDepth] = useState<number>(1.25); // Shadowbox depth in inches
+  const [depth, setDepth] = useState<number>(fixedDepth ?? 1.25); // Shadowbox depth in inches
 
   // Brass nameplate configuration (Type B behavior)
   const [brassNameplateConfig, setBrassNameplateConfig] = useState<BrassNameplateConfig>(() => {
@@ -237,7 +273,7 @@ export function ShadowboxDesigner({
 
     // Only load frame from URL if no defaultFrameId is provided (prevents URL params from overriding dedicated page defaults)
     if (!defaultFrameId && !embedded && frameId) {
-      const frame = frameStyles.find((f) => f.id === frameId);
+      const frame = effectiveFrameStyles.find((f) => f.id === frameId || f.sku === frameId);
       if (frame) setSelectedFrame(frame);
     }
     if (width) setArtworkWidth(width);
@@ -255,7 +291,7 @@ export function ShadowboxDesigner({
     if (bottomWeightedParam === "true") setBottomWeighted(true);
     if (hardware === "standard" || hardware === "security") setHangingHardware(hardware);
     if (backing) setSelectedBacking(backing);
-  }, [defaultFrameId, embedded]);
+  }, [defaultFrameId, embedded, effectiveFrameStyles]);
 
   // Load from initialConfig prop (for embed mode)
   useEffect(() => {
@@ -285,7 +321,9 @@ export function ShadowboxDesigner({
       if (state.unknownFields) setUnknownConfigFields(state.unknownFields);
 
       // Find and set frame
-      const frame = frameStyles.find((f) => f.id === state.frameId);
+      const frame = effectiveFrameStyles.find(
+        (f) => f.id === state.frameId || f.sku === state.frameId
+      );
       if (frame) setSelectedFrame(frame);
 
       // Find and set glass
@@ -311,7 +349,7 @@ export function ShadowboxDesigner({
         }
       }
     }
-  }, [initialConfig]);
+  }, [initialConfig, effectiveFrameStyles]);
 
   // Update URL when configuration changes
   useEffect(() => {
@@ -1002,7 +1040,7 @@ export function ShadowboxDesigner({
                     left: 0,
                     right: 0,
                     height: `${layout.frameFacePx}px`,
-                    backgroundImage: `url(${framePhotos.topUrl})`,
+                    backgroundImage: `url(${resolveFramePhotoUrl(framePhotos.topUrl)})`,
                     backgroundSize: "auto 100%",
                     backgroundRepeat: "repeat-x",
                     backgroundPosition: "left center",
@@ -1024,7 +1062,7 @@ export function ShadowboxDesigner({
                     left: 0,
                     right: 0,
                     height: `${layout.frameFacePx}px`,
-                    backgroundImage: `url(${framePhotos.bottomUrl})`,
+                    backgroundImage: `url(${resolveFramePhotoUrl(framePhotos.bottomUrl)})`,
                     backgroundSize: "auto 100%",
                     backgroundRepeat: "repeat-x",
                     backgroundPosition: "left center",
@@ -1046,7 +1084,7 @@ export function ShadowboxDesigner({
                     left: 0,
                     bottom: 0,
                     width: `${layout.frameFacePx}px`,
-                    backgroundImage: `url(${framePhotos.leftUrl})`,
+                    backgroundImage: `url(${resolveFramePhotoUrl(framePhotos.leftUrl)})`,
                     backgroundSize: "100% auto",
                     backgroundRepeat: "repeat-y",
                     backgroundPosition: "center top",
@@ -1068,7 +1106,7 @@ export function ShadowboxDesigner({
                     right: 0,
                     bottom: 0,
                     width: `${layout.frameFacePx}px`,
-                    backgroundImage: `url(${framePhotos.rightUrl})`,
+                    backgroundImage: `url(${resolveFramePhotoUrl(framePhotos.rightUrl)})`,
                     backgroundSize: "100% auto",
                     backgroundRepeat: "repeat-y",
                     backgroundPosition: "center top",
@@ -1163,8 +1201,15 @@ export function ShadowboxDesigner({
                         // Mat beveled edge (1/16" inner border - black for some mats, off-white for others) + depth shadow
                         boxShadow: `inset 0 0 0 ${Math.max(1, layout.scale * 0.1)}px ${getMatBevelColor(selectedMat.name)}, inset 0 4px 12px rgba(0,0,0,0.3), inset 0 1px 4px rgba(0,0,0,0.2)`,
                         transition: "background-color 450ms cubic-bezier(0.19, 1.0, 0.22, 1.0)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
-                    />
+                    >
+                      {variant === "bouquet" && (
+                        <Flower2 className="w-20 h-20 text-muted-foreground/30" />
+                      )}
+                    </div>
                   ) : (
                     <div
                       className={
@@ -1180,8 +1225,15 @@ export function ShadowboxDesigner({
                         boxShadow:
                           "inset 0 4px 12px rgba(0,0,0,0.3), inset 0 1px 4px rgba(0,0,0,0.2)",
                         transition: "background-color 450ms cubic-bezier(0.19, 1.0, 0.22, 1.0)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
-                    />
+                    >
+                      {variant === "bouquet" && (
+                        <Flower2 className="w-20 h-20 text-muted-foreground/30" />
+                      )}
+                    </div>
                   )}
                 </div>
 
@@ -1295,8 +1347,15 @@ export function ShadowboxDesigner({
                         // Mat beveled edge (1/16" inner border - black for some mats, off-white for others) + depth shadow
                         boxShadow: `inset 0 0 0 ${Math.max(1, layout.scale * 0.1)}px ${getMatBevelColor(selectedMat.name)}, inset 0 4px 12px rgba(0,0,0,0.3), inset 0 1px 4px rgba(0,0,0,0.2)`,
                         transition: "background-color 450ms cubic-bezier(0.19, 1.0, 0.22, 1.0)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
-                    />
+                    >
+                      {variant === "bouquet" && (
+                        <Flower2 className="w-20 h-20 text-muted-foreground/30" />
+                      )}
+                    </div>
                   ) : (
                     <div
                       className={
@@ -1312,8 +1371,15 @@ export function ShadowboxDesigner({
                         boxShadow:
                           "inset 0 4px 12px rgba(0,0,0,0.3), inset 0 1px 4px rgba(0,0,0,0.2)",
                         transition: "background-color 450ms cubic-bezier(0.19, 1.0, 0.22, 1.0)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
                       }}
-                    />
+                    >
+                      {variant === "bouquet" && (
+                        <Flower2 className="w-20 h-20 text-muted-foreground/30" />
+                      )}
+                    </div>
                   )}
                 </div>
 
@@ -1442,6 +1508,18 @@ export function ShadowboxDesigner({
 
               {/* Lifestyle */}
               {(() => {
+                const override = getLifestyleImage?.();
+                if (override) {
+                  return (
+                    <div className="aspect-square rounded-md border overflow-hidden bg-background">
+                      <img
+                        src={override.url}
+                        alt={override.alt}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  );
+                }
                 const lifestyleImage = selectedFrame.alternateImages?.find(
                   (img: AlternateImage) => img.type === "lifestyle"
                 );
@@ -1545,7 +1623,7 @@ export function ShadowboxDesigner({
                 </div>
                 <div className="md:max-h-[400px] md:overflow-y-auto md:pr-2">
                   <div className="grid grid-cols-2 gap-2">
-                    {frameStyles.map((frame) => (
+                    {effectiveFrameStyles.map((frame) => (
                       <button
                         key={frame.id}
                         onClick={() => setSelectedFrame(frame)}
@@ -1575,7 +1653,9 @@ export function ShadowboxDesigner({
                             }}
                           />
                         )}
-                        <p className="font-medium text-sm mb-1.5">{frame.name}</p>
+                        <p className="font-medium text-sm mb-1.5">
+                          {frameNameOverrides?.[frame.sku ?? frame.id] ?? frame.name}
+                        </p>
                         <div className="space-y-0.5 text-xs text-muted-foreground">
                           <div className="flex items-center gap-1.5">
                             <svg
@@ -1653,16 +1733,20 @@ export function ShadowboxDesigner({
                     >
                       Plywood Backing
                     </button>
-                    <button
-                      onClick={() => setSelectedBacking("none")}
-                      className={`p-3 rounded-md border-2 hover-elevate active-elevate-2 text-sm font-medium ${
-                        selectedBacking === "none" ? "border-primary bg-primary/5" : "border-border"
-                      }`}
-                      data-testid="button-backing-none"
-                      disabled={readonly}
-                    >
-                      No Backing
-                    </button>
+                    {variant !== "bouquet" && (
+                      <button
+                        onClick={() => setSelectedBacking("none")}
+                        className={`p-3 rounded-md border-2 hover-elevate active-elevate-2 text-sm font-medium ${
+                          selectedBacking === "none"
+                            ? "border-primary bg-primary/5"
+                            : "border-border"
+                        }`}
+                        data-testid="button-backing-none"
+                        disabled={readonly}
+                      >
+                        No Backing
+                      </button>
+                    )}
                   </div>
                 </div>
               </AccordionContent>
@@ -2018,7 +2102,7 @@ export function ShadowboxDesigner({
                             left: 0,
                             right: 0,
                             height: `${dialogFrameBorder}px`,
-                            backgroundImage: `url(${framePhotos.topUrl})`,
+                            backgroundImage: `url(${resolveFramePhotoUrl(framePhotos.topUrl)})`,
                             backgroundSize: "auto 100%",
                             backgroundRepeat: "repeat-x",
                             backgroundPosition: "left center",
@@ -2040,7 +2124,7 @@ export function ShadowboxDesigner({
                             left: 0,
                             right: 0,
                             height: `${dialogFrameBorder}px`,
-                            backgroundImage: `url(${framePhotos.bottomUrl})`,
+                            backgroundImage: `url(${resolveFramePhotoUrl(framePhotos.bottomUrl)})`,
                             backgroundSize: "auto 100%",
                             backgroundRepeat: "repeat-x",
                             backgroundPosition: "left center",
@@ -2062,7 +2146,7 @@ export function ShadowboxDesigner({
                             left: 0,
                             bottom: 0,
                             width: `${dialogFrameBorder}px`,
-                            backgroundImage: `url(${framePhotos.leftUrl})`,
+                            backgroundImage: `url(${resolveFramePhotoUrl(framePhotos.leftUrl)})`,
                             backgroundSize: "100% auto",
                             backgroundRepeat: "repeat-y",
                             backgroundPosition: "center top",
@@ -2084,7 +2168,7 @@ export function ShadowboxDesigner({
                             right: 0,
                             bottom: 0,
                             width: `${dialogFrameBorder}px`,
-                            backgroundImage: `url(${framePhotos.rightUrl})`,
+                            backgroundImage: `url(${resolveFramePhotoUrl(framePhotos.rightUrl)})`,
                             backgroundSize: "100% auto",
                             backgroundRepeat: "repeat-y",
                             backgroundPosition: "center top",
