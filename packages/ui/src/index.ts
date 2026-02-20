@@ -266,6 +266,7 @@ export {
   ToastAction,
 } from "./components/ui/toast";
 export { Toaster } from "./components/ui/toaster";
+export { useToast } from "./hooks/use-toast";
 export { ToggleGroup, ToggleGroupItem } from "./components/ui/toggle-group";
 export { Toggle, toggleVariants } from "./components/ui/toggle";
 export { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider } from "./components/ui/tooltip";
@@ -355,6 +356,10 @@ export type { SearchBarProps } from "./components/navigation";
 
 // Specialty components
 export { FrameDesigner } from "./components/specialty/FrameDesigner";
+export { MatConfigurator } from "./components/specialty/MatConfigurator";
+export type { MatConfiguratorProps } from "./components/specialty/MatConfigurator";
+export { BulkPricingModal } from "./components/specialty/mat/BulkPricingModal";
+export type { BulkPricingModalProps } from "./components/specialty/mat/BulkPricingModal";
 export { ShadowboxDesigner } from "./components/specialty/ShadowboxDesigner";
 export { BouquetFrameDesigner } from "./components/specialty/BouquetFrameDesigner";
 export { MilitaryFrameDesigner } from "./components/specialty/MilitaryFrameDesigner";

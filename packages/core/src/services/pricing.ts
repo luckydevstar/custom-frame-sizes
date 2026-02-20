@@ -24,6 +24,15 @@ import {
   calculateCompleteFramePriceBySku,
 } from "./pricing-engine";
 
+// Re-export for mat designer, foam board, acrylic, and other consumers
+export {
+  calculateFramePriceBySku,
+  calculateMatPriceForDesigner,
+  calculateDedicatedPagePrice,
+  COMPONENT_PRICING,
+} from "./pricing-engine";
+export type { ComponentType } from "./pricing-engine";
+
 /**
  * Calculate complete pricing breakdown for a frame configuration
  * @param config - Frame configuration object

@@ -6,6 +6,7 @@ import { brandConfig } from "../brand.config";
 import { QueryProvider } from "../components/providers/query-provider";
 import { Header, Footer } from "@framecraft/ui/components/layout";
 import { TooltipProvider } from "@framecraft/ui";
+import { Toaster } from "@framecraft/ui/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -48,6 +49,7 @@ export default function RootLayout({
                 <Header />
                 <main className="flex-1">{children}</main>
                 <Footer />
+                <Toaster />
               </div>
             </TooltipProvider>
           </StoreProvider>

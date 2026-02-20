@@ -182,3 +182,43 @@ apps/store-a/
 └── src/
     └── brand.config.ts            ✅ (configured to use SVG placeholders)
 ```
+
+## Foam board "See the Options" images (shared assets)
+
+The foam-board page uses three images in the "See the Options" section. They are served from the **shared** assets bucket (same as jersey/puzzle lifestyle images), not the store-a bucket.
+
+**Local dev:** Run the script from `useful-scripts` to copy into `assets_to_use/shared_assets/components/foam-board/`:
+
+```bash
+cd useful-scripts
+node copy-foam-board-assets.mjs --dir ../other --no-upload
+```
+
+**R2 upload (production):** Same script uploads to the **shared** R2 bucket at `components/foam-board/`:
+
+```bash
+cd useful-scripts
+node copy-foam-board-assets.mjs --dir ../other --bucket your-shared-bucket
+```
+
+Set `NEXT_PUBLIC_CDN_SHARED_URL` so the app uses the CDN for these paths. See `useful-scripts/README.md` for full usage and env vars.
+
+## Cleat hangers hero image (shared assets)
+
+The cleat-hangers page uses one hero image. It is served from the **shared** assets (same as foam-board).
+
+**Local dev:** Run from `useful-scripts` to copy from `other/` (or `--file` / `--dir`) into `assets_to_use/shared_assets/components/cleat-hangers/`:
+
+```bash
+cd useful-scripts
+node copy-cleat-hangers-assets.mjs --dir ../other --no-upload
+```
+
+**R2 upload (production):** Same script uploads to the **shared** bucket at `components/cleat-hangers/cleat-hangers.png`:
+
+```bash
+cd useful-scripts
+node copy-cleat-hangers-assets.mjs --dir ../other --bucket your-shared-bucket
+```
+
+The script looks for `image_1763478658169.png` or `cleat-hangers.png` in the source folder. See `useful-scripts/README.md` for full usage.

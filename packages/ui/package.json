@@ -6,6 +6,11 @@
   "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./hooks/use-toast": "./src/hooks/use-toast.ts",
+    "./components/ui/toaster": "./src/components/ui/toaster.tsx"
+  },
   "scripts": {
     "build": "tsc --build",
     "dev": "tsc --build --watch",

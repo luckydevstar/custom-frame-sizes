@@ -298,8 +298,10 @@ export function BrassNameplateOrderModule() {
                     onClick={() => setConfig((prev) => ({ ...prev, color: color.id }))}
                     className={`
                       h-12 rounded-md border-2 transition-all relative overflow-hidden
-                      hover-elevate active-elevate-2
-                      ${config.color === color.id ? "border-primary ring-2 ring-primary/30" : "border-border"}
+                      bg-muted
+                      hover:ring-2 hover:ring-primary/25 hover:ring-offset-2
+                      active:scale-[0.98]
+                      ${config.color === color.id ? "border-primary ring-2 ring-primary/40 ring-offset-2" : "border-border"}
                     `}
                     data-testid={`button-plate-color-${color.id}`}
                     title={color.name}
@@ -321,9 +323,7 @@ export function BrassNameplateOrderModule() {
                   </button>
                 ))}
               </div>
-              <p className="text-xs text-muted-foreground mt-2">
-                Selected: {colorOption?.name ?? ""}
-              </p>
+              <p className="text-xs text-muted-foreground mt-2">Selected: {colorOption.name}</p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">

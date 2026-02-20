@@ -161,7 +161,53 @@ export const COMPONENT_PRICING = {
     availableInDesigners: true,
     hasDedicatedPage: false,
   },
+  // Foam board (dedicated page)
+  STANDARD_WHITE_FOAM: {
+    costPerSqIn: 0.00125,
+    dedicatedMarkup: PRICING_MARKUPS.DEDICATED_PAGE,
+    designerMarkup: PRICING_MARKUPS.DESIGNER_STANDARD,
+    minimumPrice: 6.95,
+    availableInDesigners: true,
+    hasDedicatedPage: true,
+  },
+  STANDARD_BLACK_FOAM: {
+    costPerSqIn: 0.00458,
+    dedicatedMarkup: PRICING_MARKUPS.DEDICATED_PAGE,
+    designerMarkup: null,
+    minimumPrice: 7.95,
+    availableInDesigners: false,
+    hasDedicatedPage: true,
+  },
+  SELF_ADHESIVE_WHITE_FOAM: {
+    costPerSqIn: 0.00828,
+    dedicatedMarkup: PRICING_MARKUPS.DEDICATED_PAGE,
+    designerMarkup: null,
+    minimumPrice: 9.95,
+    availableInDesigners: false,
+    hasDedicatedPage: true,
+  },
 } as const;
+
+export type ComponentType = keyof typeof COMPONENT_PRICING;
+
+/**
+ * Calculate component price for dedicated standalone pages (e.g. foam board, acrylic).
+ * Uses dedicatedMarkup with minimum floor when defined.
+ */
+export function calculateDedicatedPagePrice(
+  widthIn: number,
+  heightIn: number,
+  componentType: ComponentType
+): number {
+  const config = COMPONENT_PRICING[componentType as keyof typeof COMPONENT_PRICING];
+  if (!config) return 0;
+  const sqIn = widthIn * heightIn;
+  const rawPrice = sqIn * config.costPerSqIn * config.dedicatedMarkup;
+  if (config.minimumPrice != null) {
+    return Math.max(rawPrice, config.minimumPrice);
+  }
+  return rawPrice;
+}
 
 // Frame moulding prices - TODO: Extract full list from schema.ts
 export const PICTURE_FRAME_MOULDING_PRICES: Record<string, number> = {

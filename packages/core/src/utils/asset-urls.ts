@@ -183,7 +183,7 @@ const FRAME_IMAGE_FILENAMES: Record<
 
 /**
  * Get CDN URL for a frame image (uses store-a bucket).
- * Uses store-a filename convention: corner-a.jpg, profile-a.jpg, top.jpg, etc.
+ * Prefer using frame.alternateImages (from frames.json) for exact filenames (e.g. lifestyle_01.jpg).
  *
  * @param sku - Frame SKU
  * @param imageType - Type of frame image (corner, top, bottom, left, right, profile, lifestyle)
