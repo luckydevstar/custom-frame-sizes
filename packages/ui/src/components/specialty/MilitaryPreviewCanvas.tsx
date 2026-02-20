@@ -45,8 +45,8 @@ interface MilitaryPreviewCanvasProps {
 
 function getBackingSwatchUrl(swatchFile: string | undefined): string | undefined {
   if (!swatchFile) return undefined;
-  // Suede swatches (29-38.jpg) - try shared mats path; fallback to /mats/ for local
-  return getSharedAssetUrl(`mats/${swatchFile}`);
+  // Suede swatches (29-38.jpg) - shared bucket mats/swatches/
+  return getSharedAssetUrl(`mats/swatches/${swatchFile}`);
 }
 
 export const MilitaryPreviewCanvas = memo(function MilitaryPreviewCanvas({

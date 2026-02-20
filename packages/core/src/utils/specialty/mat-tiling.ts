@@ -9,6 +9,7 @@
 
 import type React from "react";
 import { getMatByName, ALL_MATS } from "@framecraft/config";
+import { getMatPreviewImageUrl } from "../../utils/asset-urls";
 
 // Build hex-to-mat-name lookup table once at module scope
 const HEX_TO_MAT_NAME: Record<string, string> = {};
@@ -25,7 +26,7 @@ const BLACK_CORE_MAT_NUMBERS = [42, 43, 44, 45]; // Football, Basketball, White 
 
 export interface MatTilingStyle {
   backgroundImage: string;
-  backgroundSize: "cover";
+  backgroundSize: string;
   backgroundRepeat: "no-repeat";
   backgroundPosition: "center";
 }
@@ -69,15 +70,13 @@ export function getMatTilingStyle(
     };
   }
 
-  // Use background-size: cover to scale image to fill mat area
-  // This maintains aspect ratio and crops overflow (no skewing)
-  // Perfect for different frame sizes - e.g., 24x30 shows full image, 24x8 crops top/bottom
-
+  // Preview uses full-size mat image (mats/{n}.jpg), not swatch (mats/swatches/{n}.jpg).
   // Cache-busting for updated mat images (v=4 to force fresh reload of all mats)
   const cacheBustParam = "?v=4";
+  const matImageUrl = getMatPreviewImageUrl(String(mat.lineNumber)) + cacheBustParam;
 
   return {
-    backgroundImage: `url('/mats/${mat.lineNumber}.jpg${cacheBustParam}')`,
+    backgroundImage: `url(${matImageUrl})`,
     backgroundSize: "cover",
     backgroundRepeat: "no-repeat",
     backgroundPosition: "center",
@@ -280,10 +279,10 @@ export function getMatSVGPatternData(
     };
   }
 
-  // Return image path for use in SVG (SVG will handle cover sizing via preserveAspectRatio)
-  // Cache-busting for updated mat images (v=4 to force fresh reload of all mats)
+  // Preview uses full-size mat image (mats/{n}.jpg), not swatch.
   const cacheBustParam = "?v=4";
+  const imagePath = getMatPreviewImageUrl(String(mat.lineNumber)) + cacheBustParam;
   return {
-    imagePath: `/mats/${mat.lineNumber}.jpg${cacheBustParam}`,
+    imagePath,
   };
 }

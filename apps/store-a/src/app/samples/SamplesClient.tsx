@@ -705,7 +705,7 @@ function MatSampleCard({
   selected: boolean;
   onToggle: () => void;
 }) {
-  const swatchUrl = getSharedAssetUrl(`mats/${mat.swatchFile}`);
+  const swatchUrl = getSharedAssetUrl(`mats/swatches/${mat.swatchFile}`);
   const needsBorder = matNeedsBorder(mat);
   return (
     <div

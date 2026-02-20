@@ -198,13 +198,27 @@ export function getFrameImageUrl(
 }
 
 /**
- * Get CDN URL for a mat board image
+ * Get CDN URL for a mat board swatch image (shared bucket: mats/swatches/)
+ * Use for picker/thumbnails only.
  *
- * @param id - Mat board ID or filename
+ * @param id - Mat board line number or filename (e.g. "1", "42", or "42.jpg")
  * @returns Full CDN URL or local path
  */
 export function getMatImageUrl(id: string): string {
-  return getSharedAssetUrl(`mats/${id}.jpg`);
+  const base = id.replace(/\.jpg$/i, "");
+  return getSharedAssetUrl(`mats/swatches/${base}.jpg`);
+}
+
+/**
+ * Get CDN URL for the full-size mat image used in preview (shared bucket: mats/)
+ * Prefer this for preview/canvas so the mat area uses the high-res image, not the swatch.
+ *
+ * @param id - Mat board line number or filename (e.g. "1", "42", or "42.jpg")
+ * @returns Full CDN URL or local path
+ */
+export function getMatPreviewImageUrl(id: string): string {
+  const base = id.replace(/\.jpg$/i, "");
+  return getSharedAssetUrl(`mats/${base}.jpg`);
 }
 
 /**

@@ -79,10 +79,10 @@ export function getMatByName(name: string): Mat | undefined {
 }
 
 /**
- * Get swatch image path for a mat
+ * Get swatch image path for a mat (shared bucket: mats/swatches/)
  */
 export function getMatSwatchPath(mat: Mat): string {
-  return `/mats/${mat.swatchFile}`;
+  return `/mats/swatches/${mat.swatchFile}`;
 }
 
 /**

@@ -79,6 +79,17 @@ apps/store-a/
 
 See `.env.local.example` for all required environment variables.
 
+### Deploying to Vercel (mat and frame images)
+
+On Vercel, **you must set the CDN URLs** or mat/frame images will 404:
+
+- **`NEXT_PUBLIC_CDN_SHARED_URL`** – Base URL for shared assets (mats, lifestyle images, etc.). Example: `https://pub-xxxx.r2.dev` (no trailing slash).
+- **`NEXT_PUBLIC_CDN_STORE_A_URL`** – Base URL for store-a assets (frame corner/profile images). Example: `https://pub-xxxx.r2.dev` (no trailing slash).
+
+If these are not set, the app returns relative URLs like `/mats/1.jpg` and `/frames/wide-black/corner-a.jpg`. The browser then requests them from your Vercel domain; the asset API has no files (no `assets_to_use` on Vercel), so you get 404s. Setting the env vars makes the app return full CDN URLs so the browser loads images from your R2/Cloudflare buckets.
+
+Add both variables in **Vercel → Project → Settings → Environment Variables**, then redeploy so they are inlined at build time.
+
 ## Dependencies
 
 Store A uses the following shared packages:
