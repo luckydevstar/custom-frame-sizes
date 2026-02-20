@@ -323,7 +323,9 @@ export function BrassNameplateOrderModule() {
                   </button>
                 ))}
               </div>
-              <p className="text-xs text-muted-foreground mt-2">Selected: {colorOption.name}</p>
+              <p className="text-xs text-muted-foreground mt-2">
+                Selected: {colorOption?.name ?? ""}
+              </p>
             </div>
 
             <div className="grid grid-cols-2 gap-4">

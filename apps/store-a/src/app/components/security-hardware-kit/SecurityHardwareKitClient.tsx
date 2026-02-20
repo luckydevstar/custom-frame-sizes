@@ -54,6 +54,8 @@ export function SecurityHardwareKitClient() {
 
   const currentPack =
     PACK_SIZES.find((p) => p.size.toString() === selectedPackSize) ?? PACK_SIZES[0];
+  if (!currentPack) return null;
+
   const price = selectedProduct === "kit" ? currentPack.price : 4.95;
 
   const handleAddToCart = () => {

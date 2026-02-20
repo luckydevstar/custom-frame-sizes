@@ -24,7 +24,6 @@ export function useMatPricing() {
   const h = config.overallHIn;
   const perimeter = (w + h) * 2;
   const area = w * h;
-  const _qty = config.quantity || 1;
 
   // Mat total (single or double approximation)
   let matTotal = 0;

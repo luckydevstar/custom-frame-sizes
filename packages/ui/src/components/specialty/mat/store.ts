@@ -14,7 +14,6 @@ function recenterOpening(opening: MatOpening, matW: number, matH: number): MatOp
 function getDefaultConfig(): MatConfig {
   const mats = getMatsInDisplayOrder("desktop", true, true);
   const white = mats.find((m) => m.name === "White") ?? mats[0];
-  const _cream = mats.find((m) => m.name === "Cream" || m.name === "Ivory") ?? mats[1] ?? mats[0];
   return {
     overallWIn: 16,
     overallHIn: 20,

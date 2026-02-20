@@ -52,6 +52,7 @@ export function CleatHangersClient() {
 
   const currentPack =
     PACK_SIZES.find((p) => p.size.toString() === selectedPackSize) ?? PACK_SIZES[0];
+  if (!currentPack) return null;
 
   const handleAddToCart = () => {
     toast({

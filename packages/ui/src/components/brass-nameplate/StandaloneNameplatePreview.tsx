@@ -29,8 +29,8 @@ export function StandaloneNameplatePreview({
 
   const borderInset = STANDALONE_NAMEPLATE_SPECS.BORDER_INSET * DPI;
 
-  const colorOption = COLOR_OPTIONS.find((c) => c.id === config.color) || COLOR_OPTIONS[0];
-  const fontOption = FONT_OPTIONS.find((f) => f.id === config.font) || FONT_OPTIONS[0];
+  const colorOption = COLOR_OPTIONS.find((c) => c.id === config.color) ?? COLOR_OPTIONS[0];
+  const fontOption = FONT_OPTIONS.find((f) => f.id === config.font) ?? FONT_OPTIONS[0];
 
   const textAnchor =
     config.alignment === "left" ? "start" : config.alignment === "right" ? "end" : "middle";
@@ -81,6 +81,8 @@ export function StandaloneNameplatePreview({
     []
   );
   const sheenId = useMemo(() => `sheen-${Math.random().toString(36).substr(2, 9)}`, []);
+
+  if (!colorOption || !fontOption) return null;
 
   return (
     <svg
