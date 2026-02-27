@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { MatDesignerClient } from "./MatDesignerClient";
 import { brandConfig } from "../../brand.config";
 
@@ -144,7 +145,9 @@ export default function MatDesignerPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
-      <MatDesignerClient />
+      <Suspense fallback={null}>
+        <MatDesignerClient />
+      </Suspense>
     </>
   );
 }
