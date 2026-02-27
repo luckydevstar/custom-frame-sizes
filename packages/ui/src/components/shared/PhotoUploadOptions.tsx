@@ -221,6 +221,49 @@ export function PhotoUploadOptions({
     }
   }, [open]);
 
+  // When the parent re-opens the upload modal, always reset internal modal state
+  // so the main options dialog appears again (not the last Uppy/editor state).
+  useEffect(() => {
+    if (open) {
+      setShowEditor(false);
+      setShowUppy(false);
+      setIsUploading(false);
+    }
+  }, [open]);
+
+  // Defensive: ensure page scroll is restored when all upload UI is closed
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const htmlEl = document.documentElement;
+    const bodyEl = document.body;
+
+    // When no dialog/editor/dashboard/loading is visible, clear any leftover scroll locks
+    if (!open && !showUppy && !showEditor && !isUploading) {
+      if (htmlEl.style.overflow === "hidden") {
+        htmlEl.style.overflow = "";
+      }
+      if (bodyEl.style.overflow === "hidden") {
+        bodyEl.style.overflow = "";
+      }
+
+      // Uppy sometimes leaves its fixed class on the body or modal container,
+      // which forces height: 100vh; overflow: hidden and kills page scroll.
+      bodyEl.classList.remove("uppy-Dashboard--isFixed", "uppy-Dashboard-isFixed");
+      const fixedDashboards = document.querySelectorAll<HTMLElement>(
+        ".uppy-Dashboard--isFixed, .uppy-Dashboard-isFixed"
+      );
+      fixedDashboards.forEach((el) => {
+        el.classList.remove("uppy-Dashboard--isFixed", "uppy-Dashboard-isFixed");
+        if (el.style.overflow === "hidden") {
+          el.style.overflow = "";
+        }
+        if (el.style.height === "100vh") {
+          el.style.height = "";
+        }
+      });
+    }
+  }, [open, showUppy, showEditor, isUploading]);
+
   // Cleanup Uppy on unmount
   useEffect(() => {
     return () => {
@@ -316,16 +359,16 @@ export function PhotoUploadOptions({
         proudlyDisplayPoweredByUppy={false}
       />
 
-      {/* Upload Loading Overlay */}
+      {/* Upload Loading Overlay (non-modal so it doesn't lock page scroll) */}
       {isUploading && (
-        <Dialog open={isUploading}>
-          <DialogContent
-            className="sm:max-w-md flex items-center justify-center min-h-[200px]"
-            data-testid="dialog-upload-loading"
-          >
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-background/70"
+          data-testid="dialog-upload-loading"
+        >
+          <div className="sm:max-w-md flex items-center justify-center min-h-[200px] rounded-lg bg-background shadow-lg px-6 py-4">
             <FrameSpinner size="lg" text="Uploading your photo..." />
-          </DialogContent>
-        </Dialog>
+          </div>
+        </div>
       )}
     </>
   );

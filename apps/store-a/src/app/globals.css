@@ -62,3 +62,10 @@
   }
 }
 
+/* Prevent Uppy dashboard from permanently locking page scroll */
+.uppy-Dashboard-isFixed,
+.uppy-Dashboard--isFixed {
+  height: auto !important;
+  overflow: visible !important;
+}
+
