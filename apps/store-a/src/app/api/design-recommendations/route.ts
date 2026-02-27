@@ -79,17 +79,17 @@ export async function POST(request: NextRequest): Promise<Response> {
     const aspectRatio = imageWidth / imageHeight;
 
     // Helper to pick a neutral + accent mat
-    const neutralMat =
-      mats.find((m) => /white|ivory|cream|snow|eggshell/i.test(m.name || m.colorName || "")) ??
-      mats[0];
-    const accentMat =
-      mats.find((m) =>
-        /navy|blue|charcoal|graphite|forest|burgundy|wine/i.test(m.name || m.colorName || "")
-      ) ?? mats[Math.min(1, mats.length - 1)];
+    // These non-null assertions are safe because we already validated mats.length > 0 above.
+    const neutralMat = (mats.find((m) => /white|ivory|cream|snow|eggshell/i.test(m.name ?? "")) ??
+      mats[0])!;
+    const accentMat = (mats.find((m) =>
+      /navy|blue|charcoal|graphite|forest|burgundy|wine/i.test(m.name ?? "")
+    ) ?? mats[Math.min(1, mats.length - 1)])!;
 
     // Pick two distinct frames (simple heuristic: first two picture frames)
-    const primaryFrame = frames[0];
-    const secondaryFrame = frames.find((f) => f.id !== primaryFrame.id) ?? frames[0];
+    // Non-null assertion is safe because we already validated frames.length > 0 above.
+    const primaryFrame = frames[0]!;
+    const secondaryFrame = frames.find((f) => f.id !== primaryFrame.id) ?? primaryFrame;
 
     // Compute three sensible frame sizes (small/standard/large) similar to original
     const buildSizes = (longest: number): { widthIn: number; heightIn: number } => {
