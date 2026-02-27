@@ -29,7 +29,13 @@ export interface ExportPreviewOptions {
 }
 
 /**
- * Convert any image URL to data URL via CORS proxy
+ * Convert any image URL to data URL for safe canvas drawing.
+ *
+ * Strategy (aligned with original repo, but hardened for Next.js):
+ * - data: URLs → returned as-is
+ * - blob: URLs → converted to data: URLs in the browser (via FileReader)
+ * - http(s) / relative URLs → converted to absolute, then proxied through /api/proxy-image
+ *   so that mat textures and frame rails from external origins don't taint the canvas
  */
 export async function convertImageToDataURL(url: string): Promise<string> {
   // If already a data URL, return as-is
@@ -37,10 +43,30 @@ export async function convertImageToDataURL(url: string): Promise<string> {
     return url;
   }
 
+  // Handle blob: URLs (typically uploaded images in the browser)
+  if (url.startsWith("blob:")) {
+    const response = await fetch(url);
+    const blob = await response.blob();
+
+    return await new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const result = reader.result;
+        if (typeof result === "string") {
+          resolve(result);
+        } else {
+          reject(new Error("Failed to convert blob to data URL"));
+        }
+      };
+      reader.onerror = () => reject(new Error("Failed to read blob"));
+      reader.readAsDataURL(blob);
+    });
+  }
+
   // Convert relative URLs to absolute
   const absoluteUrl = url.startsWith("http") ? url : new URL(url, window.location.origin).href;
 
-  // Use CORS proxy for external images
+  // Use CORS proxy for external images (mat textures, frame rails, remote photos)
   const response = await fetch("/api/proxy-image", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
