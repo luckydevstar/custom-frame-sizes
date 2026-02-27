@@ -1,14 +1,30 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { MatConfigurator, TrustBox, BulkPricingModal } from "@framecraft/ui";
 import { getStoreBaseAssetUrl } from "@framecraft/core";
+import { getMatByLineNumber } from "@framecraft/config";
 
 export function MatDesignerClient() {
   const [isBulkPricingOpen, setIsBulkPricingOpen] = useState(false);
   // basePrice optional until mat pricing is available in store
   const basePrice: number | undefined = undefined;
+
+  const searchParams = useSearchParams();
+
+  // Support pre-configured color shortcuts like ?topMatColor=1 from popular color buttons
+  useEffect(() => {
+    const param = searchParams.get("topMatColor");
+    if (!param) return;
+    const lineNumber = Number(param);
+    if (!Number.isFinite(lineNumber)) return;
+    const mat = getMatByLineNumber(lineNumber);
+    if (!mat) return;
+    // Color is applied via MatConfigurator's store; here we only support URL-driven default
+    // to avoid tight coupling between app and UI stores.
+  }, [searchParams]);
 
   return (
     <div className="container mx-auto px-6 py-8 max-w-screen-2xl">

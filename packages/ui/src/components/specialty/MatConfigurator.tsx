@@ -19,16 +19,93 @@ import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
 import { HelpTooltip } from "../ui/help-tooltip";
 import { Badge } from "../ui/badge";
 import { SwingOut } from "../ui/SwingOut";
-import { useIsMobile, getGlassTypes, getGlassTypeById } from "@framecraft/core";
+import { useIsMobile, getGlassTypes, getGlassTypeById, getFrameStyleById } from "@framecraft/core";
 import { getMatsInDisplayOrder, isMatAvailableForSize, type Mat } from "@framecraft/config";
 import { useMatStore } from "./mat/store";
-import { MatCanvas } from "./mat/MatCanvas";
+import { MatPreviewCanvas } from "./mat/MatPreviewCanvas";
 import { FrameSelector } from "./mat/FrameSelector";
+import { MatQuantitySelector } from "./mat/MatQuantitySelector";
+import { StickyActionBar } from "./mat/StickyActionBar";
+import { WelcomeModal } from "./mat/WelcomeModal";
 import { useMatPricing } from "./mat/useMatPricing";
 
 const MIN_MAT_SIZE = 10;
 const MAX_LONG_SIDE = 60;
 const NO_CUT_INSET_IN = 0.75;
+
+/**
+ * Frame card – extracted as stable component so FrameSelector does not remount on parent re-renders.
+ * Remounting caused the frame photo fetch useEffect to run again (infinite API calls when clicking Borders).
+ */
+function MatFrameCard() {
+  const config = useMatStore((s) => s.config);
+  const setSelectedGlass = useMatStore((s) => s.setSelectedGlass);
+  const setHardware = useMatStore((s) => s.setHardware);
+  const glassTypes = getGlassTypes();
+  return (
+    <Card className="overflow-hidden border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
+      <div className="p-6 bg-gradient-to-br from-primary/5 via-transparent to-primary/5">
+        <SwingOut title="Add a Frame - Save 10%" defaultOpen testId="swingout-frame">
+          <div className="max-h-96 overflow-y-auto pr-2">
+            <FrameSelector hideNoFrame={false} />
+          </div>
+          {config.selectedFrameId && (
+            <div className="mt-6 pt-6 border-t" data-testid="glass-selection-container">
+              <h3 className="text-lg font-medium mb-4">Glazing & Backing</h3>
+              <RadioGroup
+                value={config.selectedGlassId || "standard"}
+                onValueChange={(id) => setSelectedGlass(id)}
+              >
+                {glassTypes
+                  .filter((g) => g.id !== "none" && g.id !== "backing-only")
+                  .map((glass) => (
+                    <div key={glass.id} className="flex items-center space-x-2 py-2">
+                      <RadioGroupItem
+                        value={glass.id}
+                        id={`glass-${glass.id}`}
+                        data-testid={`radio-glass-${glass.id}`}
+                      />
+                      <Label htmlFor={`glass-${glass.id}`} className="cursor-pointer">
+                        {glass.name}
+                      </Label>
+                    </div>
+                  ))}
+              </RadioGroup>
+              <div className="mt-6">
+                <h3 className="text-lg font-medium mb-4">Hanging Hardware</h3>
+                <RadioGroup
+                  value={config.hardware || "standard"}
+                  onValueChange={(v) => setHardware(v as "standard" | "security")}
+                >
+                  <div className="flex items-center space-x-2 py-2">
+                    <RadioGroupItem
+                      value="standard"
+                      id="hardware-standard"
+                      data-testid="radio-hardware-standard"
+                    />
+                    <Label htmlFor="hardware-standard" className="cursor-pointer">
+                      Standard Wall Hanging Hardware (Free)
+                    </Label>
+                  </div>
+                  <div className="flex items-center space-x-2 py-2">
+                    <RadioGroupItem
+                      value="security"
+                      id="hardware-security"
+                      data-testid="radio-hardware-security"
+                    />
+                    <Label htmlFor="hardware-security" className="cursor-pointer">
+                      Security Hardware Kit (+$8.95)
+                    </Label>
+                  </div>
+                </RadioGroup>
+              </div>
+            </div>
+          )}
+        </SwingOut>
+      </div>
+    </Card>
+  );
+}
 
 export interface MatConfiguratorProps {
   useFrameDesignerFallback?: boolean;
@@ -49,10 +126,8 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
   const setBackingKitEnabled = useMatStore((s) => s.setBackingKitEnabled);
   const setQuantity = useMatStore((s) => s.setQuantity);
   const setShowBorders = useMatStore((s) => s.setShowBorders);
-  const setSelectedGlass = useMatStore((s) => s.setSelectedGlass);
-  const setHardware = useMatStore((s) => s.setHardware);
+  const setSelectedFrame = useMatStore((s) => s.setSelectedFrame);
   const pricing = useMatPricing();
-  const glassTypes = getGlassTypes();
 
   const [widthInput, setWidthInput] = useState(String(config.overallWIn));
   const [heightInput, setHeightInput] = useState(String(config.overallHIn));
@@ -62,26 +137,123 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
   const [mobileView, setMobileView] = useState<"preview" | "controls">("controls");
   const previewRef = useRef<HTMLDivElement>(null);
 
+  // Frame photo state management (following CurrencyFrameDesigner pattern)
+  const [framePhotos, setFramePhotos] = useState<{
+    topUrl?: string;
+    bottomUrl?: string;
+    leftUrl?: string;
+    rightUrl?: string;
+  }>({});
+
+  const selectedFrame = config.selectedFrameId
+    ? (getFrameStyleById(config.selectedFrameId) ?? undefined)
+    : undefined;
+
+  // Fetch frame photos when frame selection changes
+  useEffect(() => {
+    if (!selectedFrame?.sku) {
+      setFramePhotos({});
+      return;
+    }
+
+    async function fetchFramePhotos() {
+      try {
+        const response = await fetch(`/api/frames/${selectedFrame!.sku}/photos`);
+        if (response.ok) {
+          const photoSet = await response.json();
+          setFramePhotos({
+            topUrl: photoSet.topUrl,
+            bottomUrl: photoSet.bottomUrl,
+            leftUrl: photoSet.leftUrl,
+            rightUrl: photoSet.rightUrl,
+          });
+        } else {
+          setFramePhotos({});
+        }
+      } catch (error) {
+        console.error("Error fetching frame photos:", error);
+        setFramePhotos({});
+      }
+    }
+    fetchFramePhotos();
+  }, [selectedFrame]);
+
   const isDouble = config.singleOrDouble === "double" && config.bottomMat;
   const sourceOpenings = isDouble ? config.bottomMat!.openings : config.topMat.openings;
   const allOpenings = config.topMat.openings;
 
+  // --- URL sync for frame selection (shareable links, persistence) ---
+  // On first mount, hydrate selected frame from URL (?frame= or legacy ?frameId=)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const frameFromUrl = params.get("frame") || params.get("frameId");
+      if (frameFromUrl) {
+        setSelectedFrame(frameFromUrl);
+      }
+    } catch {
+      // Ignore URL parsing errors in non-browser environments
+    }
+  }, [setSelectedFrame]);
+
+  // Whenever selectedFrameId changes, write it back to the URL as ?frame=...
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const selectedFrameId = config.selectedFrameId ?? null;
+
+      if (selectedFrameId) {
+        params.set("frame", selectedFrameId);
+      } else {
+        params.delete("frame");
+      }
+
+      const qs = params.toString();
+      const newUrl = qs ? `${window.location.pathname}?${qs}` : window.location.pathname;
+      window.history.replaceState({}, "", newUrl);
+    } catch {
+      // Best-effort; ignore if history is not available
+    }
+  }, [config.selectedFrameId]);
+
+  // Only sync inputs when ACTUAL dimension values change (not on every configVersion bump)
   useEffect(() => {
     setWidthInput(String(config.overallWIn));
     setHeightInput(String(config.overallHIn));
   }, [config.overallWIn, config.overallHIn]);
 
+  // Sync opening inputs from config ONLY when openings are added/removed (preserves typing state)
   useEffect(() => {
-    const next: Record<string, { width: string; height: string }> = {};
-    sourceOpenings.forEach((o) => {
-      const w = o.wIn ?? 0;
-      const h = o.hIn ?? 0;
-      next[o.id] = openingInputs[o.id] ?? { width: String(w), height: String(h) };
+    setOpeningInputs((prev) => {
+      const updated: Record<string, { width: string; height: string }> = {};
+
+      sourceOpenings.forEach((opening) => {
+        // Preserve existing input if it exists (allows typing), otherwise initialize from config
+        const existing = prev[opening.id];
+        if (existing) {
+          updated[opening.id] = existing;
+        } else {
+          const width = opening.wIn || 0;
+          const height = opening.hIn || 0;
+          updated[opening.id] = {
+            width: String(width),
+            height: String(height),
+          };
+        }
+      });
+
+      return updated;
     });
-    setOpeningInputs((prev) => ({ ...prev, ...next }));
-    // Intentionally omit openingInputs/sourceOpenings to avoid sync loops; we only sync from config when config changes
+    // Only re-run when openings are added/removed or mode changes, NOT on every dimension change
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [config.topMat.openings, config.bottomMat?.openings, config.singleOrDouble, configVersion]);
+  }, [
+    config.topMat.openings.length,
+    config.bottomMat?.openings.length,
+    config.singleOrDouble,
+    // We intentionally don't add sourceOpenings as a dep - we only want to re-run when count/mode changes
+  ]);
 
   const standardMats = useMemo(
     () =>
@@ -312,20 +484,23 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-2 my-4">
                   <div className="flex items-center gap-2">
                     <Checkbox
-                      id="backing-kit"
+                      id={`backing-kit-${index}`}
                       checked={config.backingKit?.enabled ?? false}
-                      onCheckedChange={(c) => setBackingKitEnabled(!!c)}
-                      data-testid="checkbox-backing-kit"
+                      onCheckedChange={(c) => setBackingKitEnabled(c === true)}
+                      data-testid={`checkbox-backing-kit-${index}`}
                     />
-                    <Label htmlFor="backing-kit" className="cursor-pointer text-sm">
+                    <Label htmlFor={`backing-kit-${index}`} className="cursor-pointer text-sm">
                       Add Backing & Clear Bags
                     </Label>
                     <HelpTooltip
                       content={
                         <div>
                           <p className="font-semibold mb-2">Backing & Clear Bags</p>
-                          <p className="text-sm">
+                          <p className="mb-2 text-sm">
                             Includes foam core backing board and clear protective bags for your mat.
+                          </p>
+                          <p className="text-sm">
+                            Keeps your mat clean and protected during storage and shipping.
                           </p>
                         </div>
                       }
@@ -334,16 +509,19 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
                   {opening.shape === "rect" && (
                     <div className="flex items-center gap-2">
                       <Checkbox
-                        id="rounded-corners"
+                        id={`rounded-corners-${index}`}
                         checked={opening.cornerStyle === "rounded"}
                         onCheckedChange={(c) =>
                           updateOpening("top", opening.id, {
-                            cornerStyle: c ? "rounded" : "square",
+                            cornerStyle: c === true ? "rounded" : "square",
                           })
                         }
-                        data-testid="checkbox-rounded-corners"
+                        data-testid={`checkbox-rounded-corners-${index}`}
                       />
-                      <Label htmlFor="rounded-corners" className="cursor-pointer text-sm">
+                      <Label
+                        htmlFor={`rounded-corners-${index}`}
+                        className="cursor-pointer text-sm"
+                      >
                         Rounded Corners
                       </Label>
                     </div>
@@ -354,12 +532,12 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
                 <div className="my-4">
                   <div className="flex items-center gap-2">
                     <Checkbox
-                      id="v-groove"
+                      id={`v-groove-${index}`}
                       checked={config.vGroove?.enabled ?? false}
-                      onCheckedChange={(c) => setVGrooveEnabled(!!c)}
-                      data-testid="checkbox-v-groove"
+                      onCheckedChange={(c) => setVGrooveEnabled(c === true)}
+                      data-testid={`checkbox-v-groove-${index}`}
                     />
-                    <Label htmlFor="v-groove" className="cursor-pointer text-sm">
+                    <Label htmlFor={`v-groove-${index}`} className="cursor-pointer text-sm">
                       Add V-Groove
                     </Label>
                     <Badge variant="secondary" className="text-xs">
@@ -415,27 +593,29 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
           </div>
         </div>
 
-        {/* Standard Overlap */}
+        {/* Standard Overlap – match original: "Artwork Overlap (Recommended)" */}
         <div className="flex items-start gap-3 p-3 bg-muted/50 rounded-md my-6">
           <Checkbox
             id="standard-overlap"
             checked={config.standardOverlap}
-            onCheckedChange={(c) => toggleStandardOverlap(!!c)}
+            onCheckedChange={(c) => toggleStandardOverlap(c === true)}
             data-testid="checkbox-standard-overlap"
             className="mt-0.5"
           />
           <div className="flex-1">
             <div className="flex items-center gap-1.5">
               <Label htmlFor="standard-overlap" className="cursor-pointer text-sm">
-                Standard overlap (recommended)
+                Artwork Overlap (Recommended)
               </Label>
               <HelpTooltip
                 content={
                   <div>
                     <p className="font-semibold mb-1">How it works:</p>
-                    <p className="text-sm">
-                      We trim each mat opening by ¼″ on every side. That keeps your artwork neatly
-                      tucked under the mat.
+                    <p className="mb-2">We trim each mat opening by ¼″ on every side (½″ total).</p>
+                    <p>
+                      That means a 5×7″ photo fits a 4½×6½″ opening — a professional framing
+                      standard that keeps your artwork neatly tucked under the mat and held in
+                      place.
                     </p>
                   </div>
                 }
@@ -522,7 +702,7 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
               <ColorSwatchesWithSeparator
                 standardColors={standardMats}
                 premiumColors={premiumMats}
-                selectedId={findColorByName(config.bottomMat.color) || ""}
+                selectedId={findColorByName(config.bottomMat?.color ?? standardMats[0]?.name ?? "")}
                 onSelect={(color: Mat) => setMatColor("bottom", color.name)}
                 testIdPrefix="color-bottom"
               />
@@ -532,70 +712,6 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
       </Card>
     );
   };
-
-  const FrameCard = () => (
-    <Card className="overflow-hidden border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-lg">
-      <div className="p-6 bg-gradient-to-br from-primary/5 via-transparent to-primary/5">
-        <SwingOut title="Add a Frame - Save 10%" defaultOpen={false} testId="swingout-frame">
-          <div className="max-h-96 overflow-y-auto pr-2">
-            <FrameSelector hideNoFrame={false} />
-          </div>
-          {config.selectedFrameId && (
-            <div className="mt-6 pt-6 border-t" data-testid="glass-selection-container">
-              <h3 className="text-lg font-medium mb-4">Glazing & Backing</h3>
-              <RadioGroup
-                value={config.selectedGlassId || "standard"}
-                onValueChange={(id) => setSelectedGlass(id)}
-              >
-                {glassTypes
-                  .filter((g) => g.id !== "none" && g.id !== "backing-only")
-                  .map((glass) => (
-                    <div key={glass.id} className="flex items-center space-x-2 py-2">
-                      <RadioGroupItem
-                        value={glass.id}
-                        id={`glass-${glass.id}`}
-                        data-testid={`radio-glass-${glass.id}`}
-                      />
-                      <Label htmlFor={`glass-${glass.id}`} className="cursor-pointer">
-                        {glass.name}
-                      </Label>
-                    </div>
-                  ))}
-              </RadioGroup>
-              <div className="mt-6">
-                <h3 className="text-lg font-medium mb-4">Hanging Hardware</h3>
-                <RadioGroup
-                  value={config.hardware || "standard"}
-                  onValueChange={(v) => setHardware(v as "standard" | "security")}
-                >
-                  <div className="flex items-center space-x-2 py-2">
-                    <RadioGroupItem
-                      value="standard"
-                      id="hardware-standard"
-                      data-testid="radio-hardware-standard"
-                    />
-                    <Label htmlFor="hardware-standard" className="cursor-pointer">
-                      Standard Wall Hanging Hardware (Free)
-                    </Label>
-                  </div>
-                  <div className="flex items-center space-x-2 py-2">
-                    <RadioGroupItem
-                      value="security"
-                      id="hardware-security"
-                      data-testid="radio-hardware-security"
-                    />
-                    <Label htmlFor="hardware-security" className="cursor-pointer">
-                      Security Hardware Kit (+$8.95)
-                    </Label>
-                  </div>
-                </RadioGroup>
-              </div>
-            </div>
-          )}
-        </SwingOut>
-      </div>
-    </Card>
-  );
 
   const PricingCard = () => (
     <Card className="p-4 md:sticky md:bottom-4">
@@ -662,21 +778,11 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
         )}
         <div className="space-y-2 pt-2">
           <Label className="text-sm font-medium">Quantity</Label>
-          <Select
-            value={String(config.quantity)}
-            onValueChange={(v) => setQuantity(parseInt(v, 10))}
-          >
-            <SelectTrigger data-testid="select-quantity-summary">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              {[1, 2, 3, 4, 5, 10, 15, 20, 25, 50].map((n) => (
-                <SelectItem key={n} value={String(n)}>
-                  {n}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+          <MatQuantitySelector
+            value={config.quantity}
+            onChange={setQuantity}
+            testId="select-quantity-summary"
+          />
         </div>
       </div>
     </Card>
@@ -694,13 +800,19 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
           data-testid="button-toggle-borders"
         >
           <Ruler className="w-4 h-4" />
-          <span className="hidden xs:inline">Borders</span>
+          <span className="hidden sm:inline">Borders</span>
         </Button>
         <div
-          className="h-[700px] w-full lg:h-[700px]"
+          className="h-[700px] w-full lg:h-[700px] flex items-center justify-center"
           style={{ minHeight: isMobile ? "calc(100vh - 20rem)" : undefined }}
         >
-          <MatCanvas key={`mat-canvas-${configVersion}`} config={config} />
+          <MatPreviewCanvas
+            config={config}
+            configVersion={configVersion}
+            framePhotos={framePhotos}
+            containerWidth={720}
+            containerHeight={700}
+          />
         </div>
       </Card>
     );
@@ -708,6 +820,7 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
 
   return (
     <>
+      <WelcomeModal />
       {/* Mobile: toggle preview vs controls */}
       <div className="lg:hidden">
         {mobileView === "preview" && (
@@ -718,7 +831,7 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
         {mobileView === "controls" && (
           <div className="space-y-6 pb-24">
             <ControlsCard />
-            <FrameCard />
+            <MatFrameCard />
             <PricingCard />
           </div>
         )}
@@ -749,10 +862,13 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
         </div>
         <div className="space-y-6">
           <ControlsCard />
-          <FrameCard />
+          <MatFrameCard />
           <PricingCard />
         </div>
       </div>
+
+      {/* Mobile: sticky bottom bar (Total, Qty, Copy link, Add to Cart) */}
+      <StickyActionBar isValid />
     </>
   );
 }

@@ -103,6 +103,7 @@ export const useMatStore = create<MatStore>((set, _get) => ({
     set((state) => {
       if (layer === "top") {
         return {
+          configVersion: state.configVersion + 1,
           config: {
             ...state.config,
             topMat: { ...state.config.topMat, color: colorName },
@@ -111,6 +112,7 @@ export const useMatStore = create<MatStore>((set, _get) => ({
       }
       if (!state.config.bottomMat) return state;
       return {
+        configVersion: state.configVersion + 1,
         config: {
           ...state.config,
           bottomMat: { ...state.config.bottomMat, color: colorName },
@@ -263,6 +265,7 @@ export const useMatStore = create<MatStore>((set, _get) => ({
         yIn: bottom.yIn - REVEAL,
       });
       return {
+        configVersion: state.configVersion + 1,
         config: {
           ...state.config,
           matRevealWidth: width,
@@ -328,9 +331,10 @@ export const useMatStore = create<MatStore>((set, _get) => ({
   },
 
   setSelectedFrame: (frameId) => {
+    const id = frameId == null ? null : String(frameId);
     set((state) => ({
       configVersion: state.configVersion + 1,
-      config: { ...state.config, selectedFrameId: frameId ?? null },
+      config: { ...state.config, selectedFrameId: id },
     }));
   },
 

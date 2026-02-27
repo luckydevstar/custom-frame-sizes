@@ -94,6 +94,7 @@ When the client says “migrate the exact thing” or “match the original,” 
 
 - **Most pages have been migrated successfully** from the original codebase into the new monorepo (e.g. store-a). UI migration is largely complete.
 - **Shopify migration** is the next focus: BFF (cart/checkout API) and core Storefront layer exist, but store-a is not yet wired to the BFF, product/variant data in Shopify is not set up, and designers still use the legacy checkout flow. See **`docs/MIGRATION_STATUS_AND_SHOPIFY.md`** for a full scan of the repo, what’s in place, gaps, and recommended Shopify migration order.
+- For **checkout pricing** (computed configurator price at checkout) and **one store vs 10 storefronts**, see **`docs/SHOPIFY_CHECKOUT_PRICING_OPTIONS.md`**.
 - Other remaining work may include: full component configurators, Samples page, browse-by (style/size) pages, navigation links, SEO/redirects, and asset hosting rollout.
 - For **per-page migration details** (what’s done, what’s next, section order, URLs), use or create a separate migration/checklist doc in this repo and reference it from here if needed.
 
