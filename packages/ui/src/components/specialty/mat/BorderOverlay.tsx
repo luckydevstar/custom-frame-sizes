@@ -125,6 +125,9 @@ export function BorderOverlay({ config, highlightMode = "all" }: BorderOverlayPr
     for (let j = i + 1; j < openings.length; j++) {
       const a = openings[i];
       const b = openings[j];
+      if (!a || !b) {
+        continue;
+      }
       const b1 = {
         left: a.xIn,
         top: a.yIn,
