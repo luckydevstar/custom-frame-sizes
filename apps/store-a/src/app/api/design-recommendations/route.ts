@@ -4,32 +4,28 @@
  * POST /api/design-recommendations
  *
  * AI Designer's Recommendation endpoint (Next.js port of the original Express route).
- * IMPORTANT: This version assumes the OpenAI API key and frames/mats JSON data
- * are available in the shared core/config packages instead of reading local files.
+ *
+ * This implementation intentionally avoids external AI calls and instead returns
+ * deterministic, "good enough" recommendations based on the uploaded image's
+ * aspect ratio plus the production frame/mat catalog and pricing engine.
+ *
+ * CRITICAL: The response shape must exactly match DesignRecommendationResponse
+ * from @framecraft/types so that the frontend UI (FrameDesigner + carousel)
+ * behaves identically to the original app:
+ * - Fully-populated frame/mat metadata (names, colors, SKU)
+ * - Three SizeOption entries with label/width/height/price
+ * - Non-empty analysis object
  */
 
 import { NextRequest } from "next/server";
-import { getFramesByCategory } from "@framecraft/core";
+import { getFramesByCategory, getGlassTypes, calculatePricing } from "@framecraft/core";
 import { ALL_MATS } from "@framecraft/config";
-
-// We only need the shape of the response used by the UI
-interface DesignRecommendation {
-  frameId: string;
-  topMatId: string;
-  bottomMatId: string;
-  explanation: string;
-  sizes: { widthIn: number; heightIn: number }[];
-}
-
-interface DesignRecommendationResponse {
-  analysis: {
-    subject: string;
-    style: string;
-    dominantColors: string[];
-    mood: string;
-  };
-  recommendations: DesignRecommendation[];
-}
+import type {
+  DesignRecommendation,
+  DesignRecommendationResponse,
+  SizeOption,
+  FrameConfiguration,
+} from "@framecraft/types";
 
 export async function POST(request: NextRequest): Promise<Response> {
   try {
@@ -71,15 +67,18 @@ export async function POST(request: NextRequest): Promise<Response> {
 
     const frames = getFramesByCategory("picture");
     const mats = ALL_MATS;
+    const glassTypes = getGlassTypes();
 
-    if (!frames.length || !mats.length) {
-      return Response.json({ error: "Frames or mats catalog not available" }, { status: 500 });
+    if (!frames.length || !mats.length || !glassTypes.length) {
+      return Response.json(
+        { error: "Frames, mats, or glass catalog not available" },
+        { status: 500 }
+      );
     }
 
     const aspectRatio = imageWidth / imageHeight;
 
-    // Helper to pick a neutral + accent mat
-    // These non-null assertions are safe because we already validated mats.length > 0 above.
+    // Helper: pick a neutral + accent mat, similar to original server route
     const neutralMat = (mats.find((m) => /white|ivory|cream|snow|eggshell/i.test(m.name ?? "")) ??
       mats[0])!;
     const accentMat = (mats.find((m) =>
@@ -87,20 +86,105 @@ export async function POST(request: NextRequest): Promise<Response> {
     ) ?? mats[Math.min(1, mats.length - 1)])!;
 
     // Pick two distinct frames (simple heuristic: first two picture frames)
-    // Non-null assertion is safe because we already validated frames.length > 0 above.
     const primaryFrame = frames[0]!;
     const secondaryFrame = frames.find((f) => f.id !== primaryFrame.id) ?? primaryFrame;
 
+    const defaultGlass = glassTypes[0]!;
+
     // Compute three sensible frame sizes (small/standard/large) similar to original
-    const buildSizes = (longest: number): { widthIn: number; heightIn: number } => {
-      const widthIn = aspectRatio >= 1 ? longest : Math.round(longest * aspectRatio * 10) / 10;
-      const heightIn = aspectRatio >= 1 ? Math.round((longest / aspectRatio) * 10) / 10 : longest;
-      return { widthIn, heightIn };
+    const buildSizeDims = (longest: number): { width: number; height: number } => {
+      const width = aspectRatio >= 1 ? longest : Math.round(longest * aspectRatio * 10) / 10;
+      const height = aspectRatio >= 1 ? Math.round((longest / aspectRatio) * 10) / 10 : longest;
+      return { width, height };
     };
 
-    const small = buildSizes(11);
-    const standard = buildSizes(24);
-    const large = buildSizes(36);
+    const smallDims = buildSizeDims(11);
+    const standardDims = buildSizeDims(24);
+    const largeDims = buildSizeDims(36);
+
+    // Helper: calculate a full SizeOption using the shared pricing engine
+    const buildSizeOption = (
+      label: string,
+      dims: { width: number; height: number },
+      frameId: string,
+      topMatId: string,
+      bottomMatId: string
+    ): SizeOption => {
+      const frameConfig: FrameConfiguration = {
+        serviceType: "frame-only",
+        artworkWidth: dims.width,
+        artworkHeight: dims.height,
+        frameStyleId: frameId,
+        matType: "double",
+        matBorderWidth: 2.5,
+        matRevealWidth: 0.25,
+        matColorId: topMatId,
+        matInnerColorId: bottomMatId,
+        glassTypeId: defaultGlass.id,
+        imageUrl: undefined,
+        copyrightAgreed: false,
+        orderSource: "ai-recommendation",
+        bottomWeighted: false,
+      };
+
+      let price = 0;
+      try {
+        const pricing = calculatePricing(frameConfig);
+        price = Math.round(pricing.total);
+      } catch (err) {
+        console.error("Failed to calculate AI recommendation price:", err);
+      }
+
+      return {
+        label,
+        width: dims.width,
+        height: dims.height,
+        price,
+      };
+    };
+
+    const buildSizesFor = (
+      frameId: string,
+      topMatId: string,
+      bottomMatId: string
+    ): SizeOption[] => [
+      buildSizeOption("Small", smallDims, frameId, topMatId, bottomMatId),
+      buildSizeOption("Standard", standardDims, frameId, topMatId, bottomMatId),
+      buildSizeOption("Large", largeDims, frameId, topMatId, bottomMatId),
+    ];
+
+    const recommendations: DesignRecommendation[] = [
+      {
+        frameId: primaryFrame.id,
+        frameName: primaryFrame.name,
+        frameSku: primaryFrame.sku,
+        frameColor: primaryFrame.color,
+        topMatId: neutralMat.id,
+        topMatName: neutralMat.name,
+        topMatColor: neutralMat.hexColor ?? "#FFFFFF",
+        bottomMatId: accentMat.id,
+        bottomMatName: accentMat.name,
+        bottomMatColor: accentMat.hexColor ?? "#000000",
+        explanation:
+          "Clean, gallery-style frame with a neutral top mat and a deeper accent mat that adds contrast without overpowering the artwork.",
+        sizes: buildSizesFor(primaryFrame.id, neutralMat.id, accentMat.id),
+      },
+      {
+        frameId: secondaryFrame.id,
+        frameName: secondaryFrame.name,
+        frameSku: secondaryFrame.sku,
+        frameColor: secondaryFrame.color,
+        topMatId: neutralMat.id,
+        topMatName: neutralMat.name,
+        topMatColor: neutralMat.hexColor ?? "#FFFFFF",
+        bottomMatId: accentMat.id,
+        bottomMatName: accentMat.name,
+        bottomMatColor: accentMat.hexColor ?? "#000000",
+        explanation:
+          "A second frame option with a slightly different profile that pairs the same neutral + accent mat combo for a classic professional look.",
+        sizes: buildSizesFor(secondaryFrame.id, neutralMat.id, accentMat.id),
+      },
+    ];
 
     const response: DesignRecommendationResponse = {
       analysis: {
@@ -109,24 +193,7 @@ export async function POST(request: NextRequest): Promise<Response> {
         dominantColors: [],
         mood: "not analyzed (fallback recommender)",
       },
-      recommendations: [
-        {
-          frameId: primaryFrame.id,
-          topMatId: neutralMat.id,
-          bottomMatId: accentMat.id,
-          explanation:
-            "Clean, gallery-style frame with a neutral top mat and a deeper accent mat that adds contrast without overpowering the artwork.",
-          sizes: [small, standard, large],
-        },
-        {
-          frameId: secondaryFrame.id,
-          topMatId: neutralMat.id,
-          bottomMatId: accentMat.id,
-          explanation:
-            "A second frame option with a slightly different profile that pairs the same neutral + accent mat combo for a classic professional look.",
-          sizes: [small, standard, large],
-        },
-      ],
+      recommendations,
     };
 
     return Response.json(response, { status: 200 });
