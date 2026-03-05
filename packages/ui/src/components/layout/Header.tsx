@@ -184,13 +184,12 @@ export function Header({
       <MobileNavigation onNavigate={() => setMobileMenuOpen(false)} />
     );
 
-  // Default cart click handler
+  // Default cart click handler: use callback if provided, else navigate to cart page
   const handleCartClick = () => {
     if (onCartClick) {
       onCartClick();
-    } else {
-      window.location.href = "/cart";
     }
+    // If no callback, the cart button is wrapped in Link below so navigation is handled by Next.js
   };
 
   return (
@@ -266,25 +265,45 @@ export function Header({
               </SheetContent>
             </Sheet>
 
-            <Button
-              variant="ghost"
-              size="icon"
-              className="relative h-11 w-11 lg:h-10 lg:w-10"
-              data-testid="button-cart"
-              aria-label={`Shopping cart${cartCount > 0 ? ` with ${cartCount} items` : ""}`}
-              onClick={handleCartClick}
-            >
-              <ShoppingCart className="h-6 w-6" aria-hidden="true" />
-              {cartCount > 0 && (
-                <Badge
-                  className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
-                  data-testid="badge-cart-count"
-                  aria-label={`${cartCount} items in cart`}
-                >
-                  {cartCount}
-                </Badge>
-              )}
-            </Button>
+            {onCartClick ? (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="relative h-11 w-11 lg:h-10 lg:w-10"
+                data-testid="button-cart"
+                aria-label={`Shopping cart${cartCount > 0 ? ` with ${cartCount} items` : ""}`}
+                onClick={handleCartClick}
+              >
+                <ShoppingCart className="h-6 w-6" aria-hidden="true" />
+                {cartCount > 0 && (
+                  <Badge
+                    className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                    data-testid="badge-cart-count"
+                    aria-label={`${cartCount} items in cart`}
+                  >
+                    {cartCount}
+                  </Badge>
+                )}
+              </Button>
+            ) : (
+              <Link
+                href="/cart"
+                className="relative inline-flex h-11 w-11 lg:h-10 lg:w-10 items-center justify-center rounded-md border border-transparent hover-elevate active-elevate-2"
+                data-testid="button-cart"
+                aria-label={`Shopping cart${cartCount > 0 ? ` with ${cartCount} items` : ""}`}
+              >
+                <ShoppingCart className="h-6 w-6" aria-hidden="true" />
+                {cartCount > 0 && (
+                  <Badge
+                    className="absolute -top-1 -right-1 h-5 w-5 flex items-center justify-center p-0 text-xs"
+                    data-testid="badge-cart-count"
+                    aria-label={`${cartCount} items in cart`}
+                  >
+                    {cartCount}
+                  </Badge>
+                )}
+              </Link>
+            )}
 
             {displayThemeToggle}
           </div>

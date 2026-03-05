@@ -315,6 +315,14 @@ export {
 } from "./components/marketing";
 export type { TestimonialCarouselProps } from "./components/marketing";
 
+// Cart components
+export { CartClient, CartItemCard, FrameConfigurationSummary } from "./components/cart";
+export type {
+  CartClientProps,
+  CartItemCardProps,
+  FrameConfigurationSummaryProps,
+} from "./components/cart";
+
 // Home page components
 export {
   HowItWorks,

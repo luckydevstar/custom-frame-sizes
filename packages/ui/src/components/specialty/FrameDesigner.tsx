@@ -61,7 +61,8 @@ import { useIsMobile, useMobileViewToggle, useIntersectionVisible } from "@frame
 import { ALL_MATS, getMatsInDisplayOrder, getMatById, type Mat } from "@framecraft/config";
 
 // TODO: App-specific dependencies - these need to be extracted or made injectable
-import { addToCart, isShopifyEnabled } from "@framecraft/core";
+import { addToCart, isShopifyEnabled, createCartItemFromFrameConfig } from "@framecraft/core";
+import { useCartStore } from "@framecraft/core/stores";
 import { useToast } from "../../hooks/use-toast";
 import { getRandomStockImage } from "@framecraft/core";
 import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
@@ -644,20 +645,23 @@ export function FrameDesigner({
         }
       }
 
-      // Call Shopify checkout service
-      await addToCart(frameConfig, finalTotalPrice, quantity);
+      // Always add to cart store (for cart page and future Shopify Plus Cart Transform flow)
+      const cartInput = createCartItemFromFrameConfig(frameConfig, finalTotalPrice, quantity, {
+        imageUrl: selectedImage ?? undefined,
+      });
+      useCartStore.getState().addItem(cartInput);
 
-      if (!isShopifyEnabled()) {
-        // Mock checkout - show success message
-        toast({
-          title: "Mock Checkout Created",
-          description: "Shopify is not configured. Check console for payload details.",
-        });
-      } else {
-        // Real checkout - user will be redirected to Shopify
+      if (isShopifyEnabled()) {
+        // Current flow: redirect to Shopify checkout (until Cart Transform is wired; then checkout from cart page)
+        await addToCart(frameConfig, finalTotalPrice, quantity);
         toast({
           title: "Redirecting to Checkout",
           description: "Taking you to secure checkout...",
+        });
+      } else {
+        toast({
+          title: "Added to Cart",
+          description: `${quantity} custom frame${quantity > 1 ? "s" : ""} added. View cart to continue.`,
         });
       }
     } catch (error) {
@@ -854,7 +858,14 @@ export function FrameDesigner({
     };
 
     try {
-      await addToCart(recFrameConfig, size.price, 1);
+      const cartInput = createCartItemFromFrameConfig(recFrameConfig, size.price, 1, {
+        imageUrl: selectedImage ?? undefined,
+      });
+      useCartStore.getState().addItem(cartInput);
+
+      if (isShopifyEnabled()) {
+        await addToCart(recFrameConfig, size.price, 1);
+      }
 
       toast({
         title: "Added to Cart!",

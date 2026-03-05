@@ -4,6 +4,7 @@ import "./globals.css";
 import { StoreProvider } from "@framecraft/core";
 import { brandConfig } from "../brand.config";
 import { QueryProvider } from "../components/providers/query-provider";
+import { CartHydration } from "./components/CartHydration";
 import { Header, Footer } from "@framecraft/ui/components/layout";
 import { TooltipProvider } from "@framecraft/ui";
 import { Toaster } from "@framecraft/ui/components/ui/toaster";
@@ -44,6 +45,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <QueryProvider>
           <StoreProvider config={brandConfig}>
+            <CartHydration />
             <TooltipProvider>
               <div className="flex min-h-screen flex-col">
                 <Header />
