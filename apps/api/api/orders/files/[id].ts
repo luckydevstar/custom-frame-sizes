@@ -1,1 +1,1 @@
-export { default } from "../../../../src/routes/orders/files/[id]/route";
+export { default } from "../../../src/routes/orders/files/[id]/route";
