@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "functions": {
     "src/routes/**/*.ts": {
       "runtime": "nodejs18.x",
