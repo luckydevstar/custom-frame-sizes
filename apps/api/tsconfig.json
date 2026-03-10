@@ -29,7 +29,7 @@
       "@framecraft/data/*": ["./packages/data/src/*"]
     }
   },
-  "include": ["api/**/*", "__tests__/**/*"],
+  "include": ["api/**/*", "shared/**/*", "__tests__/**/*"],
   "exclude": ["node_modules", "dist", "__tests__"],
   "references": [
     { "path": "../../packages/core" },

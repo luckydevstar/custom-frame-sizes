@@ -15,7 +15,7 @@ import {
   removeCartLines,
   type CartLineInput,
 } from "@framecraft/core";
-import type { CartResponse } from "../_types/responses";
+import type { CartResponse } from "../types/responses";
 
 /**
  * Create a new cart using Storefront API

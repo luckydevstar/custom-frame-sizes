@@ -4,11 +4,11 @@
  */
 
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { withRouteHandler, sendSuccess } from "../../_lib/route-handler";
-import { validationError, notFoundError } from "../../_lib/errors";
-import { getOrderFileById } from "../../_lib/order-file-utils";
-import { applyRateLimit } from "../../_lib/rate-limit-middleware";
-import { sanitizeStoreId } from "../../_lib/sanitization";
+import { withRouteHandler, sendSuccess } from "../../../shared/lib/route-handler";
+import { validationError, notFoundError } from "../../../shared/lib/errors";
+import { getOrderFileById } from "../../../shared/lib/order-file-utils";
+import { applyRateLimit } from "../../../shared/lib/rate-limit-middleware";
+import { sanitizeStoreId } from "../../../shared/lib/sanitization";
 
 const handler = withRouteHandler({
   GET: async (req: VercelRequest, res: VercelResponse) => {

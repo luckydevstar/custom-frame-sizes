@@ -5,12 +5,16 @@
  */
 
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { withRouteHandler, sendSuccess } from "../_lib/route-handler";
-import { validationError } from "../_lib/errors";
-import { CreateOrderFileRequestSchema } from "../_types/order-files";
-import { createOrderFile, getOrderFiles, isValidShopifyOrderId } from "../_lib/order-file-utils";
-import { applyRateLimit } from "../_lib/rate-limit-middleware";
-import { sanitizeStoreId } from "../_lib/sanitization";
+import { withRouteHandler, sendSuccess } from "../../shared/lib/route-handler";
+import { validationError } from "../../shared/lib/errors";
+import { CreateOrderFileRequestSchema } from "../../shared/types/order-files";
+import {
+  createOrderFile,
+  getOrderFiles,
+  isValidShopifyOrderId,
+} from "../../shared/lib/order-file-utils";
+import { applyRateLimit } from "../../shared/lib/rate-limit-middleware";
+import { sanitizeStoreId } from "../../shared/lib/sanitization";
 
 const handler = withRouteHandler({
   POST: async (req: VercelRequest, res: VercelResponse) => {

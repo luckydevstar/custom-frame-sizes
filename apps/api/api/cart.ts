@@ -4,15 +4,15 @@
  */
 
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { withRouteHandler, sendSuccess } from "./_lib/route-handler";
-import { validationError, shopifyApiError } from "./_lib/errors";
-import { setCookie, CART_ID_COOKIE } from "./_lib/cookies";
-import { CreateCartRequestSchema } from "./_types/requests";
-import { createCartWithStorefront } from "./_lib/cart-utils";
-import { ensureStoreConfig } from "./_lib/store-config";
-import { applyRateLimit } from "./_lib/rate-limit-middleware";
-import { sanitizeStoreId, sanitizeAttributes } from "./_lib/sanitization";
-import { validateStoreIdOrThrow } from "./_lib/validation";
+import { withRouteHandler, sendSuccess } from "../shared/lib/route-handler";
+import { validationError, shopifyApiError } from "../shared/lib/errors";
+import { setCookie, CART_ID_COOKIE } from "../shared/lib/cookies";
+import { CreateCartRequestSchema } from "../shared/types/requests";
+import { createCartWithStorefront } from "../shared/lib/cart-utils";
+import { ensureStoreConfig } from "../shared/lib/store-config";
+import { applyRateLimit } from "../shared/lib/rate-limit-middleware";
+import { sanitizeStoreId, sanitizeAttributes } from "../shared/lib/sanitization";
+import { validateStoreIdOrThrow } from "../shared/lib/validation";
 
 const handler = withRouteHandler({
   POST: async (req: VercelRequest, res: VercelResponse) => {
