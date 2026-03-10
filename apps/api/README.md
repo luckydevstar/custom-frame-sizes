@@ -20,13 +20,9 @@ See [Backend API Architecture](../../docs/BACKEND_API_ARCHITECTURE.md) for detai
 
 ```
 apps/api/
-├── api/                 # Vercel serverless functions (file-based routing)
-│   ├── health.ts        # GET /api/health
-│   ├── cart.ts          # POST /api/cart
-│   ├── cart/lines.ts    # PATCH /api/cart/lines
-│   ├── checkout.ts      # POST /api/checkout
-│   └── orders/files/    # GET,POST /api/orders/files and GET /api/orders/files/:id
-├── shared/              # Shared code (included in function bundle; no leading _)
+├── api/
+│   └── [[...path]].ts   # Single Express app – handles all /api/* routes
+├── shared/
 │   ├── lib/             # Utilities (route-handler, errors, cart-utils, etc.)
 │   └── types/           # TypeScript types (requests, order-files, responses)
 └── __tests__/           # Test files
@@ -34,14 +30,14 @@ apps/api/
 
 ## Route Structure
 
-Routes use Vercel's `api/` file-based routing:
+All routes are handled by one serverless function (`api/[[...path]].ts`) using Express:
 
-- `api/health.ts` → `/api/health`
-- `api/cart.ts` → `/api/cart`
-- `api/cart/lines.ts` → `/api/cart/lines`
-- `api/checkout.ts` → `/api/checkout`
-- `api/orders/files.ts` → `/api/orders/files`
-- `api/orders/files/[id].ts` → `/api/orders/files/:id`
+- `GET /api/health`
+- `POST /api/cart`
+- `PATCH /api/cart/lines`
+- `POST /api/checkout`
+- `GET|POST /api/orders/files`
+- `GET /api/orders/files/:id`
 
 ## Development
 

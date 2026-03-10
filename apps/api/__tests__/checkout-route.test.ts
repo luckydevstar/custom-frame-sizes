@@ -8,19 +8,19 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 // Mock the rate limit middleware
-vi.mock("../src/lib/rate-limit-middleware", () => ({
+vi.mock("../shared/lib/rate-limit-middleware", () => ({
   applyRateLimit: vi.fn(
     (_type: string, handler: (req: unknown, res: unknown) => Promise<void>) => handler
   ),
 }));
 
 // Mock the checkout-utils
-vi.mock("../src/lib/checkout-utils", () => ({
+vi.mock("../shared/lib/checkout-utils", () => ({
   createCheckoutUrl: vi.fn(),
 }));
 
 // Mock cookies
-vi.mock("../src/lib/cookies", () => ({
+vi.mock("../shared/lib/cookies", () => ({
   setCookie: vi.fn(),
   getCookie: vi.fn(),
   CART_ID_COOKIE: "framecraft_cart_id",
@@ -76,8 +76,8 @@ describe("/api/checkout", () => {
 
   describe("POST /api/checkout", () => {
     it("should return 404 when cart ID cookie is missing", async () => {
-      const { default: handler } = await import("../api/checkout");
-      const { getCookie } = await import("../src/lib/cookies");
+      const { default: handler } = await import("../api/[[...path]]");
+      const { getCookie } = await import("../shared/lib/cookies");
 
       vi.mocked(getCookie).mockReturnValueOnce(undefined);
 
@@ -103,9 +103,9 @@ describe("/api/checkout", () => {
     });
 
     it("should create checkout and return URL", async () => {
-      const { default: handler } = await import("../api/checkout");
-      const { getCookie } = await import("../src/lib/cookies");
-      const { createCheckoutUrl } = await import("../src/lib/checkout-utils");
+      const { default: handler } = await import("../api/[[...path]]");
+      const { getCookie } = await import("../shared/lib/cookies");
+      const { createCheckoutUrl } = await import("../shared/lib/checkout-utils");
 
       const cartId = "gid://shopify/Cart/abc123";
       vi.mocked(getCookie).mockReturnValueOnce(cartId);
@@ -141,9 +141,9 @@ describe("/api/checkout", () => {
     });
 
     it("should pass discount code to checkout", async () => {
-      const { default: handler } = await import("../api/checkout");
-      const { getCookie } = await import("../src/lib/cookies");
-      const { createCheckoutUrl } = await import("../src/lib/checkout-utils");
+      const { default: handler } = await import("../api/[[...path]]");
+      const { getCookie } = await import("../shared/lib/cookies");
+      const { createCheckoutUrl } = await import("../shared/lib/checkout-utils");
 
       vi.mocked(getCookie).mockReturnValueOnce("gid://shopify/Cart/abc123");
       vi.mocked(createCheckoutUrl).mockResolvedValueOnce({
@@ -170,8 +170,8 @@ describe("/api/checkout", () => {
     });
 
     it("should return 400 for invalid request body", async () => {
-      const { default: handler } = await import("../api/checkout");
-      const { getCookie } = await import("../src/lib/cookies");
+      const { default: handler } = await import("../api/[[...path]]");
+      const { getCookie } = await import("../shared/lib/cookies");
 
       vi.mocked(getCookie).mockReturnValueOnce("gid://shopify/Cart/abc123");
 
@@ -189,9 +189,9 @@ describe("/api/checkout", () => {
     });
 
     it("should validate email format", async () => {
-      const { default: handler } = await import("../api/checkout");
-      const { getCookie } = await import("../src/lib/cookies");
-      const { createCheckoutUrl } = await import("../src/lib/checkout-utils");
+      const { default: handler } = await import("../api/[[...path]]");
+      const { getCookie } = await import("../shared/lib/cookies");
+      const { createCheckoutUrl } = await import("../shared/lib/checkout-utils");
 
       vi.mocked(getCookie).mockReturnValueOnce("gid://shopify/Cart/abc123");
       vi.mocked(createCheckoutUrl).mockResolvedValueOnce({
@@ -215,9 +215,9 @@ describe("/api/checkout", () => {
     });
 
     it("should handle checkout creation failure", async () => {
-      const { default: handler } = await import("../api/checkout");
-      const { getCookie } = await import("../src/lib/cookies");
-      const { createCheckoutUrl } = await import("../src/lib/checkout-utils");
+      const { default: handler } = await import("../api/[[...path]]");
+      const { getCookie } = await import("../shared/lib/cookies");
+      const { createCheckoutUrl } = await import("../shared/lib/checkout-utils");
 
       vi.mocked(getCookie).mockReturnValueOnce("gid://shopify/Cart/abc123");
       vi.mocked(createCheckoutUrl).mockRejectedValueOnce(new Error("Checkout creation failed"));
@@ -246,7 +246,7 @@ describe("/api/checkout", () => {
 
   describe("Method not allowed", () => {
     it("should return 405 for GET request", async () => {
-      const { default: handler } = await import("../api/checkout");
+      const { default: handler } = await import("../api/[[...path]]");
 
       const req = createMockRequest({
         method: "GET",

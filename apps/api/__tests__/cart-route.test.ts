@@ -8,19 +8,19 @@ import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 // Mock the rate limit middleware
-vi.mock("../src/lib/rate-limit-middleware", () => ({
+vi.mock("../shared/lib/rate-limit-middleware", () => ({
   applyRateLimit: vi.fn(
     (_type: string, handler: (req: unknown, res: unknown) => Promise<void>) => handler
   ),
 }));
 
 // Mock the cart-utils
-vi.mock("../src/lib/cart-utils", () => ({
+vi.mock("../shared/lib/cart-utils", () => ({
   createCartWithStorefront: vi.fn(),
 }));
 
 // Mock cookies
-vi.mock("../src/lib/cookies", () => ({
+vi.mock("../shared/lib/cookies", () => ({
   setCookie: vi.fn(),
   getCookie: vi.fn(),
   CART_ID_COOKIE: "framecraft_cart_id",
@@ -77,8 +77,8 @@ describe("/api/cart", () => {
   describe("POST /api/cart", () => {
     it("should return 400 for invalid request body", async () => {
       // Import fresh module after mocks
-      const { default: handler } = await import("../api/cart");
-      const { createCartWithStorefront } = await import("../src/lib/cart-utils");
+      const { default: handler } = await import("../api/[[...path]]");
+      const { createCartWithStorefront } = await import("../shared/lib/cart-utils");
 
       const req = createMockRequest({
         method: "POST",
@@ -104,9 +104,9 @@ describe("/api/cart", () => {
     });
 
     it("should create cart and return success", async () => {
-      const { default: handler } = await import("../api/cart");
-      const { createCartWithStorefront } = await import("../src/lib/cart-utils");
-      const { setCookie, CART_ID_COOKIE } = await import("../src/lib/cookies");
+      const { default: handler } = await import("../api/[[...path]]");
+      const { createCartWithStorefront } = await import("../shared/lib/cart-utils");
+      const { setCookie, CART_ID_COOKIE } = await import("../shared/lib/cookies");
 
       // Mock successful cart creation
       const mockCart = {
@@ -152,8 +152,8 @@ describe("/api/cart", () => {
     });
 
     it("should return 502 when Shopify API fails", async () => {
-      const { default: handler } = await import("../api/cart");
-      const { createCartWithStorefront } = await import("../src/lib/cart-utils");
+      const { default: handler } = await import("../api/[[...path]]");
+      const { createCartWithStorefront } = await import("../shared/lib/cart-utils");
 
       vi.mocked(createCartWithStorefront).mockRejectedValueOnce(new Error("Shopify API error"));
 
@@ -185,8 +185,8 @@ describe("/api/cart", () => {
     });
 
     it("should validate store ID format", async () => {
-      const { default: handler } = await import("../api/cart");
-      const { createCartWithStorefront } = await import("../src/lib/cart-utils");
+      const { default: handler } = await import("../api/[[...path]]");
+      const { createCartWithStorefront } = await import("../shared/lib/cart-utils");
 
       const req = createMockRequest({
         method: "POST",
@@ -209,8 +209,8 @@ describe("/api/cart", () => {
     });
 
     it("should sanitize attributes", async () => {
-      const { default: handler } = await import("../api/cart");
-      const { createCartWithStorefront } = await import("../src/lib/cart-utils");
+      const { default: handler } = await import("../api/[[...path]]");
+      const { createCartWithStorefront } = await import("../shared/lib/cart-utils");
 
       const mockCart = {
         id: "gid://shopify/Cart/abc123",
@@ -251,7 +251,7 @@ describe("/api/cart", () => {
 
   describe("Method not allowed", () => {
     it("should return 405 for GET request", async () => {
-      const { default: handler } = await import("../api/cart");
+      const { default: handler } = await import("../api/[[...path]]");
 
       const req = createMockRequest({
         method: "GET",
