@@ -5,7 +5,7 @@
  */
 
 import { getCart } from "@framecraft/core";
-import type { CartResponse } from "../types/responses";
+import type { CartResponse } from "../_types/responses";
 
 /**
  * Get cart by ID

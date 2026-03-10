@@ -1,15 +1,14 @@
 /**
- * Order File by ID Route Handler
- *
+ * Order File by ID Route Handler (Vercel API)
  * GET /api/orders/files/:id - Get specific order file by ID
  */
 
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { withRouteHandler, sendSuccess } from "@/lib/route-handler";
-import { validationError, notFoundError } from "@/lib/errors";
-import { getOrderFileById } from "@/lib/order-file-utils";
-import { applyRateLimit } from "@/lib/rate-limit-middleware";
-import { sanitizeStoreId } from "@/lib/sanitization";
+import { withRouteHandler, sendSuccess } from "../../_lib/route-handler";
+import { validationError, notFoundError } from "../../_lib/errors";
+import { getOrderFileById } from "../../_lib/order-file-utils";
+import { applyRateLimit } from "../../_lib/rate-limit-middleware";
+import { sanitizeStoreId } from "../../_lib/sanitization";
 
 const handler = withRouteHandler({
   GET: async (req: VercelRequest, res: VercelResponse) => {

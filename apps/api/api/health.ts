@@ -1,3 +1,8 @@
+/**
+ * Health check endpoint for Vercel serverless API
+ * GET /api/health
+ */
+
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 
 export default async function handler(_req: VercelRequest, res: VercelResponse) {

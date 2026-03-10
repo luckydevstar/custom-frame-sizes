@@ -77,7 +77,7 @@ describe("/api/cart", () => {
   describe("POST /api/cart", () => {
     it("should return 400 for invalid request body", async () => {
       // Import fresh module after mocks
-      const { default: handler } = await import("../src/routes/cart/route");
+      const { default: handler } = await import("../api/cart");
       const { createCartWithStorefront } = await import("../src/lib/cart-utils");
 
       const req = createMockRequest({
@@ -104,7 +104,7 @@ describe("/api/cart", () => {
     });
 
     it("should create cart and return success", async () => {
-      const { default: handler } = await import("../src/routes/cart/route");
+      const { default: handler } = await import("../api/cart");
       const { createCartWithStorefront } = await import("../src/lib/cart-utils");
       const { setCookie, CART_ID_COOKIE } = await import("../src/lib/cookies");
 
@@ -152,7 +152,7 @@ describe("/api/cart", () => {
     });
 
     it("should return 502 when Shopify API fails", async () => {
-      const { default: handler } = await import("../src/routes/cart/route");
+      const { default: handler } = await import("../api/cart");
       const { createCartWithStorefront } = await import("../src/lib/cart-utils");
 
       vi.mocked(createCartWithStorefront).mockRejectedValueOnce(new Error("Shopify API error"));
@@ -185,7 +185,7 @@ describe("/api/cart", () => {
     });
 
     it("should validate store ID format", async () => {
-      const { default: handler } = await import("../src/routes/cart/route");
+      const { default: handler } = await import("../api/cart");
       const { createCartWithStorefront } = await import("../src/lib/cart-utils");
 
       const req = createMockRequest({
@@ -209,7 +209,7 @@ describe("/api/cart", () => {
     });
 
     it("should sanitize attributes", async () => {
-      const { default: handler } = await import("../src/routes/cart/route");
+      const { default: handler } = await import("../api/cart");
       const { createCartWithStorefront } = await import("../src/lib/cart-utils");
 
       const mockCart = {
@@ -251,7 +251,7 @@ describe("/api/cart", () => {
 
   describe("Method not allowed", () => {
     it("should return 405 for GET request", async () => {
-      const { default: handler } = await import("../src/routes/cart/route");
+      const { default: handler } = await import("../api/cart");
 
       const req = createMockRequest({
         method: "GET",

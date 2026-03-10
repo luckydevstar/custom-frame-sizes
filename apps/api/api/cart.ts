@@ -1,19 +1,18 @@
 /**
- * Cart Route Handler
- *
+ * Cart Route Handler (Vercel API)
  * POST /api/cart - Create a new cart
  */
 
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { withRouteHandler, sendSuccess } from "@/lib/route-handler";
-import { validationError, shopifyApiError } from "@/lib/errors";
-import { setCookie, CART_ID_COOKIE } from "@/lib/cookies";
-import { CreateCartRequestSchema } from "@/types/requests";
-import { createCartWithStorefront } from "@/lib/cart-utils";
-import { ensureStoreConfig } from "@/lib/store-config";
-import { applyRateLimit } from "@/lib/rate-limit-middleware";
-import { sanitizeStoreId, sanitizeAttributes } from "@/lib/sanitization";
-import { validateStoreIdOrThrow } from "@/lib/validation";
+import { withRouteHandler, sendSuccess } from "./_lib/route-handler";
+import { validationError, shopifyApiError } from "./_lib/errors";
+import { setCookie, CART_ID_COOKIE } from "./_lib/cookies";
+import { CreateCartRequestSchema } from "./_types/requests";
+import { createCartWithStorefront } from "./_lib/cart-utils";
+import { ensureStoreConfig } from "./_lib/store-config";
+import { applyRateLimit } from "./_lib/rate-limit-middleware";
+import { sanitizeStoreId, sanitizeAttributes } from "./_lib/sanitization";
+import { validateStoreIdOrThrow } from "./_lib/validation";
 
 const handler = withRouteHandler({
   POST: async (req: VercelRequest, res: VercelResponse) => {

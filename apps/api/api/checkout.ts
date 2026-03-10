@@ -1,19 +1,18 @@
 /**
- * Checkout Route Handler
- *
+ * Checkout Route Handler (Vercel API)
  * POST /api/checkout - Create checkout URL from cart
  */
 
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { withRouteHandler, sendSuccess } from "@/lib/route-handler";
-import { validationError, notFoundError } from "@/lib/errors";
-import { getCookie, CART_ID_COOKIE } from "@/lib/cookies";
-import { CheckoutRequestSchema } from "@/lib/validation";
-import { createCheckoutUrl } from "@/lib/checkout-utils";
-import { ensureStoreConfig } from "@/lib/store-config";
-import { applyRateLimit } from "@/lib/rate-limit-middleware";
-import { sanitizeStoreId, sanitizeEmail } from "@/lib/sanitization";
-import { validateStoreIdOrThrow } from "@/lib/validation";
+import { withRouteHandler, sendSuccess } from "./_lib/route-handler";
+import { validationError, notFoundError } from "./_lib/errors";
+import { getCookie, CART_ID_COOKIE } from "./_lib/cookies";
+import { CheckoutRequestSchema } from "./_lib/validation";
+import { createCheckoutUrl } from "./_lib/checkout-utils";
+import { ensureStoreConfig } from "./_lib/store-config";
+import { applyRateLimit } from "./_lib/rate-limit-middleware";
+import { sanitizeStoreId, sanitizeEmail } from "./_lib/sanitization";
+import { validateStoreIdOrThrow } from "./_lib/validation";
 
 const handler = withRouteHandler({
   POST: async (req: VercelRequest, res: VercelResponse) => {

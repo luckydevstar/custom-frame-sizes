@@ -1,17 +1,16 @@
 /**
- * Order Files Route Handler
- *
+ * Order Files Route Handler (Vercel API)
  * POST /api/orders/files - Create order file metadata
  * GET /api/orders/files?orderId=...&siteId=... - Get order files
  */
 
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { withRouteHandler, sendSuccess } from "@/lib/route-handler";
-import { validationError } from "@/lib/errors";
-import { CreateOrderFileRequestSchema } from "@/types/order-files";
-import { createOrderFile, getOrderFiles, isValidShopifyOrderId } from "@/lib/order-file-utils";
-import { applyRateLimit } from "@/lib/rate-limit-middleware";
-import { sanitizeStoreId } from "@/lib/sanitization";
+import { withRouteHandler, sendSuccess } from "../_lib/route-handler";
+import { validationError } from "../_lib/errors";
+import { CreateOrderFileRequestSchema } from "../_types/order-files";
+import { createOrderFile, getOrderFiles, isValidShopifyOrderId } from "../_lib/order-file-utils";
+import { applyRateLimit } from "../_lib/rate-limit-middleware";
+import { sanitizeStoreId } from "../_lib/sanitization";
 
 const handler = withRouteHandler({
   POST: async (req: VercelRequest, res: VercelResponse) => {

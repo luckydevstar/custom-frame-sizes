@@ -8,7 +8,7 @@
  * For now, it uses an in-memory store for demonstration.
  */
 
-import type { OrderFileResponse, CreateOrderFileRequest } from "@/types/order-files";
+import type { OrderFileResponse, CreateOrderFileRequest } from "../_types/order-files";
 
 /**
  * In-memory store for order files

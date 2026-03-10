@@ -1,19 +1,18 @@
 /**
- * Cart Lines Route Handler
- *
+ * Cart Lines Route Handler (Vercel API)
  * PATCH /api/cart/lines - Update cart line items (add, update, remove)
  */
 
 import type { VercelRequest, VercelResponse } from "@vercel/node";
-import { withRouteHandler, sendSuccess, ApiError } from "@/lib/route-handler";
-import { validationError, notFoundError } from "@/lib/errors";
-import { getCookie, CART_ID_COOKIE } from "@/lib/cookies";
-import { UpdateCartLinesRequestSchema } from "@/types/requests";
-import { addLinesToCart, updateLinesInCart, removeLinesFromCart } from "@/lib/cart-utils";
-import { ensureStoreConfig } from "@/lib/store-config";
-import { applyRateLimit } from "@/lib/rate-limit-middleware";
-import { sanitizeStoreId, sanitizeAttributes } from "@/lib/sanitization";
-import { validateStoreIdOrThrow } from "@/lib/validation";
+import { withRouteHandler, sendSuccess, ApiError } from "../_lib/route-handler";
+import { validationError, notFoundError } from "../_lib/errors";
+import { getCookie, CART_ID_COOKIE } from "../_lib/cookies";
+import { UpdateCartLinesRequestSchema } from "../_types/requests";
+import { addLinesToCart, updateLinesInCart, removeLinesFromCart } from "../_lib/cart-utils";
+import { ensureStoreConfig } from "../_lib/store-config";
+import { applyRateLimit } from "../_lib/rate-limit-middleware";
+import { sanitizeStoreId, sanitizeAttributes } from "../_lib/sanitization";
+import { validateStoreIdOrThrow } from "../_lib/validation";
 
 const handler = withRouteHandler({
   PATCH: async (req: VercelRequest, res: VercelResponse) => {

@@ -20,20 +20,27 @@ See [Backend API Architecture](../../docs/BACKEND_API_ARCHITECTURE.md) for detai
 
 ```
 apps/api/
-├── src/
-│   ├── routes/          # API route handlers
-│   ├── lib/            # Shared utilities
-│   └── types/          # TypeScript types
-└── __tests__/          # Test files
+├── api/                 # Vercel serverless functions (file-based routing)
+│   ├── _lib/            # Shared utilities (route-handler, errors, cart-utils, etc.)
+│   ├── _types/          # TypeScript types (requests, order-files, responses)
+│   ├── health.ts        # GET /api/health
+│   ├── cart.ts          # POST /api/cart
+│   ├── cart/lines.ts    # PATCH /api/cart/lines
+│   ├── checkout.ts      # POST /api/checkout
+│   └── orders/files/    # GET,POST /api/orders/files and GET /api/orders/files/:id
+└── __tests__/           # Test files
 ```
 
 ## Route Structure
 
-Routes use Vercel's file-based routing:
+Routes use Vercel's `api/` file-based routing:
 
-- `src/routes/cart/route.ts` → `/api/cart`
-- `src/routes/cart/lines/route.ts` → `/api/cart/lines`
-- `src/routes/checkout/route.ts` → `/api/checkout`
+- `api/health.ts` → `/api/health`
+- `api/cart.ts` → `/api/cart`
+- `api/cart/lines.ts` → `/api/cart/lines`
+- `api/checkout.ts` → `/api/checkout`
+- `api/orders/files.ts` → `/api/orders/files`
+- `api/orders/files/[id].ts` → `/api/orders/files/:id`
 
 ## Development
 
@@ -55,17 +62,20 @@ npm run test
 
 ### Route Handler Pattern
 
-All route handlers use the `withRouteHandler` wrapper:
+All route handlers use the `withRouteHandler` wrapper from `api/_lib/route-handler.ts`:
 
 ```typescript
-import { withRouteHandler, sendSuccess } from "../../lib/route-handler";
+import { withRouteHandler, sendSuccess } from "./_lib/route-handler";
 
-export default withRouteHandler({
-  POST: async (req, res) => {
-    // Handler implementation
-    sendSuccess(res, { data: "result" });
-  },
-});
+export default applyRateLimit(
+  "endpoint",
+  withRouteHandler({
+    POST: async (req, res) => {
+      // Handler implementation
+      sendSuccess(res, { data: "result" });
+    },
+  })
+);
 ```
 
 ## Environment Variables
@@ -86,7 +96,7 @@ Set these in Vercel (Project → Settings → Environment Variables).
 - `SHOPIFY_STORE_DOMAIN_store_a` – domain for store "store-a"
 - `SHOPIFY_STOREFRONT_TOKEN_store_a` – Storefront token for store "store-a"
 
-The API registers store config from these env vars when handling requests (see `src/lib/store-config.ts`).
+The API registers store config from these env vars when handling requests (see `api/_lib/store-config.ts`).
 
 ## Deployment
 

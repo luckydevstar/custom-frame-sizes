@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": ".",
     "module": "ESNext",
     "target": "ES2022",
     "lib": ["ES2022", "DOM"],
@@ -26,13 +26,10 @@
       "@framecraft/types": ["./packages/types/src"],
       "@framecraft/types/*": ["./packages/types/src/*"],
       "@framecraft/data": ["./packages/data/src"],
-      "@framecraft/data/*": ["./packages/data/src/*"],
-      "@/lib/*": ["./apps/api/src/lib/*"],
-      "@/routes/*": ["./apps/api/src/routes/*"],
-      "@/types/*": ["./apps/api/src/types/*"]
+      "@framecraft/data/*": ["./packages/data/src/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["api/**/*", "__tests__/**/*"],
   "exclude": ["node_modules", "dist", "__tests__"],
   "references": [
     { "path": "../../packages/core" },

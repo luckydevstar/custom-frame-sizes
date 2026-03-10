@@ -76,7 +76,7 @@ describe("/api/checkout", () => {
 
   describe("POST /api/checkout", () => {
     it("should return 404 when cart ID cookie is missing", async () => {
-      const { default: handler } = await import("../src/routes/checkout/route");
+      const { default: handler } = await import("../api/checkout");
       const { getCookie } = await import("../src/lib/cookies");
 
       vi.mocked(getCookie).mockReturnValueOnce(undefined);
@@ -103,7 +103,7 @@ describe("/api/checkout", () => {
     });
 
     it("should create checkout and return URL", async () => {
-      const { default: handler } = await import("../src/routes/checkout/route");
+      const { default: handler } = await import("../api/checkout");
       const { getCookie } = await import("../src/lib/cookies");
       const { createCheckoutUrl } = await import("../src/lib/checkout-utils");
 
@@ -141,7 +141,7 @@ describe("/api/checkout", () => {
     });
 
     it("should pass discount code to checkout", async () => {
-      const { default: handler } = await import("../src/routes/checkout/route");
+      const { default: handler } = await import("../api/checkout");
       const { getCookie } = await import("../src/lib/cookies");
       const { createCheckoutUrl } = await import("../src/lib/checkout-utils");
 
@@ -170,7 +170,7 @@ describe("/api/checkout", () => {
     });
 
     it("should return 400 for invalid request body", async () => {
-      const { default: handler } = await import("../src/routes/checkout/route");
+      const { default: handler } = await import("../api/checkout");
       const { getCookie } = await import("../src/lib/cookies");
 
       vi.mocked(getCookie).mockReturnValueOnce("gid://shopify/Cart/abc123");
@@ -189,7 +189,7 @@ describe("/api/checkout", () => {
     });
 
     it("should validate email format", async () => {
-      const { default: handler } = await import("../src/routes/checkout/route");
+      const { default: handler } = await import("../api/checkout");
       const { getCookie } = await import("../src/lib/cookies");
       const { createCheckoutUrl } = await import("../src/lib/checkout-utils");
 
@@ -215,7 +215,7 @@ describe("/api/checkout", () => {
     });
 
     it("should handle checkout creation failure", async () => {
-      const { default: handler } = await import("../src/routes/checkout/route");
+      const { default: handler } = await import("../api/checkout");
       const { getCookie } = await import("../src/lib/cookies");
       const { createCheckoutUrl } = await import("../src/lib/checkout-utils");
 
@@ -246,7 +246,7 @@ describe("/api/checkout", () => {
 
   describe("Method not allowed", () => {
     it("should return 405 for GET request", async () => {
-      const { default: handler } = await import("../src/routes/checkout/route");
+      const { default: handler } = await import("../api/checkout");
 
       const req = createMockRequest({
         method: "GET",
