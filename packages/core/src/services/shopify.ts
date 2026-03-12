@@ -21,6 +21,12 @@ import type { ShopifyConfig } from "@framecraft/config";
 import { logApiError, logWarning } from "./logging";
 import { getFrameStyleById } from "./products";
 import { apiRequest } from "../utils/query-client";
+import {
+  isFramecraftApiConfigured,
+  createOrGetCart,
+  addCartLines as apiAddCartLines,
+  getCheckoutUrl,
+} from "./framecraft-api";
 
 // Default API version
 const DEFAULT_API_VERSION = "2024-01";
@@ -346,6 +352,20 @@ export async function addToCart(
 
   // Use mock variant ID for development/testing
   const finalVariantId = variantId || "gid://shopify/ProductVariant/mock";
+
+  // When FrameCraft API is configured, use backend cart + checkout URL flow
+  if (isFramecraftApiConfigured()) {
+    const cart = await createOrGetCart();
+    await apiAddCartLines(
+      [{ merchandiseId: finalVariantId, quantity, configuration: config }],
+      cart.id
+    );
+    const checkoutUrl = await getCheckoutUrl(cart.id);
+    if (checkoutUrl) {
+      window.location.href = checkoutUrl;
+    }
+    return { checkoutUrl, id: cart.id };
+  }
 
   const lineItems = [
     {

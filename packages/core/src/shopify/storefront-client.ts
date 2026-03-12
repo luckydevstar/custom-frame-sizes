@@ -397,7 +397,10 @@ export class StorefrontClient {
  * @returns StorefrontClient instance
  */
 export function createStorefrontClient(storeId?: string): StorefrontClient {
-  const resolvedStoreId = storeId || resolveStoreId() || "default";
+  // Prefer explicit storeId, then domain-based resolution, then env site ID, then "default"
+  const envStoreId =
+    (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SITE_ID) || undefined;
+  const resolvedStoreId = storeId || resolveStoreId() || envStoreId || "default";
   const config = getStoreConfig(resolvedStoreId);
   return new StorefrontClient(config);
 }
