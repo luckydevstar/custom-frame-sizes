@@ -21,4 +21,5 @@ export * from "./logging";
 export * from "./mat-catalog";
 export * from "./print-compositor";
 export * from "./shopify";
+export * from "./framecraft-api";
 export * from "./gateway-colors";
