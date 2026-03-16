@@ -37,9 +37,7 @@ import {
   validateArtworkSize,
   formatDimension,
   computePreviewLayout,
-  addToCart,
-  isShopifyEnabled,
-  apiRequest,
+  addToCartOnly,
   getRandomDiplomaInsert,
   getRandomDiplomaLifestyle,
   getSharedAssetUrl,
@@ -49,6 +47,8 @@ import {
   getDiplomaSizeById,
   getStoreBaseAssetUrl,
   type DiplomaSize,
+  useCartStore,
+  createCartItemFromFrameConfig,
 } from "@framecraft/core";
 import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
 import {
@@ -778,7 +778,6 @@ export function DiplomaFrameDesigner({
     }
 
     setIsCheckingOut(true);
-    const shopifyEnabled = await isShopifyEnabled();
 
     const glass = selectedGlass ?? glassTypes[0] ?? allGlassTypes[0]!;
     const config: FrameConfiguration = {
@@ -796,46 +795,25 @@ export function DiplomaFrameDesigner({
       copyrightAgreed: serviceType === "frame-only" ? undefined : copyrightAgreed,
     };
 
-    if (shopifyEnabled) {
-      try {
-        const result = await addToCart(config, finalTotalPrice * quantity, quantity);
+    // Add to local cart store for UI
+    const cartInput = createCartItemFromFrameConfig(config, finalTotalPrice * quantity, quantity);
+    useCartStore.getState().addItem(cartInput);
 
-        if (result.checkoutUrl) {
-          // Redirect to Shopify checkout
-          window.location.href = result.checkoutUrl;
-        } else {
-          throw new Error("Failed to create checkout");
-        }
-      } catch (error) {
-        setIsCheckingOut(false);
-        toast({
-          title: "Error",
-          description: error instanceof Error ? error.message : "Failed to add to cart",
-          variant: "destructive",
-        });
-      }
-    } else {
-      // Cart functionality coming soon
-      try {
-        const response = await apiRequest("POST", "/api/cart", config);
-        await response.json();
-        setIsCheckingOut(false);
+    // Add to backend/Shopify cart (creates backend cart, does NOT redirect)
+    try {
+      await addToCartOnly(config, finalTotalPrice * quantity, quantity);
 
-        toast({
-          title: "Added to Cart",
-          description: "Your custom frame has been added. Cart checkout coming soon!",
-        });
-
-        // TODO: Navigate to cart page when cart is implemented
-        // navigate('/cart');
-      } catch (error) {
-        setIsCheckingOut(false);
-        toast({
-          title: "Error",
-          description: "Failed to add to cart",
-          variant: "destructive",
-        });
-      }
+      toast({
+        title: "Added to Cart!",
+        description: `${quantity} diploma frame${quantity > 1 ? "s" : ""} added to your cart.`,
+      });
+    } catch (error) {
+      setIsCheckingOut(false);
+      toast({
+        title: "Checkout Error",
+        description: error instanceof Error ? error.message : "Failed to create checkout",
+        variant: "destructive",
+      });
     }
   };
 

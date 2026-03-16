@@ -61,7 +61,12 @@ import { useIsMobile, useMobileViewToggle, useIntersectionVisible } from "@frame
 import { ALL_MATS, getMatsInDisplayOrder, getMatById, type Mat } from "@framecraft/config";
 
 // TODO: App-specific dependencies - these need to be extracted or made injectable
-import { addToCart, isShopifyEnabled, createCartItemFromFrameConfig } from "@framecraft/core";
+import {
+  addToCart,
+  addToCartOnly,
+  isShopifyEnabled,
+  createCartItemFromFrameConfig,
+} from "@framecraft/core";
 import { useCartStore } from "@framecraft/core/stores";
 import { useToast } from "../../hooks/use-toast";
 import { getRandomStockImage } from "@framecraft/core";
@@ -651,19 +656,14 @@ export function FrameDesigner({
       });
       useCartStore.getState().addItem(cartInput);
 
-      if (isShopifyEnabled()) {
-        // Current flow: redirect to Shopify checkout (until Cart Transform is wired; then checkout from cart page)
-        await addToCart(frameConfig, finalTotalPrice, quantity);
-        toast({
-          title: "Redirecting to Checkout",
-          description: "Taking you to secure checkout...",
-        });
-      } else {
-        toast({
-          title: "Added to Cart",
-          description: `${quantity} custom frame${quantity > 1 ? "s" : ""} added. View cart to continue.`,
-        });
-      }
+      // Add to backend/Shopify cart (creates backend cart, does NOT redirect)
+      // This syncs immediately for better reliability, but cart page will also sync before checkout
+      await addToCartOnly(frameConfig, finalTotalPrice, quantity);
+
+      toast({
+        title: "Added to Cart!",
+        description: `${quantity} custom frame${quantity > 1 ? "s" : ""} added to your cart.`,
+      });
     } catch (error) {
       console.error("Checkout error:", error);
       toast({

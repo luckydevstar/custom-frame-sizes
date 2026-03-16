@@ -385,6 +385,51 @@ export async function addToCart(
 }
 
 /**
+ * Add item to cart WITHOUT redirecting to checkout.
+ * Use this for "Add to Cart" buttons. User can review cart and checkout later.
+ *
+ * @returns Cart object with id and checkoutUrl (but does NOT redirect)
+ */
+export async function addToCartOnly(
+  config: FrameConfiguration,
+  _price: number,
+  quantity: number = 1,
+  shopifyConfig?: ShopifyConfig
+) {
+  // Get variant ID from environment or frame-specific mapping
+  const defaultVariantId =
+    (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_FRAME_VARIANT_ID) || null;
+
+  // Try to get frame-specific variant ID from product data (if configured)
+  const frameStyle = getFrameStyleById(config.frameStyleId);
+  const variantId = (frameStyle as any)?.shopifyVariantId || defaultVariantId;
+
+  // Use mock variant ID for development/testing
+  const finalVariantId = variantId || "gid://shopify/ProductVariant/mock";
+
+  // When FrameCraft API is configured, add to backend cart without redirecting
+  if (isFramecraftApiConfigured()) {
+    const cart = await createOrGetCart();
+    const updatedCart = await apiAddCartLines(
+      [{ merchandiseId: finalVariantId, quantity, configuration: config }],
+      cart.id
+    );
+    return { checkoutUrl: updatedCart.checkoutUrl || null, id: updatedCart.id };
+  }
+
+  // Fallback: create checkout but don't redirect
+  const lineItems = [
+    {
+      variantId: finalVariantId,
+      quantity: quantity,
+    },
+  ];
+
+  const checkout = await createCheckout(config, lineItems, shopifyConfig);
+  return checkout;
+}
+
+/**
  * Store production files for an order
  *
  * @param shopifyOrderId - The Shopify order ID (can be checkout ID initially)
