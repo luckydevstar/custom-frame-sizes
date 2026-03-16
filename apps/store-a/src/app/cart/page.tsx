@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { CartClient } from "@framecraft/ui";
+import { CartPageClient } from "./CartPageClient";
 
 export const metadata: Metadata = {
   title: "Shopping Cart | CustomFrameSizes.com",
@@ -11,9 +11,5 @@ export const metadata: Metadata = {
 };
 
 export default function CartPage() {
-  return (
-    <div className="max-w-4xl mx-auto px-6 py-10">
-      <CartClient continueShoppingHref="/designer" onCheckout={undefined} />
-    </div>
-  );
+  return <CartPageClient />;
 }

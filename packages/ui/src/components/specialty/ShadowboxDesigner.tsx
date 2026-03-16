@@ -54,7 +54,7 @@ import {
 import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
 
 import { TrustBox } from "../marketing/TrustBox";
-import { addToCart, isShopifyEnabled } from "@framecraft/core";
+import { addToCartOnly, useCartStore, createCartItemFromFrameConfig } from "@framecraft/core";
 import { useToast } from "../../hooks/use-toast";
 import { toShadowboxConfig, fromShadowboxConfig } from "@framecraft/core";
 import {
@@ -545,22 +545,21 @@ export function ShadowboxDesigner({
     setIsCheckingOut(true);
 
     try {
-      // Call Shopify checkout service
-      await addToCart(frameConfig, finalTotalPrice, quantity);
+      // Add to local cart store for UI
+      const cartInput = createCartItemFromFrameConfig(
+        frameConfig,
+        finalTotalPrice * quantity,
+        quantity
+      );
+      useCartStore.getState().addItem(cartInput);
 
-      if (!isShopifyEnabled()) {
-        // Mock checkout - show success message
-        toast({
-          title: "Mock Checkout Created",
-          description: "Shopify is not configured. Check console for payload details.",
-        });
-      } else {
-        // Real checkout - user will be redirected to Shopify
-        toast({
-          title: "Redirecting to Checkout",
-          description: "Taking you to secure checkout...",
-        });
-      }
+      // Add to backend/Shopify cart (creates backend cart, does NOT redirect)
+      await addToCartOnly(frameConfig, finalTotalPrice, quantity);
+
+      toast({
+        title: "Added to Cart!",
+        description: `${quantity} shadowbox frame${quantity > 1 ? "s" : ""} added to your cart.`,
+      });
     } catch (error) {
       console.error("Checkout error:", error);
       toast({

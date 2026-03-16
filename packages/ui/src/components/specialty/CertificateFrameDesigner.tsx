@@ -38,9 +38,7 @@ import {
   validateArtworkSize,
   formatDimension,
   computePreviewLayout,
-  addToCart,
-  isShopifyEnabled,
-  apiRequest,
+  addToCartOnly,
   getRandomDiplomaInsert,
   getRandomDiplomaLifestyle,
   getSharedAssetUrl,
@@ -49,6 +47,8 @@ import {
   downloadImage,
   getMatTilingStyle,
   getStoreBaseAssetUrl,
+  useCartStore,
+  createCartItemFromFrameConfig,
 } from "@framecraft/core";
 import { CERTIFICATE_SIZES, getCertificateSizeById, type CertificateSize } from "@framecraft/core";
 import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
@@ -457,7 +457,6 @@ export function CertificateFrameDesigner({
       return;
     }
     setIsCheckingOut(true);
-    const shopifyEnabled = await isShopifyEnabled();
     const glass = selectedGlass ?? glassTypes[0];
     if (!glass) return;
     const config: FrameConfiguration = {
@@ -474,32 +473,25 @@ export function CertificateFrameDesigner({
       imageUrl: selectedImage || undefined,
       copyrightAgreed: serviceType === "frame-only" ? undefined : copyrightAgreed,
     };
-    if (shopifyEnabled) {
-      try {
-        const result = await addToCart(config, finalTotalPrice * quantity, quantity);
-        if (result.checkoutUrl) window.location.href = result.checkoutUrl;
-        else throw new Error("Failed to create checkout");
-      } catch (error) {
-        setIsCheckingOut(false);
-        toast({
-          title: "Error",
-          description: error instanceof Error ? error.message : "Failed to add to cart",
-          variant: "destructive",
-        });
-      }
-    } else {
-      try {
-        const response = await apiRequest("POST", "/api/cart", config);
-        await response.json();
-        setIsCheckingOut(false);
-        toast({
-          title: "Added to Cart",
-          description: "Your custom frame has been added. Cart checkout coming soon!",
-        });
-      } catch (error) {
-        setIsCheckingOut(false);
-        toast({ title: "Error", description: "Failed to add to cart", variant: "destructive" });
-      }
+    // Add to local cart store for UI
+    const cartInput = createCartItemFromFrameConfig(config, finalTotalPrice * quantity, quantity);
+    useCartStore.getState().addItem(cartInput);
+
+    // Add to backend/Shopify cart (creates backend cart, does NOT redirect)
+    try {
+      await addToCartOnly(config, finalTotalPrice * quantity, quantity);
+
+      toast({
+        title: "Added to Cart!",
+        description: `${quantity} certificate frame${quantity > 1 ? "s" : ""} added to your cart.`,
+      });
+    } catch (error) {
+      setIsCheckingOut(false);
+      toast({
+        title: "Checkout Error",
+        description: error instanceof Error ? error.message : "Failed to create checkout",
+        variant: "destructive",
+      });
     }
     return;
   };
