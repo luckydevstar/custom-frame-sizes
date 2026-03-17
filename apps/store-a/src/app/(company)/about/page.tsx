@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { generateMetadata } from "@/lib/seo";
 import {
   Ruler,
   Package,
@@ -19,16 +20,15 @@ import {
 import { Card, CardContent } from "@framecraft/ui";
 import { Button } from "@framecraft/ui";
 
-export const metadata: Metadata = {
-  title: "About CustomFrameSizes.com – Precision Custom Framing | Custom Frame Sizes",
+export const metadata: Metadata = generateMetadata({
+  title: "About CustomFrameSizes.com | Custom Frame Manufacturer | Precision Framing",
   description:
-    "Custom framing built to your exact specifications. Every frame made to order with professional-grade materials. Standard production ships in 3–7 business days.",
-  openGraph: {
-    title: "About CustomFrameSizes.com – Precision Custom Framing",
-    description: "Custom framing built to your exact specifications. Every frame made to order.",
-    type: "website",
-  },
-};
+    "Precision custom framing built to exact specifications. Every frame made to order with professional materials. 3–7 business day production. CustomFrameSizes.com – exact sizes, zero compromise.",
+  canonical: "https://customframesizes.com/about",
+  ogTitle: "About CustomFrameSizes – Precision Custom Framing",
+  ogDescription:
+    "Custom framing manufactured to exact specifications with professional materials. Consistent quality, custom sizes, 3-7 business day production.",
+});
 
 export default function AboutPage() {
   return (

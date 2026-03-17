@@ -3,6 +3,7 @@ import nextDynamic from "next/dynamic";
 import { Suspense } from "react";
 import { Sparkles, Shield, Package, Layers, Target } from "lucide-react";
 import { ScrollToDesignerButton } from "./scroll-button";
+import { generateMetadata } from "@/lib/seo";
 
 const PuckFrameDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.PuckFrameDesigner),
@@ -11,27 +12,15 @@ const PuckFrameDesigner = nextDynamic(
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Hockey Puck Display Frames – Complete Kit with Foam Insert | Custom Frame Sizes",
+export const metadata: Metadata = generateMetadata({
+  title: "Hockey Puck Display Frames | Custom Foam Insert Kit | CustomFrameSizes.com",
   description:
-    "Display hockey pucks safely with our complete frame kit. Includes nesting foam insert for friction-fit mounting — no adhesives or hardware that can damage your pucks. Design your display now.",
-  keywords:
-    "hockey puck frames, puck display case, hockey memorabilia frame, signed puck frame, NHL puck display, shadowbox puck frame, foam insert puck holder, friction fit puck mount",
-  openGraph: {
-    title: "Hockey Puck Display Frames – Complete Kit with Foam Insert",
-    description:
-      "Display hockey pucks safely with our complete frame kit. Includes nesting foam insert for friction-fit mounting — no adhesives or hardware that can damage your pucks.",
-    type: "website",
-    url: "/hockey-puck-frame-designer",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Hockey Puck Display Frames – Complete Kit with Foam Insert",
-    description:
-      "Display hockey pucks safely with our complete frame kit. Includes nesting foam insert for friction-fit mounting.",
-  },
-  alternates: { canonical: "/hockey-puck-frame-designer" },
-};
+    "Display hockey pucks safely with custom frames and foam insert system. Friction-fit mounting with no adhesives. Design your complete display kit now.",
+  canonical: "https://customframesizes.com/hockey-puck-frame-designer",
+  ogTitle: "Hockey Puck Display Frames – Custom Kit with Foam Insert",
+  ogDescription:
+    "Professional hockey puck display frames with custom foam insert. Friction-fit mounting, no adhesives.",
+});
 
 const serviceSchema = {
   "@context": "https://schema.org",

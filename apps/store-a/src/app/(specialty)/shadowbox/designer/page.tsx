@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@framecraft/ui";
+import { generateMetadata } from "@/lib/seo";
 
 const ShadowboxDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
@@ -12,11 +13,15 @@ const ShadowboxDesigner = nextDynamic(
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
-  title: "Shadowbox Designer | Custom Frame Sizes",
+export const metadata: Metadata = generateMetadata({
+  title: "Custom Shadowbox Designer | Design Your Shadowbox | CustomFrameSizes.com",
   description:
-    "Design your custom shadowbox frame. Choose size, depth, and style with real-time pricing.",
-};
+    "Design custom shadowbox frames with adjustable depth. Display 3D items, collectibles, jerseys, and memorabilia. Choose size, style, and glass options.",
+  canonical: "https://customframesizes.com/shadowbox/designer",
+  ogTitle: "Custom Shadowbox Designer - 3D Display Frames",
+  ogDescription:
+    "Design custom shadowbox frames for jerseys, medals, collectibles. Adjustable depth, professional display quality.",
+});
 
 export default function ShadowboxDesignerPage() {
   return (
