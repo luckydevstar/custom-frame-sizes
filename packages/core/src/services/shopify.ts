@@ -388,11 +388,15 @@ export async function addToCart(
  * Add item to cart WITHOUT redirecting to checkout.
  * Use this for "Add to Cart" buttons. User can review cart and checkout later.
  *
+ * @param config - Frame configuration
+ * @param price - Calculated price in dollars (will be converted to cents and sent to backend)
+ * @param quantity - Quantity to add
+ * @param shopifyConfig - Optional Shopify configuration
  * @returns Cart object with id and checkoutUrl (but does NOT redirect)
  */
 export async function addToCartOnly(
   config: FrameConfiguration,
-  _price: number,
+  price: number,
   quantity: number = 1,
   shopifyConfig?: ShopifyConfig
 ) {
@@ -410,8 +414,19 @@ export async function addToCartOnly(
   // When FrameCraft API is configured, add to backend cart without redirecting
   if (isFramecraftApiConfigured()) {
     const cart = await createOrGetCart();
+
+    // Convert price from dollars to cents and pass to backend
+    const priceCents = Math.round(price * 100);
+
     const updatedCart = await apiAddCartLines(
-      [{ merchandiseId: finalVariantId, quantity, configuration: config }],
+      [
+        {
+          merchandiseId: finalVariantId,
+          quantity,
+          configuration: config,
+          priceCents, // Pass calculated price to ensure backend uses same price
+        },
+      ],
       cart.id
     );
     return { checkoutUrl: updatedCart.checkoutUrl || null, id: updatedCart.id };

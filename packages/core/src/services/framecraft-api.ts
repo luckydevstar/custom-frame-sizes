@@ -22,6 +22,7 @@ export interface FramecraftCartLineInput {
   merchandiseId: string;
   quantity: number;
   configuration: FrameConfiguration;
+  priceCents?: number; // Optional: pre-calculated price in cents from frontend
 }
 
 export interface FramecraftCart {
