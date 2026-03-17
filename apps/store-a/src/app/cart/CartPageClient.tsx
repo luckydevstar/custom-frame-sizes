@@ -26,28 +26,40 @@ export function CartPageClient() {
         return;
       }
 
-      // Sync all cart items to backend before checkout
-      // This ensures backend cart matches UI cart, even if some items weren't synced during add-to-cart
-      const { createOrGetCart, addCartLines } =
-        await import("@framecraft/core/services/framecraft-api");
-
       // Get variant ID from env
       const variantId =
         process.env.NEXT_PUBLIC_SHOPIFY_FRAME_VARIANT_ID || "gid://shopify/ProductVariant/mock";
 
-      // Create/get backend cart
+      // Clear cart cookie to force creation of a new cart
+      // This prevents duplicate items when clicking checkout multiple times
+      document.cookie = "framecraft_cart_id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+
+      // Create a FRESH cart
+      const { createOrGetCart, addCartLines } =
+        await import("@framecraft/core/services/framecraft-api");
+
+      // Import pricing calculator to ensure prices match frontend
+      const { calculatePricing } = await import("@framecraft/core/services/pricing");
+
+      // Convert local cart items to API format with calculated prices
+      const lines = items.map((item) => {
+        // Calculate price using same engine as displayed in cart
+        const pricing = calculatePricing(item.configuration!);
+        const priceCents = Math.round(pricing.total * 100); // Convert dollars to cents
+
+        return {
+          merchandiseId: variantId,
+          quantity: item.quantity,
+          configuration: item.configuration!,
+          priceCents, // Pass calculated price to backend
+        };
+      });
+
+      // Create fresh cart (cookie is cleared, so this will create new)
       const cart = await createOrGetCart();
-
-      // Add all items from local cart to backend cart
-      const lines = items.map((item) => ({
-        merchandiseId: variantId,
-        quantity: item.quantity,
-        configuration: item.configuration!,
-      }));
-
       await addCartLines(lines, cart.id);
 
-      // Now get checkout URL
+      // Get checkout URL
       const { getCheckoutUrl } = await import("@framecraft/core/services/framecraft-api");
       const checkoutUrl = await getCheckoutUrl(cart.id);
       window.location.href = checkoutUrl;
