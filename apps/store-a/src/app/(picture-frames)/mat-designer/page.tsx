@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { MatDesignerClient } from "./MatDesignerClient";
 import { brandConfig } from "../../../brand.config";
+import { generateMetadata as generatePageMetadata, getCanonicalUrl } from "@/lib/seo";
 
 const baseUrl = brandConfig.seo?.canonicalUrl ?? "https://customframesizes.com";
 
@@ -114,21 +115,15 @@ const breadcrumbSchema = {
   ],
 };
 
-export const metadata: Metadata = {
-  title: "Custom Mat Board Designer - Single Opening Design in Any Size | Custom Frame Sizes",
+export const metadata: Metadata = generatePageMetadata({
+  title: "Custom Mat Board Designer | Single & Double Mats | CustomFrameSizes.com",
   description:
-    "Design custom picture mats with our professional mat cutting tool. Create single or double mats with V-groove decorative detail, 46 mat colors, and various opening shapes. Precision 1/8-inch measurements, backing boards included, bulk pricing available. Perfect for professional framers, photographers, and artists.",
-  keywords:
-    "custom mat board, picture mat cutting, double mat, oval mat, v-groove mat, museum mat, photo mat, custom matting, mat board cutter, professional picture matting, backing boards, bulk mat pricing",
-  openGraph: {
-    title: "Custom Mat Board Designer - Single Opening Design | Custom Frame Sizes",
-    description:
-      "Professional mat board designer with 46 mat colors, V-groove decorative detail, single/double mat options. Backing boards included, bulk pricing available. Precision cutting to 1/8-inch for professional framing.",
-    type: "website",
-    url: `${baseUrl}/mat-designer`,
-  },
-  alternates: { canonical: `${baseUrl}/mat-designer` },
-};
+    "Design custom picture mats with 46 colors, V-groove detail, oval/circle/rectangle openings. Single or double mats with backing boards. Precision 1/8-inch cutting for professional framing.",
+  canonical: getCanonicalUrl("/mat-designer"),
+  ogTitle: "Custom Mat Board Designer - Professional Mat Cutter",
+  ogDescription:
+    "Professional mat board designer with 46 colors, V-groove, single/double mats. Backing boards included, bulk pricing available.",
+});
 
 export default function MatDesignerPage() {
   return (
