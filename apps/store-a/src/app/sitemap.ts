@@ -78,7 +78,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   // Dynamic frame detail pages
   try {
-    const frameCategories = ["picture", "shadowbox"];
+    const frameCategories: Array<"picture" | "shadowbox"> = ["picture", "shadowbox"];
     const dynamicPages: MetadataRoute.Sitemap = [];
 
     for (const category of frameCategories) {
