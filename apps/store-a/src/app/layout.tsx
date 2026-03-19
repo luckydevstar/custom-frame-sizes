@@ -52,8 +52,13 @@ export default function RootLayout({
             <CartHydration />
             <TooltipProvider>
               <div className="flex min-h-screen flex-col">
+                <a href="#main-content" className="sr-only sr-only:focus">
+                  Skip to main content
+                </a>
                 <Header />
-                <main className="flex-1">{children}</main>
+                <main id="main-content" className="flex-1">
+                  {children}
+                </main>
                 <Footer />
                 <Toaster />
               </div>
