@@ -7,7 +7,12 @@ import { getFramePageContent } from "./frame-page-content";
 import { FrameDesignerHeroCta } from "./FrameDesignerHeroCta";
 import { FrameHeroBadge } from "./FrameHeroBadge";
 import { FrameDesignerPageSections } from "./FrameDesignerPageSections";
-import { generateDetailMetadata } from "@/lib/seo";
+import {
+  generateDetailMetadata,
+  generateProductSchema,
+  generateBreadcrumbSchema,
+  getCanonicalUrl,
+} from "@/lib/seo";
 
 // Next.js 15: params is a Promise
 type Props = { params: Promise<{ frameSlug: string }> };
@@ -45,48 +50,90 @@ export default async function FrameDesignerBySlugPage({ params }: Props) {
 
   const pageContent = getFramePageContent(frame);
 
+  const description =
+    frame.shortDescription ||
+    frame.featuredDescription ||
+    `Design a custom ${frame.name} picture frame in any size. Choose your dimensions, mat, and glazing options. Instant pricing.`;
+
+  const breadcrumbs = [
+    { name: "Home", url: getCanonicalUrl("/") },
+    { name: "Frames", url: getCanonicalUrl("/frames") },
+    { name: frame.name, url: getCanonicalUrl(`/frames/${frameSlug}`) },
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
-      {/* Hero Section - match original CustomFrameSizes-CODE (e.g. LightOakFrame.tsx) */}
-      <section className="container mx-auto px-4 pt-6 pb-4 md:pt-8 md:pb-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <FrameHeroBadge text={pageContent.heroBadgeText} />
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 leading-[1.1]">
-            <span className="text-foreground">{frame.name}</span>
-            <br />
-            <span className="text-muted-foreground">Picture Frame</span>
-          </h1>
-          <p
-            className="text-sm md:text-base text-muted-foreground mb-1.5 leading-snug max-w-2xl mx-auto italic"
-            data-testid="text-short-description"
-          >
-            {frame.shortDescription ?? ""}
-          </p>
-          <FrameDesignerHeroCta />
-        </div>
-      </section>
-
-      {/* Embedded Frame Designer - match original */}
-      <section className="container mx-auto px-4 py-4 md:py-6" data-designer-anchor>
-        <div className="max-w-7xl mx-auto">
-          <Suspense
-            fallback={
-              <div className="min-h-[600px] flex items-center justify-center">
-                Loading designer...
-              </div>
-            }
-          >
-            <FrameDesigner defaultFrameId={frameSlug} embedded />
-          </Suspense>
-        </div>
-      </section>
-
-      {/* Style Inspiration + Explanation (Design & Craftsmanship, KeyFeaturesBar, Specs, Perfect For, Final CTA) */}
-      <FrameDesignerPageSections
-        frame={frame}
-        lifestyleImages={lifestyleImages}
-        pageContent={pageContent}
+    <>
+      {/* Structured Data - Product Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: generateProductSchema({
+            name: `${frame.name} Picture Frame`,
+            description,
+            lowPrice: 25,
+            highPrice: 300,
+            url: getCanonicalUrl(`/frames/${frameSlug}`),
+            material: `${frame.material || "Wood (premium hardwoods)"} with ${frame.mouldingWidth}" width`,
+            additionalProperties: [
+              { name: "Frame Style", value: frame.name },
+              { name: "Color", value: frame.color },
+              { name: "Moulding Width", value: `${frame.mouldingWidth}"` },
+              { name: "Size Granularity", value: "1/8 inch" },
+            ],
+          }),
+        }}
       />
-    </div>
+
+      {/* Structured Data - BreadcrumbList Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: generateBreadcrumbSchema(breadcrumbs),
+        }}
+      />
+
+      <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
+        {/* Hero Section - match original CustomFrameSizes-CODE (e.g. LightOakFrame.tsx) */}
+        <section className="container mx-auto px-4 pt-6 pb-4 md:pt-8 md:pb-6">
+          <div className="max-w-4xl mx-auto text-center">
+            <FrameHeroBadge text={pageContent.heroBadgeText} />
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 leading-[1.1]">
+              <span className="text-foreground">{frame.name}</span>
+              <br />
+              <span className="text-muted-foreground">Picture Frame</span>
+            </h1>
+            <p
+              className="text-sm md:text-base text-muted-foreground mb-1.5 leading-snug max-w-2xl mx-auto italic"
+              data-testid="text-short-description"
+            >
+              {frame.shortDescription ?? ""}
+            </p>
+            <FrameDesignerHeroCta />
+          </div>
+        </section>
+
+        {/* Embedded Frame Designer - match original */}
+        <section className="container mx-auto px-4 py-4 md:py-6" data-designer-anchor>
+          <div className="max-w-7xl mx-auto">
+            <Suspense
+              fallback={
+                <div className="min-h-[600px] flex items-center justify-center">
+                  Loading designer...
+                </div>
+              }
+            >
+              <FrameDesigner defaultFrameId={frameSlug} embedded />
+            </Suspense>
+          </div>
+        </section>
+
+        {/* Style Inspiration + Explanation (Design & Craftsmanship, KeyFeaturesBar, Specs, Perfect For, Final CTA) */}
+        <FrameDesignerPageSections
+          frame={frame}
+          lifestyleImages={lifestyleImages}
+          pageContent={pageContent}
+        />
+      </div>
+    </>
   );
 }
