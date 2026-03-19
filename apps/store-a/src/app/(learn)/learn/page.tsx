@@ -2,7 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Card, CardHeader, CardTitle, CardDescription } from "@framecraft/ui";
 import { Badge } from "@framecraft/ui";
-import { Clock, BookOpen, Palette, Shield, Ruler, Award } from "lucide-react";
+import { Clock, BookOpen, Palette, Shield, Ruler, Award, FileText } from "lucide-react";
+import { getBlogPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {
   title: "Learn - Framing Guides & Resources | Custom Frame Sizes",
@@ -70,7 +71,26 @@ const guides = [
   },
 ];
 
-export default function LearnPage() {
+/** Pillar SEO guides (E4.4)—canonical Markdown in `content/blog/`; listed here in reading order. */
+const PILLAR_GUIDE_SLUGS = [
+  "framing-for-beginners-10-things",
+  "how-to-measure-for-a-picture-frame-2026",
+  "standard-picture-frame-sizes-chart",
+  "mat-border-size-complete-guide",
+  "museum-glass-vs-regular-glass-comparison",
+  "best-frame-styles-for-room-designs",
+  "how-much-does-custom-framing-cost",
+  "custom-frames-vs-ikea",
+  "picture-frame-vs-shadowbox",
+  "how-to-frame-a-jersey-step-by-step",
+] as const;
+
+export default async function LearnPage() {
+  const allPosts = getBlogPosts();
+  const pillarGuides = PILLAR_GUIDE_SLUGS.map((slug) =>
+    allPosts.find((p) => p.slug === slug)
+  ).filter((p): p is NonNullable<typeof p> => Boolean(p));
+
   const schema = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
@@ -128,6 +148,49 @@ export default function LearnPage() {
               })}
             </div>
           </section>
+
+          {pillarGuides.length > 0 ? (
+            <section className="mt-16" aria-labelledby="pillar-guides-heading">
+              <div className="flex items-center gap-2 mb-4">
+                <FileText className="h-6 w-6 text-primary" aria-hidden />
+                <h2 id="pillar-guides-heading" className="text-2xl font-bold">
+                  In-depth framing guides
+                </h2>
+              </div>
+              <p className="text-muted-foreground mb-6">
+                Longer essential reads on measuring, materials, costs, and specialty
+                projects—perfect if you want the full story before you open the{" "}
+                <Link href="/designer" className="text-primary underline hover:no-underline">
+                  custom frame designer
+                </Link>
+                .
+              </p>
+              <div className="grid gap-4 md:grid-cols-2">
+                {pillarGuides.map((post) => (
+                  <Link key={post.slug} href={`/blog/${post.slug}`}>
+                    <Card
+                      className="h-full hover-elevate cursor-pointer transition-all"
+                      data-testid={`card-pillar-${post.slug}`}
+                    >
+                      <CardHeader>
+                        <div className="flex items-center justify-between mb-2">
+                          <Badge variant="secondary" className="text-xs">
+                            Essential guide
+                          </Badge>
+                          <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                            <Clock className="h-3 w-3" />
+                            {post.readingTime}
+                          </div>
+                        </div>
+                        <CardTitle className="text-lg mb-2">{post.title}</CardTitle>
+                        <CardDescription>{post.description}</CardDescription>
+                      </CardHeader>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          ) : null}
 
           {/* Can't Find What You're Looking For? */}
           <div className="mt-12 p-6 bg-card rounded-lg border" data-testid="section-cant-find">
