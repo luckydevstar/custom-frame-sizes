@@ -52,10 +52,10 @@ When the user confirms work is complete (says "ready for PR", "create PR", or si
    git commit -m "[commit message]"
    ```
 
-3. **Push branch and create PR**:
+3. **Push branch and create PR** (targeting `develop` branch):
    ```bash
    git push -u origin HEAD
-   gh pr create --title "[PR title]" --body "[PR description]"
+   gh pr create --title "[PR title]" --body "[PR description]" --base develop
    ```
 
 ## Important Notes
@@ -65,6 +65,8 @@ When the user confirms work is complete (says "ready for PR", "create PR", or si
 - **Confirm with user** before creating the PR
 - **Generate meaningful commit messages** that describe the work done
 - **Include PR description** with summary and test plan
+- **Always open PRs to `develop`** branch, NOT `master` (use `--base develop` flag)
+- **Master branch** is for production releases only (from `develop` after review)
 
 ## Example Flow
 
