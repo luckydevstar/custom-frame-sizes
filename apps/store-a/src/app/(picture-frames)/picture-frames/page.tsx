@@ -424,6 +424,48 @@ export default function PictureFramesPage() {
         </div>
       </section>
 
+      {/* Related guides */}
+      <section className="container mx-auto px-4 py-12 border-t bg-muted/10">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-2xl font-bold mb-6">Related Guides</h2>
+          <ul className="grid md:grid-cols-3 gap-4">
+            <li>
+              <Link
+                href="/learn"
+                className="block p-4 rounded-lg border bg-card hover:border-primary/30 transition-colors"
+              >
+                <span className="font-medium">How to Measure for a Picture Frame</span>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Get the right dimensions for your artwork.
+                </p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/learn/frame-size-chart"
+                className="block p-4 rounded-lg border bg-card hover:border-primary/30 transition-colors"
+              >
+                <span className="font-medium">Standard Picture Frame Sizes</span>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Common sizes and when to choose custom.
+                </p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/faq"
+                className="block p-4 rounded-lg border bg-card hover:border-primary/30 transition-colors"
+              >
+                <span className="font-medium">Custom Frame FAQ</span>
+                <p className="text-sm text-muted-foreground mt-1">
+                  Answers to framing and ordering questions.
+                </p>
+              </Link>
+            </li>
+          </ul>
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section className="container mx-auto px-4 py-16 border-t">
         <div className="max-w-3xl mx-auto text-center">
