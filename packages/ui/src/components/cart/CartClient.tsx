@@ -50,7 +50,7 @@ export function CartClient({
 
       {isEmpty ? (
         <div className="flex flex-col items-center justify-center rounded-lg border border-dashed py-16 text-center">
-          <ShoppingCart className="h-12 w-12 text-muted-foreground/50" aria-hidden />
+          <ShoppingCart className="h-12 w-12 text-muted-foreground" aria-hidden />
           <h2 className="mt-4 text-lg font-semibold">Your cart is empty</h2>
           <p className="mt-2 max-w-sm text-sm text-muted-foreground">
             Add a custom frame from our designer or browse picture frames to get started.

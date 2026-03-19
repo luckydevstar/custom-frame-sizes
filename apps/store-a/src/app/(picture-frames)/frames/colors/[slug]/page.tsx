@@ -370,7 +370,7 @@ export default async function ColorDetailPage({ params }: ColorDetailPageProps) 
                         <CardContent className="p-4">
                           <h3 className="font-bold mb-1">{frame.name} Frame</h3>
                           {frame.shortDescription && (
-                            <p className="text-xs text-muted-foreground/80 italic mb-2">
+                            <p className="text-xs text-muted-foreground italic mb-2">
                               {frame.shortDescription}
                             </p>
                           )}

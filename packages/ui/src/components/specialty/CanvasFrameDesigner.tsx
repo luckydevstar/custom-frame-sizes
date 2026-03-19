@@ -1111,7 +1111,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
 
             {/* Caption shown only when displaying placeholder image */}
             {!selectedImage && (
-              <p className="text-xs md:text-sm text-muted-foreground/70 text-center mt-2 leading-tight">
+              <p className="text-xs md:text-sm text-muted-foreground text-center mt-2 leading-tight">
                 Sample image shown for display only. Not included with purchase.
               </p>
             )}

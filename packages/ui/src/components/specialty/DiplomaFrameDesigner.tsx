@@ -1757,14 +1757,14 @@ export function DiplomaFrameDesigner({
                                   style={{ gap: `${Math.max(4, layout.scale * 0.3)}px` }}
                                 >
                                   <ImageIcon
-                                    className="text-muted-foreground/50"
+                                    className="text-muted-foreground"
                                     style={{
                                       width: `${Math.max(16, layout.scale * 1.5)}px`,
                                       height: `${Math.max(16, layout.scale * 1.5)}px`,
                                     }}
                                   />
                                   <span
-                                    className="text-muted-foreground/60 text-center px-1"
+                                    className="text-muted-foreground text-center px-1"
                                     style={{ fontSize: `${Math.max(8, layout.scale * 0.6)}px` }}
                                   >
                                     {photoSize} Photo
@@ -1809,14 +1809,14 @@ export function DiplomaFrameDesigner({
                                   style={{ gap: `${Math.max(4, layout.scale * 0.3)}px` }}
                                 >
                                   <ImageIcon
-                                    className="text-muted-foreground/50"
+                                    className="text-muted-foreground"
                                     style={{
                                       width: `${Math.max(16, layout.scale * 1.5)}px`,
                                       height: `${Math.max(16, layout.scale * 1.5)}px`,
                                     }}
                                   />
                                   <span
-                                    className="text-muted-foreground/60 text-center px-1"
+                                    className="text-muted-foreground text-center px-1"
                                     style={{ fontSize: `${Math.max(8, layout.scale * 0.6)}px` }}
                                   >
                                     {photoSize} Photo
@@ -2116,14 +2116,14 @@ export function DiplomaFrameDesigner({
                                   style={{ gap: `${Math.max(4, layout.scale * 0.3)}px` }}
                                 >
                                   <ImageIcon
-                                    className="text-muted-foreground/50"
+                                    className="text-muted-foreground"
                                     style={{
                                       width: `${Math.max(16, layout.scale * 1.5)}px`,
                                       height: `${Math.max(16, layout.scale * 1.5)}px`,
                                     }}
                                   />
                                   <span
-                                    className="text-muted-foreground/60 text-center px-1"
+                                    className="text-muted-foreground text-center px-1"
                                     style={{ fontSize: `${Math.max(8, layout.scale * 0.6)}px` }}
                                   >
                                     {photoSize} Photo
@@ -2167,14 +2167,14 @@ export function DiplomaFrameDesigner({
                                   style={{ gap: `${Math.max(4, layout.scale * 0.3)}px` }}
                                 >
                                   <ImageIcon
-                                    className="text-muted-foreground/50"
+                                    className="text-muted-foreground"
                                     style={{
                                       width: `${Math.max(16, layout.scale * 1.5)}px`,
                                       height: `${Math.max(16, layout.scale * 1.5)}px`,
                                     }}
                                   />
                                   <span
-                                    className="text-muted-foreground/60 text-center px-1"
+                                    className="text-muted-foreground text-center px-1"
                                     style={{ fontSize: `${Math.max(8, layout.scale * 0.6)}px` }}
                                   >
                                     {photoSize} Photo
@@ -2691,7 +2691,7 @@ export function DiplomaFrameDesigner({
                             <p className="font-medium text-sm mb-1">{frame.name}</p>
                             {frame.shortDescription && (
                               <p
-                                className="text-xs text-muted-foreground/80 mb-1.5 italic"
+                                className="text-xs text-muted-foreground mb-1.5 italic"
                                 data-testid="text-frame-short-description"
                               >
                                 {frame.shortDescription}

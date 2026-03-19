@@ -435,7 +435,7 @@ export function TicketStubFrameDesigner({
                     onEditPhoto={userPhoto ? triggerPhotoUpload : undefined}
                   />
                 </div>
-                <p className="text-xs text-muted-foreground/60 text-center mt-2">
+                <p className="text-xs text-muted-foreground text-center mt-2">
                   Sample image. Not included with purchase.
                 </p>
                 {currentLayout && (

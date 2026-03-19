@@ -805,7 +805,7 @@ export function CollageFrameDesigner({
                     />
                   </div>
 
-                  <p className="text-xs text-muted-foreground/60 text-center mt-2">
+                  <p className="text-xs text-muted-foreground text-center mt-2">
                     {Object.keys(userPhotos).length > 0
                       ? "Your uploaded photos shown in preview."
                       : "Sample image. Not included with purchase."}
