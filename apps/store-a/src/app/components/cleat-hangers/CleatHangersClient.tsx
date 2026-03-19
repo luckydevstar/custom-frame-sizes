@@ -78,9 +78,11 @@ export function CleatHangersClient() {
             <h1 className="text-xl font-bold mb-2">12&quot; Heavy-Duty Metal Cleat Bar System</h1>
             <div className="space-y-3 mb-4">
               <div>
-                <label className="text-xs font-medium mb-1.5 block">Pack Size:</label>
+                <label htmlFor="pack-size-select" className="text-xs font-medium mb-1.5 block">
+                  Pack Size:
+                </label>
                 <Select value={selectedPackSize} onValueChange={setSelectedPackSize}>
-                  <SelectTrigger data-testid="select-pack">
+                  <SelectTrigger id="pack-size-select" data-testid="select-pack">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -152,9 +154,14 @@ export function CleatHangersClient() {
               <Card className="p-6 hidden md:block">
                 <div className="space-y-4 mb-6">
                   <div>
-                    <label className="text-sm font-medium mb-2 block">Pack Size:</label>
+                    <label
+                      htmlFor="pack-size-select-desktop"
+                      className="text-sm font-medium mb-2 block"
+                    >
+                      Pack Size:
+                    </label>
                     <Select value={selectedPackSize} onValueChange={setSelectedPackSize}>
-                      <SelectTrigger data-testid="select-pack">
+                      <SelectTrigger id="pack-size-select-desktop" data-testid="select-pack">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
