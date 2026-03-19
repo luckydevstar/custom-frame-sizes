@@ -418,7 +418,7 @@ export default function HomePage() {
           <h2 className="font-serif text-3xl font-bold text-center mb-12">
             What Our Customers Say
           </h2>
-          <TestimonialCarousel testimonials={testimonialsData} />
+          <TestimonialCarousel testimonialsData={testimonialsData} />
         </section>
       )}
 
