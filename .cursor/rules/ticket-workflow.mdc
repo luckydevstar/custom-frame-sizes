@@ -1,0 +1,80 @@
+---
+description: Workflow for starting and completing ticket work
+alwaysApply: true
+---
+
+# Ticket Workflow
+
+When the user shares a **new ticket** or **new task description** (different from previous work), follow this standardized Git workflow:
+
+## Workflow Steps
+
+### 0. Checkout to Local Develop Branch
+```bash
+git checkout develop
+```
+
+### 1. Sync Local Develop with Remote
+Pull the latest changes from remote develop branch:
+```bash
+git pull origin develop
+```
+
+### 2. Create New Feature Branch
+Create a new feature branch from the updated local develop:
+```bash
+git checkout -b feature/[ticket-name]
+```
+
+Branch naming convention:
+- Use format: `feature/[ticket-id]-brief-description` or `feature/brief-description`
+- Use lowercase with hyphens
+- Keep it concise and descriptive
+
+### 3. Work on the Ticket
+- Implement the required changes
+- Exchange feedback with the user
+- Make iterative improvements
+- Wait for user confirmation that work is ready
+
+### 4. Create PR When Ready
+When the user confirms work is complete (says "ready for PR", "create PR", or similar):
+
+1. **Generate commit message**:
+   - Review all changes made for this ticket
+   - Create a clear, descriptive commit message
+   - Format: `[Ticket ID] Brief summary of changes`
+   - Include details of what was implemented/fixed
+
+2. **Stage and commit changes**:
+   ```bash
+   git add .
+   git commit -m "[commit message]"
+   ```
+
+3. **Push branch and create PR**:
+   ```bash
+   git push -u origin HEAD
+   gh pr create --title "[PR title]" --body "[PR description]"
+   ```
+
+## Important Notes
+
+- **Always check** if the ticket/task is NEW work before starting this workflow
+- **Ask for ticket ID** if not provided for proper branch naming
+- **Confirm with user** before creating the PR
+- **Generate meaningful commit messages** that describe the work done
+- **Include PR description** with summary and test plan
+
+## Example Flow
+
+```
+User: "Here's ticket FC-123: Add user authentication"
+→ Checkout develop
+→ Pull latest from origin/develop  
+→ Create feature/FC-123-add-user-authentication
+→ Implement changes...
+→ User: "This looks good, create a PR"
+→ Generate commit: "[FC-123] Implement user authentication with JWT"
+→ Push and create PR automatically
+```
