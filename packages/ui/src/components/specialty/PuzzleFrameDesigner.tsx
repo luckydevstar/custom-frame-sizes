@@ -821,6 +821,7 @@ export function PuzzleFrameDesigner({
                     onClick={() => setShowFullscreenPreview(true)}
                     className="absolute top-3 left-3 z-10 shadow-md"
                     data-testid="button-fullscreen-preview"
+                    aria-label="Fullscreen view"
                   >
                     <Maximize className="h-4 w-4" />
                   </Button>
@@ -870,6 +871,7 @@ export function PuzzleFrameDesigner({
                             <button
                               className="text-muted-foreground hover:text-foreground transition-colors"
                               data-testid="button-dimensional-diagram"
+                              aria-label="View dimensional diagram"
                             >
                               <Info className="h-4 w-4" />
                             </button>
@@ -1466,6 +1468,7 @@ export function PuzzleFrameDesigner({
                 onClick={handleCopyLink}
                 data-testid="button-puzzle-mobile-copy-link"
                 className="h-11 w-11"
+                aria-label="Copy design link"
               >
                 <Copy className="h-4 w-4" />
               </Button>

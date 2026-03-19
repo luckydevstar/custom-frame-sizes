@@ -522,6 +522,7 @@ export function MilitaryFrameDesigner({
                         onClick={() => setShowFullscreenPreview(true)}
                         className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg"
                         data-testid="button-fullscreen-preview"
+                        aria-label="Fullscreen view"
                       >
                         <Maximize className="h-5 w-5" />
                       </button>
@@ -955,6 +956,7 @@ export function MilitaryFrameDesigner({
               onClick={handleCopyLink}
               className="h-11 w-11"
               data-testid="button-mobile-copy-link"
+              aria-label="Copy design link"
             >
               <Copy className="h-4 w-4" />
             </Button>

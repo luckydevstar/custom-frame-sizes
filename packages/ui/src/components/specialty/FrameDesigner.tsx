@@ -1308,6 +1308,7 @@ export function FrameDesigner({
                   className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                   data-testid="button-expand-preview"
                   title="Fullscreen preview"
+                  aria-label="Fullscreen view"
                 >
                   <Maximize className="h-5 w-5" />
                 </button>
@@ -1436,6 +1437,7 @@ export function FrameDesigner({
                   className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                   data-testid="button-export-preview"
                   title="Export preview as high-resolution PNG (1600px)"
+                  aria-label="Download frame design"
                 >
                   <Download className="h-5 w-5" />
                 </button>
@@ -2014,6 +2016,7 @@ export function FrameDesigner({
                         <button
                           className="text-muted-foreground hover:text-foreground transition-colors"
                           data-testid="button-dimensional-diagram"
+                          aria-label="View dimensional diagram"
                         >
                           <Info className="h-4 w-4" />
                         </button>
@@ -2149,6 +2152,7 @@ export function FrameDesigner({
                     id="frame-only"
                     className="sr-only"
                     data-testid="radio-service-frame-only"
+                    aria-label="Frame only"
                   />
                   <span className="font-semibold">Frame Only</span>
                 </Label>
@@ -2165,6 +2169,7 @@ export function FrameDesigner({
                     id="print-and-frame"
                     className="sr-only"
                     data-testid="radio-service-print-and-frame"
+                    aria-label="Print and frame"
                   />
                   <span className="font-semibold">Print and Frame</span>
                 </Label>
@@ -2393,6 +2398,7 @@ export function FrameDesigner({
                     variant={matType === "none" ? "default" : "outline"}
                     onClick={() => setMatType("none")}
                     data-testid="button-mat-none"
+                    aria-label="No mat"
                   >
                     <span className="font-semibold">No Mat</span>
                   </Button>
@@ -2401,6 +2407,7 @@ export function FrameDesigner({
                     variant={matType === "single" ? "default" : "outline"}
                     onClick={() => setMatType("single")}
                     data-testid="button-mat-single"
+                    aria-label="Single mat"
                   >
                     <span className="font-semibold">Single Mat</span>
                   </Button>
@@ -2409,6 +2416,7 @@ export function FrameDesigner({
                     variant={matType === "double" ? "default" : "outline"}
                     onClick={() => setMatType("double")}
                     data-testid="button-mat-double"
+                    aria-label="Double mat"
                   >
                     <span className="font-semibold">Double Mat</span>
                   </Button>
@@ -2457,6 +2465,7 @@ export function FrameDesigner({
                                   type="button"
                                   className="text-muted-foreground hover:text-foreground transition-colors"
                                   data-testid="button-bottom-weighted-info"
+                                  aria-label="Information about bottom-weighted matting"
                                 >
                                   <Info className="h-4 w-4" />
                                 </button>
@@ -2585,6 +2594,7 @@ export function FrameDesigner({
                           value={glass.id}
                           id={glass.id}
                           data-testid={`radio-glass-${glass.id}`}
+                          aria-label={glass.name}
                         />
                         <Label htmlFor={glass.id}>{glass.name}</Label>
                       </div>
@@ -3373,6 +3383,7 @@ export function FrameDesigner({
               <Button
                 variant="outline"
                 size="icon"
+                aria-label="Copy design link"
                 onClick={() => {
                   if (typeof window !== "undefined") {
                     const url = `${window.location.origin}${pathname}${searchParams.toString() ? `?${searchParams.toString()}` : ""}`;

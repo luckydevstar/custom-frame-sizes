@@ -884,7 +884,11 @@ export function NewspaperFrameDesigner({
                       </Label>
                       <Tooltip delayDuration={200}>
                         <TooltipTrigger asChild>
-                          <button type="button" className="text-muted-foreground">
+                          <button
+                            type="button"
+                            className="text-muted-foreground"
+                            aria-label="Information about newspaper display area"
+                          >
                             <Info className="h-4 w-4" />
                           </button>
                         </TooltipTrigger>

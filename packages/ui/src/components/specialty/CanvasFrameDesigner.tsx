@@ -913,6 +913,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                   }}
                   className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                   data-testid="button-expand-preview"
+                  aria-label="Fullscreen view"
                 >
                   <Maximize className="h-5 w-5" />
                 </button>
@@ -1131,6 +1132,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                         <button
                           className="text-muted-foreground hover:text-foreground transition-colors"
                           data-testid="button-dimensional-diagram"
+                          aria-label="View dimensional diagram"
                         >
                           <Info className="h-4 w-4" />
                         </button>
@@ -1906,6 +1908,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                 }}
                 data-testid="button-mobile-copy-link"
                 className="h-7 w-7"
+                aria-label="Copy design link"
               >
                 <Copy className="h-3.5 w-3.5" />
               </Button>

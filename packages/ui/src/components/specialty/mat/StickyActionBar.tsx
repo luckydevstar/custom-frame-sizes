@@ -87,6 +87,7 @@ export function StickyActionBar({
             onClick={handleCopyLink}
             data-testid="button-copy-link-mobile"
             className="h-11 w-11"
+            aria-label="Copy design link"
           >
             <Copy className="h-4 w-4" />
           </Button>

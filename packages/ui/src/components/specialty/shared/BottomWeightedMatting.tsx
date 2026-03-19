@@ -37,6 +37,7 @@ export function BottomWeightedMatting({
               type="button"
               className="text-muted-foreground hover:text-foreground transition-colors"
               data-testid={`${prefix}button-bottom-weighted-info`}
+              aria-label="Information about bottom-weighted matting"
             >
               <Info className="h-4 w-4" />
             </button>

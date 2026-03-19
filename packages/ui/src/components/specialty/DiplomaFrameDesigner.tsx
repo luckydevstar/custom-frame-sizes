@@ -1407,6 +1407,7 @@ export function DiplomaFrameDesigner({
                       className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                       data-testid="button-expand-preview"
                       title="Fullscreen preview"
+                      aria-label="Fullscreen view"
                     >
                       <Maximize className="h-5 w-5" />
                     </button>
@@ -2276,7 +2277,12 @@ export function DiplomaFrameDesigner({
                     {selectedFrame.dimensionalDiagram && (
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <Button variant="ghost" size="icon" className="h-5 w-5 p-0">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-5 w-5 p-0"
+                            aria-label="View dimensional diagram"
+                          >
                             <Info className="h-4 w-4 text-muted-foreground" />
                           </Button>
                         </TooltipTrigger>
@@ -2498,6 +2504,7 @@ export function DiplomaFrameDesigner({
                                   }
                                 }}
                                 data-testid="button-remove-photo"
+                                aria-label="Remove graduation photo"
                               >
                                 <X className="h-4 w-4" />
                               </Button>
@@ -2740,6 +2747,7 @@ export function DiplomaFrameDesigner({
                         variant={matType === "none" ? "default" : "outline"}
                         onClick={() => setMatType("none")}
                         data-testid="button-mat-none"
+                        aria-label="No mat"
                       >
                         <span className="font-semibold">No Mat</span>
                       </Button>
@@ -2748,6 +2756,7 @@ export function DiplomaFrameDesigner({
                         variant={matType === "single" ? "default" : "outline"}
                         onClick={() => setMatType("single")}
                         data-testid="button-mat-single"
+                        aria-label="Single mat"
                       >
                         <span className="font-semibold">Single Mat</span>
                       </Button>
@@ -2756,6 +2765,7 @@ export function DiplomaFrameDesigner({
                         variant={matType === "double" ? "default" : "outline"}
                         onClick={() => setMatType("double")}
                         data-testid="button-mat-double"
+                        aria-label="Double mat"
                       >
                         <span className="font-semibold">Double Mat</span>
                       </Button>
@@ -2922,6 +2932,7 @@ export function DiplomaFrameDesigner({
                               value={glass.id}
                               id={glass.id}
                               data-testid={`radio-glass-${glass.id}`}
+                              aria-label={glass.name}
                             />
                             <Label htmlFor={glass.id}>{glass.name}</Label>
                           </div>
@@ -3019,6 +3030,7 @@ export function DiplomaFrameDesigner({
                 size="icon"
                 onClick={() => setFullImageOpen(false)}
                 data-testid="button-close-fullscreen"
+                aria-label="Close preview"
               >
                 <X className="h-5 w-5" />
               </Button>
@@ -3356,6 +3368,7 @@ export function DiplomaFrameDesigner({
                 }}
                 data-testid="button-mobile-copy-link"
                 className="h-11 w-11"
+                aria-label="Copy design link"
               >
                 <Copy className="h-4 w-4" />
               </Button>

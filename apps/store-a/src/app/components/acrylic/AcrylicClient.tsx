@@ -291,6 +291,7 @@ export function AcrylicClient() {
                         disabled={width <= 4}
                         className="h-10 w-10 shrink-0"
                         data-testid="button-decrement-width"
+                        aria-label="Decrease width"
                       >
                         <Minus className="h-3 w-3" />
                       </Button>
@@ -318,6 +319,7 @@ export function AcrylicClient() {
                         disabled={width >= 50}
                         className="h-10 w-10 shrink-0"
                         data-testid="button-increment-width"
+                        aria-label="Increase width"
                       >
                         <Plus className="h-3 w-3" />
                       </Button>
@@ -339,6 +341,7 @@ export function AcrylicClient() {
                         disabled={height <= 4}
                         className="h-10 w-10 shrink-0"
                         data-testid="button-decrement-height"
+                        aria-label="Decrease height"
                       >
                         <Minus className="h-3 w-3" />
                       </Button>
@@ -366,6 +369,7 @@ export function AcrylicClient() {
                         disabled={height >= 50}
                         className="h-10 w-10 shrink-0"
                         data-testid="button-increment-height"
+                        aria-label="Increase height"
                       >
                         <Plus className="h-3 w-3" />
                       </Button>

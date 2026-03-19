@@ -842,6 +842,7 @@ export function ComicBookFrameDesigner({
                           }}
                           className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                           data-testid="button-expand-preview"
+                          aria-label="Fullscreen view"
                         >
                           <Maximize className="h-5 w-5" />
                         </button>
@@ -1580,6 +1581,7 @@ export function ComicBookFrameDesigner({
                     <Button
                       variant="outline"
                       size="icon"
+                      aria-label="Copy design link"
                       onClick={() => {
                         if (typeof window !== "undefined") {
                           navigator.clipboard.writeText(window.location.href);
@@ -1727,6 +1729,7 @@ export function ComicBookFrameDesigner({
                     onClick={handleShare}
                     className="h-11 w-11"
                     data-testid="comic-mobile-copy-link"
+                    aria-label="Copy design link"
                   >
                     <Copy className="h-4 w-4" />
                   </Button>

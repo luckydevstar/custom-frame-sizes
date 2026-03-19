@@ -68,6 +68,7 @@ export function FrameSelector({ hideNoFrame = false }: FrameSelectorProps) {
               selectedFrameId === null ? "border-primary bg-primary/5" : "border-transparent"
             }`}
             data-testid="button-frame-none"
+            aria-label="Mat only, no frame"
           >
             <div className="h-12 w-full rounded mb-2 border-2 border-dashed border-muted-foreground/30 flex items-center justify-center bg-muted/30">
               <span className="text-xs text-muted-foreground font-medium">Mat Only</span>
@@ -108,6 +109,7 @@ export function FrameSelector({ hideNoFrame = false }: FrameSelectorProps) {
                 selectedFrameId === frameId ? "border-primary bg-primary/5" : "border-transparent"
               }`}
               data-testid={`button-frame-${frame.id}`}
+              aria-label={`Select ${frame.name} frame`}
             >
               {frameBottomUrls[frame.id] ? (
                 <div className="h-12 w-full rounded mb-2 overflow-hidden relative">
