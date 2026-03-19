@@ -70,3 +70,19 @@
   overflow: visible !important;
 }
 
+.sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 0.75rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  z-index: 1000;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0 2px hsl(var(--ring));
+}
+
