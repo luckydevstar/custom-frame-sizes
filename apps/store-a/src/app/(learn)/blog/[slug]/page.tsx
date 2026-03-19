@@ -174,7 +174,9 @@ export default async function BlogPostPage({ params }: PageProps) {
               );
             },
             h2: ({ node: _node, ...props }) => <h2 {...props} className="scroll-mt-20 mt-8 mb-4" />,
-            h3: ({ node: _node, ...props }) => <h3 {...props} className="scroll-mt-20 mt-6 mb-3" />,
+            // Map markdown "h3" to "h2" to avoid H1 -> H3 heading level skips in articles
+            // when the markdown starts with "###" instead of "##".
+            h3: ({ node: _node, ...props }) => <h2 {...props} className="scroll-mt-20 mt-6 mb-3" />,
           }}
         >
           {post.content}
