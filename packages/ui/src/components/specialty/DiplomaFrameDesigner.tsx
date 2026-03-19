@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import NextImage from "next/image";
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import {
   Maximize,
@@ -133,7 +133,7 @@ function TasselIcon({ className, style }: { className?: string; style?: React.CS
         ...style,
       }}
     >
-      <Image
+      <NextImage
         src={TASSEL_IMAGE_URL}
         alt="Graduation tassel with 2026 charm"
         fill

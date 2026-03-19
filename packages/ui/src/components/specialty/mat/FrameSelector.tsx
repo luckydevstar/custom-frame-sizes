@@ -112,7 +112,7 @@ export function FrameSelector({ hideNoFrame = false }: FrameSelectorProps) {
               {frameBottomUrls[frame.id] ? (
                 <div className="h-12 w-full rounded mb-2 overflow-hidden relative">
                   <Image
-                    src={frameBottomUrls[frame.id]}
+                    src={frameBottomUrls[frame.id]!}
                     alt={`${frame.name} frame`}
                     fill
                     className="object-cover"
