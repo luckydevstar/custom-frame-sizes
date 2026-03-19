@@ -1996,7 +1996,7 @@ export function FrameDesigner({
 
             {/* Caption shown only when displaying placeholder image */}
             {!selectedImage && (
-              <p className="text-xs text-muted-foreground/60 text-center mt-2">
+              <p className="text-xs text-muted-foreground text-center mt-2">
                 Sample image. Not included with purchase.
               </p>
             )}
@@ -2342,7 +2342,7 @@ export function FrameDesigner({
                         <p className="font-medium text-sm mb-1">{frame.name}</p>
                         {frame.shortDescription && (
                           <p
-                            className="text-xs text-muted-foreground/80 mb-1.5 italic"
+                            className="text-xs text-muted-foreground mb-1.5 italic"
                             data-testid="text-frame-short-description"
                           >
                             {frame.shortDescription}

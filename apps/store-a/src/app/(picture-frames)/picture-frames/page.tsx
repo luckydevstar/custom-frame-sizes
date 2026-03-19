@@ -221,7 +221,7 @@ export default function PictureFramesPage() {
                       </h3>
                       {frame.shortDescription && (
                         <p
-                          className="text-xs text-muted-foreground/80 italic"
+                          className="text-xs text-muted-foreground italic"
                           data-testid="text-frame-short-description"
                         >
                           {frame.shortDescription}

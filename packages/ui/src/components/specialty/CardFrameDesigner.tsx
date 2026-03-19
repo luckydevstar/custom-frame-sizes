@@ -996,7 +996,7 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
                     ) : (
                       <div className="flex items-center justify-center h-full min-h-[400px]">
                         <div className="text-center p-8">
-                          <LayoutGrid className="w-12 h-12 mx-auto mb-4 text-muted-foreground/50" />
+                          <LayoutGrid className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
                           <p className="text-lg font-medium text-muted-foreground">
                             Select a layout to preview your frame
                           </p>

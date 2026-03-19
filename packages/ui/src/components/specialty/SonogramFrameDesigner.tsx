@@ -816,7 +816,7 @@ export function SonogramFrameDesigner({
                 >
                   {renderPreview()}
                 </div>
-                <p className="text-xs text-muted-foreground/60 text-center mt-2">
+                <p className="text-xs text-muted-foreground text-center mt-2">
                   Placeholder preview. Your sonogram images will be framed here.
                 </p>
                 <div className="mt-4 p-3 bg-muted/50 rounded-md text-sm space-y-0.5">
