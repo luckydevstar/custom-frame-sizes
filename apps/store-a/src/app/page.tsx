@@ -122,7 +122,19 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Hero Section with H1 and Value Proposition */}
+      {/* Hero - Video/visual at top for visibility */}
+      <Hero
+        title={brandConfig.branding?.tagline || "Custom Picture Frames in Any Size"}
+        subtitle={
+          brandConfig.branding?.valueProposition ||
+          "Design your custom frame in minutes with exact dimensions"
+        }
+        ctaPrimary={{ label: "Start Designing", href: "#designer" }}
+        ctaSecondary={{ label: "Browse Frames", href: "/picture-frames" }}
+        heroImagesData={heroImagesData}
+      />
+
+      {/* H1 and Value Proposition */}
       <section className="bg-gradient-to-b from-background to-muted/30 py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-6">
           <h1 className="font-serif text-4xl md:text-5xl font-bold text-center mb-6">
@@ -337,19 +349,6 @@ export default function HomePage() {
           }),
         }}
       />
-
-      <Hero
-        title={brandConfig.branding?.tagline || "Custom Picture Frames in Any Size"}
-        subtitle={
-          brandConfig.branding?.valueProposition ||
-          "Design your custom frame in minutes with exact dimensions"
-        }
-        ctaPrimary={{ label: "Start Designing", href: "#designer" }}
-        ctaSecondary={{ label: "Browse Frames", href: "/picture-frames" }}
-        heroImagesData={heroImagesData}
-      />
-
-      {showTestimonial && <TestimonialCarousel testimonialsData={testimonialsData} />}
 
       {/* Frame Designer Section */}
       <div id="designer" className="max-w-7xl mx-auto px-6 py-16">
