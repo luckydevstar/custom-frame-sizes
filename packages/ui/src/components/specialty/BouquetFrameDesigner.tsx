@@ -1554,6 +1554,11 @@ export function BouquetFrameDesigner({
                         onValueChange={(values) => setMatBorderWidth((values[0] ?? 0).toString())}
                         data-testid="slider-mat-border"
                         disabled={readonly}
+                        aria-label="Mat border width in inches"
+                        aria-valuemin={1.5}
+                        aria-valuemax={8}
+                        aria-valuenow={matBorder}
+                        aria-valuetext={`${matBorder.toFixed(2)} inches`}
                       />
                       <p className="text-xs text-muted-foreground">
                         Border on each side of the artwork
