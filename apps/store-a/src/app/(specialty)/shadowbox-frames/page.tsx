@@ -1,8 +1,12 @@
 import type { Metadata } from "next";
 import nextDynamic from "next/dynamic";
+import Link from "next/link";
+import Image from "next/image";
 import { Suspense } from "react";
 import { Sparkles, Box, Palette, Layers, Shield } from "lucide-react";
 import { ScrollToDesignerButton } from "./scroll-button";
+import { getFramesByCategory, getStoreBaseAssetUrl } from "@framecraft/core";
+import { Button } from "@framecraft/ui";
 
 const ShadowboxDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
@@ -24,11 +28,30 @@ export const metadata: Metadata = {
   },
 };
 
+function getCornerOrThumbUrl(frame: {
+  alternateImages?: { type: string; url: string; alt?: string }[];
+  thumbnail?: string | null;
+}) {
+  const corner = frame.alternateImages?.find((img) => img.type === "corner");
+  if (corner) {
+    const path = corner.url.startsWith("/") ? corner.url.slice(1) : corner.url;
+    return getStoreBaseAssetUrl(path);
+  }
+  if (frame.thumbnail) {
+    const path = frame.thumbnail.startsWith("/") ? frame.thumbnail.slice(1) : frame.thumbnail;
+    return getStoreBaseAssetUrl(path);
+  }
+  return null;
+}
+
 export default function ShadowboxFramesPage() {
+  const shadowboxFrames = getFramesByCategory("shadowbox");
+  const galleryFrames = shadowboxFrames.slice(0, 6);
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
       {/* Hero Section */}
-      <section className="hidden md:block container mx-auto px-4 pt-6 pb-4 md:pt-8 md:pb-6">
+      <section className="container mx-auto px-4 pt-6 pb-4 md:pt-8 md:pb-6">
         <div className="max-w-4xl mx-auto text-center">
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-muted border border-border mb-3">
             <Sparkles className="w-3 h-3" />
@@ -75,6 +98,32 @@ export default function ShadowboxFramesPage() {
         </div>
       </section>
 
+      {/* Description: what are shadowbox frames, use cases */}
+      <section className="border-t py-12">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto">
+            <h2 className="text-2xl font-bold mb-6">What Are Shadowbox Frames?</h2>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              Shadowbox frames are deep display frames designed to hold three-dimensional
+              objects—jerseys, medals, signed memorabilia, military insignia, and keepsakes—with
+              enough interior depth so nothing is compressed or damaged. Unlike flat picture frames,
+              a shadowbox has a front-opening or rear-loading cavity that you set your items into,
+              with optional matting and mounting to keep everything in place. Custom shadowbox
+              frames are built to your exact interior dimensions and depth, so whether you are
+              framing a single medal or a full jersey, the fit is precise and professional.
+            </p>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              Common use cases include sports memorabilia (jerseys, signed balls, tickets), military
+              shadowboxes (medals, patches, flags), wedding and event keepsakes (invitations,
+              flowers, favors), and collectibles (coins, badges, awards). We build each shadowbox
+              with archival-safe materials and UV-filtering glazing so your items stay protected for
+              decades. Use our designer above to enter your dimensions, choose frame style and
+              depth, and see real-time pricing.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="border-t py-12 bg-muted/20">
         <div className="container mx-auto px-4">
@@ -114,6 +163,102 @@ export default function ShadowboxFramesPage() {
                 </p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery of example shadowbox frames */}
+      {galleryFrames.length > 0 && (
+        <section className="border-t py-12">
+          <div className="container mx-auto px-4">
+            <div className="max-w-6xl mx-auto">
+              <h2 className="text-2xl font-bold mb-6">Shadowbox Frame Styles</h2>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {galleryFrames.map((frame) => {
+                  const imgSrc = getCornerOrThumbUrl(frame);
+                  const alt =
+                    frame.alternateImages?.find((i) => i.type === "corner")?.alt ??
+                    `${frame.name} shadowbox frame`;
+                  return (
+                    <Link
+                      key={frame.id}
+                      href="/shadowbox/designer"
+                      className="group relative overflow-hidden rounded-lg border bg-card hover:border-primary/30 transition-all block"
+                    >
+                      <div className="relative aspect-square overflow-hidden bg-muted/20">
+                        {imgSrc ? (
+                          <Image
+                            src={imgSrc}
+                            alt={alt}
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            sizes="(max-width: 768px) 50vw, 33vw"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center">
+                            <Box className="w-12 h-12 text-muted-foreground/30" />
+                          </div>
+                        )}
+                      </div>
+                      <div className="p-3">
+                        <span className="font-medium text-sm group-hover:text-primary transition-colors">
+                          {frame.name}
+                        </span>
+                      </div>
+                    </Link>
+                  );
+                })}
+              </div>
+              <div className="mt-6 text-center">
+                <Button asChild>
+                  <Link href="/shadowbox/designer">Design Your Shadowbox</Link>
+                </Button>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Related guides */}
+      <section className="border-t py-12 bg-muted/10">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto">
+            <h2 className="text-2xl font-bold mb-6">Related Guides</h2>
+            <ul className="grid md:grid-cols-3 gap-4">
+              <li>
+                <Link
+                  href="/learn"
+                  className="block p-4 rounded-lg border bg-card hover:border-primary/30 transition-colors"
+                >
+                  <span className="font-medium">How to Frame a Jersey</span>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Step-by-step guide to jersey shadowbox framing.
+                  </p>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/learn"
+                  className="block p-4 rounded-lg border bg-card hover:border-primary/30 transition-colors"
+                >
+                  <span className="font-medium">Shadowbox Depth Guide</span>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Choosing the right depth for your items.
+                  </p>
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/faq"
+                  className="block p-4 rounded-lg border bg-card hover:border-primary/30 transition-colors"
+                >
+                  <span className="font-medium">Framing FAQ</span>
+                  <p className="text-sm text-muted-foreground mt-1">
+                    Common questions about custom framing.
+                  </p>
+                </Link>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
