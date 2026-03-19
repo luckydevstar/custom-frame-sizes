@@ -9,7 +9,11 @@ import { Header, Footer } from "@framecraft/ui/components/layout";
 import { TooltipProvider } from "@framecraft/ui";
 import { Toaster } from "@framecraft/ui/components/ui/toaster";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+});
 
 // Get SEO metadata from brand config
 const seoConfig = brandConfig.seo;

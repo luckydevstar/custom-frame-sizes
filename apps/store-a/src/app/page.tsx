@@ -1,25 +1,88 @@
 import { brandConfig } from "../brand.config";
-import {
-  Hero,
-  FrameDesigner,
-  TestimonialCarousel,
-  HowItWorks,
-  ValueProps,
-  InspirationGallery,
-  FaqMini,
-  SeoTextBlock,
-  FrameStylesShowcase,
-  ShadowboxShowcase,
-  CanvasFramesShowcase,
-  PrintAndFrameService,
-  MatDesignerShowcase,
-  GlazingShowcase,
-  SpecialtyDesignersShowcase,
-  EducationTeasers,
-} from "@framecraft/ui";
+import { Hero, ValueProps, SeoTextBlock, FrameStylesShowcase } from "@framecraft/ui";
+import dynamic from "next/dynamic";
 import { getFramesByCategory } from "@framecraft/core";
 import type { Metadata } from "next";
 import { Suspense } from "react";
+
+// Dynamic imports for below-fold components to improve LCP
+const FrameDesigner = dynamic(() => import("@framecraft/ui").then((m) => m.FrameDesigner), {
+  loading: () => <div className="h-96 bg-muted/20 animate-pulse" />,
+  ssr: true,
+});
+
+const TestimonialCarousel = dynamic(
+  () => import("@framecraft/ui").then((m) => m.TestimonialCarousel),
+  {
+    loading: () => <div className="h-64 bg-muted/20 animate-pulse" />,
+    ssr: true,
+  }
+);
+
+const HowItWorks = dynamic(() => import("@framecraft/ui").then((m) => m.HowItWorks), {
+  loading: () => <div className="h-72 bg-muted/20 animate-pulse" />,
+  ssr: true,
+});
+
+const InspirationGallery = dynamic(
+  () => import("@framecraft/ui").then((m) => m.InspirationGallery),
+  {
+    loading: () => <div className="h-96 bg-muted/20 animate-pulse" />,
+    ssr: true,
+  }
+);
+
+const FaqMini = dynamic(() => import("@framecraft/ui").then((m) => m.FaqMini), {
+  loading: () => <div className="h-96 bg-muted/20 animate-pulse" />,
+  ssr: true,
+});
+
+const ShadowboxShowcase = dynamic(() => import("@framecraft/ui").then((m) => m.ShadowboxShowcase), {
+  loading: () => <div className="h-80 bg-muted/20 animate-pulse" />,
+  ssr: true,
+});
+
+const CanvasFramesShowcase = dynamic(
+  () => import("@framecraft/ui").then((m) => m.CanvasFramesShowcase),
+  {
+    loading: () => <div className="h-80 bg-muted/20 animate-pulse" />,
+    ssr: true,
+  }
+);
+
+const PrintAndFrameService = dynamic(
+  () => import("@framecraft/ui").then((m) => m.PrintAndFrameService),
+  {
+    loading: () => <div className="h-80 bg-muted/20 animate-pulse" />,
+    ssr: true,
+  }
+);
+
+const MatDesignerShowcase = dynamic(
+  () => import("@framecraft/ui").then((m) => m.MatDesignerShowcase),
+  {
+    loading: () => <div className="h-80 bg-muted/20 animate-pulse" />,
+    ssr: true,
+  }
+);
+
+const GlazingShowcase = dynamic(() => import("@framecraft/ui").then((m) => m.GlazingShowcase), {
+  loading: () => <div className="h-80 bg-muted/20 animate-pulse" />,
+  ssr: true,
+});
+
+const SpecialtyDesignersShowcase = dynamic(
+  () => import("@framecraft/ui").then((m) => m.SpecialtyDesignersShowcase),
+  {
+    loading: () => <div className="h-80 bg-muted/20 animate-pulse" />,
+    ssr: true,
+  }
+);
+
+const EducationTeasers = dynamic(() => import("@framecraft/ui").then((m) => m.EducationTeasers), {
+  loading: () => <div className="h-80 bg-muted/20 animate-pulse" />,
+  ssr: true,
+});
 // Import store-specific data
 import heroImagesDataRaw from "../data/heroImages.json";
 import testimonialsData from "../data/testimonials.json";
