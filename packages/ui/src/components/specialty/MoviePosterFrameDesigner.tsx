@@ -1159,6 +1159,7 @@ export function MoviePosterFrameDesigner({
                                 type="button"
                                 className="text-muted-foreground hover:text-foreground transition-colors"
                                 data-testid="button-movie-poster-bottom-weighted-info"
+                                aria-label="Information about bottom-weighted matting"
                               >
                                 <Info className="h-4 w-4" />
                               </button>

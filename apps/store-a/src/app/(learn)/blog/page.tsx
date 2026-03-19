@@ -170,6 +170,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
                   <Link
                     href={buildPageUrl(currentPage - 1, selectedTag)}
                     data-testid="button-prev-page"
+                    aria-label="Go to previous page"
                   >
                     Previous
                   </Link>
@@ -186,6 +187,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
                     <Link
                       href={buildPageUrl(page, selectedTag)}
                       data-testid={`button-page-${page}`}
+                      aria-label={`Go to page ${page}`}
                     >
                       {page}
                     </Link>
@@ -201,6 +203,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
                   <Link
                     href={buildPageUrl(currentPage + 1, selectedTag)}
                     data-testid="button-next-page"
+                    aria-label="Go to next page"
                   >
                     Next
                   </Link>

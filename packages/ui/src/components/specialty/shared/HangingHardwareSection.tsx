@@ -61,6 +61,7 @@ export function HangingHardwareSection({
                 value="standard"
                 id="hardware-standard"
                 data-testid="radio-hardware-standard"
+                aria-label="Standard hardware"
               />
               <Label
                 htmlFor="hardware-standard"
@@ -70,7 +71,12 @@ export function HangingHardwareSection({
               </Label>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button variant="ghost" size="sm" className="shrink-0 px-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="shrink-0 px-2"
+                    aria-label="Information about standard hardware"
+                  >
                     <Info className="w-4 h-4" />
                   </Button>
                 </TooltipTrigger>
@@ -89,13 +95,19 @@ export function HangingHardwareSection({
                 value="security"
                 id="hardware-security"
                 data-testid="radio-hardware-security"
+                aria-label="Security hardware"
               />
               <Label htmlFor="hardware-security" className="flex-1 cursor-pointer">
                 Security Hardware Kit
               </Label>
               <Tooltip>
                 <TooltipTrigger asChild>
-                  <Button variant="ghost" size="sm" className="shrink-0 px-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="shrink-0 px-2"
+                    aria-label="Information about security hardware"
+                  >
                     <Info className="w-4 h-4" />
                   </Button>
                 </TooltipTrigger>

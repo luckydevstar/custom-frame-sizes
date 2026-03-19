@@ -889,6 +889,7 @@ export function SignatureFrameDesigner({
                 onClick={handleCopyLink}
                 data-testid="button-mobile-copy-link"
                 className="h-9 w-9"
+                aria-label="Copy design link"
               >
                 <Copy className="h-4 w-4" />
               </Button>

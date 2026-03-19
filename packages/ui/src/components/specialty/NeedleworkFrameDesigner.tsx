@@ -1008,6 +1008,7 @@ export function NeedleworkFrameDesigner({
                                 type="button"
                                 className="text-muted-foreground hover:text-foreground"
                                 data-testid="button-needlework-bottom-weighted-info"
+                                aria-label="Information about bottom-weighted matting"
                               >
                                 <Info className="h-4 w-4" />
                               </button>

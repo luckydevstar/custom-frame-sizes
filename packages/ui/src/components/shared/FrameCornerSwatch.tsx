@@ -39,6 +39,7 @@ export function FrameCornerSwatch({
         isSelected ? "border-primary" : "border-transparent"
       }`}
       data-testid={`button-frame-${frameId}`}
+      aria-label={`Select ${frameName} frame`}
     >
       <div className="aspect-square rounded mb-2 overflow-hidden relative">
         {imageUrl ? (

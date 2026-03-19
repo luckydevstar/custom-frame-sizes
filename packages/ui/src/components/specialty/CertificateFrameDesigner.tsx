@@ -839,6 +839,7 @@ export function CertificateFrameDesigner({
                       className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                       data-testid="button-expand-preview"
                       title="Fullscreen preview"
+                      aria-label="Fullscreen view"
                     >
                       <Maximize className="h-5 w-5" />
                     </button>
@@ -943,6 +944,7 @@ export function CertificateFrameDesigner({
                       className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                       data-testid="button-export-preview"
                       title="Export preview (1600px)"
+                      aria-label="Download frame design"
                     >
                       <Download className="h-5 w-5" />
                     </button>
@@ -957,6 +959,7 @@ export function CertificateFrameDesigner({
                       className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                       data-testid="button-copy-link"
                       title="Copy design link"
+                      aria-label="Copy design link"
                     >
                       <Copy className="h-5 w-5" />
                     </button>
@@ -1194,6 +1197,7 @@ export function CertificateFrameDesigner({
                           <button
                             className="text-muted-foreground hover:text-foreground transition-colors"
                             data-testid="button-dimensional-diagram"
+                            aria-label="View dimensional diagram"
                           >
                             <Info className="h-4 w-4" />
                           </button>
@@ -1434,6 +1438,7 @@ export function CertificateFrameDesigner({
                         variant={matType === "none" ? "default" : "outline"}
                         onClick={() => setMatType("none")}
                         data-testid="button-mat-none"
+                        aria-label="No mat"
                       >
                         <span className="font-semibold">No Mat</span>
                       </Button>
@@ -1442,6 +1447,7 @@ export function CertificateFrameDesigner({
                         variant={matType === "single" ? "default" : "outline"}
                         onClick={() => setMatType("single")}
                         data-testid="button-mat-single"
+                        aria-label="Single mat"
                       >
                         <span className="font-semibold">Single Mat</span>
                       </Button>
@@ -1450,6 +1456,7 @@ export function CertificateFrameDesigner({
                         variant={matType === "double" ? "default" : "outline"}
                         onClick={() => setMatType("double")}
                         data-testid="button-mat-double"
+                        aria-label="Double mat"
                       >
                         <span className="font-semibold">Double Mat</span>
                       </Button>
@@ -1628,6 +1635,7 @@ export function CertificateFrameDesigner({
                             value={glass.id}
                             id={glass.id}
                             data-testid={`radio-glass-${glass.id}`}
+                            aria-label={glass.name}
                           />
                           <Label htmlFor={glass.id}>{glass.name}</Label>
                         </div>
@@ -1691,6 +1699,7 @@ export function CertificateFrameDesigner({
               onClick={handleShare}
               className="h-11 w-11"
               data-testid="button-mobile-copy-link"
+              aria-label="Copy design link"
             >
               <Link2 className="h-4 w-4" />
             </Button>
@@ -1751,6 +1760,7 @@ export function CertificateFrameDesigner({
                 size="icon"
                 onClick={() => setFullImageOpen(false)}
                 data-testid="button-close-fullscreen"
+                aria-label="Close preview"
               >
                 <X className="h-5 w-5" />
               </Button>

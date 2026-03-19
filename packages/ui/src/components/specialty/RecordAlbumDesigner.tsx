@@ -1054,6 +1054,7 @@ export function RecordAlbumDesigner({
                       onClick={() => setFullscreenDesignerOpen(true)}
                       className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                       data-testid="button-fullscreen-preview"
+                      aria-label="Fullscreen view"
                     >
                       <Maximize className="h-5 w-5" />
                     </button>
@@ -1435,6 +1436,7 @@ export function RecordAlbumDesigner({
                   onClick={() => setShowShareDialog(true)}
                   data-testid="button-record-album-mobile-copy-link"
                   className="h-11 w-11"
+                  aria-label="Copy design link"
                 >
                   <Copy className="h-4 w-4" />
                 </Button>

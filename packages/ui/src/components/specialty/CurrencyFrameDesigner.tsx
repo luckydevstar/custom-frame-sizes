@@ -558,6 +558,7 @@ export function CurrencyFrameDesigner({
                       onClick={() => setShowFullscreenPreview(true)}
                       className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover:shadow-md active:scale-95"
                       data-testid="button-fullscreen-preview"
+                      aria-label="Fullscreen view"
                     >
                       <Maximize className="h-5 w-5" />
                     </button>
@@ -970,6 +971,7 @@ export function CurrencyFrameDesigner({
                                       type="button"
                                       className="text-muted-foreground hover:text-foreground transition-colors"
                                       data-testid="button-bottom-weighted-info"
+                                      aria-label="Information about bottom-weighted matting"
                                     >
                                       <Info className="h-4 w-4" />
                                     </button>
@@ -1223,6 +1225,7 @@ export function CurrencyFrameDesigner({
               onClick={handleAddToCart}
               className="px-4"
               data-testid="button-add-to-cart-mobile"
+              aria-label="Add to cart"
             >
               <ShoppingCart className="w-4 h-4" />
             </Button>
