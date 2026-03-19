@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { ArrowRight, Shirt, GraduationCap, LayoutGrid, Disc3, BookOpen, Film } from "lucide-react";
@@ -147,13 +148,16 @@ export function SpecialtyDesignersShowcase({ showAll = false }: SpecialtyDesigne
               data-testid={`specialty-card-${designer.id}`}
             >
               <div className={`grid grid-cols-1 ${showAll ? "" : "sm:grid-cols-2"}`}>
-                <div className="relative aspect-[4/3]">
-                  <img
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <Image
                     src={designer.image}
                     alt={designer.imageAlt}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                    decoding="async"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    priority={false}
+                    placeholder="blur"
+                    blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23e5e7eb' width='400' height='300'/%3E%3C/svg%3E"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent sm:hidden" />
                 </div>

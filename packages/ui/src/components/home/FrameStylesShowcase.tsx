@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { ArrowRight } from "lucide-react";
@@ -117,13 +118,16 @@ export function FrameStylesShowcase({
                 data-testid={`frame-style-${frame.id}`}
               >
                 {/* Frame Image */}
-                <div className="aspect-[4/3] relative">
-                  <img
+                <div className="aspect-[4/3] relative overflow-hidden">
+                  <Image
                     src={frame.image}
                     alt={frame.alt}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                    decoding="async"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    priority={false}
+                    placeholder="blur"
+                    blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23e5e7eb' width='400' height='300'/%3E%3C/svg%3E"
                   />
 
                   {/* Subtle Gradient Overlay for Text Readability */}

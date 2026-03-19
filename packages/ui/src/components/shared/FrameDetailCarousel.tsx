@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useRef, useLayoutEffect, useEffect } from "react";
 import { Button } from "../ui/button";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -138,11 +139,16 @@ export function FrameDetailCarousel({ images, onImageClick }: FrameDetailCarouse
               onClick={() => onImageClick(index)}
               data-testid={`image-preview-${index}`}
             >
-              <div className="aspect-[4/3]">
-                <img
+              <div className="aspect-[4/3] overflow-hidden">
+                <Image
                   src={image.url}
                   alt={image.alt}
-                  className="w-full h-full object-cover transition-transform duration-300 group-hover/card:scale-105 rounded-lg"
+                  fill
+                  className="object-cover transition-transform duration-300 group-hover/card:scale-105 rounded-lg"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  priority={false}
+                  placeholder="blur"
+                  blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23e5e7eb' width='400' height='300'/%3E%3C/svg%3E"
                   onLoad={handleImageLoad}
                 />
               </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { ArrowRight, Square, Circle, Heart, Star, Hexagon, Diamond } from "lucide-react";
@@ -133,12 +134,16 @@ export function MatDesignerShowcase() {
             {/* Right: Featured Image */}
             <div className="order-1 lg:order-2">
               <div className="relative rounded-lg overflow-hidden">
-                <img
+                <Image
                   src={currentImage.url}
                   alt={currentImage.alt}
+                  width={600}
+                  height={450}
                   className="w-full h-auto aspect-[4/3] object-cover"
-                  loading="lazy"
-                  decoding="async"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority={false}
+                  placeholder="blur"
+                  blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 450'%3E%3Crect fill='%23e5e7eb' width='600' height='450'/%3E%3C/svg%3E"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent" />
                 <div className="absolute bottom-4 left-4 right-4">

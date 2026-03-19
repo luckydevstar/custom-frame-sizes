@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { FrameConfigurationSummary } from "./FrameConfigurationSummary";
@@ -59,10 +60,15 @@ export function CartItemCard({ item, onQuantityChange, onRemove, className }: Ca
             className="h-full w-full"
           />
         ) : item.imageUrl || config?.imageUrl ? (
-          <img
+          <Image
             src={(item.imageUrl ?? config?.imageUrl) as string}
-            alt=""
-            className="h-full w-full object-cover"
+            alt={`Custom ${frame?.name || "frame"} with ${topMat?.name || "mat"}`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 112px, 112px"
+            priority={false}
+            placeholder="blur"
+            blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 112 128'%3E%3Crect fill='%23e5e7eb' width='112' height='128'/%3E%3C/svg%3E"
           />
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center gap-1 bg-muted/80 p-2 text-center text-muted-foreground text-xs">
