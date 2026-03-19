@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Button, Card, Label, QuantitySelector, TrustBadges } from "@framecraft/ui";
 import { useToast } from "@framecraft/ui/hooks/use-toast";
@@ -89,12 +90,16 @@ export function AcrylicCleanerClient() {
             <div className="grid md:grid-cols-2 gap-6 md:gap-10">
               {/* Product Images */}
               <div className="space-y-4">
-                <div className="aspect-square rounded-lg overflow-hidden bg-white border">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                <div className="aspect-square rounded-lg overflow-hidden bg-white border relative">
+                  <Image
                     src={PRODUCT_IMAGES[selectedImage]}
                     alt="NOVUS Acrylic Cleaner 8oz bottle"
-                    className="w-full h-full object-contain p-4"
+                    fill
+                    className="object-contain p-4"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    priority={selectedImage === 0}
+                    placeholder="blur"
+                    blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23ffffff' width='400' height='400'/%3E%3C/svg%3E"
                     data-testid="img-product-main"
                   />
                 </div>
@@ -104,18 +109,22 @@ export function AcrylicCleanerClient() {
                       key={idx}
                       type="button"
                       onClick={() => setSelectedImage(idx)}
-                      className={`aspect-square rounded-lg overflow-hidden bg-white border-2 transition-colors ${
+                      className={`aspect-square rounded-lg overflow-hidden bg-white border-2 transition-colors relative ${
                         selectedImage === idx
                           ? "border-primary"
                           : "border-transparent hover:border-muted-foreground/30"
                       }`}
                       data-testid={`button-thumbnail-${idx}`}
                     >
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
+                      <Image
                         src={img}
                         alt={`Product view ${idx + 1}`}
-                        className="w-full h-full object-contain p-2"
+                        fill
+                        className="object-contain"
+                        sizes="80px"
+                        priority={false}
+                        placeholder="blur"
+                        blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80'%3E%3Crect fill='%23ffffff' width='80' height='80'/%3E%3C/svg%3E"
                       />
                     </button>
                   ))}
