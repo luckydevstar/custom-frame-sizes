@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
 import { Dialog, DialogContent, DialogDescription } from "../ui/dialog";
 import { Button } from "../ui/button";
@@ -129,12 +130,19 @@ export function ImageGallery({ images, initialIndex = 0, open, onOpenChange }: I
             </>
           )}
 
-          <img
-            src={currentImage?.url ?? ""}
-            alt={currentImage?.alt ?? ""}
-            className="max-w-full max-h-full object-contain"
-            data-testid={`image-gallery-${currentIndex}`}
-          />
+          <div className="relative w-full h-96">
+            <Image
+              src={currentImage?.url ?? ""}
+              alt={currentImage?.alt ?? ""}
+              fill
+              className="object-contain"
+              sizes="(max-width: 768px) 100vw, 90vw"
+              priority={currentIndex === 0}
+              placeholder="blur"
+              blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'%3E%3Crect fill='%23e5e7eb' width='800' height='600'/%3E%3C/svg%3E"
+              data-testid={`image-gallery-${currentIndex}`}
+            />
+          </div>
 
           {images.length > 1 && (
             <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-40">

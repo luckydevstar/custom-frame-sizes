@@ -2,18 +2,17 @@ import type { Metadata } from "next";
 import { Mail } from "lucide-react";
 import { brandConfig } from "@/brand.config";
 import { ContactForm } from "./ContactForm";
+import { generateMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Contact Us | Custom Frame Sizes",
+export const metadata: Metadata = generateMetadata({
+  title: "Contact Us | CustomFrameSizes.com – Framing Experts",
   description:
-    "Get in touch with our framing experts. We're here to help with your custom frame project.",
-  openGraph: {
-    title: "Contact Us",
-    description:
-      "Get in touch with our framing experts. We're here to help with your custom frame project.",
-    type: "website",
-  },
-};
+    "Get in touch with our custom framing experts. Call, email, or fill out our contact form. Response within 24 hours on business days.",
+  canonical: "https://customframesizes.com/contact",
+  ogTitle: "Contact CustomFrameSizes – Framing Support",
+  ogDescription:
+    "Contact our custom framing experts. Phone, email, or contact form. Somerset, NJ based.",
+});
 
 export default function ContactPage() {
   const contactEmail = (brandConfig.metadata?.contactEmail ??

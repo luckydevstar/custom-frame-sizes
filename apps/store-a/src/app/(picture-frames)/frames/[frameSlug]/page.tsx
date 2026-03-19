@@ -7,6 +7,7 @@ import { getFramePageContent } from "./frame-page-content";
 import { FrameDesignerHeroCta } from "./FrameDesignerHeroCta";
 import { FrameHeroBadge } from "./FrameHeroBadge";
 import { FrameDesignerPageSections } from "./FrameDesignerPageSections";
+import { generateDetailMetadata } from "@/lib/seo";
 
 // Next.js 15: params is a Promise
 type Props = { params: Promise<{ frameSlug: string }> };
@@ -17,20 +18,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { frameSlug } = await params;
   const frame = getFrameStyleById(frameSlug);
   if (!frame) return { title: "Frame Not Found" };
-  const title = `${frame.name} Frame - Custom Frame Designer | CustomFrameSizes.com`;
+
   const description =
     frame.shortDescription ||
     frame.featuredDescription ||
-    `Design a custom ${frame.name} picture frame in any size. Choose your dimensions, mat, and glazing. Instant pricing.`;
-  return {
-    title,
+    `Design a custom ${frame.name} picture frame in any size. Choose your dimensions, mat, and glazing options. Instant pricing.`;
+
+  return generateDetailMetadata({
+    name: frame.name,
     description,
-    openGraph: {
-      title: `${frame.name} Frame - Design Your Custom Frame`,
-      description,
-      type: "website",
-    },
-  };
+    slug: `frames/${frameSlug}`,
+  });
 }
 
 export default async function FrameDesignerBySlugPage({ params }: Props) {

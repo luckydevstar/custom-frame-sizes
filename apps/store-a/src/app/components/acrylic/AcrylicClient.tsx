@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import {
   Button,
@@ -534,13 +535,16 @@ export function AcrylicClient() {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <Card className="p-6" data-testid="card-regular-acrylic-visual">
-            <div className="aspect-[4/3] rounded-md overflow-hidden mb-4 bg-muted/20">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+            <div className="aspect-[4/3] rounded-md overflow-hidden mb-4 bg-muted/20 relative">
+              <Image
                 src={standardAcrylicImg}
                 alt="Standard frame-grade acrylic with visible glare and reflections in bright lighting"
-                className="w-full h-full object-contain"
-                loading="lazy"
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority={false}
+                placeholder="blur"
+                blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 450'%3E%3Crect fill='%23e5e7eb' width='600' height='450'/%3E%3C/svg%3E"
               />
             </div>
             <h3 className="font-semibold text-xl mb-3">Regular Acrylic</h3>
@@ -594,13 +598,16 @@ export function AcrylicClient() {
             </div>
           </Card>
           <Card className="p-6" data-testid="card-nonglare-acrylic-visual">
-            <div className="aspect-[4/3] rounded-md overflow-hidden mb-4 bg-muted/20">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+            <div className="aspect-[4/3] rounded-md overflow-hidden mb-4 bg-muted/20 relative">
+              <Image
                 src={nonglareAcrylicImg}
                 alt="Non-glare frame-grade acrylic with crystal clear viewing, no reflections or glare"
-                className="w-full h-full object-contain"
-                loading="lazy"
+                fill
+                className="object-contain"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                priority={false}
+                placeholder="blur"
+                blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 450'%3E%3Crect fill='%23e5e7eb' width='600' height='450'/%3E%3C/svg%3E"
               />
             </div>
             <h3 className="font-semibold text-xl mb-3">Non-Glare Acrylic</h3>

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface FrameCornerSwatchProps {
   frameId: string;
   frameName: string;
@@ -38,9 +40,18 @@ export function FrameCornerSwatch({
       }`}
       data-testid={`button-frame-${frameId}`}
     >
-      <div className="aspect-square rounded mb-2 overflow-hidden">
+      <div className="aspect-square rounded mb-2 overflow-hidden relative">
         {imageUrl ? (
-          <img src={imageUrl} alt={altText} loading="lazy" className="w-full h-full object-cover" />
+          <Image
+            src={imageUrl}
+            alt={altText}
+            fill
+            className="object-cover"
+            sizes="120px"
+            priority={false}
+            placeholder="blur"
+            blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Crect fill='%23e5e7eb' width='120' height='120'/%3E%3C/svg%3E"
+          />
         ) : (
           <div
             className="w-full h-full rounded"

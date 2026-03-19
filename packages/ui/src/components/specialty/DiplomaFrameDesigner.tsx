@@ -1,5 +1,6 @@
 "use client";
 
+import NextImage from "next/image";
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import {
   Maximize,
@@ -123,18 +124,27 @@ function TasselIcon({ className, style }: { className?: string; style?: React.CS
     );
   }
   return (
-    <img
-      src={TASSEL_IMAGE_URL}
-      alt="Graduation tassel with 2026 charm"
+    <div
       className={className}
       style={{
-        objectFit: "cover",
+        position: "relative",
         width: "100%",
         height: "100%",
         ...style,
       }}
-      onError={() => setLoadError(true)}
-    />
+    >
+      <NextImage
+        src={TASSEL_IMAGE_URL}
+        alt="Graduation tassel with 2026 charm"
+        fill
+        className="object-cover"
+        sizes="100px"
+        priority={false}
+        placeholder="blur"
+        blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%23e5e7eb' width='100' height='100'/%3E%3C/svg%3E"
+        onError={() => setLoadError(true)}
+      />
+    </div>
   );
 }
 

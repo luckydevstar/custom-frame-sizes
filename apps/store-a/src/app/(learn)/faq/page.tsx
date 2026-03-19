@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { HelpCircle } from "lucide-react";
+import { generateMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Frequently Asked Questions - Custom Picture Frames | Custom Frame Sizes",
+export const metadata: Metadata = generateMetadata({
+  title: "FAQ | CustomFrameSizes.com – Framing Questions Answered",
   description:
-    "Get answers to common questions about custom picture frames, sizes, shipping, local pickup, returns, and quality at CustomFrameSizes.com.",
-  openGraph: {
-    title: "Frequently Asked Questions - Custom Picture Frames",
-    description:
-      "Common questions about custom framing, ordering, materials, pricing, shipping, and our quality guarantee.",
-    type: "website",
-  },
-};
+    "Answers to common questions about custom frames, sizes, shipping, local pickup, returns, glazing options, and production timelines.",
+  canonical: "https://customframesizes.com/faq",
+  ogTitle: "Frequently Asked Questions - CustomFrameSizes",
+  ogDescription:
+    "Answers about custom framing, sizing, shipping, local pickup, returns, materials, and warranty.",
+});
 
 const faqSchema = {
   "@context": "https://schema.org",

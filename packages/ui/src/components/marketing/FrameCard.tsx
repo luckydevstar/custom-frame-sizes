@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Card } from "../ui/card";
 import { Button } from "../ui/button";
 import { Badge } from "../ui/badge";
@@ -14,10 +15,15 @@ export function FrameCard({ name, material, startingPrice, imageUrl, featured }:
   return (
     <Card className="overflow-hidden hover-elevate group">
       <div className="aspect-square bg-muted relative overflow-hidden">
-        <img
+        <Image
           src={imageUrl}
-          alt={name}
-          className="w-full h-full object-cover transition-transform group-hover:scale-105"
+          alt={`${name} frame`}
+          fill
+          className="object-cover transition-transform group-hover:scale-105"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          priority={false}
+          placeholder="blur"
+          blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 400'%3E%3Crect fill='%23e5e7eb' width='400' height='400'/%3E%3C/svg%3E"
           data-testid="img-frame"
         />
         {featured && (

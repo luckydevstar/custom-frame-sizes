@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { FrameDesigner } from "@framecraft/ui";
+import { generateMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Custom Frame Designer - Design Your Perfect Frame | CustomFrameSizes.com",
+export const metadata: Metadata = generateMetadata({
+  title: "Custom Picture Frame Designer | Design Your Frame | CustomFrameSizes.com",
   description:
-    "Design custom picture frames with our interactive designer. Choose your size, frame style, mat colors, and glazing options. See instant pricing and preview your design in real-time.",
-  openGraph: {
-    title: "Custom Frame Designer - Interactive Frame Builder",
-    description:
-      "Design and customize your perfect picture frame online. Any size, any style, instant pricing.",
-    type: "website",
-  },
-};
+    "Design custom picture frames online with our interactive designer. Any size from 4×4 to 60×60 inches. 100+ styles, instant pricing, and real-time preview.",
+  canonical: "https://customframesizes.com/designer",
+  ogTitle: "Custom Picture Frame Designer - Interactive Builder",
+  ogDescription:
+    "Design and customize your perfect picture frame online. Any size, any style, instant pricing.",
+});
 
 export default function DesignerPage() {
   return (

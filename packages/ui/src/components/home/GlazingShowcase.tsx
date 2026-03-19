@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Shield, Sun, Sparkles } from "lucide-react";
 import { getStoreAssetUrl } from "@framecraft/core";
 
@@ -62,12 +63,15 @@ export function GlazingShowcase() {
           {/* Standard Acrylic - With Glare */}
           <div className="relative group">
             <div className="aspect-[3/2] rounded-lg overflow-hidden bg-muted/20">
-              <img
+              <Image
                 src={getStoreAssetUrl("glazing/standard-acrylic.jpg")}
                 alt="Standard frame-grade acrylic with visible glare and reflections in bright lighting"
-                className="w-full h-full object-contain"
-                loading="lazy"
-                decoding="async"
+                fill
+                className="object-contain"
+                sizes="(max-width: 640px) 100vw, 50vw"
+                priority={false}
+                placeholder="blur"
+                blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect fill='%23e5e7eb' width='300' height='200'/%3E%3C/svg%3E"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
               <div className="absolute bottom-3 left-3 right-3 text-white">
@@ -80,12 +84,15 @@ export function GlazingShowcase() {
           {/* Non-Glare Acrylic - No Glare */}
           <div className="relative group">
             <div className="aspect-[3/2] rounded-lg overflow-hidden ring-2 ring-primary/30 bg-muted/20">
-              <img
+              <Image
                 src={getStoreAssetUrl("glazing/nonglare-acrylic.jpg")}
                 alt="Non-glare frame-grade acrylic with crystal clear viewing, no reflections or glare"
-                className="w-full h-full object-contain"
-                loading="lazy"
-                decoding="async"
+                fill
+                className="object-contain"
+                sizes="(max-width: 640px) 100vw, 50vw"
+                priority={false}
+                placeholder="blur"
+                blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 300 200'%3E%3Crect fill='%23e5e7eb' width='300' height='200'/%3E%3C/svg%3E"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
               <div className="absolute top-2 right-2">
