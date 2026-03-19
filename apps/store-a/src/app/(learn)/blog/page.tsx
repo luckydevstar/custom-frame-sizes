@@ -118,7 +118,10 @@ export default async function BlogPage({ searchParams }: PageProps) {
                       <div className="relative aspect-video overflow-hidden rounded-t-lg">
                         <Image
                           src={post.hero}
-                          alt=""
+                          alt={
+                            post.heroAlt ??
+                            `${post.title} — cover image for this framing article on the Custom Frame Sizes blog`
+                          }
                           fill
                           className="object-cover"
                           sizes="(max-width: 768px) 100vw, 400px"
