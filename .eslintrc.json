@@ -11,6 +11,7 @@
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:react/jsx-runtime",
+    "plugin:jsx-a11y/recommended",
     "prettier"
   ],
   "ignorePatterns": [
@@ -29,7 +30,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "react", "react-hooks"],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "jsx-a11y"],
   "rules": {
     "@typescript-eslint/no-unused-vars": [
       "error",
