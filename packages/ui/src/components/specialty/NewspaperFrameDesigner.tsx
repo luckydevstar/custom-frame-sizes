@@ -871,6 +871,11 @@ export function NewspaperFrameDesigner({
                       value={[matBorder]}
                       onValueChange={(v) => setMatBorderWidth(String(v[0] ?? 2.5))}
                       data-testid="slider-newspaper-mat-border"
+                      aria-label="Mat border width in inches"
+                      aria-valuemin={1.5}
+                      aria-valuemax={8}
+                      aria-valuenow={matBorder}
+                      aria-valuetext={`${matBorder.toFixed(2)} inches`}
                     />
                     <div className="flex items-center gap-2">
                       <Checkbox

@@ -1134,6 +1134,11 @@ export function MoviePosterFrameDesigner({
                           setMatBorderWidth(values[0]?.toString() ?? "1.5")
                         }
                         data-testid="slider-movie-poster-mat-border"
+                        aria-label="Mat border width in inches"
+                        aria-valuemin={1.5}
+                        aria-valuemax={8}
+                        aria-valuenow={matBorder}
+                        aria-valuetext={`${matBorder.toFixed(2)} inches`}
                       />
                       <p className="text-xs text-muted-foreground">
                         Border around your onesheet poster

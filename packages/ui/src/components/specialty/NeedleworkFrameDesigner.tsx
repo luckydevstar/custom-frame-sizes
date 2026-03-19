@@ -987,6 +987,11 @@ export function NeedleworkFrameDesigner({
                           setMatBorderWidth(values[0]?.toString() ?? "2.5")
                         }
                         data-testid="slider-needlework-mat-border"
+                        aria-label="Mat border width in inches"
+                        aria-valuemin={1.5}
+                        aria-valuemax={8}
+                        aria-valuenow={matBorder}
+                        aria-valuetext={`${matBorder.toFixed(2)} inches`}
                       />
                       <div className="flex items-center space-x-2 pt-2">
                         <Checkbox

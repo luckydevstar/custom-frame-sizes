@@ -1492,6 +1492,15 @@ export function CertificateFrameDesigner({
                               setMatBorderWidth(clampedValue.toString());
                             }}
                             data-testid="slider-mat-border"
+                            aria-label="Mat border width in inches"
+                            aria-valuemin={
+                              brassNameplateConfig.enabled
+                                ? BRASS_NAMEPLATE_SPECS.MIN_BOTTOM_BORDER
+                                : 1.5
+                            }
+                            aria-valuemax={8}
+                            aria-valuenow={matBorder}
+                            aria-valuetext={`${matBorder.toFixed(2)} inches`}
                           />
                           <p className="text-xs text-muted-foreground">
                             {brassNameplateConfig.enabled

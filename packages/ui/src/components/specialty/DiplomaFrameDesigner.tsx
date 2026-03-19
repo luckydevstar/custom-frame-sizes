@@ -2791,6 +2791,11 @@ export function DiplomaFrameDesigner({
                             value={[matBorder]}
                             onValueChange={(values) => setMatBorderWidth(String(values[0] ?? 2.5))}
                             data-testid="slider-mat-border"
+                            aria-label="Mat border width in inches"
+                            aria-valuemin={1.5}
+                            aria-valuemax={8}
+                            aria-valuenow={matBorder}
+                            aria-valuetext={`${matBorder.toFixed(2)} inches`}
                           />
                           <p className="text-xs text-muted-foreground">
                             {brassNameplateConfig.enabled

@@ -2441,6 +2441,11 @@ export function FrameDesigner({
                           setMatBorderWidth((values[0] ?? matBorder).toString())
                         }
                         data-testid="slider-mat-border"
+                        aria-label="Mat border width in inches"
+                        aria-valuemin={1.5}
+                        aria-valuemax={8}
+                        aria-valuenow={matBorder}
+                        aria-valuetext={`${matBorder.toFixed(2)} inches`}
                       />
                       <p className="text-xs text-muted-foreground">Each side of artwork</p>
 

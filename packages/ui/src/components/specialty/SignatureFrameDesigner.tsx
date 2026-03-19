@@ -720,6 +720,11 @@ export function SignatureFrameDesigner({
                     max={SIGNATURE_MAT_BORDER_MAX}
                     step={1}
                     data-testid="slider-mat-border"
+                    aria-label="Mat border width in inches"
+                    aria-valuemin={SIGNATURE_MAT_BORDER_MIN}
+                    aria-valuemax={SIGNATURE_MAT_BORDER_MAX}
+                    aria-valuenow={matBorder}
+                    aria-valuetext={`${matBorder} inches`}
                   />
                   <div className="flex justify-between text-xs text-muted-foreground">
                     <span>4&quot; (Compact)</span>

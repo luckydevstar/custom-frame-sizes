@@ -1204,6 +1204,11 @@ export function SonogramFrameDesigner({
                             value={[matBorder]}
                             onValueChange={(values) => setMatBorderWidth(values[0]!.toString())}
                             data-testid="slider-mat-border"
+                            aria-label="Mat border width in inches"
+                            aria-valuemin={1}
+                            aria-valuemax={4}
+                            aria-valuenow={matBorder}
+                            aria-valuetext={`${matBorder.toFixed(2)} inches`}
                           />
                           <BottomWeightedMatting
                             checked={bottomWeighted}
