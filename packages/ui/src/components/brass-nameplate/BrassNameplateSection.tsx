@@ -340,6 +340,14 @@ export function BrassNameplateSection({
         <div
           className="flex items-center justify-between p-4 cursor-pointer"
           onClick={() => updateConfig({ enabled: !config.enabled })}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              updateConfig({ enabled: !config.enabled });
+            }
+          }}
+          role="button"
+          tabIndex={0}
           data-testid="nameplate-section-header"
         >
           <div className="flex items-center gap-3">

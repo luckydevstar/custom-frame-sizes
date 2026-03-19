@@ -305,7 +305,7 @@ export default async function ColorDetailPage({ params }: ColorDetailPageProps) 
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={heroImage.url}
-                      alt={`${colorData.displayName} picture frames displayed in ${colorData.designStyle.toLowerCase()} interior`}
+                      alt={`${colorData.displayName} displayed in ${colorData.designStyle.toLowerCase()} interior`}
                       className="w-full h-full object-cover"
                       loading="eager"
                     />

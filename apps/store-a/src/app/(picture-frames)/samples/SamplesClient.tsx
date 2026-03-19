@@ -657,10 +657,13 @@ function FrameSampleCard({
 }) {
   const imageUrl = getFrameSampleImage(frame);
   return (
-    <div
+    <button
       className={`group relative cursor-pointer transition-all ${selected ? "scale-[1.01]" : ""}`}
       onClick={onToggle}
       data-testid={`card-frame-sample-${frame.id}`}
+      type="button"
+      aria-pressed={selected}
+      title={`Select ${frame.name} frame`}
     >
       <div
         className={`relative overflow-hidden rounded-lg shadow-sm ${selected ? "ring-2 ring-primary shadow-md" : "group-hover:shadow-md"}`}
@@ -692,7 +695,7 @@ function FrameSampleCard({
         </div>
         <div className="text-xs text-muted-foreground">{frame.mouldingWidth}&quot; moulding</div>
       </div>
-    </div>
+    </button>
   );
 }
 
@@ -708,10 +711,13 @@ function MatSampleCard({
   const swatchUrl = getSharedAssetUrl(`mats/swatches/${mat.swatchFile}`);
   const needsBorder = matNeedsBorder(mat);
   return (
-    <div
+    <button
       className={`group relative cursor-pointer transition-all ${selected ? "scale-[1.02]" : ""}`}
       onClick={onToggle}
       data-testid={`card-mat-sample-${mat.id}`}
+      type="button"
+      aria-pressed={selected}
+      title={`Select ${mat.name} mat`}
     >
       <div
         className={`relative overflow-hidden rounded-lg shadow-sm ${selected ? "ring-2 ring-primary shadow-md" : "group-hover:shadow-md"}`}
@@ -748,7 +754,7 @@ function MatSampleCard({
           {mat.name}
         </div>
       </div>
-    </div>
+    </button>
   );
 }
 
@@ -762,10 +768,13 @@ function AcrylicSampleCard({
   onToggle: () => void;
 }) {
   return (
-    <div
+    <button
       className={`group relative cursor-pointer transition-all ${selected ? "scale-[1.01]" : ""}`}
       onClick={onToggle}
       data-testid={`card-acrylic-sample-${acrylic.id}`}
+      type="button"
+      aria-pressed={selected}
+      title={`Select ${acrylic.name} acrylic`}
     >
       <div
         className={`relative overflow-hidden rounded-lg bg-card p-4 shadow-sm ${selected ? "ring-2 ring-primary shadow-md" : "group-hover:shadow-md border"}`}
@@ -795,6 +804,6 @@ function AcrylicSampleCard({
           </div>
         </div>
       </div>
-    </div>
+    </button>
   );
 }

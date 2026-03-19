@@ -130,6 +130,7 @@ export function MegaMenu({ label, children, isActive = false }: MegaMenuProps) {
           className="absolute left-0 top-full pt-2 z-50"
           data-testid={`megamenu-${label.toLowerCase().replace(/\s+/g, "-")}`}
           onKeyDown={handleMenuKeyDown}
+          tabIndex={-1}
         >
           <div className="bg-background border rounded-lg shadow-lg min-w-[600px]">{children}</div>
         </div>

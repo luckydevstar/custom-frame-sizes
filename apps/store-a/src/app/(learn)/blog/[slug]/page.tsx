@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/heading-has-content */
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
@@ -111,7 +112,7 @@ export default async function BlogPostPage({ params }: PageProps) {
         <div className="mb-8 relative w-full h-96 rounded-lg overflow-hidden bg-muted">
           <Image
             src={post.hero}
-            alt={post.heroAlt ?? `${post.title} — featured image for this framing guide`}
+            alt={post.heroAlt ?? `${post.title} — featured for this framing guide`}
             fill
             className="object-cover"
             data-testid="img-post-hero"

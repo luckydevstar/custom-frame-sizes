@@ -2058,6 +2058,17 @@ export function FrameDesigner({
                       setFullImageOpen(true);
                     }
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      if (framePhotos.cornerUrl) {
+                        setFullscreenImage("corner");
+                        setFullImageOpen(true);
+                      }
+                    }
+                  }}
+                  role="button"
+                  tabIndex={framePhotos.cornerUrl ? 0 : -1}
                   data-testid="img-corner-detail"
                 >
                   {framePhotos.cornerUrl ? (
@@ -2085,6 +2096,17 @@ export function FrameDesigner({
                       setFullImageOpen(true);
                     }
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      if (framePhotos.profileUrl) {
+                        setFullscreenImage("profile");
+                        setFullImageOpen(true);
+                      }
+                    }
+                  }}
+                  role="button"
+                  tabIndex={framePhotos.profileUrl ? 0 : -1}
                   data-testid="img-profile-view"
                 >
                   {framePhotos.profileUrl ? (
@@ -2112,6 +2134,17 @@ export function FrameDesigner({
                       setFullImageOpen(true);
                     }
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      if (framePhotos.lifestyleUrl) {
+                        setFullscreenImage("lifestyle");
+                        setFullImageOpen(true);
+                      }
+                    }
+                  }}
+                  role="button"
+                  tabIndex={framePhotos.lifestyleUrl ? 0 : -1}
                   data-testid="img-lifestyle"
                 >
                   {framePhotos.lifestyleUrl ? (
@@ -2633,6 +2666,14 @@ export function FrameDesigner({
                       : "border-dashed border-muted-foreground/30 hover:border-muted-foreground/50 hover:bg-muted/30"
                   }`}
                   onClick={() => setPuzzleGlue(!puzzleGlue)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setPuzzleGlue(!puzzleGlue);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
                   data-testid="card-puzzle-glue"
                 >
                   <div className="flex items-start gap-3">

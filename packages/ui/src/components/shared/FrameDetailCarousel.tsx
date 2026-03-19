@@ -137,6 +137,14 @@ export function FrameDetailCarousel({ images, onImageClick }: FrameDetailCarouse
               key={image.url}
               className="group/card relative rounded-lg border bg-card cursor-pointer transition-all flex-shrink-0 w-80 hover-elevate active-elevate-2"
               onClick={() => onImageClick(index)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  onImageClick(index);
+                }
+              }}
+              role="button"
+              tabIndex={0}
               data-testid={`image-preview-${index}`}
             >
               <div className="aspect-[4/3] overflow-hidden">

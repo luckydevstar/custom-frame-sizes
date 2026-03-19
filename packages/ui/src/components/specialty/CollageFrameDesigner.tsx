@@ -1127,7 +1127,7 @@ export function CollageFrameDesigner({
                                       <div className="relative aspect-square group">
                                         <img
                                           src={userPhotos[idx]}
-                                          alt={`Photo ${idx + 1}`}
+                                          alt={`Uploaded ${idx + 1}`}
                                           className="w-full h-full object-cover rounded-md border"
                                           data-testid={`img-photo-${idx}`}
                                         />
@@ -1617,7 +1617,7 @@ export function CollageFrameDesigner({
                 <div style={{ filter: "drop-shadow(0 8px 32px rgba(0, 0, 0, 0.15))" }}>
                   <img
                     src={fullscreenLifestyleUrl}
-                    alt="Lifestyle photo"
+                    alt="Lifestyle"
                     className="max-w-full max-h-[70vh] object-contain"
                   />
                 </div>

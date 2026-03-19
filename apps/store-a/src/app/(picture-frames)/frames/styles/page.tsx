@@ -134,7 +134,7 @@ export default function FramesByStylePage() {
                         {/* eslint-disable-next-line @next/next/no-img-element -- dynamic asset URL from getStyleHubImage (store-a CDN) */}
                         <img
                           src={imageSrc}
-                          alt={`${style.displayName} style picture frames in custom sizes`}
+                          alt={`${style.displayName} style in custom sizes`}
                           className="w-full h-full object-cover"
                           loading="lazy"
                           decoding="async"

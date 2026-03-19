@@ -1245,7 +1245,7 @@ export function PlaybillFrameDesigner({
               {fullscreenImage === "lifestyle" && fullscreenLifestyleUrl && (
                 <img
                   src={fullscreenLifestyleUrl}
-                  alt="Lifestyle photo"
+                  alt="Lifestyle"
                   className="max-w-full max-h-full object-contain"
                 />
               )}

@@ -664,7 +664,7 @@ export const CollagePreviewCanvas = memo(function CollagePreviewCanvas({
               >
                 <img
                   src={imageSrc}
-                  alt={`Vintage family photo collage insert ${index + 1} - warm toned portrait`}
+                  alt={`Vintage family collage insert ${index + 1} - warm toned portrait`}
                   style={{
                     width: "100%",
                     height: "100%",

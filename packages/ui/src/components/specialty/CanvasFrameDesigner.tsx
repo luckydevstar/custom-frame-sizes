@@ -1173,6 +1173,17 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                       setFullImageOpen(true);
                     }
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      if (resolvedCornerUrl) {
+                        setFullscreenImage("corner");
+                        setFullImageOpen(true);
+                      }
+                    }
+                  }}
+                  role="button"
+                  tabIndex={resolvedCornerUrl ? 0 : -1}
                   data-testid="img-corner-detail"
                 >
                   {resolvedCornerUrl ? (
@@ -1200,6 +1211,17 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                       setFullImageOpen(true);
                     }
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      if (resolvedProfileUrl) {
+                        setFullscreenImage("profile");
+                        setFullImageOpen(true);
+                      }
+                    }
+                  }}
+                  role="button"
+                  tabIndex={resolvedProfileUrl ? 0 : -1}
                   data-testid="img-profile-view"
                 >
                   {resolvedProfileUrl ? (
@@ -1227,6 +1249,17 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                       setFullImageOpen(true);
                     }
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      if (framePhotos.lifestyleUrl) {
+                        setFullscreenImage("lifestyle");
+                        setFullImageOpen(true);
+                      }
+                    }
+                  }}
+                  role="button"
+                  tabIndex={framePhotos.lifestyleUrl ? 0 : -1}
                   data-testid="img-lifestyle"
                 >
                   {framePhotos.lifestyleUrl ? (

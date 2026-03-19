@@ -1743,7 +1743,7 @@ export function DiplomaFrameDesigner({
                               {photoImage ? (
                                 <img
                                   src={photoImage}
-                                  alt="Graduation photo"
+                                  alt="Graduation"
                                   style={{
                                     width: "100%",
                                     height: "100%",
@@ -1795,7 +1795,7 @@ export function DiplomaFrameDesigner({
                               {photoImage ? (
                                 <img
                                   src={photoImage}
-                                  alt="Graduation photo"
+                                  alt="Graduation"
                                   style={{
                                     width: "100%",
                                     height: "100%",
@@ -2103,7 +2103,7 @@ export function DiplomaFrameDesigner({
                               {photoImage ? (
                                 <img
                                   src={photoImage}
-                                  alt="Graduation photo"
+                                  alt="Graduation"
                                   style={{
                                     width: "100%",
                                     height: "100%",
@@ -2154,7 +2154,7 @@ export function DiplomaFrameDesigner({
                               {photoImage ? (
                                 <img
                                   src={photoImage}
-                                  alt="Graduation photo"
+                                  alt="Graduation"
                                   style={{
                                     width: "100%",
                                     height: "100%",
@@ -2488,7 +2488,7 @@ export function DiplomaFrameDesigner({
                             <div className="relative">
                               <img
                                 src={photoImage}
-                                alt="Uploaded graduation photo"
+                                alt="Uploaded graduation"
                                 className="w-full max-h-40 object-contain rounded-lg border"
                                 data-testid="img-graduation-photo-preview"
                               />
@@ -2523,6 +2523,14 @@ export function DiplomaFrameDesigner({
                         ) : (
                           <div
                             onClick={() => photoInputRef.current?.click()}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                photoInputRef.current?.click();
+                              }
+                            }}
+                            role="button"
+                            tabIndex={0}
                             className="border-2 border-dashed border-border rounded-lg p-6 text-center cursor-pointer hover:border-primary/50 transition-colors"
                             data-testid="dropzone-graduation-photo"
                           >
