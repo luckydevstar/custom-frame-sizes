@@ -92,7 +92,7 @@ export function AcrylicCleanerClient() {
               <div className="space-y-4">
                 <div className="aspect-square rounded-lg overflow-hidden bg-white border relative">
                   <Image
-                    src={PRODUCT_IMAGES[selectedImage]}
+                    src={PRODUCT_IMAGES[selectedImage]!}
                     alt="NOVUS Acrylic Cleaner 8oz bottle"
                     fill
                     className="object-contain p-4"
