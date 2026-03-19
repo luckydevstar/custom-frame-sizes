@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { getFramesByCategory } from "@framecraft/core";
 import { useMatStore } from "./store";
@@ -110,11 +111,16 @@ export function FrameSelector({ hideNoFrame = false }: FrameSelectorProps) {
             >
               {frameBottomUrls[frame.id] ? (
                 <div className="h-12 w-full rounded mb-2 overflow-hidden relative">
-                  <img
+                  <Image
                     src={frameBottomUrls[frame.id]}
                     alt={`${frame.name} frame`}
-                    className="h-full w-full object-cover"
+                    fill
+                    className="object-cover"
                     style={{ objectPosition: "center center" }}
+                    sizes="120px"
+                    priority={false}
+                    placeholder="blur"
+                    blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 48'%3E%3Crect fill='%23e5e7eb' width='120' height='48'/%3E%3C/svg%3E"
                   />
                 </div>
               ) : (
