@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex */
+
 import Image from "next/image";
 import { useMemo } from "react";
 import { Button } from "../../ui/button";

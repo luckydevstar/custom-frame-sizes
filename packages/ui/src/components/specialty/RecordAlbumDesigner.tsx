@@ -1155,7 +1155,7 @@ export function RecordAlbumDesigner({
                     {lifestyleImage ? (
                       <img
                         src={lifestyleImage}
-                        alt="Lifestyle photo"
+                        alt="Lifestyle"
                         className="w-full h-full object-cover"
                       />
                     ) : (
@@ -1522,11 +1522,7 @@ export function RecordAlbumDesigner({
               />
             )}
             {fullscreenImage === "lifestyle" && lifestyleImage && (
-              <img
-                src={lifestyleImage}
-                alt="Lifestyle photo showing frame in use"
-                className="w-full h-full object-contain"
-              />
+              <img src={lifestyleImage} alt="Lifestyle" className="w-full h-full object-contain" />
             )}
             {fullscreenImage === "screw" && (
               <div className="w-full h-full flex items-center justify-center bg-muted/10 p-8">
