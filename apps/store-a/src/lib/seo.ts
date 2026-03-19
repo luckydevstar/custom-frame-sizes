@@ -166,3 +166,211 @@ export function getCanonicalUrl(path: string): string {
 export function getOgImage(customImage?: string): string {
   return customImage || OG_IMAGE;
 }
+
+/**
+ * Organization Schema
+ * Centralized organization data for all pages
+ */
+export interface OrganizationSchemaProps {
+  name?: string;
+  description?: string;
+  contactPhone?: string;
+  contactEmail?: string;
+  socialProfiles?: string[];
+  logo?: string;
+}
+
+export function generateOrganizationSchema({
+  name = "CustomFrameSizes",
+  description = "Custom picture frames, mats, and specialty framing solutions for any size and style.",
+  contactPhone,
+  contactEmail,
+  socialProfiles = [
+    "https://www.facebook.com/customframesizes",
+    "https://www.instagram.com/customframesizes",
+    "https://www.pinterest.com/customframesizes",
+  ],
+  logo = OG_IMAGE,
+}: OrganizationSchemaProps = {}): string {
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name,
+    description,
+    url: SITE_URL,
+    logo,
+    contactPoint: {
+      "@type": "ContactPoint",
+      telephone: contactPhone,
+      email: contactEmail,
+      contactType: "Customer Service",
+    },
+    sameAs: socialProfiles,
+  });
+}
+
+/**
+ * Product Schema
+ * Used for designer pages and product detail pages
+ */
+export interface ProductSchemaProps {
+  name: string;
+  description: string;
+  brand?: string;
+  lowPrice?: number;
+  highPrice?: number;
+  priceCurrency?: string;
+  priceValidUntil?: string;
+  availability?:
+    | "https://schema.org/InStock"
+    | "https://schema.org/OutOfStock"
+    | "https://schema.org/PreOrder";
+  ratingValue?: number;
+  reviewCount?: number;
+  image?: string;
+  url?: string;
+  material?: string;
+  additionalProperties?: Array<{ name: string; value: string }>;
+}
+
+export function generateProductSchema({
+  name,
+  description,
+  brand = "CustomFrameSizes",
+  lowPrice = 25,
+  highPrice = 500,
+  priceCurrency = "USD",
+  priceValidUntil,
+  availability = "https://schema.org/InStock",
+  ratingValue,
+  reviewCount,
+  image,
+  url,
+  material,
+  additionalProperties = [],
+}: ProductSchemaProps): string {
+  const schema: Record<string, unknown> = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name,
+    description,
+    brand: {
+      "@type": "Brand",
+      name: brand,
+    },
+    offers: {
+      "@type": "AggregateOffer",
+      priceCurrency,
+      lowPrice,
+      highPrice,
+      availability,
+    },
+  };
+
+  if (priceValidUntil) {
+    const currentOffers = schema.offers as Record<string, unknown>;
+    schema.offers = {
+      ...currentOffers,
+      priceValidUntil,
+    };
+  }
+
+  if (image) {
+    schema.image = image;
+  }
+
+  if (url) {
+    schema.url = url;
+  }
+
+  if (material) {
+    schema.material = material;
+  }
+
+  if (ratingValue && reviewCount) {
+    schema.aggregateRating = {
+      "@type": "AggregateRating",
+      ratingValue: ratingValue.toString(),
+      reviewCount: reviewCount.toString(),
+    };
+  }
+
+  if (additionalProperties.length > 0) {
+    schema.additionalProperty = additionalProperties.map((prop) => ({
+      "@type": "PropertyValue",
+      name: prop.name,
+      value: prop.value,
+    }));
+  }
+
+  return JSON.stringify(schema);
+}
+
+/**
+ * BreadcrumbList Schema
+ * For category and detail pages
+ */
+export interface BreadcrumbItem {
+  name: string;
+  url: string;
+}
+
+export function generateBreadcrumbSchema(items: BreadcrumbItem[]): string {
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.url,
+    })),
+  });
+}
+
+/**
+ * FAQ Schema
+ * For FAQ pages
+ */
+export interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export function generateFAQSchema(items: FAQItem[]): string {
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  });
+}
+
+/**
+ * WebSite Schema
+ * For site-wide search configuration
+ */
+export function generateWebsiteSchema(
+  searchUrl: string = `${SITE_URL}/picture-frames?search={search_term_string}`
+): string {
+  return JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "CustomFrameSizes",
+    url: SITE_URL,
+    potentialAction: {
+      "@type": "SearchAction",
+      target: {
+        "@type": "EntryPoint",
+        urlTemplate: searchUrl,
+      },
+      "query-input": "required name=search_term_string",
+    },
+  });
+}
