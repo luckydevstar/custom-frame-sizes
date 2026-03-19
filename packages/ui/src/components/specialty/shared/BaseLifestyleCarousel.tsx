@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo } from "react";
 import { Button } from "../../ui/button";
 import { ChevronLeft, ChevronRight, Maximize } from "lucide-react";
@@ -141,18 +142,22 @@ export function BaseLifestyleCarousel({
                       : `Gallery image ${index + 1} of ${displayImages.length}: ${image.alt}`
                   }
                 >
-                  <div className="aspect-[4/3] relative">
-                    <img
+                  <div className="aspect-[4/3] relative overflow-hidden">
+                    <Image
                       src={image.url}
                       alt={image.alt}
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover/card:scale-105"
-                      loading="lazy"
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover/card:scale-105"
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      priority={false}
+                      placeholder="blur"
+                      blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23e5e7eb' width='400' height='300'/%3E%3C/svg%3E"
                       onLoad={handleImageLoad}
                       onError={(e) => {
                         const target = e.target as HTMLImageElement;
                         target.style.display = "none";
                       }}
-                    />
+                    />{" "}
                     {isClickable && (
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover/card:opacity-100 transition-opacity bg-black/30">
                         <div className="bg-background/90 p-3 rounded-full shadow-lg">
