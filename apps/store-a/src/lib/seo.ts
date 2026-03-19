@@ -268,8 +268,9 @@ export function generateProductSchema({
   };
 
   if (priceValidUntil) {
+    const currentOffers = schema.offers as Record<string, unknown>;
     schema.offers = {
-      ...schema.offers,
+      ...currentOffers,
       priceValidUntil,
     };
   }
