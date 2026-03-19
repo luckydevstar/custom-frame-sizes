@@ -122,6 +122,151 @@ export default function HomePage() {
 
   return (
     <>
+      {/* Hero Section with H1 and Value Proposition */}
+      <section className="bg-gradient-to-b from-background to-muted/30 py-16 md:py-24">
+        <div className="max-w-4xl mx-auto px-6">
+          <h1 className="font-serif text-4xl md:text-5xl font-bold text-center mb-6">
+            Custom Picture Frames | Any Size, Any Style
+          </h1>
+          <p className="text-lg md:text-xl text-muted-foreground text-center mb-8 max-w-3xl mx-auto leading-relaxed">
+            Design your perfect custom picture frame online. Choose from 100+ professional frame
+            styles, any size from 4×4 to 60×60 inches, with instant pricing and real-time preview.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="/designer"
+              className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+            >
+              Start Designing Now
+            </a>
+            <a
+              href="/frames"
+              className="inline-flex items-center justify-center px-8 py-3 border border-input bg-background rounded-lg font-semibold hover:bg-muted transition-colors"
+            >
+              Browse Frame Styles
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 1: Design Your Perfect Frame Online */}
+      <section className="max-w-4xl mx-auto px-6 py-16 md:py-20">
+        <div className="text-center mb-12">
+          <h2 className="font-serif text-3xl font-bold mb-4">Design Your Perfect Frame Online</h2>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Our interactive frame designer puts professional customization at your fingertips.
+            Upload your artwork, enter exact dimensions, and visualize your finished frame with
+            photorealistic rendering.
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <div className="text-center">
+            <div className="text-4xl font-bold text-primary mb-2">100+</div>
+            <p className="text-muted-foreground">Frame Styles to Choose From</p>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-bold text-primary mb-2">4×4 to 60×60</div>
+            <p className="text-muted-foreground">Any Size You Need (1/8&quot; Precision)</p>
+          </div>
+          <div className="text-center">
+            <div className="text-4xl font-bold text-primary mb-2">Instant</div>
+            <p className="text-muted-foreground">Real-Time Pricing &amp; Preview</p>
+          </div>
+        </div>
+
+        <div className="bg-muted/40 rounded-lg p-8 text-center">
+          <p className="text-lg font-semibold mb-4">Ready to Create?</p>
+          <a
+            href="/designer"
+            className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+          >
+            Open Frame Designer
+          </a>
+        </div>
+      </section>
+
+      {/* Section 2: Why Choose Us */}
+      <section className="bg-muted/20 py-16 md:py-20">
+        <div className="max-w-4xl mx-auto px-6">
+          <h2 className="font-serif text-3xl font-bold text-center mb-12">
+            Why Choose CustomFrameSizes?
+          </h2>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-semibold mb-3">Professional Quality</h3>
+              <p className="text-muted-foreground">
+                Premium hardwoods, museum-quality materials, and professional-grade glazing options
+                ensure your framed artwork looks museum-quality for decades.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-3">Custom Everything</h3>
+              <p className="text-muted-foreground">
+                Any size, any style, any configuration. From standard sizes to oversized specialty
+                frames, we build exactly what you envision.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-3">Precision Engineering</h3>
+              <p className="text-muted-foreground">
+                Our 1/8-inch precision cutting and digital rendering ensures every frame is cut to
+                exact specifications and looks exactly like your preview.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-3">Design Expertise</h3>
+              <p className="text-muted-foreground">
+                With 100+ frame styles and countless customization options, our designers have
+                curated the perfect frames for any décor style or purpose.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 3: Popular Frame Sizes with Designer Links */}
+      <section className="max-w-4xl mx-auto px-6 py-16 md:py-20">
+        <h2 className="font-serif text-3xl font-bold text-center mb-12">Popular Frame Sizes</h2>
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {[
+            { size: "8×10", desc: "Most Popular" },
+            { size: "11×14", desc: "Portrait" },
+            { size: "16×20", desc: "Large" },
+            { size: "24×36", desc: "Poster Size" },
+            { size: "5×7", desc: "Small" },
+            { size: "12×12", desc: "Square" },
+            { size: "18×24", desc: "Landscape" },
+            { size: "30×40", desc: "Extra Large" },
+          ].map((item) => (
+            <a
+              key={item.size}
+              href={`/designer?size=${item.size}`}
+              className="p-4 border rounded-lg text-center hover:border-primary hover:bg-muted/40 transition-colors group"
+            >
+              <div className="font-bold text-lg group-hover:text-primary transition-colors">
+                {item.size}
+              </div>
+              <div className="text-sm text-muted-foreground">{item.desc}</div>
+            </a>
+          ))}
+        </div>
+
+        <div className="text-center mt-12">
+          <p className="text-muted-foreground mb-4">
+            Need a different size? Our designer handles any custom dimensions.
+          </p>
+          <a
+            href="/designer"
+            className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+          >
+            View All Sizes in Designer
+          </a>
+        </div>
+      </section>
+
       {/* Structured Data - Product Schema */}
       <script
         type="application/ld+json"
@@ -249,8 +394,33 @@ export default function HomePage() {
       {/* Print & Frame Service */}
       <PrintAndFrameService />
 
-      {/* Frame Styles Showcase */}
-      <FrameStylesShowcase frames={pictureFrames} />
+      {/* Section 5: Featured Designs Gallery */}
+      <section className="bg-muted/20 py-16 md:py-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="font-serif text-3xl font-bold text-center mb-12">
+            Featured Frame Designs
+          </h2>
+          <FrameStylesShowcase frames={pictureFrames} />
+          <div className="text-center mt-12">
+            <a
+              href="/frames"
+              className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors"
+            >
+              View All Frame Styles
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 4: Customer Testimonials */}
+      {showTestimonial && (
+        <section className="max-w-6xl mx-auto px-6 py-16 md:py-20">
+          <h2 className="font-serif text-3xl font-bold text-center mb-12">
+            What Our Customers Say
+          </h2>
+          <TestimonialCarousel testimonialsData={testimonialsData} />
+        </section>
+      )}
 
       {/* Showcase Sections */}
       <div style={{ display: "flex", flexDirection: "column", gap: "var(--section-gap)" }}>
