@@ -66,7 +66,6 @@ export function BaseLifestyleCarousel({
     scrollNext,
     handleScroll,
     handleImageLoad,
-    handleKeyDown,
   } = useCarouselScroll(displayImages.length);
 
   if (displayImages.length === 0) return null;
@@ -97,13 +96,7 @@ export function BaseLifestyleCarousel({
         )}
       </div>
 
-      <div
-        className="relative group px-4"
-        onKeyDown={handleKeyDown}
-        role="region"
-        aria-label={ariaLabel}
-        tabIndex={0}
-      >
+      <div className="relative group px-4" role="region" aria-label={ariaLabel}>
         {showPrevButton && (
           <Button
             variant="ghost"

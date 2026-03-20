@@ -46,7 +46,7 @@ export function PrintAndFrameService() {
                 ))}
               </div>
 
-              <p className="text-sm text-muted-foreground/80 mb-5">
+              <p className="text-sm text-muted-foreground mb-5">
                 Upload your digital files, we handle the printing and framing
               </p>
             </div>

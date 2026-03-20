@@ -158,7 +158,7 @@ export default function FramesByColorPage() {
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={color.image}
-                        alt={`${color.displayName} picture frames in custom sizes`}
+                        alt={`${color.displayName} in custom sizes`}
                         className="w-full h-full object-cover"
                         loading="lazy"
                         decoding="async"

@@ -301,7 +301,7 @@ export default function ShadowboxPage() {
                       </h3>
                       {frame.shortDescription && (
                         <p
-                          className="text-xs text-muted-foreground/80 italic mb-2"
+                          className="text-xs text-muted-foreground italic mb-2"
                           data-testid="text-shadowbox-short-description"
                         >
                           {frame.shortDescription}

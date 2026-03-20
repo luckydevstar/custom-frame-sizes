@@ -293,7 +293,7 @@ export const WeddingInvitationPreview = memo(function WeddingInvitationPreview({
                 ) : secondaryImage ? (
                   <img
                     src={secondaryImage}
-                    alt="Wedding photo"
+                    alt="Wedding"
                     style={{ width: "100%", height: "100%", objectFit: "cover" }}
                   />
                 ) : (

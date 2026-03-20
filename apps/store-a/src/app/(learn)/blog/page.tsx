@@ -118,7 +118,10 @@ export default async function BlogPage({ searchParams }: PageProps) {
                       <div className="relative aspect-video overflow-hidden rounded-t-lg">
                         <Image
                           src={post.hero}
-                          alt=""
+                          alt={
+                            post.heroAlt ??
+                            `${post.title} — cover image for this framing article on the Custom Frame Sizes blog`
+                          }
                           fill
                           className="object-cover"
                           sizes="(max-width: 768px) 100vw, 400px"
@@ -167,6 +170,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
                   <Link
                     href={buildPageUrl(currentPage - 1, selectedTag)}
                     data-testid="button-prev-page"
+                    aria-label="Go to previous page"
                   >
                     Previous
                   </Link>
@@ -183,6 +187,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
                     <Link
                       href={buildPageUrl(page, selectedTag)}
                       data-testid={`button-page-${page}`}
+                      aria-label={`Go to page ${page}`}
                     >
                       {page}
                     </Link>
@@ -198,6 +203,7 @@ export default async function BlogPage({ searchParams }: PageProps) {
                   <Link
                     href={buildPageUrl(currentPage + 1, selectedTag)}
                     data-testid="button-next-page"
+                    aria-label="Go to next page"
                   >
                     Next
                   </Link>

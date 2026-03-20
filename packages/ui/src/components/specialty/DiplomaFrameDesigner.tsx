@@ -1407,6 +1407,7 @@ export function DiplomaFrameDesigner({
                       className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                       data-testid="button-expand-preview"
                       title="Fullscreen preview"
+                      aria-label="Fullscreen view"
                     >
                       <Maximize className="h-5 w-5" />
                     </button>
@@ -1742,7 +1743,7 @@ export function DiplomaFrameDesigner({
                               {photoImage ? (
                                 <img
                                   src={photoImage}
-                                  alt="Graduation photo"
+                                  alt="Graduation"
                                   style={{
                                     width: "100%",
                                     height: "100%",
@@ -1756,14 +1757,14 @@ export function DiplomaFrameDesigner({
                                   style={{ gap: `${Math.max(4, layout.scale * 0.3)}px` }}
                                 >
                                   <ImageIcon
-                                    className="text-muted-foreground/50"
+                                    className="text-muted-foreground"
                                     style={{
                                       width: `${Math.max(16, layout.scale * 1.5)}px`,
                                       height: `${Math.max(16, layout.scale * 1.5)}px`,
                                     }}
                                   />
                                   <span
-                                    className="text-muted-foreground/60 text-center px-1"
+                                    className="text-muted-foreground text-center px-1"
                                     style={{ fontSize: `${Math.max(8, layout.scale * 0.6)}px` }}
                                   >
                                     {photoSize} Photo
@@ -1794,7 +1795,7 @@ export function DiplomaFrameDesigner({
                               {photoImage ? (
                                 <img
                                   src={photoImage}
-                                  alt="Graduation photo"
+                                  alt="Graduation"
                                   style={{
                                     width: "100%",
                                     height: "100%",
@@ -1808,14 +1809,14 @@ export function DiplomaFrameDesigner({
                                   style={{ gap: `${Math.max(4, layout.scale * 0.3)}px` }}
                                 >
                                   <ImageIcon
-                                    className="text-muted-foreground/50"
+                                    className="text-muted-foreground"
                                     style={{
                                       width: `${Math.max(16, layout.scale * 1.5)}px`,
                                       height: `${Math.max(16, layout.scale * 1.5)}px`,
                                     }}
                                   />
                                   <span
-                                    className="text-muted-foreground/60 text-center px-1"
+                                    className="text-muted-foreground text-center px-1"
                                     style={{ fontSize: `${Math.max(8, layout.scale * 0.6)}px` }}
                                   >
                                     {photoSize} Photo
@@ -2102,7 +2103,7 @@ export function DiplomaFrameDesigner({
                               {photoImage ? (
                                 <img
                                   src={photoImage}
-                                  alt="Graduation photo"
+                                  alt="Graduation"
                                   style={{
                                     width: "100%",
                                     height: "100%",
@@ -2115,14 +2116,14 @@ export function DiplomaFrameDesigner({
                                   style={{ gap: `${Math.max(4, layout.scale * 0.3)}px` }}
                                 >
                                   <ImageIcon
-                                    className="text-muted-foreground/50"
+                                    className="text-muted-foreground"
                                     style={{
                                       width: `${Math.max(16, layout.scale * 1.5)}px`,
                                       height: `${Math.max(16, layout.scale * 1.5)}px`,
                                     }}
                                   />
                                   <span
-                                    className="text-muted-foreground/60 text-center px-1"
+                                    className="text-muted-foreground text-center px-1"
                                     style={{ fontSize: `${Math.max(8, layout.scale * 0.6)}px` }}
                                   >
                                     {photoSize} Photo
@@ -2153,7 +2154,7 @@ export function DiplomaFrameDesigner({
                               {photoImage ? (
                                 <img
                                   src={photoImage}
-                                  alt="Graduation photo"
+                                  alt="Graduation"
                                   style={{
                                     width: "100%",
                                     height: "100%",
@@ -2166,14 +2167,14 @@ export function DiplomaFrameDesigner({
                                   style={{ gap: `${Math.max(4, layout.scale * 0.3)}px` }}
                                 >
                                   <ImageIcon
-                                    className="text-muted-foreground/50"
+                                    className="text-muted-foreground"
                                     style={{
                                       width: `${Math.max(16, layout.scale * 1.5)}px`,
                                       height: `${Math.max(16, layout.scale * 1.5)}px`,
                                     }}
                                   />
                                   <span
-                                    className="text-muted-foreground/60 text-center px-1"
+                                    className="text-muted-foreground text-center px-1"
                                     style={{ fontSize: `${Math.max(8, layout.scale * 0.6)}px` }}
                                   >
                                     {photoSize} Photo
@@ -2276,7 +2277,12 @@ export function DiplomaFrameDesigner({
                     {selectedFrame.dimensionalDiagram && (
                       <Tooltip>
                         <TooltipTrigger asChild>
-                          <Button variant="ghost" size="icon" className="h-5 w-5 p-0">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-5 w-5 p-0"
+                            aria-label="View dimensional diagram"
+                          >
                             <Info className="h-4 w-4 text-muted-foreground" />
                           </Button>
                         </TooltipTrigger>
@@ -2482,7 +2488,7 @@ export function DiplomaFrameDesigner({
                             <div className="relative">
                               <img
                                 src={photoImage}
-                                alt="Uploaded graduation photo"
+                                alt="Uploaded graduation"
                                 className="w-full max-h-40 object-contain rounded-lg border"
                                 data-testid="img-graduation-photo-preview"
                               />
@@ -2498,6 +2504,7 @@ export function DiplomaFrameDesigner({
                                   }
                                 }}
                                 data-testid="button-remove-photo"
+                                aria-label="Remove graduation photo"
                               >
                                 <X className="h-4 w-4" />
                               </Button>
@@ -2516,6 +2523,14 @@ export function DiplomaFrameDesigner({
                         ) : (
                           <div
                             onClick={() => photoInputRef.current?.click()}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter" || e.key === " ") {
+                                e.preventDefault();
+                                photoInputRef.current?.click();
+                              }
+                            }}
+                            role="button"
+                            tabIndex={0}
                             className="border-2 border-dashed border-border rounded-lg p-6 text-center cursor-pointer hover:border-primary/50 transition-colors"
                             data-testid="dropzone-graduation-photo"
                           >
@@ -2684,7 +2699,7 @@ export function DiplomaFrameDesigner({
                             <p className="font-medium text-sm mb-1">{frame.name}</p>
                             {frame.shortDescription && (
                               <p
-                                className="text-xs text-muted-foreground/80 mb-1.5 italic"
+                                className="text-xs text-muted-foreground mb-1.5 italic"
                                 data-testid="text-frame-short-description"
                               >
                                 {frame.shortDescription}
@@ -2740,6 +2755,7 @@ export function DiplomaFrameDesigner({
                         variant={matType === "none" ? "default" : "outline"}
                         onClick={() => setMatType("none")}
                         data-testid="button-mat-none"
+                        aria-label="No mat"
                       >
                         <span className="font-semibold">No Mat</span>
                       </Button>
@@ -2748,6 +2764,7 @@ export function DiplomaFrameDesigner({
                         variant={matType === "single" ? "default" : "outline"}
                         onClick={() => setMatType("single")}
                         data-testid="button-mat-single"
+                        aria-label="Single mat"
                       >
                         <span className="font-semibold">Single Mat</span>
                       </Button>
@@ -2756,6 +2773,7 @@ export function DiplomaFrameDesigner({
                         variant={matType === "double" ? "default" : "outline"}
                         onClick={() => setMatType("double")}
                         data-testid="button-mat-double"
+                        aria-label="Double mat"
                       >
                         <span className="font-semibold">Double Mat</span>
                       </Button>
@@ -2781,6 +2799,11 @@ export function DiplomaFrameDesigner({
                             value={[matBorder]}
                             onValueChange={(values) => setMatBorderWidth(String(values[0] ?? 2.5))}
                             data-testid="slider-mat-border"
+                            aria-label="Mat border width in inches"
+                            aria-valuemin={1.5}
+                            aria-valuemax={8}
+                            aria-valuenow={matBorder}
+                            aria-valuetext={`${matBorder.toFixed(2)} inches`}
                           />
                           <p className="text-xs text-muted-foreground">
                             {brassNameplateConfig.enabled
@@ -2922,6 +2945,7 @@ export function DiplomaFrameDesigner({
                               value={glass.id}
                               id={glass.id}
                               data-testid={`radio-glass-${glass.id}`}
+                              aria-label={glass.name}
                             />
                             <Label htmlFor={glass.id}>{glass.name}</Label>
                           </div>
@@ -3019,6 +3043,7 @@ export function DiplomaFrameDesigner({
                 size="icon"
                 onClick={() => setFullImageOpen(false)}
                 data-testid="button-close-fullscreen"
+                aria-label="Close preview"
               >
                 <X className="h-5 w-5" />
               </Button>
@@ -3356,6 +3381,7 @@ export function DiplomaFrameDesigner({
                 }}
                 data-testid="button-mobile-copy-link"
                 className="h-11 w-11"
+                aria-label="Copy design link"
               >
                 <Copy className="h-4 w-4" />
               </Button>

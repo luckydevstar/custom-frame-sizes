@@ -9,6 +9,8 @@ export interface BlogPost {
   date: string;
   tags: string[];
   hero?: string;
+  /** Alt text for hero image (SEO & accessibility) */
+  heroAlt?: string;
   author: string;
   content: string;
   readingTime: string;
@@ -52,6 +54,7 @@ export function getBlogPosts(): BlogPost[] {
       date: data.date ?? "",
       tags,
       hero: data.hero,
+      heroAlt: typeof data.heroAlt === "string" ? data.heroAlt : undefined,
       author: data.author ?? "CustomFrameSizes Team",
       content,
       readingTime: readingTime(content),
@@ -77,6 +80,7 @@ export function getBlogPost(slug: string): BlogPost | null {
     date: data.date ?? "",
     tags,
     hero: data.hero,
+    heroAlt: typeof data.heroAlt === "string" ? data.heroAlt : undefined,
     author: data.author ?? "CustomFrameSizes Team",
     content,
     readingTime: readingTime(content),

@@ -89,7 +89,7 @@ export function SecurityHardwareKitClient() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={componentsFlatLay}
-                alt="Anti-theft picture frame security hardware kit with tamper-proof mounting system"
+                alt="Anti-theft security hardware kit with tamper-proof mounting system"
                 className="w-full h-full object-contain p-4"
               />
             </div>
@@ -100,12 +100,21 @@ export function SecurityHardwareKitClient() {
               </div>
               <div className="space-y-2 mb-3 flex-1">
                 <div>
-                  <label className="text-[10px] font-medium mb-1 block">Product:</label>
+                  <label
+                    htmlFor="security-product-select"
+                    className="text-[10px] font-medium mb-1 block"
+                  >
+                    Product:
+                  </label>
                   <Select
                     value={selectedProduct}
                     onValueChange={(value) => setSelectedProduct(value as "kit" | "wrench")}
                   >
-                    <SelectTrigger data-testid="select-product" className="h-8 text-xs">
+                    <SelectTrigger
+                      id="security-product-select"
+                      data-testid="select-product"
+                      className="h-8 text-xs"
+                    >
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -116,9 +125,18 @@ export function SecurityHardwareKitClient() {
                 </div>
                 {selectedProduct === "kit" && (
                   <div>
-                    <label className="text-[10px] font-medium mb-1 block">Pack:</label>
+                    <label
+                      htmlFor="security-pack-select"
+                      className="text-[10px] font-medium mb-1 block"
+                    >
+                      Pack:
+                    </label>
                     <Select value={selectedPackSize} onValueChange={setSelectedPackSize}>
-                      <SelectTrigger data-testid="select-pack" className="h-8 text-xs">
+                      <SelectTrigger
+                        id="security-pack-select"
+                        data-testid="select-pack"
+                        className="h-8 text-xs"
+                      >
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -159,7 +177,7 @@ export function SecurityHardwareKitClient() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={componentsFlatLay}
-                  alt="Professional anti-theft frame security hardware kit with zinc steel T-screws, wall brackets, frame plates, security wrench, and mounting fasteners for museum-grade picture frame protection"
+                  alt="Professional anti-theft security hardware kit with zinc steel T-screws, wall brackets, frame plates, security wrench, and mounting fasteners for museum-grade protection"
                   className="w-full h-full object-contain p-8"
                 />
               </div>
@@ -176,7 +194,7 @@ export function SecurityHardwareKitClient() {
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={screwComponents}
-                    alt="Close-up of security T-screw, wall anchor, and specialty wrench for anti-theft picture frame mounting system"
+                    alt="Close-up of security T-screw, wall anchor, and specialty wrench for anti-theft mounting system"
                     className="w-full h-full object-contain p-4"
                   />
                 </div>
@@ -200,12 +218,20 @@ export function SecurityHardwareKitClient() {
               <Card className="p-6 hidden md:block">
                 <div className="space-y-4 mb-6">
                   <div>
-                    <label className="text-sm font-medium mb-2 block">Product:</label>
+                    <label
+                      htmlFor="security-product-select-desktop"
+                      className="text-sm font-medium mb-2 block"
+                    >
+                      Product:
+                    </label>
                     <Select
                       value={selectedProduct}
                       onValueChange={(value) => setSelectedProduct(value as "kit" | "wrench")}
                     >
-                      <SelectTrigger data-testid="select-product">
+                      <SelectTrigger
+                        id="security-product-select-desktop"
+                        data-testid="select-product"
+                      >
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -216,9 +242,14 @@ export function SecurityHardwareKitClient() {
                   </div>
                   {selectedProduct === "kit" && (
                     <div>
-                      <label className="text-sm font-medium mb-2 block">Pack Size:</label>
+                      <label
+                        htmlFor="security-pack-select-desktop"
+                        className="text-sm font-medium mb-2 block"
+                      >
+                        Pack Size:
+                      </label>
                       <Select value={selectedPackSize} onValueChange={setSelectedPackSize}>
-                        <SelectTrigger data-testid="select-pack">
+                        <SelectTrigger id="security-pack-select-desktop" data-testid="select-pack">
                           <SelectValue />
                         </SelectTrigger>
                         <SelectContent>
@@ -323,7 +354,7 @@ export function SecurityHardwareKitClient() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={frameBackHardware}
-                alt="Security hardware brackets installed on back of wood picture frame showing tamper-proof mounting system"
+                alt="Security hardware brackets installed showing tamper-proof mounting system"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -340,7 +371,7 @@ export function SecurityHardwareKitClient() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={wallMounting}
-                alt="Installing wall bracket with security T-screw for theft-deterrent picture frame mounting"
+                alt="Installing wall bracket with security T-screw for theft-deterrent mounting"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -357,7 +388,7 @@ export function SecurityHardwareKitClient() {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={bracketInstallation}
-                alt="Hand installing anti-theft security bracket with T-screw lock system on picture frame back"
+                alt="Hand installing anti-theft security bracket with T-screw lock system"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -397,7 +428,7 @@ export function SecurityHardwareKitClient() {
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={securityBracketsBack}
-                  alt="Close-up view of security T-screws and locking brackets mounted on picture frame back for anti-theft protection"
+                  alt="Close-up view of security T-screws and locking brackets mounted for anti-theft protection"
                   className="w-full h-full object-cover"
                 />
               </div>

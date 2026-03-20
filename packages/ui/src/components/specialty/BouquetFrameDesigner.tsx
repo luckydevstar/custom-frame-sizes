@@ -848,6 +848,7 @@ export function BouquetFrameDesigner({
                 className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                 data-testid="button-expand-preview"
                 disabled={readonly}
+                aria-label="Fullscreen view"
               >
                 <Maximize className="h-5 w-5" />
               </button>
@@ -1208,6 +1209,7 @@ export function BouquetFrameDesigner({
                     <button
                       className="text-muted-foreground hover:text-foreground transition-colors"
                       data-testid="button-dimensional-diagram"
+                      aria-label="View dimensional diagram"
                     >
                       <Info className="h-4 w-4" />
                     </button>
@@ -1236,6 +1238,7 @@ export function BouquetFrameDesigner({
                   <button
                     className="text-muted-foreground hover:text-foreground transition-colors"
                     data-testid="button-usable-interior-info"
+                    aria-label="Information about usable interior dimensions"
                   >
                     <Info className="h-4 w-4" />
                   </button>
@@ -1331,6 +1334,7 @@ export function BouquetFrameDesigner({
                       <button
                         className="text-muted-foreground hover:text-foreground transition-colors"
                         data-testid="button-dimensional-diagram"
+                        aria-label="View dimensional diagram"
                       >
                         <Info className="h-4 w-4" />
                       </button>
@@ -1550,6 +1554,11 @@ export function BouquetFrameDesigner({
                         onValueChange={(values) => setMatBorderWidth((values[0] ?? 0).toString())}
                         data-testid="slider-mat-border"
                         disabled={readonly}
+                        aria-label="Mat border width in inches"
+                        aria-valuemin={1.5}
+                        aria-valuemax={8}
+                        aria-valuenow={matBorder}
+                        aria-valuetext={`${matBorder.toFixed(2)} inches`}
                       />
                       <p className="text-xs text-muted-foreground">
                         Border on each side of the artwork
@@ -1842,6 +1851,7 @@ export function BouquetFrameDesigner({
                 onClick={handleCopyLink}
                 data-testid="button-mobile-copy-link"
                 className="h-11 w-11"
+                aria-label="Copy design link"
               >
                 <Copy className="h-4 w-4" />
               </Button>

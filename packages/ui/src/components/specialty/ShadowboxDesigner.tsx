@@ -1013,6 +1013,7 @@ export function ShadowboxDesigner({
                 className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                 data-testid="button-expand-preview"
                 disabled={readonly}
+                aria-label="Fullscreen view"
               >
                 <Maximize className="h-5 w-5" />
               </button>
@@ -1417,6 +1418,7 @@ export function ShadowboxDesigner({
                     <button
                       className="text-muted-foreground hover:text-foreground transition-colors"
                       data-testid="button-dimensional-diagram"
+                      aria-label="View dimensional diagram"
                     >
                       <Info className="h-4 w-4" />
                     </button>
@@ -1729,6 +1731,7 @@ export function ShadowboxDesigner({
                       }`}
                       data-testid="button-backing-plywood"
                       disabled={readonly}
+                      aria-label="Plywood backing"
                     >
                       Plywood Backing
                     </button>
@@ -1742,6 +1745,7 @@ export function ShadowboxDesigner({
                         }`}
                         data-testid="button-backing-none"
                         disabled={readonly}
+                        aria-label="No backing"
                       >
                         No Backing
                       </button>
@@ -1761,6 +1765,7 @@ export function ShadowboxDesigner({
                     onClick={() => setMatType("none")}
                     data-testid="button-mat-none"
                     disabled={readonly}
+                    aria-label="No mat"
                   >
                     <span className="font-semibold">No Mat</span>
                   </Button>
@@ -1770,6 +1775,7 @@ export function ShadowboxDesigner({
                     onClick={() => setMatType("single")}
                     data-testid="button-mat-single"
                     disabled={readonly}
+                    aria-label="Single mat"
                   >
                     <span className="font-semibold">Single Mat</span>
                   </Button>
@@ -1779,6 +1785,7 @@ export function ShadowboxDesigner({
                     onClick={() => setMatType("double")}
                     data-testid="button-mat-double"
                     disabled={readonly}
+                    aria-label="Double mat"
                   >
                     <span className="font-semibold">Double Mat</span>
                   </Button>
@@ -1802,6 +1809,11 @@ export function ShadowboxDesigner({
                         onValueChange={(values) => setMatBorderWidth((values[0] ?? 2.5).toString())}
                         data-testid="slider-mat-border"
                         disabled={readonly}
+                        aria-label="Mat border width in inches"
+                        aria-valuemin={1.5}
+                        aria-valuemax={8}
+                        aria-valuenow={matBorder}
+                        aria-valuetext={`${matBorder.toFixed(2)} inches`}
                       />
                       <p className="text-xs text-muted-foreground">
                         Border on each side of the artwork
@@ -1949,6 +1961,7 @@ export function ShadowboxDesigner({
                             id={glass.id}
                             data-testid={`radio-glass-${glass.id}`}
                             disabled={readonly}
+                            aria-label={glass.name}
                           />
                           <Label htmlFor={glass.id}>{glass.name}</Label>
                         </div>
@@ -2455,6 +2468,7 @@ export function ShadowboxDesigner({
               <Button
                 variant="outline"
                 size="icon"
+                aria-label="Copy design link"
                 onClick={() => {
                   const url = window.location.href;
                   navigator.clipboard.writeText(url);

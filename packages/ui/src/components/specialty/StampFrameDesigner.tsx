@@ -596,6 +596,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                       onClick={() => setShowFullscreenPreview(true)}
                       className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg"
                       data-testid="button-fullscreen-preview"
+                      aria-label="Fullscreen view"
                     >
                       <Maximize className="h-5 w-5" />
                     </button>
@@ -981,6 +982,11 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                               setMatBorderWidth((values[0] ?? 0).toString())
                             }
                             data-testid="slider-mat-border"
+                            aria-label="Mat border width in inches"
+                            aria-valuemin={1.5}
+                            aria-valuemax={8}
+                            aria-valuenow={matBorder}
+                            aria-valuetext={`${matBorder.toFixed(2)} inches`}
                           />
                           <p className="text-xs text-muted-foreground">Each side of artwork</p>
                           <BottomWeightedMatting
@@ -1229,6 +1235,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
               onClick={handleAddToCart}
               className="px-4"
               data-testid="button-add-to-cart-mobile"
+              aria-label="Add to cart"
             >
               <ShoppingCart className="w-4 h-4" />
             </Button>

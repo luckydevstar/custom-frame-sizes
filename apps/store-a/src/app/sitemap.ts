@@ -1,6 +1,7 @@
 import { MetadataRoute } from "next";
 import { getFramesByCategory } from "@framecraft/core";
 import { env } from "@/lib/env";
+import { getBlogPosts } from "@/lib/blog";
 
 const baseUrl = env.shopify.storeDomain
   ? `https://${env.shopify.storeDomain}`
@@ -61,6 +62,37 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "yearly",
       priority: 0.6,
     },
+    // Category landing pages
+    {
+      url: `${baseUrl}/picture-frames`,
+      lastModified: oneMonthAgo,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: `${baseUrl}/shadowbox-frames`,
+      lastModified: oneMonthAgo,
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${baseUrl}/diploma-frames`,
+      lastModified: oneMonthAgo,
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${baseUrl}/certificate-frames`,
+      lastModified: oneMonthAgo,
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
+    {
+      url: `${baseUrl}/specialty-frames`,
+      lastModified: oneMonthAgo,
+      changeFrequency: "monthly",
+      priority: 0.75,
+    },
     // Learn/Resources pages
     {
       url: `${baseUrl}/faq`,
@@ -74,7 +106,26 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.6,
     },
+    {
+      url: `${baseUrl}/blog`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.75,
+    },
   ];
+
+  let blogPostEntries: MetadataRoute.Sitemap = [];
+  try {
+    const posts = getBlogPosts();
+    blogPostEntries = posts.map((post) => ({
+      url: `${baseUrl}/blog/${post.slug}`,
+      lastModified: post.date ? new Date(post.date) : now,
+      changeFrequency: "monthly" as const,
+      priority: 0.65,
+    }));
+  } catch {
+    blogPostEntries = [];
+  }
 
   // Dynamic frame detail pages
   try {
@@ -97,9 +148,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     }
 
-    return [...staticPages, ...dynamicPages];
+    return [...staticPages, ...blogPostEntries, ...dynamicPages];
   } catch {
-    // If dynamic pages fail, return just static pages
-    return staticPages;
+    // If dynamic detail pages fail, still include blog URLs
+    return [...staticPages, ...blogPostEntries];
   }
 }

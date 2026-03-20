@@ -9,7 +9,11 @@ import { Header, Footer } from "@framecraft/ui/components/layout";
 import { TooltipProvider } from "@framecraft/ui";
 import { Toaster } from "@framecraft/ui/components/ui/toaster";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  preload: true,
+});
 
 // Get SEO metadata from brand config
 const seoConfig = brandConfig.seo;
@@ -48,8 +52,13 @@ export default function RootLayout({
             <CartHydration />
             <TooltipProvider>
               <div className="flex min-h-screen flex-col">
+                <a href="#main-content" className="sr-only sr-only:focus">
+                  Skip to main content
+                </a>
                 <Header />
-                <main className="flex-1">{children}</main>
+                <main id="main-content" className="flex-1">
+                  {children}
+                </main>
                 <Footer />
                 <Toaster />
               </div>

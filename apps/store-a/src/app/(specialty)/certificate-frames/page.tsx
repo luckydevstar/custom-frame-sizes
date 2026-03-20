@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 import { Sparkles, Shield, Ruler, Layers, Award } from "lucide-react";
 import { brandConfig } from "../../../brand.config";
 import { ScrollToDesignerButton } from "./scroll-button";
@@ -312,6 +313,50 @@ export default function CertificateFramesPage() {
                   </p>
                 </div>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Related guides */}
+        <section className="py-12 border-t bg-muted/10">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <h2 className="text-2xl font-bold mb-6">Related Guides</h2>
+              <ul className="grid md:grid-cols-3 gap-4">
+                <li>
+                  <Link
+                    href="/learn"
+                    className="block p-4 rounded-lg border bg-card hover:border-primary/30 transition-colors"
+                  >
+                    <span className="font-medium">How to Measure for a Certificate Frame</span>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Get the right dimensions for your document.
+                    </p>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/learn"
+                    className="block p-4 rounded-lg border bg-card hover:border-primary/30 transition-colors"
+                  >
+                    <span className="font-medium">UV Glass for Certificates</span>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Why framer&apos;s grade acrylic protects credentials.
+                    </p>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/faq"
+                    className="block p-4 rounded-lg border bg-card hover:border-primary/30 transition-colors"
+                  >
+                    <span className="font-medium">Certificate Framing FAQ</span>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      Common questions about framing licenses and awards.
+                    </p>
+                  </Link>
+                </li>
+              </ul>
             </div>
           </div>
         </section>

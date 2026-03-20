@@ -816,7 +816,7 @@ export function SonogramFrameDesigner({
                 >
                   {renderPreview()}
                 </div>
-                <p className="text-xs text-muted-foreground/60 text-center mt-2">
+                <p className="text-xs text-muted-foreground text-center mt-2">
                   Placeholder preview. Your sonogram images will be framed here.
                 </p>
                 <div className="mt-4 p-3 bg-muted/50 rounded-md text-sm space-y-0.5">
@@ -1204,6 +1204,11 @@ export function SonogramFrameDesigner({
                             value={[matBorder]}
                             onValueChange={(values) => setMatBorderWidth(values[0]!.toString())}
                             data-testid="slider-mat-border"
+                            aria-label="Mat border width in inches"
+                            aria-valuemin={1}
+                            aria-valuemax={4}
+                            aria-valuenow={matBorder}
+                            aria-valuetext={`${matBorder.toFixed(2)} inches`}
                           />
                           <BottomWeightedMatting
                             checked={bottomWeighted}
@@ -1364,6 +1369,7 @@ export function SonogramFrameDesigner({
                   onClick={handleCopyLink}
                   data-testid="button-mobile-copy-link"
                   className="h-9 w-9"
+                  aria-label="Copy design link"
                 >
                   <Copy className="h-4 w-4" />
                 </Button>

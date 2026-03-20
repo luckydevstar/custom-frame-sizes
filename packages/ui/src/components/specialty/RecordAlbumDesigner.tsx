@@ -1054,6 +1054,7 @@ export function RecordAlbumDesigner({
                       onClick={() => setFullscreenDesignerOpen(true)}
                       className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                       data-testid="button-fullscreen-preview"
+                      aria-label="Fullscreen view"
                     >
                       <Maximize className="h-5 w-5" />
                     </button>
@@ -1154,7 +1155,7 @@ export function RecordAlbumDesigner({
                     {lifestyleImage ? (
                       <img
                         src={lifestyleImage}
-                        alt="Lifestyle photo"
+                        alt="Lifestyle"
                         className="w-full h-full object-cover"
                       />
                     ) : (
@@ -1435,6 +1436,7 @@ export function RecordAlbumDesigner({
                   onClick={() => setShowShareDialog(true)}
                   data-testid="button-record-album-mobile-copy-link"
                   className="h-11 w-11"
+                  aria-label="Copy design link"
                 >
                   <Copy className="h-4 w-4" />
                 </Button>
@@ -1520,11 +1522,7 @@ export function RecordAlbumDesigner({
               />
             )}
             {fullscreenImage === "lifestyle" && lifestyleImage && (
-              <img
-                src={lifestyleImage}
-                alt="Lifestyle photo showing frame in use"
-                className="w-full h-full object-contain"
-              />
+              <img src={lifestyleImage} alt="Lifestyle" className="w-full h-full object-contain" />
             )}
             {fullscreenImage === "screw" && (
               <div className="w-full h-full flex items-center justify-center bg-muted/10 p-8">

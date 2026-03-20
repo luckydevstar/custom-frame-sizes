@@ -871,6 +871,11 @@ export function NewspaperFrameDesigner({
                       value={[matBorder]}
                       onValueChange={(v) => setMatBorderWidth(String(v[0] ?? 2.5))}
                       data-testid="slider-newspaper-mat-border"
+                      aria-label="Mat border width in inches"
+                      aria-valuemin={1.5}
+                      aria-valuemax={8}
+                      aria-valuenow={matBorder}
+                      aria-valuetext={`${matBorder.toFixed(2)} inches`}
                     />
                     <div className="flex items-center gap-2">
                       <Checkbox
@@ -884,7 +889,11 @@ export function NewspaperFrameDesigner({
                       </Label>
                       <Tooltip delayDuration={200}>
                         <TooltipTrigger asChild>
-                          <button type="button" className="text-muted-foreground">
+                          <button
+                            type="button"
+                            className="text-muted-foreground"
+                            aria-label="Information about newspaper display area"
+                          >
                             <Info className="h-4 w-4" />
                           </button>
                         </TooltipTrigger>

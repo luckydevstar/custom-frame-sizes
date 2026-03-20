@@ -779,6 +779,7 @@ export function CollageFrameDesigner({
                           onClick={() => openFullscreen("preview")}
                           className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                           data-testid="button-expand-preview"
+                          aria-label="Fullscreen view"
                         >
                           <Maximize className="h-5 w-5" />
                         </button>
@@ -804,7 +805,7 @@ export function CollageFrameDesigner({
                     />
                   </div>
 
-                  <p className="text-xs text-muted-foreground/60 text-center mt-2">
+                  <p className="text-xs text-muted-foreground text-center mt-2">
                     {Object.keys(userPhotos).length > 0
                       ? "Your uploaded photos shown in preview."
                       : "Sample image. Not included with purchase."}
@@ -831,6 +832,7 @@ export function CollageFrameDesigner({
                               <button
                                 className="text-muted-foreground hover:text-foreground transition-colors"
                                 data-testid="button-dimensional-diagram"
+                                aria-label="View dimensional diagram"
                               >
                                 <Info className="h-4 w-4" />
                               </button>
@@ -1125,7 +1127,7 @@ export function CollageFrameDesigner({
                                       <div className="relative aspect-square group">
                                         <img
                                           src={userPhotos[idx]}
-                                          alt={`Photo ${idx + 1}`}
+                                          alt={`Uploaded ${idx + 1}`}
                                           className="w-full h-full object-cover rounded-md border"
                                           data-testid={`img-photo-${idx}`}
                                         />
@@ -1136,6 +1138,7 @@ export function CollageFrameDesigner({
                                             className="h-6 w-6"
                                             onClick={() => handleEditPhoto(idx)}
                                             data-testid={`button-edit-photo-${idx}`}
+                                            aria-label={`Edit photo ${idx + 1}`}
                                           >
                                             <Pencil className="h-3 w-3" />
                                           </Button>
@@ -1145,6 +1148,7 @@ export function CollageFrameDesigner({
                                             className="h-6 w-6"
                                             onClick={() => handleRemovePhoto(idx)}
                                             data-testid={`button-remove-photo-${idx}`}
+                                            aria-label={`Remove photo ${idx + 1}`}
                                           >
                                             <X className="h-3 w-3" />
                                           </Button>
@@ -1514,6 +1518,7 @@ export function CollageFrameDesigner({
                   onClick={handleShare}
                   data-testid="button-collage-mobile-copy-link"
                   className="h-11 w-11"
+                  aria-label="Copy design link"
                 >
                   <Copy className="h-4 w-4" />
                 </Button>
@@ -1612,7 +1617,7 @@ export function CollageFrameDesigner({
                 <div style={{ filter: "drop-shadow(0 8px 32px rgba(0, 0, 0, 0.15))" }}>
                   <img
                     src={fullscreenLifestyleUrl}
-                    alt="Lifestyle photo"
+                    alt="Lifestyle"
                     className="max-w-full max-h-[70vh] object-contain"
                   />
                 </div>

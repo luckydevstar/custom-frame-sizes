@@ -1308,6 +1308,7 @@ export function FrameDesigner({
                   className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                   data-testid="button-expand-preview"
                   title="Fullscreen preview"
+                  aria-label="Fullscreen view"
                 >
                   <Maximize className="h-5 w-5" />
                 </button>
@@ -1436,6 +1437,7 @@ export function FrameDesigner({
                   className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                   data-testid="button-export-preview"
                   title="Export preview as high-resolution PNG (1600px)"
+                  aria-label="Download frame design"
                 >
                   <Download className="h-5 w-5" />
                 </button>
@@ -1994,7 +1996,7 @@ export function FrameDesigner({
 
             {/* Caption shown only when displaying placeholder image */}
             {!selectedImage && (
-              <p className="text-xs text-muted-foreground/60 text-center mt-2">
+              <p className="text-xs text-muted-foreground text-center mt-2">
                 Sample image. Not included with purchase.
               </p>
             )}
@@ -2014,6 +2016,7 @@ export function FrameDesigner({
                         <button
                           className="text-muted-foreground hover:text-foreground transition-colors"
                           data-testid="button-dimensional-diagram"
+                          aria-label="View dimensional diagram"
                         >
                           <Info className="h-4 w-4" />
                         </button>
@@ -2055,6 +2058,17 @@ export function FrameDesigner({
                       setFullImageOpen(true);
                     }
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      if (framePhotos.cornerUrl) {
+                        setFullscreenImage("corner");
+                        setFullImageOpen(true);
+                      }
+                    }
+                  }}
+                  role="button"
+                  tabIndex={framePhotos.cornerUrl ? 0 : -1}
                   data-testid="img-corner-detail"
                 >
                   {framePhotos.cornerUrl ? (
@@ -2082,6 +2096,17 @@ export function FrameDesigner({
                       setFullImageOpen(true);
                     }
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      if (framePhotos.profileUrl) {
+                        setFullscreenImage("profile");
+                        setFullImageOpen(true);
+                      }
+                    }
+                  }}
+                  role="button"
+                  tabIndex={framePhotos.profileUrl ? 0 : -1}
                   data-testid="img-profile-view"
                 >
                   {framePhotos.profileUrl ? (
@@ -2109,6 +2134,17 @@ export function FrameDesigner({
                       setFullImageOpen(true);
                     }
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      if (framePhotos.lifestyleUrl) {
+                        setFullscreenImage("lifestyle");
+                        setFullImageOpen(true);
+                      }
+                    }
+                  }}
+                  role="button"
+                  tabIndex={framePhotos.lifestyleUrl ? 0 : -1}
                   data-testid="img-lifestyle"
                 >
                   {framePhotos.lifestyleUrl ? (
@@ -2149,6 +2185,7 @@ export function FrameDesigner({
                     id="frame-only"
                     className="sr-only"
                     data-testid="radio-service-frame-only"
+                    aria-label="Frame only"
                   />
                   <span className="font-semibold">Frame Only</span>
                 </Label>
@@ -2165,6 +2202,7 @@ export function FrameDesigner({
                     id="print-and-frame"
                     className="sr-only"
                     data-testid="radio-service-print-and-frame"
+                    aria-label="Print and frame"
                   />
                   <span className="font-semibold">Print and Frame</span>
                 </Label>
@@ -2337,7 +2375,7 @@ export function FrameDesigner({
                         <p className="font-medium text-sm mb-1">{frame.name}</p>
                         {frame.shortDescription && (
                           <p
-                            className="text-xs text-muted-foreground/80 mb-1.5 italic"
+                            className="text-xs text-muted-foreground mb-1.5 italic"
                             data-testid="text-frame-short-description"
                           >
                             {frame.shortDescription}
@@ -2393,6 +2431,7 @@ export function FrameDesigner({
                     variant={matType === "none" ? "default" : "outline"}
                     onClick={() => setMatType("none")}
                     data-testid="button-mat-none"
+                    aria-label="No mat"
                   >
                     <span className="font-semibold">No Mat</span>
                   </Button>
@@ -2401,6 +2440,7 @@ export function FrameDesigner({
                     variant={matType === "single" ? "default" : "outline"}
                     onClick={() => setMatType("single")}
                     data-testid="button-mat-single"
+                    aria-label="Single mat"
                   >
                     <span className="font-semibold">Single Mat</span>
                   </Button>
@@ -2409,6 +2449,7 @@ export function FrameDesigner({
                     variant={matType === "double" ? "default" : "outline"}
                     onClick={() => setMatType("double")}
                     data-testid="button-mat-double"
+                    aria-label="Double mat"
                   >
                     <span className="font-semibold">Double Mat</span>
                   </Button>
@@ -2433,6 +2474,11 @@ export function FrameDesigner({
                           setMatBorderWidth((values[0] ?? matBorder).toString())
                         }
                         data-testid="slider-mat-border"
+                        aria-label="Mat border width in inches"
+                        aria-valuemin={1.5}
+                        aria-valuemax={8}
+                        aria-valuenow={matBorder}
+                        aria-valuetext={`${matBorder.toFixed(2)} inches`}
                       />
                       <p className="text-xs text-muted-foreground">Each side of artwork</p>
 
@@ -2457,6 +2503,7 @@ export function FrameDesigner({
                                   type="button"
                                   className="text-muted-foreground hover:text-foreground transition-colors"
                                   data-testid="button-bottom-weighted-info"
+                                  aria-label="Information about bottom-weighted matting"
                                 >
                                   <Info className="h-4 w-4" />
                                 </button>
@@ -2585,6 +2632,7 @@ export function FrameDesigner({
                           value={glass.id}
                           id={glass.id}
                           data-testid={`radio-glass-${glass.id}`}
+                          aria-label={glass.name}
                         />
                         <Label htmlFor={glass.id}>{glass.name}</Label>
                       </div>
@@ -2618,6 +2666,14 @@ export function FrameDesigner({
                       : "border-dashed border-muted-foreground/30 hover:border-muted-foreground/50 hover:bg-muted/30"
                   }`}
                   onClick={() => setPuzzleGlue(!puzzleGlue)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setPuzzleGlue(!puzzleGlue);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
                   data-testid="card-puzzle-glue"
                 >
                   <div className="flex items-start gap-3">
@@ -3373,6 +3429,7 @@ export function FrameDesigner({
               <Button
                 variant="outline"
                 size="icon"
+                aria-label="Copy design link"
                 onClick={() => {
                   if (typeof window !== "undefined") {
                     const url = `${window.location.origin}${pathname}${searchParams.toString() ? `?${searchParams.toString()}` : ""}`;

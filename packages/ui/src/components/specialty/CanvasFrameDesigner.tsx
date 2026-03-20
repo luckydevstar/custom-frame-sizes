@@ -913,6 +913,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                   }}
                   className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                   data-testid="button-expand-preview"
+                  aria-label="Fullscreen view"
                 >
                   <Maximize className="h-5 w-5" />
                 </button>
@@ -1110,7 +1111,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
 
             {/* Caption shown only when displaying placeholder image */}
             {!selectedImage && (
-              <p className="text-xs md:text-sm text-muted-foreground/70 text-center mt-2 leading-tight">
+              <p className="text-xs md:text-sm text-muted-foreground text-center mt-2 leading-tight">
                 Sample image shown for display only. Not included with purchase.
               </p>
             )}
@@ -1131,6 +1132,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                         <button
                           className="text-muted-foreground hover:text-foreground transition-colors"
                           data-testid="button-dimensional-diagram"
+                          aria-label="View dimensional diagram"
                         >
                           <Info className="h-4 w-4" />
                         </button>
@@ -1171,6 +1173,17 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                       setFullImageOpen(true);
                     }
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      if (resolvedCornerUrl) {
+                        setFullscreenImage("corner");
+                        setFullImageOpen(true);
+                      }
+                    }
+                  }}
+                  role="button"
+                  tabIndex={resolvedCornerUrl ? 0 : -1}
                   data-testid="img-corner-detail"
                 >
                   {resolvedCornerUrl ? (
@@ -1198,6 +1211,17 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                       setFullImageOpen(true);
                     }
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      if (resolvedProfileUrl) {
+                        setFullscreenImage("profile");
+                        setFullImageOpen(true);
+                      }
+                    }
+                  }}
+                  role="button"
+                  tabIndex={resolvedProfileUrl ? 0 : -1}
                   data-testid="img-profile-view"
                 >
                   {resolvedProfileUrl ? (
@@ -1225,6 +1249,17 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                       setFullImageOpen(true);
                     }
                   }}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      if (framePhotos.lifestyleUrl) {
+                        setFullscreenImage("lifestyle");
+                        setFullImageOpen(true);
+                      }
+                    }
+                  }}
+                  role="button"
+                  tabIndex={framePhotos.lifestyleUrl ? 0 : -1}
                   data-testid="img-lifestyle"
                 >
                   {framePhotos.lifestyleUrl ? (
@@ -1906,6 +1941,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                 }}
                 data-testid="button-mobile-copy-link"
                 className="h-7 w-7"
+                aria-label="Copy design link"
               >
                 <Copy className="h-3.5 w-3.5" />
               </Button>

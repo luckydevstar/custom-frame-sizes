@@ -115,6 +115,7 @@ export function AcrylicCleanerClient() {
                           : "border-transparent hover:border-muted-foreground/30"
                       }`}
                       data-testid={`button-thumbnail-${idx}`}
+                      aria-label={`Select product view ${idx + 1}`}
                     >
                       <Image
                         src={img}

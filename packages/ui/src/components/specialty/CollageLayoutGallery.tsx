@@ -315,6 +315,7 @@ function SizeFilterButtons({
             className="p-1.5 rounded-md text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
             data-testid="filter-clear"
             title="Clear filters"
+            aria-label="Clear filters"
           >
             <X className="w-4 h-4" />
           </button>

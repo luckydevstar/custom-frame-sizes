@@ -821,6 +821,7 @@ export function PuzzleFrameDesigner({
                     onClick={() => setShowFullscreenPreview(true)}
                     className="absolute top-3 left-3 z-10 shadow-md"
                     data-testid="button-fullscreen-preview"
+                    aria-label="Fullscreen view"
                   >
                     <Maximize className="h-4 w-4" />
                   </Button>
@@ -850,7 +851,7 @@ export function PuzzleFrameDesigner({
                 </div>
 
                 {/* Sample image caption */}
-                <p className="text-xs text-muted-foreground/60 text-center mt-2">
+                <p className="text-xs text-muted-foreground text-center mt-2">
                   Sample image. Not included with purchase.
                 </p>
 
@@ -870,6 +871,7 @@ export function PuzzleFrameDesigner({
                             <button
                               className="text-muted-foreground hover:text-foreground transition-colors"
                               data-testid="button-dimensional-diagram"
+                              aria-label="View dimensional diagram"
                             >
                               <Info className="h-4 w-4" />
                             </button>
@@ -1259,6 +1261,11 @@ export function PuzzleFrameDesigner({
                           value={[matBorder]}
                           onValueChange={(values) => setMatBorderWidth((values[0] ?? 0).toString())}
                           data-testid="slider-mat-border"
+                          aria-label="Mat border width in inches"
+                          aria-valuemin={1.5}
+                          aria-valuemax={8}
+                          aria-valuenow={matBorder}
+                          aria-valuetext={`${matBorder.toFixed(2)} inches`}
                         />
                         <p className="text-xs text-muted-foreground">
                           Border on each side of the puzzle
@@ -1466,6 +1473,7 @@ export function PuzzleFrameDesigner({
                 onClick={handleCopyLink}
                 data-testid="button-puzzle-mobile-copy-link"
                 className="h-11 w-11"
+                aria-label="Copy design link"
               >
                 <Copy className="h-4 w-4" />
               </Button>

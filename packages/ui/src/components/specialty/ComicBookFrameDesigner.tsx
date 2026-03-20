@@ -842,6 +842,7 @@ export function ComicBookFrameDesigner({
                           }}
                           className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                           data-testid="button-expand-preview"
+                          aria-label="Fullscreen view"
                         >
                           <Maximize className="h-5 w-5" />
                         </button>
@@ -870,7 +871,7 @@ export function ComicBookFrameDesigner({
                     ) : (
                       <div className="flex items-center justify-center h-full min-h-[400px]">
                         <div className="text-center p-8">
-                          <LayoutGrid className="w-12 h-12 mx-auto mb-4 text-muted-foreground/50" />
+                          <LayoutGrid className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
                           <p className="text-lg font-medium text-muted-foreground">
                             Select a layout to preview your frame
                           </p>
@@ -1580,6 +1581,7 @@ export function ComicBookFrameDesigner({
                     <Button
                       variant="outline"
                       size="icon"
+                      aria-label="Copy design link"
                       onClick={() => {
                         if (typeof window !== "undefined") {
                           navigator.clipboard.writeText(window.location.href);
@@ -1727,6 +1729,7 @@ export function ComicBookFrameDesigner({
                     onClick={handleShare}
                     className="h-11 w-11"
                     data-testid="comic-mobile-copy-link"
+                    aria-label="Copy design link"
                   >
                     <Copy className="h-4 w-4" />
                   </Button>

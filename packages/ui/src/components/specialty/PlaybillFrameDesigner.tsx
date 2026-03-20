@@ -600,6 +600,7 @@ export function PlaybillFrameDesigner({
                           }}
                           className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
                           data-testid="button-expand-preview"
+                          aria-label="Fullscreen view"
                         >
                           <Maximize className="h-5 w-5" />
                         </button>
@@ -625,7 +626,7 @@ export function PlaybillFrameDesigner({
                   </div>
 
                   {/* Sample image caption */}
-                  <p className="text-xs text-muted-foreground/60 text-center mt-2">
+                  <p className="text-xs text-muted-foreground text-center mt-2">
                     Sample image. Not included with purchase.
                   </p>
 
@@ -651,6 +652,7 @@ export function PlaybillFrameDesigner({
                               <button
                                 className="text-muted-foreground hover:text-foreground transition-colors"
                                 data-testid="button-dimensional-diagram"
+                                aria-label="View dimensional diagram"
                               >
                                 <Info className="h-4 w-4" />
                               </button>
@@ -1149,6 +1151,7 @@ export function PlaybillFrameDesigner({
                   onClick={handleShare}
                   data-testid="button-playbill-mobile-copy-link"
                   className="h-11 w-11"
+                  aria-label="Copy design link"
                 >
                   <Copy className="h-4 w-4" />
                 </Button>
@@ -1242,7 +1245,7 @@ export function PlaybillFrameDesigner({
               {fullscreenImage === "lifestyle" && fullscreenLifestyleUrl && (
                 <img
                   src={fullscreenLifestyleUrl}
-                  alt="Lifestyle photo"
+                  alt="Lifestyle"
                   className="max-w-full max-h-full object-contain"
                 />
               )}

@@ -7,6 +7,11 @@ import remarkBreaks from "remark-breaks";
 import { Button, Card, CardContent, Badge } from "@framecraft/ui";
 import { Clock, Calendar, User, ArrowLeft, ArrowRight } from "lucide-react";
 import { getBlogPost, getBlogPosts, formatBlogDate } from "@/lib/blog";
+import { env } from "@/lib/env";
+
+const siteOrigin = env.shopify.storeDomain
+  ? `https://${env.shopify.storeDomain}`
+  : "https://customframesizes.com";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -21,14 +26,17 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const post = getBlogPost(slug);
   if (!post) return { title: "Post Not Found" };
+  const canonical = `${siteOrigin}/blog/${slug}`;
   return {
     title: `${post.title} | Custom Frame Sizes Blog`,
     description: post.description,
+    alternates: { canonical },
     openGraph: {
       title: post.title,
       description: post.description,
       type: "article",
       publishedTime: post.date,
+      url: canonical,
     },
   };
 }
@@ -57,6 +65,34 @@ export default async function BlogPostPage({ params }: PageProps) {
   const nextPost =
     currentIndex >= 0 && currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
 
+  const postUrl = `${siteOrigin}/blog/${slug}`;
+  const imageUrl = post.hero?.startsWith("http")
+    ? post.hero
+    : post.hero
+      ? `${siteOrigin}${post.hero}`
+      : undefined;
+  const blogPostingSchema = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    headline: post.title,
+    description: post.description,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      "@type": "Organization",
+      name: post.author,
+      url: siteOrigin,
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "CustomFrameSizes",
+      url: siteOrigin,
+    },
+    mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
+    url: postUrl,
+    ...(imageUrl ? { image: [imageUrl] } : {}),
+  };
+
   return (
     <article className="container mx-auto px-4 py-8 max-w-4xl">
       <Link href="/blog">
@@ -66,11 +102,16 @@ export default async function BlogPostPage({ params }: PageProps) {
         </Button>
       </Link>
 
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingSchema) }}
+      />
+
       {post.hero && (
         <div className="mb-8 relative w-full h-96 rounded-lg overflow-hidden bg-muted">
           <Image
             src={post.hero}
-            alt=""
+            alt={post.heroAlt ?? `${post.title} — featured for this framing guide`}
             fill
             className="object-cover"
             data-testid="img-post-hero"
@@ -132,8 +173,18 @@ export default async function BlogPostPage({ params }: PageProps) {
                 </a>
               );
             },
-            h2: ({ node: _node, ...props }) => <h2 {...props} className="scroll-mt-20 mt-8 mb-4" />,
-            h3: ({ node: _node, ...props }) => <h3 {...props} className="scroll-mt-20 mt-6 mb-3" />,
+            h2: ({ node: _node, children, ...props }) => (
+              <h2 {...props} className="scroll-mt-20 mt-8 mb-4">
+                {children}
+              </h2>
+            ),
+            // Map markdown "h3" to "h2" to avoid H1 -> H3 heading level skips in articles
+            // when the markdown starts with "###" instead of "##".
+            h3: ({ node: _node, children, ...props }) => (
+              <h2 {...props} className="scroll-mt-20 mt-6 mb-3">
+                {children}
+              </h2>
+            ),
           }}
         >
           {post.content}

@@ -150,7 +150,7 @@ export function GlazingShowcase() {
 
               {/* Recommendation */}
               <div className="pt-4 border-t">
-                <p className="text-xs text-center text-muted-foreground/80">
+                <p className="text-xs text-center text-muted-foreground">
                   <span className="font-medium text-foreground">Recommended:</span>{" "}
                   {option.recommended}
                 </p>
