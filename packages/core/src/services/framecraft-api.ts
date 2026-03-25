@@ -62,14 +62,12 @@ async function request<T>(method: string, path: string, body?: unknown): Promise
 
 /**
  * Create a new cart or get existing cart by id/cookie.
- * Body can be {} or { cartId: "gid://..." }. Cookie is sent automatically.
+ *
+ * @param cartId - Cart ID to retrieve. If null, forces creation of new cart. If undefined, uses cookie.
  */
-export async function createOrGetCart(cartId?: string): Promise<FramecraftCart> {
-  const data = await request<{ cart: FramecraftCart }>(
-    "POST",
-    "/api/cart",
-    cartId ? { cartId } : {}
-  );
+export async function createOrGetCart(cartId?: string | null): Promise<FramecraftCart> {
+  const body = cartId !== undefined ? { cartId } : {};
+  const data = await request<{ cart: FramecraftCart }>("POST", "/api/cart", body);
   if (!data.cart) throw new Error("No cart in response");
   return data.cart;
 }

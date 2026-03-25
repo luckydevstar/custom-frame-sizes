@@ -30,14 +30,6 @@ export function CartPageClient() {
       const variantId =
         process.env.NEXT_PUBLIC_SHOPIFY_FRAME_VARIANT_ID || "gid://shopify/ProductVariant/mock";
 
-      // Clear cart cookie to force creation of a new cart
-      // This prevents duplicate items when clicking checkout multiple times
-      document.cookie = "framecraft_cart_id=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-
-      // Create a FRESH cart
-      const { createOrGetCart, addCartLines } =
-        await import("@framecraft/core/services/framecraft-api");
-
       // Import pricing calculator to ensure prices match frontend
       const { calculatePricing } = await import("@framecraft/core/services/pricing");
 
@@ -55,12 +47,18 @@ export function CartPageClient() {
         };
       });
 
-      // Create fresh cart (cookie is cleared, so this will create new)
-      const cart = await createOrGetCart();
+      // CRITICAL: Create a completely new cart with ONLY current items
+      // Pass null for cartId to force creation of a new cart instead of retrieving old one
+      const { createOrGetCart, getCheckoutUrl } =
+        await import("@framecraft/core/services/framecraft-api");
+
+      const cart = await createOrGetCart(null);
+
+      // Add the current items to the new cart
+      const { addCartLines } = await import("@framecraft/core/services/framecraft-api");
       await addCartLines(lines, cart.id);
 
-      // Get checkout URL
-      const { getCheckoutUrl } = await import("@framecraft/core/services/framecraft-api");
+      // Get checkout URL for the new cart
       const checkoutUrl = await getCheckoutUrl(cart.id);
       window.location.href = checkoutUrl;
     } catch (error) {
