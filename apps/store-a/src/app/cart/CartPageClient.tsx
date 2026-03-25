@@ -47,20 +47,24 @@ export function CartPageClient() {
         };
       });
 
-      // CRITICAL: Create a completely new cart with ONLY current items
-      // Pass null for cartId to force creation of a new cart instead of retrieving old one
-      const { createOrGetCart, getCheckoutUrl } =
-        await import("@framecraft/core/services/framecraft-api");
+      // CRITICAL: Get a fresh checkout URL with current items
+      // The backend will handle clearing old carts and creating a new fresh one
+      const apiBase = (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_API_URL) || "";
 
-      const cart = await createOrGetCart(null);
+      const freshCheckoutRes = await fetch(`${apiBase}/api/cart/fresh-checkout`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ lines }),
+        credentials: "include",
+      });
 
-      // Add the current items to the new cart
-      const { addCartLines } = await import("@framecraft/core/services/framecraft-api");
-      await addCartLines(lines, cart.id);
+      const freshCheckoutData = await freshCheckoutRes.json();
 
-      // Get checkout URL for the new cart
-      const checkoutUrl = await getCheckoutUrl(cart.id);
-      window.location.href = checkoutUrl;
+      if (!freshCheckoutData.success || !freshCheckoutData.checkoutUrl) {
+        throw new Error(freshCheckoutData.error?.message || "Failed to create fresh checkout");
+      }
+
+      window.location.href = freshCheckoutData.checkoutUrl;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       setError(message);
