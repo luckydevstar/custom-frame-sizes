@@ -30,6 +30,20 @@ export function CartPageClient() {
       const variantId =
         process.env.NEXT_PUBLIC_SHOPIFY_FRAME_VARIANT_ID || "gid://shopify/ProductVariant/mock";
 
+      // CRITICAL: Clear ALL Shopify-related cookies to force a fresh session
+      // This prevents Shopify from associating the new cart with old checkout sessions
+      const cookies = document.cookie.split(";");
+      cookies.forEach((cookie) => {
+        const name = cookie.split("=")[0]?.trim();
+        // Clear any Shopify cookies (cart, checkout, session)
+        if (
+          name &&
+          (name.includes("shopify") || name.includes("cart") || name.includes("checkout"))
+        ) {
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+        }
+      });
+
       // Import serialization and pricing functions
       const { serializeFrameConfiguration } = await import("@framecraft/core/shopify");
       const { calculatePricing } = await import("@framecraft/core/services/pricing");
