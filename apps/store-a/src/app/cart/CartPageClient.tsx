@@ -30,37 +30,59 @@ export function CartPageClient() {
       const variantId =
         process.env.NEXT_PUBLIC_SHOPIFY_FRAME_VARIANT_ID || "gid://shopify/ProductVariant/mock";
 
-      // Import pricing calculator to ensure prices match frontend
+      // CRITICAL: Clear ALL Shopify-related cookies to force a fresh session
+      // This prevents Shopify from associating the new cart with old checkout sessions
+      const cookies = document.cookie.split(";");
+      cookies.forEach((cookie) => {
+        const name = cookie.split("=")[0]?.trim();
+        // Clear any Shopify cookies (cart, checkout, session)
+        if (
+          name &&
+          (name.includes("shopify") || name.includes("cart") || name.includes("checkout"))
+        ) {
+          document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/`;
+        }
+      });
+
+      // Import serialization and pricing functions
+      const { serializeFrameConfiguration } = await import("@framecraft/core/shopify");
       const { calculatePricing } = await import("@framecraft/core/services/pricing");
 
-      // Convert local cart items to API format with calculated prices
+      // Convert local cart items to API format with serialized configuration
       const lines = items.map((item) => {
         // Calculate price using same engine as displayed in cart
         const pricing = calculatePricing(item.configuration!);
         const priceCents = Math.round(pricing.total * 100); // Convert dollars to cents
 
+        // Serialize configuration to Shopify attributes format
+        const attributes = serializeFrameConfiguration(item.configuration!);
+
         return {
           merchandiseId: variantId,
           quantity: item.quantity,
-          configuration: item.configuration!,
-          priceCents, // Pass calculated price to backend
+          attributes, // Pre-serialized for Shopify
+          priceCents,
         };
       });
 
-      // CRITICAL: Create a completely new cart with ONLY current items
-      // Pass null for cartId to force creation of a new cart instead of retrieving old one
-      const { createOrGetCart, getCheckoutUrl } =
-        await import("@framecraft/core/services/framecraft-api");
+      // CRITICAL: Get a fresh checkout URL with current items
+      // The backend will handle clearing old carts and creating a new fresh one
+      const apiBase = (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_API_URL) || "";
 
-      const cart = await createOrGetCart(null);
+      const freshCheckoutRes = await fetch(`${apiBase}/api/cart/fresh-checkout`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ lines }),
+        credentials: "include",
+      });
 
-      // Add the current items to the new cart
-      const { addCartLines } = await import("@framecraft/core/services/framecraft-api");
-      await addCartLines(lines, cart.id);
+      const freshCheckoutData = await freshCheckoutRes.json();
 
-      // Get checkout URL for the new cart
-      const checkoutUrl = await getCheckoutUrl(cart.id);
-      window.location.href = checkoutUrl;
+      if (!freshCheckoutData.success || !freshCheckoutData.checkoutUrl) {
+        throw new Error(freshCheckoutData.error?.message || "Failed to create fresh checkout");
+      }
+
+      window.location.href = freshCheckoutData.checkoutUrl;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
       setError(message);
