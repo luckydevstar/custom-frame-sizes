@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const path = require('path');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 
 // Rewrite asset URLs to local API (assets_to_use). Path goes in URL so it is passed reliably.
 // Note: 'frames' is NOT included here because /frames/colors, /frames/styles, /frames/sizes are
@@ -20,6 +23,7 @@ const assetsRewrite = {
 };
 const nextConfig = {
   reactStrictMode: true,
+  swcMinify: true, // Use SWC for faster minification
   async rewrites() {
     return [...assetRewrites, assetsRewrite];
   },
@@ -96,5 +100,5 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);
 

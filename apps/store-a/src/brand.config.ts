@@ -21,9 +21,9 @@ export const brandConfig: BrandConfig = {
 
   theme: {
     brandColors: {
-      primary: "#1D7BC7", // Blue - matches default theme
-      secondary: "#0ea5e9", // Light blue
-      accent: "#FF7A00", // Orange accent
+      primary: "#0F7CFF", // Vibrant blue - from original CustomFrameSizes.com
+      secondary: "#f3f4f6", // Light grey/white
+      accent: "#0F7CFF", // Blue accent
     },
     typography: {
       fonts: {
