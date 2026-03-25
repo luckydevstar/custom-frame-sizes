@@ -11,8 +11,10 @@
 export const HEAVY_COMPONENTS = {
   // Designer tools - complex state management, large dependencies
   FrameDesigner: () => import("@framecraft/ui").then((m) => m.FrameDesigner),
-  MatDesigner: () => import("@framecraft/ui").then((m) => m.MatDesigner),
+  MatConfigurator: () => import("@framecraft/ui").then((m) => m.MatConfigurator),
   ShadowboxDesigner: () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
+  JerseyFrameDesigner: () => import("@framecraft/ui").then((m) => m.JerseyFrameDesigner),
+  CanvasFrameDesigner: () => import("@framecraft/ui").then((m) => m.CanvasFrameDesigner),
 
   // Showcases - gallery components with many images
   ShadowboxShowcase: () => import("@framecraft/ui").then((m) => m.ShadowboxShowcase),
@@ -21,8 +23,8 @@ export const HEAVY_COMPONENTS = {
   SpecialtyDesignersShowcase: () =>
     import("@framecraft/ui").then((m) => m.SpecialtyDesignersShowcase),
 
-  // 3D viewers - heavyweight libraries
-  ModelViewer: () => import("@framecraft/ui").then((m) => m.ModelViewer),
+  // AR viewer - heavyweight 3D libraries
+  ARViewer: () => import("@framecraft/ui").then((m) => m.ARViewer),
 };
 
 /**
