@@ -12,7 +12,7 @@ import { Toaster } from "@framecraft/ui/components/ui/toaster";
 // Body font - loaded with key weights only
 const inter = Inter({
   subsets: ["latin"],
-  weight: [300, 400, 500, 600, 700],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
   preload: true,
 });
@@ -20,7 +20,7 @@ const inter = Inter({
 // Heading font - loaded with key weights only
 const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: [400, 700],
+  weight: ["400", "700"],
   display: "swap",
   preload: true,
   variable: "--font-playfair",
@@ -29,7 +29,7 @@ const playfair = Playfair_Display({
 // Accent font - loaded with key weights only
 const montserrat = Montserrat({
   subsets: ["latin"],
-  weight: [300, 400, 500, 600, 700],
+  weight: ["300", "400", "500", "600", "700"],
   display: "swap",
   preload: true,
   variable: "--font-montserrat",

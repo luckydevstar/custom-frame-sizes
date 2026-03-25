@@ -21,7 +21,7 @@ export const FONT_STRATEGY = {
     inter: {
       name: "Inter",
       usage: "Body text, default sans-serif",
-      weight: [300, 400, 500, 600, 700],
+      weight: ["300", "400", "500", "600", "700"],
       display: "swap",
       preload: true,
       cssVariable: "--font-inter",
@@ -29,7 +29,7 @@ export const FONT_STRATEGY = {
     playfair: {
       name: "Playfair Display",
       usage: "Headings (h1-h6)",
-      weight: [400, 700],
+      weight: ["400", "700"],
       display: "swap",
       preload: true,
       cssVariable: "--font-playfair",
@@ -37,7 +37,7 @@ export const FONT_STRATEGY = {
     montserrat: {
       name: "Montserrat",
       usage: "Accent elements, special emphasis",
-      weight: [300, 400, 500, 600, 700],
+      weight: ["300", "400", "500", "600", "700"],
       display: "swap",
       preload: true,
       cssVariable: "--font-montserrat",
@@ -101,7 +101,7 @@ export const IMPLEMENTATION = {
   configuration: `
     const inter = Inter({
       subsets: ['latin'],
-      weight: [300, 400, 500, 600, 700],
+      weight: ['300', '400', '500', '600', '700'],
       display: 'swap',
       preload: true,
       variable: '--font-inter',
@@ -109,7 +109,7 @@ export const IMPLEMENTATION = {
 
     const playfair = Playfair_Display({
       subsets: ['latin'],
-      weight: [400, 700],
+      weight: ['400', '700'],
       display: 'swap',
       preload: true,
       variable: '--font-playfair',
@@ -117,7 +117,7 @@ export const IMPLEMENTATION = {
 
     const montserrat = Montserrat({
       subsets: ['latin'],
-      weight: [300, 400, 500, 600, 700],
+      weight: ['300', '400', '500', '600', '700'],
       display: 'swap',
       preload: true,
       variable: '--font-montserrat',
