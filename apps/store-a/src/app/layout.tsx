@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Playfair_Display, Montserrat } from "next/font/google";
 import "./globals.css";
 import { StoreProvider } from "@framecraft/core";
 import { brandConfig } from "../brand.config";
@@ -9,10 +9,30 @@ import { Header, Footer } from "@framecraft/ui/components/layout";
 import { TooltipProvider } from "@framecraft/ui";
 import { Toaster } from "@framecraft/ui/components/ui/toaster";
 
+// Body font - loaded with key weights only
 const inter = Inter({
   subsets: ["latin"],
+  weights: [300, 400, 500, 600, 700],
   display: "swap",
   preload: true,
+});
+
+// Heading font - loaded with key weights only
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  weights: [400, 700],
+  display: "swap",
+  preload: true,
+  variable: "--font-playfair",
+});
+
+// Accent font - loaded with key weights only
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  weights: [300, 400, 500, 600, 700],
+  display: "swap",
+  preload: true,
+  variable: "--font-montserrat",
 });
 
 // Get SEO metadata from brand config
@@ -46,7 +66,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={`${inter.className} ${playfair.variable} ${montserrat.variable}`}>
         <QueryProvider>
           <StoreProvider config={brandConfig}>
             <CartHydration />
