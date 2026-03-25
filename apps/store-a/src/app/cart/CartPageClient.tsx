@@ -30,20 +30,24 @@ export function CartPageClient() {
       const variantId =
         process.env.NEXT_PUBLIC_SHOPIFY_FRAME_VARIANT_ID || "gid://shopify/ProductVariant/mock";
 
-      // Import pricing calculator to ensure prices match frontend
+      // Import serialization and pricing functions
+      const { serializeFrameConfiguration } = await import("@framecraft/core/shopify");
       const { calculatePricing } = await import("@framecraft/core/services/pricing");
 
-      // Convert local cart items to API format with calculated prices
+      // Convert local cart items to API format with serialized configuration
       const lines = items.map((item) => {
         // Calculate price using same engine as displayed in cart
         const pricing = calculatePricing(item.configuration!);
         const priceCents = Math.round(pricing.total * 100); // Convert dollars to cents
 
+        // Serialize configuration to Shopify attributes format
+        const attributes = serializeFrameConfiguration(item.configuration!);
+
         return {
           merchandiseId: variantId,
           quantity: item.quantity,
-          configuration: item.configuration!,
-          priceCents, // Pass calculated price to backend
+          attributes, // Pre-serialized for Shopify
+          priceCents,
         };
       });
 
