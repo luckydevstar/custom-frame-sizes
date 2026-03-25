@@ -62,6 +62,7 @@ export function CartPageClient() {
           quantity: item.quantity,
           attributes, // Pre-serialized for Shopify
           priceCents,
+          configuration: item.configuration!, // Send raw config for backend processing
         };
       });
 
