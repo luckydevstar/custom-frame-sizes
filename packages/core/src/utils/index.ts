@@ -30,5 +30,3 @@ export * from "./export-preview";
 export * from "./ar-model-generator";
 export * from "./generate-ticket-svg";
 export * from "./cart-item";
-// Re-export mat-tiling utilities for convenience (used by many designers)
-export * from "./specialty/mat-tiling";
