@@ -35,7 +35,7 @@ export * from "./features";
 // Brand configuration
 export * from "./brand-config";
 // Note: BrandConfigRegistry type is exported from types/brand-config
-// The instance is exported from brand-config
+// The instance (brandConfigRegistry) is exported from brand-config
 export type {
   BrandConfig,
   BrandConfigRegistry,
