@@ -1,21 +1,21 @@
 "use client";
 
+import {
+  computePreviewLayout,
+  getMatTilingStyle,
+  getMatBevelColor,
+  PUCK_INSERTS,
+  createPuckDataUrl,
+  type PuckLayout,
+  type PuckInsert,
+} from "@framecraft/core";
 import { ImageIcon } from "lucide-react";
 import { memo, useMemo, useCallback, useState, useEffect } from "react";
 
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
 
 import type { Mat } from "@framecraft/config";
-import type { PuckLayout ,
-  computePreviewLayout,
-  getMatTilingStyle,
-  getMatBevelColor,
-  PUCK_INSERTS,
-  createPuckDataUrl,
-  type PuckInsert,
-} from "@framecraft/core";
-import type { FrameStyle , BrassNameplateConfig } from "@framecraft/types";
-
+import type { FrameStyle, BrassNameplateConfig } from "@framecraft/types";
 
 interface PuckPreviewCanvasProps {
   layout: ReturnType<typeof computePreviewLayout>;
@@ -119,7 +119,7 @@ export const PuckPreviewCanvas = memo(function PuckPreviewCanvas({
           const cx = opening.x * previewScale;
           const cy = opening.y * previewScale;
           paths.push(
-            `M ${cx - r} ${cy} A ${r} ${r} 0 1 0 ${cx + r} ${cy} A ${r} ${r} 0 1 0 ${cx - r} ${cy}`
+            `M ${cx - r} ${cy} A ${r} ${r} 0 1 0 ${cx + r} ${cy} A ${r} ${r} 0 1 0 ${cx - r} ${cy}`,
           );
         } else {
           const x = opening.x * previewScale + revealOffset;
@@ -133,12 +133,12 @@ export const PuckPreviewCanvas = memo(function PuckPreviewCanvas({
       const outerRect = `M 0 0 h ${layout.glassPx.w} v ${layout.glassPx.h} h ${-layout.glassPx.w} Z`;
       return `${outerRect} ${paths.join(" ")}`;
     },
-    [currentLayout.openings, matReveal, previewScale, layout.glassPx.w, layout.glassPx.h]
+    [currentLayout.openings, matReveal, previewScale, layout.glassPx.w, layout.glassPx.h],
   );
 
   const bottomMatPath = useMemo(
     () => generateMatClipPath(matType === "double"),
-    [generateMatClipPath, matType]
+    [generateMatClipPath, matType],
   );
 
   const topMatPath = useMemo(() => generateMatClipPath(false), [generateMatClipPath]);
@@ -148,7 +148,7 @@ export const PuckPreviewCanvas = memo(function PuckPreviewCanvas({
       bottomMat: `puck-bottom-mat-${currentLayout.id}-${Date.now()}`,
       topMat: `puck-top-mat-${currentLayout.id}-${Date.now()}`,
     }),
-    [currentLayout.id]
+    [currentLayout.id],
   );
 
   const renderOpenings = () => {
@@ -403,7 +403,7 @@ export const PuckPreviewCanvas = memo(function PuckPreviewCanvas({
             ...getMatTilingStyle(
               matType === "single" ? topMatColor.name : bottomMatColor.name,
               previewScale,
-              matType === "single" ? topMatColor.hexColor : bottomMatColor.hexColor
+              matType === "single" ? topMatColor.hexColor : bottomMatColor.hexColor,
             ),
             transition: "background-color 450ms cubic-bezier(0.19, 1.0, 0.22, 1.0)",
           }}
