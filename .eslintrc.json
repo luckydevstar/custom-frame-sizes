@@ -12,6 +12,8 @@
     "plugin:react-hooks/recommended",
     "plugin:react/jsx-runtime",
     "plugin:jsx-a11y/recommended",
+    "plugin:import/recommended",
+    "plugin:import/typescript",
     "prettier"
   ],
   "ignorePatterns": [
@@ -30,7 +32,7 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "react", "react-hooks", "jsx-a11y"],
+  "plugins": ["@typescript-eslint", "react", "react-hooks", "jsx-a11y", "import"],
   "rules": {
     "@typescript-eslint/no-unused-vars": [
       "error",
@@ -39,7 +41,7 @@
         "varsIgnorePattern": "^_"
       }
     ],
-    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-explicit-any": "warn",
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "react/react-in-jsx-scope": "off",
     "react/prop-types": "off",
@@ -52,7 +54,17 @@
     "jsx-a11y/no-noninteractive-element-interactions": "warn",
     "jsx-a11y/no-noninteractive-tabindex": "warn",
     "jsx-a11y/heading-has-content": "warn",
-    "jsx-a11y/anchor-has-content": "warn"
+    "jsx-a11y/anchor-has-content": "warn",
+    "import/order": [
+      "warn",
+      {
+        "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "type"],
+        "alphabetize": { "order": "asc", "caseInsensitive": true },
+        "newlines-between": "always"
+      }
+    ],
+    "import/no-unresolved": "off",
+    "import/no-duplicates": "warn"
   },
   "settings": {
     "react": {
