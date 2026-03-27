@@ -1,18 +1,23 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef, lazy, Suspense } from "react";
-// Removed wouter useLocation - not needed in Next.js
 import { Maximize, X, Eye, Settings, Info, Smartphone, Copy, Flower2 } from "lucide-react";
+import { useState, useEffect, useMemo, useRef, lazy, Suspense } from "react";
+
+// Removed wouter useLocation - not needed in Next.js
+import { useToast } from "../../hooks/use-toast";
+import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
+import { TrustBox } from "../marketing/TrustBox";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
+import { Checkbox } from "../ui/checkbox";
+import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
+import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Checkbox } from "../ui/checkbox";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { Input } from "../ui/input";
-import { Slider } from "../ui/slider";
 import { Separator } from "../ui/separator";
-import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
+import { Slider } from "../ui/slider";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 // Lazy-load ARViewer so @google/model-viewer (uses `self`) is never loaded on the server
@@ -20,16 +25,15 @@ const ARViewer = lazy(() => import("../shared/ARViewer").then((m) => ({ default:
 
 import { PriceBox } from "../ui/PriceBox";
 import { QuantitySelector } from "../ui/quantity-selector";
-import type { PriceLineItem } from "../ui/PriceBox";
 import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
-import { TrustBox } from "../marketing/TrustBox";
+
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
-import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
-import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+
+import type { PriceLineItem } from "../ui/PriceBox";
 
 // Types from @framecraft/types
-import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
-import type { BrassNameplateConfig } from "@framecraft/types";
+import type { FrameStyle, FrameConfiguration, BrassNameplateConfig } from "@framecraft/types";
+
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 
 // Services, utils, hooks from @framecraft/core
@@ -52,6 +56,8 @@ import {
   resolveFramePhotoUrl,
   getRandomBouquetLifestyleImage,
   getBouquetLifestyleImages,
+  useIsMobile,
+  useMobileViewToggle,
 } from "@framecraft/core";
 
 // Config from @framecraft/config
@@ -63,9 +69,6 @@ import {
   ALL_MATS,
   type Mat,
 } from "@framecraft/config";
-
-import { useToast } from "../../hooks/use-toast";
-import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
 
 // Bouquet-specific frame SKUs: Deep Black (10727), Deep White (10728), Deep Brown (10729)
 const BOUQUET_FRAME_SKUS = ["10727", "10728", "10729"];

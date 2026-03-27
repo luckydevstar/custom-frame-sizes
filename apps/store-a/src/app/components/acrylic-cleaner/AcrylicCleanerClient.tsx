@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
-import { useState, useEffect } from "react";
 import { Button, Card, Label, QuantitySelector, TrustBadges } from "@framecraft/ui";
 import { useToast } from "@framecraft/ui/hooks/use-toast";
 import { ShoppingCart, Check, Sparkles, Shield, Droplets, Package } from "lucide-react";
+import Image from "next/image";
+import { useState, useEffect } from "react";
 
 const PRODUCT_IMAGES = [
   "https://novuspolish.com/cdn/shop/files/NPP-1---8-oz_Front_1946x.jpg?v=1731410582",

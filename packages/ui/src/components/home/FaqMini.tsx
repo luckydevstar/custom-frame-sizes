@@ -1,9 +1,10 @@
 "use client";
 
+import { useIntersectionAnimation } from "@framecraft/core";
 import Link from "next/link";
+
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import { Button } from "../ui/button";
-import { useIntersectionAnimation } from "@framecraft/core";
 
 export interface FAQ {
   question: string;

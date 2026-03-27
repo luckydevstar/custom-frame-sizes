@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import {
   Palette,
   Ruler,
@@ -23,6 +22,7 @@ import {
   Heart,
   Film,
 } from "lucide-react";
+import Link from "next/link";
 
 export function PictureFramesMegaMenu() {
   const browseOptions = [

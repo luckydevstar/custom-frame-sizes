@@ -5,8 +5,9 @@
 
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { animations } from "@framecraft/config";
+import { useEffect, useRef, useState } from "react";
+
 import { usePrefersReducedMotion } from "./useScrollAnimation";
 
 export interface ParallaxOptions {

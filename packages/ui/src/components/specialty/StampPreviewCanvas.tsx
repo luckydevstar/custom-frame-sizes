@@ -1,13 +1,14 @@
 "use client";
 
-import { memo, useMemo } from "react";
-import { PostageStampIcon } from "../icons/PostageStampIcon";
-import type { FrameStyle } from "@framecraft/types";
-import type { BrassNameplateConfig } from "@framecraft/types";
-import type { StampBackingOption } from "@framecraft/core";
-import type { Mat } from "@framecraft/config";
 import { computePreviewLayout, getMatTilingStyle, getMatBevelColor } from "@framecraft/core";
+import { memo, useMemo } from "react";
+
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+import { PostageStampIcon } from "../icons/PostageStampIcon";
+
+import type { Mat } from "@framecraft/config";
+import type { StampBackingOption } from "@framecraft/core";
+import type { FrameStyle , BrassNameplateConfig } from "@framecraft/types";
 
 interface StampPreviewCanvasProps {
   layout: ReturnType<typeof computePreviewLayout>;

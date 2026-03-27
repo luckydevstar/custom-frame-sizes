@@ -1,10 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import { ShoppingCart } from "lucide-react";
-import { useCartStore, cartSelectors } from "@framecraft/core/stores";
 import { formatPrice } from "@framecraft/core";
+import { useCartStore, cartSelectors } from "@framecraft/core/stores";
+import { ShoppingCart } from "lucide-react";
+import Link from "next/link";
+
 import { Button } from "../ui/button";
+
 import { CartItemCard } from "./CartItemCard";
 
 export interface CartClientProps {

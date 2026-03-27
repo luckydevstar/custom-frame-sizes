@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { Shirt, GraduationCap, Award, Box, Film } from "lucide-react";
 import { Button } from "@framecraft/ui";
+import { Shirt, GraduationCap, Award, Box, Film } from "lucide-react";
+import Link from "next/link";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Specialty Frames | Jersey, Diploma, Certificate & More | CustomFrameSizes.com",

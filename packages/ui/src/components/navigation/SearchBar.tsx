@@ -1,9 +1,11 @@
 "use client";
 
-import { useState } from "react";
 import { Search } from "lucide-react";
-import { Input } from "../ui/input";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
+
+import { Input } from "../ui/input";
+
 
 export interface SearchBarProps {
   placeholder?: string;

@@ -1,13 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
-import { Switch } from "../ui/switch";
-import { Checkbox } from "../ui/checkbox";
-import { Button } from "../ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { BrassNameplatePreview } from "./BrassNameplatePreview";
+import { useIsMobile } from "@framecraft/core";
+import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import {
   AlertCircle,
   Download,
@@ -18,10 +12,22 @@ import {
   GraduationCap,
   Trophy,
 } from "lucide-react";
-import type { BrassNameplateConfig } from "@framecraft/types";
-import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
+import { useState } from "react";
+
 import { useToast } from "../../hooks/use-toast";
-import { useIsMobile } from "@framecraft/core";
+import { Button } from "../ui/button";
+import { Checkbox } from "../ui/checkbox";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Switch } from "../ui/switch";
+
+import { BrassNameplatePreview } from "./BrassNameplatePreview";
+
+import type { BrassNameplateConfig } from "@framecraft/types";
+
+
+
 
 export interface BrassNameplateSectionProps {
   config: BrassNameplateConfig;

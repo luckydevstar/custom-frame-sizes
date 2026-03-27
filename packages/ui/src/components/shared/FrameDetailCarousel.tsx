@@ -1,9 +1,11 @@
 "use client";
 
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { useState, useRef, useLayoutEffect, useEffect } from "react";
+
 import { Button } from "../ui/button";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+
 import type { GalleryImage } from "./ImageGallery";
 
 interface FrameDetailCarouselProps {

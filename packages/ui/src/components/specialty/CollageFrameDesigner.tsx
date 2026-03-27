@@ -1,21 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef, useCallback } from "react";
-import { Copy, Maximize, X, Eye, Settings, Info, Upload, Pencil } from "lucide-react";
-import { Checkbox } from "../ui/checkbox";
-import { TermsOfServiceModal } from "../shared/TermsOfServiceModal";
-import { ImageEditor } from "../shared/ImageEditor";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
-import { QuantitySelector } from "../ui/quantity-selector";
-import { PriceBox } from "../ui/PriceBox";
-import type { PriceLineItem } from "../ui/PriceBox";
-import { useToast } from "../../hooks/use-toast";
+import { ALL_MATS, getMatById, isMatAvailableForSize, type Mat } from "@framecraft/config";
 import {
   useIsMobile,
   useMobileViewToggle,
@@ -32,17 +17,35 @@ import {
   uploadCollagePrintFile,
   useCollagePricing,
   getStoreBaseAssetUrl,
-} from "@framecraft/core";
-import type { FrameStyle } from "@framecraft/types";
-import type { BrassNameplateConfig } from "@framecraft/types";
-import { ALL_MATS, getMatById, isMatAvailableForSize, type Mat } from "@framecraft/config";
-import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
+ CollagePrintConfig, CollagePrintResult } from "@framecraft/core";
+import { Copy, Maximize, X, Eye, Settings, Info, Upload, Pencil } from "lucide-react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
+
+import { useToast } from "../../hooks/use-toast";
 import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
-import type { CollagePrintConfig, CollagePrintResult } from "@framecraft/core";
-import { CollagePreviewCanvas } from "./CollagePreviewCanvas";
-import { CollageLayoutGallery } from "./CollageLayoutGallery";
 import { TrustBadges } from "../marketing/TrustBadges";
+import { ImageEditor } from "../shared/ImageEditor";
+import { TermsOfServiceModal } from "../shared/TermsOfServiceModal";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { Checkbox } from "../ui/checkbox";
+import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Label } from "../ui/label";
+import { PriceBox } from "../ui/PriceBox";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+
+import { CollageLayoutGallery } from "./CollageLayoutGallery";
+import { CollagePreviewCanvas } from "./CollagePreviewCanvas";
 import { HangingHardwareSection, BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared";
+
+import type { PriceLineItem } from "../ui/PriceBox";
+import type { FrameStyle , BrassNameplateConfig } from "@framecraft/types";
+
+
 
 const pictureFrames = getFramesByCategory("picture");
 const allFrames = pictureFrames;

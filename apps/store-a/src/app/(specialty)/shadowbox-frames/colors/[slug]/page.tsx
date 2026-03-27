@@ -1,8 +1,3 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
-import { Button, Card, CardContent, Badge } from "@framecraft/ui";
 import {
   getFrameStyles,
   SHADOWBOX_COLOR_METADATA,
@@ -10,8 +5,15 @@ import {
   getShadowboxColorGalleryImages,
   getStoreBaseAssetUrl,
 } from "@framecraft/core";
+import { Button, Card, CardContent, Badge } from "@framecraft/ui";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+
 import { brandConfig } from "../../../../../brand.config";
+
 import type { FrameStyle } from "@framecraft/types";
+import type { Metadata } from "next";
 
 interface ShadowboxColorDetailPageProps {
   params: { slug: string };

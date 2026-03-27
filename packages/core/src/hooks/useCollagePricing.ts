@@ -5,15 +5,17 @@
 
 "use client";
 
-import { useMemo } from "react";
-import type { FrameStyle, GlassType, FrameConfiguration } from "@framecraft/types";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
+import { useMemo } from "react";
+
 import {
   type CollageLayoutType,
   COLLAGE_LAYOUTS,
   DEFAULT_FRAME_MOLDING_WIDTH,
 } from "../lib/collage-layouts";
 import { calculatePricing } from "../services/pricing";
+
+import type { FrameStyle, GlassType, FrameConfiguration } from "@framecraft/types";
 
 const MAT_SURCHARGE_PER_OPENING = 12;
 const DOUBLE_MAT_SURCHARGE = 15;

@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
 import { BusinessContent } from "./BusinessContent";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Business & Wholesale Custom Framing Solutions | Custom Frame Sizes",

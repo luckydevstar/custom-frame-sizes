@@ -5,10 +5,12 @@
  * Preserves base theme values for any missing overrides.
  */
 
+import { defaultTheme } from "../theme";
+
+import { hexToHSL } from "./base-theme";
+
 import type { ThemeConfig } from "../theme";
 import type { ThemeOverride } from "../types/brand-config";
-import { defaultTheme } from "../theme";
-import { hexToHSL } from "./base-theme";
 
 /**
  * Merge theme override with base theme

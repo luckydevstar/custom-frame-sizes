@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
 import { Suspense } from "react";
+
 import { NeedleworkFramesContent } from "./needlework-frames-content";
+
+import type { Metadata } from "next";
 
 const baseUrl = "https://customframesizes.com";
 const pageUrl = `${baseUrl}/specialty/needlework`;

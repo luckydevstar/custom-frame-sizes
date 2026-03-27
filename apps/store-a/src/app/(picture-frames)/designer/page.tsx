@@ -1,7 +1,9 @@
-import type { Metadata } from "next";
+import { FrameDesigner } from "@framecraft/ui";
 import Link from "next/link";
 import { Suspense } from "react";
-import { FrameDesigner } from "@framecraft/ui";
+
+import type { Metadata } from "next";
+
 import {
   generateMetadata,
   generateProductSchema,

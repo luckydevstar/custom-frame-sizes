@@ -7,8 +7,6 @@
  * Provides theme values and utilities for theme management.
  */
 
-import { useEffect, useMemo } from "react";
-import type { ThemeConfig, ThemeOverride } from "@framecraft/config";
 import {
   getMergedTheme,
   applyThemeToDocument,
@@ -17,6 +15,9 @@ import {
   toggleDarkMode,
   getBrandConfig,
 } from "@framecraft/config";
+import { useEffect, useMemo } from "react";
+
+import type { ThemeConfig, ThemeOverride } from "@framecraft/config";
 
 export interface UseThemeOptions {
   /**

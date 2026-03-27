@@ -1,10 +1,14 @@
-import type { Metadata } from "next";
+import { ComicBookFrameDesigner, TrustBox } from "@framecraft/ui";
+import { Sparkles, Shield, Box, Grid3x3, Star } from "lucide-react";
 import Image from "next/image";
 import { Suspense } from "react";
-import { Sparkles, Shield, Box, Grid3x3, Star } from "lucide-react";
-import { ComicBookFrameDesigner, TrustBox } from "@framecraft/ui";
-import { RelatedProducts } from "@/components/RelatedProducts";
+
 import { ScrollToDesignerButton } from "./scroll-button";
+
+import type { Metadata } from "next";
+
+import { RelatedProducts } from "@/components/RelatedProducts";
+
 
 export const metadata: Metadata = {
   title: "Custom Comic Book Frames | Display & Protect Your Collection | CustomFrameSizes.com",

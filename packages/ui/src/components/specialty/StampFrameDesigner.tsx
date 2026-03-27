@@ -1,20 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
-import { Share2, Stamp, Info, Maximize, Settings, Eye, Copy, ShoppingCart } from "lucide-react";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Separator } from "../ui/separator";
-import { Slider } from "../ui/slider";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { Input } from "../ui/input";
-import { QuantitySelector } from "../ui/quantity-selector";
-import { PriceBox } from "../ui/PriceBox";
-import type { PriceLineItem } from "../ui/PriceBox";
-import { useToast } from "../../hooks/use-toast";
+import { getMatById, getMatsInDisplayOrder, ALL_MATS, type Mat } from "@framecraft/config";
 import {
   getFramesByCategory,
   getGlassTypes,
@@ -40,17 +26,38 @@ import {
   getRandomStampLifestyleImage,
   getStampLifestyleImages,
 } from "@framecraft/core";
-import type { FrameStyle, GlassType, FrameConfiguration } from "@framecraft/types";
-import type { BrassNameplateConfig } from "@framecraft/types";
-import type { StampLayoutType } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
-import { TrustBox } from "../marketing/TrustBox";
-import { StampPreviewCanvas } from "./StampPreviewCanvas";
+import { Share2, Stamp, Info, Maximize, Settings, Eye, Copy, ShoppingCart } from "lucide-react";
+import { useState, useEffect, useMemo, useRef } from "react";
+
+import { useToast } from "../../hooks/use-toast";
 import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
-import { HangingHardwareSection } from "./shared/HangingHardwareSection";
-import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
-import { getMatById, getMatsInDisplayOrder, ALL_MATS, type Mat } from "@framecraft/config";
+import { TrustBox } from "../marketing/TrustBox";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
 import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { PriceBox } from "../ui/PriceBox";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Separator } from "../ui/separator";
+import { Slider } from "../ui/slider";
+
+import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import { StampPreviewCanvas } from "./StampPreviewCanvas";
+
+import type { PriceLineItem } from "../ui/PriceBox";
+import type { StampLayoutType } from "@framecraft/core";
+import type { FrameStyle, GlassType, FrameConfiguration , BrassNameplateConfig } from "@framecraft/types";
+
+
+
+
+
 
 const shadowboxFrames = getFramesByCategory("shadowbox");
 const availableLayouts = getAllStampLayouts();

@@ -1,8 +1,9 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { Card, CardHeader, CardTitle, CardDescription } from "@framecraft/ui";
-import { Badge } from "@framecraft/ui";
+import { Card, CardHeader, CardTitle, CardDescription , Badge } from "@framecraft/ui";
 import { Clock, BookOpen, Palette, Shield, Ruler, Award, FileText } from "lucide-react";
+import Link from "next/link";
+
+import type { Metadata } from "next";
+
 import { getBlogPosts } from "@/lib/blog";
 
 export const metadata: Metadata = {

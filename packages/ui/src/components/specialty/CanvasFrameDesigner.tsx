@@ -1,7 +1,23 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
-// Removed wouter useLocation - not needed in Next.js
+import {
+  getFramesByCategory,
+  calculatePricing,
+  apiRequest,
+  addToCart,
+  isShopifyEnabled,
+  getRandomStockImage,
+  calculateCanvasPrintDimensions,
+  generateCanvasPrintFile,
+  checkImageResolution,
+  parseFraction,
+  validateArtworkSize,
+  computePreviewLayout,
+  getStoreBaseAssetUrl,
+  useIsMobile,
+  useMobileViewToggle,
+  useIntersectionVisible,
+} from "@framecraft/core";
 import {
   Upload,
   Copy,
@@ -15,38 +31,31 @@ import {
   Loader2,
   CheckCircle2,
 } from "lucide-react";
-import { Button } from "../ui/button";
-import { QuantitySelector } from "../ui/quantity-selector";
-import { Card } from "../ui/card";
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-// Select components not currently used but may be needed in future
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { useState, useEffect, useMemo, useRef } from "react";
+
+// Removed wouter useLocation - not needed in Next.js
+import { useToast } from "../../hooks/use-toast";
+import { TrustBadges } from "../marketing/TrustBadges";
+import { TrustBox } from "../marketing/TrustBox";
+import { ARViewer } from "../shared/ARViewer";
+import { PhotoUploadOptions } from "../shared/PhotoUploadOptions";
+import { TermsOfServiceModal } from "../shared/TermsOfServiceModal";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { Input } from "../ui/input";
-import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
 import { Checkbox } from "../ui/checkbox";
+import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
-// Import types from @framecraft/types
+import { CanvasLifestyleCarousel } from "./CanvasLifestyleCarousel";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+
 import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
-
-// Import services from @framecraft/core
-import { getFramesByCategory, calculatePricing } from "@framecraft/core";
-
-// Import utilities from @framecraft/core
-import {
-  parseFraction,
-  validateArtworkSize,
-  computePreviewLayout,
-  getStoreBaseAssetUrl,
-} from "@framecraft/core";
-
-// Import hooks from @framecraft/core
-import { useIsMobile, useMobileViewToggle, useIntersectionVisible } from "@framecraft/core";
-
-// TODO: Extract these app-specific dependencies or make them injectable
 // - TermsOfServiceModal component
 // - PhotoUploadOptions component
 // - ARViewer component
@@ -60,26 +69,15 @@ import { useIsMobile, useMobileViewToggle, useIntersectionVisible } from "@frame
 // - apiRequest from queryClient
 // - floaterFrameDiagram asset
 // - @uppy/core types
-import { TermsOfServiceModal } from "../shared/TermsOfServiceModal";
 // Asset imports need to be handled at app level - placeholder for now
 // TODO: Add canvas floater diagram image
 // import floaterFrameDiagram from "@assets/image_1765893431262.png";
-import { ARViewer } from "../shared/ARViewer";
-import { PhotoUploadOptions } from "../shared/PhotoUploadOptions";
+
 import type { UploadResult } from "@uppy/core";
-import { apiRequest } from "@framecraft/core";
-import { addToCart, isShopifyEnabled } from "@framecraft/core";
-import { useToast } from "../../hooks/use-toast";
-import { getRandomStockImage } from "@framecraft/core";
-import { TrustBadges } from "../marketing/TrustBadges";
-import { TrustBox } from "../marketing/TrustBox";
-import { HangingHardwareSection } from "./shared/HangingHardwareSection";
-import { CanvasLifestyleCarousel } from "./CanvasLifestyleCarousel";
-import {
-  calculateCanvasPrintDimensions,
-  generateCanvasPrintFile,
-  checkImageResolution,
-} from "@framecraft/core";
+
+
+
+
 
 // Get canvas float frames from products service
 const canvasFrames = getFramesByCategory("canvas");

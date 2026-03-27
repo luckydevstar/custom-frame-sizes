@@ -8,13 +8,15 @@
 "use client";
 
 import { useMemo } from "react";
+
+import { calculatePricing } from "../services/pricing";
 import {
   type PlaybillLayoutType,
   PLAYBILL_LAYOUTS,
   DEFAULT_FRAME_MOLDING_WIDTH,
   PLAYBILL_MAT_BORDER,
 } from "../utils/specialty/playbill-layouts";
-import { calculatePricing } from "../services/pricing";
+
 import type { FrameConfiguration } from "@framecraft/types";
 
 // TODO: Extract BRASS_NAMEPLATE_SPECS to @framecraft/types

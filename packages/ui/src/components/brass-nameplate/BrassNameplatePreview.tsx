@@ -1,5 +1,6 @@
-import type { BrassNameplateConfig } from "@framecraft/types";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
+
+import type { BrassNameplateConfig } from "@framecraft/types";
 
 interface BrassNameplatePreviewProps {
   config: BrassNameplateConfig;

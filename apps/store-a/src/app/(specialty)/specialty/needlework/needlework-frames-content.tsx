@@ -1,9 +1,8 @@
 "use client";
 
+import { Button , Card, CardContent , NeedleworkFrameDesigner } from "@framecraft/ui";
 import { Sparkles, Shield, Ruler, Layers, Award, Scissors, Maximize } from "lucide-react";
-import { Button } from "@framecraft/ui";
-import { Card, CardContent } from "@framecraft/ui";
-import { NeedleworkFrameDesigner } from "@framecraft/ui";
+
 import { RelatedProducts } from "@/components/RelatedProducts";
 
 const SIZE_PRESETS = [

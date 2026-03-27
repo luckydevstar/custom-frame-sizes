@@ -1,8 +1,9 @@
 "use client";
 
-import { Card } from "../ui/card";
 import { MAGAZINE_LAYOUTS, type MagazineLayoutType } from "@framecraft/core";
+
 import { cn } from "../../utils";
+import { Card } from "../ui/card";
 
 interface MagazineLayoutGalleryProps {
   selectedLayout: MagazineLayoutType;

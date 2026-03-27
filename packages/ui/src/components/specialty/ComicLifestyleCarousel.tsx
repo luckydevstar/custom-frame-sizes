@@ -1,8 +1,10 @@
 "use client";
 
-import { useMemo } from "react";
 import { getFramesByCategory, getSharedAssetUrl } from "@framecraft/core";
+import { useMemo } from "react";
+
 import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
+
 import type { LifestyleImage } from "./shared/BaseLifestyleCarousel";
 import type { AlternateImage } from "@framecraft/types";
 

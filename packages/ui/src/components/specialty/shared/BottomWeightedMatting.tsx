@@ -1,7 +1,8 @@
+import { Info } from "lucide-react";
+
 import { Checkbox } from "../../ui/checkbox";
 import { Label } from "../../ui/label";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../../ui/tooltip";
-import { Info } from "lucide-react";
 
 interface BottomWeightedMattingProps {
   checked: boolean;

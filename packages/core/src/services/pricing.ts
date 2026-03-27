@@ -7,15 +7,6 @@
  */
 
 // Import types from @framecraft/types
-import type { FrameConfiguration, PricingBreakdown } from "@framecraft/types";
-
-// Import products service from same package
-import { getPricingConfig, getFrameStyleById, getMatColorById, getGlassTypeById } from "./products";
-
-// Import pricing engine functions from temporary pricing-engine module
-// TODO: Extract full pricing engine from @shared/schema - this is a minimal version
-// The pricing-engine.ts file contains essential functions extracted temporarily
-// Full extraction of all pricing engine functions should be done in a future ticket
 import {
   calculateFramePriceBySku,
   ALL_FRAME_MOULDING_PRICES,
@@ -23,6 +14,16 @@ import {
   calculateMatPriceForDesigner,
   calculateCompleteFramePriceBySku,
 } from "./pricing-engine";
+import { getPricingConfig, getFrameStyleById, getMatColorById, getGlassTypeById } from "./products";
+
+import type { FrameConfiguration, PricingBreakdown } from "@framecraft/types";
+
+// Import products service from same package
+
+// Import pricing engine functions from temporary pricing-engine module
+// TODO: Extract full pricing engine from @shared/schema - this is a minimal version
+// The pricing-engine.ts file contains essential functions extracted temporarily
+// Full extraction of all pricing engine functions should be done in a future ticket
 
 // Re-export for mat designer, foam board, acrylic, and other consumers
 export {

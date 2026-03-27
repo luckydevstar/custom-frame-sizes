@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo } from "react";
 import { getTicketStubLifestyleImages } from "@framecraft/core";
+import { useMemo } from "react";
+
 import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
 
 export interface TicketStubLifestyleCarouselProps {

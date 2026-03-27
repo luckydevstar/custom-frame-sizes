@@ -1,34 +1,13 @@
 "use client";
 
-import NextImage from "next/image";
-import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import {
-  Maximize,
-  X,
-  Eye,
-  Settings,
-  Info,
-  Copy,
-  GraduationCap,
-  Image as ImageIcon,
-  Ribbon,
-  Upload,
-  AlertCircle,
-} from "lucide-react";
-import { useIntelligentPreviewSizing } from "@framecraft/core";
-import { Button } from "../ui/button";
-import { QuantitySelector } from "../ui/quantity-selector";
-import { Card } from "../ui/card";
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { Input } from "../ui/input";
-import { Slider } from "../ui/slider";
-import { Separator } from "../ui/separator";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { Alert, AlertDescription } from "../ui/alert";
-import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
+  ALL_MATS,
+  getMatsInDisplayOrder,
+  getMatById,
+  getAvailableColorsForSize,
+  type Mat,
+} from "@framecraft/config";
+import { useIntelligentPreviewSizing , useIsMobile, useMobileViewToggle } from "@framecraft/core";
 import {
   getFramesByCategory,
   getGlassTypes,
@@ -51,26 +30,51 @@ import {
   useCartStore,
   createCartItemFromFrameConfig,
 } from "@framecraft/core";
-import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
-import {
-  ALL_MATS,
-  getMatsInDisplayOrder,
-  getMatById,
-  getAvailableColorsForSize,
-  type Mat,
-} from "@framecraft/config";
-import { useToast } from "../../hooks/use-toast";
-import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
-import { ARViewer } from "../shared/ARViewer";
-import { HangingHardwareSection } from "./shared/HangingHardwareSection";
-import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
-import type { BrassNameplateConfig } from "@framecraft/types";
 import { BRASS_NAMEPLATE_SPECS, getTypeBBottomBorder } from "@framecraft/types";
+import {
+  Maximize,
+  X,
+  Eye,
+  Settings,
+  Info,
+  Copy,
+  GraduationCap,
+  Image as ImageIcon,
+  Ribbon,
+  Upload,
+  AlertCircle,
+} from "lucide-react";
+import NextImage from "next/image";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
+
+import { useToast } from "../../hooks/use-toast";
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
+import { ARViewer } from "../shared/ARViewer";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Alert, AlertDescription } from "../ui/alert";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 import { PriceBox } from "../ui/PriceBox";
-import type { PriceLineItem } from "../ui/PriceBox";
-import { BottomWeightedMatting } from "./shared/BottomWeightedMatting";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Separator } from "../ui/separator";
+import { Slider } from "../ui/slider";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+
 import { DiplomaLifestyleCarousel } from "./DiplomaLifestyleCarousel";
+import { BottomWeightedMatting } from "./shared/BottomWeightedMatting";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+
+import type { PriceLineItem } from "../ui/PriceBox";
+import type { FrameStyle, FrameConfiguration , BrassNameplateConfig } from "@framecraft/types";
+
+
+
 
 // Tassel image: served from shared_assets/diploma/tassel.png when present (add file to assets_to_use or run populate script)
 const TASSEL_IMAGE_URL = getSharedAssetUrl("diploma/tassel.png");

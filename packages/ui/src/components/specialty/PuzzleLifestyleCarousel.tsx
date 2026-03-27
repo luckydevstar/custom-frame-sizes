@@ -1,8 +1,10 @@
 "use client";
 
-import { useMemo } from "react";
 import { getPuzzleLifestyleImages } from "@framecraft/core/lib/puzzle-lifestyle-images";
+import { useMemo } from "react";
+
 import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
+
 import type { LifestyleImage } from "./shared/BaseLifestyleCarousel";
 
 interface PuzzleLifestyleCarouselProps {

@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
 import { SamplesClient } from "./SamplesClient";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Order Frame, Mat & Acrylic Samples | Free Shipping | Custom Frame Sizes",

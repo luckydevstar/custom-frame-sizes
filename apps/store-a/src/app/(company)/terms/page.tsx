@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
 import { FileText } from "lucide-react";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Terms of Service - CustomFrameSizes.com | Custom Frame Sizes",

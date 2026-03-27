@@ -1,8 +1,8 @@
 "use client";
 
-import { Suspense } from "react";
-import { Disc3 } from "lucide-react";
 import { RecordAlbumDesigner } from "@framecraft/ui";
+import { Disc3 } from "lucide-react";
+import { Suspense } from "react";
 
 export function CdFrameDesignerSection() {
   return (

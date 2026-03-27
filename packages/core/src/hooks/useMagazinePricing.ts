@@ -6,11 +6,13 @@
 
 "use client";
 
+import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import { useMemo } from "react";
+
+import { calculatePricing } from "../services/pricing";
 import { getMagazineLayout, type MagazineLayoutType } from "../utils/specialty/magazine-layouts";
 import { getMagazineSizeById } from "../utils/specialty/magazine-sizes";
-import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
-import { calculatePricing } from "../services/pricing";
+
 import type { FrameStyle, GlassType, FrameConfiguration } from "@framecraft/types";
 
 const MAT_SURCHARGE_PER_OPENING = 15;

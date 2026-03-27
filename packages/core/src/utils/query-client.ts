@@ -4,6 +4,7 @@
  */
 
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
+
 import { logApiError } from "../services/logging";
 
 async function throwIfResNotOk(res: Response) {

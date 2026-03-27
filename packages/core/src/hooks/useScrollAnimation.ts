@@ -5,8 +5,8 @@
 
 "use client";
 
-import { useEffect, useRef, useState } from "react";
 import { animations } from "@framecraft/config";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * Hook to detect user's reduced motion preference

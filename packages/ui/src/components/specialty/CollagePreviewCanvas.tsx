@@ -10,11 +10,6 @@
 
 "use client";
 
-import { memo, useMemo } from "react";
-import { Image } from "lucide-react";
-import type { FrameStyle } from "@framecraft/types";
-import type { Mat } from "@framecraft/config";
-import type { BrassNameplateConfig } from "@framecraft/types";
 import {
   type CollageLayoutType,
   type OpeningShape,
@@ -31,8 +26,15 @@ import {
   getSchoolLayoutPresetImages,
   isSchoolDaysPresetLayout,
 } from "@framecraft/core";
+import { Image } from "lucide-react";
+import { memo, useMemo } from "react";
+
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+
 import { BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
+
+import type { Mat } from "@framecraft/config";
+import type { BrassNameplateConfig , FrameStyle } from "@framecraft/types";
 
 const PLAQUE_BOTTOM_MARGIN = 1.0; // inches from bottom of frame
 

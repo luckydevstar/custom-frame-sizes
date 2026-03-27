@@ -1,9 +1,9 @@
-import { brandConfig } from "../brand.config";
+import { getFramesByCategory } from "@framecraft/core";
 import { Hero, ValueProps, SeoTextBlock, FrameStylesShowcase } from "@framecraft/ui";
 import dynamic from "next/dynamic";
-import { getFramesByCategory } from "@framecraft/core";
-import type { Metadata } from "next";
 import { Suspense } from "react";
+
+import { brandConfig } from "../brand.config";
 
 // Dynamic imports for below-fold components to improve LCP
 const FrameDesigner = dynamic(() => import("@framecraft/ui").then((m) => m.FrameDesigner), {
@@ -86,7 +86,9 @@ const EducationTeasers = dynamic(() => import("@framecraft/ui").then((m) => m.Ed
 // Import store-specific data
 import heroImagesDataRaw from "../data/heroImages.json";
 import testimonialsData from "../data/testimonials.json";
+
 import type { HeroImage } from "@framecraft/core";
+import type { Metadata } from "next";
 
 // Type assertion for hero images data
 const heroImagesData = heroImagesDataRaw as HeroImage[];

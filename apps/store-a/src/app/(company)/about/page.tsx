@@ -1,6 +1,4 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { generateMetadata } from "@/lib/seo";
+import { Card, CardContent , Button } from "@framecraft/ui";
 import {
   Ruler,
   Package,
@@ -17,8 +15,12 @@ import {
   Sliders,
   CreditCard,
 } from "lucide-react";
-import { Card, CardContent } from "@framecraft/ui";
-import { Button } from "@framecraft/ui";
+import Link from "next/link";
+
+import type { Metadata } from "next";
+
+import { generateMetadata } from "@/lib/seo";
+
 
 export const metadata: Metadata = generateMetadata({
   title: "About CustomFrameSizes.com | Custom Frame Manufacturer | Precision Framing",

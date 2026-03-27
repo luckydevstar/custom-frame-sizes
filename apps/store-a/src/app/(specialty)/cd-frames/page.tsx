@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
 import { CdFramesContent } from "./cd-frames-content";
+
+import type { Metadata } from "next";
 
 const baseUrl = "https://customframesizes.com";
 const pageUrl = `${baseUrl}/cd-frames`;

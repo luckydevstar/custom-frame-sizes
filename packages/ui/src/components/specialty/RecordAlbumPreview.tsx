@@ -1,6 +1,5 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
 import {
   getRecordAlbumLayoutWithMolding,
   getCDLayout,
@@ -14,9 +13,12 @@ import {
   type Circle,
   type MatOpeningLayoutType,
 } from "@framecraft/core";
-import type { BrassNameplateConfig } from "@framecraft/types";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
+import { useState, useEffect, useMemo, useRef } from "react";
+
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+
+import type { BrassNameplateConfig } from "@framecraft/types";
 
 const CD_DISC_IMAGE = "/cd/disc-placeholder.png";
 

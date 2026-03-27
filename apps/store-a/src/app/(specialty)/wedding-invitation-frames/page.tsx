@@ -1,8 +1,12 @@
-import type { Metadata } from "next";
-import { Heart, Shield, Award, Frame, Sparkles, Gift, Calendar, Users, Camera } from "lucide-react";
 import { Card, WeddingInvitationFrameDesigner } from "@framecraft/ui";
-import { RelatedProducts } from "@/components/RelatedProducts";
+import { Heart, Shield, Award, Frame, Sparkles, Gift, Calendar, Users, Camera } from "lucide-react";
+
 import { ScrollToDesignerButton } from "./scroll-button";
+
+import type { Metadata } from "next";
+
+import { RelatedProducts } from "@/components/RelatedProducts";
+
 
 export const metadata: Metadata = {
   title: "Wedding Invitation Frame | Custom Frame Sizes for Wedding Invitations",

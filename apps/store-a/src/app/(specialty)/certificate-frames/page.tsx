@@ -1,9 +1,12 @@
-import type { Metadata } from "next";
+import { Sparkles, Shield, Ruler, Layers, Award } from "lucide-react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { Sparkles, Shield, Ruler, Layers, Award } from "lucide-react";
+
 import { brandConfig } from "../../../brand.config";
+
 import { ScrollToDesignerButton } from "./scroll-button";
+
+import type { Metadata } from "next";
 
 const CertificateFrameDesigner = dynamic(
   () => import("@framecraft/ui").then((mod) => ({ default: mod.CertificateFrameDesigner })),

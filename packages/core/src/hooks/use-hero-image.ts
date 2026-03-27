@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+
 import { getStoreAssetUrl } from "../utils/asset-urls";
 
 export interface HeroImage {

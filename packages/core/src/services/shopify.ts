@@ -15,18 +15,21 @@
  * 3. Restart the application
  */
 
-import type { FrameConfiguration } from "@framecraft/types";
-import type { MatConfig } from "@framecraft/types";
-import type { ShopifyConfig } from "@framecraft/config";
-import { logApiError, logWarning } from "./logging";
-import { getFrameStyleById } from "./products";
 import { apiRequest } from "../utils/query-client";
+
 import {
   isFramecraftApiConfigured,
   createOrGetCart,
   addCartLines as apiAddCartLines,
   getCheckoutUrl,
 } from "./framecraft-api";
+import { logApiError, logWarning } from "./logging";
+import { getFrameStyleById } from "./products";
+
+import type { ShopifyConfig } from "@framecraft/config";
+import type { FrameConfiguration , MatConfig } from "@framecraft/types";
+
+
 
 // Default API version
 const DEFAULT_API_VERSION = "2024-01";

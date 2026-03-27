@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
 import { AcrylicCleanerClient } from "./AcrylicCleanerClient";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Acrylic Cleaner & Polish – Safe for Frame Glazing | Custom Frame Sizes",

@@ -1,7 +1,8 @@
-import { MetadataRoute } from "next";
 import { getFramesByCategory } from "@framecraft/core";
-import { env } from "@/lib/env";
+import { MetadataRoute } from "next";
+
 import { getBlogPosts } from "@/lib/blog";
+import { env } from "@/lib/env";
 
 const baseUrl = env.shopify.storeDomain
   ? `https://${env.shopify.storeDomain}`

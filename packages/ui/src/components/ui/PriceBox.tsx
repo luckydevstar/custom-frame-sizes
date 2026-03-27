@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useId, ReactNode } from "react";
 import { ShoppingCart, Copy, ChevronDown, ChevronUp } from "lucide-react";
+import { useState, useId, ReactNode } from "react";
+
 import { Button } from "./button";
 import { Card } from "./card";
 import { Label } from "./label";
-import { Separator } from "./separator";
 import { QuantitySelector } from "./quantity-selector";
+import { Separator } from "./separator";
 
 export interface PriceLineItem {
   label: string;

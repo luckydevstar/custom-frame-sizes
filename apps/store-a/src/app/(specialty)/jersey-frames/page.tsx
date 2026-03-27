@@ -1,11 +1,15 @@
-import type { Metadata } from "next";
+import { getJerseyLifestyleImages } from "@framecraft/core";
+import { JerseyFrameDesigner, JerseyLifestyleCarousel, Card, Button } from "@framecraft/ui";
+import { Shirt, Shield, Ruler, Layers, Award, CheckCircle2, ArrowDown } from "lucide-react";
 import Link from "next/link";
 import { Suspense } from "react";
-import { Shirt, Shield, Ruler, Layers, Award, CheckCircle2, ArrowDown } from "lucide-react";
-import { JerseyFrameDesigner, JerseyLifestyleCarousel, Card, Button } from "@framecraft/ui";
-import { getJerseyLifestyleImages } from "@framecraft/core";
+
 import { brandConfig } from "../../../brand.config";
+
 import { ScrollToDesignerButton } from "./scroll-button";
+
+import type { Metadata } from "next";
+
 import { RelatedProducts } from "@/components/RelatedProducts";
 
 export const metadata: Metadata = {

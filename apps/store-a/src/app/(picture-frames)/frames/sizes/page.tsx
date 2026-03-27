@@ -1,12 +1,15 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
-import { Ruler, Frame } from "lucide-react";
-import { Button, Card, CardContent } from "@framecraft/ui";
 import { getStoreBaseAssetUrl } from "@framecraft/core";
+import { Button, Card, CardContent } from "@framecraft/ui";
+import { Ruler, Frame } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
 import { brandConfig } from "../../../../brand.config";
-import mostPopularSizes from "./frame-sizes.json";
+
 import allAvailableSizes from "./frame-sizes-remaining.json";
+import mostPopularSizes from "./frame-sizes.json";
+
+import type { Metadata } from "next";
 
 /** Most Popular = first 30 sizes; All Available = remaining 70 sizes (different data). */
 const topSizes = mostPopularSizes;

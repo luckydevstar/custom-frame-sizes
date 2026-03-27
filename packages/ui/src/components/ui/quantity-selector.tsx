@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select";
+
 import { Input } from "./input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select";
 
 interface QuantitySelectorProps {
   value: number;

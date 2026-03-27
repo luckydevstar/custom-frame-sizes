@@ -1,12 +1,13 @@
 "use client";
 
-import * as React from "react";
+import { useIsMobile } from "@framecraft/core";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, VariantProps } from "class-variance-authority";
 import { PanelLeftIcon } from "lucide-react";
+import * as React from "react";
 
-import { useIsMobile } from "@framecraft/core";
 import { cn } from "../../utils";
+
 import { Button } from "./button";
 import { Input } from "./input";
 import { Separator } from "./separator";

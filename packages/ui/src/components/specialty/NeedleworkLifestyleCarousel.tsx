@@ -1,8 +1,9 @@
 "use client";
 
-import { useMemo } from "react";
-import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
 import { getNeedleworkLifestyleImages, getSharedAssetUrl } from "@framecraft/core";
+import { useMemo } from "react";
+
+import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
 
 const NEEDLEWORK_LIFESTYLE_IMAGES: Array<{ url: string; alt: string }> = (() => {
   const items = getNeedleworkLifestyleImages();

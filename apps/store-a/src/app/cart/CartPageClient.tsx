@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
-import { CartClient } from "@framecraft/ui";
 import { useCartStore } from "@framecraft/core/stores";
+import { CartClient } from "@framecraft/ui";
+import { useEffect } from "react";
 
 export function CartPageClient() {
   const setLoading = useCartStore((state) => state._setLoading);

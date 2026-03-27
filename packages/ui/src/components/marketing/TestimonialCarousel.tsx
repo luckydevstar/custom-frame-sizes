@@ -1,10 +1,12 @@
 "use client";
 
-import { Star, ChevronLeft, ChevronRight, Shield, Flag, RotateCcw } from "lucide-react";
 import { useRotatingTestimonial, type Testimonial } from "@framecraft/core";
-import { Skeleton } from "../ui/skeleton";
-import { Button } from "../ui/button";
+import { Star, ChevronLeft, ChevronRight, Shield, Flag, RotateCcw } from "lucide-react";
 import { useEffect } from "react";
+
+import { Button } from "../ui/button";
+import { Skeleton } from "../ui/skeleton";
+
 
 export interface TestimonialCarouselProps {
   showTrustIndicators?: boolean;

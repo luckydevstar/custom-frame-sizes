@@ -6,6 +6,7 @@
  */
 
 import { describe, it, expect } from "vitest";
+
 import {
   serializeFrameConfiguration,
   deserializeFrameConfiguration,
@@ -24,6 +25,7 @@ import {
   type ComicBookSpecialtyConfig,
   type PlaybillSpecialtyConfig,
 } from "../serialization";
+
 import type { FrameConfiguration } from "@framecraft/types";
 
 describe("serializeFrameConfiguration", () => {

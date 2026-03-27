@@ -1,7 +1,8 @@
 "use client";
 
-import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
 import { getSharedAssetUrl } from "@framecraft/core";
+
+import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
 
 const COLLAGE_LIFESTYLE_PATHS: Array<{ path: string; alt: string }> = [
   {

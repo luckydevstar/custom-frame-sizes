@@ -1,5 +1,7 @@
-import type { Metadata } from "next";
 import { CartPageClient } from "./CartPageClient";
+
+import type { Metadata } from "next";
+
 import { generateMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = generateMetadata({

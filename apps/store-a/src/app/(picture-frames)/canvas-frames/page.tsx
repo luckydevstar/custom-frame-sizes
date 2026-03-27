@@ -1,7 +1,3 @@
-import type { Metadata } from "next";
-import nextDynamic from "next/dynamic";
-import { Suspense } from "react";
-import { Sparkles, Frame, Palette, Brush, Shield, Layers, Ruler } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -12,8 +8,16 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@framecraft/ui";
-import { RelatedProducts } from "@/components/RelatedProducts";
+import { Sparkles, Frame, Palette, Brush, Shield, Layers, Ruler } from "lucide-react";
+import nextDynamic from "next/dynamic";
+import { Suspense } from "react";
+
 import { ScrollToDesignerButton } from "./scroll-button";
+
+import type { Metadata } from "next";
+
+import { RelatedProducts } from "@/components/RelatedProducts";
+
 
 const CanvasFrameDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.CanvasFrameDesigner),

@@ -13,11 +13,11 @@
  */
 
 // Import JSON data files
-import framesData from "./frames.json";
-import matsData from "./mats.json";
-import glassData from "./glass.json";
-import pricingConfigData from "./pricing-config.json";
 import frameSizesData from "./frame-sizes.json";
+import framesData from "./frames.json";
+import glassData from "./glass.json";
+import matsData from "./mats.json";
+import pricingConfigData from "./pricing-config.json";
 
 // Frame class map (SKU → frameClass from xlsx)
 export { getFrameClass, FRAME_CLASS_SKUS } from "./frame-class-map";

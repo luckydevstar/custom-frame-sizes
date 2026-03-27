@@ -8,12 +8,6 @@
  *   - ticket-frames/insert-images/poster_insert_1.png for the poster opening (concert poster + tickets layouts)
  */
 
-import { memo, useMemo } from "react";
-import { Ticket } from "lucide-react";
-import type { FrameStyle } from "@framecraft/types";
-import type { BrassNameplateConfig } from "@framecraft/types";
-import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
-import type { Mat } from "@framecraft/config";
 import {
   TICKET_STUB_LAYOUTS,
   DEFAULT_FRAME_MOLDING_WIDTH,
@@ -21,8 +15,19 @@ import {
   getMatTilingStyle,
   getMatBevelColor,
 } from "@framecraft/core";
-import type { TicketStubLayoutType } from "@framecraft/core";
+import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
+import { Ticket } from "lucide-react";
+import { memo, useMemo } from "react";
+
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+
+import type { Mat } from "@framecraft/config";
+import type { TicketStubLayoutType } from "@framecraft/core";
+import type { FrameStyle , BrassNameplateConfig } from "@framecraft/types";
+
+
+
+
 
 const TICKET_INSERT_COUNT = 7;
 

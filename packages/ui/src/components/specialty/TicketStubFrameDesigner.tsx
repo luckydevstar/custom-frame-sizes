@@ -1,19 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef, useCallback } from "react";
-import { Copy, X, Eye, Settings, Upload, CheckCircle2 } from "lucide-react";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { TooltipProvider } from "../ui/tooltip";
-import { QuantitySelector } from "../ui/quantity-selector";
-import { PriceBox } from "../ui/PriceBox";
-import type { PriceLineItem } from "../ui/PriceBox";
-import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
-import type { BrassNameplateConfig } from "@framecraft/types";
-import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
+import { ALL_MATS, getMatById, type Mat } from "@framecraft/config";
 import {
   getFramesByCategory,
   getGlassTypes,
@@ -27,14 +14,33 @@ import {
   getStoreBaseAssetUrl,
   type TicketStubLayoutType,
 } from "@framecraft/core";
-import { ALL_MATS, getMatById, type Mat } from "@framecraft/config";
+import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
+import { Copy, X, Eye, Settings, Upload, CheckCircle2 } from "lucide-react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
+
 import { useToast } from "../../hooks/use-toast";
-import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
-import { HangingHardwareSection } from "./shared/HangingHardwareSection";
-import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
 import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
-import { TicketStubPreview } from "./TicketStubPreview";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
+import { Label } from "../ui/label";
+import { PriceBox } from "../ui/PriceBox";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { TooltipProvider } from "../ui/tooltip";
+
+import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
 import { TicketStubLayoutGallery } from "./TicketStubLayoutGallery";
+import { TicketStubPreview } from "./TicketStubPreview";
+
+import type { PriceLineItem } from "../ui/PriceBox";
+import type { FrameStyle, FrameConfiguration , BrassNameplateConfig } from "@framecraft/types";
+
+
+
+
 
 const MAT_REVEAL = 0.25;
 const MAT_SURCHARGE_PER_OPENING = 15;

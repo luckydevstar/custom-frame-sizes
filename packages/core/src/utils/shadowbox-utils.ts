@@ -3,8 +3,9 @@
  * Pure functions for serialization, pricing, and layout calculations
  */
 
-import type { ShadowboxConfig, ShadowboxLayout, ShadowboxMatLayer } from "@framecraft/types";
 import { calculatePricing } from "../services/pricing";
+
+import type { ShadowboxConfig, ShadowboxLayout, ShadowboxMatLayer } from "@framecraft/types";
 
 /**
  * Serialize a Shadowbox configuration to a base64-encoded JSON string

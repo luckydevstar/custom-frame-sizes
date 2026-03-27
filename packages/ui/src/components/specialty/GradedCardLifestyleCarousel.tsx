@@ -1,6 +1,7 @@
 "use client";
 
 import { getSharedAssetUrl } from "@framecraft/core";
+
 import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
 
 const GRADED_CARD_LIFESTYLE_IMAGES: Array<{ url: string; alt: string }> = [

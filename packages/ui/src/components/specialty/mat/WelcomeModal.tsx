@@ -5,7 +5,11 @@
  * Migrated from CustomFrameSizes-CODE client/src/features/mat/WelcomeModal.tsx.
  */
 
+import { Square, Palette, Maximize2, ShoppingCart } from "lucide-react";
 import { useState, useEffect } from "react";
+
+import { Button } from "../../ui/button";
+import { Checkbox } from "../../ui/checkbox";
 import {
   Dialog,
   DialogContent,
@@ -13,10 +17,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../ui/dialog";
-import { Button } from "../../ui/button";
-import { Checkbox } from "../../ui/checkbox";
 import { Label } from "../../ui/label";
-import { Square, Palette, Maximize2, ShoppingCart } from "lucide-react";
 
 const WELCOME_SHOWN_KEY = "mat-designer-welcome-shown";
 

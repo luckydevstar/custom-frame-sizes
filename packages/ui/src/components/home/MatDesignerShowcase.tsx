@@ -1,11 +1,12 @@
 "use client";
 
+import { getSharedAssetUrl } from "@framecraft/core";
+import { ArrowRight, Square, Circle, Heart, Star, Hexagon, Diamond } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../ui/button";
-import { ArrowRight, Square, Circle, Heart, Star, Hexagon, Diamond } from "lucide-react";
 import { useState, useEffect } from "react";
-import { getSharedAssetUrl } from "@framecraft/core";
+
+import { Button } from "../ui/button";
 
 export function MatDesignerShowcase() {
   // Mat lifestyle images from shared_assets (signature-frames lifestyle used for mat/photo framing vibe)

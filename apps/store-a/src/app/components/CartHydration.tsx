@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
 import { useCartStore } from "@framecraft/core/stores";
+import { useEffect } from "react";
 
 /**
  * Hydrates the cart store from localStorage on mount so the cart page and header

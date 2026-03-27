@@ -1,6 +1,19 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
+import { getMatsInDisplayOrder, getMatById, ALL_MATS, type Mat } from "@framecraft/config";
+import {
+  useIsMobile,
+  useMobileViewToggle,
+  useIntelligentPreviewSizing,
+  getFrameStyleById,
+  calculatePricing,
+  computePreviewLayout,
+  getPuckLayoutById,
+  getAllPuckLayouts,
+  getRandomPuckLifestyleImage,
+  getStoreBaseAssetUrl,
+} from "@framecraft/core";
+import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import {
   Share2,
   ShoppingCart,
@@ -17,40 +30,31 @@ import {
   Package,
   Target,
 } from "lucide-react";
+import { useState, useEffect, useMemo, useRef } from "react";
+
+import { useToast } from "../../hooks/use-toast";
+import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
+import { TrustBox } from "../marketing/TrustBox";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
-import { Label } from "../ui/label";
-import { Separator } from "../ui/separator";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { QuantitySelector } from "../ui/quantity-selector";
-import { PriceBox } from "../ui/PriceBox";
-import type { PriceLineItem } from "../ui/PriceBox";
-import { useToast } from "../../hooks/use-toast";
-import {
-  useIsMobile,
-  useMobileViewToggle,
-  useIntelligentPreviewSizing,
-  getFrameStyleById,
-  calculatePricing,
-  computePreviewLayout,
-  getPuckLayoutById,
-  getAllPuckLayouts,
-  getRandomPuckLifestyleImage,
-  getStoreBaseAssetUrl,
-} from "@framecraft/core";
-import type { PuckLayoutType } from "@framecraft/core";
-import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
-import type { BrassNameplateConfig } from "@framecraft/types";
-import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
-import { getMatsInDisplayOrder, getMatById, ALL_MATS, type Mat } from "@framecraft/config";
 import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
-import { TrustBox } from "../marketing/TrustBox";
-import { PuckPreviewCanvas } from "./PuckPreviewCanvas";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Label } from "../ui/label";
+import { PriceBox } from "../ui/PriceBox";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { Separator } from "../ui/separator";
+
 import { PuckLifestyleCarousel } from "./PuckLifestyleCarousel";
-import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
-import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import { PuckPreviewCanvas } from "./PuckPreviewCanvas";
 import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+
+import type { PriceLineItem } from "../ui/PriceBox";
+import type { PuckLayoutType } from "@framecraft/core";
+import type { FrameStyle, FrameConfiguration , BrassNameplateConfig } from "@framecraft/types";
+
+
 
 const PUCK_FRAME_IDS = [
   "extra-deep-matte-black",

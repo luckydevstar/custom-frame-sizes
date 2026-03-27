@@ -1,50 +1,50 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef, useCallback } from "react";
-import { Copy, Maximize, ShoppingCart, Eye, Settings, LayoutGrid, Info, Ruler } from "lucide-react";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Input } from "../ui/input";
-import { Separator } from "../ui/separator";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { Alert, AlertDescription } from "../ui/alert";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
-import { QuantitySelector } from "../ui/quantity-selector";
-import { PriceBox } from "../ui/PriceBox";
-import type { PriceLineItem } from "../ui/PriceBox";
-import { useToast } from "../../hooks/use-toast";
+import { ALL_MATS, getMatById, getAvailableMatsForSize, type Mat } from "@framecraft/config";
 import {
   getFramesByCategory,
   getGlassTypes,
   getSharedAssetUrl,
   getStoreBaseAssetUrl,
-} from "@framecraft/core";
-import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
-import type { FrameStyle } from "@framecraft/types";
-import { ALL_MATS, getMatById, getAvailableMatsForSize, type Mat } from "@framecraft/config";
-import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
-import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
-import type { BrassNameplateConfig } from "@framecraft/types";
-import { MAGAZINE_SIZES, getMagazineSizeById, type MagazineSize } from "@framecraft/core";
-import {
+ useIsMobile, useMobileViewToggle , getMagazineCoversForConfig , useMagazinePricing , getMagazinesForTooltip } from "@framecraft/core";
+import { MAGAZINE_SIZES, getMagazineSizeById, type MagazineSize ,
   MAGAZINE_LAYOUTS,
   getMagazineLayout,
   calculateMagazineFrameSize,
   getAvailableLayoutsForSize,
   type MagazineLayoutType,
 } from "@framecraft/core";
-import { getMagazineCoversForConfig } from "@framecraft/core";
-import { MagazinePreviewCanvas, useMagazinePreviewState } from "./MagazinePreviewCanvas";
-import { useMagazinePricing } from "@framecraft/core";
-import { MagazineLayoutGallery } from "./MagazineLayoutGallery";
+import { Copy, Maximize, ShoppingCart, Eye, Settings, LayoutGrid, Info, Ruler } from "lucide-react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
+
+import { useToast } from "../../hooks/use-toast";
+import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
 import { TrustBadges } from "../marketing/TrustBadges";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Alert, AlertDescription } from "../ui/alert";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { PriceBox } from "../ui/PriceBox";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Separator } from "../ui/separator";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+
+import { MagazineLayoutGallery } from "./MagazineLayoutGallery";
 import { MagazineLifestyleCarousel, MAGAZINE_LIFESTYLE_IMAGES } from "./MagazineLifestyleCarousel";
-import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import { MagazinePreviewCanvas, useMagazinePreviewState } from "./MagazinePreviewCanvas";
 import { BottomWeightedMatting } from "./shared/BottomWeightedMatting";
-import { getMagazinesForTooltip } from "@framecraft/core";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+
+import type { PriceLineItem } from "../ui/PriceBox";
+import type { FrameStyle , BrassNameplateConfig } from "@framecraft/types";
+
+
+
 
 // Get product data from services
 const shadowboxFrames = getFramesByCategory("shadowbox");

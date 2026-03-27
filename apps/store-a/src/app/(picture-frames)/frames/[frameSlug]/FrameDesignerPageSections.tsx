@@ -1,12 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { ArrowRight, Award, Eye, Shield, Sparkles } from "lucide-react";
-import { FrameDetailCarousel, ImageGallery } from "@framecraft/ui/components/shared";
-import type { GalleryImage } from "@framecraft/ui/components/shared";
 import { Button } from "@framecraft/ui";
-import type { FrameStyle } from "@framecraft/types";
+import { FrameDetailCarousel, ImageGallery } from "@framecraft/ui/components/shared";
+import { ArrowRight, Award, Eye, Shield, Sparkles } from "lucide-react";
+import { useState } from "react";
+
 import type { FramePageContent } from "./frame-page-content";
+import type { FrameStyle } from "@framecraft/types";
+import type { GalleryImage } from "@framecraft/ui/components/shared";
 
 const FEATURE_ICONS = [Sparkles, Shield, Award, Eye] as const;
 const PERFECT_FOR_ICON = Award;

@@ -1,13 +1,15 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import ReactCrop, { Crop, PixelCrop } from "react-image-crop";
-import "react-image-crop/dist/ReactCrop.css";
-import { Button } from "../ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-import { Card } from "../ui/card";
 import { Wand2, Crop as CropIcon, RotateCw, Check, X } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import "react-image-crop/dist/ReactCrop.css";
+
 import { useIsMobile } from "@framecraft/core";
+import ReactCrop, { type Crop, type PixelCrop } from "react-image-crop";
+
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
 interface ImageEditorProps {
   imageUrl: string;

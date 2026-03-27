@@ -1,14 +1,15 @@
 "use client";
 
-import { memo, useMemo } from "react";
-import type { MatConfig } from "./types";
+import { getMatByName } from "@framecraft/config";
 import {
   getFrameStyleById,
   computePreviewLayout,
   getMatTilingStyle,
   getMatBevelColor,
 } from "@framecraft/core";
-import { getMatByName } from "@framecraft/config";
+import { memo, useMemo } from "react";
+
+import type { MatConfig } from "./types";
 
 export interface MatPreviewLayout {
   scale: number;

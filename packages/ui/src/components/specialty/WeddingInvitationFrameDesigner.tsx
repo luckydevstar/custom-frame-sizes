@@ -1,21 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef, useCallback } from "react";
-import { Heart, LayoutTemplate, ImageIcon, Package, Upload, X, CheckCircle2 } from "lucide-react";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { Input } from "../ui/input";
-import { Separator } from "../ui/separator";
-import { Checkbox } from "../ui/checkbox";
-import { QuantitySelector } from "../ui/quantity-selector";
-import { PriceBox } from "../ui/PriceBox";
-import type { PriceLineItem } from "../ui/PriceBox";
-import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
-import type { BrassNameplateConfig } from "@framecraft/types";
-import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
+import { ALL_MATS, getMatById, getMatsInDisplayOrder, type Mat } from "@framecraft/config";
 import {
   getFramesByCategory,
   getGlassTypes,
@@ -43,13 +28,34 @@ import {
   type InvitationSize,
   type SecondaryOpeningSize,
 } from "@framecraft/core";
-import { ALL_MATS, getMatById, getMatsInDisplayOrder, type Mat } from "@framecraft/config";
+import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
+import { Heart, LayoutTemplate, ImageIcon, Package, Upload, X, CheckCircle2 } from "lucide-react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
+
 import { useToast } from "../../hooks/use-toast";
-import { HangingHardwareSection } from "./shared/HangingHardwareSection";
-import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
 import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { Checkbox } from "../ui/checkbox";
 import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { PriceBox } from "../ui/PriceBox";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Separator } from "../ui/separator";
+
+import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
 import { WeddingInvitationPreview } from "./WeddingInvitationPreview";
+
+import type { PriceLineItem } from "../ui/PriceBox";
+import type { FrameStyle, FrameConfiguration , BrassNameplateConfig } from "@framecraft/types";
+
+
+
+
 
 const pictureFrames = getFramesByCategory("picture");
 const glassTypes = getGlassTypes().filter((g) => g.id === "standard" || g.id === "non-glare");
