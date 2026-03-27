@@ -1,7 +1,36 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef, lazy, Suspense } from "react";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { ALL_MATS, getMatsInDisplayOrder, getMatById, type Mat } from "@framecraft/config";
+import {
+  apiRequest,
+  calculatePricing,
+  getRandomStockImage,
+  exportFramePreview,
+  convertImageToDataURL,
+  downloadImage,
+  getMatTilingStyle,
+  getMatBevelColor,
+  calculatePrintDimensions,
+  generatePrintFile,
+  downloadPrintFile,
+  getFramesByCategory,
+  getGlassTypes,
+  getFrameStyleById,
+  parseFraction,
+  validateArtworkSize,
+  computePreviewLayout,
+  getStoreBaseAssetUrl,
+  useIsMobile,
+  useMobileViewToggle,
+  useIntersectionVisible,
+  addToCart,
+  addToCartOnly,
+  isShopifyEnabled,
+  createCartItemFromFrameConfig,
+  useCartStore,
+} from "@framecraft/core";
+import { BRASS_NAMEPLATE_SPECS, getTypeBBottomBorder, type FrameStyle, type FrameConfiguration, type DesignRecommendation, type DesignRecommendationResponse, type BrassNameplateConfig } from "@framecraft/types";
+import { useMutation } from "@tanstack/react-query";
 import {
   Upload,
   Copy,
@@ -16,75 +45,42 @@ import {
   Puzzle,
   CheckCircle2,
 } from "lucide-react";
-import { TermsOfServiceModal } from "../shared/TermsOfServiceModal";
-import { useMutation } from "@tanstack/react-query";
-// Import UI components from same package (relative imports)
-import { Button } from "../ui/button";
-import { FrameSpinner } from "../ui/frame-spinner";
-import { QuantitySelector } from "../ui/quantity-selector";
-import { Card } from "../ui/card";
-import { PriceBox } from "../ui/PriceBox";
-import type { PriceLineItem } from "../ui/PriceBox";
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-// Select components not currently used but may be needed in future
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { Input } from "../ui/input";
-import { Slider } from "../ui/slider";
-import { Separator } from "../ui/separator";
-import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
-import { Checkbox } from "../ui/checkbox";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
-import { PhotoUploadOptions } from "../shared/PhotoUploadOptions";
-import type { UploadResult } from "@uppy/core";
-import { apiRequest } from "@framecraft/core";
-// Import types from @framecraft/types
-import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
+import { useState, useEffect, useMemo, useRef, lazy, Suspense } from "react";
 
-// Import services from @framecraft/core
-import { getFramesByCategory, getGlassTypes, getFrameStyleById } from "@framecraft/core";
-import { calculatePricing } from "@framecraft/core";
-
-// Import utilities from @framecraft/core
-import {
-  parseFraction,
-  validateArtworkSize,
-  computePreviewLayout,
-  getStoreBaseAssetUrl,
-} from "@framecraft/core";
-
-// Import hooks from @framecraft/core
-import { useIsMobile, useMobileViewToggle, useIntersectionVisible } from "@framecraft/core";
-
-// Import palette config from @framecraft/config
-import { ALL_MATS, getMatsInDisplayOrder, getMatById, type Mat } from "@framecraft/config";
-
-// TODO: App-specific dependencies - these need to be extracted or made injectable
-import {
-  addToCart,
-  addToCartOnly,
-  isShopifyEnabled,
-  createCartItemFromFrameConfig,
-} from "@framecraft/core";
-import { useCartStore } from "@framecraft/core/stores";
 import { useToast } from "../../hooks/use-toast";
-import { getRandomStockImage } from "@framecraft/core";
-import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
-import { exportFramePreview, convertImageToDataURL, downloadImage } from "@framecraft/core";
+import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
 import { RecommendationCarousel } from "../marketing/RecommendationCarousel";
-import type { DesignRecommendation, DesignRecommendationResponse } from "@framecraft/types";
+import { PhotoUploadOptions } from "../shared/PhotoUploadOptions";
+import { TermsOfServiceModal } from "../shared/TermsOfServiceModal";
 
+
+// UI imports
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { Checkbox } from "../ui/checkbox";
+import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
+import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
+import { FrameSpinner } from "../ui/frame-spinner";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { PriceBox, type PriceLineItem } from "../ui/PriceBox";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Separator } from "../ui/separator";
+import { Slider } from "../ui/slider";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+
+import type { UploadResult } from "@uppy/core";
+
+// Lazy-load ARViewer so @google/model-viewer (uses `self`) is never loaded on the server
 const ARViewer = lazy(() =>
   import("../shared/ARViewer").then((mod) => ({ default: mod.ARViewer }))
 );
-import { getMatTilingStyle, getMatBevelColor } from "@framecraft/core";
-import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
-import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
-import type { BrassNameplateConfig } from "@framecraft/types";
-import { BRASS_NAMEPLATE_SPECS, getTypeBBottomBorder } from "@framecraft/types";
-import { HangingHardwareSection } from "./shared/HangingHardwareSection";
-import { calculatePrintDimensions, generatePrintFile, downloadPrintFile } from "@framecraft/core";
 
 // Get product data from services
 const frameStyles = getFramesByCategory("picture");

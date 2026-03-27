@@ -5,29 +5,32 @@
  * Two-column layout: preview (left) and controls (right). All state in store; config drives preview.
  */
 
-import { useState, useEffect, useMemo, useRef } from "react";
+import { getMatsInDisplayOrder, isMatAvailableForSize, type Mat } from "@framecraft/config";
+import { useIsMobile, getGlassTypes, getGlassTypeById, getFrameStyleById } from "@framecraft/core";
 import { Square, Ruler, Eye, Settings } from "lucide-react";
-import { Card } from "../ui/card";
+import { useState, useEffect, useMemo, useRef } from "react";
+
+import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+import { Card } from "../ui/card";
 import { Checkbox } from "../ui/checkbox";
-import { Slider } from "../ui/slider";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
 import { HelpTooltip } from "../ui/help-tooltip";
-import { Badge } from "../ui/badge";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Slider } from "../ui/slider";
 import { SwingOut } from "../ui/SwingOut";
-import { useIsMobile, getGlassTypes, getGlassTypeById, getFrameStyleById } from "@framecraft/core";
-import { getMatsInDisplayOrder, isMatAvailableForSize, type Mat } from "@framecraft/config";
-import { useMatStore } from "./mat/store";
-import { MatPreviewCanvas } from "./mat/MatPreviewCanvas";
+
+
 import { FrameSelector } from "./mat/FrameSelector";
+import { MatPreviewCanvas } from "./mat/MatPreviewCanvas";
 import { MatQuantitySelector } from "./mat/MatQuantitySelector";
 import { StickyActionBar } from "./mat/StickyActionBar";
-import { WelcomeModal } from "./mat/WelcomeModal";
+import { useMatStore } from "./mat/store";
 import { useMatPricing } from "./mat/useMatPricing";
+import { WelcomeModal } from "./mat/WelcomeModal";
 
 const MIN_MAT_SIZE = 10;
 const MAX_LONG_SIDE = 60;

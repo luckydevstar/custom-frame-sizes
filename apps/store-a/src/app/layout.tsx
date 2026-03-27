@@ -1,13 +1,16 @@
 import type { Metadata } from "next";
+
 import { Inter, Playfair_Display, Montserrat } from "next/font/google";
 import "./globals.css";
 import { StoreProvider } from "@framecraft/core";
+import { TooltipProvider } from "@framecraft/ui";
+import { Header, Footer } from "@framecraft/ui/components/layout";
+import { Toaster } from "@framecraft/ui/components/ui/toaster";
+
 import { brandConfig } from "../brand.config";
 import { QueryProvider } from "../components/providers/query-provider";
+
 import { CartHydration } from "./components/CartHydration";
-import { Header, Footer } from "@framecraft/ui/components/layout";
-import { TooltipProvider } from "@framecraft/ui";
-import { Toaster } from "@framecraft/ui/components/ui/toaster";
 
 // Body font - loaded with key weights only
 const inter = Inter({

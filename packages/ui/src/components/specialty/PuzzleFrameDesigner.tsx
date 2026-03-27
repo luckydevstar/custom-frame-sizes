@@ -1,63 +1,20 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-// Removed wouter useLocation - not needed in Next.js
-import { Info, Maximize, Settings, Eye, Copy } from "lucide-react";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { Input } from "../ui/input";
-import { Separator } from "../ui/separator";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
-import { QuantitySelector } from "../ui/quantity-selector";
-import { PriceBox } from "../ui/PriceBox";
-import type { PriceLineItem } from "../ui/PriceBox";
-// Import types from @framecraft/types
-import type { FrameStyle, FrameConfiguration, AlternateImage } from "@framecraft/types";
-
-// Import services from @framecraft/core
-import {
-  getFramesByCategory,
-  getGlassTypes,
-  calculatePricing,
-  getStoreBaseAssetUrl,
-} from "@framecraft/core";
-
-// Import hooks from @framecraft/core
-import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
-
-// Import config from @framecraft/config
 import {
   getMatsInDisplayOrder,
   isMatAvailableForSize,
   ALL_MATS,
   type Mat,
 } from "@framecraft/config";
-
-// Import UI components from same package
-import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
-
-// TODO: Extract these app-specific dependencies or make them injectable
-// - useToast hook
-// - useIntelligentPreviewSizing hook
-// - TrustBox component
-// - matRules utilities (isOversizeMat)
-// - puzzleSizes utilities (PUZZLE_SIZES, getPuzzleSizesByCategory, etc.)
-// - stockImages utilities (getRandomPuzzleImage)
-// - puzzle-lifestyle-photos constants (getRandomPuzzlePhoto)
-// - PuzzleLifestyleCarousel component
-// - HangingHardwareSection, BottomWeightedMatting components
-// - BrassNameplateSection, BrassNameplatePreview components
-// - matTiling utilities (getMatTilingStyle, getMatBevelColor)
-// - @shared/schema types
-import { useToast } from "../../hooks/use-toast";
-import { useIntelligentPreviewSizing } from "@framecraft/core";
-import { TrustBox } from "../marketing/TrustBox";
 import {
+  getFramesByCategory,
+  getGlassTypes,
+  calculatePricing,
+  getStoreBaseAssetUrl,
+  useIntelligentPreviewSizing,
+  getMatBevelColor,
+  useIsMobile,
+  useMobileViewToggle,
   isOversizeMat,
   getPuzzleSizeById,
   createRoundMatOpening,
@@ -66,17 +23,43 @@ import {
   getRandomPuzzleImage as getDefaultRandomPuzzleImage,
   type PuzzleSize,
 } from "@framecraft/core";
-import { Slider } from "../ui/slider";
-import { getMatBevelColor } from "@framecraft/core";
-import { HangingHardwareSection } from "./shared/HangingHardwareSection";
-import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
-import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
-import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
 import {
   BRASS_NAMEPLATE_SPECS,
   getTypeBBottomBorder,
   type BrassNameplateConfig,
+  type FrameStyle,
+  type FrameConfiguration,
+  type AlternateImage,
 } from "@framecraft/types";
+import { Info, Maximize, Settings, Eye, Copy } from "lucide-react";
+import { useState, useEffect, useMemo } from "react";
+
+// Removed wouter useLocation - not needed in Next.js
+import { useToast } from "../../hooks/use-toast";
+import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
+import { TrustBox } from "../marketing/TrustBox";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { PriceBox, type PriceLineItem } from "../ui/PriceBox";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Separator } from "../ui/separator";
+import { Slider } from "../ui/slider";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+
+import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+
+
+
+
 
 // Get picture frames and glass types
 const pictureFrames = getFramesByCategory("picture");

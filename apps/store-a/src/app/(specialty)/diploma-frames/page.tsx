@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
-import { GraduationCap, Shield, Ruler, Award, BookOpen } from "lucide-react";
-import { Button } from "@framecraft/ui";
 import { getStoreBaseAssetUrl } from "@framecraft/core";
+import { Button } from "@framecraft/ui";
+import { GraduationCap, Shield, Ruler, Award, BookOpen } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Diploma Frames | Custom College & University Diploma Framing | CustomFrameSizes.com",

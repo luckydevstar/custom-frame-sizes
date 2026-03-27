@@ -1,6 +1,6 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import { Button , Card, CardContent } from "@framecraft/ui";
 import {
   BookOpen,
   Shield,
@@ -16,8 +16,7 @@ import {
   Camera,
   Gift,
 } from "lucide-react";
-import { Button } from "@framecraft/ui";
-import { Card, CardContent } from "@framecraft/ui";
+import dynamic from "next/dynamic";
 
 const MagazineFrameDesigner = dynamic(
   () =>

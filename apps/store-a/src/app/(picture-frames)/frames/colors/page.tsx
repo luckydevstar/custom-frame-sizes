@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { Button, Card, CardContent } from "@framecraft/ui";
 import { COLOR_METADATA, getColorHubImage, countFramesPerColor } from "@framecraft/core";
+import { Button, Card, CardContent } from "@framecraft/ui";
+import Link from "next/link";
+
 import { brandConfig } from "../../../../brand.config";
+
+import type { Metadata } from "next";
 
 // Count frames per color
 const colorCounts = countFramesPerColor();

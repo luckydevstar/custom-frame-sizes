@@ -6,13 +6,16 @@
  * Add to Cart calls optional onAddToCart(config, totalCents) when provided.
  */
 
+import { Copy } from "lucide-react";
 import { useState } from "react";
+
 import { Button } from "../../ui/button";
 import { Label } from "../../ui/label";
-import { Copy } from "lucide-react";
+
+import { MatQuantitySelector } from "./MatQuantitySelector";
 import { useMatStore } from "./store";
 import { useMatPricing } from "./useMatPricing";
-import { MatQuantitySelector } from "./MatQuantitySelector";
+
 import type { MatConfig } from "./types";
 
 export interface StickyActionBarProps {

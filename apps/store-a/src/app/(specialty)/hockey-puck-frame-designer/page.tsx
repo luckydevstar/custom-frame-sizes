@@ -1,8 +1,11 @@
-import type { Metadata } from "next";
+import { Sparkles, Shield, Package, Layers, Target } from "lucide-react";
 import nextDynamic from "next/dynamic";
 import { Suspense } from "react";
-import { Sparkles, Shield, Package, Layers, Target } from "lucide-react";
+
 import { ScrollToDesignerButton } from "./scroll-button";
+
+import type { Metadata } from "next";
+
 import { generateMetadata } from "@/lib/seo";
 
 const PuckFrameDesigner = nextDynamic(

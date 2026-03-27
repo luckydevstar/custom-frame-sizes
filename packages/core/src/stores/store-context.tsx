@@ -11,9 +11,11 @@
  */
 
 import { createContext, useContext, useMemo, type ReactNode } from "react";
-import type { BrandConfig } from "@framecraft/config";
-import { useTheme } from "../hooks/use-theme";
+
 import { useFeatureFlag } from "../hooks/use-feature-flag";
+import { useTheme } from "../hooks/use-theme";
+
+import type { BrandConfig } from "@framecraft/config";
 
 export interface StoreContextValue {
   /**

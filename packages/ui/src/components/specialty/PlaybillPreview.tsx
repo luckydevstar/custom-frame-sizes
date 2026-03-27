@@ -10,12 +10,6 @@
 
 "use client";
 
-import { memo, useMemo } from "react";
-import { FileText } from "lucide-react";
-import type { FrameStyle } from "@framecraft/types";
-import type { Mat } from "@framecraft/config";
-import type { BrassNameplateConfig } from "@framecraft/types";
-import type { PlaybillLayoutType } from "@framecraft/core";
 import {
   PLAYBILL_LAYOUTS,
   DEFAULT_FRAME_MOLDING_WIDTH,
@@ -24,7 +18,16 @@ import {
   getMatTilingStyle,
   getMatBevelColor,
 } from "@framecraft/core";
+import { FileText } from "lucide-react";
+import { memo, useMemo } from "react";
+
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+
+import type { Mat } from "@framecraft/config";
+import type { PlaybillLayoutType } from "@framecraft/core";
+import type { FrameStyle , BrassNameplateConfig } from "@framecraft/types";
+
+
 
 interface PlaybillPreviewProps {
   // Frame configuration

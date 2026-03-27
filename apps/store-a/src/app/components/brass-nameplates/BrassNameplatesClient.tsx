@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect } from "react";
 import { Badge, TooltipProvider, BrassNameplateOrderModule } from "@framecraft/ui";
 import { Sparkles, Ruler, Palette, Type, CheckCircle2 } from "lucide-react";
+import { useEffect } from "react";
 
 const FAQ_ITEMS = [
   {

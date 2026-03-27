@@ -1,17 +1,19 @@
 "use client";
 
-import { memo, useMemo } from "react";
-import { Award } from "lucide-react";
-import type { FrameStyle } from "@framecraft/types";
-import type { MilitaryMatOption } from "@framecraft/core";
-import type { BrassNameplateConfig } from "@framecraft/types";
 import {
   computePreviewLayout,
   getMatTilingStyle,
   getMatBevelColor,
   getSharedAssetUrl,
 } from "@framecraft/core";
+import { Award } from "lucide-react";
+import { memo, useMemo } from "react";
+
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+
+import type { MilitaryMatOption } from "@framecraft/core";
+import type { FrameStyle , BrassNameplateConfig } from "@framecraft/types";
+
 
 interface MilitaryPreviewCanvasProps {
   layout: ReturnType<typeof computePreviewLayout>;

@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
 import { MagazineFramesContent } from "./magazine-frames-content";
+
+import type { Metadata } from "next";
 
 const baseUrl = "https://customframesizes.com";
 const pageUrl = `${baseUrl}/magazine-frames`;

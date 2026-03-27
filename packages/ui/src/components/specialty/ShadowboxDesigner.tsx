@@ -1,26 +1,35 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef, lazy, Suspense } from "react";
-// Removed wouter useLocation - not needed in Next.js
 import { Maximize, X, Eye, Settings, Info, Smartphone, Copy, Flower2 } from "lucide-react";
+import { useState, useEffect, useMemo, useRef, lazy, Suspense } from "react";
+
+// Removed wouter useLocation - not needed in Next.js
+import { useToast } from "../../hooks/use-toast";
+import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
+import { TrustBox } from "../marketing/TrustBox";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 
 // Lazy-load ARViewer so @google/model-viewer (uses `self`) is never loaded on the server
 const ARViewer = lazy(() => import("../shared/ARViewer").then((m) => ({ default: m.ARViewer })));
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Checkbox } from "../ui/checkbox";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { Input } from "../ui/input";
-import { Slider } from "../ui/slider";
-import { Separator } from "../ui/separator";
-// Select components not currently used
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
 import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
 import { PriceBox } from "../ui/PriceBox";
 import { QuantitySelector } from "../ui/quantity-selector";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Separator } from "../ui/separator";
+import { Slider } from "../ui/slider";
+// Select components not currently used
+// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+
 import type { PriceLineItem } from "../ui/PriceBox";
 // Import types from @framecraft/types
 import type {
@@ -29,17 +38,8 @@ import type {
   ShadowboxJerseyMount,
   ShadowboxAccessory,
   AlternateImage,
+  BrassNameplateConfig,
 } from "@framecraft/types";
-
-// Import services from @framecraft/core
-import { getFramesByCategory, getMatColors, getGlassTypes } from "@framecraft/core";
-import { calculatePricing } from "@framecraft/core";
-
-// Import utilities from @framecraft/core
-import { parseFraction, validateArtworkSize, computePreviewLayout } from "@framecraft/core";
-
-// Import hooks from @framecraft/core
-import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
 
 // Import config from @framecraft/config
 import {
@@ -50,25 +50,29 @@ import {
   type Mat,
 } from "@framecraft/config";
 
-// Import UI components from same package
-import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
-
-import { TrustBox } from "../marketing/TrustBox";
-import { addToCartOnly, useCartStore, createCartItemFromFrameConfig } from "@framecraft/core";
-import { useToast } from "../../hooks/use-toast";
-import { toShadowboxConfig, fromShadowboxConfig } from "@framecraft/core";
+// Import services, utilities, hooks, and components from @framecraft/core
 import {
+  getFramesByCategory,
+  getMatColors,
+  getGlassTypes,
+  calculatePricing,
+  parseFraction,
+  validateArtworkSize,
+  computePreviewLayout,
+  useIsMobile,
+  useMobileViewToggle,
+  addToCartOnly,
+  useCartStore,
+  createCartItemFromFrameConfig,
+  toShadowboxConfig,
+  fromShadowboxConfig,
   getMatTilingStyle,
   getMatBevelColor,
   getStoreAssetUrl,
   getStoreBaseAssetUrl,
   resolveFramePhotoUrl,
 } from "@framecraft/core";
-import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
-import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
-import type { BrassNameplateConfig } from "@framecraft/types";
 import { BRASS_NAMEPLATE_SPECS, getTypeBBottomBorder } from "@framecraft/types";
-import { HangingHardwareSection } from "./shared/HangingHardwareSection";
 
 // Get product data from services
 // Note: Shadowbox frames need deeper rabbet depth than standard picture frames

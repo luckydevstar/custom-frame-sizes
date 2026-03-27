@@ -1,12 +1,15 @@
-import type { Metadata } from "next";
+import { getFrameStyleById, getStoreBaseAssetUrl } from "@framecraft/core";
+import { FrameDesigner } from "@framecraft/ui";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { FrameDesigner } from "@framecraft/ui";
-import { getFrameStyleById, getStoreBaseAssetUrl } from "@framecraft/core";
+
 import { getFramePageContent } from "./frame-page-content";
 import { FrameDesignerHeroCta } from "./FrameDesignerHeroCta";
-import { FrameHeroBadge } from "./FrameHeroBadge";
 import { FrameDesignerPageSections } from "./FrameDesignerPageSections";
+import { FrameHeroBadge } from "./FrameHeroBadge";
+
+import type { Metadata } from "next";
+
 import {
   generateDetailMetadata,
   generateProductSchema,

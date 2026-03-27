@@ -4,10 +4,12 @@
  * The frame (if any) is composed by outer layout components using divs/background images.
  */
 
-import type { MatConfig } from "./types";
 import { getMatByName } from "@framecraft/config";
 import { getMatSVGPatternData } from "@framecraft/core";
+
 import { BorderOverlay } from "./BorderOverlay";
+
+import type { MatConfig } from "./types";
 
 const OVERLAP_PER_SIDE = 0.25;
 const PREVIEW_SCALE = 1;

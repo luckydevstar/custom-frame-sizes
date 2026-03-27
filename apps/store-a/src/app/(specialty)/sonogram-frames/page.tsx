@@ -1,7 +1,9 @@
-import type { Metadata } from "next";
-import { Baby, Heart, Shield, Sparkles, Check, Frame, PenTool } from "lucide-react";
 import { Card, SonogramFrameDesigner } from "@framecraft/ui";
+import { Baby, Heart, Shield, Sparkles, Check, Frame, PenTool } from "lucide-react";
+
 import { ScrollToDesignerButton } from "./scroll-button";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Sonogram Frames - Custom Ultrasound Picture Frames | CustomFrameSizes.com",

@@ -1,7 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { Palette, Shirt, Award, ArrowRight, Heart, Banknote, Circle } from "lucide-react";
+import Link from "next/link";
+
 import { PostageStampIcon } from "../icons/PostageStampIcon";
 
 export function ShadowboxMegaMenu() {

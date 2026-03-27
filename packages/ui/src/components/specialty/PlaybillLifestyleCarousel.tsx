@@ -1,7 +1,9 @@
 "use client";
 
 import { getSharedAssetUrl } from "@framecraft/core";
+
 import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
+
 import type { LifestyleImage } from "./shared/BaseLifestyleCarousel";
 
 // Helper to create CDN URLs for playbill lifestyle images

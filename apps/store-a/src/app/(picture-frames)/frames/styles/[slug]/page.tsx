@@ -1,11 +1,3 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
-import { Suspense } from "react";
-import { ArrowLeft } from "lucide-react";
-import { Card, CardContent, Badge } from "@framecraft/ui";
-import { FrameDesigner } from "@framecraft/ui";
 import {
   STYLE_METADATA,
   getFramesForStyle,
@@ -14,7 +6,16 @@ import {
   getStyleLifestyleImages,
   getStoreBaseAssetUrl,
 } from "@framecraft/core";
+import { Card, CardContent, Badge , FrameDesigner } from "@framecraft/ui";
+import { ArrowLeft } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
+
 import { brandConfig } from "../../../../../brand.config";
+
+import type { Metadata } from "next";
 
 const frames = getFrameStyles();
 

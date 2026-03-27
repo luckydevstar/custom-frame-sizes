@@ -1,7 +1,8 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
 import { Sparkles, ArrowLeft } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Glazing Guide - Choosing the Right Glass for Your Custom Frame | Custom Frame Sizes",

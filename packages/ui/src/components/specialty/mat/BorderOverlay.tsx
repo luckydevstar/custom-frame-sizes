@@ -4,8 +4,9 @@
  * Simplified: rect and oval only; highlightMode "all" only.
  */
 
-import type { MatConfig, MatOpening } from "./types";
 import { getMatByName } from "@framecraft/config";
+
+import type { MatConfig, MatOpening } from "./types";
 
 interface BorderOverlayProps {
   config: MatConfig;

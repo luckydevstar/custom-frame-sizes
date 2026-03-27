@@ -1,6 +1,7 @@
 "use client";
 
 import { DIPLOMA_LIFESTYLE_IMAGES, getSharedAssetUrl } from "@framecraft/core";
+
 import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
 
 interface DiplomaLifestyleCarouselProps {

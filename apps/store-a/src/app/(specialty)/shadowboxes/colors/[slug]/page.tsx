@@ -1,8 +1,3 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import { ArrowLeft, Shirt, Disc3, Award, Box, Shield, Palette, Package, Ruler } from "lucide-react";
-import { Button, Card, CardContent, Badge } from "@framecraft/ui";
 import {
   getFrameStyles,
   SHADOWBOX_COLOR_METADATA,
@@ -10,13 +5,21 @@ import {
   isUsingShadowboxPlaceholderImages,
   getStoreBaseAssetUrl,
 } from "@framecraft/core";
+import { Button, Card, CardContent, Badge } from "@framecraft/ui";
+import { ArrowLeft, Shirt, Disc3, Award, Box, Shield, Palette, Package, Ruler } from "lucide-react";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+
 import { brandConfig } from "../../../../../brand.config";
-import type { FrameStyle } from "@framecraft/types";
+
 import {
   COMPLEMENTARY_COLORS_MAP,
   FRAME_MATERIALS_COPY,
   SHADOWBOX_COLOR_FAQ,
 } from "./shadowbox-color-detail-data";
+
+import type { FrameStyle } from "@framecraft/types";
+import type { Metadata } from "next";
 
 const VALID_SLUGS = ["black", "white", "brown", "silver", "gold", "blue", "natural"];
 

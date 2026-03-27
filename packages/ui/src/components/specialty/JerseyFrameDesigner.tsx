@@ -1,38 +1,49 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
-// Removed wouter useLocation - using window.location directly in Next.js
-import { Share2, Shirt, Info, Maximize, Settings, Eye, Copy, Palette, Shield } from "lucide-react";
-import { useIntelligentPreviewSizing } from "@framecraft/core";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
-import { Separator } from "../ui/separator";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { QuantitySelector } from "../ui/quantity-selector";
-// Import types from @framecraft/types
-import type { FrameStyle, FrameConfiguration, AlternateImage } from "@framecraft/types";
-
-// Import services from @framecraft/core
-import { getFrameStyleById, calculatePricing } from "@framecraft/core";
-
-// Import utilities from @framecraft/core
-import {
+import { getMatsInDisplayOrder, getMatById, type Mat } from "@framecraft/config";
+import { useIntelligentPreviewSizing , generateDoubleMatPaths , getFrameStyleById, calculatePricing ,
   computePreviewLayout,
   getStoreBaseAssetUrl,
   getJerseyLifestyleImages,
-} from "@framecraft/core";
+ useIsMobile, useMobileViewToggle } from "@framecraft/core";
+import { type MatOption , getJerseyLayout, type JerseyLayoutType } from "@framecraft/core";
+import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
+import { Share2, Shirt, Info, Maximize, Settings, Eye, Copy, Palette, Shield } from "lucide-react";
+import { useState, useEffect, useMemo, useRef } from "react";
+
+// Removed wouter useLocation - using window.location directly in Next.js
+import { useToast } from "../../hooks/use-toast";
+import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
+import { TrustBox } from "../marketing/TrustBox";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { PriceBox } from "../ui/PriceBox";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { Separator } from "../ui/separator";
+
+// Import types from @framecraft/types
+import { JerseyLifestyleCarousel } from "./JerseyLifestyleCarousel";
+import { JerseyPreviewCanvas } from "./JerseyPreviewCanvas";
+import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+
+import type { PriceLineItem } from "../ui/PriceBox";
+import type { FrameStyle, FrameConfiguration, AlternateImage , BrassNameplateConfig } from "@framecraft/types";
+
+// Import services from @framecraft/core
+
+// Import utilities from @framecraft/core
 
 // Import hooks from @framecraft/core
-import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
 
 // Import config from @framecraft/config
-import { getMatsInDisplayOrder, getMatById, type Mat } from "@framecraft/config";
 
 // Import UI components from same package
-import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
 
 // TODO: Extract these app-specific dependencies or make them injectable
 // - useToast hook
@@ -43,20 +54,14 @@ import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
 // - BrassNameplateSection component
 // - HangingHardwareSection, BottomWeightedMatting components
 // - @shared/schema types
-import { useToast } from "../../hooks/use-toast";
-import { TrustBox } from "../marketing/TrustBox";
-import { type MatOption } from "@framecraft/core";
-import { getJerseyLayout, type JerseyLayoutType } from "@framecraft/core";
-import { generateDoubleMatPaths } from "@framecraft/core";
-import { JerseyPreviewCanvas } from "./JerseyPreviewCanvas";
-import { JerseyLifestyleCarousel } from "./JerseyLifestyleCarousel";
-import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
-import type { BrassNameplateConfig } from "@framecraft/types";
-import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
-import { HangingHardwareSection } from "./shared/HangingHardwareSection";
-import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
-import { PriceBox } from "../ui/PriceBox";
-import type { PriceLineItem } from "../ui/PriceBox";
+
+
+
+
+
+
+
+
 
 // Jersey frames: only 3 specific shadowbox frames allowed (extra deep with 2" usable depth)
 const JERSEY_FRAME_IDS = [

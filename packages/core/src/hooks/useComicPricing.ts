@@ -13,13 +13,15 @@
 "use client";
 
 import { useMemo } from "react";
+
+import { calculatePricing } from "../services/pricing";
+import { getComicFormatById, isSlabbedFormat } from "../utils/specialty/comic-formats";
 import {
   getComicLayout,
   INTERIOR_DIMENSIONS,
   type ComicLayoutType,
 } from "../utils/specialty/comic-layouts";
-import { getComicFormatById, isSlabbedFormat } from "../utils/specialty/comic-formats";
-import { calculatePricing } from "../services/pricing";
+
 import type { FrameConfiguration } from "@framecraft/types";
 
 // TODO: Extract BRASS_NAMEPLATE_SPECS to @framecraft/types

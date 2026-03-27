@@ -1,8 +1,9 @@
 "use client";
 
-import { Moon, Sun } from "lucide-react";
-import { Button } from "../ui/button";
 import { useTheme } from "@framecraft/core";
+import { Moon, Sun } from "lucide-react";
+
+import { Button } from "../ui/button";
 
 export function ThemeToggle() {
   const { isDark, toggleDark } = useTheme({ applyToDocument: false });

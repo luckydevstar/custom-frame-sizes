@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
 import { FoamBoardClient } from "./FoamBoardClient";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Custom-Cut Foam Board | Professional Mounting Board | Custom Frame Sizes",

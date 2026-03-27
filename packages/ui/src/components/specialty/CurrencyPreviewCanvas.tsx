@@ -1,13 +1,15 @@
 "use client";
 
+import { computePreviewLayout, getMatTilingStyle, getMatBevelColor } from "@framecraft/core";
 import { memo, useMemo } from "react";
-import type { FrameStyle } from "@framecraft/types";
-import type { BrassNameplateConfig } from "@framecraft/types";
+
+import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+import { CurrencyIcon } from "../icons/CurrencyIcon";
+
 import type { Mat } from "@framecraft/config";
 import type { CurrencyBackingOption } from "@framecraft/core";
-import { computePreviewLayout, getMatTilingStyle, getMatBevelColor } from "@framecraft/core";
-import { CurrencyIcon } from "../icons/CurrencyIcon";
-import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+import type { FrameStyle , BrassNameplateConfig } from "@framecraft/types";
+
 
 export interface CurrencyPreviewCanvasLayout {
   scale: number;

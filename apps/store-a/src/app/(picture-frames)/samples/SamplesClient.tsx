@@ -9,8 +9,14 @@
  * Free shipping on all samples
  */
 
-import { useState, useMemo, useEffect } from "react";
-import { Check, Truck, ChevronDown, ChevronUp, ShoppingCart, X } from "lucide-react";
+import { getRegularMats, getPremiumMats, matNeedsBorder } from "@framecraft/config";
+import {
+  getFrameStyles,
+  getStoreBaseAssetUrl,
+  getSharedAssetUrl,
+  getFrameImageUrl,
+  getCanvasImageUrl,
+} from "@framecraft/core";
 import {
   Button,
   Card,
@@ -23,16 +29,11 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@framecraft/ui";
-import {
-  getFrameStyles,
-  getStoreBaseAssetUrl,
-  getSharedAssetUrl,
-  getFrameImageUrl,
-  getCanvasImageUrl,
-} from "@framecraft/core";
-import { getRegularMats, getPremiumMats, matNeedsBorder } from "@framecraft/config";
-import type { FrameStyle } from "@framecraft/types";
+import { Check, Truck, ChevronDown, ChevronUp, ShoppingCart, X } from "lucide-react";
+import { useState, useMemo, useEffect } from "react";
+
 import type { Mat } from "@framecraft/config";
+import type { FrameStyle } from "@framecraft/types";
 
 /** Frame with optional canvas-specific lifestyleImage (from frames.json). */
 type FrameWithLifestyle = FrameStyle & { lifestyleImage?: string };

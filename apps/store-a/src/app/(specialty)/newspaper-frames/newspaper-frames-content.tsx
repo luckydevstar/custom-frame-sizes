@@ -1,8 +1,8 @@
 "use client";
 
-import { Newspaper, Shield, Award, Sparkles, Check, Frame, ArrowDown } from "lucide-react";
 import { Button, Card, CardContent, NewspaperFrameDesigner } from "@framecraft/ui";
 import { NewspaperLifestyleCarousel } from "@framecraft/ui/components/specialty/NewspaperLifestyleCarousel";
+import { Newspaper, Shield, Award, Sparkles, Check, Frame, ArrowDown } from "lucide-react";
 
 const faqData = [
   {

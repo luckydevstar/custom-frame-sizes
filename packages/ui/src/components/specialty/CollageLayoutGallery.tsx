@@ -11,10 +11,6 @@
 
 "use client";
 
-import { useState, useMemo } from "react";
-import { Card } from "../ui/card";
-import { Badge } from "../ui/badge";
-import { Button } from "../ui/button";
 import {
   COLLAGE_LAYOUTS,
   getSizeFilterOptions,
@@ -29,8 +25,14 @@ import {
   type VariantSizeId,
   type CollageLayout,
 } from "@framecraft/core";
-import { cn } from "../../utils";
 import { Heart, Circle, Square, Hexagon, PawPrint, X } from "lucide-react";
+import { useState, useMemo } from "react";
+
+import { cn } from "../../utils";
+import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+
 
 interface CollageLayoutGalleryProps {
   selectedLayout: CollageLayoutType;

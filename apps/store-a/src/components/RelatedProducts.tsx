@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Card } from "@framecraft/ui";
 import {
   ArrowRight,
   Frame,
@@ -27,8 +27,10 @@ import {
   Sparkles,
   Droplets,
 } from "lucide-react";
+import Link from "next/link";
+
 import type { LucideIcon } from "lucide-react";
-import { Card } from "@framecraft/ui";
+
 
 export interface RelatedProduct {
   href: string;

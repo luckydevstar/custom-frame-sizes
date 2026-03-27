@@ -6,8 +6,10 @@
  */
 
 import { lazy, Suspense, type ComponentType, type ReactNode } from "react";
-import type { ComponentOverrides } from "@framecraft/config";
+
 import { useStoreConfig } from "../stores/store-context";
+
+import type { ComponentOverrides } from "@framecraft/config";
 
 /**
  * Component override registry

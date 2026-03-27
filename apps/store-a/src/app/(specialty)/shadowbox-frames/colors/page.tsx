@@ -1,14 +1,16 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { Button, Card, CardContent, Badge } from "@framecraft/ui";
-import { Box, Shield, Ruler, Disc3, Shirt, Trophy, Music, Heart } from "lucide-react";
 import {
   getFrameStyles,
   SHADOWBOX_COLOR_METADATA,
   getShadowboxColorCounts,
   getShadowboxColorHubImage,
 } from "@framecraft/core";
+import { Button, Card, CardContent, Badge } from "@framecraft/ui";
+import { Box, Shield, Ruler, Disc3, Shirt, Trophy, Music, Heart } from "lucide-react";
+import Link from "next/link";
+
 import { brandConfig } from "../../../../brand.config";
+
+import type { Metadata } from "next";
 
 const frames = getFrameStyles();
 const colorCounts = getShadowboxColorCounts(

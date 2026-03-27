@@ -1,6 +1,4 @@
-import type { Metadata } from "next";
-import dynamic from "next/dynamic";
-import { Suspense } from "react";
+import { Card } from "@framecraft/ui";
 import {
   Grid3X3,
   Images,
@@ -15,10 +13,15 @@ import {
   Camera,
   Gift,
 } from "lucide-react";
-import { Card } from "@framecraft/ui";
-import { CollageLifestyleSection } from "./CollageLifestyleSection";
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
+
 import { brandConfig } from "../../../brand.config";
+
+import { CollageLifestyleSection } from "./CollageLifestyleSection";
 import { ScrollToDesignerButton } from "./scroll-button";
+
+import type { Metadata } from "next";
 
 const CollageFrameDesigner = dynamic(
   () => import("@framecraft/ui").then((mod) => ({ default: mod.CollageFrameDesigner })),

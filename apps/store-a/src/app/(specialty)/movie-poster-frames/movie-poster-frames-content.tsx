@@ -1,8 +1,8 @@
 "use client";
 
+import { Button , MoviePosterFrameDesigner } from "@framecraft/ui";
 import { Film, Sparkles } from "lucide-react";
-import { Button } from "@framecraft/ui";
-import { MoviePosterFrameDesigner } from "@framecraft/ui";
+
 import { RelatedProducts } from "@/components/RelatedProducts";
 
 export function MoviePosterFramesContent() {

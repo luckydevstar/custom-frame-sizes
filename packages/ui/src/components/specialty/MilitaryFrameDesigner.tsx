@@ -1,18 +1,5 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
-import { Share2, Award, Maximize, Settings, Eye, Copy, ShoppingCart, Shield } from "lucide-react";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
-import { Label } from "../ui/label";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { Input } from "../ui/input";
-import { QuantitySelector } from "../ui/quantity-selector";
-import { PriceBox } from "../ui/PriceBox";
-import type { PriceLineItem } from "../ui/PriceBox";
-import { useToast } from "../../hooks/use-toast";
 import {
   getFramesByCategory,
   calculatePricing,
@@ -33,14 +20,33 @@ import {
   getRandomMilitaryPhoto,
   BRASS_PLAQUE_DIMENSIONS,
 } from "@framecraft/core";
-import type { FrameStyle, FrameConfiguration, BrassNameplateConfig } from "@framecraft/types";
-import type { MilitaryLayoutType } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
-import { TrustBox } from "../marketing/TrustBox";
-import { MilitaryPreviewCanvas } from "./MilitaryPreviewCanvas";
+import { Share2, Award, Maximize, Settings, Eye, Copy, ShoppingCart, Shield } from "lucide-react";
+import { useState, useEffect, useMemo, useRef } from "react";
+
+import { useToast } from "../../hooks/use-toast";
 import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
+import { TrustBox } from "../marketing/TrustBox";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { PriceBox } from "../ui/PriceBox";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+
+import { MilitaryPreviewCanvas } from "./MilitaryPreviewCanvas";
 import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+
+import type { PriceLineItem } from "../ui/PriceBox";
+import type { MilitaryLayoutType } from "@framecraft/core";
+import type { FrameStyle, FrameConfiguration, BrassNameplateConfig } from "@framecraft/types";
+
+
+
 
 const shadowboxFrames = getFramesByCategory("shadowbox");
 const frameStyles = shadowboxFrames.length > 0 ? shadowboxFrames : [];

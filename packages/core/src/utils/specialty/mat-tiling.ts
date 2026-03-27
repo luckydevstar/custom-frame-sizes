@@ -7,9 +7,11 @@
  * and crops overflow - perfect for different frame aspect ratios.
  */
 
-import type React from "react";
 import { getMatByName, ALL_MATS } from "@framecraft/config";
+
 import { getMatPreviewImageUrl } from "../../utils/asset-urls";
+
+import type React from "react";
 
 // Build hex-to-mat-name lookup table once at module scope
 const HEX_TO_MAT_NAME: Record<string, string> = {};

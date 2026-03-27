@@ -1,7 +1,6 @@
 "use client";
 
-import { useTheme } from "@framecraft/core";
-import { getBrandAssetUrl } from "@framecraft/core";
+import { useTheme , getBrandAssetUrl } from "@framecraft/core";
 import Image from "next/image";
 
 interface LogoProps {

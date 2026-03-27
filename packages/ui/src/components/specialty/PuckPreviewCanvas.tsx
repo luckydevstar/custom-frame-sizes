@@ -1,12 +1,12 @@
 "use client";
 
-import { memo, useMemo, useCallback, useState, useEffect } from "react";
 import { ImageIcon } from "lucide-react";
-import type { FrameStyle } from "@framecraft/types";
-import type { BrassNameplateConfig } from "@framecraft/types";
+import { memo, useMemo, useCallback, useState, useEffect } from "react";
+
+import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+
 import type { Mat } from "@framecraft/config";
-import type { PuckLayout } from "@framecraft/core";
-import {
+import type { PuckLayout ,
   computePreviewLayout,
   getMatTilingStyle,
   getMatBevelColor,
@@ -14,7 +14,8 @@ import {
   createPuckDataUrl,
   type PuckInsert,
 } from "@framecraft/core";
-import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+import type { FrameStyle , BrassNameplateConfig } from "@framecraft/types";
+
 
 interface PuckPreviewCanvasProps {
   layout: ReturnType<typeof computePreviewLayout>;

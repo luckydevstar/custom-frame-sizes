@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
-import { Suspense } from "react";
-import { Sparkles, Shield, Package, Disc3, Award, CheckCircle2, AlertCircle } from "lucide-react";
-import { RecordAlbumDesigner, Card, Button, Separator } from "@framecraft/ui";
 import { getSharedAssetUrl, getRecordAlbumLifestyleImageUrl } from "@framecraft/core";
-import { ScrollToDesignerButton } from "./scroll-button";
+import { RecordAlbumDesigner, Card, Button, Separator } from "@framecraft/ui";
+import { Sparkles, Shield, Package, Disc3, Award, CheckCircle2, AlertCircle } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Suspense } from "react";
+
 import { RecordAlbumLifestyleSection } from "./RecordAlbumLifestyleSection";
+import { ScrollToDesignerButton } from "./scroll-button";
+
 import type { GalleryImage } from "@framecraft/ui";
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title:

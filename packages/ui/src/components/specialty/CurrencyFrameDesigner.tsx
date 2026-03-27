@@ -1,31 +1,12 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
-import { Info, Maximize, Settings, Eye, ShoppingCart } from "lucide-react";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Separator } from "../ui/separator";
-import { Slider } from "../ui/slider";
-import { Checkbox } from "../ui/checkbox";
-import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { Input } from "../ui/input";
-import { QuantitySelector } from "../ui/quantity-selector";
-import { PriceBox } from "../ui/PriceBox";
-import type { PriceLineItem } from "../ui/PriceBox";
-import { useToast } from "../../hooks/use-toast";
-import { useIsMobile, useMobileViewToggle, useIntelligentPreviewSizing } from "@framecraft/core";
-import {
+import { getMatsInDisplayOrder, getMatById, ALL_MATS, type Mat } from "@framecraft/config";
+import { useIsMobile, useMobileViewToggle, useIntelligentPreviewSizing,
   getFramesByCategory,
   getGlassTypes,
   calculatePricing,
   parseFraction,
   computePreviewLayout,
-} from "@framecraft/core";
-import {
   getCurrencyLayout,
   getAllCurrencyLayouts,
   getCurrencyLayoutWithBrassNameplate,
@@ -37,19 +18,39 @@ import {
   getDefaultCurrencyBacking,
   getCurrencyLifestyleImages,
   getRandomCurrencyLifestyleImage,
-  getStoreBaseAssetUrl,
-} from "@framecraft/core";
-import type { CurrencyLayoutType } from "@framecraft/core";
-import type { FrameStyle, GlassType, FrameConfiguration } from "@framecraft/types";
-import type { BrassNameplateConfig } from "@framecraft/types";
+  getStoreBaseAssetUrl} from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
-import { getMatsInDisplayOrder, getMatById, ALL_MATS, type Mat } from "@framecraft/config";
-import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
-import { TrustBox } from "../marketing/TrustBox";
-import { CurrencyPreviewCanvas } from "./CurrencyPreviewCanvas";
+import { Info, Maximize, Settings, Eye, ShoppingCart } from "lucide-react";
+import { useState, useEffect, useMemo, useRef } from "react";
+
+import { useToast } from "../../hooks/use-toast";
 import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
-import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import { TrustBox } from "../marketing/TrustBox";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { Checkbox } from "../ui/checkbox";
+import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { PriceBox } from "../ui/PriceBox";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Separator } from "../ui/separator";
+import { Slider } from "../ui/slider";
+import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
+
+import { CurrencyPreviewCanvas } from "./CurrencyPreviewCanvas";
 import { BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+
+import type { PriceLineItem } from "../ui/PriceBox";
+import type { CurrencyLayoutType } from "@framecraft/core";
+import type { FrameStyle, GlassType, FrameConfiguration , BrassNameplateConfig } from "@framecraft/types";
+
+
+
 
 const shadowboxFrames = getFramesByCategory("shadowbox");
 const availableLayouts = getAllCurrencyLayouts();

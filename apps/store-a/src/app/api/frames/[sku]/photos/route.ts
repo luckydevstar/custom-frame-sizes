@@ -1,5 +1,5 @@
-import { NextRequest, NextResponse } from "next/server";
 import { getFrameStyles, getStoreBaseAssetUrl } from "@framecraft/core";
+import { NextRequest, NextResponse } from "next/server";
 
 function getCdnBase(): string | null {
   const url = typeof process !== "undefined" && process.env?.NEXT_PUBLIC_CDN_STORE_A_URL;

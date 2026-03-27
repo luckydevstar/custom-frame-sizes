@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo } from "react";
 import { getJerseyLifestyleImages } from "@framecraft/core";
+import { useMemo } from "react";
+
 import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
 
 export interface JerseyLifestyleCarouselProps {

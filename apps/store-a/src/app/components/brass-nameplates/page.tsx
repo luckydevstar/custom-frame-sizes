@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
 import { BrassNameplatesClient } from "./BrassNameplatesClient";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Custom Brass Nameplates - Laser Engraved Plaques | Custom Frame Sizes",

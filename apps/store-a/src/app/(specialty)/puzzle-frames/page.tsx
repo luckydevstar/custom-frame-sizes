@@ -1,9 +1,13 @@
-import type { Metadata } from "next";
-import { Suspense } from "react";
-import { Sparkles } from "lucide-react";
 import { PuzzleFrameDesigner, PuzzleLifestyleCarousel } from "@framecraft/ui";
+import { Sparkles } from "lucide-react";
+import { Suspense } from "react";
+
 import { brandConfig } from "../../../brand.config";
+
 import { ScrollToDesignerButton } from "./scroll-button";
+
+import type { Metadata } from "next";
+
 import { RelatedProducts } from "@/components/RelatedProducts";
 
 export const metadata: Metadata = {

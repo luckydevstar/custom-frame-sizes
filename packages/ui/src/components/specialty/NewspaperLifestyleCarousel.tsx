@@ -1,7 +1,8 @@
 "use client";
 
-import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
 import { getNewspaperLifestyleImages, getSharedAssetUrl } from "@framecraft/core";
+
+import { BaseLifestyleCarousel } from "./shared/BaseLifestyleCarousel";
 
 const NEWSPAPER_LIFESTYLE_IMAGES = (() => {
   const items = getNewspaperLifestyleImages();

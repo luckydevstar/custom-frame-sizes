@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { Button } from "@framecraft/ui";
 import { Sparkles } from "lucide-react";
+import Link from "next/link";
 
 interface DesignerPlaceholderProps {
   /** Section id for scroll target */

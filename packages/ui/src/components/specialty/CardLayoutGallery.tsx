@@ -1,14 +1,15 @@
 "use client";
 
-import { Card } from "../ui/card";
 import {
   CARD_LAYOUTS,
   getLayoutsGroupedByCategory,
   getAvailableLayoutsForFormatGrouped,
   type CardLayoutType,
 } from "@framecraft/core";
-import { cn } from "../../utils";
 import { Sparkles } from "lucide-react";
+
+import { cn } from "../../utils";
+import { Card } from "../ui/card";
 
 interface CardLayoutGalleryProps {
   selectedLayout: CardLayoutType;

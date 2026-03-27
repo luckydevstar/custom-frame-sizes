@@ -5,9 +5,10 @@
  * Price is in dollars; stored cart item price is in cents.
  */
 
-import type { FrameConfiguration } from "@framecraft/types";
-import type { AddCartItemInput } from "../stores/cart-store";
 import { getFrameStyleById } from "../services/products";
+
+import type { AddCartItemInput } from "../stores/cart-store";
+import type { FrameConfiguration } from "@framecraft/types";
 
 const DEFAULT_FRAME_VARIANT_ID =
   (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_FRAME_VARIANT_ID) || null;

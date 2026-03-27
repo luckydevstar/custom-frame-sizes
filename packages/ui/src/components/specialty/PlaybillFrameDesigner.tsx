@@ -1,64 +1,15 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef, useCallback } from "react";
-// Removed wouter useLocation - not needed in Next.js
-import { Copy, Maximize, Eye, Settings, Info } from "lucide-react";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
-// Badge not currently used
-// import { Badge } from "../ui/badge";
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-// Select components not currently used
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-// Separator not currently used
-// import { Separator } from "../ui/separator";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-// Alert components not currently used
-// import { Alert, AlertDescription } from "../ui/alert";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
-import { QuantitySelector } from "../ui/quantity-selector";
-import { PriceBox } from "../ui/PriceBox";
-import type { PriceLineItem } from "../ui/PriceBox";
-// Import types from @framecraft/types
-import type { FrameStyle, AlternateImage } from "@framecraft/types";
-
-// Import services from @framecraft/core
+import { ALL_MATS, getMatById, type Mat } from "@framecraft/config";
 import {
   getFramesByCategory,
   getGlassTypes,
   getSharedAssetUrl,
   getStoreBaseAssetUrl,
-} from "@framecraft/core";
-
-// Import hooks from @framecraft/core
-import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
-
-// Import config from @framecraft/config
-import { ALL_MATS, getMatById, type Mat } from "@framecraft/config";
-
-// Import UI components from same package
-import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
-
-// TODO: Extract these app-specific dependencies or make them injectable
-// - useToast hook
-// - useIntelligentPreviewSizing hook
-// - BrassNameplateSection component
-// - @shared/schema types
-// - playbillLayouts utilities (PLAYBILL_LAYOUTS, PLAQUE_FRAME_EXTENSION)
-// - PlaybillPreview component
-// - usePlaybillPricing hook
-// - PlaybillLayoutGallery component
-// - TrustBadges component
-// - PlaybillLifestyleCarousel component
-// - HangingHardwareSection, BottomWeightedMatting components
-import { useToast } from "../../hooks/use-toast";
-import { useIntelligentPreviewSizing } from "@framecraft/core";
-import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
-import type { BrassNameplateConfig } from "@framecraft/types";
-// import { BRASS_NAMEPLATE_SPECS, getTypeABottomBorder } from "@framecraft/types";
-import {
+  useIntelligentPreviewSizing,
+  usePlaybillPricing,
+  useIsMobile,
+  useMobileViewToggle,
   PLAYBILL_LAYOUTS,
   PLAQUE_FRAME_EXTENSION,
   getRandomPlaybillInserts,
@@ -66,13 +17,32 @@ import {
   createPlaybillInsertSeed,
   type PlaybillLayoutType,
 } from "@framecraft/core";
-import { PlaybillPreview } from "./PlaybillPreview";
-import { usePlaybillPricing } from "@framecraft/core";
+import { Copy, Maximize, Eye, Settings, Info } from "lucide-react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
+
+// Removed wouter useLocation - not needed in Next.js
+import { useToast } from "../../hooks/use-toast";
+import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
+import { TrustBadges } from "../marketing/TrustBadges";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Label } from "../ui/label";
+import { PriceBox, type PriceLineItem } from "../ui/PriceBox";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
+
 import { PlaybillLayoutGallery } from "./PlaybillLayoutGallery";
 import { PlaybillLifestyleCarousel } from "./PlaybillLifestyleCarousel";
-import { TrustBadges } from "../marketing/TrustBadges";
-import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import { PlaybillPreview } from "./PlaybillPreview";
 import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+
+import type { FrameStyle, AlternateImage, BrassNameplateConfig } from "@framecraft/types";
+
 
 // Get product data from services
 const shadowboxFrames = getFramesByCategory("shadowbox");

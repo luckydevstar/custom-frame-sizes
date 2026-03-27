@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
+import { useRotatingImages , useIntersectionAnimation } from "@framecraft/core";
 import { ArrowRight } from "lucide-react";
-import { Button } from "../ui/button";
-import { useRotatingImages } from "@framecraft/core";
-import { useIntersectionAnimation } from "@framecraft/core";
+import Link from "next/link";
+
 import { RotatingImage } from "../marketing/RotatingImage";
+import { Button } from "../ui/button";
 
 export interface InspirationGalleryProps {
   galleryLink?: string;

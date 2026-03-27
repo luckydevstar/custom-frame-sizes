@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
-import { X } from "lucide-react";
 import { Button, Dialog, DialogContent, DialogTitle, FrameDetailCarousel } from "@framecraft/ui";
+import { X } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
+
 import type { GalleryImage } from "@framecraft/ui";
 
 interface SignatureLifestyleSectionProps {

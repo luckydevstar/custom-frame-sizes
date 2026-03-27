@@ -1,13 +1,17 @@
 "use client";
 
-import { memo, useMemo } from "react";
-import { Heart } from "lucide-react";
-import type { FrameStyle } from "@framecraft/types";
-import type { BrassNameplateConfig } from "@framecraft/types";
-import type { Mat } from "@framecraft/config";
 import { getMatTilingStyle, getMatBevelColor } from "@framecraft/core";
-import type { WeddingFrameConfig, WeddingPreviewDimensions } from "@framecraft/core";
+import { Heart } from "lucide-react";
+import { memo, useMemo } from "react";
+
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+
+import type { Mat } from "@framecraft/config";
+import type { WeddingFrameConfig, WeddingPreviewDimensions } from "@framecraft/core";
+import type { FrameStyle , BrassNameplateConfig } from "@framecraft/types";
+
+
+
 
 const MAT_REVEAL = 0.25;
 

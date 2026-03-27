@@ -1,12 +1,17 @@
-import type { Metadata } from "next";
-import { Heart } from "lucide-react";
-import { Card, SignatureFrameDesigner, Separator, TrustBox } from "@framecraft/ui";
 import { getSharedAssetUrl } from "@framecraft/core";
-import { RelatedProducts } from "@/components/RelatedProducts";
+import { Card, SignatureFrameDesigner, Separator, TrustBox } from "@framecraft/ui";
+import { Heart } from "lucide-react";
+
+
+import { brandConfig } from "../../../brand.config";
+
 import { ScrollToDesignerButton } from "./scroll-button";
 import { SignatureLifestyleSection } from "./SignatureLifestyleSection";
-import { brandConfig } from "../../../brand.config";
+
 import type { GalleryImage } from "@framecraft/ui";
+import type { Metadata } from "next";
+
+import { RelatedProducts } from "@/components/RelatedProducts";
 
 const SIGNATURE_LIFESTYLE_PATHS: Array<{ path: string; alt: string }> = [
   {

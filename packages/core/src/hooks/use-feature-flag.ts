@@ -6,7 +6,6 @@
  * React hook for accessing feature flags from store configuration.
  */
 
-import { useMemo } from "react";
 import {
   defaultFeatureFlags,
   mergeFeatureFlags,
@@ -16,6 +15,7 @@ import {
   type FeatureFlags,
 } from "@framecraft/config";
 import { getBrandConfig } from "@framecraft/config";
+import { useMemo } from "react";
 
 export interface UseFeatureFlagOptions {
   /**

@@ -1,11 +1,5 @@
 "use client";
 
-import { memo, useMemo } from "react";
-import { BookOpen } from "lucide-react";
-import type { FrameStyle } from "@framecraft/types";
-import type { Mat } from "@framecraft/config";
-import type { BrassNameplateConfig } from "@framecraft/types";
-import type { MagazineLayoutType, MagazineManifest } from "@framecraft/core";
 import {
   getPreviewScale,
   getMatTilingStyle,
@@ -16,7 +10,16 @@ import {
   getMagazineSizeById,
   getFrameImageUrl,
 } from "@framecraft/core";
+import { BookOpen } from "lucide-react";
+import { memo, useMemo } from "react";
+
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+
+import type { Mat } from "@framecraft/config";
+import type { MagazineLayoutType, MagazineManifest } from "@framecraft/core";
+import type { FrameStyle , BrassNameplateConfig } from "@framecraft/types";
+
+
 
 interface MagazinePreviewCanvasProps {
   framePhotos: {

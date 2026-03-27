@@ -1,22 +1,5 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
-import { useSearchParams } from "next/navigation";
-import { Disc3, Eye, Settings, Maximize, Copy } from "lucide-react";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
-import { QuantitySelector } from "../ui/quantity-selector";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Separator } from "../ui/separator";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { RecordAlbumPreview } from "./RecordAlbumPreview";
-import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
-import { PriceBox } from "../ui/PriceBox";
-import type { PriceLineItem } from "../ui/PriceBox";
-import { useToast } from "../../hooks/use-toast";
 import {
   ALL_MATS,
   getMatsInDisplayOrder,
@@ -45,16 +28,38 @@ import {
   type RecordAlbumLayoutType,
   type CDLayoutType,
 } from "@framecraft/core";
+import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
+import { Disc3, Eye, Settings, Maximize, Copy } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { useState, useEffect, useMemo } from "react";
+
+import { useToast } from "../../hooks/use-toast";
+import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { PriceBox } from "../ui/PriceBox";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Separator } from "../ui/separator";
+
+import { RecordAlbumPreview } from "./RecordAlbumPreview";
+import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+
+import type { PriceLineItem } from "../ui/PriceBox";
 import type {
   FrameStyle,
   GlassType,
   FrameConfiguration,
   BrassNameplateConfig,
 } from "@framecraft/types";
-import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
-import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
-import { HangingHardwareSection } from "./shared/HangingHardwareSection";
-import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
+
+
 
 const frameStyles = getFramesByCategory("shadowbox");
 const glassTypes = getGlassTypes().filter((g) => g.id === "standard" || g.id === "non-glare");

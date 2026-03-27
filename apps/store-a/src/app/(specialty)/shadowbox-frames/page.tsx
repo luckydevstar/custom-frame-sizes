@@ -1,12 +1,15 @@
-import type { Metadata } from "next";
-import nextDynamic from "next/dynamic";
-import Link from "next/link";
-import Image from "next/image";
-import { Suspense } from "react";
-import { Sparkles, Box, Palette, Layers, Shield } from "lucide-react";
-import { ScrollToDesignerButton } from "./scroll-button";
 import { getFramesByCategory, getStoreBaseAssetUrl } from "@framecraft/core";
 import { Button } from "@framecraft/ui";
+import { Sparkles, Box, Palette, Layers, Shield } from "lucide-react";
+import nextDynamic from "next/dynamic";
+import Image from "next/image";
+import Link from "next/link";
+import { Suspense } from "react";
+
+import { ScrollToDesignerButton } from "./scroll-button";
+
+
+import type { Metadata } from "next";
 
 const ShadowboxDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),

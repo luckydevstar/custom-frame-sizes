@@ -1,11 +1,15 @@
-import type { Metadata } from "next";
-import nextDynamic from "next/dynamic";
-import { Suspense } from "react";
-import Link from "next/link";
-import { Sparkles, Shield, Ruler, Layers, Award, ArrowDown } from "lucide-react";
 import { Card, Button } from "@framecraft/ui";
-import { RelatedProducts } from "@/components/RelatedProducts";
+import { Sparkles, Shield, Ruler, Layers, Award, ArrowDown } from "lucide-react";
+import nextDynamic from "next/dynamic";
+import Link from "next/link";
+import { Suspense } from "react";
+
 import { ScrollToDesignerButton } from "./scroll-button";
+
+import type { Metadata } from "next";
+
+import { RelatedProducts } from "@/components/RelatedProducts";
+
 
 const CurrencyFrameDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.CurrencyFrameDesigner),

@@ -6,6 +6,7 @@
  */
 
 import { describe, it, expect, vi, beforeEach } from "vitest";
+
 import {
   fetchMatCatalog,
   matBoardToPaletteColor,
@@ -15,6 +16,7 @@ import {
   isMatAvailableForSize,
   getMatSkuForSize,
 } from "../mat-catalog";
+
 import type { MatCatalog } from "@framecraft/types";
 
 // Mock fetch globally

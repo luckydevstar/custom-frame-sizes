@@ -14,9 +14,10 @@
  * navigation items as configuration and render them appropriately.
  */
 
-import { Link, useLocation } from "wouter";
-import { Button } from "../ui/button";
 import { type ReactNode } from "react";
+import { Link, useLocation } from "wouter";
+
+import { Button } from "../ui/button";
 
 export interface NavigationItem {
   /**

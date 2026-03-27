@@ -9,23 +9,25 @@
 
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { ShoppingCart, Phone, Mail, Menu } from "lucide-react";
-import { Button } from "../ui/button";
-import { Badge } from "../ui/badge";
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet";
-import { useState, type ReactNode } from "react";
 import { useStoreConfig } from "@framecraft/core";
 import { useCartStore, cartSelectors } from "@framecraft/core/stores";
+import { ShoppingCart, Phone, Mail, Menu } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useState, type ReactNode } from "react";
+
 import { Logo } from "../brand/Logo";
-import { ThemeToggle } from "./ThemeToggle";
-import { MegaMenu } from "../navigation/MegaMenu";
-import { PictureFramesMegaMenu } from "../navigation/PictureFramesMegaMenu";
-import { ShadowboxMegaMenu } from "../navigation/ShadowboxMegaMenu";
 import { ComponentsMegaMenu } from "../navigation/ComponentsMegaMenu";
-import { SearchBar } from "../navigation/SearchBar";
+import { MegaMenu } from "../navigation/MegaMenu";
 import { MobileNavigation } from "../navigation/MobileNavigation";
+import { PictureFramesMegaMenu } from "../navigation/PictureFramesMegaMenu";
+import { SearchBar } from "../navigation/SearchBar";
+import { ShadowboxMegaMenu } from "../navigation/ShadowboxMegaMenu";
+import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "../ui/sheet";
+
+import { ThemeToggle } from "./ThemeToggle";
 
 export interface HeaderProps {
   /**

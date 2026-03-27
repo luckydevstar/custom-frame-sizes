@@ -1,15 +1,19 @@
-import type { Metadata } from "next";
-import nextDynamic from "next/dynamic";
-import { Suspense } from "react";
-import Link from "next/link";
-import { Award, Clock, CheckCircle, Shield } from "lucide-react";
-import { Badge, Card } from "@framecraft/ui";
-import { getSharedAssetUrl } from "@framecraft/core/utils/asset-urls";
 import { getMilitaryLifestyleImageByNumber } from "@framecraft/core/lib/military-lifestyle-images";
+import { getSharedAssetUrl } from "@framecraft/core/utils/asset-urls";
+import { Badge, Card , MilitaryLifestyleCarousel } from "@framecraft/ui";
+import { Award, Clock, CheckCircle, Shield } from "lucide-react";
+import nextDynamic from "next/dynamic";
+import Link from "next/link";
+import { Suspense } from "react";
+
 import { brandConfig } from "../../../brand.config";
-import { RelatedProducts } from "@/components/RelatedProducts";
+
+
 import { ScrollToDesignerButton } from "./scroll-button";
-import { MilitaryLifestyleCarousel } from "@framecraft/ui";
+
+import type { Metadata } from "next";
+
+import { RelatedProducts } from "@/components/RelatedProducts";
 /**
  * Military Frame Designer with branch presets, military layouts, brass nameplate, and hanging hardware.
  */
