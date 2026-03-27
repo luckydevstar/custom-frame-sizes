@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+
 import { env } from "@/lib/env";
 
 const baseUrl = env.shopify.storeDomain

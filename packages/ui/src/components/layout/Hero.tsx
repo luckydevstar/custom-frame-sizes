@@ -1,9 +1,10 @@
 "use client";
 
-import { useMemo } from "react";
-import { Button } from "../ui/button";
-import { ArrowRight } from "lucide-react";
 import { useParallax, useHeroImage, type HeroImage } from "@framecraft/core";
+import { ArrowRight } from "lucide-react";
+import { useMemo } from "react";
+
+import { Button } from "../ui/button";
 import { Skeleton } from "../ui/skeleton";
 
 export interface HeroImageData {

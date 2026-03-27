@@ -6,6 +6,7 @@
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+
 import { useCartStore, cartSelectors, type AddCartItemInput } from "../cart-store";
 
 // Mock the persistence module

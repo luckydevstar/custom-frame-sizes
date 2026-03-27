@@ -5,8 +5,10 @@
  */
 
 import { sql } from "drizzle-orm";
-import type { Database } from "../connection";
+
 import { migrations } from "./index";
+
+import type { Database } from "../connection";
 
 /**
  * Run a migration

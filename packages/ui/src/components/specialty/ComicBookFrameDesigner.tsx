@@ -1,7 +1,21 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef, useCallback } from "react";
-// Removed wouter useLocation - not needed in Next.js
+import { ALL_MATS, getMatById, getAvailableMatsForSize, type Mat } from "@framecraft/config";
+import {
+  getFramesByCategory,
+  getGlassTypes,
+  getStoreBaseAssetUrl,
+  getComicCoversForConfig,
+  useComicPricing,
+  useIsMobile,
+  useMobileViewToggle,
+  COMIC_FORMATS,
+  getComicFormatById,
+  COMIC_LAYOUTS,
+  getComicLayout,
+  calculateComicFrameSize,
+  type ComicLayoutType,
+} from "@framecraft/core";
 import {
   Copy,
   Maximize,
@@ -14,65 +28,36 @@ import {
   Shield,
   ShoppingCart,
 } from "lucide-react";
+import { useState, useEffect, useMemo, useRef, useCallback } from "react";
+
+// Removed wouter useLocation - not needed in Next.js
+import { useToast } from "../../hooks/use-toast";
+import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
+import { TrustBadges } from "../marketing/TrustBadges";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
-import { Badge } from "../ui/badge";
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-// Select components not currently used
-// import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { Input } from "../ui/input";
-import { Separator } from "../ui/separator";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-// Alert components not currently used
-// import { Alert, AlertDescription } from "../ui/alert";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
-import { QuantitySelector } from "../ui/quantity-selector";
-import { PriceBox } from "../ui/PriceBox";
-import type { PriceLineItem } from "../ui/PriceBox";
-// Import types from @framecraft/types
-import type { FrameStyle, GlassType, AlternateImage } from "@framecraft/types";
-
-// Import services from @framecraft/core
-import { getFramesByCategory, getGlassTypes, getStoreBaseAssetUrl } from "@framecraft/core";
-
-// Import hooks from @framecraft/core
-import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
-
-// Import config from @framecraft/config
-import { ALL_MATS, getMatById, getAvailableMatsForSize, type Mat } from "@framecraft/config";
-
-// Import UI components from same package
 import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { PriceBox, type PriceLineItem } from "../ui/PriceBox";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Separator } from "../ui/separator";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
-// TODO: Extract these app-specific dependencies or make them injectable
-// - useToast hook
-// - BrassNameplateSection component
-// - @shared/schema types
-// - ComicPreviewCanvas component and useComicPreviewState hook
-// - TrustBadges component
-// - ComicLifestyleCarousel component
-// - HangingHardwareSection, BottomWeightedMatting components
-import { useToast } from "../../hooks/use-toast";
-import { getComicCoversForConfig } from "@framecraft/core";
-import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
-import type { BrassNameplateConfig } from "@framecraft/types";
-// import { BRASS_NAMEPLATE_SPECS, getTypeABottomBorder } from "@framecraft/types";
-import { COMIC_FORMATS, getComicFormatById } from "@framecraft/core";
-import {
-  COMIC_LAYOUTS,
-  getComicLayout,
-  calculateComicFrameSize,
-  type ComicLayoutType,
-} from "@framecraft/core";
-import { ComicPreviewCanvas, useComicPreviewState } from "./ComicPreviewCanvas";
-import { useComicPricing } from "@framecraft/core";
 import { ComicLayoutGallery } from "./ComicLayoutGallery";
-import { TrustBadges } from "../marketing/TrustBadges";
 import { ComicLifestyleCarousel } from "./ComicLifestyleCarousel";
-import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import { ComicPreviewCanvas, useComicPreviewState } from "./ComicPreviewCanvas";
 import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+
+import type { FrameStyle, GlassType, AlternateImage, BrassNameplateConfig } from "@framecraft/types";
+
+
+
 
 // Get product data from services
 const shadowboxFrames = getFramesByCategory("shadowbox");

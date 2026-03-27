@@ -1,10 +1,3 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import { Suspense } from "react";
-import { ArrowLeft } from "lucide-react";
-import { Button, Card, CardContent, Badge } from "@framecraft/ui";
-import { FrameDesigner } from "@framecraft/ui";
 import {
   COLOR_METADATA,
   getColorHeroImage,
@@ -12,8 +5,16 @@ import {
   getFramesByColor,
   getStoreBaseAssetUrl,
 } from "@framecraft/core";
+import { Button, Card, CardContent, Badge , FrameDesigner } from "@framecraft/ui";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
+
 import { brandConfig } from "../../../../../brand.config";
+
 import type { FrameStyle } from "@framecraft/types";
+import type { Metadata } from "next";
 
 // Next.js 14: params is a plain object; Next.js 15: params is a Promise
 type ColorDetailPageProps = {

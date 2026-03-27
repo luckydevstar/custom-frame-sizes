@@ -1,7 +1,19 @@
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
+import {
+  Button,
+  Card,
+  Badge,
+  Input,
+  Label,
+  Textarea,
+  Checkbox,
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@framecraft/ui";
 import {
   Building2,
   Store,
@@ -20,20 +32,8 @@ import {
   ChevronUp,
   MapPin,
 } from "lucide-react";
-import {
-  Button,
-  Card,
-  Badge,
-  Input,
-  Label,
-  Textarea,
-  Checkbox,
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@framecraft/ui";
+import Link from "next/link";
+import { useState } from "react";
 
 const faqItems = [
   {

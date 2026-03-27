@@ -111,6 +111,7 @@ Markdown content files for blog posts, CMS pages, and other content. Will be mig
 - [Workspace Documentation](./docs/WORKSPACE.md) - Comprehensive workspace guide for developers
 - [Migration Plan](./docs/MIGRATION_PLAN.md) - Complete migration strategy
 - [Phase 1 Tickets](./docs/PHASE1_TICKETS.md) - Detailed Phase 1 task breakdown
+- [Coding Standards](./CODING_STANDARDS.md) - Shared conventions for file structure, naming, TypeScript, testing, and Git workflow
 
 ## 🏗️ Architecture
 

@@ -1,9 +1,11 @@
 "use client";
 
+import { ChevronLeft, ChevronRight, Maximize } from "lucide-react";
 import Image from "next/image";
 import { useMemo } from "react";
+
 import { Button } from "../../ui/button";
-import { ChevronLeft, ChevronRight, Maximize } from "lucide-react";
+
 import { useCarouselScroll } from "./useCarouselScroll";
 
 export interface LifestyleImage {

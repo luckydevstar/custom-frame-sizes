@@ -6,6 +6,8 @@
  * App provides onAddFrame to navigate to frame designer (e.g. /designer or /frames/...).
  */
 
+import { Button } from "../../ui/button";
+import { Card } from "../../ui/card";
 import {
   Dialog,
   DialogContent,
@@ -14,9 +16,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "../../ui/dialog";
-import { Button } from "../../ui/button";
-import { Card } from "../../ui/card";
 import { Separator } from "../../ui/separator";
+
 import { useMatStore } from "./store";
 import { useMatPricing } from "./useMatPricing";
 

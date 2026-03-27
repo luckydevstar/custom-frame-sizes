@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
-import Image from "next/image";
-import { X } from "lucide-react";
 import { Button, Dialog, DialogContent, DialogTitle } from "@framecraft/ui";
 import { CollageLifestyleCarousel } from "@framecraft/ui/components/specialty/CollageLifestyleCarousel";
+import { X } from "lucide-react";
+import Image from "next/image";
+import { useState } from "react";
 
 export function CollageLifestyleSection() {
   // Single state so modal always shows the image that was clicked (no stale url)

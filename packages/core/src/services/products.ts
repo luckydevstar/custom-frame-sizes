@@ -19,8 +19,9 @@ import {
   pricingConfigData,
 } from "@framecraft/data";
 
-import type { FrameStyle, MatColor, GlassType, PricingConfig } from "@framecraft/types";
 import { validateFrameStyles, validateMatColors, validateGlassTypes } from "./validation";
+
+import type { FrameStyle, MatColor, GlassType, PricingConfig } from "@framecraft/types";
 
 // Extract mats array from new catalog structure - mats.json already has correct structure
 const matsDataNew = (matsDataRaw as any).mats || [];

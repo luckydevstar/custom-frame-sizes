@@ -19,42 +19,7 @@ export * from "./services";
 // Utilities
 export * from "./utils";
 
-// Explicit re-exports for magazine designer (avoids barrel optimization issues)
-export {
-  MAGAZINE_SIZES,
-  getMagazineSizeById,
-  getMagazineSizesByCategory,
-  type MagazineSize,
-} from "./utils/specialty/magazine-sizes";
-
-// Explicit re-exports for newspaper/needlework (avoids barrel optimization issues)
-export {
-  getNewspaperLifestyleImages,
-  getRandomNewspaperLifestyleImage,
-} from "./lib/newspaper-lifestyle-images";
-export type { NewspaperLifestyleImage } from "./lib/newspaper-lifestyle-images";
-export {
-  getNewspaperInsertPaths,
-  getRandomNewspaperInsertPath,
-  getUniqueRandomNewspaperInsertPaths,
-} from "./lib/newspaper-insert-images";
-export { NEWSPAPER_PRESETS, getNewspaperLayoutsForSize } from "./lib/newspaper-layouts";
-export type {
-  NewspaperLayoutType,
-  NewspaperLayout,
-  NewspaperOpening,
-} from "./lib/newspaper-layouts";
-export {
-  getNeedleworkLifestyleImages,
-  getRandomNeedleworkLifestyleImage,
-} from "./lib/needlework-lifestyle-images";
-export type { NeedleworkLifestyleImage } from "./lib/needlework-lifestyle-images";
-export {
-  getNeedleworkInsertPaths,
-  getRandomNeedleworkInsertPath,
-} from "./lib/needlework-insert-images";
-
-// Lib utilities
+// Lib utilities (includes all newspaper, needlework, and other lib exports)
 export * from "./lib";
 
 // Hooks

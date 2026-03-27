@@ -1,10 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import { BookOpen, Glasses, Ruler as RulerAlt } from "lucide-react";
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
 import { useIntersectionAnimation } from "@framecraft/core";
+import { BookOpen, Glasses, Ruler as RulerAlt } from "lucide-react";
+import Link from "next/link";
+
+import { Button } from "../ui/button";
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "../ui/card";
+
 
 const learnMoreConfig = {
   headline: "Learn More",

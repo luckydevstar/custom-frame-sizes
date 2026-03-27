@@ -6,6 +6,7 @@
  */
 
 import { registerBrandConfigs, getBrandConfig } from "@framecraft/config";
+
 import { brandConfig } from "../brand.config";
 
 // Track if config has been initialized

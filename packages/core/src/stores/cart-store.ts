@@ -8,21 +8,7 @@
  */
 
 import { create } from "zustand";
-import type { FrameConfiguration } from "@framecraft/types";
-import type {
-  ShadowboxSpecialtyConfig,
-  JerseySpecialtyConfig,
-  CanvasFloatSpecialtyConfig,
-  PuzzleSpecialtyConfig,
-  ComicBookSpecialtyConfig,
-  PlaybillSpecialtyConfig,
-} from "../shopify/serialization";
-import {
-  saveCart as persistSaveCart,
-  loadCart as persistLoadCart,
-  clearCart as persistClearCart,
-  isStorageAvailable,
-} from "./cart-persistence";
+
 import {
   createCart as apiCreateCart,
   addCartLines,
@@ -41,6 +27,23 @@ import {
   serializeComicBookConfiguration,
   serializePlaybillConfiguration,
 } from "../shopify/serialization";
+
+import {
+  saveCart as persistSaveCart,
+  loadCart as persistLoadCart,
+  clearCart as persistClearCart,
+  isStorageAvailable,
+} from "./cart-persistence";
+
+import type {
+  ShadowboxSpecialtyConfig,
+  JerseySpecialtyConfig,
+  CanvasFloatSpecialtyConfig,
+  PuzzleSpecialtyConfig,
+  ComicBookSpecialtyConfig,
+  PlaybillSpecialtyConfig,
+} from "../shopify/serialization";
+import type { FrameConfiguration } from "@framecraft/types";
 
 /**
  * Specialty configuration union type

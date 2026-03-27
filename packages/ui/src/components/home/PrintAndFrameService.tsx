@@ -1,8 +1,9 @@
 "use client";
 
 import { Upload, Printer, Frame, CheckCircle } from "lucide-react";
-import { Button } from "../ui/button";
 import Link from "next/link";
+
+import { Button } from "../ui/button";
 
 export function PrintAndFrameService() {
   const steps = [

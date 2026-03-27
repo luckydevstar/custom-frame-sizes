@@ -1,9 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
-import { Card } from "../ui/card";
-import { Ticket, Camera, Image } from "lucide-react";
-import { cn } from "../../utils";
 import {
   TICKET_STUB_LAYOUTS,
   TICKET_PHOTO_SIZES,
@@ -12,6 +8,12 @@ import {
   type TicketPhotoSizeId,
   type TicketPosterSizeId,
 } from "@framecraft/core";
+import { Ticket, Camera, Image } from "lucide-react";
+import { useMemo } from "react";
+
+import { cn } from "../../utils";
+import { Card } from "../ui/card";
+
 
 interface TicketStubLayoutGalleryProps {
   selectedLayout: TicketStubLayoutType;

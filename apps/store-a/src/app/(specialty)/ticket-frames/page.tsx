@@ -1,7 +1,9 @@
-import type { Metadata } from "next";
-import { Ticket, Shield, Grid3x3, Camera, Music, LayoutGrid } from "lucide-react";
 import { TicketStubFrameDesigner } from "@framecraft/ui";
+import { Ticket, Shield, Grid3x3, Camera, Music, LayoutGrid } from "lucide-react";
+
 import { ScrollToDesignerButton } from "./scroll-button";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Ticket Frames – Concert & Event Memorabilia Display | Custom Frame Sizes",

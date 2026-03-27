@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { formatPrice } from "@framecraft/core";
 import { motion } from "framer-motion";
 import { Sparkles, ShoppingCart, Check } from "lucide-react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Button } from "../ui/button";
+import { useState, useEffect } from "react";
+
+import { cn } from "../../utils";
 import { Badge } from "../ui/badge";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Label } from "../ui/label";
+import { Button } from "../ui/button";
 import {
   Carousel,
   CarouselContent,
@@ -16,10 +16,15 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "../ui/carousel";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Label } from "../ui/label";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+
 import { FramePreview } from "./FramePreview";
+
 import type { DesignRecommendation } from "@framecraft/types";
-import { formatPrice } from "@framecraft/core";
-import { cn } from "../../utils";
+
+
 
 interface RecommendationCarouselProps {
   recommendations: DesignRecommendation[];

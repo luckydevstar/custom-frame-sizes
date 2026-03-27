@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
-import Link from "next/link";
-import nextDynamic from "next/dynamic";
-import { Suspense } from "react";
-import { ArrowRight, Box, Zap, Ruler, Layers, Award } from "lucide-react";
-import { Button } from "@framecraft/ui";
 import { getFrameStyles, getStoreBaseAssetUrl } from "@framecraft/core";
+import { Button } from "@framecraft/ui";
+import { ArrowRight, Box, Zap, Ruler, Layers, Award } from "lucide-react";
+import nextDynamic from "next/dynamic";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Suspense } from "react";
+
 import { brandConfig } from "../../../../brand.config";
+
 import type { FrameStyle } from "@framecraft/types";
+import type { Metadata } from "next";
 
 const ShadowboxDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),

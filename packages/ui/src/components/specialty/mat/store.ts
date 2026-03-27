@@ -2,9 +2,10 @@
  * Mat configurator store – single source of truth for mat designer (aligned with original)
  */
 
-import { create } from "zustand";
-import { recenterAfterSizeChange } from "@framecraft/core";
 import { getMatsInDisplayOrder } from "@framecraft/config";
+import { recenterAfterSizeChange } from "@framecraft/core";
+import { create } from "zustand";
+
 import type { MatConfig, MatOpening, MatLayer } from "./types";
 
 function recenterOpening(opening: MatOpening, matW: number, matH: number): MatOpening {

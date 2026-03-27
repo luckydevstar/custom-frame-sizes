@@ -1,7 +1,8 @@
 import Image from "next/image";
-import { Card } from "../ui/card";
-import { Button } from "../ui/button";
+
 import { Badge } from "../ui/badge";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
 
 type FrameCardProps = {
   name: string;

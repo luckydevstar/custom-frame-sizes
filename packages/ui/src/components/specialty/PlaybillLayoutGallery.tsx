@@ -5,11 +5,12 @@
  * Shows layout name, playbill count, ticket count, and frame dimensions.
  */
 
-import { Card } from "../ui/card";
-import { Badge } from "../ui/badge";
 import { PLAYBILL_LAYOUTS, type PlaybillLayoutType } from "@framecraft/core";
-import { cn } from "../../utils";
 import { Ticket, FileText } from "lucide-react";
+
+import { cn } from "../../utils";
+import { Badge } from "../ui/badge";
+import { Card } from "../ui/card";
 
 interface PlaybillLayoutGalleryProps {
   selectedLayout: PlaybillLayoutType;

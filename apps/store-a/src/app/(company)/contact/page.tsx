@@ -1,7 +1,10 @@
-import type { Metadata } from "next";
 import { Mail } from "lucide-react";
-import { brandConfig } from "@/brand.config";
+
 import { ContactForm } from "./ContactForm";
+
+import type { Metadata } from "next";
+
+import { brandConfig } from "@/brand.config";
 import { generateMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = generateMetadata({

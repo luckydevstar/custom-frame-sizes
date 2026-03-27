@@ -8,9 +8,9 @@
  * @packageDocumentation
  */
 
-import type { ThemeConfig } from "../theme";
 import type { FeatureFlags } from "../features";
 import type { NavigationConfig } from "../navigation";
+import type { ThemeConfig } from "../theme";
 
 /**
  * Store identifier (e.g., "store-a", "custompictureframes")

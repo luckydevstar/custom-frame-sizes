@@ -1,11 +1,14 @@
 "use client";
 
+import { getStoreBaseAssetUrl } from "@framecraft/core";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+
 import { Button } from "../ui/button";
-import { ArrowRight } from "lucide-react";
+
 import type { FrameStyle } from "@framecraft/types";
-import { getStoreBaseAssetUrl } from "@framecraft/core";
+
 
 export interface FrameStylesShowcaseProps {
   frames: FrameStyle[];

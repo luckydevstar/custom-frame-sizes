@@ -5,9 +5,10 @@
  * Shows layout name, comic count, orientation, and selection state.
  */
 
-import { Card } from "../ui/card";
 import { COMIC_LAYOUTS, type ComicLayoutType } from "@framecraft/core";
+
 import { cn } from "../../utils";
+import { Card } from "../ui/card";
 
 interface ComicLayoutGalleryProps {
   selectedLayout: ComicLayoutType;

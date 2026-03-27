@@ -1,4 +1,5 @@
 import { Frame } from "lucide-react";
+
 import { cn } from "../../utils";
 
 interface FrameSpinnerProps {

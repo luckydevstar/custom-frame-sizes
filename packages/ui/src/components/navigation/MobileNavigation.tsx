@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { useStoreConfig } from "@framecraft/core";
 import {
   ArrowRight,
   Frame,
@@ -38,10 +38,11 @@ import {
   Film,
   SprayCan,
 } from "lucide-react";
+import Link from "next/link";
+
 import { PostageStampIcon } from "../icons/PostageStampIcon";
-import { Button } from "../ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { useStoreConfig } from "@framecraft/core";
+import { Button } from "../ui/button";
 
 interface MobileNavigationProps {
   onNavigate?: () => void;

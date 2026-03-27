@@ -1,9 +1,11 @@
-import type { Metadata } from "next";
+import { Button } from "@framecraft/ui";
+import { ArrowLeft } from "lucide-react";
 import nextDynamic from "next/dynamic";
 import Link from "next/link";
 import { Suspense } from "react";
-import { ArrowLeft } from "lucide-react";
-import { Button } from "@framecraft/ui";
+
+import type { Metadata } from "next";
+
 import {
   generateMetadata,
   generateProductSchema,

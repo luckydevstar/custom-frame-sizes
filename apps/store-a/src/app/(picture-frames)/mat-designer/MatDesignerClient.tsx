@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { getMatByLineNumber } from "@framecraft/config";
+import { getStoreBaseAssetUrl } from "@framecraft/core";
+import { MatConfigurator, TrustBox, BulkPricingModal } from "@framecraft/ui";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { MatConfigurator, TrustBox, BulkPricingModal } from "@framecraft/ui";
-import { getStoreBaseAssetUrl } from "@framecraft/core";
-import { getMatByLineNumber } from "@framecraft/config";
+import { useEffect, useState } from "react";
 
 export function MatDesignerClient() {
   const [isBulkPricingOpen, setIsBulkPricingOpen] = useState(false);

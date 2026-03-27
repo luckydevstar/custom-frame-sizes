@@ -1,9 +1,12 @@
 "use client";
 
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { useIntersectionAnimation } from "@framecraft/core";
-import type { LucideIcon } from "lucide-react";
 import { Flag, Award, Ruler, Package, RotateCcw } from "lucide-react";
+
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+
+import type { LucideIcon } from "lucide-react";
+
 
 export interface WhyChooseUsCard {
   icon: LucideIcon;

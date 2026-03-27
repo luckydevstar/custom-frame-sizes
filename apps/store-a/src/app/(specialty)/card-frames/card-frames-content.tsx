@@ -1,6 +1,6 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import { Button , Card, CardContent , GradedCardLifestyleCarousel } from "@framecraft/ui";
 import {
   Shield,
   Sparkles,
@@ -11,9 +11,7 @@ import {
   LayoutGrid,
   Tag,
 } from "lucide-react";
-import { Button } from "@framecraft/ui";
-import { Card, CardContent } from "@framecraft/ui";
-import { GradedCardLifestyleCarousel } from "@framecraft/ui";
+import dynamic from "next/dynamic";
 
 const CardFrameDesigner = dynamic(
   () =>

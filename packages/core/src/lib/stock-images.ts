@@ -25,8 +25,9 @@
  * ```
  */
 
-import { getActiveSeasonalCollections } from "./seasonal-collections";
 import { getSharedAssetUrl } from "../utils/asset-urls";
+
+import { getActiveSeasonalCollections } from "./seasonal-collections";
 
 export interface StockImageLibraryConfig {
   photoInserts: Record<string, string>;

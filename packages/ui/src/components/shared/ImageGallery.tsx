@@ -1,10 +1,11 @@
 "use client";
 
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import Image from "next/image";
 import { useState, useEffect, useCallback } from "react";
-import { Dialog, DialogContent, DialogDescription } from "../ui/dialog";
+
 import { Button } from "../ui/button";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription } from "../ui/dialog";
 
 export interface GalleryImage {
   url: string;

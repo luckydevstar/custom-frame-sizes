@@ -1,8 +1,10 @@
 "use client";
 
-import type { FrameConfiguration } from "@framecraft/types";
 import { getFrameStyleById, getMatColorById, getGlassTypeById } from "@framecraft/core";
+
 import { cn } from "../../utils";
+
+import type { FrameConfiguration } from "@framecraft/types";
 
 export interface FrameConfigurationSummaryProps {
   config: FrameConfiguration;

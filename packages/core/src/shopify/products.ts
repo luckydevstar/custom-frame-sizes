@@ -7,8 +7,8 @@
  * @packageDocumentation
  */
 
-import { createStorefrontClient } from "./storefront-client";
 import { ProductFields, VariantFields, CollectionFields } from "./fragments";
+import { createStorefrontClient } from "./storefront-client";
 
 /**
  * Shopify Product Image

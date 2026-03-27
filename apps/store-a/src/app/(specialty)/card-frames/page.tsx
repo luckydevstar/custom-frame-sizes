@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
 import { CardFramesContent } from "./card-frames-content";
+
+import type { Metadata } from "next";
 
 const baseUrl = "https://customframesizes.com";
 const pageUrl = `${baseUrl}/card-frames`;

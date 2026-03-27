@@ -5,8 +5,9 @@
  * Provides type-safe access to store configurations with validation.
  */
 
-import type { BrandConfig, StoreId, BrandConfigRegistry } from "./types/brand-config";
 import { validateBrandConfig } from "./validation/schema";
+
+import type { BrandConfig, StoreId, BrandConfigRegistry } from "./types/brand-config";
 
 /**
  * In-memory brand configuration registry
@@ -29,7 +30,7 @@ class BrandConfigRegistryImpl implements BrandConfigRegistry {
     const validation = validateBrandConfig(config);
     if (!validation.success) {
       throw new Error(
-        `Invalid brand configuration for store ${config.storeId}: ${validation.errors?.message}`
+        `Invalid brand configuration for store ${config.storeId}: ${validation.errors?.message}`,
       );
     }
 
@@ -68,12 +69,12 @@ class BrandConfigRegistryImpl implements BrandConfigRegistry {
 /**
  * Global brand configuration registry instance
  */
-const BrandConfigRegistry = new BrandConfigRegistryImpl();
+const brandConfigRegistry = new BrandConfigRegistryImpl();
 
 /**
  * Export the registry instance
  */
-export { BrandConfigRegistry };
+export { brandConfigRegistry };
 
 /**
  * Register multiple store configurations
@@ -82,7 +83,7 @@ export { BrandConfigRegistry };
  */
 export function registerBrandConfigs(configs: BrandConfig[]): void {
   for (const config of configs) {
-    BrandConfigRegistry.register(config);
+    brandConfigRegistry.register(config);
   }
 }
 
@@ -95,7 +96,7 @@ export function registerBrandConfigs(configs: BrandConfig[]): void {
  * @throws Error if store is not registered
  */
 export function getBrandConfig(storeId: StoreId): BrandConfig {
-  const config = BrandConfigRegistry.get(storeId);
+  const config = brandConfigRegistry.get(storeId);
   if (!config) {
     throw new Error(`Brand configuration not found for store: ${storeId}`);
   }
@@ -109,7 +110,7 @@ export function getBrandConfig(storeId: StoreId): BrandConfig {
  * @returns true if store is active, false otherwise
  */
 export function isStoreActive(storeId: StoreId): boolean {
-  const config = BrandConfigRegistry.get(storeId);
+  const config = brandConfigRegistry.get(storeId);
   if (!config) {
     return false;
   }

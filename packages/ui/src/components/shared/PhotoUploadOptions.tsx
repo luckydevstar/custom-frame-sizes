@@ -1,23 +1,28 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { Image as ImageIcon, Link as LinkIcon } from "lucide-react";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../ui/dialog";
-import { Separator } from "../ui/separator";
-import { useToast } from "../../hooks/use-toast";
+import AwsS3 from "@uppy/aws-s3";
 import Uppy from "@uppy/core";
 import { DashboardModal } from "@uppy/react";
-import AwsS3 from "@uppy/aws-s3";
+import { Image as ImageIcon, Link as LinkIcon } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+
+import { useToast } from "../../hooks/use-toast";
+import { Button } from "../ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "../ui/dialog";
+import { FrameSpinner } from "../ui/frame-spinner";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { Separator } from "../ui/separator";
+
+
 // Note: CSS imports should be handled in the app's global CSS or _app.tsx
 // These are commented out to avoid build errors - add to app CSS:
 // @import '@uppy/core/dist/style.css';
 // @import '@uppy/dashboard/dist/style.css';
-import type { UploadResult } from "@uppy/core";
 import { ImageEditor } from "./ImageEditor";
-import { FrameSpinner } from "../ui/frame-spinner";
+
+import type { UploadResult } from "@uppy/core";
+
 
 interface PhotoUploadOptionsProps {
   open: boolean;

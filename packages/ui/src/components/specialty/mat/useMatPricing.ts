@@ -3,7 +3,6 @@
  * Uses @framecraft/core pricing helpers.
  */
 
-import { useMatStore } from "./store";
 import {
   getFrameStyleById,
   getGlassTypeById,
@@ -11,6 +10,8 @@ import {
   calculateFramePriceBySku,
   calculateMatPriceForDesigner,
 } from "@framecraft/core";
+
+import { useMatStore } from "./store";
 
 // Glass pricing (aligned with core COMPONENT_PRICING)
 const STANDARD_GLASS_COST_PER_SQIN = 0.00324;

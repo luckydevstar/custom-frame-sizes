@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
-import Link from "next/link";
 import { HelpCircle } from "lucide-react";
+import Link from "next/link";
+
+import type { Metadata } from "next";
+
 import { generateMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = generateMetadata({

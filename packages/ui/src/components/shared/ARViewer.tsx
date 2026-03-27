@@ -1,14 +1,18 @@
 "use client";
 
+import { useQuery } from "@tanstack/react-query";
+import { X, RotateCw, Info, Lock } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import "@google/model-viewer";
-import type { FrameConfiguration, FrameStyle, MatColor } from "@framecraft/types";
+
+import { generateARModelBlob, convertImageToDataURL } from "@framecraft/core";
+
 import { Button } from "../ui/button";
-import { X, RotateCw, Info, Lock } from "lucide-react";
 import { Card } from "../ui/card";
-import { generateARModelBlob } from "@framecraft/core";
-import { convertImageToDataURL } from "@framecraft/core";
-import { useQuery } from "@tanstack/react-query";
+
+import type { FrameConfiguration, FrameStyle, MatColor } from "@framecraft/types";
+
+
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace

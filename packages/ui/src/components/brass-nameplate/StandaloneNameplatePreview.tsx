@@ -1,10 +1,12 @@
 import { useMemo } from "react";
-import type { StandaloneNameplateConfig } from "./StandaloneNameplateTypes";
+
 import {
   STANDALONE_NAMEPLATE_SPECS,
   FONT_OPTIONS,
   COLOR_OPTIONS,
 } from "./StandaloneNameplateTypes";
+
+import type { StandaloneNameplateConfig } from "./StandaloneNameplateTypes";
 
 interface StandaloneNameplatePreviewProps {
   config: StandaloneNameplateConfig;

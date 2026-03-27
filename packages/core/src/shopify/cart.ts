@@ -7,8 +7,9 @@
  * @packageDocumentation
  */
 
-import { createStorefrontClient } from "./storefront-client";
 import { CartFields, ProductFields, VariantFields } from "./fragments";
+import { createStorefrontClient } from "./storefront-client";
+
 import type { ShopifyAttribute } from "./serialization";
 
 /**

@@ -8,6 +8,7 @@
  */
 
 import { useState, useCallback, useMemo } from "react";
+
 import {
   calculatePrintDimensions,
   generatePrintFile,

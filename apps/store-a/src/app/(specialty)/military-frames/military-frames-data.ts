@@ -1,4 +1,5 @@
 import { getFrameStyles, getStoreBaseAssetUrl } from "@framecraft/core";
+
 import type { FrameStyle } from "@framecraft/types";
 
 const MILITARY_ALT_KEYWORDS = [

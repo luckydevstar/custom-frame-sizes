@@ -1,13 +1,19 @@
 "use client";
 
-import Image from "next/image";
-import { Minus, Plus, Trash2 } from "lucide-react";
-import { Button } from "../ui/button";
-import { FrameConfigurationSummary } from "./FrameConfigurationSummary";
-import { FramePreview } from "../marketing/FramePreview";
 import { formatPrice, getFrameStyleById, getMatColorById } from "@framecraft/core";
-import type { CartItem } from "@framecraft/core/stores";
+import { Minus, Plus, Trash2 } from "lucide-react";
+import Image from "next/image";
+
 import { cn } from "../../utils";
+import { FramePreview } from "../marketing/FramePreview";
+import { Button } from "../ui/button";
+
+import { FrameConfigurationSummary } from "./FrameConfigurationSummary";
+
+
+
+import type { CartItem } from "@framecraft/core/stores";
+
 
 export interface CartItemCardProps {
   item: CartItem;

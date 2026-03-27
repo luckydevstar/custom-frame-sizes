@@ -9,11 +9,12 @@
 
 "use client";
 
+import { useStoreConfig } from "@framecraft/core";
+import { Phone, Mail } from "lucide-react";
 import Link from "next/link";
+
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
-import { Phone, Mail } from "lucide-react";
-import { useStoreConfig } from "@framecraft/core";
 
 export interface FooterLink {
   label: string;

@@ -1,7 +1,11 @@
 "use client";
 
-import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import {
+  parseFraction,
+  calculateDedicatedPagePrice,
+  COMPONENT_PRICING,
+  getStoreAssetUrl,
+} from "@framecraft/core";
 import {
   Button,
   Card,
@@ -15,15 +19,13 @@ import {
   TooltipTrigger,
   TrustBadges,
 } from "@framecraft/ui";
-import {
-  parseFraction,
-  calculateDedicatedPagePrice,
-  COMPONENT_PRICING,
-  getStoreAssetUrl,
-} from "@framecraft/core";
-import type { ComponentType } from "@framecraft/core";
 import { useToast } from "@framecraft/ui/hooks/use-toast";
 import { ShoppingCart, Minus, Plus, Sparkles, Info } from "lucide-react";
+import Image from "next/image";
+import { useState, useEffect, useRef } from "react";
+
+import type { ComponentType } from "@framecraft/core";
+
 
 type AcrylicType = "regular" | "non-glare";
 type PackSize = 1 | 10 | 100;

@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
-import Image from "next/image";
+import { getCDLifestyleImageUrl, getSharedAssetUrl } from "@framecraft/core";
+import { Button, Card, CardContent, Separator } from "@framecraft/ui";
 import {
   Sparkles,
   CheckCircle2,
@@ -12,10 +12,11 @@ import {
   AlertCircle,
   Disc3,
 } from "lucide-react";
-import { Button, Card, CardContent, Separator } from "@framecraft/ui";
-import { getCDLifestyleImageUrl, getSharedAssetUrl } from "@framecraft/core";
-import { ScrollToDesignerButton } from "./scroll-button";
+import Image from "next/image";
+import Link from "next/link";
+
 import { CdFrameDesignerSection } from "./cd-frame-designer-section";
+import { ScrollToDesignerButton } from "./scroll-button";
 
 // Deterministic breakup photos so server and client render the same (avoids hydration mismatch)
 const BREAKUP_PHOTOS = [

@@ -1,22 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo, useRef } from "react";
-import { useSearchParams } from "next/navigation";
-import { Maximize, Eye, Settings, Info } from "lucide-react";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
-import { PriceBox } from "../ui/PriceBox";
-import type { PriceLineItem } from "../ui/PriceBox";
-import { Label } from "../ui/label";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
-import { Input } from "../ui/input";
-import { Slider } from "../ui/slider";
-import { Separator } from "../ui/separator";
-import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
-import { Checkbox } from "../ui/checkbox";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import type { FrameStyle, GlassType } from "@framecraft/types";
+import { ALL_MATS, getMatsInDisplayOrder, getMatById, type Mat } from "@framecraft/config";
 import {
   getFramesByCategory,
   getGlassTypes,
@@ -32,16 +16,38 @@ import {
   getStoreBaseAssetUrl,
   type NewspaperLayoutType,
 } from "@framecraft/core";
-import { useToast } from "../../hooks/use-toast";
-import { ALL_MATS, getMatsInDisplayOrder, getMatById, type Mat } from "@framecraft/config";
 import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
-import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
-import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
-import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
-import type { BrassNameplateConfig } from "@framecraft/types";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
-import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import { Maximize, Eye, Settings, Info } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import { useState, useEffect, useMemo, useRef } from "react";
+
+import { useToast } from "../../hooks/use-toast";
+import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection";
 import { TrustBadges } from "../marketing/TrustBadges";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { Checkbox } from "../ui/checkbox";
+import { ColorSwatchesWithSeparator } from "../ui/ColorSwatches";
+import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { PriceBox } from "../ui/PriceBox";
+import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Separator } from "../ui/separator";
+import { Slider } from "../ui/slider";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+
+
+
+
+import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+
+import type { PriceLineItem } from "../ui/PriceBox";
+import type { FrameStyle, GlassType , BrassNameplateConfig } from "@framecraft/types";
+
 
 const frameStyles = getFramesByCategory("shadowbox");
 const allGlassTypes = getGlassTypes();

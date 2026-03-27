@@ -1,15 +1,5 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback, useRef } from "react";
-import { Button } from "../ui/button";
-import { Card } from "../ui/card";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { Slider } from "../ui/slider";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
-import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
-import { QuantitySelector } from "../ui/quantity-selector";
-import { useToast } from "../../hooks/use-toast";
 import { useIsMobile, parseFraction } from "@framecraft/core";
 import {
   ShoppingCart,
@@ -25,13 +15,19 @@ import {
   AlignRight,
   Sparkles,
 } from "lucide-react";
+import { useState, useEffect, useMemo, useCallback, useRef } from "react";
+
+import { useToast } from "../../hooks/use-toast";
+import { Button } from "../ui/button";
+import { Card } from "../ui/card";
+import { Input } from "../ui/input";
+import { Label } from "../ui/label";
+import { QuantitySelector } from "../ui/quantity-selector";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Slider } from "../ui/slider";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
+
 import { StandaloneNameplatePreview } from "./StandaloneNameplatePreview";
-import type {
-  StandaloneNameplateConfig,
-  TextLine,
-  FontId,
-  Alignment,
-} from "./StandaloneNameplateTypes";
 import {
   STANDALONE_NAMEPLATE_SPECS,
   FONT_OPTIONS,
@@ -43,6 +39,13 @@ import {
   checkTextOverflow,
   configToUrlParams,
   urlParamsToConfig,
+} from "./StandaloneNameplateTypes";
+
+import type {
+  StandaloneNameplateConfig,
+  TextLine,
+  FontId,
+  Alignment,
 } from "./StandaloneNameplateTypes";
 
 export function BrassNameplateOrderModule() {

@@ -7,8 +7,8 @@
  * Provides theme configuration and utilities to child components.
  */
 
-import { createContext, useContext, type ReactNode } from "react";
 import { useTheme, type UseThemeReturn } from "@framecraft/core";
+import { createContext, useContext, type ReactNode } from "react";
 
 export interface ThemeProviderProps {
   /**

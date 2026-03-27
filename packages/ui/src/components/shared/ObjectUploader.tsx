@@ -1,17 +1,21 @@
 "use client";
 
 // Reference: blueprint:javascript_object_storage
-import { useState } from "react";
-import type { ReactNode } from "react";
+import AwsS3 from "@uppy/aws-s3";
 import Uppy from "@uppy/core";
 import { DashboardModal } from "@uppy/react";
-import AwsS3 from "@uppy/aws-s3";
+import { useState } from "react";
+
+import { Button } from "../ui/button";
+
+import type { UploadResult } from "@uppy/core";
+import type { ReactNode } from "react";
+
 // Note: CSS imports should be handled in the app's global CSS or _app.tsx
 // These are commented out to avoid build errors - add to app CSS:
 // @import '@uppy/core/dist/style.css';
 // @import '@uppy/dashboard/dist/style.css';
-import type { UploadResult } from "@uppy/core";
-import { Button } from "../ui/button";
+
 
 interface ObjectUploaderProps {
   maxNumberOfFiles?: number;

@@ -1,7 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import Image from "next/image";
+import {
+  parseFraction,
+  calculateDedicatedPagePrice,
+  COMPONENT_PRICING,
+  getSharedAssetUrl,
+} from "@framecraft/core";
 import {
   Button,
   Card,
@@ -15,15 +19,12 @@ import {
   TooltipTrigger,
   TrustBadges,
 } from "@framecraft/ui";
-import {
-  parseFraction,
-  calculateDedicatedPagePrice,
-  COMPONENT_PRICING,
-  getSharedAssetUrl,
-} from "@framecraft/core";
-import type { ComponentType } from "@framecraft/core";
 import { useToast } from "@framecraft/ui/hooks/use-toast";
 import { ShoppingCart, Minus, Plus, Layers, Package } from "lucide-react";
+import Image from "next/image";
+import { useState, useEffect, useRef } from "react";
+
+import type { ComponentType } from "@framecraft/core";
 
 type FoamBoardType = "standard-white" | "standard-black" | "self-adhesive-white";
 type PackSize = 1 | 10 | 100;

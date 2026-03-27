@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
-import { Shield, Sun, Sparkles } from "lucide-react";
 import { getStoreAssetUrl } from "@framecraft/core";
+import { Shield, Sun, Sparkles } from "lucide-react";
+import Image from "next/image";
 
 const glazingOptions = [
   {

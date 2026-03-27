@@ -1,18 +1,19 @@
 "use client";
 
-import { memo, useMemo } from "react";
-import { Shirt } from "lucide-react";
-import type { FrameStyle } from "@framecraft/types";
-import type { MatOption } from "@framecraft/core";
-import type { JerseyLayoutType } from "@framecraft/core";
-import type { BrassNameplateConfig } from "@framecraft/types";
 import {
   computePreviewLayout,
   getMatTilingStyle,
   getMatBevelColor,
   generateOpeningPaths,
 } from "@framecraft/core";
+import { Shirt } from "lucide-react";
+import { memo, useMemo } from "react";
+
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
+
+import type { MatOption , JerseyLayoutType } from "@framecraft/core";
+import type { FrameStyle , BrassNameplateConfig } from "@framecraft/types";
+
 
 function getBackingStyles(backing: MatOption): React.CSSProperties {
   return { backgroundColor: backing.hex };

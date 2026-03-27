@@ -1,9 +1,10 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
-import { Award, ArrowRight, Sparkles, Ruler, CheckCircle2 } from "lucide-react";
-import { Button } from "@framecraft/ui";
 import { getFrameStyles, getStoreBaseAssetUrl } from "@framecraft/core";
+import { Button } from "@framecraft/ui";
+import { Award, ArrowRight, Sparkles, Ruler, CheckCircle2 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Custom Picture Frames - Professional Grade & Ornate Designs | CustomFrameSizes.com",

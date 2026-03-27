@@ -1,8 +1,9 @@
 "use client";
 
+import { getFramesByCategory } from "@framecraft/core";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { getFramesByCategory } from "@framecraft/core";
+
 import { useMatStore } from "./store";
 
 /**

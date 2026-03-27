@@ -4,8 +4,9 @@
  * Helper functions for working with themes and CSS custom properties.
  */
 
-import type { ThemeConfig } from "../theme";
 import { generateThemeCSS, hslToCSS } from "./base-theme";
+
+import type { ThemeConfig } from "../theme";
 
 /**
  * Apply theme to document

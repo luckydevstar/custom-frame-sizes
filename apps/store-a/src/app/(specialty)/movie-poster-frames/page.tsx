@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
 import { Suspense } from "react";
+
 import { MoviePosterFramesContent } from "./movie-poster-frames-content";
+
+import type { Metadata } from "next";
 
 const baseUrl = "https://customframesizes.com";
 const pageUrl = `${baseUrl}/movie-poster-frames`;

@@ -1,8 +1,11 @@
-import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import { Sparkles, Shield, Ruler, Layers, Award } from "lucide-react";
+import dynamic from "next/dynamic";
+
 import { brandConfig } from "../../../brand.config";
+
 import { ScrollToDesignerButton } from "./scroll-button";
+
+import type { Metadata } from "next";
 
 const DiplomaFrameDesigner = dynamic(
   () => import("@framecraft/ui").then((mod) => ({ default: mod.DiplomaFrameDesigner })),

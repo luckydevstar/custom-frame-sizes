@@ -3,8 +3,9 @@
  * Provides consistent metadata generation across all pages
  */
 
-import type { Metadata } from "next";
 import { env } from "./env";
+
+import type { Metadata } from "next";
 
 const SITE_DOMAIN = env.shopify.storeDomain || "store-a.example.com";
 const SITE_URL = `https://${SITE_DOMAIN}`;

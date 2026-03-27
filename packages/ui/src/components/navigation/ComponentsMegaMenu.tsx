@@ -1,7 +1,7 @@
 "use client";
 
-import Link from "next/link";
 import { Square, Shield, Sparkles, Layers, Grid3x3, Award, SprayCan, Palette } from "lucide-react";
+import Link from "next/link";
 
 export function ComponentsMegaMenu() {
   const components = [

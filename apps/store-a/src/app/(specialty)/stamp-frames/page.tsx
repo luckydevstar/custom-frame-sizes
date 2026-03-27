@@ -1,7 +1,4 @@
-import type { Metadata } from "next";
-import nextDynamic from "next/dynamic";
-import { Suspense } from "react";
-import Link from "next/link";
+import { Badge, Button } from "@framecraft/ui";
 import {
   Stamp,
   Clock,
@@ -13,8 +10,14 @@ import {
   Hand,
   ArrowDown,
 } from "lucide-react";
-import { Badge, Button } from "@framecraft/ui";
+import nextDynamic from "next/dynamic";
+import Link from "next/link";
+import { Suspense } from "react";
+
 import { ScrollToDesignerButton } from "./scroll-button";
+
+import type { Metadata } from "next";
+
 import { RelatedProducts } from "@/components/RelatedProducts";
 const StampFrameDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.StampFrameDesigner),

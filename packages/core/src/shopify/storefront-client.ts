@@ -7,8 +7,9 @@
  * @packageDocumentation
  */
 
-import type { StoreConfig } from "./store-config";
 import { getStoreConfig, resolveStoreId } from "./store-config";
+
+import type { StoreConfig } from "./store-config";
 
 /**
  * GraphQL request structure

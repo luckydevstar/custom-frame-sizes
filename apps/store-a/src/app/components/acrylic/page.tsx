@@ -1,5 +1,6 @@
-import type { Metadata } from "next";
 import { AcrylicClient } from "./AcrylicClient";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Custom-Cut Acrylic Sheets | Professional Glazing | Custom Frame Sizes",

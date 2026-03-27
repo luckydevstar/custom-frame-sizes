@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { Button, Card, CardContent } from "@framecraft/ui";
 import {
   STYLE_METADATA,
   getStyleHubImage,
   countFramesPerStyle,
   getFrameStyles,
 } from "@framecraft/core";
+import { Button, Card, CardContent } from "@framecraft/ui";
+import Link from "next/link";
+
 import { brandConfig } from "../../../../brand.config";
+
+import type { Metadata } from "next";
 
 const frames = getFrameStyles();
 const styleCounts = countFramesPerStyle(frames as Parameters<typeof countFramesPerStyle>[0]);

@@ -1,6 +1,7 @@
-import type { Metadata } from "next";
-import Link from "next/link";
 import { RefreshCw } from "lucide-react";
+import Link from "next/link";
+
+import type { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Returns & Exchanges Policy - CustomFrameSizes.com | Custom Frame Sizes",
