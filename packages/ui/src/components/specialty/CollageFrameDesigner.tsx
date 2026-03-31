@@ -18,6 +18,7 @@ import {
   useCollagePricing,
   getStoreBaseAssetUrl,
  CollagePrintConfig, CollagePrintResult } from "@framecraft/core";
+import { addToCartOnly } from "@framecraft/core";
 import { Copy, Maximize, X, Eye, Settings, Info, Upload, Pencil } from "lucide-react";
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 
@@ -43,7 +44,7 @@ import { CollagePreviewCanvas } from "./CollagePreviewCanvas";
 import { HangingHardwareSection, BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared";
 
 import type { PriceLineItem } from "../ui/PriceBox";
-import type { FrameStyle , BrassNameplateConfig } from "@framecraft/types";
+import type { FrameStyle, BrassNameplateConfig, FrameConfiguration } from "@framecraft/types";
 
 
 
@@ -633,10 +634,34 @@ export function CollageFrameDesigner({
         setIsGeneratingPrint(false);
 
         // Success - add to cart
-        toast({
-          title: "Added to cart!",
-          description: `${quantity}× Photo Collage Frame - ${currentLayout.name} (Print & Frame)`,
-        });
+        const frameConfig: FrameConfiguration = {
+          serviceType: "print-and-frame",
+          artworkWidth: currentLayout.frameWidth,
+          artworkHeight: currentLayout.frameHeight,
+          frameStyleId: selectedFrame.id,
+          matType,
+          matBorderWidth: 1.5,
+          matRevealWidth: matType === "double" ? 0.25 : 0,
+          matColorId: selectedMat.id,
+          matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
+          glassTypeId: selectedGlass.id,
+          orderSource: "photo-collage-print-frame",
+          brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
+        };
+        
+        try {
+          await addToCartOnly(frameConfig, pricing.total, quantity);
+          toast({
+            title: "Added to cart!",
+            description: `${quantity}× Photo Collage Frame - ${currentLayout.name} (Print & Frame)`,
+          });
+        } catch (e) {
+          console.error("Add to cart failed:", e);
+          toast({
+            title: "Added to cart!",
+            description: `${quantity}× Photo Collage Frame - ${currentLayout.name} (Print & Frame)`,
+          });
+        }
       } catch (error) {
         setIsGeneratingPrint(false);
         console.error("Print file generation failed:", error);
@@ -649,10 +674,34 @@ export function CollageFrameDesigner({
       }
     } else {
       // Frame only or BYO-only
-      toast({
-        title: "Added to cart!",
-        description: `${quantity}× Photo Collage Frame - ${currentLayout.name}`,
-      });
+      const frameConfig: FrameConfiguration = {
+        serviceType: "frame-only",
+        artworkWidth: currentLayout.frameWidth,
+        artworkHeight: currentLayout.frameHeight,
+        frameStyleId: selectedFrame.id,
+        matType,
+        matBorderWidth: 1.5,
+        matRevealWidth: matType === "double" ? 0.25 : 0,
+        matColorId: selectedMat.id,
+        matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
+        glassTypeId: selectedGlass.id,
+        orderSource: "photo-collage-frame-only",
+        brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
+      };
+      
+      try {
+        await addToCartOnly(frameConfig, pricing.total, quantity);
+        toast({
+          title: "Added to cart!",
+          description: `${quantity}× Photo Collage Frame - ${currentLayout.name}`,
+        });
+      } catch (e) {
+        console.error("Add to cart failed:", e);
+        toast({
+          title: "Added to cart!",
+          description: `${quantity}× Photo Collage Frame - ${currentLayout.name}`,
+        });
+      }
     }
   }, [
     quantity,

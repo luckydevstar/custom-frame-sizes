@@ -805,6 +805,7 @@ export function DiplomaFrameDesigner({
       matColorId: selectedMat.id,
       matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
       glassTypeId: glass.id,
+      orderSource: `diploma-${serviceType}`,
       imageUrl: selectedImage || undefined,
       copyrightAgreed: serviceType === "frame-only" ? undefined : copyrightAgreed,
     };

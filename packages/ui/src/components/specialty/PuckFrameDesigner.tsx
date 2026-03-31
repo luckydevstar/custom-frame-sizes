@@ -12,6 +12,7 @@ import {
   getAllPuckLayouts,
   getRandomPuckLifestyleImage,
   getStoreBaseAssetUrl,
+  addToCartOnly,
 } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import {
@@ -170,6 +171,7 @@ export function PuckFrameDesigner({ defaultFrameId, embedded = false }: PuckFram
   const [showShareDialog, setShowShareDialog] = useState(false);
   const [showFullscreenPreview, setShowFullscreenPreview] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [lifestylePreviewImage, setLifestylePreviewImage] = useState(() =>
     getRandomPuckLifestyleImage()
   );
@@ -359,11 +361,41 @@ export function PuckFrameDesigner({ defaultFrameId, embedded = false }: PuckFram
     }
   };
 
-  const handleAddToCart = () => {
-    toast({
-      title: "Added to cart!",
-      description: `${currentLayout.displayName} frame added to your cart.`,
-    });
+  const handleAddToCart = async () => {
+    setIsCheckingOut(true);
+    try {
+      const artWidth = currentLayout.frameInteriorWidth - 2 * currentLayout.matBorder;
+      const artHeight = currentLayout.frameInteriorHeight - 2 * currentLayout.matBorder;
+      const frameConfig: FrameConfiguration = {
+        serviceType: "frame-only",
+        artworkWidth: artWidth,
+        artworkHeight: artHeight,
+        frameStyleId: selectedFrame.id,
+        matType,
+        matBorderWidth: currentLayout.matBorder,
+        matRevealWidth: 0.125,
+        matColorId: selectedMat.id,
+        matInnerColorId: matType === "double" ? selectedBottomMat.id : undefined,
+        glassTypeId: "backing-only",
+        orderSource: `puck-frame-${currentLayout.id}`,
+        bottomWeighted,
+        brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
+      };
+      await addToCartOnly(frameConfig, pricing.total, quantity);
+      toast({
+        title: "Added to Cart!",
+        description: `${currentLayout.displayName} frame added to your cart.`,
+      });
+    } catch (error) {
+      console.error("Add to cart error:", error);
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to add to cart",
+        variant: "destructive",
+      });
+    } finally {
+      setIsCheckingOut(false);
+    }
   };
 
   const finishedWidth = (
@@ -708,6 +740,7 @@ export function PuckFrameDesigner({ defaultFrameId, embedded = false }: PuckFram
                   quantity={quantity}
                   onQuantityChange={setQuantity}
                   onAddToCart={handleAddToCart}
+                  isProcessing={isCheckingOut}
                   className="md:static md:bottom-auto"
                 />
               </div>
@@ -783,11 +816,12 @@ export function PuckFrameDesigner({ defaultFrameId, embedded = false }: PuckFram
             <QuantitySelector value={quantity} onChange={setQuantity} />
             <Button
               onClick={handleAddToCart}
+              disabled={isCheckingOut}
               className="flex-1"
               data-testid="button-mobile-add-to-cart"
             >
               <ShoppingCart className="w-4 h-4 mr-2" />
-              Add to Cart
+              {isCheckingOut ? "Adding..." : "Add to Cart"}
             </Button>
           </div>
         </div>

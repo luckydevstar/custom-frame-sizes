@@ -46,7 +46,6 @@ import {
   validateArtworkSize,
   computePreviewLayout,
   addToCartOnly,
-  isShopifyEnabled,
   toShadowboxConfig,
   fromShadowboxConfig,
   getMatTilingStyle,
@@ -479,7 +478,9 @@ export function BouquetFrameDesigner({
       matColorId: selectedMat.id,
       matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
       glassTypeId: (selectedGlass ?? glassTypes[0]!).id,
+      orderSource: "bouquet-frame",
       bottomWeighted,
+      brassNameplateConfig: brassNameplateConfig.enabled && matType !== "none" ? brassNameplateConfig : undefined,
     };
     const pricing = calculatePricing(frameConfig);
     const totalPrice = pricing.total;
@@ -490,17 +491,10 @@ export function BouquetFrameDesigner({
 
     try {
       await addToCartOnly(frameConfig, finalTotal, quantity);
-      if (!isShopifyEnabled()) {
-        toast({
-          title: "Mock Checkout Created",
-          description: "Shopify is not configured. Check console for payload details.",
-        });
-      } else {
-        toast({
-          title: "Redirecting to Checkout",
-          description: "Taking you to secure checkout...",
-        });
-      }
+      toast({
+        title: "Added to Cart!",
+        description: "Bouquet frame added to your cart.",
+      });
     } catch (error) {
       console.error("Checkout error:", error);
       toast({

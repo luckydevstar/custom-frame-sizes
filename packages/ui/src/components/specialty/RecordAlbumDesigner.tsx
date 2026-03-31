@@ -13,9 +13,8 @@ import {
   getFramesByCategory,
   getGlassTypes,
   getFrameStyleById,
-  calculatePricing,
   addToCartOnly,
-  isShopifyEnabled,
+  calculatePricing,
   getRecordAlbumLayout,
   getRecordAlbumLayoutWithMolding,
   getLayoutPricingDimensions,
@@ -932,17 +931,10 @@ export function RecordAlbumDesigner({
         brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
       };
       await addToCartOnly(frameConfig, pricing.total, quantity);
-      if (!isShopifyEnabled()) {
-        toast({
-          title: "Mock Checkout Created",
-          description: "Shopify is not configured. Check console for payload details.",
-        });
-      } else {
-        toast({
-          title: "Redirecting to Checkout",
-          description: "Taking you to secure checkout...",
-        });
-      }
+      toast({
+        title: "Added to Cart!",
+        description: `1 ${layoutType === "cd" ? "CD frame" : "vinyl record frame"} added to your cart.`,
+      });
     } catch (error) {
       console.error("Checkout error:", error);
       toast({

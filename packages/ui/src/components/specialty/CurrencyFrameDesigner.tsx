@@ -18,6 +18,7 @@ import { useIsMobile, useMobileViewToggle, useIntelligentPreviewSizing,
   getDefaultCurrencyBacking,
   getCurrencyLifestyleImages,
   getRandomCurrencyLifestyleImage,
+  addToCartOnly,
   getStoreBaseAssetUrl} from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import { Info, Maximize, Settings, Eye, ShoppingCart } from "lucide-react";
@@ -66,6 +67,7 @@ export function CurrencyFrameDesigner({
   embedded: _embedded = false,
 }: CurrencyFrameDesignerProps) {
   const { toast } = useToast();
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const isMobile = useIsMobile();
   const {
     mobileView,
@@ -430,11 +432,39 @@ export function CurrencyFrameDesigner({
     matType,
   ]);
 
-  const handleAddToCart = () => {
-    toast({
-      title: "Added to Cart",
-      description: `${quantity}× ${currentLayout.displayName} Currency Frame added to your cart.`,
-    });
+  const handleAddToCart = async () => {
+    setIsCheckingOut(true);
+    try {
+      const frameConfig: FrameConfiguration = {
+        serviceType: "frame-only",
+        artworkWidth: adjustedLayout.matOpeningWidth,
+        artworkHeight: adjustedLayout.matOpeningHeight,
+        frameStyleId: selectedFrame.id,
+        matType,
+        matBorderWidth: adjustedLayout.matBorderTop,
+        matRevealWidth: matReveal,
+        matColorId: selectedTopMat.id,
+        matInnerColorId: matType === "double" ? selectedAccentMat.id : undefined,
+        glassTypeId: selectedGlass.id,
+        orderSource: `currency-${currentLayout.id || 'custom'}`,
+        bottomWeighted,
+        brassNameplateConfig: brassNameplateConfig.enabled && matType !== "none" ? brassNameplateConfig : undefined,
+      };
+      await addToCartOnly(frameConfig, pricing.total, quantity);
+      toast({
+        title: "Added to Cart!",
+        description: `${quantity}× ${currentLayout.displayName} Currency Frame added to your cart.`,
+      });
+    } catch (error) {
+      console.error("Add to cart error:", error);
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to add to cart",
+        variant: "destructive",
+      });
+    } finally {
+      setIsCheckingOut(false);
+    }
   };
 
   const brassNameplatePass = {
@@ -1137,6 +1167,7 @@ export function CurrencyFrameDesigner({
                   quantity={quantity}
                   onQuantityChange={setQuantity}
                   onAddToCart={handleAddToCart}
+                  isProcessing={isCheckingOut}
                   priceItems={priceItems}
                 />
               </div>
@@ -1229,6 +1260,7 @@ export function CurrencyFrameDesigner({
             <QuantitySelector value={quantity} onChange={setQuantity} className="w-20" />
             <Button
               onClick={handleAddToCart}
+              disabled={isCheckingOut}
               className="px-4"
               data-testid="button-add-to-cart-mobile"
               aria-label="Add to cart"

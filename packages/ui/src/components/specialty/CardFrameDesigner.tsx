@@ -18,6 +18,7 @@ import {
   getRandomCategory,
   getAllCategories,
   type CardCategory} from "@framecraft/core";
+import { addToCartOnly } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import {
   Copy,
@@ -600,13 +601,59 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
   }, [toast]);
 
   // Add to cart handler
-  const handleAddToCart = useCallback(() => {
-    const currentLayout = getCardLayout(selectedLayout);
-    toast({
-      title: "Added to cart!",
-      description: `${quantity}× Card Frame - ${currentLayout?.displayName ?? "Custom"}`,
-    });
-  }, [quantity, selectedLayout, toast]);
+  const handleAddToCart = useCallback(async () => {
+    try {
+      const currentLayout = getCardLayout(selectedLayout);
+      if (!selectedLayout || !currentLayout) {
+        toast({
+          title: "Please select a layout",
+          description: "Choose a layout to add to cart",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const frameConfig: FrameConfiguration = {
+        serviceType: "frame-only",
+        artworkWidth: manufacturingFrameDimensions.width,
+        artworkHeight: manufacturingFrameDimensions.height,
+        frameStyleId: selectedFrame.id,
+        matType: matType === "none" ? "none" : matType,
+        matBorderWidth: matType === "none" ? 0 : MAT_BORDER,
+        matRevealWidth: matType === "double" ? MAT_REVEAL : 0,
+        matColorId: matType === "none" ? "" : selectedMat.id,
+        matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
+        glassTypeId: selectedGlass.id,
+        orderSource: `card-frame-${selectedLayout}`,
+        brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
+      };
+
+      await addToCartOnly(frameConfig, pricing.total, quantity);
+      toast({
+        title: "Added to Cart!",
+        description: `${quantity}× Card Frame - ${currentLayout.displayName ?? "Custom"}`,
+      });
+    } catch (error) {
+      console.error("Add to cart error:", error);
+      toast({
+        title: "Add to Cart Failed",
+        description: error instanceof Error ? error.message : "Failed to add item to cart",
+        variant: "destructive",
+      });
+    }
+  }, [
+    selectedLayout,
+    selectedFrame.id,
+    matType,
+    selectedMat.id,
+    selectedMatInner.id,
+    selectedGlass.id,
+    brassNameplateConfig,
+    quantity,
+    pricing.total,
+    manufacturingFrameDimensions,
+    toast,
+  ]);
 
   // Apply preset configuration (reserved for future preset buttons; kept for API)
   function applyPreset(presetName: "signature" | "vault") {
