@@ -953,7 +953,7 @@ export function WeddingInvitationFrameDesigner({
 
               <BottomWeightedMatting checked={bottomWeighted} onCheckedChange={setBottomWeighted} />
 
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              <div className="flex flex-wrap items-center gap-4 pt-2 w-full">
                 <QuantitySelector value={quantity} onChange={setQuantity} />
                 <PriceBox
                   totalPrice={finalTotalPrice}
@@ -963,16 +963,9 @@ export function WeddingInvitationFrameDesigner({
                   isProcessing={isCheckingOut}
                   priceItems={pricing?.items}
                   disabled={!hasValidCustomInvite || !hasValidCustomSecondary}
+                  className="flex-1"
                 />
               </div>
-              <Button
-                className="w-full"
-                size="lg"
-                onClick={handleAddToCart}
-                disabled={!hasValidCustomInvite || !hasValidCustomSecondary || isCheckingOut}
-              >
-                {isCheckingOut ? "Processing..." : "Add to Cart"}
-              </Button>
             </Card>
           </div>
         </div>
