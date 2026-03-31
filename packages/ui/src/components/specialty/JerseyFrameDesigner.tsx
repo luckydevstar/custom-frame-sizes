@@ -9,7 +9,7 @@ import { useIntelligentPreviewSizing , generateDoubleMatPaths , getFrameStyleByI
   useMobileViewToggle,
   addToCartOnly,
 } from "@framecraft/core";
-import { type MatOption , getJerseyLayout, type JerseyLayoutType, type FrameConfiguration } from "@framecraft/core";
+import { type MatOption , getJerseyLayout, type JerseyLayoutType } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import { Share2, Shirt, Info, Maximize, Settings, Eye, Copy, Palette, Shield } from "lucide-react";
 import { useState, useEffect, useMemo, useRef } from "react";

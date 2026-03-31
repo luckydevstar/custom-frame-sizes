@@ -8,7 +8,6 @@ import {
   parseFraction,
   computePreviewLayout,
   addToCartOnly,
-  isShopifyEnabled,
   useIsMobile,
   useMobileViewToggle,
   useIntelligentPreviewSizing,

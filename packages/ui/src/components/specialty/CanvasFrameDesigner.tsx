@@ -5,7 +5,6 @@ import {
   calculatePricing,
   apiRequest,
   addToCartOnly,
-  isShopifyEnabled,
   getRandomStockImage,
   calculateCanvasPrintDimensions,
   generateCanvasPrintFile,
@@ -731,10 +730,10 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
       artworkWidth: artWidth,
       artworkHeight: artHeight,
       frameStyleId: selectedFrame.id,
-      matType: "none", // Always no mat for canvas float frames
+      matType: "none" as const, // Always no mat for canvas float frames
       matBorderWidth: 0,
       matRevealWidth: 0,
-      matColorId: undefined, // No mat color for canvas
+      matColorId: undefined as unknown as string, // No mat color for canvas (optional field)
       matInnerColorId: undefined,
       glassTypeId: "standard", // Default to standard for pricing
       orderSource: `canvas-${serviceType}`,
