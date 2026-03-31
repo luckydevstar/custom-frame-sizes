@@ -222,7 +222,6 @@ export function BouquetFrameDesigner({
   const [unknownConfigFields, setUnknownConfigFields] = useState<Record<string, unknown>>({});
 
   const { toast } = useToast();
-  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const isMobile = useIsMobile();
   const { mobileView, setMobileView, showMobileBar, previewCardRef, controlsHeadingRef } =
     useMobileViewToggle({ isMobile });
