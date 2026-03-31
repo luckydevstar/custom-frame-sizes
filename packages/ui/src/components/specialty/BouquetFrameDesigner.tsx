@@ -46,7 +46,6 @@ import {
   validateArtworkSize,
   computePreviewLayout,
   addToCartOnly,
-  isShopifyEnabled,
   toShadowboxConfig,
   fromShadowboxConfig,
   getMatTilingStyle,
