@@ -13,6 +13,8 @@ import {
   getRandomPuckLifestyleImage,
   getStoreBaseAssetUrl,
   addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
 } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import {
@@ -381,6 +383,8 @@ export function PuckFrameDesigner({ defaultFrameId, embedded = false }: PuckFram
         bottomWeighted,
         brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
       };
+      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({
         title: "Added to Cart!",

@@ -19,7 +19,9 @@ import { useIsMobile, useMobileViewToggle, useIntelligentPreviewSizing,
   getCurrencyLifestyleImages,
   getRandomCurrencyLifestyleImage,
   addToCartOnly,
-  getStoreBaseAssetUrl} from "@framecraft/core";
+  getStoreBaseAssetUrl,
+  createCartItemFromFrameConfig,
+  useCartStore} from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import { Info, Maximize, Settings, Eye, ShoppingCart } from "lucide-react";
 import { useState, useEffect, useMemo, useRef } from "react";
@@ -450,6 +452,8 @@ export function CurrencyFrameDesigner({
         bottomWeighted,
         brassNameplateConfig: brassNameplateConfig.enabled && matType !== "none" ? brassNameplateConfig : undefined,
       };
+      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({
         title: "Added to Cart!",
