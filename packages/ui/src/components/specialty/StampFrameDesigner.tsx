@@ -53,7 +53,6 @@ import { HangingHardwareSection } from "./shared/HangingHardwareSection";
 import { StampPreviewCanvas } from "./StampPreviewCanvas";
 
 import type { PriceLineItem } from "../ui/PriceBox";
-import type { StampLayoutType } from "@framecraft/core";
 import type { FrameStyle, GlassType, FrameConfiguration , BrassNameplateConfig } from "@framecraft/types";
 
 
