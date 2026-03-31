@@ -24,6 +24,8 @@ import {
   validateCustomDimensions,
   createCustomInvitationSize,
   createCustomSecondarySize,
+  createCartItemFromFrameConfig,
+  useCartStore,
   type WeddingLayoutType,
   type InvitationSize,
   type SecondaryOpeningSize,
@@ -494,6 +496,8 @@ export function WeddingInvitationFrameDesigner({
       copyrightAgreed: serviceType === "print-and-frame" ? copyrightAgreed : undefined,
     };
     try {
+      const cartInput = createCartItemFromFrameConfig(config, finalTotalPrice * quantity, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(config, finalTotalPrice * quantity, quantity);
       toast({
         title: "Added to Cart!",

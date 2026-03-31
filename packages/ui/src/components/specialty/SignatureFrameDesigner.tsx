@@ -17,6 +17,8 @@ import {
   SIGNATURE_MAT_BORDER_DEFAULT,
   getSignatureOpeningSizeInches,
   getStoreBaseAssetUrl,
+  createCartItemFromFrameConfig,
+  useCartStore,
   type SignatureOpeningSize,
   type SignatureOpeningShape,
 } from "@framecraft/core";
@@ -372,6 +374,8 @@ export function SignatureFrameDesigner({
       copyrightAgreed: serviceType === "print-and-frame" ? copyrightAgreed : undefined,
     };
     try {
+      const cartInput = createCartItemFromFrameConfig(config, finalTotalPrice * quantity, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(config, finalTotalPrice * quantity, quantity);
       toast({
         title: "Added to Cart!",

@@ -8,6 +8,8 @@ import { useIntelligentPreviewSizing , generateDoubleMatPaths , getFrameStyleByI
   useIsMobile,
   useMobileViewToggle,
   addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
 } from "@framecraft/core";
 import { type MatOption , getJerseyLayout, type JerseyLayoutType } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
@@ -565,6 +567,8 @@ export function JerseyFrameDesigner({
         bottomWeighted,
         brassNameplateConfig: brassNameplateConfig.enabled && currentLayout.allowsPlaque ? brassNameplateConfig : undefined,
       };
+      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({
         title: "Added to Cart!",
