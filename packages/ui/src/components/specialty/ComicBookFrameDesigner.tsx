@@ -712,7 +712,7 @@ export function ComicBookFrameDesigner({
         matType: matType === "none" ? "none" : matType,
         matBorderWidth: matType === "none" ? 0 : MAT_BORDER,
         matRevealWidth: matType === "double" ? MAT_REVEAL : 0,
-        matColorId: matType === "none" ? "" : selectedMat.id,
+        matColorId: matType === "none" ? (undefined as unknown as string) : selectedMat.id,
         matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
         glassTypeId: selectedGlass.id,
         orderSource: `comic-frame-${selectedLayout}`,
