@@ -1354,7 +1354,7 @@ export function MoviePosterFrameDesigner({
             quantity={quantity}
             onQuantityChange={setQuantity}
             onAddToCart={handleCheckout}
-            isProcessing={false}
+            isProcessing={isCheckingOut}
             disabled={!isValidDimensions || isTooLarge || !customDimensionValidation.valid}
             priceItems={priceItems}
             warnings={warnings}

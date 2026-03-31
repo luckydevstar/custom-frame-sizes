@@ -1488,7 +1488,7 @@ export function CollageFrameDesigner({
                 testIdPrefix="collage-"
                 className={`transition-all ${pricingSidebarExpanded ? "top-6" : "top-20"}`}
                 disabled={!canAddToCart || isGeneratingPrint}
-                isProcessing={isGeneratingPrint}
+                isProcessing={isCheckingOut}
                 beforeButtons={
                   serviceType === "print-and-frame" && printCount > 0 && !copyrightAgreed ? (
                     <div
