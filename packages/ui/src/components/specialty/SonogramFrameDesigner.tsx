@@ -22,9 +22,11 @@ import {
   PEN_TOOL_FONTS,
   isLightMat,
   getStoreBaseAssetUrl,
+  createCartItemFromFrameConfig,
+  useCartStore,
   type SonogramLayoutType,
   type PenToolConfig,
- SonogramLifestyleImage } from "@framecraft/core";
+  SonogramLifestyleImage } from "@framecraft/core";
 import { Copy, Eye, Settings, PenTool } from "lucide-react";
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 
@@ -407,6 +409,8 @@ export function SonogramFrameDesigner({
       bottomWeighted,
     };
     try {
+      const cartInput = createCartItemFromFrameConfig(config, finalTotalPrice * quantity, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(config, finalTotalPrice * quantity, quantity);
       toast({
         title: "Added to Cart!",

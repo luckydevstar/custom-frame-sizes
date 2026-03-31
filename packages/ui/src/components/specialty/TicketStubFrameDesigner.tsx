@@ -12,6 +12,8 @@ import {
   useIsMobile,
   useMobileViewToggle,
   getStoreBaseAssetUrl,
+  createCartItemFromFrameConfig,
+  useCartStore,
   type TicketStubLayoutType,
 } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
@@ -330,6 +332,8 @@ export function TicketStubFrameDesigner({
       bottomWeighted,
     };
     try {
+      const cartInput = createCartItemFromFrameConfig(config, pricing.total * quantity, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(config, pricing.total * quantity, quantity);
       toast({
         title: "Added to cart!",
