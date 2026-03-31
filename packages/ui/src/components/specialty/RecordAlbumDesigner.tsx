@@ -24,6 +24,8 @@ import {
   getRecordAlbumLifestyleImageUrl,
   getSharedAssetUrl,
   getStoreBaseAssetUrl,
+  createCartItemFromFrameConfig,
+  useCartStore,
   type RecordAlbumLayoutType,
   type CDLayoutType,
 } from "@framecraft/core";
@@ -930,6 +932,8 @@ export function RecordAlbumDesigner({
         orderSource,
         brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
       };
+      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({
         title: "Added to Cart!",

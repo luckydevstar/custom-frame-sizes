@@ -6,15 +6,23 @@ import {
   getGlassTypes,
   getSharedAssetUrl,
   getStoreBaseAssetUrl,
- useIsMobile, useMobileViewToggle , getMagazineCoversForConfig , useMagazinePricing , getMagazinesForTooltip } from "@framecraft/core";
-import { MAGAZINE_SIZES, getMagazineSizeById, type MagazineSize ,
+  useIsMobile,
+  useMobileViewToggle,
+  getMagazineCoversForConfig,
+  useMagazinePricing,
+  getMagazinesForTooltip,
+  MAGAZINE_SIZES,
+  getMagazineSizeById,
   MAGAZINE_LAYOUTS,
   getMagazineLayout,
   calculateMagazineFrameSize,
   getAvailableLayoutsForSize,
+  addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
+  type MagazineSize,
   type MagazineLayoutType,
 } from "@framecraft/core";
-import { addToCartOnly } from "@framecraft/core";
 import { Copy, Maximize, ShoppingCart, Eye, Settings, LayoutGrid, Info, Ruler } from "lucide-react";
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 
@@ -612,6 +620,8 @@ export function MagazineFrameDesigner({
         brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
       };
 
+      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({
         title: "Added to Cart!",

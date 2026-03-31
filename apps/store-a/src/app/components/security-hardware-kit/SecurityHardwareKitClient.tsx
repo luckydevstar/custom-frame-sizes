@@ -1,6 +1,6 @@
 "use client";
 
-import { getSharedAssetUrl, addToCartOnly } from "@framecraft/core";
+import { getSharedAssetUrl, addToCartOnly, createCartItemFromFrameConfig, useCartStore } from "@framecraft/core";
 import {
   Button,
   Card,
@@ -76,6 +76,8 @@ export function SecurityHardwareKitClient() {
       const productName =
         selectedProduct === "kit" ? "Professional Security Hardware Kit" : "Security Wrench Only";
       
+      const cartInput = createCartItemFromFrameConfig(securityConfig, price, currentPack.size);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(securityConfig, price, currentPack.size);
       
       toast({

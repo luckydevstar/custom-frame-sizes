@@ -16,6 +16,8 @@ import {
   useIsMobile,
   useMobileViewToggle,
   useIntersectionVisible,
+  createCartItemFromFrameConfig,
+  useCartStore,
 } from "@framecraft/core";
 import {
   Upload,
@@ -691,6 +693,8 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
       }
 
       // Call Shopify checkout service
+      const cartInput = createCartItemFromFrameConfig(frameConfig, finalTotalPrice, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(frameConfig, finalTotalPrice, quantity);
       toast({
         title: "Added to Cart!",

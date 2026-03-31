@@ -1,6 +1,6 @@
 "use client";
 
-import { getSharedAssetUrl, addToCartOnly } from "@framecraft/core";
+import { getSharedAssetUrl, addToCartOnly, createCartItemFromFrameConfig, useCartStore } from "@framecraft/core";
 import {
   Button,
   Card,
@@ -69,6 +69,8 @@ export function CleatHangersClient() {
         orderSource: `cleat-hangers-${currentPack.size}`,
       };
       
+      const cartInput = createCartItemFromFrameConfig(cleatConfig, currentPack.price, currentPack.size);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(cleatConfig, currentPack.price, currentPack.size);
       
       toast({

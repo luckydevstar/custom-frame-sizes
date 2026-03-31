@@ -6,6 +6,8 @@ import {
   COMPONENT_PRICING,
   getStoreAssetUrl,
   addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
 } from "@framecraft/core";
 import {
   Button,
@@ -151,6 +153,8 @@ export function AcrylicClient() {
         orderSource: `acrylic-${acrylicType}`,
       };
       
+      const cartInput = createCartItemFromFrameConfig(acrylicConfig, total, packSize);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(acrylicConfig, total, packSize);
       
       toast({

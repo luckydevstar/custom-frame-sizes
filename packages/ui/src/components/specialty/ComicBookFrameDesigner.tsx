@@ -15,6 +15,8 @@ import {
   getComicLayout,
   calculateComicFrameSize,
   addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
   type ComicLayoutType,
 } from "@framecraft/core";
 import {
@@ -719,6 +721,8 @@ export function ComicBookFrameDesigner({
         brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
       };
 
+      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({
         title: "Added to Cart!",

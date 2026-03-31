@@ -15,8 +15,12 @@ import {
   getNeedleworkLifestyleImages,
   getRandomNeedleworkLifestyleImage,
   getStoreBaseAssetUrl,
- useIsMobile, useMobileViewToggle } from "@framecraft/core";
-import { addToCartOnly } from "@framecraft/core";
+  useIsMobile,
+  useMobileViewToggle,
+  addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
+} from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS, getTypeBBottomBorder } from "@framecraft/types";
 import { Maximize, Eye, Settings, Info, ChevronLeft, ChevronRight } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -499,6 +503,8 @@ export function NeedleworkFrameDesigner({
         brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
       };
 
+      const cartInput = createCartItemFromFrameConfig(frameConfig, totalPerUnit, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(frameConfig, totalPerUnit, quantity);
       toast({
         title: "Added to Cart",
