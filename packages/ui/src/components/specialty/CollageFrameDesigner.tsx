@@ -218,6 +218,7 @@ export function CollageFrameDesigner({
   >("preview");
   const [fullscreenLifestyleUrl, setFullscreenLifestyleUrl] = useState<string>("");
   const [quantity, setQuantity] = useState(1);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [pricingSidebarExpanded, setPricingSidebarExpanded] = useState(false);
 
   const [framePhotos, setFramePhotos] = useState<{
@@ -654,6 +655,7 @@ export function CollageFrameDesigner({
         };
         
         try {
+          setIsCheckingOut(true);
           const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
           useCartStore.getState().addItem(cartInput);
           await addToCartOnly(frameConfig, pricing.total, quantity);
@@ -667,6 +669,8 @@ export function CollageFrameDesigner({
             title: "Added to cart!",
             description: `${quantity}× Photo Collage Frame - ${currentLayout.name} (Print & Frame)`,
           });
+        } finally {
+          setIsCheckingOut(false);
         }
       } catch (error) {
         setIsGeneratingPrint(false);
@@ -696,6 +700,7 @@ export function CollageFrameDesigner({
       };
       
       try {
+        setIsCheckingOut(true);
         const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
         useCartStore.getState().addItem(cartInput);
         await addToCartOnly(frameConfig, pricing.total, quantity);
@@ -709,6 +714,8 @@ export function CollageFrameDesigner({
           title: "Added to cart!",
           description: `${quantity}× Photo Collage Frame - ${currentLayout.name}`,
         });
+      } finally {
+        setIsCheckingOut(false);
       }
     }
   }, [
@@ -1481,7 +1488,7 @@ export function CollageFrameDesigner({
                 testIdPrefix="collage-"
                 className={`transition-all ${pricingSidebarExpanded ? "top-6" : "top-20"}`}
                 disabled={!canAddToCart || isGeneratingPrint}
-                isProcessing={isGeneratingPrint}
+                isProcessing={isCheckingOut}
                 beforeButtons={
                   serviceType === "print-and-frame" && printCount > 0 && !copyrightAgreed ? (
                     <div

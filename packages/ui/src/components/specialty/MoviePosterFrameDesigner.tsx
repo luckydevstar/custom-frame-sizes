@@ -219,6 +219,7 @@ export function MoviePosterFrameDesigner({
   const [bottomWeighted, setBottomWeighted] = useState(false);
   const [hangingHardware, setHangingHardware] = useState<"standard" | "security">("standard");
   const [quantity, setQuantity] = useState(1);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [fullImageOpen, setFullImageOpen] = useState(false);
   const [displayPoster, setDisplayPoster] = useState(() => getRandomPosterForSize("us-standard"));
   const [lifestylePreviewImage, setLifestylePreviewImage] = useState(() =>
@@ -606,6 +607,7 @@ export function MoviePosterFrameDesigner({
       return;
     }
     
+    setIsCheckingOut(true);
     try {
       const frameConfig: FrameConfiguration = {
         serviceType: "frame-only",
@@ -636,6 +638,8 @@ export function MoviePosterFrameDesigner({
         description: error instanceof Error ? error.message : "Failed to add to cart",
         variant: "destructive",
       });
+    } finally {
+      setIsCheckingOut(false);
     }
   };
 
@@ -1350,7 +1354,7 @@ export function MoviePosterFrameDesigner({
             quantity={quantity}
             onQuantityChange={setQuantity}
             onAddToCart={handleCheckout}
-            isProcessing={false}
+            isProcessing={isCheckingOut}
             disabled={!isValidDimensions || isTooLarge || !customDimensionValidation.valid}
             priceItems={priceItems}
             warnings={warnings}

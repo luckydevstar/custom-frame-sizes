@@ -173,6 +173,7 @@ export function WeddingInvitationFrameDesigner({
   const [brassNameplateConfig, setBrassNameplateConfig] =
     useState<BrassNameplateConfig>(defaultNameplateConfig);
   const [quantity, setQuantity] = useState(1);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [serviceType, setServiceType] = useState<"frame-only" | "print-and-frame">(
     () => (urlParams.get("serviceType") as "frame-only" | "print-and-frame") || "frame-only"
   );
@@ -475,6 +476,7 @@ export function WeddingInvitationFrameDesigner({
       }
       return;
     }
+    setIsCheckingOut(true);
     const config: FrameConfiguration = {
       serviceType: serviceType === "print-and-frame" ? "print-and-frame" : "frame-only",
       frameStyleId: selectedFrame.id,
@@ -503,6 +505,8 @@ export function WeddingInvitationFrameDesigner({
         description: err instanceof Error ? err.message : "Could not add to cart",
         variant: "destructive",
       });
+    } finally {
+      setIsCheckingOut(false);
     }
   }, [
     canAddToCart,
@@ -952,6 +956,7 @@ export function WeddingInvitationFrameDesigner({
                   quantity={quantity}
                   onQuantityChange={setQuantity}
                   onAddToCart={handleAddToCart}
+                  isProcessing={isCheckingOut}
                   priceItems={pricing?.items}
                   disabled={!hasValidCustomInvite || !hasValidCustomSecondary}
                 />
@@ -960,9 +965,9 @@ export function WeddingInvitationFrameDesigner({
                 className="w-full"
                 size="lg"
                 onClick={handleAddToCart}
-                disabled={!hasValidCustomInvite || !hasValidCustomSecondary}
+                disabled={!hasValidCustomInvite || !hasValidCustomSecondary || isCheckingOut}
               >
-                Add to Cart
+                {isCheckingOut ? "Processing..." : "Add to Cart"}
               </Button>
             </Card>
           </div>

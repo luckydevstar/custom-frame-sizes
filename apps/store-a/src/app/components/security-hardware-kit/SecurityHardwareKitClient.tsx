@@ -47,6 +47,7 @@ export function SecurityHardwareKitClient() {
   const { toast } = useToast();
   const [selectedProduct, setSelectedProduct] = useState<"kit" | "wrench">("kit");
   const [selectedPackSize, setSelectedPackSize] = useState("1");
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -59,6 +60,7 @@ export function SecurityHardwareKitClient() {
   const price = selectedProduct === "kit" ? currentPack.price : 4.95;
 
   const handleAddToCart = async () => {
+    setIsCheckingOut(true);
     try {
       const securityConfig = {
         serviceType: "frame-only" as const,
@@ -94,6 +96,8 @@ export function SecurityHardwareKitClient() {
         description: "Failed to add to cart. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsCheckingOut(false);
     }
   };
 
@@ -189,10 +193,11 @@ export function SecurityHardwareKitClient() {
               <Button
                 className="w-full h-9 text-xs"
                 onClick={handleAddToCart}
+                disabled={isCheckingOut}
                 data-testid="button-add-to-cart"
               >
                 <ShoppingCart className="w-3.5 h-3.5 mr-1.5" />
-                Add to Cart
+                {isCheckingOut ? "Adding..." : "Add to Cart"}
               </Button>
             </Card>
           </div>
@@ -309,10 +314,11 @@ export function SecurityHardwareKitClient() {
                   className="w-full"
                   size="lg"
                   onClick={handleAddToCart}
+                  disabled={isCheckingOut}
                   data-testid="button-add-to-cart"
                 >
                   <ShoppingCart className="w-5 h-5 mr-2" />
-                  Add to Cart
+                  {isCheckingOut ? "Adding..." : "Add to Cart"}
                 </Button>
               </Card>
             </div>
