@@ -7,7 +7,6 @@ import {
   generateMatBoardPath,
   getMatTilingStyle,
   getMatBevelColor,
-  getStoreBaseAssetUrl,
   getSharedAssetUrl,
   type RecordAlbumLayoutType,
   type CDLayoutType,
