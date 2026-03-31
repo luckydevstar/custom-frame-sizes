@@ -19,6 +19,7 @@ import {
   validateMilitaryCustomDimensions,
   getRandomMilitaryPhoto,
   BRASS_PLAQUE_DIMENSIONS,
+  addToCartOnly,
 } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import { Share2, Award, Maximize, Settings, Eye, Copy, ShoppingCart, Shield } from "lucide-react";
@@ -61,6 +62,7 @@ export function MilitaryFrameDesigner({
   embedded = false,
 }: MilitaryFrameDesignerProps) {
   const { toast } = useToast();
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const isMobile = useIsMobile();
   const { mobileView, setMobileView, showMobileBar, previewCardRef, controlsHeadingRef } =
     useMobileViewToggle({ isMobile });
@@ -371,11 +373,54 @@ export function MilitaryFrameDesigner({
     toast({ title: "Design link copied!", description: "Design link copied to clipboard." });
   };
 
-  const handleAddToCart = () => {
-    toast({
-      title: "Feature coming soon",
-      description: "Shopping cart integration will be available in the next update.",
-    });
+  const handleAddToCart = async () => {
+    setIsCheckingOut(true);
+    try {
+      const safeW = customDimensionValidation.valid
+        ? parsedCustomWidth
+        : MILITARY_CUSTOM_SIZE_LIMITS.MIN_WIDTH;
+      const safeH = customDimensionValidation.valid
+        ? parsedCustomHeight
+        : MILITARY_CUSTOM_SIZE_LIMITS.MIN_HEIGHT;
+      const artworkWidth =
+        selectedLayout === "custom"
+          ? safeW + MILITARY_CUSTOM_SIZE_LIMITS.DEFAULT_MAT_BORDER * 2
+          : currentLayout.frameWidth;
+      const artworkHeight =
+        selectedLayout === "custom"
+          ? safeH + MILITARY_CUSTOM_SIZE_LIMITS.DEFAULT_MAT_BORDER * 2
+          : currentLayout.frameHeight;
+
+      const config: FrameConfiguration = {
+        artworkWidth,
+        artworkHeight,
+        frameStyleId: selectedFrame?.id ?? "",
+        matType: "double",
+        matBorderWidth: currentLayout.matBorderWidth,
+        matRevealWidth: 0.25,
+        matColorId: "mat-1",
+        matInnerColorId: "mat-2",
+        glassTypeId: "standard",
+        serviceType: "frame-only",
+        orderSource: `military-${selectedLayout}`,
+        brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
+      };
+
+      await addToCartOnly(config, pricing.total, quantity);
+      toast({
+        title: "Added to Cart!",
+        description: "Military frame added to your cart.",
+      });
+    } catch (error) {
+      console.error("Add to cart error:", error);
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to add to cart",
+        variant: "destructive",
+      });
+    } finally {
+      setIsCheckingOut(false);
+    }
   };
 
   const availableLayouts = getAllMilitaryLayouts();
@@ -880,6 +925,7 @@ export function MilitaryFrameDesigner({
                   onAddToCart={handleAddToCart}
                   onCopyLink={handleCopyLink}
                   priceItems={priceItems}
+                  isProcessing={isCheckingOut}
                   testIdPrefix=""
                 />
 
@@ -968,11 +1014,12 @@ export function MilitaryFrameDesigner({
             </Button>
             <Button
               onClick={handleAddToCart}
+              disabled={isCheckingOut}
               className="flex-1 text-xs min-w-0 min-h-11"
               data-testid="button-mobile-add-to-cart"
             >
               <ShoppingCart className="h-4 w-4 mr-2" />
-              Add to Cart
+              {isCheckingOut ? "Adding..." : "Add to Cart"}
             </Button>
           </div>
         </div>

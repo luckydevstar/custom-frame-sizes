@@ -15,6 +15,9 @@ import {
   getRandomPlaybillInserts,
   getRandomTicketInserts,
   createPlaybillInsertSeed,
+  addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
   type PlaybillLayoutType,
 } from "@framecraft/core";
 import { Copy, Maximize, Eye, Settings, Info } from "lucide-react";
@@ -41,7 +44,7 @@ import { PlaybillPreview } from "./PlaybillPreview";
 import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
 
-import type { FrameStyle, AlternateImage, BrassNameplateConfig } from "@framecraft/types";
+import type { FrameStyle, AlternateImage, BrassNameplateConfig, FrameConfiguration } from "@framecraft/types";
 
 
 // Get product data from services
@@ -474,11 +477,47 @@ export function PlaybillFrameDesigner({
 
   // Add to cart handler
   const handleAddToCart = useCallback(async () => {
-    toast({
-      title: "Added to cart!",
-      description: `${quantity}× Playbill Frame - ${currentLayout?.name}`,
-    });
-  }, [quantity, currentLayout, toast]);
+    try {
+      if (!currentLayout) {
+        toast({
+          title: "Please select a layout",
+          description: "Choose a layout to add to cart",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const frameConfig: FrameConfiguration = {
+        serviceType: "frame-only",
+        artworkWidth: currentLayout.frameWidth,
+        artworkHeight: currentLayout.frameHeight,
+        frameStyleId: selectedFrame.id,
+        matType: matType === "none" ? "none" : matType,
+        matBorderWidth: matType === "none" ? 0 : 2.0,
+        matRevealWidth: matType === "double" ? 0.25 : 0,
+        matColorId: matType === "none" ? "" : selectedMat.id,
+        matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
+        glassTypeId: selectedGlass?.id || "standard",
+        orderSource: `playbill-frame-${selectedLayout}`,
+        brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
+      };
+
+      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
+      useCartStore.getState().addItem(cartInput);
+      await addToCartOnly(frameConfig, pricing.total, quantity);
+      toast({
+        title: "Added to Cart!",
+        description: `${quantity}× Playbill Frame - ${currentLayout.name}`,
+      });
+    } catch (error) {
+      console.error("Add to cart error:", error);
+      toast({
+        title: "Add to Cart Failed",
+        description: error instanceof Error ? error.message : "Failed to add item to cart",
+        variant: "destructive",
+      });
+    }
+  }, [quantity, currentLayout, selectedFrame.id, matType, selectedMat.id, selectedMatInner.id, selectedGlass?.id, brassNameplateConfig, pricing.total, toast]);
 
   // Split mats into standard and premium for color swatches
   // Hide Terracotta (lineNumber 28) on desktop

@@ -7,8 +7,7 @@ import {
   calculatePricing,
   parseFraction,
   computePreviewLayout,
-  addToCart,
-  isShopifyEnabled,
+  addToCartOnly,
   useIsMobile,
   useMobileViewToggle,
   useIntelligentPreviewSizing,
@@ -25,6 +24,9 @@ import {
   getDefaultStampBacking,
   getRandomStampLifestyleImage,
   getStampLifestyleImages,
+  createCartItemFromFrameConfig,
+  useCartStore,
+  type StampLayoutType,
 } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import { Share2, Stamp, Info, Maximize, Settings, Eye, Copy, ShoppingCart } from "lucide-react";
@@ -51,7 +53,6 @@ import { HangingHardwareSection } from "./shared/HangingHardwareSection";
 import { StampPreviewCanvas } from "./StampPreviewCanvas";
 
 import type { PriceLineItem } from "../ui/PriceBox";
-import type { StampLayoutType } from "@framecraft/core";
 import type { FrameStyle, GlassType, FrameConfiguration , BrassNameplateConfig } from "@framecraft/types";
 
 
@@ -187,6 +188,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
   const [showShareDialog, setShowShareDialog] = useState(false);
   const [showFullscreenPreview, setShowFullscreenPreview] = useState(false);
   const [quantity, setQuantity] = useState(1);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [lifestylePreviewImage, setLifestylePreviewImage] = useState(() =>
     getRandomStampLifestyleImage()
   );
@@ -364,6 +366,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
       matColorId: selectedTopMat.id,
       matInnerColorId: matType === "double" ? selectedAccentMat.id : undefined,
       glassTypeId: selectedGlass.id,
+      orderSource: `stamp-${currentLayout.id || 'custom'}`,
       bottomWeighted,
     }),
     [
@@ -374,6 +377,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
       selectedTopMat.id,
       selectedAccentMat.id,
       selectedGlass.id,
+      currentLayout.id,
       bottomWeighted,
     ]
   );
@@ -425,26 +429,24 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
   };
 
   const handleAddToCart = async () => {
+    setIsCheckingOut(true);
     const finalTotal = pricing.total * quantity;
     try {
-      await addToCart(frameConfig, finalTotal, quantity);
-      if (!isShopifyEnabled()) {
-        toast({
-          title: "Mock Checkout Created",
-          description: "Shopify is not configured. Check console for payload details.",
-        });
-      } else {
-        toast({
-          title: "Added to Cart",
-          description: `${quantity}× ${currentLayout.displayName} Stamp Frame added.`,
-        });
-      }
+      const cartInput = createCartItemFromFrameConfig(frameConfig, finalTotal, quantity);
+      useCartStore.getState().addItem(cartInput);
+      await addToCartOnly(frameConfig, finalTotal, quantity);
+      toast({
+        title: "Added to Cart!",
+        description: `${quantity}× ${currentLayout.displayName} Stamp Frame added.`,
+      });
     } catch (err) {
       toast({
         title: "Error",
         description: "Could not add to cart. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsCheckingOut(false);
     }
   };
 
@@ -1153,6 +1155,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                   onQuantityChange={setQuantity}
                   onAddToCart={handleAddToCart}
                   onCopyLink={handleCopyLink}
+                  isProcessing={isCheckingOut}
                   priceItems={priceItems}
                 />
               </div>
@@ -1240,6 +1243,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
             <QuantitySelector value={quantity} onChange={setQuantity} className="w-20" />
             <Button
               onClick={handleAddToCart}
+              disabled={isCheckingOut}
               className="px-4"
               data-testid="button-add-to-cart-mobile"
               aria-label="Add to cart"

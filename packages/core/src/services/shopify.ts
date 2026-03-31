@@ -336,7 +336,7 @@ function serializeFrameConfiguration(
  */
 export async function addToCart(
   config: FrameConfiguration,
-  _price: number,
+  price: number,
   quantity: number = 1,
   shopifyConfig?: ShopifyConfig
 ) {
@@ -359,8 +359,17 @@ export async function addToCart(
   // When FrameCraft API is configured, use backend cart + checkout URL flow
   if (isFramecraftApiConfigured()) {
     const cart = await createOrGetCart();
+    
+    // Convert price from dollars to cents and pass to backend
+    const priceCents = Math.round(price * 100);
+    
     await apiAddCartLines(
-      [{ merchandiseId: finalVariantId, quantity, configuration: config }],
+      [{ 
+        merchandiseId: finalVariantId, 
+        quantity, 
+        configuration: config,
+        priceCents, // Pass calculated price to ensure backend uses same price
+      }],
       cart.id
     );
     const checkoutUrl = await getCheckoutUrl(cart.id);

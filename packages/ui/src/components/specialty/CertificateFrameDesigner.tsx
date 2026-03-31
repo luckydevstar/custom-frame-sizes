@@ -465,7 +465,10 @@ export function CertificateFrameDesigner({
     }
     setIsCheckingOut(true);
     const glass = selectedGlass ?? glassTypes[0];
-    if (!glass) return;
+    if (!glass) {
+      setIsCheckingOut(false);
+      return;
+    }
     const config: FrameConfiguration = {
       serviceType,
       artworkWidth: parseFraction(artworkWidth),
@@ -477,6 +480,7 @@ export function CertificateFrameDesigner({
       matColorId: selectedMat.id,
       matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
       glassTypeId: glass.id,
+      orderSource: `certificate-${serviceType}`,
       imageUrl: selectedImage || undefined,
       copyrightAgreed: serviceType === "frame-only" ? undefined : copyrightAgreed,
     };
@@ -493,14 +497,14 @@ export function CertificateFrameDesigner({
         description: `${quantity} certificate frame${quantity > 1 ? "s" : ""} added to your cart.`,
       });
     } catch (error) {
-      setIsCheckingOut(false);
       toast({
         title: "Checkout Error",
         description: error instanceof Error ? error.message : "Failed to create checkout",
         variant: "destructive",
       });
+    } finally {
+      setIsCheckingOut(false);
     }
-    return;
   };
 
   const handleShare = useCallback(() => {

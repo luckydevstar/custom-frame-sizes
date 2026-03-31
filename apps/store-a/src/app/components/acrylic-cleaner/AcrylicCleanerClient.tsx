@@ -3,6 +3,7 @@
 import { Button, Card, Label, QuantitySelector, TrustBadges } from "@framecraft/ui";
 import { useToast } from "@framecraft/ui/hooks/use-toast";
 import { ShoppingCart, Check, Sparkles, Shield, Droplets, Package } from "lucide-react";
+import { addToCartOnly, createCartItemFromFrameConfig, useCartStore } from "@framecraft/core";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
@@ -27,26 +28,41 @@ export function AcrylicCleanerClient() {
 
   const total = PRICE * quantity;
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     setIsCheckingOut(true);
 
-    const lineItems = [
-      {
-        sku: SKU,
-        quantity: quantity,
-        customAttributes: [{ key: "Product", value: "NOVUS Acrylic Cleaner 8oz" }],
-      },
-    ];
+    try {
+      const cleanerConfig = {
+        serviceType: "frame-only" as const,
+        artworkWidth: 8,
+        artworkHeight: 8,
+        frameStyleId: "cleaner-product",
+        matType: "none" as const,
+        matBorderWidth: 0,
+        matRevealWidth: 0,
+        matColorId: "",
+        glassTypeId: "standard",
+        orderSource: "acrylic-cleaner",
+      };
 
-    const params = new URLSearchParams();
-    params.set("line_items", JSON.stringify(lineItems));
+      const cartInput = createCartItemFromFrameConfig(cleanerConfig, total, quantity);
+      useCartStore.getState().addItem(cartInput);
+      await addToCartOnly(cleanerConfig, total, quantity);
 
-    toast({
-      title: "Added to Cart",
-      description: `${quantity}x Acrylic Cleaner added to your cart.`,
-    });
-
-    setIsCheckingOut(false);
+      toast({
+        title: "Added to Cart",
+        description: `${quantity}x Acrylic Cleaner added to your cart.`,
+      });
+    } catch (error) {
+      console.error("Error adding acrylic cleaner to cart:", error);
+      toast({
+        title: "Error",
+        description: "Failed to add to cart. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsCheckingOut(false);
+    }
   };
 
   const productSchema = {

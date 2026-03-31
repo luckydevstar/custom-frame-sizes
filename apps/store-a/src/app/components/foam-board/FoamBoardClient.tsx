@@ -5,6 +5,9 @@ import {
   calculateDedicatedPagePrice,
   COMPONENT_PRICING,
   getSharedAssetUrl,
+  addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
 } from "@framecraft/core";
 import {
   Button,
@@ -111,7 +114,7 @@ export function FoamBoardClient() {
     return () => observer.disconnect();
   }, []);
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (!isValidDimensions || isTooLarge) {
       toast({
         title: "Invalid Configuration",
@@ -121,13 +124,38 @@ export function FoamBoardClient() {
       return;
     }
     setIsCheckingOut(true);
-    setTimeout(() => {
+    try {
+      const foamBoardConfig = {
+        serviceType: "frame-only" as const,
+        artworkWidth: width,
+        artworkHeight: height,
+        frameStyleId: "foam-board",
+        matType: "none" as const,
+        matBorderWidth: 0,
+        matRevealWidth: 0,
+        matColorId: "",
+        glassTypeId: "standard",
+        orderSource: `foam-board-${boardType}`,
+      };
+      
+      const cartInput = createCartItemFromFrameConfig(foamBoardConfig, total, packSize);
+      useCartStore.getState().addItem(cartInput);
+      await addToCartOnly(foamBoardConfig, total, packSize);
+      
       toast({
         title: "Added to Cart",
         description: `${packSize} foam board${packSize > 1 ? "s" : ""} added to cart.`,
       });
+    } catch (error) {
+      console.error("Error adding foam board to cart:", error);
+      toast({
+        title: "Error",
+        description: "Failed to add to cart. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
       setIsCheckingOut(false);
-    }, 800);
+    }
   };
 
   const getBoardTypeLabel = (type: FoamBoardType) => {

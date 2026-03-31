@@ -6,7 +6,7 @@ import {
   getGlassTypes,
   getFrameStyleById,
   calculatePricing,
-  addToCart,
+  addToCartOnly,
   useIntelligentPreviewSizing,
   useIsMobile,
   useMobileViewToggle,
@@ -370,7 +370,7 @@ export function SignatureFrameDesigner({
       copyrightAgreed: serviceType === "print-and-frame" ? copyrightAgreed : undefined,
     };
     try {
-      await addToCart(config, finalTotalPrice * quantity, quantity);
+      await addToCartOnly(config, finalTotalPrice * quantity, quantity);
       toast({
         title: "Added to Cart!",
         description: `${quantity} × Custom Signature Frame${quantity > 1 ? "s" : ""}`,

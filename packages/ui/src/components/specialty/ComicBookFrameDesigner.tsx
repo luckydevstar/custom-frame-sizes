@@ -14,6 +14,9 @@ import {
   COMIC_LAYOUTS,
   getComicLayout,
   calculateComicFrameSize,
+  addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
   type ComicLayoutType,
 } from "@framecraft/core";
 import {
@@ -54,7 +57,7 @@ import { ComicPreviewCanvas, useComicPreviewState } from "./ComicPreviewCanvas";
 import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
 
-import type { FrameStyle, GlassType, AlternateImage, BrassNameplateConfig } from "@framecraft/types";
+import type { FrameStyle, GlassType, AlternateImage, BrassNameplateConfig, FrameConfiguration } from "@framecraft/types";
 
 
 
@@ -692,13 +695,60 @@ export function ComicBookFrameDesigner({
 
   // Add to cart handler
   const handleAddToCart = useCallback(async () => {
-    const currentLayout = getComicLayout(selectedLayout);
+    try {
+      const currentLayout = getComicLayout(selectedLayout);
+      if (!selectedLayout || !currentLayout) {
+        toast({
+          title: "Please select a layout",
+          description: "Choose a layout to add to cart",
+          variant: "destructive",
+        });
+        return;
+      }
 
-    toast({
-      title: "Added to cart!",
-      description: `${quantity}× Comic Frame - ${currentLayout?.displayName || "Custom"} (${manufacturingFrameDimensions.width.toFixed(1)}" × ${manufacturingFrameDimensions.height.toFixed(1)}")`,
-    });
-  }, [quantity, selectedLayout, manufacturingFrameDimensions, toast]);
+      const frameConfig: FrameConfiguration = {
+        serviceType: "frame-only",
+        artworkWidth: manufacturingFrameDimensions.width,
+        artworkHeight: manufacturingFrameDimensions.height,
+        frameStyleId: selectedFrame.id,
+        matType: matType === "none" ? "none" : matType,
+        matBorderWidth: matType === "none" ? 0 : MAT_BORDER,
+        matRevealWidth: matType === "double" ? MAT_REVEAL : 0,
+        matColorId: matType === "none" ? "" : selectedMat.id,
+        matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
+        glassTypeId: selectedGlass.id,
+        orderSource: `comic-frame-${selectedLayout}`,
+        brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
+      };
+
+      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
+      useCartStore.getState().addItem(cartInput);
+      await addToCartOnly(frameConfig, pricing.total, quantity);
+      toast({
+        title: "Added to Cart!",
+        description: `${quantity}× Comic Frame - ${currentLayout.displayName} (${manufacturingFrameDimensions.width.toFixed(1)}" × ${manufacturingFrameDimensions.height.toFixed(1)}")`,
+      });
+    } catch (error) {
+      console.error("Add to cart error:", error);
+      toast({
+        title: "Add to Cart Failed",
+        description: error instanceof Error ? error.message : "Failed to add item to cart",
+        variant: "destructive",
+      });
+    }
+  }, [
+    selectedLayout,
+    selectedFrame.id,
+    matType,
+    selectedMat.id,
+    selectedMatInner.id,
+    selectedGlass.id,
+    brassNameplateConfig,
+    quantity,
+    pricing.total,
+    manufacturingFrameDimensions,
+    toast,
+  ]);
 
   // Scroll detection for desktop price box expansion - expands when scrolling down page
   useEffect(() => {

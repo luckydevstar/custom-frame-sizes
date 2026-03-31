@@ -14,9 +14,13 @@ import {
   NEWSPAPER_PRESETS,
   getNewspaperLayoutsForSize,
   getStoreBaseAssetUrl,
+  useIsMobile,
+  useMobileViewToggle,
+  addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
   type NewspaperLayoutType,
 } from "@framecraft/core";
-import { useIsMobile, useMobileViewToggle } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import { Maximize, Eye, Settings, Info } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -46,7 +50,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
 
 import type { PriceLineItem } from "../ui/PriceBox";
-import type { FrameStyle, GlassType , BrassNameplateConfig } from "@framecraft/types";
+import type { FrameStyle, GlassType, BrassNameplateConfig, FrameConfiguration } from "@framecraft/types";
 
 
 const frameStyles = getFramesByCategory("shadowbox");
@@ -433,12 +437,40 @@ export function NewspaperFrameDesigner({
     if (img) setLifestylePreview({ url: getSharedAssetUrl(img.path), alt: img.alt });
   }, [selectedFrame.id]);
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (!isValidDimensions || isTooLarge) {
       toast({ title: "Invalid dimensions", variant: "destructive" });
       return;
     }
-    toast({ title: "Added to Cart", description: `${quantity}× Newspaper Frame added.` });
+    
+    try {
+      const frameConfig: FrameConfiguration = {
+        serviceType: "frame-only",
+        artworkWidth: frameWidth,
+        artworkHeight: baseFrameHeight,
+        frameStyleId: selectedFrame.id,
+        matType,
+        matBorderWidth: matType === "none" ? 0 : parseFloat(matBorderWidth),
+        matRevealWidth: matType === "double" ? parseFloat(matRevealWidth) : 0,
+        matColorId: matType === "none" ? "" : selectedMat.id,
+        matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
+        glassTypeId: selectedGlass?.id || "standard",
+        orderSource: `newspaper-frame`,
+        brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
+      };
+
+      const cartInput = createCartItemFromFrameConfig(frameConfig, totalPerUnit, quantity);
+      useCartStore.getState().addItem(cartInput);
+      await addToCartOnly(frameConfig, totalPerUnit, quantity);
+      toast({ title: "Added to Cart", description: `${quantity}× Newspaper Frame added.` });
+    } catch (error) {
+      console.error("Add to cart failed:", error);
+      toast({ 
+        title: "Error", 
+        description: error instanceof Error ? error.message : "Failed to add to cart",
+        variant: "destructive"
+      });
+    }
   };
 
   const renderPreview = () => {

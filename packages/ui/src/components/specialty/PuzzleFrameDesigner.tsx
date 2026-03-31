@@ -21,6 +21,9 @@ import {
   validatePuzzleDimensions,
   getRandomPuzzlePhoto as getDefaultRandomPuzzlePhoto,
   getRandomPuzzleImage as getDefaultRandomPuzzleImage,
+  addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
   type PuzzleSize,
 } from "@framecraft/core";
 import {
@@ -763,7 +766,24 @@ export function PuzzleFrameDesigner({
 
     setIsCheckingOut(true);
     try {
-      // TODO: Implement Shopify cart integration
+      const frameConfig: FrameConfiguration = {
+        serviceType: "frame-only",
+        artworkWidth: selectedPuzzleSize.width,
+        artworkHeight: selectedPuzzleSize.height,
+        frameStyleId: selectedFrame.id,
+        matType: matType === "none" ? "none" : matType,
+        matBorderWidth: matType === "none" ? 0 : parseFloat(matBorderWidth),
+        matRevealWidth: matType === "double" ? parseFloat(matRevealWidth) : 0,
+        matColorId: selectedMatColor.id,
+        matInnerColorId: matType === "double" ? selectedBottomMatColor.id : undefined,
+        glassTypeId: glassType || "standard",
+        orderSource: `puzzle-frame-${selectedPuzzleSize.id}`,
+        brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
+      };
+
+      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
+      useCartStore.getState().addItem(cartInput);
+      await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({
         title: "Added to cart",
         description: `${quantity}× Puzzle Frame added to cart`,
@@ -772,7 +792,7 @@ export function PuzzleFrameDesigner({
       console.error("Error adding to cart:", error);
       toast({
         title: "Error",
-        description: "Failed to add to cart. Please try again.",
+        description: error instanceof Error ? error.message : "Failed to add to cart. Please try again.",
         variant: "destructive",
       });
     } finally {

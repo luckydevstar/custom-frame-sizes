@@ -1,6 +1,6 @@
 "use client";
 
-import { getSharedAssetUrl } from "@framecraft/core";
+import { getSharedAssetUrl, addToCartOnly, createCartItemFromFrameConfig, useCartStore } from "@framecraft/core";
 import {
   Button,
   Card,
@@ -54,11 +54,37 @@ export function CleatHangersClient() {
     PACK_SIZES.find((p) => p.size.toString() === selectedPackSize) ?? PACK_SIZES[0];
   if (!currentPack) return null;
 
-  const handleAddToCart = () => {
-    toast({
-      title: "Added to Cart",
-      description: `12" Heavy-Duty Metal Cleat Bar Hanging System${currentPack.size > 1 ? ` - ${currentPack.label}` : ""}`,
-    });
+  const handleAddToCart = async () => {
+    try {
+      const cleatConfig = {
+        serviceType: "frame-only" as const,
+        artworkWidth: 12,
+        artworkHeight: 12,
+        frameStyleId: "cleat-hanger",
+        matType: "none" as const,
+        matBorderWidth: 0,
+        matRevealWidth: 0,
+        matColorId: "",
+        glassTypeId: "standard",
+        orderSource: `cleat-hangers-${currentPack.size}`,
+      };
+      
+      const cartInput = createCartItemFromFrameConfig(cleatConfig, currentPack.price, currentPack.size);
+      useCartStore.getState().addItem(cartInput);
+      await addToCartOnly(cleatConfig, currentPack.price, currentPack.size);
+      
+      toast({
+        title: "Added to Cart",
+        description: `12" Heavy-Duty Metal Cleat Bar Hanging System${currentPack.size > 1 ? ` - ${currentPack.label}` : ""}`,
+      });
+    } catch (error) {
+      console.error("Error adding cleat hangers to cart:", error);
+      toast({
+        title: "Error",
+        description: "Failed to add to cart. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   // Image: shared assets at components/cleat-hangers/cleat-hangers.png (or add to assets_to_use/shared_assets)

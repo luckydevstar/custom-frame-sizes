@@ -1,6 +1,6 @@
 "use client";
 
-import { getSharedAssetUrl } from "@framecraft/core";
+import { getSharedAssetUrl, addToCartOnly, createCartItemFromFrameConfig, useCartStore } from "@framecraft/core";
 import {
   Button,
   Card,
@@ -58,16 +58,43 @@ export function SecurityHardwareKitClient() {
 
   const price = selectedProduct === "kit" ? currentPack.price : 4.95;
 
-  const handleAddToCart = () => {
-    const productName =
-      selectedProduct === "kit" ? "Professional Security Hardware Kit" : "Security Wrench Only";
-    toast({
-      title: "Added to Cart",
-      description:
-        selectedProduct === "kit" && currentPack.size > 1
-          ? `${productName} - ${currentPack.label}`
-          : productName,
-    });
+  const handleAddToCart = async () => {
+    try {
+      const securityConfig = {
+        serviceType: "frame-only" as const,
+        artworkWidth: 8,
+        artworkHeight: 8,
+        frameStyleId: "security-hardware",
+        matType: "none" as const,
+        matBorderWidth: 0,
+        matRevealWidth: 0,
+        matColorId: "",
+        glassTypeId: "standard",
+        orderSource: `security-${selectedProduct}-${currentPack.size}`,
+      };
+      
+      const productName =
+        selectedProduct === "kit" ? "Professional Security Hardware Kit" : "Security Wrench Only";
+      
+      const cartInput = createCartItemFromFrameConfig(securityConfig, price, currentPack.size);
+      useCartStore.getState().addItem(cartInput);
+      await addToCartOnly(securityConfig, price, currentPack.size);
+      
+      toast({
+        title: "Added to Cart",
+        description:
+          selectedProduct === "kit" && currentPack.size > 1
+            ? `${productName} - ${currentPack.label}`
+            : productName,
+      });
+    } catch (error) {
+      console.error("Error adding security hardware to cart:", error);
+      toast({
+        title: "Error",
+        description: "Failed to add to cart. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   const componentsFlatLay = IMG("all-components-flat-lay.jpg");

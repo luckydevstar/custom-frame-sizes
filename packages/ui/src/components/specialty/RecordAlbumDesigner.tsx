@@ -13,9 +13,8 @@ import {
   getFramesByCategory,
   getGlassTypes,
   getFrameStyleById,
+  addToCartOnly,
   calculatePricing,
-  addToCart,
-  isShopifyEnabled,
   getRecordAlbumLayout,
   getRecordAlbumLayoutWithMolding,
   getLayoutPricingDimensions,
@@ -25,6 +24,8 @@ import {
   getRecordAlbumLifestyleImageUrl,
   getSharedAssetUrl,
   getStoreBaseAssetUrl,
+  createCartItemFromFrameConfig,
+  useCartStore,
   type RecordAlbumLayoutType,
   type CDLayoutType,
 } from "@framecraft/core";
@@ -925,24 +926,19 @@ export function RecordAlbumDesigner({
         matType,
         matBorderWidth: matType === "none" ? 0 : layoutDims.matBorderWidth,
         matRevealWidth: matType === "double" ? 0.25 : 0,
-        matColorId: matType === "none" ? "" : selectedMat.id,
+        matColorId: selectedMat.id,
         matInnerColorId: matType === "double" ? selectedBottomMat.id : undefined,
         glassTypeId: selectedGlass.id,
         orderSource,
         brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
       };
-      await addToCart(frameConfig, pricing.total, quantity);
-      if (!isShopifyEnabled()) {
-        toast({
-          title: "Mock Checkout Created",
-          description: "Shopify is not configured. Check console for payload details.",
-        });
-      } else {
-        toast({
-          title: "Redirecting to Checkout",
-          description: "Taking you to secure checkout...",
-        });
-      }
+      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
+      useCartStore.getState().addItem(cartInput);
+      await addToCartOnly(frameConfig, pricing.total, quantity);
+      toast({
+        title: "Added to Cart!",
+        description: `1 ${layoutType === "cd" ? "CD frame" : "vinyl record frame"} added to your cart.`,
+      });
     } catch (error) {
       console.error("Checkout error:", error);
       toast({

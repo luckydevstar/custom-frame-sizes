@@ -2,7 +2,6 @@ import { getFramesByCategory } from "@framecraft/core";
 import { Hero, ValueProps, SeoTextBlock, FrameStylesShowcase } from "@framecraft/ui";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
-
 import { brandConfig } from "../brand.config";
 
 // Dynamic imports for below-fold components to improve LCP

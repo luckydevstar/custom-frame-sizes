@@ -6,12 +6,21 @@ import {
   getGlassTypes,
   getSharedAssetUrl,
   getStoreBaseAssetUrl,
- useIsMobile, useMobileViewToggle , getMagazineCoversForConfig , useMagazinePricing , getMagazinesForTooltip } from "@framecraft/core";
-import { MAGAZINE_SIZES, getMagazineSizeById, type MagazineSize ,
+  useIsMobile,
+  useMobileViewToggle,
+  getMagazineCoversForConfig,
+  useMagazinePricing,
+  getMagazinesForTooltip,
+  MAGAZINE_SIZES,
+  getMagazineSizeById,
   MAGAZINE_LAYOUTS,
   getMagazineLayout,
   calculateMagazineFrameSize,
   getAvailableLayoutsForSize,
+  addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
+  type MagazineSize,
   type MagazineLayoutType,
 } from "@framecraft/core";
 import { Copy, Maximize, ShoppingCart, Eye, Settings, LayoutGrid, Info, Ruler } from "lucide-react";
@@ -41,7 +50,7 @@ import { BottomWeightedMatting } from "./shared/BottomWeightedMatting";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
 
 import type { PriceLineItem } from "../ui/PriceBox";
-import type { FrameStyle , BrassNameplateConfig } from "@framecraft/types";
+import type { FrameStyle, BrassNameplateConfig, FrameConfiguration } from "@framecraft/types";
 
 
 
@@ -585,12 +594,60 @@ export function MagazineFrameDesigner({
 
   // Add to cart handler
   const handleAddToCart = useCallback(async () => {
-    const currentLayout = getMagazineLayout(selectedLayout);
-    toast({
-      title: "Added to cart!",
-      description: `${quantity}× Magazine Frame - ${currentLayout?.displayName || "Custom"}`,
-    });
-  }, [quantity, selectedLayout, toast]);
+    try {
+      const currentLayout = getMagazineLayout(selectedLayout);
+      if (!selectedLayout || !currentLayout) {
+        toast({
+          title: "Please select a layout",
+          description: "Choose a layout to add to cart",
+          variant: "destructive",
+        });
+        return;
+      }
+
+      const frameConfig: FrameConfiguration = {
+        serviceType: "frame-only",
+        artworkWidth: manufacturingFrameDimensions.width,
+        artworkHeight: manufacturingFrameDimensions.height,
+        frameStyleId: selectedFrame.id,
+        matType: matType === "none" ? "none" : matType,
+        matBorderWidth: matType === "none" ? 0 : MAT_BORDER,
+        matRevealWidth: matType === "double" ? MAT_REVEAL : 0,
+        matColorId: matType === "none" ? "" : selectedMat.id,
+        matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
+        glassTypeId: selectedGlass?.id || "standard",
+        orderSource: `magazine-frame-${selectedLayout}`,
+        brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
+      };
+
+      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
+      useCartStore.getState().addItem(cartInput);
+      await addToCartOnly(frameConfig, pricing.total, quantity);
+      toast({
+        title: "Added to Cart!",
+        description: `${quantity}× Magazine Frame - ${currentLayout.displayName || "Custom"}`,
+      });
+    } catch (error) {
+      console.error("Add to cart error:", error);
+      toast({
+        title: "Add to Cart Failed",
+        description: error instanceof Error ? error.message : "Failed to add item to cart",
+        variant: "destructive",
+      });
+    }
+  }, [
+    selectedLayout,
+    selectedFrame.id,
+    matType,
+    selectedMat.id,
+    selectedMatInner.id,
+    selectedGlass?.id,
+    brassNameplateConfig,
+    quantity,
+    pricing.total,
+    manufacturingFrameDimensions,
+    toast,
+  ]);
 
   // Scroll detection for desktop price box expansion - expands when scrolling down page
   useEffect(() => {

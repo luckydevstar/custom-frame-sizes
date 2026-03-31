@@ -4,8 +4,7 @@ import {
   getFramesByCategory,
   calculatePricing,
   apiRequest,
-  addToCart,
-  isShopifyEnabled,
+  addToCartOnly,
   getRandomStockImage,
   calculateCanvasPrintDimensions,
   generateCanvasPrintFile,
@@ -17,6 +16,8 @@ import {
   useIsMobile,
   useMobileViewToggle,
   useIntersectionVisible,
+  createCartItemFromFrameConfig,
+  useCartStore,
 } from "@framecraft/core";
 import {
   Upload,
@@ -59,7 +60,7 @@ import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
 // - TermsOfServiceModal component
 // - PhotoUploadOptions component
 // - ARViewer component
-// - shopify service (addToCart, isShopifyEnabled)
+// - shopify service (addToCartOnly, isShopifyEnabled)
 // - useToast hook
 // - stockImages utilities (getRandomStockImage)
 // - TrustBadges, TrustBox components
@@ -692,21 +693,13 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
       }
 
       // Call Shopify checkout service
-      await addToCart(frameConfig, finalTotalPrice, quantity);
-
-      if (!isShopifyEnabled()) {
-        // Mock checkout - show success message
-        toast({
-          title: "Mock Checkout Created",
-          description: "Shopify is not configured. Check console for payload details.",
-        });
-      } else {
-        // Real checkout - user will be redirected to Shopify
-        toast({
-          title: "Redirecting to Checkout",
-          description: "Taking you to secure checkout...",
-        });
-      }
+      const cartInput = createCartItemFromFrameConfig(frameConfig, finalTotalPrice, quantity);
+      useCartStore.getState().addItem(cartInput);
+      await addToCartOnly(frameConfig, finalTotalPrice, quantity);
+      toast({
+        title: "Added to Cart!",
+        description: "Canvas print added to your cart.",
+      });
     } catch (error) {
       console.error("Checkout error:", error);
       toast({
@@ -741,12 +734,13 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
       artworkWidth: artWidth,
       artworkHeight: artHeight,
       frameStyleId: selectedFrame.id,
-      matType: "none", // Always no mat for canvas float frames
+      matType: "none" as const, // Always no mat for canvas float frames
       matBorderWidth: 0,
       matRevealWidth: 0,
-      matColorId: "", // Empty string for no mat
+      matColorId: "", // No mat color for canvas (optional field)
       matInnerColorId: undefined,
       glassTypeId: "standard", // Default to standard for pricing
+      orderSource: `canvas-${serviceType}`,
       imageUrl: selectedImage || undefined,
       copyrightAgreed,
     }),
