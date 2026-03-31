@@ -6,7 +6,7 @@ import {
   getGlassTypes,
   getFrameStyleById,
   calculatePricing,
-  addToCart,
+  addToCartOnly,
   TICKET_STUB_LAYOUTS,
   useIntelligentPreviewSizing,
   useIsMobile,
@@ -328,7 +328,7 @@ export function TicketStubFrameDesigner({
       bottomWeighted,
     };
     try {
-      await addToCart(config, pricing.total * quantity, quantity);
+      await addToCartOnly(config, pricing.total * quantity, quantity);
       toast({
         title: "Added to cart!",
         description: `${quantity}× Ticket Frame – ${currentLayout.name}`,

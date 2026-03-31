@@ -6,7 +6,7 @@ import {
   getGlassTypes,
   getFrameStyleById,
   calculatePricing,
-  addToCart,
+  addToCartOnly,
   computePreviewLayout,
   useIntelligentPreviewSizing,
   useIsMobile,
@@ -405,7 +405,7 @@ export function SonogramFrameDesigner({
       bottomWeighted,
     };
     try {
-      await addToCart(config, finalTotalPrice * quantity, quantity);
+      await addToCartOnly(config, finalTotalPrice * quantity, quantity);
       toast({
         title: "Added to Cart!",
         description: `${quantity} × Custom Sonogram Frame${quantity > 1 ? "s" : ""}`,

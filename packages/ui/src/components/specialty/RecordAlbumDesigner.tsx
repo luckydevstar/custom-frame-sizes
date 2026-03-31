@@ -14,7 +14,7 @@ import {
   getGlassTypes,
   getFrameStyleById,
   calculatePricing,
-  addToCart,
+  addToCartOnly,
   isShopifyEnabled,
   getRecordAlbumLayout,
   getRecordAlbumLayoutWithMolding,
@@ -931,7 +931,7 @@ export function RecordAlbumDesigner({
         orderSource,
         brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
       };
-      await addToCart(frameConfig, pricing.total, quantity);
+      await addToCartOnly(frameConfig, pricing.total, quantity);
       if (!isShopifyEnabled()) {
         toast({
           title: "Mock Checkout Created",
