@@ -45,6 +45,7 @@ const PERFECT_FOR_ITEMS = [
 export function CleatHangersClient() {
   const { toast } = useToast();
   const [selectedPackSize, setSelectedPackSize] = useState("1");
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -55,6 +56,7 @@ export function CleatHangersClient() {
   if (!currentPack) return null;
 
   const handleAddToCart = async () => {
+    setIsCheckingOut(true);
     try {
       const cleatConfig = {
         serviceType: "frame-only" as const,
@@ -84,6 +86,8 @@ export function CleatHangersClient() {
         description: "Failed to add to cart. Please try again.",
         variant: "destructive",
       });
+    } finally {
+      setIsCheckingOut(false);
     }
   };
 
@@ -142,10 +146,11 @@ export function CleatHangersClient() {
               className="w-full"
               size="lg"
               onClick={handleAddToCart}
+              disabled={isCheckingOut}
               data-testid="button-add-to-cart"
             >
               <ShoppingCart className="w-5 h-5 mr-2" />
-              Add to Cart
+              {isCheckingOut ? "Adding..." : "Add to Cart"}
             </Button>
           </Card>
 
@@ -223,10 +228,11 @@ export function CleatHangersClient() {
                   className="w-full"
                   size="lg"
                   onClick={handleAddToCart}
+                  disabled={isCheckingOut}
                   data-testid="button-add-to-cart"
                 >
                   <ShoppingCart className="w-5 h-5 mr-2" />
-                  Add to Cart
+                  {isCheckingOut ? "Adding..." : "Add to Cart"}
                 </Button>
               </Card>
             </div>

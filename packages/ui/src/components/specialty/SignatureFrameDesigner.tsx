@@ -157,6 +157,7 @@ export function SignatureFrameDesigner({
   const [brassNameplateConfig, setBrassNameplateConfig] =
     useState<BrassNameplateConfig>(defaultNameplateConfig);
   const [quantity, setQuantity] = useState(1);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [serviceType, setServiceType] = useState<"frame-only" | "print-and-frame">(
     () => (urlParams.get("serviceType") as "frame-only" | "print-and-frame") || "frame-only"
   );
@@ -353,6 +354,7 @@ export function SignatureFrameDesigner({
       }
       return;
     }
+    setIsCheckingOut(true);
     const config: FrameConfiguration = {
       serviceType: serviceType === "print-and-frame" ? "print-and-frame" : "frame-only",
       frameStyleId: selectedFrame.id,
@@ -381,6 +383,8 @@ export function SignatureFrameDesigner({
         description: err instanceof Error ? err.message : "Could not add to cart",
         variant: "destructive",
       });
+    } finally {
+      setIsCheckingOut(false);
     }
   }, [
     canAddToCart,
@@ -869,6 +873,7 @@ export function SignatureFrameDesigner({
               onAddToCart={handleAddToCart}
               onCopyLink={handleCopyLink}
               disabled={!canAddToCart}
+              isProcessing={isCheckingOut}
               priceItems={priceItems}
               testIdPrefix="signature-"
             />
