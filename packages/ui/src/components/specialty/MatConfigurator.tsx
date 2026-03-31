@@ -826,15 +826,15 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
       // Create a mat configuration object compatible with frame configuration
       const matFrameConfig = {
         serviceType: "frame-only" as const,
-        artworkWidth: matConfig.topMat.overallWIn,
-        artworkHeight: matConfig.topMat.overallHIn,
+        artworkWidth: matConfig.overallWIn,
+        artworkHeight: matConfig.overallHIn,
         frameStyleId: matConfig.selectedFrameId || "standard-frame",
         matType: matConfig.singleOrDouble || ("single" as const),
-        matBorderWidth: matConfig.topMat.borderWIn,
-        matRevealWidth: matConfig.singleOrDouble === "double" ? (matConfig.matRevealWIn || 0.125) : 0,
-        matColorId: matConfig.topMat.colorLineNumber.toString(),
-        matInnerColorId: matConfig.bottomMat ? matConfig.bottomMat.colorLineNumber.toString() : undefined,
-        glassTypeId: "standard",
+        matBorderWidth: matConfig.topMat.openings[0]?.xIn || 0.5,
+        matRevealWidth: matConfig.singleOrDouble === "double" ? (matConfig.matRevealWidth || 0.125) : 0,
+        matColorId: matConfig.topMat.color || "white",
+        matInnerColorId: matConfig.bottomMat ? matConfig.bottomMat.color : undefined,
+        glassTypeId: matConfig.selectedGlassId || "standard",
         orderSource: "mat-designer",
       };
       
