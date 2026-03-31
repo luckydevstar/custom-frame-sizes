@@ -965,14 +965,6 @@ export function WeddingInvitationFrameDesigner({
                   disabled={!hasValidCustomInvite || !hasValidCustomSecondary}
                 />
               </div>
-              <Button
-                className="w-full"
-                size="lg"
-                onClick={handleAddToCart}
-                disabled={!hasValidCustomInvite || !hasValidCustomSecondary || isCheckingOut}
-              >
-                {isCheckingOut ? "Processing..." : "Add to Cart"}
-              </Button>
             </Card>
           </div>
         </div>
