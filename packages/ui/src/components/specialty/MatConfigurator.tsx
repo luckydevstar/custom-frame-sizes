@@ -6,7 +6,7 @@
  */
 
 import { getMatsInDisplayOrder, isMatAvailableForSize, type Mat } from "@framecraft/config";
-import { useIsMobile, getGlassTypes, getGlassTypeById, getFrameStyleById } from "@framecraft/core";
+import { useIsMobile, getGlassTypes, getGlassTypeById, getFrameStyleById, addToCartOnly } from "@framecraft/core";
 import { Square, Ruler, Eye, Settings } from "lucide-react";
 import { useState, useEffect, useMemo, useRef } from "react";
 
@@ -821,6 +821,30 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
     );
   };
 
+  const handleAddToCart = async (matConfig: typeof config, totalDollars: number) => {
+    try {
+      // Create a mat configuration object compatible with frame configuration
+      const matFrameConfig = {
+        serviceType: "frame-only" as const,
+        artworkWidth: matConfig.topMat.overallWIn,
+        artworkHeight: matConfig.topMat.overallHIn,
+        frameStyleId: matConfig.selectedFrameId || "standard-frame",
+        matType: matConfig.singleOrDouble || ("single" as const),
+        matBorderWidth: matConfig.topMat.borderWIn,
+        matRevealWidth: matConfig.singleOrDouble === "double" ? (matConfig.matRevealWIn || 0.125) : 0,
+        matColorId: matConfig.topMat.colorLineNumber.toString(),
+        matInnerColorId: matConfig.bottomMat ? matConfig.bottomMat.colorLineNumber.toString() : undefined,
+        glassTypeId: "standard",
+        orderSource: "mat-designer",
+      };
+      
+      await addToCartOnly(matFrameConfig, totalDollars, matConfig.quantity);
+    } catch (error) {
+      console.error("Error adding mat to cart:", error);
+      throw error;
+    }
+  };
+
   return (
     <>
       <WelcomeModal />
@@ -871,7 +895,7 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
       </div>
 
       {/* Mobile: sticky bottom bar (Total, Qty, Copy link, Add to Cart) */}
-      <StickyActionBar isValid />
+      <StickyActionBar isValid onAddToCart={handleAddToCart} />
     </>
   );
 }

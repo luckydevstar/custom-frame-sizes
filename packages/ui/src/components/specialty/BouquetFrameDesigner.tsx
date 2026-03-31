@@ -45,7 +45,7 @@ import {
   parseFraction,
   validateArtworkSize,
   computePreviewLayout,
-  addToCart,
+  addToCartOnly,
   isShopifyEnabled,
   toShadowboxConfig,
   fromShadowboxConfig,
@@ -489,7 +489,7 @@ export function BouquetFrameDesigner({
     const finalTotal = totalPrice + hardwarePrice + nameplatePrice;
 
     try {
-      await addToCart(frameConfig, finalTotal, quantity);
+      await addToCartOnly(frameConfig, finalTotal, quantity);
       if (!isShopifyEnabled()) {
         toast({
           title: "Mock Checkout Created",

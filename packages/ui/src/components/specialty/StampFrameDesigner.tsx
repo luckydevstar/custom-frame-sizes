@@ -7,7 +7,7 @@ import {
   calculatePricing,
   parseFraction,
   computePreviewLayout,
-  addToCart,
+  addToCartOnly,
   isShopifyEnabled,
   useIsMobile,
   useMobileViewToggle,
@@ -427,7 +427,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
   const handleAddToCart = async () => {
     const finalTotal = pricing.total * quantity;
     try {
-      await addToCart(frameConfig, finalTotal, quantity);
+      await addToCartOnly(frameConfig, finalTotal, quantity);
       if (!isShopifyEnabled()) {
         toast({
           title: "Mock Checkout Created",

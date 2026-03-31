@@ -6,7 +6,7 @@ import {
   getGlassTypes,
   getFrameStyleById,
   calculatePricing,
-  addToCart,
+  addToCartOnly,
   parseFraction,
   useIsMobile,
   useMobileViewToggle,
@@ -492,7 +492,7 @@ export function WeddingInvitationFrameDesigner({
       copyrightAgreed: serviceType === "print-and-frame" ? copyrightAgreed : undefined,
     };
     try {
-      await addToCart(config, finalTotalPrice * quantity, quantity);
+      await addToCartOnly(config, finalTotalPrice * quantity, quantity);
       toast({
         title: "Added to Cart!",
         description: `${quantity} × Wedding Invitation Frame${quantity > 1 ? "s" : ""}`,

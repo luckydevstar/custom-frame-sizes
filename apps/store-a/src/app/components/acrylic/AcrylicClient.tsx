@@ -5,6 +5,7 @@ import {
   calculateDedicatedPagePrice,
   COMPONENT_PRICING,
   getStoreAssetUrl,
+  addToCartOnly,
 } from "@framecraft/core";
 import {
   Button,
@@ -126,7 +127,7 @@ export function AcrylicClient() {
     return () => observer.disconnect();
   }, []);
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
     if (!isValidDimensions || isTooLarge) {
       toast({
         title: "Invalid Configuration",
@@ -136,13 +137,36 @@ export function AcrylicClient() {
       return;
     }
     setIsCheckingOut(true);
-    setTimeout(() => {
+    try {
+      const acrylicConfig = {
+        serviceType: "frame-only" as const,
+        artworkWidth: width,
+        artworkHeight: height,
+        frameStyleId: "acrylic-sheet",
+        matType: "none" as const,
+        matBorderWidth: 0,
+        matRevealWidth: 0,
+        matColorId: "",
+        glassTypeId: acrylicType === "non-glare" ? "non-glare" : "standard",
+        orderSource: `acrylic-${acrylicType}`,
+      };
+      
+      await addToCartOnly(acrylicConfig, total, packSize);
+      
       toast({
         title: "Added to Cart",
         description: `${packSize} acrylic sheet${packSize > 1 ? "s" : ""} added to cart.`,
       });
+    } catch (error) {
+      console.error("Error adding acrylic to cart:", error);
+      toast({
+        title: "Error",
+        description: "Failed to add to cart. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
       setIsCheckingOut(false);
-    }, 800);
+    }
   };
 
   const pricing = COMPONENT_PRICING as Record<string, { minimumPrice?: number }>;

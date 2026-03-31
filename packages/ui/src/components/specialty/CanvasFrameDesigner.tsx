@@ -4,7 +4,7 @@ import {
   getFramesByCategory,
   calculatePricing,
   apiRequest,
-  addToCart,
+  addToCartOnly,
   isShopifyEnabled,
   getRandomStockImage,
   calculateCanvasPrintDimensions,
@@ -59,7 +59,7 @@ import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
 // - TermsOfServiceModal component
 // - PhotoUploadOptions component
 // - ARViewer component
-// - shopify service (addToCart, isShopifyEnabled)
+// - shopify service (addToCartOnly, isShopifyEnabled)
 // - useToast hook
 // - stockImages utilities (getRandomStockImage)
 // - TrustBadges, TrustBox components
@@ -692,7 +692,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
       }
 
       // Call Shopify checkout service
-      await addToCart(frameConfig, finalTotalPrice, quantity);
+      await addToCartOnly(frameConfig, finalTotalPrice, quantity);
 
       if (!isShopifyEnabled()) {
         // Mock checkout - show success message
