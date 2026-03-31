@@ -14,9 +14,13 @@ import {
   NEWSPAPER_PRESETS,
   getNewspaperLayoutsForSize,
   getStoreBaseAssetUrl,
+  useIsMobile,
+  useMobileViewToggle,
+  addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
   type NewspaperLayoutType,
 } from "@framecraft/core";
-import { useIsMobile, useMobileViewToggle, addToCartOnly } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import { Maximize, Eye, Settings, Info } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -455,6 +459,8 @@ export function NewspaperFrameDesigner({
         brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
       };
 
+      const cartInput = createCartItemFromFrameConfig(frameConfig, totalPerUnit, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(frameConfig, totalPerUnit, quantity);
       toast({ title: "Added to Cart", description: `${quantity}× Newspaper Frame added.` });
     } catch (error) {

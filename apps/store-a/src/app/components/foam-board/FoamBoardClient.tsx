@@ -6,6 +6,8 @@ import {
   COMPONENT_PRICING,
   getSharedAssetUrl,
   addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
 } from "@framecraft/core";
 import {
   Button,
@@ -136,6 +138,8 @@ export function FoamBoardClient() {
         orderSource: `foam-board-${boardType}`,
       };
       
+      const cartInput = createCartItemFromFrameConfig(foamBoardConfig, total, packSize);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(foamBoardConfig, total, packSize);
       
       toast({

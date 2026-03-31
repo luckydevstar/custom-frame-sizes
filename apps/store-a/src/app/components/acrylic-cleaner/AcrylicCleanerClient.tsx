@@ -3,7 +3,7 @@
 import { Button, Card, Label, QuantitySelector, TrustBadges } from "@framecraft/ui";
 import { useToast } from "@framecraft/ui/hooks/use-toast";
 import { ShoppingCart, Check, Sparkles, Shield, Droplets, Package } from "lucide-react";
-import { addToCartOnly } from "@framecraft/core";
+import { addToCartOnly, createCartItemFromFrameConfig, useCartStore } from "@framecraft/core";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 
@@ -45,6 +45,8 @@ export function AcrylicCleanerClient() {
         orderSource: "acrylic-cleaner",
       };
 
+      const cartInput = createCartItemFromFrameConfig(cleanerConfig, total, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(cleanerConfig, total, quantity);
 
       toast({

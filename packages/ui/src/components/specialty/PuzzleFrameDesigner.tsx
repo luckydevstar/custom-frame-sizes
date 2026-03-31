@@ -22,6 +22,8 @@ import {
   getRandomPuzzlePhoto as getDefaultRandomPuzzlePhoto,
   getRandomPuzzleImage as getDefaultRandomPuzzleImage,
   addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
   type PuzzleSize,
 } from "@framecraft/core";
 import {
@@ -779,6 +781,8 @@ export function PuzzleFrameDesigner({
         brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
       };
 
+      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({
         title: "Added to cart",

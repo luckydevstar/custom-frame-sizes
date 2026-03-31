@@ -6,19 +6,22 @@ import {
   getGlassTypes,
   getSharedAssetUrl,
   getStoreBaseAssetUrl,
- useIsMobile, useMobileViewToggle , calculatePricing } from "@framecraft/core";
-import {
+  useIsMobile,
+  useMobileViewToggle,
+  calculatePricing,
   getCardFormatById,
   CARD_LAYOUTS,
   getCardLayout,
   calculateCardFrameSize,
-  type CardLayoutType,
-
   getShuffledCardsForFormat,
   getRandomCategory,
   getAllCategories,
-  type CardCategory} from "@framecraft/core";
-import { addToCartOnly } from "@framecraft/core";
+  addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
+  type CardLayoutType,
+  type CardCategory,
+} from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import {
   Copy,
@@ -628,6 +631,8 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
         brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
       };
 
+      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({
         title: "Added to Cart!",

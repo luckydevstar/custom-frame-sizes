@@ -12,13 +12,17 @@ import {
   PLAQUE_FRAME_EXTENSION,
   PHOTO_SIZES,
   DEFAULT_FRAME_MOLDING_WIDTH,
-  type CollageLayoutType,
   generateCollagePrintFile,
   uploadCollagePrintFile,
   useCollagePricing,
   getStoreBaseAssetUrl,
- CollagePrintConfig, CollagePrintResult } from "@framecraft/core";
-import { addToCartOnly } from "@framecraft/core";
+  addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
+  type CollageLayoutType,
+  type CollagePrintConfig,
+  type CollagePrintResult,
+} from "@framecraft/core";
 import { Copy, Maximize, X, Eye, Settings, Info, Upload, Pencil } from "lucide-react";
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 
@@ -650,6 +654,8 @@ export function CollageFrameDesigner({
         };
         
         try {
+          const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
+          useCartStore.getState().addItem(cartInput);
           await addToCartOnly(frameConfig, pricing.total, quantity);
           toast({
             title: "Added to cart!",
@@ -690,6 +696,8 @@ export function CollageFrameDesigner({
       };
       
       try {
+        const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
+        useCartStore.getState().addItem(cartInput);
         await addToCartOnly(frameConfig, pricing.total, quantity);
         toast({
           title: "Added to cart!",

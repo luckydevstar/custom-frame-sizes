@@ -16,6 +16,8 @@ import {
   getRandomTicketInserts,
   createPlaybillInsertSeed,
   addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
   type PlaybillLayoutType,
 } from "@framecraft/core";
 import { Copy, Maximize, Eye, Settings, Info } from "lucide-react";
@@ -500,6 +502,8 @@ export function PlaybillFrameDesigner({
         brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
       };
 
+      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({
         title: "Added to Cart!",

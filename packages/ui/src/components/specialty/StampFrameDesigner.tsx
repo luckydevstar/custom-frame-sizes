@@ -24,6 +24,9 @@ import {
   getDefaultStampBacking,
   getRandomStampLifestyleImage,
   getStampLifestyleImages,
+  createCartItemFromFrameConfig,
+  useCartStore,
+  type StampLayoutType,
 } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import { Share2, Stamp, Info, Maximize, Settings, Eye, Copy, ShoppingCart } from "lucide-react";
@@ -50,7 +53,6 @@ import { HangingHardwareSection } from "./shared/HangingHardwareSection";
 import { StampPreviewCanvas } from "./StampPreviewCanvas";
 
 import type { PriceLineItem } from "../ui/PriceBox";
-import type { StampLayoutType } from "@framecraft/core";
 import type { FrameStyle, GlassType, FrameConfiguration , BrassNameplateConfig } from "@framecraft/types";
 
 
@@ -430,6 +432,8 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
     setIsCheckingOut(true);
     const finalTotal = pricing.total * quantity;
     try {
+      const cartInput = createCartItemFromFrameConfig(frameConfig, finalTotal, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(frameConfig, finalTotal, quantity);
       toast({
         title: "Added to Cart!",
