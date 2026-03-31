@@ -477,6 +477,7 @@ export function CertificateFrameDesigner({
       matColorId: selectedMat.id,
       matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
       glassTypeId: glass.id,
+      orderSource: `certificate-${serviceType}`,
       imageUrl: selectedImage || undefined,
       copyrightAgreed: serviceType === "frame-only" ? undefined : copyrightAgreed,
     };

@@ -693,20 +693,10 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
 
       // Call Shopify checkout service
       await addToCartOnly(frameConfig, finalTotalPrice, quantity);
-
-      if (!isShopifyEnabled()) {
-        // Mock checkout - show success message
-        toast({
-          title: "Mock Checkout Created",
-          description: "Shopify is not configured. Check console for payload details.",
-        });
-      } else {
-        // Real checkout - user will be redirected to Shopify
-        toast({
-          title: "Redirecting to Checkout",
-          description: "Taking you to secure checkout...",
-        });
-      }
+      toast({
+        title: "Added to Cart!",
+        description: "Canvas print added to your cart.",
+      });
     } catch (error) {
       console.error("Checkout error:", error);
       toast({
@@ -744,9 +734,10 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
       matType: "none", // Always no mat for canvas float frames
       matBorderWidth: 0,
       matRevealWidth: 0,
-      matColorId: "", // Empty string for no mat
+      matColorId: undefined, // No mat color for canvas
       matInnerColorId: undefined,
       glassTypeId: "standard", // Default to standard for pricing
+      orderSource: `canvas-${serviceType}`,
       imageUrl: selectedImage || undefined,
       copyrightAgreed,
     }),

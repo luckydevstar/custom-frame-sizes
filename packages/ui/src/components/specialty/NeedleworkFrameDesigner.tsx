@@ -16,6 +16,7 @@ import {
   getRandomNeedleworkLifestyleImage,
   getStoreBaseAssetUrl,
  useIsMobile, useMobileViewToggle } from "@framecraft/core";
+import { addToCartOnly } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS, getTypeBBottomBorder } from "@framecraft/types";
 import { Maximize, Eye, Settings, Info, ChevronLeft, ChevronRight } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -46,7 +47,7 @@ import { NeedleworkLifestyleCarousel } from "./NeedleworkLifestyleCarousel";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
 
 import type { PriceLineItem } from "../ui/PriceBox";
-import type { FrameStyle, GlassType , BrassNameplateConfig } from "@framecraft/types";
+import type { FrameStyle, GlassType, BrassNameplateConfig, FrameConfiguration } from "@framecraft/types";
 
 const NEEDLEWORK_SIZE_PRESETS = [
   { w: 8, h: 8, label: '8×8"' },
@@ -481,10 +482,36 @@ export function NeedleworkFrameDesigner({
       });
       return;
     }
-    toast({
-      title: "Added to Cart",
-      description: `${quantity}× Needlework Frame added to your cart.`,
-    });
+    
+    try {
+      const frameConfig: FrameConfiguration = {
+        serviceType: "frame-only",
+        artworkWidth: artWidth,
+        artworkHeight: artHeight,
+        frameStyleId: selectedFrame.id,
+        matType,
+        matBorderWidth: matType === "none" ? 0 : matBorder,
+        matRevealWidth: matType === "double" ? 0.125 : 0,
+        matColorId: matType === "none" ? "" : selectedMat.id,
+        matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
+        glassTypeId: selectedGlass?.id || "standard",
+        orderSource: `needlework-frame`,
+        brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
+      };
+
+      await addToCartOnly(frameConfig, totalPerUnit, quantity);
+      toast({
+        title: "Added to Cart",
+        description: `${quantity}× Needlework Frame added to your cart.`,
+      });
+    } catch (error) {
+      console.error("Add to cart failed:", error);
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to add to cart",
+        variant: "destructive",
+      });
+    }
   };
 
   const getMatTextureClass = (_mat: Mat) => "mat-texture-standard";

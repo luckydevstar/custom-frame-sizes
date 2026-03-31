@@ -5,8 +5,11 @@ import { useIntelligentPreviewSizing , generateDoubleMatPaths , getFrameStyleByI
   computePreviewLayout,
   getStoreBaseAssetUrl,
   getJerseyLifestyleImages,
- useIsMobile, useMobileViewToggle } from "@framecraft/core";
-import { type MatOption , getJerseyLayout, type JerseyLayoutType } from "@framecraft/core";
+  useIsMobile,
+  useMobileViewToggle,
+  addToCartOnly,
+} from "@framecraft/core";
+import { type MatOption , getJerseyLayout, type JerseyLayoutType, type FrameConfiguration } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import { Share2, Shirt, Info, Maximize, Settings, Eye, Copy, Palette, Shield } from "lucide-react";
 import { useState, useEffect, useMemo, useRef } from "react";
@@ -103,6 +106,7 @@ export function JerseyFrameDesigner({
   // Removed useLocation() - not needed in Next.js, using window.location directly where needed
   const { toast } = useToast();
   const isMobile = useIsMobile();
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const { mobileView, setMobileView, showMobileBar, previewCardRef, controlsHeadingRef } =
     useMobileViewToggle({ isMobile });
 
@@ -543,11 +547,39 @@ export function JerseyFrameDesigner({
     });
   };
 
-  const handleAddToCart = () => {
-    toast({
-      title: "Feature coming soon",
-      description: "Shopping cart integration will be available in the next update.",
-    });
+  const handleAddToCart = async () => {
+    setIsCheckingOut(true);
+    try {
+      const frameConfig: FrameConfiguration = {
+        artworkWidth: currentLayout.frameInteriorWidth,
+        artworkHeight: currentLayout.frameInteriorHeight,
+        frameStyleId: selectedFrame.id,
+        matType: "double",
+        matBorderWidth: 2,
+        matRevealWidth: currentLayout.matReveal,
+        matColorId: selectedTopMat.sku,
+        matInnerColorId: selectedBottomMat.sku,
+        glassTypeId: "standard",
+        serviceType: "frame-only",
+        orderSource: `jersey-${currentLayout.id}`,
+        bottomWeighted,
+        brassNameplateConfig: brassNameplateConfig.enabled && currentLayout.allowsPlaque ? brassNameplateConfig : undefined,
+      };
+      await addToCartOnly(frameConfig, pricing.total, quantity);
+      toast({
+        title: "Added to Cart!",
+        description: "Jersey frame added to your cart.",
+      });
+    } catch (error) {
+      console.error("Add to cart error:", error);
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to add to cart",
+        variant: "destructive",
+      });
+    } finally {
+      setIsCheckingOut(false);
+    }
   };
 
   if (!selectedFrame) {
@@ -1335,6 +1367,7 @@ export function JerseyFrameDesigner({
                   onAddToCart={handleAddToCart}
                   onCopyLink={handleCopyLink}
                   priceItems={priceItems}
+                  isProcessing={isCheckingOut}
                   testIdPrefix=""
                 />
               </div>
@@ -1463,10 +1496,11 @@ export function JerseyFrameDesigner({
             <Button
               size="default"
               onClick={handleAddToCart}
+              disabled={isCheckingOut}
               data-testid="button-mobile-add-to-cart"
               className="flex-1 text-xs min-w-0 min-h-11"
             >
-              Add to Cart
+              {isCheckingOut ? "Adding..." : "Add to Cart"}
             </Button>
           </div>
         </div>

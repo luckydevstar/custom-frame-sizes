@@ -13,6 +13,7 @@ import {
   getMatBevelColor,
   getStoreBaseAssetUrl,
  useIsMobile, useMobileViewToggle } from "@framecraft/core";
+import { addToCartOnly } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS, getTypeBBottomBorder } from "@framecraft/types";
 import { Maximize, Eye, Settings, Info, ChevronLeft, ChevronRight } from "lucide-react";
 import { useSearchParams } from "next/navigation";
@@ -42,7 +43,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
 
 import type { PriceLineItem } from "../ui/PriceBox";
-import type { FrameStyle, GlassType , BrassNameplateConfig } from "@framecraft/types";
+import type { FrameStyle, GlassType, BrassNameplateConfig, FrameConfiguration } from "@framecraft/types";
 
 
 const POSTER_IDS = [
@@ -600,10 +601,36 @@ export function MoviePosterFrameDesigner({
       });
       return;
     }
-    toast({
-      title: "Added to Cart",
-      description: `${quantity}× Onesheet Poster Frame added to your cart.`,
-    });
+    
+    try {
+      const frameConfig: FrameConfiguration = {
+        serviceType: "frame-only",
+        artworkWidth: artWidth,
+        artworkHeight: artHeight,
+        frameStyleId: selectedFrame.id,
+        matType,
+        matBorderWidth: matType === "none" ? 0 : matBorder,
+        matRevealWidth: matType === "double" ? 0.125 : 0,
+        matColorId: matType === "none" ? "" : selectedMat.id,
+        matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
+        glassTypeId: selectedGlass?.id || "standard",
+        orderSource: `movie-poster-frame`,
+        brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
+      };
+
+      await addToCartOnly(frameConfig, totalPrice + hardwarePrice + nameplatePrice, quantity);
+      toast({
+        title: "Added to Cart",
+        description: `${quantity}× Onesheet Poster Frame added to your cart.`,
+      });
+    } catch (error) {
+      console.error("Add to cart failed:", error);
+      toast({
+        title: "Error",
+        description: error instanceof Error ? error.message : "Failed to add to cart",
+        variant: "destructive",
+      });
+    }
   };
 
   const getMatTextureClass = (_mat: Mat) => "mat-texture-standard";
