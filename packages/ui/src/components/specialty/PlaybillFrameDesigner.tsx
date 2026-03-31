@@ -493,7 +493,7 @@ export function PlaybillFrameDesigner({
         matType: matType === "none" ? "none" : matType,
         matBorderWidth: matType === "none" ? 0 : 2.0,
         matRevealWidth: matType === "double" ? 0.25 : 0,
-        matColorId: matType === "none" ? (undefined as unknown as string) : selectedMat.id,
+        matColorId: matType === "none" ? "" : selectedMat.id,
         matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
         glassTypeId: selectedGlass?.id || "standard",
         orderSource: `playbill-frame-${selectedLayout}`,

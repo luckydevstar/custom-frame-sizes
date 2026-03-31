@@ -924,7 +924,7 @@ export function RecordAlbumDesigner({
         matType,
         matBorderWidth: matType === "none" ? 0 : layoutDims.matBorderWidth,
         matRevealWidth: matType === "double" ? 0.25 : 0,
-        matColorId: matType === "none" ? (undefined as unknown as string) : selectedMat.id,
+        matColorId: selectedMat.id,
         matInnerColorId: matType === "double" ? selectedBottomMat.id : undefined,
         glassTypeId: selectedGlass.id,
         orderSource,
