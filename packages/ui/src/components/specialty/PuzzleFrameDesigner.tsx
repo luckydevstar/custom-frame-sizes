@@ -772,7 +772,7 @@ export function PuzzleFrameDesigner({
         matType: matType === "none" ? "none" : matType,
         matBorderWidth: matType === "none" ? 0 : parseFloat(matBorderWidth),
         matRevealWidth: matType === "double" ? parseFloat(matRevealWidth) : 0,
-        matColorId: matType === "none" ? (undefined as unknown as string) : selectedMatColor.id,
+        matColorId: selectedMatColor.id,
         matInnerColorId: matType === "double" ? selectedBottomMatColor.id : undefined,
         glassTypeId: glassType || "standard",
         orderSource: `puzzle-frame-${selectedPuzzleSize.id}`,

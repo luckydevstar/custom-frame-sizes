@@ -611,7 +611,7 @@ export function MoviePosterFrameDesigner({
         matType,
         matBorderWidth: matType === "none" ? 0 : matBorder,
         matRevealWidth: matType === "double" ? 0.125 : 0,
-        matColorId: matType === "none" ? (undefined as unknown as string) : selectedMat.id,
+        matColorId: matType === "none" ? "" : selectedMat.id,
         matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
         glassTypeId: selectedGlass?.id || "standard",
         orderSource: `movie-poster-frame`,

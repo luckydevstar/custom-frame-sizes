@@ -448,7 +448,7 @@ export function NewspaperFrameDesigner({
         matType,
         matBorderWidth: matType === "none" ? 0 : parseFloat(matBorderWidth),
         matRevealWidth: matType === "double" ? parseFloat(matRevealWidth) : 0,
-        matColorId: matType === "none" ? (undefined as unknown as string) : selectedMat.id,
+        matColorId: matType === "none" ? "" : selectedMat.id,
         matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
         glassTypeId: selectedGlass?.id || "standard",
         orderSource: `newspaper-frame`,

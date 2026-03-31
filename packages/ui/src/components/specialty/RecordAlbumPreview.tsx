@@ -7,6 +7,8 @@ import {
   generateMatBoardPath,
   getMatTilingStyle,
   getMatBevelColor,
+  getStoreBaseAssetUrl,
+  getSharedAssetUrl,
   type RecordAlbumLayoutType,
   type CDLayoutType,
   type Rectangle,
@@ -21,6 +23,10 @@ import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview"
 import type { BrassNameplateConfig } from "@framecraft/types";
 
 const CD_DISC_IMAGE = "/cd/disc-placeholder.png";
+
+// Helper function to get shared asset URL for CD images
+const getCDDiscImage = () => getSharedAssetUrl(CD_DISC_IMAGE);
+const getCDInsertImage = (path: string) => getSharedAssetUrl(path);
 
 interface RecordAlbumPreviewProps {
   layout: RecordAlbumLayoutType | CDLayoutType;
@@ -621,7 +627,7 @@ export function RecordAlbumPreview({
                             layout === "cover-only" ||
                             layout === "double-disc") ? (
                           <img
-                            src="/cd/insert-placeholder.jpg"
+                            src={getCDInsertImage("/cd/insert-placeholder.jpg")}
                             alt="CD insert placeholder"
                             className="w-full h-full object-cover"
                           />
@@ -635,7 +641,7 @@ export function RecordAlbumPreview({
                           >
                             {layoutType === "cd" ? (
                               <img
-                                src={CD_DISC_IMAGE}
+                                src={getCDDiscImage()}
                                 alt="CD disc"
                                 style={{
                                   width: "24px",
@@ -729,7 +735,7 @@ export function RecordAlbumPreview({
                     >
                       {isCDLayout ? (
                         <img
-                          src={CD_DISC_IMAGE}
+                          src={getCDDiscImage()}
                           alt="CD disc"
                           className="w-full h-full object-cover"
                           style={{ display: "block", transform: "scale(1.02)" }}
