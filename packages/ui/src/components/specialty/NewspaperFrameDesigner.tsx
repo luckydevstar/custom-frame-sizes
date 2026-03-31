@@ -108,6 +108,7 @@ export function NewspaperFrameDesigner({
   const [bottomWeighted, setBottomWeighted] = useState(false);
   const [hangingHardware, setHangingHardware] = useState<"standard" | "security">("standard");
   const [quantity, setQuantity] = useState(1);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [fullImageOpen, setFullImageOpen] = useState(false);
   const [lifestylePreview, setLifestylePreview] = useState<{ url: string; alt: string }>(() => {
     const img = getRandomNewspaperLifestyleImage();
@@ -443,6 +444,7 @@ export function NewspaperFrameDesigner({
       return;
     }
     
+    setIsCheckingOut(true);
     try {
       const frameConfig: FrameConfiguration = {
         serviceType: "frame-only",
@@ -470,6 +472,8 @@ export function NewspaperFrameDesigner({
         description: error instanceof Error ? error.message : "Failed to add to cart",
         variant: "destructive"
       });
+    } finally {
+      setIsCheckingOut(false);
     }
   };
 
@@ -1049,7 +1053,7 @@ export function NewspaperFrameDesigner({
             quantity={quantity}
             onQuantityChange={setQuantity}
             onAddToCart={handleCheckout}
-            isProcessing={false}
+            isProcessing={isCheckingOut}
             disabled={!isValidDimensions || isTooLarge}
             priceItems={priceItems}
             testIdPrefix="newspaper-"

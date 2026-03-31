@@ -22,9 +22,11 @@ import {
   PEN_TOOL_FONTS,
   isLightMat,
   getStoreBaseAssetUrl,
+  createCartItemFromFrameConfig,
+  useCartStore,
   type SonogramLayoutType,
   type PenToolConfig,
- SonogramLifestyleImage } from "@framecraft/core";
+  SonogramLifestyleImage } from "@framecraft/core";
 import { Copy, Eye, Settings, PenTool } from "lucide-react";
 import { useState, useEffect, useMemo, useRef, useCallback } from "react";
 
@@ -105,6 +107,7 @@ export function SonogramFrameDesigner({
   const [matBorderWidth, setMatBorderWidth] = useState("2.5");
   const [matRevealWidth, setMatRevealWidth] = useState("0.25");
   const [quantity, setQuantity] = useState(1);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [hangingHardware, setHangingHardware] = useState<"standard" | "security">("standard");
   const [bottomWeighted, setBottomWeighted] = useState(false);
   const [selectedPreset, setSelectedPreset] = useState<(typeof SONOGRAM_PRESETS)[number]>(
@@ -391,6 +394,7 @@ export function SonogramFrameDesigner({
 
   const handleCheckout = useCallback(async () => {
     if (!isValidDimensions || isTooLarge) return;
+    setIsCheckingOut(true);
     const config: FrameConfiguration = {
       serviceType: "frame-only",
       frameStyleId: selectedFrame.id,
@@ -405,6 +409,8 @@ export function SonogramFrameDesigner({
       bottomWeighted,
     };
     try {
+      const cartInput = createCartItemFromFrameConfig(config, finalTotalPrice * quantity, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(config, finalTotalPrice * quantity, quantity);
       toast({
         title: "Added to Cart!",
@@ -416,6 +422,8 @@ export function SonogramFrameDesigner({
         description: err instanceof Error ? err.message : "Could not add to cart",
         variant: "destructive",
       });
+    } finally {
+      setIsCheckingOut(false);
     }
   }, [
     isValidDimensions,
@@ -1341,6 +1349,7 @@ export function SonogramFrameDesigner({
                   onAddToCart={handleCheckout}
                   onCopyLink={handleCopyLink}
                   disabled={!isValidDimensions || isTooLarge}
+                  isProcessing={isCheckingOut}
                   priceItems={priceItems}
                   warnings={warnings}
                   testIdPrefix="sonogram-"

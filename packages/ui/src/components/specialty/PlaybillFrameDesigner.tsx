@@ -305,6 +305,7 @@ export function PlaybillFrameDesigner({
   >("preview");
   const [fullscreenLifestyleUrl, setFullscreenLifestyleUrl] = useState<string>("");
   const [quantity, setQuantity] = useState(1);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [pricingSidebarExpanded, setPricingSidebarExpanded] = useState(false);
   // Frame photos state
   const [framePhotos, setFramePhotos] = useState<{
@@ -477,6 +478,7 @@ export function PlaybillFrameDesigner({
 
   // Add to cart handler
   const handleAddToCart = useCallback(async () => {
+    setIsCheckingOut(true);
     try {
       if (!currentLayout) {
         toast({
@@ -484,6 +486,7 @@ export function PlaybillFrameDesigner({
           description: "Choose a layout to add to cart",
           variant: "destructive",
         });
+        setIsCheckingOut(false);
         return;
       }
 
@@ -516,6 +519,8 @@ export function PlaybillFrameDesigner({
         description: error instanceof Error ? error.message : "Failed to add item to cart",
         variant: "destructive",
       });
+    } finally {
+      setIsCheckingOut(false);
     }
   }, [quantity, currentLayout, selectedFrame.id, matType, selectedMat.id, selectedMatInner.id, selectedGlass?.id, brassNameplateConfig, pricing.total, toast]);
 
@@ -1112,6 +1117,7 @@ export function PlaybillFrameDesigner({
                 onCopyLink={handleShare}
                 priceItems={priceItems}
                 testIdPrefix="playbill-"
+                isProcessing={isCheckingOut}
                 className={`transition-all ${pricingSidebarExpanded ? "top-6" : "top-20"}`}
               />
             </div>
@@ -1169,8 +1175,9 @@ export function PlaybillFrameDesigner({
                   onClick={handleAddToCart}
                   data-testid="button-playbill-mobile-add-to-cart"
                   className="flex-1 text-xs min-w-0 min-h-11"
+                  disabled={isCheckingOut}
                 >
-                  Add to Cart
+                  {isCheckingOut ? "Processing..." : "Add to Cart"}
                 </Button>
               </div>
             </div>

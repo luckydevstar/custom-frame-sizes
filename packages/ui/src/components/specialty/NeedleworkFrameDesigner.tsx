@@ -121,6 +121,7 @@ export function NeedleworkFrameDesigner({
   const [bottomWeighted, setBottomWeighted] = useState(false);
   const [hangingHardware, setHangingHardware] = useState<"standard" | "security">("standard");
   const [quantity, setQuantity] = useState(1);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [fullImageOpen, setFullImageOpen] = useState(false);
   const [placeholderSeed] = useState(() => Math.floor(Math.random() * 10000));
   const [lifestylePreview, setLifestylePreview] = useState<{ url: string; alt: string }>(() =>
@@ -487,6 +488,7 @@ export function NeedleworkFrameDesigner({
       return;
     }
     
+    setIsCheckingOut(true);
     try {
       const frameConfig: FrameConfiguration = {
         serviceType: "frame-only",
@@ -517,6 +519,8 @@ export function NeedleworkFrameDesigner({
         description: error instanceof Error ? error.message : "Failed to add to cart",
         variant: "destructive",
       });
+    } finally {
+      setIsCheckingOut(false);
     }
   };
 
@@ -1196,7 +1200,7 @@ export function NeedleworkFrameDesigner({
             quantity={quantity}
             onQuantityChange={setQuantity}
             onAddToCart={handleCheckout}
-            isProcessing={false}
+            isProcessing={isCheckingOut}
             disabled={!isValidDimensions || isTooLarge}
             priceItems={priceItems}
             warnings={warnings}

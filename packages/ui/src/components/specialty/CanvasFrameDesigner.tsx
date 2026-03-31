@@ -55,7 +55,6 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/
 
 import { CanvasLifestyleCarousel } from "./CanvasLifestyleCarousel";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
-
 import type { FrameStyle, FrameConfiguration } from "@framecraft/types";
 // - TermsOfServiceModal component
 // - PhotoUploadOptions component
@@ -737,7 +736,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
       matType: "none" as const, // Always no mat for canvas float frames
       matBorderWidth: 0,
       matRevealWidth: 0,
-      matColorId: "", // No mat color for canvas (optional field)
+      matColorId: undefined as unknown as string, // No mat color for canvas (optional field)
       matInnerColorId: undefined,
       glassTypeId: "standard", // Default to standard for pricing
       orderSource: `canvas-${serviceType}`,

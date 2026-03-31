@@ -20,6 +20,8 @@ import {
   getRandomMilitaryPhoto,
   BRASS_PLAQUE_DIMENSIONS,
   addToCartOnly,
+  createCartItemFromFrameConfig,
+  useCartStore,
 } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
 import { Share2, Award, Maximize, Settings, Eye, Copy, ShoppingCart, Shield } from "lucide-react";
@@ -406,6 +408,8 @@ export function MilitaryFrameDesigner({
         brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
       };
 
+      const cartInput = createCartItemFromFrameConfig(config, pricing.total, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(config, pricing.total, quantity);
       toast({
         title: "Added to Cart!",

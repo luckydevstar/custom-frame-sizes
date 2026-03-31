@@ -236,6 +236,7 @@ export function MagazineFrameDesigner({
   // UI state
   const [showShareDialog, setShowShareDialog] = useState(false);
   const [showFullscreenPreview, setShowFullscreenPreview] = useState(false);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [fullscreenImage, setFullscreenImage] = useState<
     "preview" | "corner" | "profile" | "lifestyle"
   >("preview");
@@ -594,6 +595,7 @@ export function MagazineFrameDesigner({
 
   // Add to cart handler
   const handleAddToCart = useCallback(async () => {
+    setIsCheckingOut(true);
     try {
       const currentLayout = getMagazineLayout(selectedLayout);
       if (!selectedLayout || !currentLayout) {
@@ -602,6 +604,7 @@ export function MagazineFrameDesigner({
           description: "Choose a layout to add to cart",
           variant: "destructive",
         });
+        setIsCheckingOut(false);
         return;
       }
 
@@ -634,6 +637,8 @@ export function MagazineFrameDesigner({
         description: error instanceof Error ? error.message : "Failed to add item to cart",
         variant: "destructive",
       });
+    } finally {
+      setIsCheckingOut(false);
     }
   }, [
     selectedLayout,
@@ -2079,6 +2084,7 @@ export function MagazineFrameDesigner({
                 onCopyLink={handleShare}
                 priceItems={priceItems}
                 testIdPrefix="magazine-"
+                isProcessing={isCheckingOut}
               />
             </div>
           </div>
@@ -2284,11 +2290,12 @@ export function MagazineFrameDesigner({
                   </Button>
                   <Button
                     onClick={handleAddToCart}
+                    disabled={isCheckingOut}
                     className="flex-1 text-xs min-w-0 min-h-11"
                     data-testid="magazine-mobile-add-to-cart"
                   >
                     <ShoppingCart className="h-4 w-4 mr-1.5" />
-                    Add to Cart
+                    {isCheckingOut ? "Processing..." : "Add to Cart"}
                   </Button>
                 </div>
               </div>

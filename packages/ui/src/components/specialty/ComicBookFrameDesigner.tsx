@@ -5,6 +5,7 @@ import {
   getFramesByCategory,
   getGlassTypes,
   getStoreBaseAssetUrl,
+  getSharedAssetUrl,
   getComicCoversForConfig,
   useComicPricing,
   useIsMobile,
@@ -239,6 +240,7 @@ export function ComicBookFrameDesigner({
   // UI state
   const [showShareDialog, setShowShareDialog] = useState(false);
   const [showFullscreenPreview, setShowFullscreenPreview] = useState(false);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [fullscreenImage, setFullscreenImage] = useState<
     "preview" | "corner" | "profile" | "lifestyle"
   >("preview");
@@ -492,6 +494,16 @@ export function ComicBookFrameDesigner({
     };
   }, [selectedLayout]);
 
+
+  // Wrap getCoversForConfig to use shared assets URL
+  const wrappedGetCoversForConfig = useCallback(
+    (formatId: string, layoutId: string, count: number) => {
+      const covers = getCoversForConfig(formatId, layoutId, count);
+      return covers.map((coverPath: string) => getSharedAssetUrl(coverPath));
+    },
+    [getCoversForConfig]
+  );
+
   // Get preview state using the hook
   const previewState = useComicPreviewState({
     formatId: selectedFormat,
@@ -506,7 +518,7 @@ export function ComicBookFrameDesigner({
     containerWidth: containerSize.width,
     containerHeight: containerSize.height,
     bottomWeightedExtra,
-    getCoversForConfig,
+    getCoversForConfig: wrappedGetCoversForConfig,
   });
 
   // Get fullscreen preview state with larger dimensions
@@ -523,7 +535,7 @@ export function ComicBookFrameDesigner({
     containerWidth: typeof window !== "undefined" ? window.innerWidth - 100 : 1000,
     containerHeight: typeof window !== "undefined" ? window.innerHeight - 100 : 800,
     bottomWeightedExtra,
-    getCoversForConfig,
+    getCoversForConfig: wrappedGetCoversForConfig,
   });
 
   // Get mats filtered by frame size to hide mats that don't have required sheet sizes
@@ -695,6 +707,7 @@ export function ComicBookFrameDesigner({
 
   // Add to cart handler
   const handleAddToCart = useCallback(async () => {
+    setIsCheckingOut(true);
     try {
       const currentLayout = getComicLayout(selectedLayout);
       if (!selectedLayout || !currentLayout) {
@@ -703,6 +716,7 @@ export function ComicBookFrameDesigner({
           description: "Choose a layout to add to cart",
           variant: "destructive",
         });
+        setIsCheckingOut(false);
         return;
       }
 
@@ -735,6 +749,8 @@ export function ComicBookFrameDesigner({
         description: error instanceof Error ? error.message : "Failed to add item to cart",
         variant: "destructive",
       });
+    } finally {
+      setIsCheckingOut(false);
     }
   }, [
     selectedLayout,
@@ -1570,6 +1586,7 @@ export function ComicBookFrameDesigner({
                 onCopyLink={handleShare}
                 priceItems={priceItems}
                 testIdPrefix="comic-"
+                isProcessing={isCheckingOut}
               />
             </div>
           </div>
@@ -1770,11 +1787,12 @@ export function ComicBookFrameDesigner({
                   </Button>
                   <Button
                     onClick={handleAddToCart}
+                    disabled={isCheckingOut}
                     className="flex-1 text-xs min-w-0 min-h-11"
                     data-testid="comic-mobile-add-to-cart"
                   >
                     <ShoppingCart className="h-4 w-4 mr-1.5" />
-                    Add to Cart
+                    {isCheckingOut ? "Processing..." : "Add to Cart"}
                   </Button>
                 </div>
               </div>

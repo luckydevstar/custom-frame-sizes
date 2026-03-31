@@ -12,6 +12,8 @@ import {
   useIsMobile,
   useMobileViewToggle,
   getStoreBaseAssetUrl,
+  createCartItemFromFrameConfig,
+  useCartStore,
   type TicketStubLayoutType,
 } from "@framecraft/core";
 import { BRASS_NAMEPLATE_SPECS } from "@framecraft/types";
@@ -122,6 +124,7 @@ export function TicketStubFrameDesigner({
   const [brassNameplateConfig, setBrassNameplateConfig] =
     useState<BrassNameplateConfig>(defaultNameplateConfig);
   const [quantity, setQuantity] = useState(1);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [serviceType, setServiceType] = useState<"frame-only" | "print-and-frame">(() =>
     urlParams.get("service") === "print-and-frame" ? "print-and-frame" : "frame-only"
   );
@@ -312,6 +315,7 @@ export function TicketStubFrameDesigner({
         return;
       }
     }
+    setIsCheckingOut(true);
     const config: FrameConfiguration = {
       serviceType: serviceType === "print-and-frame" ? "print-and-frame" : "frame-only",
       artworkWidth: currentLayout.frameWidth,
@@ -328,6 +332,8 @@ export function TicketStubFrameDesigner({
       bottomWeighted,
     };
     try {
+      const cartInput = createCartItemFromFrameConfig(config, pricing.total * quantity, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(config, pricing.total * quantity, quantity);
       toast({
         title: "Added to cart!",
@@ -339,6 +345,8 @@ export function TicketStubFrameDesigner({
         description: err instanceof Error ? err.message : "Could not add to cart",
         variant: "destructive",
       });
+    } finally {
+      setIsCheckingOut(false);
     }
   }, [
     currentLayout,
@@ -790,6 +798,7 @@ export function TicketStubFrameDesigner({
                 onCopyLink={handleShare}
                 priceItems={priceItems}
                 disabled={!printAndFrameReady}
+                isProcessing={isCheckingOut}
                 testIdPrefix="ticket-"
                 className={`transition-all ${pricingSidebarExpanded ? "top-6" : "top-20"}`}
               />

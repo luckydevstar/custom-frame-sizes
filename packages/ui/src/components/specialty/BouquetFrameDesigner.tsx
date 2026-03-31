@@ -57,6 +57,8 @@ import {
   getBouquetLifestyleImages,
   useIsMobile,
   useMobileViewToggle,
+  createCartItemFromFrameConfig,
+  useCartStore,
 } from "@framecraft/core";
 
 // Config from @framecraft/config
@@ -490,6 +492,8 @@ export function BouquetFrameDesigner({
     const finalTotal = totalPrice + hardwarePrice + nameplatePrice;
 
     try {
+      const cartInput = createCartItemFromFrameConfig(frameConfig, finalTotal, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(frameConfig, finalTotal, quantity);
       toast({
         title: "Added to Cart!",

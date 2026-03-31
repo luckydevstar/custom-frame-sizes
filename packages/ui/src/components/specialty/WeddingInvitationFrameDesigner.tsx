@@ -24,6 +24,8 @@ import {
   validateCustomDimensions,
   createCustomInvitationSize,
   createCustomSecondarySize,
+  createCartItemFromFrameConfig,
+  useCartStore,
   type WeddingLayoutType,
   type InvitationSize,
   type SecondaryOpeningSize,
@@ -173,6 +175,7 @@ export function WeddingInvitationFrameDesigner({
   const [brassNameplateConfig, setBrassNameplateConfig] =
     useState<BrassNameplateConfig>(defaultNameplateConfig);
   const [quantity, setQuantity] = useState(1);
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [serviceType, setServiceType] = useState<"frame-only" | "print-and-frame">(
     () => (urlParams.get("serviceType") as "frame-only" | "print-and-frame") || "frame-only"
   );
@@ -475,6 +478,7 @@ export function WeddingInvitationFrameDesigner({
       }
       return;
     }
+    setIsCheckingOut(true);
     const config: FrameConfiguration = {
       serviceType: serviceType === "print-and-frame" ? "print-and-frame" : "frame-only",
       frameStyleId: selectedFrame.id,
@@ -492,6 +496,8 @@ export function WeddingInvitationFrameDesigner({
       copyrightAgreed: serviceType === "print-and-frame" ? copyrightAgreed : undefined,
     };
     try {
+      const cartInput = createCartItemFromFrameConfig(config, finalTotalPrice * quantity, quantity);
+      useCartStore.getState().addItem(cartInput);
       await addToCartOnly(config, finalTotalPrice * quantity, quantity);
       toast({
         title: "Added to Cart!",
@@ -503,6 +509,8 @@ export function WeddingInvitationFrameDesigner({
         description: err instanceof Error ? err.message : "Could not add to cart",
         variant: "destructive",
       });
+    } finally {
+      setIsCheckingOut(false);
     }
   }, [
     canAddToCart,
@@ -945,25 +953,19 @@ export function WeddingInvitationFrameDesigner({
 
               <BottomWeightedMatting checked={bottomWeighted} onCheckedChange={setBottomWeighted} />
 
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              <div className="flex flex-wrap items-center gap-4 pt-2 w-full">
                 <QuantitySelector value={quantity} onChange={setQuantity} />
                 <PriceBox
                   totalPrice={finalTotalPrice}
                   quantity={quantity}
                   onQuantityChange={setQuantity}
                   onAddToCart={handleAddToCart}
+                  isProcessing={isCheckingOut}
                   priceItems={pricing?.items}
                   disabled={!hasValidCustomInvite || !hasValidCustomSecondary}
+                  className="flex-1"
                 />
               </div>
-              <Button
-                className="w-full"
-                size="lg"
-                onClick={handleAddToCart}
-                disabled={!hasValidCustomInvite || !hasValidCustomSecondary}
-              >
-                Add to Cart
-              </Button>
             </Card>
           </div>
         </div>
