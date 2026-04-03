@@ -2,7 +2,13 @@ import { getFramesByCategory } from "@framecraft/core";
 import { Hero, ValueProps, SeoTextBlock, FrameStylesShowcase } from "@framecraft/ui";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
+
 import { brandConfig } from "../brand.config";
+import heroImagesDataRaw from "../data/heroImages.json";
+import testimonialsData from "../data/testimonials.json";
+
+import type { HeroImage } from "@framecraft/core";
+import type { Metadata } from "next";
 
 // Dynamic imports for below-fold components to improve LCP
 const FrameDesigner = dynamic(() => import("@framecraft/ui").then((m) => m.FrameDesigner), {
@@ -15,7 +21,7 @@ const TestimonialCarousel = dynamic(
   {
     loading: () => <div className="h-64 bg-muted/20 animate-pulse" />,
     ssr: true,
-  }
+  },
 );
 
 const HowItWorks = dynamic(() => import("@framecraft/ui").then((m) => m.HowItWorks), {
@@ -28,7 +34,7 @@ const InspirationGallery = dynamic(
   {
     loading: () => <div className="h-96 bg-muted/20 animate-pulse" />,
     ssr: true,
-  }
+  },
 );
 
 const FaqMini = dynamic(() => import("@framecraft/ui").then((m) => m.FaqMini), {
@@ -46,7 +52,7 @@ const CanvasFramesShowcase = dynamic(
   {
     loading: () => <div className="h-80 bg-muted/20 animate-pulse" />,
     ssr: true,
-  }
+  },
 );
 
 const PrintAndFrameService = dynamic(
@@ -54,7 +60,7 @@ const PrintAndFrameService = dynamic(
   {
     loading: () => <div className="h-80 bg-muted/20 animate-pulse" />,
     ssr: true,
-  }
+  },
 );
 
 const MatDesignerShowcase = dynamic(
@@ -62,7 +68,7 @@ const MatDesignerShowcase = dynamic(
   {
     loading: () => <div className="h-80 bg-muted/20 animate-pulse" />,
     ssr: true,
-  }
+  },
 );
 
 const GlazingShowcase = dynamic(() => import("@framecraft/ui").then((m) => m.GlazingShowcase), {
@@ -75,19 +81,13 @@ const SpecialtyDesignersShowcase = dynamic(
   {
     loading: () => <div className="h-80 bg-muted/20 animate-pulse" />,
     ssr: true,
-  }
+  },
 );
 
 const EducationTeasers = dynamic(() => import("@framecraft/ui").then((m) => m.EducationTeasers), {
   loading: () => <div className="h-80 bg-muted/20 animate-pulse" />,
   ssr: true,
 });
-// Import store-specific data
-import heroImagesDataRaw from "../data/heroImages.json";
-import testimonialsData from "../data/testimonials.json";
-
-import type { HeroImage } from "@framecraft/core";
-import type { Metadata } from "next";
 
 // Type assertion for hero images data
 const heroImagesData = heroImagesDataRaw as HeroImage[];
@@ -135,12 +135,12 @@ export default function HomePage() {
         heroImagesData={heroImagesData}
       />
 
-      {/* H1 and Value Proposition */}
+      {/* Value proposition (hero above is the sole page H1) */}
       <section className="bg-gradient-to-b from-background to-muted/30 py-16 md:py-24">
         <div className="max-w-4xl mx-auto px-6">
-          <h1 className="font-serif text-4xl md:text-5xl font-bold text-center mb-6">
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-center mb-6">
             Custom Picture Frames | Any Size, Any Style
-          </h1>
+          </h2>
           <p className="text-lg md:text-xl text-muted-foreground text-center mb-8 max-w-3xl mx-auto leading-relaxed">
             Design your perfect custom picture frame online. Choose from 100+ professional frame
             styles, any size from 4×4 to 60×60 inches, with instant pricing and real-time preview.
