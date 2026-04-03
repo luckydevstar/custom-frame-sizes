@@ -10,7 +10,7 @@ import type { BrandConfig } from "../types/brand-config";
 export const storeAConfig: BrandConfig = {
   storeId: "store-a",
   name: "Store A",
-  domain: "store-a.example.com",
+  domain: "www.customframesizes.com",
   shopify: {
     domain: "store-a.myshopify.com",
     storefrontAccessToken: "SHOPIFY_STOREFRONT_TOKEN_STORE_A", // From env
@@ -38,7 +38,7 @@ export const storeAConfig: BrandConfig = {
     title: "Store A - Custom Picture Frames",
     description: "Premium custom picture frames from Store A",
     keywords: ["custom frames", "picture frames", "Store A"],
-    canonicalUrl: "https://store-a.example.com",
+    canonicalUrl: "https://www.customframesizes.com",
   },
   branding: {
     tagline: "Premium Custom Framing",

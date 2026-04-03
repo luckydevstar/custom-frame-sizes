@@ -41,7 +41,7 @@ interface BrandConfig {
 {
   storeId: "store-a",
   name: "Store A",
-  domain: "store-a.example.com"
+  domain: "www.customframesizes.com"
 }
 ```
 
@@ -180,8 +180,8 @@ interface BrandConfig {
     title: "Store A - Custom Picture Frames",
     description: "Premium custom picture frames",
     keywords: ["custom frames", "picture frames"],
-    ogImage: "https://store-a.example.com/og-image.jpg",
-    canonicalUrl: "https://store-a.example.com"
+    ogImage: "https://www.customframesizes.com/og-image.jpg",
+    canonicalUrl: "https://www.customframesizes.com"
   }
 }
 ```

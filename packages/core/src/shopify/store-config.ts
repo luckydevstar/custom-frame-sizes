@@ -176,7 +176,7 @@ export function resolveStoreId(): string | null {
   // 1. Try to extract from domain (if in browser)
   if (typeof window !== "undefined") {
     const hostname = window.location.hostname;
-    // Extract store ID from subdomain (e.g., "store-a.example.com" → "store-a")
+    // Extract store ID from subdomain (e.g., "store-a.myshopify.com" → "store-a")
     const subdomainMatch = hostname.match(/^([^.]+)\./);
     if (subdomainMatch && subdomainMatch[1] !== "www") {
       return subdomainMatch[1] ?? null;
