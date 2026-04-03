@@ -47,8 +47,9 @@
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 100%;
-    --border: 215 20% 25%;
-    --input: 215 20% 25%;
+    /* P3 #22: lighter border/input vs background (~3:1+ for WCAG 1.4.11 UI boundaries) */
+    --border: 215 16% 48%;
+    --input: 215 16% 48%;
     --ring: 210 75% 55%;
   }
 }
@@ -99,5 +100,19 @@
   color: hsl(var(--foreground));
   border-radius: 0.25rem;
   box-shadow: 0 0 0 2px hsl(var(--ring));
+}
+
+/* P3 #20: prefers-reduced-motion (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
