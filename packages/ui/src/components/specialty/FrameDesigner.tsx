@@ -29,7 +29,15 @@ import {
   createCartItemFromFrameConfig,
   useCartStore,
 } from "@framecraft/core";
-import { BRASS_NAMEPLATE_SPECS, getTypeBBottomBorder, type FrameStyle, type FrameConfiguration, type DesignRecommendation, type DesignRecommendationResponse, type BrassNameplateConfig } from "@framecraft/types";
+import {
+  BRASS_NAMEPLATE_SPECS,
+  getTypeBBottomBorder,
+  type FrameStyle,
+  type FrameConfiguration,
+  type DesignRecommendation,
+  type DesignRecommendationResponse,
+  type BrassNameplateConfig,
+} from "@framecraft/types";
 import { useMutation } from "@tanstack/react-query";
 import {
   Upload,
@@ -54,9 +62,6 @@ import { BrassNameplateSection } from "../brass-nameplate/BrassNameplateSection"
 import { RecommendationCarousel } from "../marketing/RecommendationCarousel";
 import { PhotoUploadOptions } from "../shared/PhotoUploadOptions";
 import { TermsOfServiceModal } from "../shared/TermsOfServiceModal";
-
-
-// UI imports
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
@@ -79,7 +84,7 @@ import type { UploadResult } from "@uppy/core";
 
 // Lazy-load ARViewer so @google/model-viewer (uses `self`) is never loaded on the server
 const ARViewer = lazy(() =>
-  import("../shared/ARViewer").then((mod) => ({ default: mod.ARViewer }))
+  import("../shared/ARViewer").then((mod) => ({ default: mod.ARViewer })),
 );
 
 // Get product data from services
@@ -113,11 +118,11 @@ export function FrameDesigner({
   }, [defaultFrameId, searchParams]);
 
   const [selectedFrame, setSelectedFrame] = useState<FrameStyle>(
-    () => initialFrame ?? frameStyles[0]!
+    () => initialFrame ?? frameStyles[0]!,
   );
   const [selectedMat, setSelectedMat] = useState<Mat>(() => getMatById("mat-1") ?? ALL_MATS[0]!);
   const [selectedMatInner, setSelectedMatInner] = useState<Mat>(
-    () => getMatById("mat-4") ?? ALL_MATS[1]!
+    () => getMatById("mat-4") ?? ALL_MATS[1]!,
   );
   const [selectedGlass, setSelectedGlass] = useState(glassTypes[0]);
   const [matType, setMatType] = useState<"none" | "single" | "double">("single");
@@ -185,7 +190,7 @@ export function FrameDesigner({
   const isCopyrightCheckboxVisible = useIntersectionVisible(
     copyrightCheckboxRef,
     { threshold: 0.4 },
-    [selectedImage, serviceType]
+    [selectedImage, serviceType],
   );
 
   // Custom dimensions - artwork size
@@ -209,7 +214,7 @@ export function FrameDesigner({
   // Get placeholder image from stock library (or stock/photo_inserts fallback)
   const placeholderImage = useMemo(
     () => getRandomStockImage(seedForPlaceholder),
-    [seedForPlaceholder]
+    [seedForPlaceholder],
   );
 
   // Use uploaded image if available, otherwise use placeholder
@@ -297,6 +302,8 @@ export function FrameDesigner({
   // Update URL when configuration changes (but not during initial load)
   useEffect(() => {
     if (!isInitialLoadComplete) return;
+    // Embedded PDP (/frames/[slug]): keep canonical URL clean for SEO (P1 #13)
+    if (_embedded) return;
 
     const params = new URLSearchParams();
     params.set("frame", selectedFrame.id);
@@ -366,6 +373,7 @@ export function FrameDesigner({
     brassNameplateConfig,
     pathname,
     router,
+    _embedded,
   ]);
 
   // Fetch frame photos from local storage when frame changes
@@ -471,7 +479,7 @@ export function FrameDesigner({
   };
 
   const handleUploadComplete = async (
-    result: UploadResult<Record<string, unknown>, Record<string, unknown>>
+    result: UploadResult<Record<string, unknown>, Record<string, unknown>>,
   ) => {
     if (result.successful && result.successful.length > 0) {
       const uploadedFile = result.successful[0];
@@ -619,7 +627,7 @@ export function FrameDesigner({
             artHeight,
             matBorder,
             effectiveBottomBorder,
-            matType
+            matType,
           );
 
           // Generate the print file
@@ -712,7 +720,7 @@ export function FrameDesigner({
 
   // Convert image URL to base64 with compression for AI analysis
   const convertImageToBase64 = async (
-    imageUrl: string
+    imageUrl: string,
   ): Promise<{ base64: string; width: number; height: number }> => {
     return new Promise((resolve, reject) => {
       const img = new Image();
@@ -831,7 +839,7 @@ export function FrameDesigner({
   // Handle add recommendation to cart
   const handleAddRecommendationToCart = async (
     recommendation: DesignRecommendation,
-    sizeIndex: number
+    sizeIndex: number,
   ) => {
     const size = recommendation.sizes[sizeIndex];
     if (!size) return;
@@ -930,7 +938,7 @@ export function FrameDesigner({
 
   const allAvailableMats = useMemo(
     () => [...standardMats, ...premiumMats],
-    [standardMats, premiumMats]
+    [standardMats, premiumMats],
   );
 
   // Auto-switch to white if selected mat becomes unavailable when size changes
@@ -997,7 +1005,7 @@ export function FrameDesigner({
       selectedImage,
       copyrightAgreed,
       bottomWeighted,
-    ]
+    ],
   );
 
   // Calculate pricing using the pricing service
@@ -1109,7 +1117,7 @@ export function FrameDesigner({
         data-testid="warning-oversize"
       >
         The overall dimensions of your frame are oversized and will incur an oversize fee
-      </div>
+      </div>,
     );
   }
 
@@ -1121,7 +1129,7 @@ export function FrameDesigner({
         data-testid="warning-too-large"
       >
         This frame is too large for online ordering – please contact us to discuss your project
-      </div>
+      </div>,
     );
   }
 
@@ -1366,13 +1374,13 @@ export function FrameDesigner({
                           scale: layout.scale,
                           artworkUrl: imageDataUrl,
                         },
-                        1600
+                        1600,
                       );
 
                       // Detect mobile for appropriate handling
                       const isMobileDevice =
                         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-                          navigator.userAgent
+                          navigator.userAgent,
                         );
                       const hasShareAPI = navigator.share !== undefined;
 
@@ -1636,7 +1644,7 @@ export function FrameDesigner({
                           ...getMatTilingStyle(
                             selectedMatInner.name,
                             layout.scale,
-                            selectedMatInner.hexColor
+                            selectedMatInner.hexColor,
                           ),
                           display: "flex",
                           alignItems: "center",
@@ -1836,7 +1844,7 @@ export function FrameDesigner({
                           ...getMatTilingStyle(
                             selectedMatInner.name,
                             layout.scale,
-                            selectedMatInner.hexColor
+                            selectedMatInner.hexColor,
                           ),
                           display: "flex",
                           alignItems: "center",
@@ -2025,7 +2033,7 @@ export function FrameDesigner({
                           src={getStoreBaseAssetUrl(
                             selectedFrame.dimensionalDiagram.startsWith("/")
                               ? selectedFrame.dimensionalDiagram.slice(1)
-                              : selectedFrame.dimensionalDiagram
+                              : selectedFrame.dimensionalDiagram,
                           )}
                           alt={`${selectedFrame.name} dimensional diagram`}
                           className="w-64 rounded-lg border-2 border-border bg-background"
@@ -2354,7 +2362,7 @@ export function FrameDesigner({
                               src={getStoreBaseAssetUrl(
                                 frame.thumbnail.startsWith("/")
                                   ? frame.thumbnail.slice(1)
-                                  : frame.thumbnail
+                                  : frame.thumbnail,
                               )}
                               alt={frame.name}
                               className="h-full w-full object-cover"
@@ -2866,7 +2874,7 @@ export function FrameDesigner({
                     const dialogAvailableWidth = Math.max(100, dialogMaxWidth - dialogTotalBorderX);
                     const dialogAvailableHeight = Math.max(
                       100,
-                      dialogMaxHeight - dialogTotalBorderY
+                      dialogMaxHeight - dialogTotalBorderY,
                     );
 
                     // Use larger scale for artwork display
@@ -3082,7 +3090,7 @@ export function FrameDesigner({
                                 ...getMatTilingStyle(
                                   selectedMat.name,
                                   dialogScale,
-                                  selectedMat.hexColor
+                                  selectedMat.hexColor,
                                 ),
                                 padding: `${dialogMatBorder}px`,
                                 transition:
@@ -3098,7 +3106,7 @@ export function FrameDesigner({
                                   ...getMatTilingStyle(
                                     selectedMatInner.name,
                                     dialogScale,
-                                    selectedMatInner.hexColor
+                                    selectedMatInner.hexColor,
                                   ),
                                   border: `${Math.max(1.1, dialogScale * 0.08)}px solid ${getMatBevelColor(selectedMat.name)}`,
                                   transition:
@@ -3140,7 +3148,7 @@ export function FrameDesigner({
                                 ...getMatTilingStyle(
                                   selectedMat.name,
                                   dialogScale,
-                                  selectedMat.hexColor
+                                  selectedMat.hexColor,
                                 ),
                                 padding: `${dialogMatBorder}px`,
                                 transition:
@@ -3233,7 +3241,7 @@ export function FrameDesigner({
                                   ...getMatTilingStyle(
                                     selectedMat.name,
                                     dialogScale,
-                                    selectedMat.hexColor
+                                    selectedMat.hexColor,
                                   ),
                                   padding: `${dialogMatBorder}px`,
                                   transition:
@@ -3249,7 +3257,7 @@ export function FrameDesigner({
                                     ...getMatTilingStyle(
                                       selectedMatInner.name,
                                       dialogScale,
-                                      selectedMatInner.hexColor
+                                      selectedMatInner.hexColor,
                                     ),
                                     border: `${Math.max(1.1, dialogScale * 0.08)}px solid ${getMatBevelColor(selectedMat.name)}`,
                                     transition:
@@ -3291,7 +3299,7 @@ export function FrameDesigner({
                                   ...getMatTilingStyle(
                                     selectedMat.name,
                                     dialogScale,
-                                    selectedMat.hexColor
+                                    selectedMat.hexColor,
                                   ),
                                   padding: `${dialogMatBorder}px`,
                                   transition:
