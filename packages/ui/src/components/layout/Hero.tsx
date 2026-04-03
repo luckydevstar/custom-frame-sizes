@@ -133,7 +133,7 @@ export function Hero({
   // Create overlay gradient
   const overlayStyle = {
     background: `linear-gradient(to bottom, ${effectiveConfig.overlayColor}${Math.round(
-      overlayOpacity * 255
+      overlayOpacity * 255,
     )
       .toString(16)
       .padStart(2, "0")}, ${effectiveConfig.overlayColor}${Math.round(overlayOpacity * 255)
@@ -280,7 +280,7 @@ function HeroContent({
       className={`hero-content relative z-10 max-w-4xl mx-auto px-6 text-center ${fadeInClass} ${transitionClass}`}
     >
       <h1
-        className="font-serif text-2xl md:text-4xl font-bold text-white mb-3 md:mb-4"
+        className="hero-title font-serif text-2xl md:text-4xl font-bold text-white mb-3 md:mb-4"
         style={{ textShadow: "0 2px 8px rgba(0,0,0,0.3)" }}
         data-testid="text-hero-title"
       >
