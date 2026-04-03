@@ -9,7 +9,7 @@ export const metadata: Metadata = generateMetadata({
   title: "FAQ | CustomFrameSizes.com – Framing Questions Answered",
   description:
     "Answers to common questions about custom frames, sizes, shipping, local pickup, returns, glazing options, and production timelines.",
-  canonical: "https://customframesizes.com/faq",
+  canonical: "https://www.customframesizes.com/faq",
   ogTitle: "Frequently Asked Questions - CustomFrameSizes",
   ogDescription:
     "Answers about custom framing, sizing, shipping, local pickup, returns, materials, and warranty.",

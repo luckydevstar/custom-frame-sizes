@@ -1,13 +1,12 @@
 import { getMilitaryLifestyleImageByNumber } from "@framecraft/core/lib/military-lifestyle-images";
 import { getSharedAssetUrl } from "@framecraft/core/utils/asset-urls";
-import { Badge, Card , MilitaryLifestyleCarousel } from "@framecraft/ui";
+import { Badge, Card, MilitaryLifestyleCarousel } from "@framecraft/ui";
 import { Award, Clock, CheckCircle, Shield } from "lucide-react";
 import nextDynamic from "next/dynamic";
 import Link from "next/link";
 import { Suspense } from "react";
 
 import { brandConfig } from "../../../brand.config";
-
 
 import { ScrollToDesignerButton } from "./scroll-button";
 
@@ -19,12 +18,12 @@ import { RelatedProducts } from "@/components/RelatedProducts";
  */
 const MilitaryFrameDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.MilitaryFrameDesigner),
-  { ssr: false }
+  { ssr: false },
 );
 
 export const dynamic = "force-dynamic";
 
-const baseUrl = brandConfig.seo?.canonicalUrl ?? "https://customframesizes.com";
+const baseUrl = brandConfig.seo?.canonicalUrl ?? "https://www.customframesizes.com";
 
 export const metadata: Metadata = {
   title:

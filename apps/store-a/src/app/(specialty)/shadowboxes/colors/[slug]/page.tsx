@@ -31,7 +31,7 @@ function getShadowboxFramesByColor(colorName: string): FrameStyle[] {
   const frames = getFrameStyles();
   const searchColor = colorName === "Blue" ? "barn blue" : colorName.toLowerCase();
   return frames.filter(
-    (f) => f.category === "shadowbox" && f.colorName?.toLowerCase() === searchColor
+    (f) => f.category === "shadowbox" && f.colorName?.toLowerCase() === searchColor,
   );
 }
 
@@ -79,12 +79,12 @@ export default async function ShadowboxColorDetailPage({ params }: ShadowboxColo
   const colorFrames = getShadowboxFramesByColor(colorName);
   const heroImage = getShadowboxColorHeroImage(colorName, frames);
   const usingPlaceholders = isUsingShadowboxPlaceholderImages(colorName, frames);
-  const baseUrl = brandConfig.seo?.canonicalUrl || "https://customframesizes.com";
+  const baseUrl = brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com";
 
   const featuredFrame =
     colorFrames.length > 0
       ? colorFrames.reduce((prev, current) =>
-          (current.pricePerInch ?? 0) > (prev.pricePerInch ?? 0) ? current : prev
+          (current.pricePerInch ?? 0) > (prev.pricePerInch ?? 0) ? current : prev,
         )
       : null;
   const otherFrames = featuredFrame
@@ -99,7 +99,7 @@ export default async function ShadowboxColorDetailPage({ params }: ShadowboxColo
       ? { min: Math.min(...depths), max: Math.max(...depths), count: new Set(depths).size }
       : null;
   const widthOptions = new Set(
-    colorFrames.map((f) => f.mouldingWidth).filter((w): w is number => typeof w === "number")
+    colorFrames.map((f) => f.mouldingWidth).filter((w): w is number => typeof w === "number"),
   ).size;
 
   const complementaryNames = COMPLEMENTARY_COLORS_MAP[colorName] ?? [];
@@ -158,7 +158,7 @@ export default async function ShadowboxColorDetailPage({ params }: ShadowboxColo
               ?.filter((img) => img.type === "lifestyle")
               .slice(0, 2)
               .map((img) =>
-                getStoreBaseAssetUrl(img.url.startsWith("/") ? img.url.slice(1) : img.url)
+                getStoreBaseAssetUrl(img.url.startsWith("/") ? img.url.slice(1) : img.url),
               ) ?? []),
           ],
           sku: featuredFrame.id.toUpperCase(),

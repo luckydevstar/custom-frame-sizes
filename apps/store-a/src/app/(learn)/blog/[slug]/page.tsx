@@ -13,7 +13,7 @@ import { env } from "@/lib/env";
 
 const siteOrigin = env.shopify.storeDomain
   ? `https://${env.shopify.storeDomain}`
-  : "https://customframesizes.com";
+  : "https://www.customframesizes.com";
 
 type PageProps = {
   params: Promise<{ slug: string }>;

@@ -1,4 +1,4 @@
-import { Card, CardContent , Button } from "@framecraft/ui";
+import { Card, CardContent, Button } from "@framecraft/ui";
 import {
   Ruler,
   Package,
@@ -21,12 +21,11 @@ import type { Metadata } from "next";
 
 import { generateMetadata } from "@/lib/seo";
 
-
 export const metadata: Metadata = generateMetadata({
   title: "About CustomFrameSizes.com | Custom Frame Manufacturer | Precision Framing",
   description:
     "Precision custom framing built to exact specifications. Every frame made to order with professional materials. 3–7 business day production. CustomFrameSizes.com – exact sizes, zero compromise.",
-  canonical: "https://customframesizes.com/about",
+  canonical: "https://www.customframesizes.com/about",
   ogTitle: "About CustomFrameSizes – Precision Custom Framing",
   ogDescription:
     "Custom framing manufactured to exact specifications with professional materials. Consistent quality, custom sizes, 3-7 business day production.",

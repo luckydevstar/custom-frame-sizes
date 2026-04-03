@@ -11,7 +11,7 @@ export const metadata: Metadata = generateMetadata({
   title: "Contact Us | CustomFrameSizes.com – Framing Experts",
   description:
     "Get in touch with our custom framing experts. Call, email, or fill out our contact form. Response within 24 hours on business days.",
-  canonical: "https://customframesizes.com/contact",
+  canonical: "https://www.customframesizes.com/contact",
   ogTitle: "Contact CustomFrameSizes – Framing Support",
   ogDescription:
     "Contact our custom framing experts. Phone, email, or contact form. Somerset, NJ based.",

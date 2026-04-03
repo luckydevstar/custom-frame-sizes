@@ -2,11 +2,9 @@ import { getFramesByCategory } from "@framecraft/core";
 import { MetadataRoute } from "next";
 
 import { getBlogPosts } from "@/lib/blog";
-import { env } from "@/lib/env";
+import { siteUrl } from "@/lib/seo";
 
-const baseUrl = env.shopify.storeDomain
-  ? `https://${env.shopify.storeDomain}`
-  : "https://customframesizes.com";
+const baseUrl = siteUrl;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();

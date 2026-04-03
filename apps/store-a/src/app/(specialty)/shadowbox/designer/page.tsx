@@ -15,7 +15,7 @@ import {
 
 const ShadowboxDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
-  { ssr: false }
+  { ssr: false },
 );
 
 export const dynamic = "force-dynamic";
@@ -24,7 +24,7 @@ export const metadata: Metadata = generateMetadata({
   title: "Custom Shadowbox Designer | Design Your Shadowbox | CustomFrameSizes.com",
   description:
     "Design custom shadowbox frames with adjustable depth. Display 3D items, collectibles, jerseys, and memorabilia. Choose size, style, and glass options.",
-  canonical: "https://customframesizes.com/shadowbox/designer",
+  canonical: "https://www.customframesizes.com/shadowbox/designer",
   ogTitle: "Custom Shadowbox Designer - 3D Display Frames",
   ogDescription:
     "Design custom shadowbox frames for jerseys, medals, collectibles. Adjustable depth, professional display quality.",

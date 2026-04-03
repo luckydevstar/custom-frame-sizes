@@ -1,10 +1,8 @@
 import { MetadataRoute } from "next";
 
-import { env } from "@/lib/env";
+import { siteUrl } from "@/lib/seo";
 
-const baseUrl = env.shopify.storeDomain
-  ? `https://${env.shopify.storeDomain}`
-  : "https://customframesizes.com";
+const baseUrl = siteUrl;
 
 export default function robots(): MetadataRoute.Robots {
   return {

@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 };
 
 export default function FramesByStylePage() {
-  const baseUrl = brandConfig.seo?.canonicalUrl || "https://customframesizes.com";
+  const baseUrl = brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com";
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",

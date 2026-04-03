@@ -13,7 +13,7 @@ import type { Metadata } from "next";
 
 const ShadowboxDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
-  { ssr: false }
+  { ssr: false },
 );
 
 export const dynamic = "force-dynamic";
@@ -65,10 +65,10 @@ function pickRandom<T>(array: T[], n: number): T[] {
 
 export default function ShadowboxPage() {
   const allShadowboxFrames = getFrameStyles().filter(
-    (f) => f.category === "shadowbox"
+    (f) => f.category === "shadowbox",
   ) as FrameStyle[];
   const featuredFrames = pickRandom(allShadowboxFrames, 3);
-  const baseUrl = brandConfig.seo?.canonicalUrl || "https://customframesizes.com";
+  const baseUrl = brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com";
 
   const priceValidUntil = new Date();
   priceValidUntil.setDate(priceValidUntil.getDate() + 30);

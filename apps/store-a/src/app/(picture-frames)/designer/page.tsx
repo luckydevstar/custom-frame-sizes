@@ -16,7 +16,7 @@ export const metadata: Metadata = generateMetadata({
   title: "Custom Picture Frame Designer | Design Your Frame | CustomFrameSizes.com",
   description:
     "Design custom picture frames online with our interactive designer. Any size from 4×4 to 60×60 inches. 100+ styles, instant pricing, and real-time preview.",
-  canonical: "https://customframesizes.com/designer",
+  canonical: "https://www.customframesizes.com/designer",
   ogTitle: "Custom Picture Frame Designer - Interactive Builder",
   ogDescription:
     "Design and customize your perfect picture frame online. Any size, any style, instant pricing.",
