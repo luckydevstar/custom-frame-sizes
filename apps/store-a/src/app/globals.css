@@ -65,6 +65,11 @@
   .hero-title {
     font-family: var(--font-playfair), "Playfair Display", Georgia, ui-serif, serif;
   }
+
+  /* Brand: H1 letter-spacing (homepage hero, frame PDP, all semantic h1s) */
+  h1 {
+    letter-spacing: -0.02em;
+  }
 }
 
 /* Prevent Uppy dashboard from permanently locking page scroll */
