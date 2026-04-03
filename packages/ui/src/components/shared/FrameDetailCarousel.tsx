@@ -117,12 +117,12 @@ export function FrameDetailCarousel({ images, onImageClick }: FrameDetailCarouse
         <Button
           variant="ghost"
           size="icon"
-          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 h-12 w-12 rounded-full bg-background/90 hover:bg-background shadow-lg opacity-80 hover:opacity-100 transition-opacity"
+          className="absolute left-0 top-1/2 -translate-y-1/2 z-10 h-12 w-12 min-h-[44px] min-w-[44px] rounded-full bg-background/90 hover:bg-background shadow-lg opacity-80 hover:opacity-100 transition-opacity"
           onClick={scrollPrevious}
           aria-label="Previous image"
           data-testid="button-carousel-previous"
         >
-          <ChevronLeft className="h-6 w-6" />
+          <ChevronLeft className="h-6 w-6" aria-hidden />
         </Button>
       )}
 
@@ -148,6 +148,7 @@ export function FrameDetailCarousel({ images, onImageClick }: FrameDetailCarouse
               role="button"
               tabIndex={0}
               data-testid={`image-preview-${index}`}
+              aria-label={`Open gallery: ${image.alt}`}
             >
               <div className="aspect-[4/3] overflow-hidden">
                 <Image
@@ -177,12 +178,12 @@ export function FrameDetailCarousel({ images, onImageClick }: FrameDetailCarouse
         <Button
           variant="ghost"
           size="icon"
-          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 h-12 w-12 rounded-full bg-background/90 hover:bg-background shadow-lg opacity-80 hover:opacity-100 transition-opacity"
+          className="absolute right-0 top-1/2 -translate-y-1/2 z-10 h-12 w-12 min-h-[44px] min-w-[44px] rounded-full bg-background/90 hover:bg-background shadow-lg opacity-80 hover:opacity-100 transition-opacity"
           onClick={scrollNext}
           aria-label="Next image"
           data-testid="button-carousel-next"
         >
-          <ChevronRight className="h-6 w-6" />
+          <ChevronRight className="h-6 w-6" aria-hidden />
         </Button>
       )}
     </div>

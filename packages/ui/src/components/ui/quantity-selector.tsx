@@ -2,6 +2,8 @@
 
 import { useState, useEffect, useRef } from "react";
 
+import { cn } from "../../utils";
+
 import { Input } from "./input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./select";
 
@@ -11,6 +13,8 @@ interface QuantitySelectorProps {
   className?: string;
   disabled?: boolean;
   testId?: string;
+  /** Accessible name for the quantity control (P1 #16) */
+  ariaLabel?: string;
 }
 
 export function QuantitySelector({
@@ -19,6 +23,7 @@ export function QuantitySelector({
   className = "",
   disabled = false,
   testId,
+  ariaLabel = "Quantity",
 }: QuantitySelectorProps) {
   const numValue = typeof value === "number" && !Number.isNaN(value) ? Math.max(1, value) : 1;
   const [isCustom, setIsCustom] = useState(numValue >= 10);
@@ -97,15 +102,20 @@ export function QuantitySelector({
         onChange={handleCustomInputChange}
         onBlur={handleCustomInputBlur}
         disabled={disabled}
-        className={className}
+        className={cn(className, "min-h-11")}
         data-testid={testId}
+        aria-label={ariaLabel}
       />
     );
   }
 
   return (
     <Select value={String(numValue)} onValueChange={handleSelectChange} disabled={disabled}>
-      <SelectTrigger className={className} data-testid={testId}>
+      <SelectTrigger
+        className={cn(className, "min-h-11")}
+        data-testid={testId}
+        aria-label={ariaLabel}
+      >
         <SelectValue />
       </SelectTrigger>
       <SelectContent>

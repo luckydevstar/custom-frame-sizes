@@ -97,7 +97,7 @@ export function ImageGallery({ images, initialIndex = 0, open, onOpenChange }: I
           <Button
             variant="ghost"
             size="icon"
-            className="absolute top-4 right-4 z-50 text-white hover:bg-white/20 h-10 w-10"
+            className="absolute top-4 right-4 z-50 text-white hover:bg-white/20 h-11 w-11 min-h-[44px] min-w-[44px]"
             onClick={() => onOpenChange(false)}
             aria-label="Close gallery"
             data-testid="button-close-gallery"
@@ -146,17 +146,24 @@ export function ImageGallery({ images, initialIndex = 0, open, onOpenChange }: I
           </div>
 
           {images.length > 1 && (
-            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2 z-40">
+            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-1 z-40">
               {images.map((_, index) => (
                 <button
                   key={index}
+                  type="button"
                   onClick={() => setCurrentIndex(index)}
-                  className={`h-2 rounded-full transition-all ${
-                    index === currentIndex ? "w-8 bg-white" : "w-2 bg-white/50 hover:bg-white/75"
-                  }`}
+                  className="flex min-h-11 min-w-11 items-center justify-center rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
                   data-testid={`button-dot-${index}`}
-                  aria-label={`Go to image ${index + 1}`}
-                />
+                  aria-label={`Go to image ${index + 1} of ${images.length}`}
+                  aria-current={index === currentIndex || undefined}
+                >
+                  <span
+                    className={`block h-2 rounded-full transition-all ${
+                      index === currentIndex ? "w-8 bg-white" : "w-2 bg-white/50 hover:bg-white/75"
+                    }`}
+                    aria-hidden
+                  />
+                </button>
               ))}
             </div>
           )}

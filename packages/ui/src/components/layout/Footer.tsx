@@ -105,13 +105,13 @@ export function Footer({ links, onNewsletterSubmit }: FooterProps) {
 
     return (
       <div>
-        <h3 className="font-semibold text-base mb-4">{title}</h3>
+        <h3 className="mb-4 text-base font-semibold text-white">{title}</h3>
         <ul className="space-y-2">
           {links.map((link) => (
             <li key={link.path}>
               <Link
                 href={link.path}
-                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="text-sm text-white/80 transition-colors hover:text-white"
                 data-testid={`link-footer-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
               >
                 {link.label}
@@ -124,7 +124,7 @@ export function Footer({ links, onNewsletterSubmit }: FooterProps) {
   };
 
   return (
-    <footer className="border-t bg-card mt-auto" role="contentinfo">
+    <footer className="mt-auto border-t border-white/10 bg-[#333D37] text-white" role="contentinfo">
       <div className="container mx-auto px-4 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
           {renderLinkColumn("Shop", footerLinks.shop)}
@@ -134,10 +134,8 @@ export function Footer({ links, onNewsletterSubmit }: FooterProps) {
 
           {/* Newsletter Column */}
           <div>
-            <h3 className="font-semibold text-base mb-4">Stay Updated</h3>
-            <p className="text-sm text-muted-foreground mb-3">
-              Get framing tips and exclusive offers
-            </p>
+            <h3 className="mb-4 text-base font-semibold text-white">Stay Updated</h3>
+            <p className="mb-3 text-sm text-white/80">Get framing tips and exclusive offers</p>
             <form onSubmit={handleNewsletterSubmit} className="space-y-2">
               <label htmlFor="newsletter-email" className="sr-only">
                 Email address
@@ -150,7 +148,7 @@ export function Footer({ links, onNewsletterSubmit }: FooterProps) {
                 required
                 aria-required="true"
                 aria-label="Email address for newsletter"
-                className="text-sm"
+                className="border-white/20 bg-white/10 text-sm text-white placeholder:text-white/50 focus-visible:ring-white/40 focus-visible:ring-offset-2 focus-visible:ring-offset-[#333D37]"
                 data-testid="input-newsletter-email"
               />
               <Button
@@ -167,11 +165,11 @@ export function Footer({ links, onNewsletterSubmit }: FooterProps) {
 
         {/* Contact Info Row */}
         {(contactPhone || contactEmail) && (
-          <div className="border-t mt-8 pt-8 flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-8 text-sm">
+          <div className="mt-8 flex flex-col items-center justify-center gap-4 border-t border-white/10 pt-8 text-sm sm:flex-row sm:gap-8">
             {contactPhone && (
               <a
                 href={`tel:${contactPhone.replace(/\D/g, "")}`}
-                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                className="flex items-center gap-2 text-white/80 transition-colors hover:text-white"
                 data-testid="link-footer-phone"
               >
                 <Phone className="h-4 w-4" />
@@ -181,7 +179,7 @@ export function Footer({ links, onNewsletterSubmit }: FooterProps) {
             {contactEmail && (
               <a
                 href={`mailto:${contactEmail}`}
-                className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+                className="flex items-center gap-2 text-white/80 transition-colors hover:text-white"
                 data-testid="link-footer-email"
               >
                 <Mail className="h-4 w-4" />
@@ -192,28 +190,28 @@ export function Footer({ links, onNewsletterSubmit }: FooterProps) {
         )}
 
         {/* Bottom Bar */}
-        <div className="border-t mt-6 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground" data-testid="text-copyright">
+        <div className="mt-6 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 md:flex-row">
+          <p className="text-sm text-white/80" data-testid="text-copyright">
             © {currentYear} {siteName}. All rights reserved.
           </p>
           <div className="flex gap-4 text-sm">
             <Link
               href="/privacy-policy"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-white/80 transition-colors hover:text-white"
               data-testid="link-privacy"
             >
               Privacy
             </Link>
             <Link
               href="/terms"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-white/80 transition-colors hover:text-white"
               data-testid="link-terms"
             >
               Terms
             </Link>
             <Link
               href="/contact"
-              className="text-muted-foreground hover:text-foreground transition-colors"
+              className="text-white/80 transition-colors hover:text-white"
               data-testid="link-contact"
             >
               Contact

@@ -6,7 +6,6 @@ import { useState } from "react";
 
 import { Input } from "../ui/input";
 
-
 export interface SearchBarProps {
   placeholder?: string;
   onSearch?: (query: string) => void;
@@ -38,6 +37,7 @@ export function SearchBar({ placeholder = "Search frames...", onSearch }: Search
         onChange={(e) => setSearchQuery(e.target.value)}
         className="pl-9 h-10"
         data-testid="input-search"
+        aria-label="Search frames"
       />
     </form>
   );

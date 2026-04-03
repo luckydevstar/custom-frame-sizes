@@ -400,15 +400,7 @@ export default function HomePage() {
           <h2 className="font-serif text-3xl font-bold text-center mb-12">
             Featured Frame Designs
           </h2>
-          <FrameStylesShowcase frames={pictureFrames} />
-          <div className="text-center mt-12">
-            <a
-              href="/frames"
-              className="inline-flex items-center justify-center px-8 py-3 bg-primary text-primary-foreground rounded-lg font-semibold hover:bg-primary/90 transition-colors"
-            >
-              View All Frame Styles
-            </a>
-          </div>
+          <FrameStylesShowcase frames={pictureFrames} allFramesLink="/frames" />
         </div>
       </section>
 
