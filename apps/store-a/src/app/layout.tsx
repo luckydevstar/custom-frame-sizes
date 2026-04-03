@@ -1,16 +1,16 @@
-import type { Metadata } from "next";
-
-import { Inter, Playfair_Display, Montserrat } from "next/font/google";
 import "./globals.css";
 import { StoreProvider } from "@framecraft/core";
 import { TooltipProvider } from "@framecraft/ui";
 import { Header, Footer } from "@framecraft/ui/components/layout";
 import { Toaster } from "@framecraft/ui/components/ui/toaster";
+import { Inter, Playfair_Display, Montserrat } from "next/font/google";
 
 import { brandConfig } from "../brand.config";
 import { QueryProvider } from "../components/providers/query-provider";
 
 import { CartHydration } from "./components/CartHydration";
+
+import type { Metadata } from "next";
 
 // Body font - loaded with key weights only
 const inter = Inter({
@@ -68,8 +68,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.className} ${playfair.variable} ${montserrat.variable}`}>
+    <html lang="en" className={playfair.variable} suppressHydrationWarning>
+      <body className={`${inter.className} ${montserrat.variable}`}>
         <QueryProvider>
           <StoreProvider config={brandConfig}>
             <CartHydration />

@@ -9,6 +9,16 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        /** next/font sets --font-playfair on <html> (layout.tsx); map Tailwind font-serif to it */
+        serif: [
+          'var(--font-playfair)',
+          '"Playfair Display"',
+          'Georgia',
+          'ui-serif',
+          'serif',
+        ],
+      },
       colors: {
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
