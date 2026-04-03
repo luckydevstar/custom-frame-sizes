@@ -7,7 +7,7 @@ import { env } from "./env";
 
 import type { Metadata } from "next";
 
-const SITE_DOMAIN = env.shopify.storeDomain || "store-a.example.com";
+const SITE_DOMAIN = env.shopify.storeDomain || "www.customframesizes.com";
 const SITE_URL = `https://${SITE_DOMAIN}`;
 const OG_IMAGE = `${SITE_URL}/assets/og-image.jpg`;
 const TWITTER_IMAGE = `${SITE_URL}/assets/twitter-image.jpg`;
@@ -358,7 +358,7 @@ export function generateFAQSchema(items: FAQItem[]): string {
  * For site-wide search configuration
  */
 export function generateWebsiteSchema(
-  searchUrl: string = `${SITE_URL}/picture-frames?search={search_term_string}`
+  searchUrl: string = `${SITE_URL}/picture-frames?search={search_term_string}`,
 ): string {
   return JSON.stringify({
     "@context": "https://schema.org",

@@ -11,7 +11,7 @@ import { env } from "./lib/env";
 export const brandConfig: BrandConfig = {
   storeId: "store-a",
   name: "CustomFrameSizes.com",
-  domain: env.shopify.storeDomain || "store-a.example.com",
+  domain: env.shopify.storeDomain || "www.customframesizes.com",
 
   shopify: {
     domain: env.shopify.storeDomain || "store-a.myshopify.com",
@@ -72,9 +72,9 @@ export const brandConfig: BrandConfig = {
       "exact dimensions",
       "CustomFrameSizes",
     ],
-    canonicalUrl: `https://${env.shopify.storeDomain || "store-a.example.com"}`,
-    ogImage: `https://${env.shopify.storeDomain || "store-a.example.com"}/assets/og-image.jpg`,
-    twitterImage: `https://${env.shopify.storeDomain || "store-a.example.com"}/assets/og-image.jpg`,
+    canonicalUrl: `https://${env.shopify.storeDomain || "www.customframesizes.com"}`,
+    ogImage: `https://${env.shopify.storeDomain || "www.customframesizes.com"}/assets/og-image.jpg`,
+    twitterImage: `https://${env.shopify.storeDomain || "www.customframesizes.com"}/assets/og-image.jpg`,
   },
 
   branding: {
