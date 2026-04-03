@@ -10,7 +10,7 @@ import { generateMetadata } from "@/lib/seo";
 
 const PuckFrameDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.PuckFrameDesigner),
-  { ssr: false }
+  { ssr: false },
 );
 
 export const dynamic = "force-dynamic";
@@ -19,7 +19,7 @@ export const metadata: Metadata = generateMetadata({
   title: "Hockey Puck Display Frames | Custom Foam Insert Kit | CustomFrameSizes.com",
   description:
     "Display hockey pucks safely with custom frames and foam insert system. Friction-fit mounting with no adhesives. Design your complete display kit now.",
-  canonical: "https://customframesizes.com/hockey-puck-frame-designer",
+  canonical: "https://www.customframesizes.com/hockey-puck-frame-designer",
   ogTitle: "Hockey Puck Display Frames – Custom Kit with Foam Insert",
   ogDescription:
     "Professional hockey puck display frames with custom foam insert. Friction-fit mounting, no adhesives.",

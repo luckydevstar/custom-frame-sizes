@@ -39,7 +39,7 @@ export const metadata: Metadata = {
 };
 
 export default function FramesBySizePage() {
-  const baseUrl = brandConfig.seo?.canonicalUrl || "https://customframesizes.com";
+  const baseUrl = brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com";
   const canonicalFramesSizes = `${baseUrl}/frames/sizes`;
 
   const breadcrumbSchema = {

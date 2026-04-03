@@ -9,6 +9,8 @@ import type { Metadata } from "next";
 
 const SITE_DOMAIN = env.shopify.storeDomain || "www.customframesizes.com";
 const SITE_URL = `https://${SITE_DOMAIN}`;
+/** Public site origin (https + hostname); use for sitemap, robots, and JSON-LD fallbacks */
+export const siteUrl = SITE_URL;
 const OG_IMAGE = `${SITE_URL}/assets/og-image.jpg`;
 const TWITTER_IMAGE = `${SITE_URL}/assets/twitter-image.jpg`;
 

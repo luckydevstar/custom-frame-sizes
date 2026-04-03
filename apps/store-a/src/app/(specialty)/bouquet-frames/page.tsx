@@ -13,7 +13,6 @@ import {
 import nextDynamic from "next/dynamic";
 import Link from "next/link";
 
-
 import { brandConfig } from "../../../brand.config";
 
 import { ScrollToDesignerButton } from "./scroll-button";
@@ -35,7 +34,7 @@ const BouquetFrameDesigner = nextDynamic(
         </div>
       </div>
     ),
-  }
+  },
 );
 
 /** Bouquet-page defaults: 20×24", 2" depth for preserved bouquets, white mat, light backing. */
@@ -146,13 +145,13 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       position: 1,
       name: "Home",
-      item: brandConfig.seo?.canonicalUrl || "https://customframesizes.com/",
+      item: brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com/",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "Preserved Bouquet Frames",
-      item: `${brandConfig.seo?.canonicalUrl || "https://customframesizes.com"}/bouquet-frames`,
+      item: `${brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com"}/bouquet-frames`,
     },
   ],
 };

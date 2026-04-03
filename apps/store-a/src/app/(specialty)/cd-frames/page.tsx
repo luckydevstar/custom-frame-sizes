@@ -2,7 +2,7 @@ import { CdFramesContent } from "./cd-frames-content";
 
 import type { Metadata } from "next";
 
-const baseUrl = "https://customframesizes.com";
+const baseUrl = "https://www.customframesizes.com";
 const pageUrl = `${baseUrl}/cd-frames`;
 const ogImage = `${baseUrl}/cd/lifestyle/cd-frame-lifestyle-1.jpg`;
 

@@ -14,7 +14,7 @@ import type { Metadata } from "next";
 
 const frames = getFrameStyles();
 const colorCounts = getShadowboxColorCounts(
-  frames as Parameters<typeof getShadowboxColorCounts>[0]
+  frames as Parameters<typeof getShadowboxColorCounts>[0],
 );
 const orderedColors = Object.entries(SHADOWBOX_COLOR_METADATA)
   .sort((a, b) => (colorCounts[b[0]] || 0) - (colorCounts[a[0]] || 0))
@@ -24,7 +24,7 @@ const orderedColors = Object.entries(SHADOWBOX_COLOR_METADATA)
     count: colorCounts[colorName] || 0,
     image: getShadowboxColorHubImage(
       colorName,
-      frames as Parameters<typeof getShadowboxColorHubImage>[1]
+      frames as Parameters<typeof getShadowboxColorHubImage>[1],
     ),
   }));
 
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/shadowboxes/colors" },
 };
 
-const baseUrl = brandConfig.seo?.canonicalUrl || "https://customframesizes.com";
+const baseUrl = brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com";
 
 export default function ShadowboxesColorsPage() {
   const breadcrumbSchema = {

@@ -2,7 +2,7 @@ import { MagazineFramesContent } from "./magazine-frames-content";
 
 import type { Metadata } from "next";
 
-const baseUrl = "https://customframesizes.com";
+const baseUrl = "https://www.customframesizes.com";
 const pageUrl = `${baseUrl}/magazine-frames`;
 
 export const metadata: Metadata = {
