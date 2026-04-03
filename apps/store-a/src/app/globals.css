@@ -70,6 +70,12 @@
   h1 {
     letter-spacing: -0.02em;
   }
+
+  /* WCAG 2.4.7: visible keyboard focus where components do not set ring/outline (P1 #15) */
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
 }
 
 /* Prevent Uppy dashboard from permanently locking page scroll */
