@@ -73,6 +73,7 @@ export function ContactForm({
           value={formData.name}
           onChange={handleChange}
           data-testid="input-name"
+          autoComplete="name"
         />
       </div>
       <div className="space-y-2">
@@ -85,6 +86,7 @@ export function ContactForm({
           value={formData.email}
           onChange={handleChange}
           data-testid="input-email"
+          autoComplete="email"
         />
       </div>
       <div className="space-y-2">
@@ -96,6 +98,7 @@ export function ContactForm({
           value={formData.phone}
           onChange={handleChange}
           data-testid="input-phone"
+          autoComplete="tel"
         />
       </div>
       <div className="space-y-2">

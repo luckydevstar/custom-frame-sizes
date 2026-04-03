@@ -113,7 +113,7 @@ export function ColorSwatches({
             onKeyDown={(e) => handleKeyDown(e, color, index)}
             aria-disabled={isDisabled}
             className={`
-              aspect-square rounded-md border-2 relative overflow-hidden
+              w-full min-h-[44px] min-w-[44px] aspect-square rounded-md border-2 relative overflow-hidden
               ${isDisabled ? "opacity-40 cursor-not-allowed" : "hover-elevate active-elevate-2 cursor-pointer"}
               ${borderClasses}
               focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2
@@ -127,7 +127,7 @@ export function ColorSwatches({
               backgroundColor: color.hexColor, // Fallback while image loads
             }}
             title={isDisabled ? disabledTooltip : color.name}
-            aria-label={color.name}
+            aria-label={`Select ${color.name} mat`}
             aria-checked={isSelected}
             role="radio"
             tabIndex={isSelected ? 0 : -1}

@@ -14,7 +14,6 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Separator } from "../ui/separator";
 
-
 // Note: CSS imports should be handled in the app's global CSS or _app.tsx
 // These are commented out to avoid build errors - add to app CSS:
 // @import '@uppy/core/dist/style.css';
@@ -22,7 +21,6 @@ import { Separator } from "../ui/separator";
 import { ImageEditor } from "./ImageEditor";
 
 import type { UploadResult } from "@uppy/core";
-
 
 interface PhotoUploadOptionsProps {
   open: boolean;
@@ -66,7 +64,7 @@ export function PhotoUploadOptions({
         strings: {
           // Customize text for world-class UX
           dropHereOr: "Drop your photo here or %{browse}",
-          browse: "browse",
+          browse: "Upload artwork image",
           // Remove redundant file count mentions
           xFilesSelected: {
             0: "Ready to upload",
@@ -106,7 +104,7 @@ export function PhotoUploadOptions({
       })
       .on("error", () => {
         setIsUploading(false);
-      })
+      }),
   );
 
   const handleDeviceUpload = () => {
@@ -255,7 +253,7 @@ export function PhotoUploadOptions({
       // which forces height: 100vh; overflow: hidden and kills page scroll.
       bodyEl.classList.remove("uppy-Dashboard--isFixed", "uppy-Dashboard-isFixed");
       const fixedDashboards = document.querySelectorAll<HTMLElement>(
-        ".uppy-Dashboard--isFixed, .uppy-Dashboard-isFixed"
+        ".uppy-Dashboard--isFixed, .uppy-Dashboard-isFixed",
       );
       fixedDashboards.forEach((el) => {
         el.classList.remove("uppy-Dashboard--isFixed", "uppy-Dashboard-isFixed");
@@ -296,6 +294,7 @@ export function PhotoUploadOptions({
               onChange={handleFileSelect}
               className="hidden"
               data-testid="input-file-hidden"
+              aria-label="Upload artwork image"
             />
 
             {/* Primary: Device Photo Library */}
@@ -337,8 +336,10 @@ export function PhotoUploadOptions({
                   onClick={handleUrlSubmit}
                   disabled={isLoadingUrl || !urlInput.trim()}
                   data-testid="button-url-submit"
+                  aria-label="Submit image URL"
+                  className="min-h-11 min-w-11 shrink-0 px-3"
                 >
-                  <LinkIcon className="h-4 w-4" />
+                  <LinkIcon className="h-4 w-4" aria-hidden />
                 </Button>
               </div>
               <p className="text-xs text-muted-foreground">Paste a direct link to an image file</p>
