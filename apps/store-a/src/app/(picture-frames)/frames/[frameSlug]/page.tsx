@@ -11,6 +11,7 @@ import { FrameHeroBadge } from "./FrameHeroBadge";
 import type { Metadata } from "next";
 
 import {
+  buildFrameProductMetaDescription,
   generateDetailMetadata,
   generateProductSchema,
   generateBreadcrumbSchema,
@@ -27,10 +28,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const frame = getFrameStyleById(frameSlug);
   if (!frame) return { title: "Frame Not Found" };
 
-  const description =
-    frame.shortDescription ||
-    frame.featuredDescription ||
-    `Design a custom ${frame.name} picture frame in any size. Choose your dimensions, mat, and glazing options. Instant pricing.`;
+  const description = buildFrameProductMetaDescription({
+    name: frame.name,
+    shortDescription: frame.shortDescription,
+    featuredDescription: frame.featuredDescription,
+  });
 
   return generateDetailMetadata({
     name: frame.name,
@@ -53,10 +55,11 @@ export default async function FrameDesignerBySlugPage({ params }: Props) {
 
   const pageContent = getFramePageContent(frame);
 
-  const description =
-    frame.shortDescription ||
-    frame.featuredDescription ||
-    `Design a custom ${frame.name} picture frame in any size. Choose your dimensions, mat, and glazing options. Instant pricing.`;
+  const description = buildFrameProductMetaDescription({
+    name: frame.name,
+    shortDescription: frame.shortDescription,
+    featuredDescription: frame.featuredDescription,
+  });
 
   const breadcrumbs = [
     { name: "Home", url: getCanonicalUrl("/") },

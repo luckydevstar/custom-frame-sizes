@@ -7,6 +7,70 @@ import { env } from "./env";
 
 import type { Metadata } from "next";
 
+const FRAME_META_PREFIX = "custom picture frame in any size from 4×4 to 60×60.";
+const FRAME_META_SUFFIX = "Instant pricing at CustomFrameSizes.com.";
+/** Align with generateMetadata description cap (155) and plan target 120–160. */
+const FRAME_META_MAX = 155;
+const FRAME_META_MIN = 120;
+
+function normalizeWhitespace(s: string): string {
+  return s.replace(/\s+/g, " ").trim();
+}
+
+function stripTrailingPeriod(s: string): string {
+  return s.endsWith(".") ? s.slice(0, -1).trimEnd() : s;
+}
+
+function truncateTagline(tagline: string, maxLen: number): string {
+  if (tagline.length <= maxLen) return tagline;
+  const slice = tagline.slice(0, Math.max(0, maxLen - 1)).trimEnd();
+  const lastSpace = slice.lastIndexOf(" ");
+  if (lastSpace > maxLen * 0.45) return `${slice.slice(0, lastSpace)}…`;
+  return `${slice}…`;
+}
+
+/**
+ * Meta description for picture-frame product pages (120–155 chars before global trim).
+ * @see docs/CFS_PRELAUNCH_FIXES_PLAN.md P1 #12
+ */
+export function buildFrameProductMetaDescription({
+  name,
+  shortDescription,
+  featuredDescription,
+}: {
+  name: string;
+  shortDescription?: string | null;
+  featuredDescription?: string | null;
+}): string {
+  const base = `${name} ${FRAME_META_PREFIX}`;
+  const shortT = normalizeWhitespace(shortDescription || "");
+  const featT = normalizeWhitespace(featuredDescription || "");
+  const tagline = stripTrailingPeriod(shortT || featT);
+  const filler = "Choose dimensions, mat, and glazing.";
+
+  const withMiddle = (middle: string) => `${base} ${middle}. ${FRAME_META_SUFFIX}`;
+  const maxMiddleLen = FRAME_META_MAX - base.length - 3 - FRAME_META_SUFFIX.length;
+
+  let middle = tagline || filler;
+  let desc = withMiddle(middle);
+
+  if (desc.length < FRAME_META_MIN && tagline) {
+    middle = `${tagline}. ${filler}`;
+    desc = withMiddle(middle);
+  }
+
+  if (desc.length > FRAME_META_MAX && maxMiddleLen > 12) {
+    middle = truncateTagline(middle, maxMiddleLen);
+    desc = withMiddle(middle);
+  }
+
+  if (desc.length > FRAME_META_MAX) {
+    desc = desc.slice(0, FRAME_META_MAX);
+  }
+
+  return desc;
+}
+
 const SITE_DOMAIN = env.shopify.storeDomain || "www.customframesizes.com";
 const SITE_URL = `https://${SITE_DOMAIN}`;
 /** Public site origin (https + hostname); use for sitemap, robots, and JSON-LD fallbacks */
