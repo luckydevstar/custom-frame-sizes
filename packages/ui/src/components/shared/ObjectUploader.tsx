@@ -16,7 +16,6 @@ import type { ReactNode } from "react";
 // @import '@uppy/core/dist/style.css';
 // @import '@uppy/dashboard/dist/style.css';
 
-
 interface ObjectUploaderProps {
   maxNumberOfFiles?: number;
   maxFileSize?: number;
@@ -76,6 +75,12 @@ export function ObjectUploader({
         allowedFileTypes: ["image/*", "application/pdf"],
       },
       autoProceed: false,
+      locale: {
+        strings: {
+          browse: "Upload artwork image",
+        },
+        pluralize: (n: number) => (n === 1 ? 0 : 1),
+      },
     })
       .use(AwsS3, {
         shouldUseMultipart: false,
@@ -91,7 +96,7 @@ export function ObjectUploader({
         setShowModal(false);
         // Clear files after upload to allow re-uploading
         uppy.cancelAll();
-      })
+      }),
   );
 
   return (

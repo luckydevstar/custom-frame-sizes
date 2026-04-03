@@ -1305,18 +1305,20 @@ export function FrameDesigner({
               {/* Preview control buttons - always visible */}
               <div className="absolute top-4 left-4 z-50 flex gap-2">
                 <button
+                  type="button"
                   onClick={() => {
                     setFullscreenImage("preview");
                     setFullImageOpen(true);
                   }}
-                  className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md bg-background/90 p-2 shadow-lg hover:bg-background hover-elevate active-elevate-2"
                   data-testid="button-expand-preview"
                   title="Fullscreen preview"
                   aria-label="Fullscreen view"
                 >
-                  <Maximize className="h-5 w-5" />
+                  <Maximize className="h-5 w-5" aria-hidden />
                 </button>
                 <button
+                  type="button"
                   onClick={async () => {
                     try {
                       let imageDataUrl = displayImage;
@@ -1438,12 +1440,12 @@ export function FrameDesigner({
                       });
                     }
                   }}
-                  className="bg-background/90 hover:bg-background p-2 rounded-md shadow-lg hover-elevate active-elevate-2"
+                  className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md bg-background/90 p-2 shadow-lg hover:bg-background hover-elevate active-elevate-2"
                   data-testid="button-export-preview"
                   title="Export preview as high-resolution PNG (1600px)"
-                  aria-label="Download frame design"
+                  aria-label="Download or share frame preview image"
                 >
-                  <Download className="h-5 w-5" />
+                  <Download className="h-5 w-5" aria-hidden />
                 </button>
               </div>
 
@@ -2267,6 +2269,7 @@ export function FrameDesigner({
                         onChange={(e) => setCopyrightAgreed(e.target.checked)}
                         className="mt-0.5"
                         data-testid="checkbox-copyright"
+                        aria-label="I confirm copyright ownership and agree to the terms of service"
                       />
                       <Label htmlFor="copyright-agreement" className="text-xs cursor-pointer">
                         I confirm that I own or am authorized to reproduce this image and agree to
@@ -2350,11 +2353,14 @@ export function FrameDesigner({
                     {frameStyles.map((frame) => (
                       <button
                         key={frame.id}
+                        type="button"
                         onClick={() => setSelectedFrame(frame)}
-                        className={`p-3 rounded-md border-2 text-left hover-elevate active-elevate-2 ${
+                        className={`min-h-[44px] p-3 rounded-md border-2 text-left hover-elevate active-elevate-2 ${
                           selectedFrame.id === frame.id ? "border-primary" : "border-transparent"
                         }`}
                         data-testid={`button-frame-${frame.id}`}
+                        aria-label={`Select ${frame.name} frame style`}
+                        aria-pressed={selectedFrame.id === frame.id}
                       >
                         {frame.thumbnail ? (
                           <div className="h-12 w-full rounded mb-2 overflow-hidden">
@@ -2492,6 +2498,7 @@ export function FrameDesigner({
                           checked={bottomWeighted}
                           onCheckedChange={(checked) => setBottomWeighted(checked === true)}
                           data-testid="checkbox-bottom-weighted"
+                          aria-label="Bottom-weighted matting"
                         />
                         <div className="flex items-center gap-2">
                           <Label
@@ -2505,11 +2512,11 @@ export function FrameDesigner({
                               <TooltipTrigger asChild>
                                 <button
                                   type="button"
-                                  className="text-muted-foreground hover:text-foreground transition-colors"
+                                  className="inline-flex min-h-11 min-w-11 items-center justify-center text-muted-foreground hover:text-foreground transition-colors"
                                   data-testid="button-bottom-weighted-info"
                                   aria-label="Information about bottom-weighted matting"
                                 >
-                                  <Info className="h-4 w-4" />
+                                  <Info className="h-4 w-4" aria-hidden />
                                 </button>
                               </TooltipTrigger>
                               <TooltipContent className="max-w-xs">
@@ -2571,6 +2578,11 @@ export function FrameDesigner({
                               setMatRevealWidth((values[0] ?? matReveal).toString())
                             }
                             data-testid="slider-mat-reveal"
+                            aria-label="Mat reveal width in inches"
+                            aria-valuemin={0.25}
+                            aria-valuemax={1}
+                            aria-valuenow={matReveal}
+                            aria-valuetext={`${matReveal.toFixed(2)} inches`}
                           />
                           <p className="text-xs text-muted-foreground">
                             Inner mat border visible around artwork
@@ -2631,14 +2643,15 @@ export function FrameDesigner({
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                     {glassTypes.map((glass) => (
-                      <div key={glass.id} className="flex items-center space-x-2 py-2">
+                      <div key={glass.id} className="flex min-h-11 items-center gap-3 py-1">
                         <RadioGroupItem
                           value={glass.id}
                           id={glass.id}
                           data-testid={`radio-glass-${glass.id}`}
-                          aria-label={glass.name}
                         />
-                        <Label htmlFor={glass.id}>{glass.name}</Label>
+                        <Label htmlFor={glass.id} className="cursor-pointer">
+                          {glass.name}
+                        </Label>
                       </div>
                     ))}
                   </div>
@@ -2706,6 +2719,7 @@ export function FrameDesigner({
                       data-testid="checkbox-puzzle-glue"
                       className="mt-1"
                       onClick={(e) => e.stopPropagation()}
+                      aria-label="Add puzzle glue sheets"
                     />
                   </div>
                 </div>
@@ -2742,6 +2756,7 @@ export function FrameDesigner({
                     onChange={(e) => setCopyrightAgreed(e.target.checked)}
                     className="mt-0.5"
                     data-testid="checkbox-copyright-sticky"
+                    aria-label="I confirm copyright ownership and agree to the terms of service"
                   />
                   <Label htmlFor="copyright-agreement-sticky" className="text-xs cursor-pointer">
                     I confirm that I own or am authorized to reproduce this image and agree to the{" "}
@@ -3397,6 +3412,7 @@ export function FrameDesigner({
                     onChange={(e) => setCopyrightAgreed(e.target.checked)}
                     className="mt-0.5"
                     data-testid="checkbox-copyright-sticky-mobile"
+                    aria-label="I confirm copyright ownership and agree to the terms of service"
                   />
                   <Label
                     htmlFor="copyright-agreement-sticky-mobile"
@@ -3424,8 +3440,9 @@ export function FrameDesigner({
                 <QuantitySelector
                   value={quantity}
                   onChange={setQuantity}
-                  className="w-14 h-7 text-xs text-center p-0"
+                  className="w-14 text-xs text-center"
                   testId="input-quantity-sticky"
+                  ariaLabel="Quantity"
                 />
               </div>
 
