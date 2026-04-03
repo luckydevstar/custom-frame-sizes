@@ -106,6 +106,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     },
     {
+      url: `${baseUrl}/gallery-wall-guide`,
+      lastModified: oneMonthAgo,
+      changeFrequency: "monthly",
+      priority: 0.65,
+    },
+    {
+      url: `${baseUrl}/components`,
+      lastModified: oneMonthAgo,
+      changeFrequency: "monthly",
+      priority: 0.65,
+    },
+    {
       url: `${baseUrl}/blog`,
       lastModified: now,
       changeFrequency: "weekly",
