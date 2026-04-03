@@ -5,7 +5,7 @@ import {
   getFramesByColor,
   getStoreBaseAssetUrl,
 } from "@framecraft/core";
-import { Button, Card, CardContent, Badge , FrameDesigner } from "@framecraft/ui";
+import { Button, Card, CardContent, Badge, FrameDesigner } from "@framecraft/ui";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -157,7 +157,7 @@ export default async function ColorDetailPage({ params }: ColorDetailPageProps) 
   const featuredFrame =
     colorFrames.length > 0
       ? colorFrames.reduce((prev, current) =>
-          (current.pricePerInch || 0) > (prev.pricePerInch || 0) ? current : prev
+          (current.pricePerInch || 0) > (prev.pricePerInch || 0) ? current : prev,
         )
       : null;
   const heroImage = getColorHeroImage(colorName);
@@ -173,19 +173,19 @@ export default async function ColorDetailPage({ params }: ColorDetailPageProps) 
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: brandConfig.seo?.canonicalUrl || "https://customframesizes.com",
+        item: brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Frames by Color",
-        item: `${brandConfig.seo?.canonicalUrl || "https://customframesizes.com"}/frames/colors`,
+        item: `${brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com"}/frames/colors`,
       },
       {
         "@type": "ListItem",
         position: 3,
         name: `${colorData.displayName} Frames`,
-        item: `${brandConfig.seo?.canonicalUrl || "https://customframesizes.com"}/frames/colors/${colorData.slug}`,
+        item: `${brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com"}/frames/colors/${colorData.slug}`,
       },
     ],
   };

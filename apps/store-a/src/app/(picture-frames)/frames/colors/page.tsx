@@ -41,13 +41,13 @@ export default function FramesByColorPage() {
         "@type": "ListItem",
         position: 1,
         name: "Home",
-        item: brandConfig.seo?.canonicalUrl || "https://customframesizes.com",
+        item: brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "Frames by Color",
-        item: `${brandConfig.seo?.canonicalUrl || "https://customframesizes.com"}/frames/colors`,
+        item: `${brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com"}/frames/colors`,
       },
     ],
   };
@@ -107,7 +107,7 @@ export default function FramesByColorPage() {
     name: "Picture Frames by Color",
     description:
       "Browse custom picture frames by color: black, white, gold, brown, silver, and specialty finishes. Expert craftsmanship in sizes from 4×4 to 48×72 inches.",
-    url: `${brandConfig.seo?.canonicalUrl || "https://customframesizes.com"}/frames/colors`,
+    url: `${brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com"}/frames/colors`,
     inLanguage: "en-US",
   };
 

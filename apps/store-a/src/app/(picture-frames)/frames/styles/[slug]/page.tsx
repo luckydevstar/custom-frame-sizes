@@ -6,7 +6,7 @@ import {
   getStyleLifestyleImages,
   getStoreBaseAssetUrl,
 } from "@framecraft/core";
-import { Card, CardContent, Badge , FrameDesigner } from "@framecraft/ui";
+import { Card, CardContent, Badge, FrameDesigner } from "@framecraft/ui";
 import { ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -118,9 +118,9 @@ export default async function StyleDetailPage({ params }: Props) {
   const [styleName, styleData] = entry;
   const styleFrames = getFramesForStyle(
     styleName,
-    frames as Parameters<typeof getFramesForStyle>[1]
+    frames as Parameters<typeof getFramesForStyle>[1],
   );
-  const baseUrl = brandConfig.seo?.canonicalUrl || "https://customframesizes.com";
+  const baseUrl = brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com";
 
   const featuredFrame =
     styleFrames.length > 0
@@ -128,7 +128,7 @@ export default async function StyleDetailPage({ params }: Props) {
           ((current as { pricePerInch?: number }).pricePerInch ?? 0) >
           ((prev as { pricePerInch?: number }).pricePerInch ?? 0)
             ? current
-            : prev
+            : prev,
         )
       : null;
   const otherFrames = styleFrames.filter((f) => f.id !== featuredFrame?.id);
@@ -136,7 +136,7 @@ export default async function StyleDetailPage({ params }: Props) {
   const heroImage = getStyleHeroImage(styleName, frames as Parameters<typeof getStyleHeroImage>[1]);
   const lifestyleImagesRaw = getStyleLifestyleImages(
     styleName,
-    frames as Parameters<typeof getStyleLifestyleImages>[1]
+    frames as Parameters<typeof getStyleLifestyleImages>[1],
   );
   const lifestyleImages = lifestyleImagesRaw.map((img) => ({
     url: resolveImageUrl(img.url),

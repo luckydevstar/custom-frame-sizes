@@ -8,7 +8,7 @@ import type { Metadata } from "next";
 
 import { generateMetadata as generatePageMetadata, getCanonicalUrl } from "@/lib/seo";
 
-const baseUrl = brandConfig.seo?.canonicalUrl ?? "https://customframesizes.com";
+const baseUrl = brandConfig.seo?.canonicalUrl ?? "https://www.customframesizes.com";
 
 const priceValidUntil = new Date();
 priceValidUntil.setDate(priceValidUntil.getDate() + 30);

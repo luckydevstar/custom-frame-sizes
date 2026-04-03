@@ -191,7 +191,7 @@ export interface BrandConfig {
   name: string;
 
   /**
-   * Store domain (e.g., "store-a.example.com")
+   * Public site hostname (e.g., "www.customframesizes.com")
    */
   domain: string;
 

@@ -61,8 +61,14 @@
     @apply bg-background text-foreground;
     font-family: var(--font-inter, system-ui, -apple-system, sans-serif);
   }
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-playfair, serif);
+  h1, h2, h3, h4, h5, h6,
+  .hero-title {
+    font-family: var(--font-playfair), "Playfair Display", Georgia, ui-serif, serif;
+  }
+
+  /* Brand: H1 letter-spacing (homepage hero, frame PDP, all semantic h1s) */
+  h1 {
+    letter-spacing: -0.02em;
   }
 }
 

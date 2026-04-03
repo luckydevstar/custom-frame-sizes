@@ -4,7 +4,7 @@ import { NeedleworkFramesContent } from "./needlework-frames-content";
 
 import type { Metadata } from "next";
 
-const baseUrl = "https://customframesizes.com";
+const baseUrl = "https://www.customframesizes.com";
 const pageUrl = `${baseUrl}/specialty/needlework`;
 
 export const metadata: Metadata = {

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     description:
       "Order custom brass nameplates in any size from 1.5 to 12 inches. Laser-engraved with your text and decorative icons.",
     type: "website",
-    url: "https://customframesizes.com/components/brass-nameplates",
+    url: "https://www.customframesizes.com/components/brass-nameplates",
   },
   twitter: {
     card: "summary_large_image",

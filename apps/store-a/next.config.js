@@ -24,6 +24,13 @@ const assetsRewrite = {
 const nextConfig = {
   reactStrictMode: true,
   swcMinify: true, // Use SWC for faster minification
+  async redirects() {
+    return [
+      { source: '/returns', destination: '/returns-exchanges', permanent: true },
+      { source: '/business-services', destination: '/business', permanent: true },
+      { source: '/frame-quality-guarantee', destination: '/warranty', permanent: true },
+    ];
+  },
   async rewrites() {
     return [...assetRewrites, assetsRewrite];
   },

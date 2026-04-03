@@ -23,7 +23,7 @@ function getShadowboxFramesByColor(colorName: string): FrameStyle[] {
   const frames = getFrameStyles();
   const searchColor = colorName === "Blue" ? "barn blue" : colorName.toLowerCase();
   return frames.filter(
-    (f) => f.category === "shadowbox" && f.colorName?.toLowerCase() === searchColor
+    (f) => f.category === "shadowbox" && f.colorName?.toLowerCase() === searchColor,
   );
 }
 
@@ -67,7 +67,7 @@ export default async function ShadowboxColorDetailPage({ params }: ShadowboxColo
   const colorFrames = getShadowboxFramesByColor(colorName);
   const heroImage = getShadowboxColorHeroImage(colorName, frames);
   const galleryImages = getShadowboxColorGalleryImages(colorName, frames);
-  const baseUrl = brandConfig.seo?.canonicalUrl || "https://customframesizes.com";
+  const baseUrl = brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com";
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
