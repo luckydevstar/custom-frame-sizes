@@ -64,9 +64,19 @@ export interface ThemeOverride {
    */
   logo?: {
     /**
-     * Logo image URL or path
+     * Logo image URL or path (fallback)
      */
     src: string;
+
+    /**
+     * Logo for light mode (optional, will use src if not provided)
+     */
+    srcLight?: string;
+
+    /**
+     * Logo for dark mode (optional, will use src if not provided)
+     */
+    srcDark?: string;
 
     /**
      * Alt text for logo

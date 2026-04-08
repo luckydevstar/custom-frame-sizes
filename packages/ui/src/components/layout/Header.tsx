@@ -103,7 +103,8 @@ export function Header({
     <Logo
       className="!h-12 w-auto"
       alt={storeConfig.theme?.logo?.alt || storeConfig.name}
-      logoSrcLight={storeConfig.theme?.logo?.src}
+      logoSrcLight={storeConfig.theme?.logo?.srcLight || storeConfig.theme?.logo?.src}
+      logoSrcDark={storeConfig.theme?.logo?.srcDark}
     />
   );
 
