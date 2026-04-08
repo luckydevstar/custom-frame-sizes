@@ -15,7 +15,7 @@ import {
   toggleDarkMode,
   getBrandConfig,
 } from "@framecraft/config";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import type { ThemeConfig, ThemeOverride } from "@framecraft/config";
 
@@ -66,6 +66,7 @@ export interface UseThemeReturn {
  */
 export function useTheme(options: UseThemeOptions = {}): UseThemeReturn {
   const { storeId, override, applyToDocument = true } = options;
+  const [isDarkState, setIsDarkState] = useState(false);
 
   // Get theme override from store config if storeId provided
   const storeThemeOverride = useMemo(() => {
@@ -103,11 +104,39 @@ export function useTheme(options: UseThemeOptions = {}): UseThemeReturn {
   // Get merged theme
   const theme = useMemo(() => getMergedTheme(finalOverride), [finalOverride]);
 
-  // Apply theme to document
+  // Apply theme to document and sync isDark state
   useEffect(() => {
-    if (applyToDocument && typeof document !== "undefined") {
+    if (typeof document === "undefined") {
+      return;
+    }
+
+    setIsDarkState(isDarkMode());
+
+    if (applyToDocument) {
       applyThemeToDocument(theme);
     }
+
+    // Listen for theme changes
+    const handleStorageChange = () => {
+      setIsDarkState(isDarkMode());
+    };
+
+    window.addEventListener("storage", handleStorageChange);
+    
+    // Also listen for mutation observer to catch direct class changes
+    const observer = new MutationObserver(() => {
+      setIsDarkState(isDarkMode());
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      observer.disconnect();
+    };
   }, [theme, applyToDocument]);
 
   // Get color helper
@@ -119,17 +148,17 @@ export function useTheme(options: UseThemeOptions = {}): UseThemeReturn {
   };
 
   // Dark mode helpers
-  const isDark = typeof document !== "undefined" ? isDarkMode() : false;
   const toggleDark = (force?: boolean) => {
     if (typeof document !== "undefined") {
       toggleDarkMode(undefined, force);
+      setIsDarkState(isDarkMode());
     }
   };
 
   return {
     theme,
     getColor,
-    isDark,
+    isDark: isDarkState,
     toggleDark,
   };
 }

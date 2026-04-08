@@ -21,3 +21,6 @@ export * from "./cart";
 
 // Serialization
 export * from "./serialization";
+
+// Brand utilities
+export * from "./brand";
