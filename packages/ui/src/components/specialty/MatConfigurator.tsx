@@ -6,8 +6,8 @@
  */
 
 import { getMatsInDisplayOrder, isMatAvailableForSize, type Mat } from "@framecraft/config";
-import { useIsMobile, getGlassTypes, getGlassTypeById, getFrameStyleById, addToCartOnly } from "@framecraft/core";
-import { Square, Ruler, Eye, Settings } from "lucide-react";
+import { useIsMobile, getGlassTypes, getGlassTypeById, getFrameStyleById, addToCartOnly, createCartItemFromFrameConfig, useCartStore } from "@framecraft/core";
+import { Square, Ruler, Eye, Settings, ShoppingCart } from "lucide-react";
 import { useState, useEffect, useMemo, useRef } from "react";
 
 import { Badge } from "../ui/badge";
@@ -22,6 +22,7 @@ import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
 import { Slider } from "../ui/slider";
 import { SwingOut } from "../ui/SwingOut";
+import { useToast } from "../../hooks/use-toast";
 
 
 import { FrameSelector } from "./mat/FrameSelector";
@@ -115,6 +116,7 @@ export interface MatConfiguratorProps {
 }
 
 export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfiguratorProps) {
+  const { toast } = useToast();
   const isMobile = useIsMobile();
   const config = useMatStore((s) => s.config);
   const configVersion = useMatStore((s) => s.configVersion);
@@ -138,6 +140,7 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
     Record<string, { width: string; height: string }>
   >({});
   const [mobileView, setMobileView] = useState<"preview" | "controls">("controls");
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
   const previewRef = useRef<HTMLDivElement>(null);
 
   // Frame photo state management (following CurrencyFrameDesigner pattern)
@@ -763,7 +766,7 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
             </span>
           </div>
         )}
-        <div className="flex justify-between font-semibold text-lg pt-2">
+        <div className="flex justify-between font-semibold text-lg pt-2 border-t">
           <span>Total</span>
           <span data-testid="text-total-price">
             {pricing.formatPrice(
@@ -787,6 +790,21 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
             testId="select-quantity-summary"
           />
         </div>
+        <Button
+          className="w-full mt-4"
+          size="lg"
+          onClick={() =>
+            handleAddToCart(
+              config,
+              config.selectedFrameId ? pricing.grandTotal : pricing.total
+            )
+          }
+          disabled={isCheckingOut}
+          data-testid="button-add-to-cart-pricing"
+        >
+          <ShoppingCart className="w-4 h-4 mr-2" />
+          {isCheckingOut ? "Adding..." : "Add to Cart"}
+        </Button>
       </div>
     </Card>
   );
@@ -822,13 +840,17 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
   };
 
   const handleAddToCart = async (matConfig: typeof config, totalDollars: number) => {
+    setIsCheckingOut(true);
     try {
+      // Determine if this is mat-only or mat+frame
+      const frameStyleId = matConfig.selectedFrameId ? matConfig.selectedFrameId : "mat-board";
+      
       // Create a mat configuration object compatible with frame configuration
       const matFrameConfig = {
         serviceType: "frame-only" as const,
         artworkWidth: matConfig.overallWIn,
         artworkHeight: matConfig.overallHIn,
-        frameStyleId: matConfig.selectedFrameId || "standard-frame",
+        frameStyleId,
         matType: matConfig.singleOrDouble || ("single" as const),
         matBorderWidth: matConfig.topMat.openings[0]?.xIn || 0.5,
         matRevealWidth: matConfig.singleOrDouble === "double" ? (matConfig.matRevealWidth || 0.125) : 0,
@@ -838,10 +860,35 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
         orderSource: "mat-designer",
       };
       
+      // Add to local cart store
+      const productTitle = matConfig.selectedFrameId 
+        ? `Custom Mat + ${getFrameStyleById(matConfig.selectedFrameId)?.name || "Frame"}`
+        : "Custom Mat Board";
+      
+      const cartInput = createCartItemFromFrameConfig(
+        matFrameConfig,
+        totalDollars,
+        matConfig.quantity,
+        { productTitle }
+      );
+      useCartStore.getState().addItem(cartInput);
+      
+      // Add to backend cart
       await addToCartOnly(matFrameConfig, totalDollars, matConfig.quantity);
+
+      toast({
+        title: "Added to Cart",
+        description: `${matConfig.quantity} custom mat${matConfig.quantity > 1 ? "s" : ""} added to your cart.`,
+      });
     } catch (error) {
       console.error("Error adding mat to cart:", error);
-      throw error;
+      toast({
+        title: "Error",
+        description: "Failed to add to cart. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsCheckingOut(false);
     }
   };
 

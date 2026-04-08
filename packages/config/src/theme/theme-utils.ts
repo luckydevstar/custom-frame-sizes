@@ -85,10 +85,49 @@ export function toggleDarkMode(
   if (force !== undefined) {
     if (force) {
       element.classList.add("dark");
+      // Persist to localStorage
+      if (typeof window !== "undefined") {
+        localStorage.setItem("framecraft-theme", "dark");
+      }
     } else {
       element.classList.remove("dark");
+      // Persist to localStorage
+      if (typeof window !== "undefined") {
+        localStorage.setItem("framecraft-theme", "light");
+      }
     }
   } else {
     element.classList.toggle("dark");
+    // Persist the new state
+    if (typeof window !== "undefined") {
+      const isDark = element.classList.contains("dark");
+      localStorage.setItem("framecraft-theme", isDark ? "dark" : "light");
+    }
+  }
+}
+
+/**
+ * Restore theme from localStorage or system preference
+ *
+ * @param element Element to apply theme (default: document.documentElement)
+ */
+export function restoreTheme(element: HTMLElement = document.documentElement): void {
+  if (typeof window === "undefined") return;
+
+  // Check localStorage first
+  const savedTheme = localStorage.getItem("framecraft-theme");
+  if (savedTheme === "dark") {
+    element.classList.add("dark");
+    return;
+  } else if (savedTheme === "light") {
+    element.classList.remove("dark");
+    return;
+  }
+
+  // Fall back to system preference
+  if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+    element.classList.add("dark");
+  } else {
+    element.classList.remove("dark");
   }
 }

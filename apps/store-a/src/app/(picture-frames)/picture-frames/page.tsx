@@ -3,6 +3,9 @@ import { Button } from "@framecraft/ui";
 import { Award, ArrowRight, Sparkles, Ruler, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
+
+import { SearchableFrames } from "./SearchableFrames";
 
 import type { Metadata } from "next";
 
@@ -188,51 +191,9 @@ export default function PictureFramesPage() {
                 Choose from our complete collection of custom picture frames
               </p>
             </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-              {displayFrames.map((frame) => {
-                const imgSrc = getCornerOrThumbUrl(frame);
-                return (
-                  <Link
-                    key={frame.id}
-                    href={`/designer?frame=${frame.id}`}
-                    className="group relative overflow-hidden rounded-lg border bg-card hover:border-primary/30 transition-all cursor-pointer block"
-                    data-testid={`frame-${frame.id}`}
-                  >
-                    <div className="relative aspect-square overflow-hidden bg-muted/20">
-                      {imgSrc ? (
-                        <Image
-                          src={imgSrc}
-                          alt={
-                            frame.alternateImages?.find((i) => i.type === "corner")?.alt ??
-                            `${frame.name} frame`
-                          }
-                          fill
-                          className="object-cover transition-transform duration-300 group-hover:scale-105"
-                          sizes="(max-width: 768px) 33vw, 25vw"
-                        />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center">
-                          <Sparkles className="w-12 h-12 text-muted-foreground/30" />
-                        </div>
-                      )}
-                    </div>
-                    <div className="p-4">
-                      <h3 className="font-semibold text-base group-hover:text-primary transition-colors mb-1">
-                        {frame.name} Frame
-                      </h3>
-                      {frame.shortDescription && (
-                        <p
-                          className="text-xs text-muted-foreground italic"
-                          data-testid="text-frame-short-description"
-                        >
-                          {frame.shortDescription}
-                        </p>
-                      )}
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
+            <Suspense fallback={<div>Loading frames...</div>}>
+              <SearchableFrames frames={displayFrames} />
+            </Suspense>
             <div className="mt-8 text-center">
               <Button asChild size="lg">
                 <Link href="/designer">Start Designing</Link>

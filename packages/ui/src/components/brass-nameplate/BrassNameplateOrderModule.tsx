@@ -1,6 +1,6 @@
 "use client";
 
-import { useIsMobile, parseFraction } from "@framecraft/core";
+import { useIsMobile, parseFraction, addToCartOnly, createCartItemFromFrameConfig, useCartStore } from "@framecraft/core";
 import {
   ShoppingCart,
   Plus,
@@ -162,7 +162,7 @@ export function BrassNameplateOrderModule() {
     });
   }, [toast]);
 
-  const handleAddToCart = useCallback(() => {
+  const handleAddToCart = useCallback(async () => {
     if (!isValidSize) {
       toast({
         title: "Invalid Size",
@@ -194,14 +194,43 @@ export function BrassNameplateOrderModule() {
 
     setIsCheckingOut(true);
 
-    setTimeout(() => {
+    try {
+      const brassNameplateConfig = {
+        serviceType: "frame-only" as const,
+        artworkWidth: width,
+        artworkHeight: height,
+        frameStyleId: "brass-nameplate",
+        matType: "none" as const,
+        matBorderWidth: 0,
+        matRevealWidth: 0,
+        orderSource: "brass-nameplate-standalone",
+        brassNameplateConfig: config, // Store full nameplate config
+      };
+
+      const cartInput = createCartItemFromFrameConfig(
+        brassNameplateConfig,
+        price,
+        quantity,
+        { productTitle: "Custom Brass Nameplate" }
+      );
+      useCartStore.getState().addItem(cartInput);
+      await addToCartOnly(brassNameplateConfig, price, quantity);
+
       toast({
         title: "Added to Cart",
         description: `${quantity} custom nameplate${quantity > 1 ? "s" : ""} added to your cart.`,
       });
+    } catch (error) {
+      console.error("Error adding brass nameplate to cart:", error);
+      toast({
+        title: "Error",
+        description: "Failed to add to cart. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
       setIsCheckingOut(false);
-    }, 1000);
-  }, [isValidSize, overflowCheck.hasOverflow, config.lines, quantity, toast]);
+    }
+  }, [isValidSize, overflowCheck.hasOverflow, config, config.lines, quantity, toast, width, height, price]);
 
   const visibleLines = config.lines.slice(0, STANDALONE_NAMEPLATE_SPECS.MAX_VISIBLE_LINES);
   const canAddMoreLines = config.lines.length < 10;
