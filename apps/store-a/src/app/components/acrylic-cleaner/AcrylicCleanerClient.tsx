@@ -36,16 +36,19 @@ export function AcrylicCleanerClient() {
         serviceType: "frame-only" as const,
         artworkWidth: 8,
         artworkHeight: 8,
-        frameStyleId: "cleaner-product",
+        frameStyleId: "acrylic-cleaner",
         matType: "none" as const,
         matBorderWidth: 0,
         matRevealWidth: 0,
-        matColorId: "",
-        glassTypeId: "standard",
         orderSource: "acrylic-cleaner",
       };
 
-      const cartInput = createCartItemFromFrameConfig(cleanerConfig, total, quantity);
+      const cartInput = createCartItemFromFrameConfig(
+        cleanerConfig, 
+        total, 
+        quantity,
+        { productTitle: "Acrylic Cleaner & Polish" }
+      );
       useCartStore.getState().addItem(cartInput);
       await addToCartOnly(cleanerConfig, total, quantity);
 

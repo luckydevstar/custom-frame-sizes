@@ -50,9 +50,18 @@ export function CartPageClient() {
 
       // Convert local cart items to API format with serialized configuration
       const lines = items.map((item) => {
-        // Calculate price using same engine as displayed in cart
-        const pricing = calculatePricing(item.configuration!);
-        const priceCents = Math.round(pricing.total * 100); // Convert dollars to cents
+        // Calculate price based on product type
+        let priceCents: number;
+        
+        try {
+          // Try frame pricing first (works for custom frames)
+          const pricing = calculatePricing(item.configuration!);
+          priceCents = Math.round(pricing.total * 100); // Convert dollars to cents
+        } catch {
+          // If calculatePricing fails (non-frame products), use pre-calculated price from cart
+          // Foam board, cleat hangers, acrylic, etc. store their price in item.price (which is in cents)
+          priceCents = item.price || 0;
+        }
 
         // Serialize configuration to Shopify attributes format
         const attributes = serializeFrameConfiguration(item.configuration!);

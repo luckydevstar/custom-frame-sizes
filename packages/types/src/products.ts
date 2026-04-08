@@ -142,9 +142,9 @@ export interface FrameConfiguration {
   matType: "none" | "single" | "double";
   matBorderWidth: number; // in inches
   matRevealWidth: number; // in inches (for double mat)
-  matColorId: string; // outer mat or single mat
+  matColorId?: string; // outer mat or single mat - optional for non-frame products
   matInnerColorId?: string; // inner mat for double mat
-  glassTypeId: string;
+  glassTypeId?: string; // optional for non-frame products
   imageUrl?: string; // for print-and-frame service
   copyrightAgreed?: boolean;
   orderSource?: string; // Track order source (e.g., "ai-recommendation", "manual")

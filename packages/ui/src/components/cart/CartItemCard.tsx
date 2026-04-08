@@ -10,9 +10,33 @@ import { Button } from "../ui/button";
 
 import { FrameConfigurationSummary } from "./FrameConfigurationSummary";
 
-
-
 import type { CartItem } from "@framecraft/core/stores";
+
+export interface CartItemCardProps {
+  item: CartItem;
+  onQuantityChange: (itemId: string, quantity: number) => void;
+  onRemove: (itemId: string) => void;
+  className?: string;
+}
+
+/**
+ * Get product display name from frameStyleId
+ */
+function getProductDisplayName(frameStyleId?: string): string {
+  if (!frameStyleId) return "Custom Product";
+  
+  const nameMap: Record<string, string> = {
+    "foam-board": "Foam Board",
+    "cleat-hanger": "Cleat Hangers",
+    "acrylic": "Acrylic Sheet",
+    "acrylic-cleaner": "Acrylic Cleaner",
+    "security-hardware": "Security Hardware",
+    "brass-nameplate": "Brass Nameplate",
+    "mat-board": "Mat Board",
+  };
+  
+  return nameMap[frameStyleId] || "Custom Frame";
+}
 
 
 export interface CartItemCardProps {
@@ -36,6 +60,8 @@ export function CartItemCard({ item, onQuantityChange, onRemove, className }: Ca
   const bottomMat = config?.matInnerColorId ? getMatColorById(config.matInnerColorId) : undefined;
   const canShowPreview =
     config && (config.matType === "single" || config.matType === "double") && topMat?.hexColor;
+
+  const productDisplayName = config ? getProductDisplayName(config.frameStyleId) : "Custom Product";
 
   return (
     <article
@@ -78,7 +104,7 @@ export function CartItemCard({ item, onQuantityChange, onRemove, className }: Ca
           />
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center gap-1 bg-muted/80 p-2 text-center text-muted-foreground text-xs">
-            <span className="font-medium">Custom frame</span>
+            <span className="font-medium">{productDisplayName}</span>
             <span>
               {config ? `${config.artworkWidth}" × ${config.artworkHeight}"` : "No preview"}
             </span>

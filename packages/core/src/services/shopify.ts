@@ -309,9 +309,9 @@ function serializeFrameConfiguration(
     ...(config.matType === "double"
       ? [{ key: "Mat Reveal", value: `${config.matRevealWidth}"` }]
       : []),
-    { key: "Mat Color", value: config.matColorId },
+    ...(config.matColorId ? [{ key: "Mat Color", value: config.matColorId }] : []),
     ...(config.matInnerColorId ? [{ key: "Mat Inner Color", value: config.matInnerColorId }] : []),
-    { key: "Glass Type", value: config.glassTypeId },
+    ...(config.glassTypeId ? [{ key: "Glass Type", value: config.glassTypeId }] : []),
     ...(config.imageUrl ? [{ key: "Customer Image", value: config.imageUrl }] : []),
     ...(config.orderSource ? [{ key: "Order Source", value: config.orderSource }] : []),
     { key: "Configuration JSON", value: JSON.stringify(config) }, // Full config as JSON for reference
