@@ -2,8 +2,8 @@
 
 import { useSearchParams } from 'next/navigation';
 import { useMemo } from 'react';
-import type { FrameStyle } from '@framecraft/core';
 import { getStoreBaseAssetUrl } from '@framecraft/core';
+import type { FrameStyle } from '@framecraft/types';
 import { Button } from '@framecraft/ui';
 import { ArrowRight, Sparkles } from 'lucide-react';
 import Image from 'next/image';
@@ -37,7 +37,16 @@ export function SearchableFrames({ frames }: SearchableFramesProps) {
     if (!query) return frames;
 
     return frames.filter((frame) => {
-      const searchableText = `${frame.name} ${frame.description || ''}`.toLowerCase();
+      const searchableText = [
+        frame.name,
+        frame.shortDescription,
+        frame.featuredDescription,
+        frame.material,
+        frame.colorName,
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
       return searchableText.includes(query);
     });
   }, [frames, query]);
@@ -82,8 +91,10 @@ export function SearchableFrames({ frames }: SearchableFramesProps) {
                 </div>
                 <div className="p-4">
                   <h3 className="font-semibold text-sm line-clamp-2 mb-2">{frame.name}</h3>
-                  {frame.description && (
-                    <p className="text-xs text-muted-foreground line-clamp-2 mb-3">{frame.description}</p>
+                  {frame.shortDescription && (
+                    <p className="text-xs text-muted-foreground line-clamp-2 mb-3">
+                      {frame.shortDescription}
+                    </p>
                   )}
                   <Button variant="ghost" size="sm" className="w-full">
                     View Frame

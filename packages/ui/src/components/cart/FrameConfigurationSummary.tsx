@@ -53,16 +53,16 @@ export function FrameConfigurationSummary({
 }: FrameConfigurationSummaryProps) {
   const productType = getProductType(config.frameStyleId);
   const frame = getFrameStyleById(config.frameStyleId);
-  const matColor = getMatColorById(config.matColorId);
+  const matColor = config.matColorId ? getMatColorById(config.matColorId) : undefined;
   const matInnerColor = config.matInnerColorId
     ? getMatColorById(config.matInnerColorId)
     : undefined;
-  const glass = getGlassTypeById(config.glassTypeId);
+  const glass = config.glassTypeId ? getGlassTypeById(config.glassTypeId) : undefined;
 
   const frameName = frame?.name ?? config.frameStyleId;
-  const matName = matColor?.name ?? config.matColorId;
-  const matInnerName = matInnerColor?.name ?? config.matInnerColorId;
-  const glassName = glass?.name ?? config.glassTypeId;
+  const matName = matColor?.name ?? config.matColorId ?? "—";
+  const matInnerName = matInnerColor?.name ?? config.matInnerColorId ?? "—";
+  const glassDisplay = glass?.name ?? config.glassTypeId ?? "";
 
   // Build rows based on product type
   const rows: { label: string; value: string }[] = [];
@@ -89,8 +89,8 @@ export function FrameConfigurationSummary({
       break;
 
     case "acrylic":
-      if (config.glassTypeId) {
-        rows.push({ label: "Glass Type", value: glassName });
+      if (config.glassTypeId && glassDisplay) {
+        rows.push({ label: "Glass Type", value: glassDisplay });
       }
       break;
 
@@ -126,10 +126,10 @@ export function FrameConfigurationSummary({
             ? "None"
             : config.matType === "single"
               ? `${matName} (${config.matBorderWidth}" border)`
-              : `Double: ${matName} + ${matInnerName ?? "—"} (${config.matBorderWidth}" border, ${config.matRevealWidth}" reveal)`,
+              : `Double: ${matName} + ${matInnerName} (${config.matBorderWidth}" border, ${config.matRevealWidth}" reveal)`,
       });
-      if (config.glassTypeId) {
-        rows.push({ label: "Glazing", value: glassName });
+      if (config.glassTypeId && glassDisplay) {
+        rows.push({ label: "Glazing", value: glassDisplay });
       }
       rows.push({
         label: "Service",
@@ -152,7 +152,7 @@ export function FrameConfigurationSummary({
             ? matName
             : `${matName} + ${matInnerName ?? "—"}`
       );
-      if (glassName) parts.push(glassName);
+      if (glassDisplay) parts.push(glassDisplay);
     } else if (productType === "foam-board" && config.orderSource) {
       const boardType = config.orderSource.replace("foam-board-", "").replace(/-/g, " ");
       parts.push(boardType);

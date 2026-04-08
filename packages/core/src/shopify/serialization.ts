@@ -151,10 +151,12 @@ export function serializeFrameConfiguration(config: FrameConfiguration): Shopify
       value: formatDimension(config.matBorderWidth),
     });
 
-    attributes.push({
-      key: "Mat Color",
-      value: config.matColorId,
-    });
+    if (config.matColorId) {
+      attributes.push({
+        key: "Mat Color",
+        value: config.matColorId,
+      });
+    }
 
     if (config.matType === "double") {
       if (config.matRevealWidth !== undefined) {

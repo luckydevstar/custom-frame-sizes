@@ -56,7 +56,8 @@ export function CartItemCard({ item, onQuantityChange, onRemove, className }: Ca
   const config = item.configuration;
   const uploadedImage = item.imageUrl ?? config?.imageUrl ?? null;
   const frame = config ? getFrameStyleById(config.frameStyleId) : undefined;
-  const topMat = config ? getMatColorById(config.matColorId) : undefined;
+  const topMat =
+    config?.matColorId ? getMatColorById(config.matColorId) : undefined;
   const bottomMat = config?.matInnerColorId ? getMatColorById(config.matInnerColorId) : undefined;
   const canShowPreview =
     config && (config.matType === "single" || config.matType === "double") && topMat?.hexColor;
