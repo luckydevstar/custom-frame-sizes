@@ -151,10 +151,12 @@ export function serializeFrameConfiguration(config: FrameConfiguration): Shopify
       value: formatDimension(config.matBorderWidth),
     });
 
-    attributes.push({
-      key: "Mat Color",
-      value: config.matColorId,
-    });
+    if (config.matColorId) {
+      attributes.push({
+        key: "Mat Color",
+        value: config.matColorId,
+      });
+    }
 
     if (config.matType === "double") {
       if (config.matRevealWidth !== undefined) {
@@ -174,10 +176,12 @@ export function serializeFrameConfiguration(config: FrameConfiguration): Shopify
   }
 
   // 5. Glass
-  attributes.push({
-    key: "Glass Type",
-    value: config.glassTypeId,
-  });
+  if (config.glassTypeId) {
+    attributes.push({
+      key: "Glass Type",
+      value: config.glassTypeId,
+    });
+  }
 
   // 6. Image (for print-and-frame service)
   if (config.imageUrl) {
@@ -283,8 +287,10 @@ function validateFrameConfiguration(config: FrameConfiguration): void {
     }
   }
 
-  if (!config.glassTypeId) {
-    throw new Error("glassTypeId is required");
+  // glassTypeId is only required for actual frame products (not foam board, etc.)
+  // Allow undefined or empty for component products
+  if (config.glassTypeId === "") {
+    console.warn("glassTypeId is empty - this is allowed for non-frame products");
   }
 
   if (config.serviceType === "print-and-frame" && !config.imageUrl) {
@@ -420,10 +426,10 @@ function deserializeFromAttributes(attributes: ShopifyAttribute[]): FrameConfigu
 
   // Glass Type
   const glassTypeId = attrMap.get("Glass Type");
-  if (!glassTypeId) {
-    throw new Error("Glass Type attribute is required");
+  // glassTypeId is optional - allows for non-frame products
+  if (glassTypeId) {
+    config.glassTypeId = glassTypeId;
   }
-  config.glassTypeId = glassTypeId;
 
   // Optional fields
   const imageUrl = attrMap.get("Customer Image");

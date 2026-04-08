@@ -59,6 +59,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: '*.customframesizes.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'novuspolish.com',
+      },
     ],
   },
   experimental: {

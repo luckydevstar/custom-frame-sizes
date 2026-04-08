@@ -144,16 +144,20 @@ export function AcrylicClient() {
         serviceType: "frame-only" as const,
         artworkWidth: width,
         artworkHeight: height,
-        frameStyleId: "acrylic-sheet",
+        frameStyleId: "acrylic",
         matType: "none" as const,
         matBorderWidth: 0,
         matRevealWidth: 0,
-        matColorId: "",
         glassTypeId: acrylicType === "non-glare" ? "non-glare" : "standard",
         orderSource: `acrylic-${acrylicType}`,
       };
       
-      const cartInput = createCartItemFromFrameConfig(acrylicConfig, total, packSize);
+      const cartInput = createCartItemFromFrameConfig(
+        acrylicConfig, 
+        total, 
+        packSize,
+        { productTitle: "Custom-Cut Acrylic Sheet" }
+      );
       useCartStore.getState().addItem(cartInput);
       await addToCartOnly(acrylicConfig, total, packSize);
       

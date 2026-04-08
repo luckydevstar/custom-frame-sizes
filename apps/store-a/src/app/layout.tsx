@@ -7,6 +7,7 @@ import { Inter, Playfair_Display, Montserrat } from "next/font/google";
 
 import { brandConfig } from "../brand.config";
 import { QueryProvider } from "../components/providers/query-provider";
+import { ThemeScript } from "../components/providers/theme-script";
 
 import { CartHydration } from "./components/CartHydration";
 
@@ -69,6 +70,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={playfair.variable} suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+      </head>
       <body className={`${inter.className} ${montserrat.variable}`}>
         <QueryProvider>
           <StoreProvider config={brandConfig}>

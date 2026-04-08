@@ -14,56 +14,150 @@ export interface FrameConfigurationSummaryProps {
 }
 
 /**
+ * Determine product type from frameStyleId
+ */
+function getProductType(frameStyleId?: string): 
+  | "frame"
+  | "foam-board"
+  | "cleat-hanger"
+  | "acrylic"
+  | "acrylic-cleaner"
+  | "security-hardware"
+  | "brass-nameplate"
+  | "mat-board"
+  | "unknown" {
+  if (!frameStyleId) return "unknown";
+  
+  const typeMap: Record<string, ReturnType<typeof getProductType>> = {
+    "foam-board": "foam-board",
+    "cleat-hanger": "cleat-hanger",
+    "acrylic": "acrylic",
+    "acrylic-cleaner": "acrylic-cleaner",
+    "security-hardware": "security-hardware",
+    "brass-nameplate": "brass-nameplate",
+    "mat-board": "mat-board",
+  };
+  
+  return typeMap[frameStyleId] || "frame";
+}
+
+/**
  * Renders a human-readable summary of a frame configuration (artwork size, frame, mats, glass).
- * Used on the cart page and anywhere we need to show "what's in this frame" again.
+ * For non-frame products, shows only relevant attributes.
+ * Used on the cart page and anywhere we need to show "what's in this product" again.
  */
 export function FrameConfigurationSummary({
   config,
   className,
   compact = false,
 }: FrameConfigurationSummaryProps) {
+  const productType = getProductType(config.frameStyleId);
   const frame = getFrameStyleById(config.frameStyleId);
-  const matColor = getMatColorById(config.matColorId);
+  const matColor = config.matColorId ? getMatColorById(config.matColorId) : undefined;
   const matInnerColor = config.matInnerColorId
     ? getMatColorById(config.matInnerColorId)
     : undefined;
-  const glass = getGlassTypeById(config.glassTypeId);
+  const glass = config.glassTypeId ? getGlassTypeById(config.glassTypeId) : undefined;
 
   const frameName = frame?.name ?? config.frameStyleId;
-  const matName = matColor?.name ?? config.matColorId;
-  const matInnerName = matInnerColor?.name ?? config.matInnerColorId;
-  const glassName = glass?.name ?? config.glassTypeId;
+  const matName = matColor?.name ?? config.matColorId ?? "—";
+  const matInnerName = matInnerColor?.name ?? config.matInnerColorId ?? "—";
+  const glassDisplay = glass?.name ?? config.glassTypeId ?? "";
 
-  const rows: { label: string; value: string }[] = [
-    { label: "Artwork size", value: `${config.artworkWidth}" × ${config.artworkHeight}"` },
-    { label: "Frame", value: frameName },
-    {
-      label: "Mat",
-      value:
-        config.matType === "none"
-          ? "None"
-          : config.matType === "single"
-            ? `${matName} (${config.matBorderWidth}" border)`
-            : `Double: ${matName} + ${matInnerName ?? "—"} (${config.matBorderWidth}" border, ${config.matRevealWidth}" reveal)`,
-    },
-    { label: "Glazing", value: glassName },
-    {
-      label: "Service",
-      value: config.serviceType === "print-and-frame" ? "Print & frame" : "Frame only",
-    },
-  ];
+  // Build rows based on product type
+  const rows: { label: string; value: string }[] = [];
+
+  // Size is always shown for all products
+  rows.push({ label: "Size", value: `${config.artworkWidth}" × ${config.artworkHeight}"` });
+
+  // Product-specific attributes
+  switch (productType) {
+    case "foam-board":
+      if (config.orderSource) {
+        const boardType = config.orderSource.replace("foam-board-", "");
+        rows.push({
+          label: "Type",
+          value: boardType
+            .replace(/-/g, " ")
+            .replace(/\b\w/g, (l) => l.toUpperCase()),
+        });
+      }
+      break;
+
+    case "cleat-hanger":
+      rows.push({ label: "Type", value: "12\" Heavy-Duty Metal Cleat Bar System" });
+      break;
+
+    case "acrylic":
+      if (config.glassTypeId && glassDisplay) {
+        rows.push({ label: "Glass Type", value: glassDisplay });
+      }
+      break;
+
+    case "acrylic-cleaner":
+      rows.push({ label: "Product", value: "Acrylic Cleaner & Polish" });
+      break;
+
+    case "security-hardware":
+      rows.push({ label: "Type", value: "Professional Security Hardware" });
+      break;
+
+    case "brass-nameplate":
+      rows.push({ label: "Product", value: "Brass Nameplate" });
+      break;
+
+    case "mat-board":
+      if (config.matType !== "none") {
+        rows.push({
+          label: "Mat Type",
+          value: config.matType === "double" ? "Double Mat" : "Single Mat",
+        });
+      }
+      break;
+
+    case "frame":
+    default:
+      // Full frame display for custom frames
+      rows.push({ label: "Frame", value: frameName });
+      rows.push({
+        label: "Mat",
+        value:
+          config.matType === "none"
+            ? "None"
+            : config.matType === "single"
+              ? `${matName} (${config.matBorderWidth}" border)`
+              : `Double: ${matName} + ${matInnerName} (${config.matBorderWidth}" border, ${config.matRevealWidth}" reveal)`,
+      });
+      if (config.glassTypeId && glassDisplay) {
+        rows.push({ label: "Glazing", value: glassDisplay });
+      }
+      rows.push({
+        label: "Service",
+        value: config.serviceType === "print-and-frame" ? "Print & frame" : "Frame only",
+      });
+      break;
+  }
 
   if (compact) {
     const parts = [
       `${config.artworkWidth}"×${config.artworkHeight}"`,
-      frameName,
-      config.matType === "none"
-        ? "No mat"
-        : config.matType === "single"
-          ? matName
-          : `${matName} + ${matInnerName ?? "—"}`,
-      glassName,
     ];
+    
+    if (productType === "frame") {
+      parts.push(frameName);
+      parts.push(
+        config.matType === "none"
+          ? "No mat"
+          : config.matType === "single"
+            ? matName
+            : `${matName} + ${matInnerName ?? "—"}`
+      );
+      if (glassDisplay) parts.push(glassDisplay);
+    } else if (productType === "foam-board" && config.orderSource) {
+      const boardType = config.orderSource.replace("foam-board-", "").replace(/-/g, " ");
+      parts.push(boardType);
+    }
+    
     return <p className={cn("text-sm text-muted-foreground", className)}>{parts.join(" · ")}</p>;
   }
 

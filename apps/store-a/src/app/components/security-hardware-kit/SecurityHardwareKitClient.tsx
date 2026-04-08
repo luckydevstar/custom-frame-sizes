@@ -70,15 +70,18 @@ export function SecurityHardwareKitClient() {
         matType: "none" as const,
         matBorderWidth: 0,
         matRevealWidth: 0,
-        matColorId: "",
-        glassTypeId: "standard",
         orderSource: `security-${selectedProduct}-${currentPack.size}`,
       };
       
       const productName =
         selectedProduct === "kit" ? "Professional Security Hardware Kit" : "Security Wrench Only";
       
-      const cartInput = createCartItemFromFrameConfig(securityConfig, price, currentPack.size);
+      const cartInput = createCartItemFromFrameConfig(
+        securityConfig, 
+        price, 
+        currentPack.size,
+        { productTitle: productName }
+      );
       useCartStore.getState().addItem(cartInput);
       await addToCartOnly(securityConfig, price, currentPack.size);
       

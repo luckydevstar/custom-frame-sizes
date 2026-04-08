@@ -66,12 +66,16 @@ export function CleatHangersClient() {
         matType: "none" as const,
         matBorderWidth: 0,
         matRevealWidth: 0,
-        matColorId: "",
-        glassTypeId: "standard",
+        // Don't include matColorId/glassTypeId - they're not needed
         orderSource: `cleat-hangers-${currentPack.size}`,
       };
       
-      const cartInput = createCartItemFromFrameConfig(cleatConfig, currentPack.price, currentPack.size);
+      const cartInput = createCartItemFromFrameConfig(
+        cleatConfig, 
+        currentPack.price, 
+        currentPack.size,
+        { productTitle: "12\" Heavy-Duty Metal Cleat Bar System" }
+      );
       useCartStore.getState().addItem(cartInput);
       await addToCartOnly(cleatConfig, currentPack.price, currentPack.size);
       

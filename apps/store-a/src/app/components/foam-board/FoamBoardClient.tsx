@@ -133,12 +133,16 @@ export function FoamBoardClient() {
         matType: "none" as const,
         matBorderWidth: 0,
         matRevealWidth: 0,
-        matColorId: "",
-        glassTypeId: "standard",
+        // Don't include matColorId/glassTypeId - they're not needed for foam board
         orderSource: `foam-board-${boardType}`,
       };
       
-      const cartInput = createCartItemFromFrameConfig(foamBoardConfig, total, packSize);
+      const cartInput = createCartItemFromFrameConfig(
+        foamBoardConfig, 
+        total, 
+        packSize,
+        { productTitle: "Custom-Cut Foam Board" }
+      );
       useCartStore.getState().addItem(cartInput);
       await addToCartOnly(foamBoardConfig, total, packSize);
       

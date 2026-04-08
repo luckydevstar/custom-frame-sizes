@@ -45,10 +45,10 @@ export function calculatePricing(config: FrameConfiguration): PricingBreakdown {
 
   // Get product details with validation
   const frameStyle = getFrameStyleById(config.frameStyleId);
-  const matColor = getMatColorById(config.matColorId);
+  const matColor = config.matColorId ? getMatColorById(config.matColorId) : undefined;
   // matInnerColor is available but not used in current pricing calculation
   // const matInnerColor = config.matInnerColorId ? getMatColorById(config.matInnerColorId) : undefined;
-  const glassType = getGlassTypeById(config.glassTypeId);
+  const glassType = config.glassTypeId ? getGlassTypeById(config.glassTypeId) : undefined;
 
   // Validate required products exist
   if (!frameStyle) {
