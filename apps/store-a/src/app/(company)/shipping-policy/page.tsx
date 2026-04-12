@@ -3,17 +3,13 @@ import Link from "next/link";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+import { generatePageMetadata } from "@/lib/seo-utils";
+
+export const metadata: Metadata = generatePageMetadata("/shipping-policy", {
   title: "Shipping Policy - CustomFrameSizes.com | Custom Frame Sizes",
   description:
     "Learn about our shipping methods, production times, delivery options, tracking, and policies for custom picture frame orders at CustomFrameSizes.com.",
-  openGraph: {
-    title: "Shipping Policy - CustomFrameSizes.com",
-    description:
-      "Shipping methods, production times, delivery options, and policies for custom frame orders.",
-    type: "website",
-  },
-};
+});
 
 export default function ShippingPolicyPage() {
   return (

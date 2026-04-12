@@ -9,21 +9,16 @@ import { SearchableFrames } from "./SearchableFrames";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+import { SearchableFrames } from "./SearchableFrames";
+import { generatePageMetadata } from "@/lib/seo-utils";
+
+export const metadata: Metadata = generatePageMetadata("/picture-frames", {
   title: "Custom Picture Frames - Professional Grade & Ornate Designs | CustomFrameSizes.com",
   description:
     "Browse our collection of custom picture frames in professional-grade finishes. Ornate gold frames, classic wood mouldings, and modern designs. Any size from 4×4 to 48×72 inches with precision 1/16 inch accuracy. Expert craftsmanship with instant pricing.",
-  openGraph: {
-    title: "Custom Picture Frames - Professional Grade Framing",
-    description:
-      "Premium custom picture frames for art, photos, diplomas, and heirlooms. Professional-grade materials, expert craftsmanship, any custom size with instant pricing.",
-    type: "website",
-    url: "/picture-frames",
-  },
   keywords:
     "custom picture frames, museum frames, ornate frames, gold picture frames, wood frames, custom framing, picture frame gallery, fine art frames, photo frames",
-  alternates: { canonical: "/picture-frames" },
-};
+});
 
 function getCornerOrThumbUrl(frame: {
   alternateImages?: { type: string; url: string }[];

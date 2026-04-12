@@ -3,16 +3,13 @@ import Link from "next/link";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+import { generatePageMetadata } from "@/lib/seo-utils";
+
+export const metadata: Metadata = generatePageMetadata("/warranty", {
   title: "Frame Quality Guarantee - CustomFrameSizes.com | Custom Frame Sizes",
   description:
     "Learn about our lifetime craftsmanship warranty and quality guarantee for custom picture frames at CustomFrameSizes.com.",
-  openGraph: {
-    title: "Frame Quality Guarantee - CustomFrameSizes.com",
-    description: "Lifetime craftsmanship warranty and quality guarantee for custom frames.",
-    type: "website",
-  },
-};
+});
 
 export default function WarrantyPage() {
   return (

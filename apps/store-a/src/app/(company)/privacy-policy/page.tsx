@@ -3,17 +3,13 @@ import Link from "next/link";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+import { generatePageMetadata } from "@/lib/seo-utils";
+
+export const metadata: Metadata = generatePageMetadata("/privacy-policy", {
   title: "Privacy Policy - CustomFrameSizes.com | Custom Frame Sizes",
   description:
     "Learn how CustomFrameSizes.com collects, uses, and protects your personal information, including uploaded images, order data, and privacy rights.",
-  openGraph: {
-    title: "Privacy Policy - CustomFrameSizes.com",
-    description:
-      "How we collect, use, and protect your information when you use our site and place orders.",
-    type: "website",
-  },
-};
+});
 
 export default function PrivacyPolicyPage() {
   return (

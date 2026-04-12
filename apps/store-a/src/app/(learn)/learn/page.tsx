@@ -5,18 +5,14 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 import { getBlogPosts } from "@/lib/blog";
+import { generatePageMetadata } from "@/lib/seo-utils";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/learn", {
   title: "Learn - Framing Guides & Resources | Custom Frame Sizes",
   description:
     "Comprehensive guides to help you measure, design, and care for your custom frames. Learn about mats, glazing, gallery walls, and more.",
-  openGraph: {
-    title: "Learn - Framing Guides & Resources",
-    description:
-      "Comprehensive guides to help you measure, design, and care for your custom frames.",
-    type: "website",
-  },
-};
+  ogType: "website",
+});
 
 const guides = [
   {
