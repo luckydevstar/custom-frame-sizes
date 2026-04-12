@@ -54,7 +54,7 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useState, useEffect, useMemo, useRef, lazy, Suspense } from "react";
+import { useState, useEffect, useMemo, useRef, lazy, Suspense, useCallback } from "react";
 
 import { useToast } from "../../hooks/use-toast";
 import { BrassNameplatePreview } from "../brass-nameplate/BrassNameplatePreview";
@@ -239,6 +239,15 @@ export function FrameDesigner({
 
   // Track if initial load is complete
   const [isInitialLoadComplete, setIsInitialLoadComplete] = useState(false);
+  // Track if user has made any active changes (to distinguish from initial page load)
+  const [hasUserInteracted, setHasUserInteracted] = useState(false);
+
+  // Helper to mark user interaction and prevent parameter leak
+  const markUserInteraction = useCallback(() => {
+    if (!hasUserInteracted) {
+      setHasUserInteracted(true);
+    }
+  }, [hasUserInteracted]);
 
   // Load configuration from URL parameters on mount and when URL changes
   useEffect(() => {
@@ -299,9 +308,10 @@ export function FrameDesigner({
     }, 0);
   }, [searchParams]);
 
-  // Update URL when configuration changes (but not during initial load)
+  // Update URL when configuration changes (but only if user has actively interacted)
   useEffect(() => {
-    if (!isInitialLoadComplete) return;
+    // Don't write URL during initial load or if user hasn't interacted
+    if (!isInitialLoadComplete || !hasUserInteracted) return;
     // Embedded PDP (/frames/[slug]): keep canonical URL clean for SEO (P1 #13)
     if (_embedded) return;
 
@@ -356,6 +366,7 @@ export function FrameDesigner({
     router.replace(newUrl, { scroll: false });
   }, [
     isInitialLoadComplete,
+    hasUserInteracted,
     selectedFrame,
     artworkWidth,
     artworkHeight,
@@ -2177,7 +2188,10 @@ export function FrameDesigner({
           <Card className="p-4">
             <RadioGroup
               value={serviceType}
-              onValueChange={(value: "frame-only" | "print-and-frame") => setServiceType(value)}
+              onValueChange={(value: "frame-only" | "print-and-frame") => {
+                markUserInteraction();
+                setServiceType(value);
+              }}
             >
               <div className="grid grid-cols-2 gap-3">
                 <Label
@@ -2296,7 +2310,10 @@ export function FrameDesigner({
                     <Input
                       id="width"
                       value={artworkWidth}
-                      onChange={(e) => handleWidthChange(e.target.value)}
+                      onChange={(e) => {
+                        markUserInteraction();
+                        handleWidthChange(e.target.value);
+                      }}
                       onFocus={(e) => {
                         setTimeout(() => {
                           e.target.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -2312,7 +2329,10 @@ export function FrameDesigner({
                     <Input
                       id="height"
                       value={artworkHeight}
-                      onChange={(e) => setArtworkHeight(e.target.value)}
+                      onChange={(e) => {
+                        markUserInteraction();
+                        setArtworkHeight(e.target.value);
+                      }}
                       onFocus={(e) => {
                         setTimeout(() => {
                           e.target.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -2354,7 +2374,10 @@ export function FrameDesigner({
                       <button
                         key={frame.id}
                         type="button"
-                        onClick={() => setSelectedFrame(frame)}
+                        onClick={() => {
+                          markUserInteraction();
+                          setSelectedFrame(frame);
+                        }}
                         className={`min-h-[44px] p-3 rounded-md border-2 text-left hover-elevate active-elevate-2 ${
                           selectedFrame.id === frame.id ? "border-primary" : "border-transparent"
                         }`}
@@ -2439,7 +2462,10 @@ export function FrameDesigner({
                   <Button
                     type="button"
                     variant={matType === "none" ? "default" : "outline"}
-                    onClick={() => setMatType("none")}
+                    onClick={() => {
+                      markUserInteraction();
+                      setMatType("none");
+                    }}
                     data-testid="button-mat-none"
                     aria-label="No mat"
                   >
@@ -2448,7 +2474,10 @@ export function FrameDesigner({
                   <Button
                     type="button"
                     variant={matType === "single" ? "default" : "outline"}
-                    onClick={() => setMatType("single")}
+                    onClick={() => {
+                      markUserInteraction();
+                      setMatType("single");
+                    }}
                     data-testid="button-mat-single"
                     aria-label="Single mat"
                   >
@@ -2457,7 +2486,10 @@ export function FrameDesigner({
                   <Button
                     type="button"
                     variant={matType === "double" ? "default" : "outline"}
-                    onClick={() => setMatType("double")}
+                    onClick={() => {
+                      markUserInteraction();
+                      setMatType("double");
+                    }}
                     data-testid="button-mat-double"
                     aria-label="Double mat"
                   >
@@ -2480,9 +2512,10 @@ export function FrameDesigner({
                         max={8}
                         step={0.25}
                         value={[matBorder]}
-                        onValueChange={(values) =>
-                          setMatBorderWidth((values[0] ?? matBorder).toString())
-                        }
+                        onValueChange={(values) => {
+                          markUserInteraction();
+                          setMatBorderWidth((values[0] ?? matBorder).toString());
+                        }}
                         data-testid="slider-mat-border"
                         aria-label="Mat border width in inches"
                         aria-valuemin={1.5}
@@ -2496,7 +2529,10 @@ export function FrameDesigner({
                         <Checkbox
                           id="bottomWeighted"
                           checked={bottomWeighted}
-                          onCheckedChange={(checked) => setBottomWeighted(checked === true)}
+                          onCheckedChange={(checked) => {
+                            markUserInteraction();
+                            setBottomWeighted(checked === true);
+                          }}
                           data-testid="checkbox-bottom-weighted"
                           aria-label="Bottom-weighted matting"
                         />
@@ -2547,6 +2583,7 @@ export function FrameDesigner({
                         premiumColors={premiumMats}
                         selectedId={selectedMat.id}
                         onSelect={(mat) => {
+                          markUserInteraction();
                           setSelectedMat(mat);
                         }}
                         testIdPrefix="mat"
@@ -2574,9 +2611,10 @@ export function FrameDesigner({
                             max={1}
                             step={0.25}
                             value={[matReveal]}
-                            onValueChange={(values) =>
-                              setMatRevealWidth((values[0] ?? matReveal).toString())
-                            }
+                            onValueChange={(values) => {
+                              markUserInteraction();
+                              setMatRevealWidth((values[0] ?? matReveal).toString());
+                            }}
                             data-testid="slider-mat-reveal"
                             aria-label="Mat reveal width in inches"
                             aria-valuemin={0.25}
@@ -2602,6 +2640,7 @@ export function FrameDesigner({
                             premiumColors={premiumMats}
                             selectedId={selectedMatInner.id}
                             onSelect={(mat) => {
+                              markUserInteraction();
                               setSelectedMatInner(mat);
                             }}
                             testIdPrefix="mat-inner"
@@ -2623,7 +2662,10 @@ export function FrameDesigner({
                 <AccordionContent>
                   <BrassNameplateSection
                     config={brassNameplateConfig}
-                    onChange={setBrassNameplateConfig}
+                    onChange={(config) => {
+                      markUserInteraction();
+                      setBrassNameplateConfig(config);
+                    }}
                     data-testid="section-brass-nameplate"
                     embedded={true}
                   />
@@ -2638,7 +2680,10 @@ export function FrameDesigner({
                   value={selectedGlass?.id ?? ""}
                   onValueChange={(id) => {
                     const glass = glassTypes.find((g) => g.id === id);
-                    if (glass) setSelectedGlass(glass);
+                    if (glass) {
+                      markUserInteraction();
+                      setSelectedGlass(glass);
+                    }
                   }}
                 >
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -2669,7 +2714,10 @@ export function FrameDesigner({
               <AccordionContent className="space-y-4">
                 <HangingHardwareSection
                   hardwareType={hangingHardware}
-                  setHardwareType={setHangingHardware}
+                  setHardwareType={(hwType) => {
+                    markUserInteraction();
+                    setHangingHardware(hwType);
+                  }}
                   frameWidth={frameWidth}
                   frameHeight={frameHeight}
                 />
@@ -2682,10 +2730,14 @@ export function FrameDesigner({
                       ? "border-primary bg-primary/5"
                       : "border-dashed border-muted-foreground/30 hover:border-muted-foreground/50 hover:bg-muted/30"
                   }`}
-                  onClick={() => setPuzzleGlue(!puzzleGlue)}
+                  onClick={() => {
+                    markUserInteraction();
+                    setPuzzleGlue(!puzzleGlue);
+                  }}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" || e.key === " ") {
                       e.preventDefault();
+                      markUserInteraction();
                       setPuzzleGlue(!puzzleGlue);
                     }
                   }}
@@ -2715,7 +2767,10 @@ export function FrameDesigner({
                     <Checkbox
                       id="puzzle-glue"
                       checked={puzzleGlue}
-                      onCheckedChange={(checked) => setPuzzleGlue(!!checked)}
+                      onCheckedChange={(checked) => {
+                        markUserInteraction();
+                        setPuzzleGlue(!!checked);
+                      }}
                       data-testid="checkbox-puzzle-glue"
                       className="mt-1"
                       onClick={(e) => e.stopPropagation()}
@@ -2730,7 +2785,10 @@ export function FrameDesigner({
           <PriceBox
             totalPrice={finalTotalPrice}
             quantity={quantity}
-            onQuantityChange={setQuantity}
+            onQuantityChange={(newQuantity) => {
+              markUserInteraction();
+              setQuantity(newQuantity);
+            }}
             onAddToCart={handleCheckout}
             isProcessing={isCheckingOut}
             disabled={

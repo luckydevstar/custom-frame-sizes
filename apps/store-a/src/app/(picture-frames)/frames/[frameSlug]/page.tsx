@@ -106,7 +106,7 @@ export default async function FrameDesignerBySlugPage({ params }: Props) {
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-2 leading-[1.1]">
               <span className="text-foreground">{frame.name}</span>
               <br />
-              <span className="text-muted-foreground">Picture Frame</span>
+              <span className="text-muted-foreground"> Picture Frame</span>
             </h1>
             <p
               className="text-sm md:text-base text-muted-foreground mb-1.5 leading-snug max-w-2xl mx-auto italic"
