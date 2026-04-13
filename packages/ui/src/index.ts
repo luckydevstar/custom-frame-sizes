@@ -181,6 +181,7 @@ export {
 } from "./components/ui/pagination";
 export { Popover, PopoverTrigger, PopoverContent } from "./components/ui/popover";
 export { PriceBox } from "./components/ui/PriceBox";
+export { ProcessingOverlay } from "./components/ui/ProcessingOverlay";
 export { Progress } from "./components/ui/progress";
 export { QuantitySelector } from "./components/ui/quantity-selector";
 export { RadioGroup, RadioGroupItem } from "./components/ui/radio-group";

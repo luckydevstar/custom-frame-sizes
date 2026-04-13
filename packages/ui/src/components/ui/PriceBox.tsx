@@ -8,6 +8,7 @@ import { Card } from "./card";
 import { Label } from "./label";
 import { QuantitySelector } from "./quantity-selector";
 import { Separator } from "./separator";
+import { ProcessingOverlay } from "./ProcessingOverlay";
 import { ShareDesignModal } from "../specialty/ShareDesignModal";
 import type { EmailShareData } from "../specialty/ShareDesignModal";
 
@@ -237,6 +238,9 @@ export function PriceBox({
           onEmailSend={onShareDesign}
         />
       )}
+
+      {/* Processing Overlay */}
+      <ProcessingOverlay isOpen={isProcessing} message="Adding to cart..." />
     </>
   );
 }
