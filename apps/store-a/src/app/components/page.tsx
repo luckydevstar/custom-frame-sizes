@@ -1,8 +1,7 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@framecraft/ui";
-import { ArrowLeft, Package } from "lucide-react";
 import Link from "next/link";
-
 import type { Metadata } from "next";
+import { ArrowLeft, Package } from "lucide-react";
 
 import { generateMetadata, getCanonicalUrl } from "@/lib/seo";
 

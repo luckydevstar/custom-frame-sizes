@@ -1,12 +1,9 @@
 import { Suspense } from "react";
-
-import { brandConfig } from "../../../brand.config";
-
-import { MatDesignerClient } from "./MatDesignerClient";
-
 import type { Metadata } from "next";
 
 import { generateMetadata as generatePageMetadata, getCanonicalUrl } from "@/lib/seo";
+import { brandConfig } from "../../../brand.config";
+import { MatDesignerClient } from "./MatDesignerClient";
 
 const baseUrl = brandConfig.seo?.canonicalUrl ?? "https://www.customframesizes.com";
 

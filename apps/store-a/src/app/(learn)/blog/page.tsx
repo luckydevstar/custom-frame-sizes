@@ -1,3 +1,6 @@
+import Image from "next/image";
+import Link from "next/link";
+import type { Metadata } from "next";
 import {
   Card,
   CardHeader,
@@ -8,10 +11,6 @@ import {
   Button,
 } from "@framecraft/ui";
 import { FileText, Clock, Calendar } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-
-import type { Metadata } from "next";
 
 import { getBlogPosts, getAllTags, formatBlogDate } from "@/lib/blog";
 

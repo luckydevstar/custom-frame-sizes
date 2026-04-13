@@ -1,8 +1,7 @@
 import { FrameDesigner } from "@framecraft/ui";
 import Link from "next/link";
-import { Suspense } from "react";
-
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import {
   generateMetadata,

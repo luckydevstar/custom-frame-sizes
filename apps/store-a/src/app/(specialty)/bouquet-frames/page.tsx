@@ -1,4 +1,8 @@
 import { Card, Button } from "@framecraft/ui";
+import Link from "next/link";
+import nextDynamic from "next/dynamic";
+import type { ShadowboxConfig } from "@framecraft/types";
+import type { Metadata } from "next";
 import {
   Heart,
   Flower2,
@@ -10,17 +14,10 @@ import {
   Ruler,
   CheckCircle2,
 } from "lucide-react";
-import nextDynamic from "next/dynamic";
-import Link from "next/link";
-
-import { brandConfig } from "../../../brand.config";
-
-import { ScrollToDesignerButton } from "./scroll-button";
-
-import type { ShadowboxConfig } from "@framecraft/types";
-import type { Metadata } from "next";
 
 import { RelatedProducts } from "@/components/RelatedProducts";
+import { brandConfig } from "../../../brand.config";
+import { ScrollToDesignerButton } from "./scroll-button";
 
 const BouquetFrameDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.BouquetFrameDesigner),

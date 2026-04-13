@@ -8,15 +8,13 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@framecraft/ui";
-import { Sparkles, Frame, Palette, Brush, Shield, Layers, Ruler } from "lucide-react";
 import nextDynamic from "next/dynamic";
-import { Suspense } from "react";
-
-import { ScrollToDesignerButton } from "./scroll-button";
-
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import { Sparkles, Frame, Palette, Brush, Shield, Layers, Ruler } from "lucide-react";
 
 import { generatePageMetadata } from "@/lib/seo-utils";
+import { ScrollToDesignerButton } from "./scroll-button";
 
 const CanvasFrameDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.CanvasFrameDesigner),

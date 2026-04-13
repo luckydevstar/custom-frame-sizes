@@ -1,8 +1,7 @@
-import { Card, CardHeader, CardTitle, CardDescription , Badge } from "@framecraft/ui";
-import { Clock, BookOpen, Palette, Shield, Ruler, Award, FileText } from "lucide-react";
 import Link from "next/link";
-
 import type { Metadata } from "next";
+import { Card, CardHeader, CardTitle, CardDescription, Badge } from "@framecraft/ui";
+import { Clock, BookOpen, Palette, Shield, Ruler, Award, FileText } from "lucide-react";
 
 import { getBlogPosts } from "@/lib/blog";
 import { generatePageMetadata } from "@/lib/seo-utils";
