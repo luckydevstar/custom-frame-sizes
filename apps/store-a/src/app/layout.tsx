@@ -47,6 +47,13 @@ export const metadata: Metadata = {
   title: seoConfig.title,
   description: seoConfig.description,
   keywords: seoConfig.keywords,
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico" },
+    ],
+    shortcut: "/favicon.ico",
+  },
   openGraph: {
     title: seoConfig.title,
     description: seoConfig.description,
