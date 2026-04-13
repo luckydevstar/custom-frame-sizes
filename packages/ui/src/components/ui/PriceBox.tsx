@@ -1,6 +1,6 @@
 "use client";
 
-import { ShoppingCart, Copy, ChevronDown, ChevronUp } from "lucide-react";
+import { ShoppingCart, Share2, ChevronDown, ChevronUp } from "lucide-react";
 import { useState, useId, ReactNode } from "react";
 
 import { Button } from "./button";
@@ -8,6 +8,8 @@ import { Card } from "./card";
 import { Label } from "./label";
 import { QuantitySelector } from "./quantity-selector";
 import { Separator } from "./separator";
+import { ShareDesignModal } from "../specialty/ShareDesignModal";
+import type { EmailShareData } from "../specialty/ShareDesignModal";
 
 export interface PriceLineItem {
   label: string;
@@ -28,8 +30,8 @@ export interface PriceBoxProps {
   onQuantityChange: (quantity: number) => void;
   /** Callback when Add to Cart is clicked */
   onAddToCart: () => void;
-  /** Callback when Copy Link is clicked */
-  onCopyLink?: () => void;
+  /** Callback when Share Design is triggered (returns false to prevent modal close) */
+  onShareDesign?: (data: EmailShareData) => Promise<void>;
   /** Whether the checkout is processing */
   isProcessing?: boolean;
   /** Whether the Add to Cart button should be disabled */
@@ -42,8 +44,8 @@ export interface PriceBoxProps {
   className?: string;
   /** Test ID prefix for elements */
   testIdPrefix?: string;
-  /** Hide the Copy Link button */
-  hideCopyLink?: boolean;
+  /** Hide the Share Design button */
+  hideShareDesign?: boolean;
   /** Custom content to render before the Add to Cart button (e.g., sticky copyright checkbox) */
   beforeButtons?: ReactNode;
 }
@@ -84,140 +86,145 @@ export function PriceBox({
   quantity,
   onQuantityChange,
   onAddToCart,
-  onCopyLink,
+  onShareDesign,
   isProcessing = false,
   disabled = false,
   priceItems,
   warnings,
   className = "",
   testIdPrefix = "",
-  hideCopyLink = false,
+  hideShareDesign = false,
   beforeButtons,
 }: PriceBoxProps) {
   const [showPricingDetails, setShowPricingDetails] = useState(false);
+  const [showShareModal, setShowShareModal] = useState(false);
   const pricingDetailsId = useId();
 
   const hasItemizedPricing = priceItems && priceItems.length > 0;
   const finalTotal = totalPrice * quantity;
 
-  const handleCopyLink = () => {
-    if (onCopyLink) {
-      onCopyLink();
-    } else {
-      const url = window.location.href;
-      navigator.clipboard.writeText(url);
-      alert("Link copied to clipboard!");
-    }
-  };
+  const designUrl = typeof window !== "undefined" ? window.location.href : "";
 
   return (
-    <Card className={`hidden md:block md:sticky md:bottom-4 p-3 ${className}`}>
-      <div className="space-y-2">
-        {/* Total with Optional Toggle */}
-        <div className="flex justify-between items-center">
-          {hasItemizedPricing ? (
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setShowPricingDetails(!showPricingDetails)}
-              className="flex items-center gap-1 text-sm font-semibold hover:text-primary p-0 h-auto"
-              data-testid={`${testIdPrefix}button-toggle-pricing-details`}
-              aria-expanded={showPricingDetails}
-              aria-controls={pricingDetailsId}
-            >
-              <span>Total</span>
-              {showPricingDetails ? (
-                <ChevronUp className="h-3 w-3" />
-              ) : (
-                <ChevronDown className="h-3 w-3" />
-              )}
-            </Button>
-          ) : (
-            <span className="text-sm font-semibold">Total</span>
-          )}
-          <span className="text-lg font-bold" data-testid={`${testIdPrefix}text-total-price`}>
-            ${finalTotal.toFixed(2)}
-          </span>
-        </div>
+    <>
+      <Card className={`hidden md:block md:sticky md:bottom-4 p-3 ${className}`}>
+        <div className="space-y-2">
+          {/* Total with Optional Toggle */}
+          <div className="flex justify-between items-center">
+            {hasItemizedPricing ? (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setShowPricingDetails(!showPricingDetails)}
+                className="flex items-center gap-1 text-sm font-semibold hover:text-primary p-0 h-auto"
+                data-testid={`${testIdPrefix}button-toggle-pricing-details`}
+                aria-expanded={showPricingDetails}
+                aria-controls={pricingDetailsId}
+              >
+                <span>Total</span>
+                {showPricingDetails ? (
+                  <ChevronUp className="h-3 w-3" />
+                ) : (
+                  <ChevronDown className="h-3 w-3" />
+                )}
+              </Button>
+            ) : (
+              <span className="text-sm font-semibold">Total</span>
+            )}
+            <span className="text-lg font-bold" data-testid={`${testIdPrefix}text-total-price`}>
+              ${finalTotal.toFixed(2)}
+            </span>
+          </div>
 
-        {/* Collapsible Pricing Details */}
-        {hasItemizedPricing && showPricingDetails && (
-          <>
-            <Separator />
-            <div id={pricingDetailsId} className="space-y-2">
-              {priceItems.map((item, index) => (
-                <div key={index} className="flex justify-between text-sm">
-                  <span className="text-muted-foreground">{item.label}</span>
-                  {item.isIncluded ? (
-                    <span data-testid={item.testId} className="text-muted-foreground">
-                      Included
-                    </span>
-                  ) : (
-                    <span
-                      data-testid={item.testId}
-                      className={item.isDiscount ? "text-green-600" : ""}
-                    >
-                      {item.isDiscount && item.amount < 0 ? "-" : ""}$
-                      {Math.abs(item.amount).toFixed(2)}
-                    </span>
-                  )}
-                </div>
-              ))}
-            </div>
-            <Separator />
-          </>
-        )}
-
-        {/* Quantity Selector */}
-        <div className="flex items-center justify-between">
-          <Label htmlFor="quantity" className="text-xs font-medium">
-            Quantity
-          </Label>
-          <QuantitySelector
-            value={quantity}
-            onChange={onQuantityChange}
-            className="w-20"
-            testId={`${testIdPrefix}select-quantity`}
-          />
-        </div>
-
-        {/* Warning Messages */}
-        {warnings && warnings.map((warning, index) => <div key={index}>{warning}</div>)}
-
-        {/* Custom Content Before Buttons (e.g., sticky copyright checkbox) */}
-        {beforeButtons}
-
-        {/* Add to Cart Button */}
-        <Button
-          className="w-full"
-          onClick={onAddToCart}
-          disabled={disabled || isProcessing}
-          data-testid={`${testIdPrefix}button-add-to-cart`}
-        >
-          {isProcessing ? (
-            <>Processing...</>
-          ) : (
+          {/* Collapsible Pricing Details */}
+          {hasItemizedPricing && showPricingDetails && (
             <>
-              <ShoppingCart className="h-4 w-4 mr-2" />
-              Add to Cart
+              <Separator />
+              <div id={pricingDetailsId} className="space-y-2">
+                {priceItems.map((item, index) => (
+                  <div key={index} className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">{item.label}</span>
+                    {item.isIncluded ? (
+                      <span data-testid={item.testId} className="text-muted-foreground">
+                        Included
+                      </span>
+                    ) : (
+                      <span
+                        data-testid={item.testId}
+                        className={item.isDiscount ? "text-green-600" : ""}
+                      >
+                        {item.isDiscount && item.amount < 0 ? "-" : ""}$
+                        {Math.abs(item.amount).toFixed(2)}
+                      </span>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <Separator />
             </>
           )}
-        </Button>
 
-        {/* Copy Link Button */}
-        {!hideCopyLink && (
+          {/* Quantity Selector */}
+          <div className="flex items-center justify-between">
+            <Label htmlFor="quantity" className="text-xs font-medium">
+              Quantity
+            </Label>
+            <QuantitySelector
+              value={quantity}
+              onChange={onQuantityChange}
+              className="w-20"
+              testId={`${testIdPrefix}select-quantity`}
+            />
+          </div>
+
+          {/* Warning Messages */}
+          {warnings && warnings.map((warning, index) => <div key={index}>{warning}</div>)}
+
+          {/* Custom Content Before Buttons (e.g., sticky copyright checkbox) */}
+          {beforeButtons}
+
+          {/* Add to Cart Button */}
           <Button
-            variant="outline"
-            size="sm"
             className="w-full"
-            onClick={handleCopyLink}
-            data-testid={`${testIdPrefix}button-copy-link`}
+            onClick={onAddToCart}
+            disabled={disabled || isProcessing}
+            data-testid={`${testIdPrefix}button-add-to-cart`}
           >
-            <Copy className="h-3 w-3 mr-1" />
-            Copy Link
+            {isProcessing ? (
+              <>Processing...</>
+            ) : (
+              <>
+                <ShoppingCart className="h-4 w-4 mr-2" />
+                Add to Cart
+              </>
+            )}
           </Button>
-        )}
-      </div>
-    </Card>
+
+          {/* Share Design Button */}
+          {!hideShareDesign && (
+            <Button
+              variant="outline"
+              size="sm"
+              className="w-full"
+              onClick={() => setShowShareModal(true)}
+              data-testid={`${testIdPrefix}button-share-design`}
+            >
+              <Share2 className="h-3 w-3 mr-1" />
+              Share This Design
+            </Button>
+          )}
+        </div>
+      </Card>
+
+      {/* Share Design Modal */}
+      {!hideShareDesign && (
+        <ShareDesignModal
+          isOpen={showShareModal}
+          onClose={() => setShowShareModal(false)}
+          designUrl={designUrl}
+          onEmailSend={onShareDesign}
+        />
+      )}
+    </>
   );
 }

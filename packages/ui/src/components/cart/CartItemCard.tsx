@@ -1,6 +1,6 @@
 "use client";
 
-import { formatPrice, getFrameStyleById, getMatColorById } from "@framecraft/core";
+import { formatPrice, getFrameStyleById, getMatColorById, getStoreBaseAssetUrl } from "@framecraft/core";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 
@@ -38,14 +38,6 @@ function getProductDisplayName(frameStyleId?: string): string {
   return nameMap[frameStyleId] || "Custom Frame";
 }
 
-
-export interface CartItemCardProps {
-  item: CartItem;
-  onQuantityChange: (itemId: string, quantity: number) => void;
-  onRemove: (itemId: string) => void;
-  className?: string;
-}
-
 /**
  * Single cart line: image, title, configuration summary, price, quantity, remove.
  */
@@ -63,6 +55,9 @@ export function CartItemCard({ item, onQuantityChange, onRemove, className }: Ca
     config && (config.matType === "single" || config.matType === "double") && topMat?.hexColor;
 
   const productDisplayName = config ? getProductDisplayName(config.frameStyleId) : "Custom Product";
+
+  // Generate frame corner swatch URL if frame exists
+  const frameSwatchUrl = frame?.id ? getStoreBaseAssetUrl(`/frames/${frame.id}/swatch.jpg`) : null;
 
   return (
     <article
@@ -91,6 +86,17 @@ export function CartItemCard({ item, onQuantityChange, onRemove, className }: Ca
             frameWidth={frame?.mouldingWidth ?? 0.625}
             fillMatOpening={true}
             className="h-full w-full"
+          />
+        ) : frameSwatchUrl ? (
+          <Image
+            src={frameSwatchUrl}
+            alt={`${frame?.name || "Frame"} corner swatch`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 128px, 112px"
+            priority={false}
+            placeholder="blur"
+            blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 112 128'%3E%3Crect fill='%23e5e7eb' width='112' height='128'/%3E%3C/svg%3E"
           />
         ) : item.imageUrl || config?.imageUrl ? (
           <Image
