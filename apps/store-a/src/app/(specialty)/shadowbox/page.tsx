@@ -11,6 +11,8 @@ import { ScrollToDesignerButton } from "./scroll-button";
 import type { FrameStyle } from "@framecraft/types";
 import type { Metadata } from "next";
 
+import { generatePageMetadata } from "@/lib/seo-utils";
+
 const ShadowboxDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
   { ssr: false },
@@ -18,19 +20,21 @@ const ShadowboxDesigner = nextDynamic(
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/shadowbox", {
   title: `Custom Shadowbox Frames - 3D Display & Deep Frames | ${brandConfig.name}`,
   description:
     "Custom shadowbox frames for memorabilia, jerseys, medals and 3D objects. Multiple styles, depths (0.875-2.5 in), 4x4 to 32x40. Instant pricing, museum quality.",
-  keywords:
-    "custom shadowbox frames, deep shadowbox, shadowbox display, jersey frame, medal display, 3D picture frames, memorabilia frames, shadow box custom size",
-  openGraph: {
-    title: "Custom Shadowbox Frames - 3D Display & Deep Frames",
-    description:
-      "Custom shadowbox frames for memorabilia, jerseys, medals and 3D objects. Multiple styles and depths. Professional-grade materials with instant pricing.",
-    type: "website",
-  },
-};
+  keywords: [
+    "custom shadowbox frames",
+    "deep shadowbox",
+    "shadowbox display",
+    "jersey frame",
+    "medal display",
+    "3D picture frames",
+    "memorabilia frames",
+    "shadow box custom size",
+  ],
+});
 
 function getCornerImage(frame: FrameStyle) {
   const cornerImage = frame.alternateImages?.find((img) => img.type === "corner");

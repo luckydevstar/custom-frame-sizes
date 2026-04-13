@@ -1199,7 +1199,7 @@ export function CertificateFrameDesigner({
                     <p className="font-medium">
                       Finished Size:{" "}
                       <span className="text-primary">
-                        {formatDimension(frameWidth)}&quot; × {formatDimension(frameHeight)}&quot;
+                        {formatDimension(frameWidth)}&quot; Ã— {formatDimension(frameHeight)}&quot;
                       </span>
                     </p>
                     {selectedFrame.dimensionalDiagram && (
@@ -1238,9 +1238,9 @@ export function CertificateFrameDesigner({
                     )}
                   </div>
                   <p className="text-muted-foreground text-xs">
-                    Artwork: {formatDimension(artW)}&quot; × {formatDimension(artH)}&quot;
-                    {matType !== "none" && ` • Mat Border: ${formatDimension(matBorder)}"`}
-                    {matType === "double" && ` • Reveal: ${formatDimension(matReveal)}"`}
+                    Artwork: {formatDimension(artW)}&quot; Ã— {formatDimension(artH)}&quot;
+                    {matType !== "none" && ` â€¢ Mat Border: ${formatDimension(matBorder)}"`}
+                    {matType === "double" && ` â€¢ Reveal: ${formatDimension(matReveal)}"`}
                   </p>
                 </div>
               </Card>
@@ -1331,7 +1331,7 @@ export function CertificateFrameDesigner({
                           data-testid={`button-certificate-${size.id}`}
                         >
                           <p className="font-semibold text-sm">
-                            {size.documentWidth}&quot; × {size.documentHeight}&quot;
+                            {size.documentWidth}&quot; Ã— {size.documentHeight}&quot;
                           </p>
                         </button>
                       ))}
@@ -1859,7 +1859,7 @@ export function CertificateFrameDesigner({
             setArtworkHeight(newHeight.toString());
             toast({
               title: "Size Updated",
-              description: `Frame size updated to ${newWidth}" × ${newHeight}" from AR preview`,
+              description: `Frame size updated to ${newWidth}" Ã— ${newHeight}" from AR preview`,
             });
           }}
         />

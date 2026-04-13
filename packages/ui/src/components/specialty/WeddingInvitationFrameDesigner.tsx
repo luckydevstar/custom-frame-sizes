@@ -349,7 +349,7 @@ export function WeddingInvitationFrameDesigner({
       const hardwarePrice = hardware === "security" ? 8.95 : 0;
       const items: PriceLineItem[] = [
         {
-          label: `${frameConfig.frameWidth.toFixed(1)}×${adjustedFrameHeight.toFixed(1)}" Frame`,
+          label: `${frameConfig.frameWidth.toFixed(1)}Ã—${adjustedFrameHeight.toFixed(1)}" Frame`,
           amount: result.framePrice,
         },
       ];
@@ -501,7 +501,7 @@ export function WeddingInvitationFrameDesigner({
       await addToCartOnly(config, finalTotalPrice * quantity, quantity);
       toast({
         title: "Added to Cart!",
-        description: `${quantity} × Wedding Invitation Frame${quantity > 1 ? "s" : ""}`,
+        description: `${quantity} Ã— Wedding Invitation Frame${quantity > 1 ? "s" : ""}`,
       });
     } catch (err) {
       toast({
@@ -580,7 +580,7 @@ export function WeddingInvitationFrameDesigner({
               <p className="mt-3 text-sm text-muted-foreground">
                 Finished size:{" "}
                 <span className="font-medium text-foreground">
-                  {frameConfig.frameWidth.toFixed(1)}&quot; × {adjustedFrameHeight.toFixed(1)}&quot;
+                  {frameConfig.frameWidth.toFixed(1)}&quot; Ã— {adjustedFrameHeight.toFixed(1)}&quot;
                 </span>
               </p>
             </Card>

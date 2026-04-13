@@ -16,28 +16,26 @@ import { ScrollToDesignerButton } from "./scroll-button";
 
 import type { Metadata } from "next";
 
-import { RelatedProducts } from "@/components/RelatedProducts";
-
+import { generatePageMetadata } from "@/lib/seo-utils";
 
 const CanvasFrameDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.CanvasFrameDesigner),
   { ssr: false }
 );
 
+const RelatedProducts = nextDynamic(
+  () => import("@/components/RelatedProducts").then((m) => m.RelatedProducts),
+  { ssr: false }
+);
+
 // Avoid static prerender: designer deps (e.g. recharts/framer-motion) reference `self` at module load
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/canvas-frames", {
   title: "Custom Canvas Float Frames | Any Size | CustomFrameSizes.com",
   description:
     "Design custom canvas float frames in any size. Your canvas floats inside the frame for a gallery look. Made from solid wood. Ships fast.",
-  openGraph: {
-    title: "Custom Canvas Float Frames | Any Size",
-    description:
-      "Design custom canvas float frames in any size. Your canvas floats inside the frame for a gallery look.",
-    type: "website",
-  },
-};
+});
 
 export default function CanvasFramesPage() {
   return (

@@ -337,7 +337,7 @@ export function TicketStubFrameDesigner({
       await addToCartOnly(config, pricing.total * quantity, quantity);
       toast({
         title: "Added to cart!",
-        description: `${quantity}× Ticket Frame – ${currentLayout.name}`,
+        description: `${quantity}Ã— Ticket Frame â€“ ${currentLayout.name}`,
       });
     } catch (err) {
       toast({
@@ -457,7 +457,7 @@ export function TicketStubFrameDesigner({
                     <p className="font-medium">
                       Finished Size:{" "}
                       <span className="text-primary">
-                        {currentLayout.frameWidth.toFixed(2)}&quot; ×{" "}
+                        {currentLayout.frameWidth.toFixed(2)}&quot; Ã—{" "}
                         {(
                           currentLayout.frameHeight +
                           bottomWeightedExtra +
@@ -651,7 +651,7 @@ export function TicketStubFrameDesigner({
                             )}
                             <p className="font-medium text-sm">{frame.name}</p>
                             <p className="text-xs text-muted-foreground">
-                              Width: {frame.mouldingWidth}&quot; · Depth: {frame.usableDepth}&quot;
+                              Width: {frame.mouldingWidth}&quot; Â· Depth: {frame.usableDepth}&quot;
                             </p>
                           </button>
                         ))}

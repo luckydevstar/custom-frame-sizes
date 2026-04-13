@@ -3,17 +3,13 @@ import Link from "next/link";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+import { generatePageMetadata } from "@/lib/seo-utils";
+
+export const metadata: Metadata = generatePageMetadata("/returns-exchanges", {
   title: "Returns & Exchanges Policy - CustomFrameSizes.com | Custom Frame Sizes",
   description:
     "Learn about our return and exchange policy for custom-made frames, including damage reporting, manufacturing defects, and resolution options.",
-  openGraph: {
-    title: "Returns & Exchanges Policy - CustomFrameSizes.com",
-    description:
-      "Return and exchange policy for custom-made frames, damage reporting, and resolution options.",
-    type: "website",
-  },
-};
+});
 
 export default function ReturnsExchangesPage() {
   return (

@@ -27,8 +27,17 @@ export const metadata: Metadata = {
   title: "Certificate Frames – Professional Custom Sizing | Custom Frame Sizes",
   description:
     "Design professional-grade certificate frames with framer's grade acrylic. Perfect for professional licenses, awards, and credentials. Custom sizing for any certificate.",
-  keywords:
-    "certificate frames, professional license frames, award frames, corporate certificate framing, archival framing, custom certificate sizing, UV protection, archival materials, office credentials",
+  keywords: [
+    "certificate frames",
+    "professional license frames",
+    "award frames",
+    "corporate certificate framing",
+    "archival framing",
+    "custom certificate sizing",
+    "UV protection",
+    "archival materials",
+    "office credentials",
+  ],
   openGraph: {
     title: "Certificate Frames – Professional Custom Sizing",
     description:

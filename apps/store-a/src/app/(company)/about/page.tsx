@@ -22,7 +22,7 @@ import type { Metadata } from "next";
 import { generateMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = generateMetadata({
-  title: "About CustomFrameSizes.com | Custom Frame Manufacturer | Precision Framing",
+  title: "About CustomFrameSizes – Precision Framing",
   description:
     "Precision custom framing built to exact specifications. Every frame made to order with professional materials. 3–7 business day production. CustomFrameSizes.com – exact sizes, zero compromise.",
   canonical: "https://www.customframesizes.com/about",

@@ -1731,7 +1731,6 @@ export function BouquetFrameDesigner({
             quantity={quantity}
             onQuantityChange={setQuantity}
             onAddToCart={handleCheckout}
-            onCopyLink={handleCopyLink}
             isProcessing={isCheckingOut}
             disabled={readonly || !isValidDimensions || isTooLarge}
             priceItems={priceItems}

@@ -4,16 +4,13 @@ import Link from "next/link";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+import { generatePageMetadata } from "@/lib/seo-utils";
+
+export const metadata: Metadata = generatePageMetadata("/mat-board-guide", {
   title: "Mat Board Guide - Choosing the Perfect Mat for Your Frame | Custom Frame Sizes",
   description:
     "Complete guide to mat board for custom frames. Learn about single vs. double mats, choosing mat width, mat colors, and how mats enhance your artwork.",
-  openGraph: {
-    title: "Mat Board Guide - Choosing the Perfect Mat for Your Frame",
-    description: "Complete guide to mat board, colors, and configurations for custom frames.",
-    type: "website",
-  },
-};
+});
 
 export default function MatBoardGuidePage() {
   return (

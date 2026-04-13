@@ -2,16 +2,13 @@ import { FileText } from "lucide-react";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+import { generatePageMetadata } from "@/lib/seo-utils";
+
+export const metadata: Metadata = generatePageMetadata("/terms", {
   title: "Terms of Service - CustomFrameSizes.com | Custom Frame Sizes",
   description:
     "Terms and conditions for using CustomFrameSizes.com, including ordering, user-uploaded content, copyright, refunds, and legal disclaimers.",
-  openGraph: {
-    title: "Terms of Service - CustomFrameSizes.com",
-    description: "Terms governing use of our site and services.",
-    type: "website",
-  },
-};
+});
 
 export default function TermsPage() {
   return (

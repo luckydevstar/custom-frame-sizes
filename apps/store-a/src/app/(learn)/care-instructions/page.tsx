@@ -4,16 +4,13 @@ import Link from "next/link";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+import { generatePageMetadata } from "@/lib/seo-utils";
+
+export const metadata: Metadata = generatePageMetadata("/care-instructions", {
   title: "Frame Care Instructions - How to Clean and Maintain Custom Frames | Custom Frame Sizes",
   description:
     "Learn how to properly clean and maintain your custom picture frames. Expert tips for protecting frames from sunlight, humidity, and damage to ensure lasting beauty.",
-  openGraph: {
-    title: "Frame Care Instructions - How to Clean and Maintain Custom Frames",
-    description: "Expert tips for cleaning and maintaining your custom frames.",
-    type: "website",
-  },
-};
+});
 
 export default function CareInstructionsPage() {
   return (

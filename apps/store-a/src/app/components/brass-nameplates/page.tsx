@@ -6,8 +6,14 @@ export const metadata: Metadata = {
   title: "Custom Brass Nameplates - Laser Engraved Plaques | Custom Frame Sizes",
   description:
     "Order custom brass nameplates in any size from 1.5 to 12 inches. Laser-engraved with your text, choice of fonts, and decorative icons. Brass, silver, or black finishes.",
-  keywords:
-    "brass nameplate, custom nameplate, engraved plaque, brass plaque, personalized nameplate, laser engraved",
+  keywords: [
+    "brass nameplate",
+    "custom nameplate",
+    "engraved plaque",
+    "brass plaque",
+    "personalized nameplate",
+    "laser engraved",
+  ],
   openGraph: {
     title: "Custom Brass Nameplates - Laser Engraved Plaques",
     description:

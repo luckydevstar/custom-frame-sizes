@@ -32,8 +32,20 @@ export const metadata: Metadata = {
   title: "Multi Opening Frames | Multi Photo Frames & Collage Mats | Custom Frame Sizes",
   description:
     "Custom multi opening frames with multi opening mats for 2-25 photos. Display family pictures in a multi photo frame with 20+ layouts, framer's grade acrylic, and archival matting. Fits photo sizes 4×4 to 16×20.",
-  keywords:
-    "collage frame, multi opening frame, multi opening mat, photo collage frame, multi photo frame, family photo frame, picture collage frame, gallery wall frame, multiple opening frame, custom collage frame, wedding collage frame, baby collage frame",
+  keywords: [
+    "collage frame",
+    "multi opening frame",
+    "multi opening mat",
+    "photo collage frame",
+    "multi photo frame",
+    "family photo frame",
+    "picture collage frame",
+    "gallery wall frame",
+    "multiple opening frame",
+    "custom collage frame",
+    "wedding collage frame",
+    "baby collage frame",
+  ],
   openGraph: {
     title: "Multi Opening Frames | Multi Photo Frames & Collage Mats",
     description:

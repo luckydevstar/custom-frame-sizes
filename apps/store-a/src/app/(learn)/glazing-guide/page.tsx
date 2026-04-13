@@ -4,17 +4,13 @@ import Link from "next/link";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+import { generatePageMetadata } from "@/lib/seo-utils";
+
+export const metadata: Metadata = generatePageMetadata("/glazing-guide", {
   title: "Glazing Guide - Choosing the Right Glass for Your Custom Frame | Custom Frame Sizes",
   description:
     "Complete guide to frame glazing options. Compare standard glass vs. acrylic, UV protection, non-glare, and gallery-grade glazing to protect and showcase your artwork.",
-  openGraph: {
-    title: "Glazing Guide - Choosing the Right Glass for Your Custom Frame",
-    description:
-      "Compare glass and acrylic, UV protection, and anti-glare solutions for your frames.",
-    type: "website",
-  },
-};
+});
 
 const HERO_IMAGE = "/images/blog/frame-studio-hero.png";
 

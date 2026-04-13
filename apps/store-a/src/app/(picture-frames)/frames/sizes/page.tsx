@@ -26,8 +26,15 @@ export const metadata: Metadata = {
   title: `Picture Frames by Size - Custom Dimensions | ${brandConfig.name}`,
   description:
     "Shop 100+ custom picture frame sizes from 4×4 to 48×72 inches. Standard sizes (8×10, 16×20, 24×36) and hard-to-find dimensions. Made-to-order with instant pricing.",
-  keywords:
-    "custom frame sizes, picture frame dimensions, 8x10 frame, 16x20 frame, 24x36 frame, custom size frames, frame size chart",
+  keywords: [
+    "custom frame sizes",
+    "picture frame dimensions",
+    "8x10 frame",
+    "16x20 frame",
+    "24x36 frame",
+    "custom size frames",
+    "frame size chart",
+  ],
   openGraph: {
     title: "Picture Frames by Size - Custom Dimensions",
     description:

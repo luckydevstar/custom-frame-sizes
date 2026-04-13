@@ -266,7 +266,7 @@ export function CollageFrameDesigner({
   }, [selectedLayout]);
 
   // Filter mats based on selected layout's frame size
-  // Mats only available in 32x40 are hidden when frame exceeds that size (e.g., 11x14 "3 Wide Photos" = 49×17")
+  // Mats only available in 32x40 are hidden when frame exceeds that size (e.g., 11x14 "3 Wide Photos" = 49Ã—17")
   const standardMats = useMemo(() => {
     return ALL_MATS.filter(
       (m) =>
@@ -601,7 +601,7 @@ export function CollageFrameDesigner({
 
         toast({
           title: "Print File Generated!",
-          description: `${interiorW}" × ${interiorH}" at 300 DPI (${fileSizeMB} MB) - ${result.printCount} photo${result.printCount !== 1 ? "s" : ""} printed${result.byoCount > 0 ? `, ${result.byoCount} BYO space${result.byoCount !== 1 ? "s" : ""}` : ""}`,
+          description: `${interiorW}" Ã— ${interiorH}" at 300 DPI (${fileSizeMB} MB) - ${result.printCount} photo${result.printCount !== 1 ? "s" : ""} printed${result.byoCount > 0 ? `, ${result.byoCount} BYO space${result.byoCount !== 1 ? "s" : ""}` : ""}`,
         });
 
         // Upload print file to object storage for production retrieval
@@ -661,13 +661,13 @@ export function CollageFrameDesigner({
           await addToCartOnly(frameConfig, pricing.total, quantity);
           toast({
             title: "Added to cart!",
-            description: `${quantity}× Photo Collage Frame - ${currentLayout.name} (Print & Frame)`,
+            description: `${quantity}Ã— Photo Collage Frame - ${currentLayout.name} (Print & Frame)`,
           });
         } catch (e) {
           console.error("Add to cart failed:", e);
           toast({
             title: "Added to cart!",
-            description: `${quantity}× Photo Collage Frame - ${currentLayout.name} (Print & Frame)`,
+            description: `${quantity}Ã— Photo Collage Frame - ${currentLayout.name} (Print & Frame)`,
           });
         } finally {
           setIsCheckingOut(false);
@@ -706,13 +706,13 @@ export function CollageFrameDesigner({
         await addToCartOnly(frameConfig, pricing.total, quantity);
         toast({
           title: "Added to cart!",
-          description: `${quantity}× Photo Collage Frame - ${currentLayout.name}`,
+          description: `${quantity}Ã— Photo Collage Frame - ${currentLayout.name}`,
         });
       } catch (e) {
         console.error("Add to cart failed:", e);
         toast({
           title: "Added to cart!",
-          description: `${quantity}× Photo Collage Frame - ${currentLayout.name}`,
+          description: `${quantity}Ã— Photo Collage Frame - ${currentLayout.name}`,
         });
       } finally {
         setIsCheckingOut(false);
@@ -734,7 +734,7 @@ export function CollageFrameDesigner({
 
     const displayFrameHeight = currentLayout.frameHeight + bottomWeightedExtra;
     items.push({
-      label: `${currentLayout.name} Frame & Glazing (${currentLayout.frameWidth}" × ${displayFrameHeight}")`,
+      label: `${currentLayout.name} Frame & Glazing (${currentLayout.frameWidth}" Ã— ${displayFrameHeight}")`,
       amount: pricing.framePrice + pricing.glassPrice,
       testId: "price-frame",
     });
@@ -884,7 +884,7 @@ export function CollageFrameDesigner({
                         <p className="font-medium">
                           Finished Size:{" "}
                           <span className="text-primary">
-                            {currentLayout.frameWidth.toFixed(2)}&quot; ×{" "}
+                            {currentLayout.frameWidth.toFixed(2)}&quot; Ã—{" "}
                             {(
                               currentLayout.frameHeight +
                               bottomWeightedExtra +
@@ -919,7 +919,7 @@ export function CollageFrameDesigner({
                         )}
                       </div>
                       <p className="text-muted-foreground text-xs">
-                        Layout: {currentLayout.name} ({currentLayout.openingCount} photos) • Photo
+                        Layout: {currentLayout.name} ({currentLayout.openingCount} photos) â€¢ Photo
                         Size:{" "}
                         {currentLayout.photoSizeLabel ||
                           PHOTO_SIZES[currentLayout.defaultPhotoSize].displayName}

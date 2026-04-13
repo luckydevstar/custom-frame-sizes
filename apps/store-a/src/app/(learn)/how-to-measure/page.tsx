@@ -4,16 +4,13 @@ import Link from "next/link";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+import { generatePageMetadata } from "@/lib/seo-utils";
+
+export const metadata: Metadata = generatePageMetadata("/how-to-measure", {
   title: "How to Measure for Custom Frames | Custom Frame Sizes",
   description:
     "Learn how to accurately measure artwork and photos for custom framing. Step-by-step guide to measuring frame size vs. glass size and avoiding common mistakes.",
-  openGraph: {
-    title: "How to Measure for Custom Frames",
-    description: "Step-by-step guide to measuring artwork and photos for custom framing.",
-    type: "website",
-  },
-};
+});
 
 export default function HowToMeasurePage() {
   return (

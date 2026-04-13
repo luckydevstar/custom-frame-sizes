@@ -11,8 +11,18 @@ export const metadata: Metadata = {
   title: "Custom Needlework Frames | Cross Stitch & Embroidery Display | CustomFrameSizes.com",
   description:
     "Custom frames for needlework, cross stitch, and embroidery. Professional framing with framer's grade acrylic and archival materials. Handmade frames built to your exact size.",
-  keywords:
-    "needlework frames, cross stitch frames, embroidery frames, needlepoint frames, textile framing, fabric art frames, cross stitch display, embroidery display, needlework preservation, custom textile frames",
+  keywords: [
+    "needlework frames",
+    "cross stitch frames",
+    "embroidery frames",
+    "needlepoint frames",
+    "textile framing",
+    "fabric art frames",
+    "cross stitch display",
+    "embroidery display",
+    "needlework preservation",
+    "custom textile frames",
+  ],
   openGraph: {
     title: "Custom Needlework Frames | Cross Stitch & Embroidery Display | Custom Frame Sizes",
     description:

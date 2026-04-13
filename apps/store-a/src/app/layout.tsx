@@ -58,9 +58,6 @@ export const metadata: Metadata = {
     description: seoConfig.description,
     images: seoConfig.twitterImage ? [seoConfig.twitterImage] : [],
   },
-  alternates: {
-    canonical: seoConfig.canonicalUrl,
-  },
 };
 
 export default function RootLayout({

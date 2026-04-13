@@ -89,9 +89,9 @@ type CanvasDepth = (typeof CANVAS_DEPTHS)[number];
 // Depth labels for display
 const DEPTH_LABELS: Record<CanvasDepth, string> = {
   1.0: '1"',
-  1.375: '1⅜"',
-  1.5: '1½"',
-  1.625: '1⅝"',
+  1.375: '1â…œ"',
+  1.5: '1Â½"',
+  1.625: '1â…"',
 };
 
 // Theme labels for 1.625" depth
@@ -716,7 +716,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
   const artWidth = parseFraction(artworkWidth);
   const artHeight = parseFraction(artworkHeight);
 
-  // Artwork size validation - minimum 4×4 inches
+  // Artwork size validation - minimum 4Ã—4 inches
   const artworkSizeValidation = useMemo(() => {
     if (artWidth === 0 && artHeight === 0) return null; // Don't validate empty inputs
     return validateArtworkSize(artWidth, artHeight);
@@ -805,23 +805,23 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
   // Maps SKU to exaggerated display width in inches
   const displayMouldingWidth = useMemo(() => {
     const frameWidthExaggerations: Record<string, number> = {
-      // 0.25" actual → 0.75" display (1" depth frames)
+      // 0.25" actual â†’ 0.75" display (1" depth frames)
       "10117": 0.75,
       "10494": 0.75,
       "10495": 0.75,
-      // 1.375" depth frames → 0.75" display
+      // 1.375" depth frames â†’ 0.75" display
       "10426": 0.75,
       "10427": 0.75,
       "10428": 0.75,
       "10694": 0.75,
-      // 1.625" depth frames → 2" display
+      // 1.625" depth frames â†’ 2" display
       "10564": 2,
       "10565": 2,
       "10627": 2,
-      // 1.5" depth frames → 1.25" display
+      // 1.5" depth frames â†’ 1.25" display
       "10104": 1.25,
       "10105": 1.25,
-      // Barnwood and metal frames → 1.1" display
+      // Barnwood and metal frames â†’ 1.1" display
       "10764": 1.1,
       "10765": 1.1,
       "10766": 1.1,
@@ -1113,7 +1113,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                 <p className="font-medium">
                   Finished Size:{" "}
                   <span className="text-primary">
-                    {frameWidth.toFixed(2)}&quot; × {frameHeight.toFixed(2)}&quot;
+                    {frameWidth.toFixed(2)}&quot; Ã— {frameHeight.toFixed(2)}&quot;
                   </span>
                 </p>
                 {selectedFrame.dimensionalDiagram && (
@@ -1148,7 +1148,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                 )}
               </div>
               <p className="text-muted-foreground text-xs">
-                Canvas: {artWidth}&quot; × {artHeight}&quot;
+                Canvas: {artWidth}&quot; Ã— {artHeight}&quot;
               </p>
             </div>
 
@@ -1408,7 +1408,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                 </h4>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   Your canvas sits recessed within the frame. The gap between your canvas edge and
-                  the frame&apos;s inner edge is automatically set to ¼&quot;, creating a floating
+                  the frame&apos;s inner edge is automatically set to Â¼&quot;, creating a floating
                   effect.
                 </p>
               </div>
@@ -2029,7 +2029,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
             // Show success toast
             toast({
               title: "Size Updated",
-              description: `Canvas size updated to ${newWidth}" × ${newHeight}" from AR preview`,
+              description: `Canvas size updated to ${newWidth}" Ã— ${newHeight}" from AR preview`,
             });
           }}
         />

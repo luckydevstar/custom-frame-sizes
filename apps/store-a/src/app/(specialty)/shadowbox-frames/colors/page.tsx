@@ -32,8 +32,19 @@ export const metadata: Metadata = {
   title: "Shadowbox Frames by Color - Custom Depth Display Cases | Custom Frame Sizes",
   description:
     "Professional shadowbox frames in 7 color finishes: black, white, brown, silver, gold, blue, and natural wood. Deep-profile display cases for sports jerseys, military medals, vinyl records, and memorabilia.",
-  keywords:
-    "shadowbox frames by color, black shadowbox, white shadowbox, brown shadowbox frames, gold shadowbox frames, silver shadowbox display case, blue shadowbox, natural wood shadowbox, jersey display frames, medal display case, memorabilia frames",
+  keywords: [
+    "shadowbox frames by color",
+    "black shadowbox",
+    "white shadowbox",
+    "brown shadowbox frames",
+    "gold shadowbox frames",
+    "silver shadowbox display case",
+    "blue shadowbox",
+    "natural wood shadowbox",
+    "jersey display frames",
+    "medal display case",
+    "memorabilia frames",
+  ],
   openGraph: {
     title: "Shadowbox Frames by Color - Custom Depth Display Cases | Custom Frame Sizes",
     description:

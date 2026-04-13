@@ -4,16 +4,13 @@ import Link from "next/link";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+import { generatePageMetadata } from "@/lib/seo-utils";
+
+export const metadata: Metadata = generatePageMetadata("/frame-size-chart", {
   title: "Frame Size Chart - Standard Picture Frame Sizes Reference | Custom Frame Sizes",
   description:
     "Complete reference chart of standard picture frame sizes including photo prints, posters, and artwork. Learn when to choose standard vs. custom frame sizes.",
-  openGraph: {
-    title: "Frame Size Chart - Standard Picture Frame Sizes Reference",
-    description: "Reference chart of standard frame sizes for photos, posters, and art prints.",
-    type: "website",
-  },
-};
+});
 
 export default function FrameSizeChartPage() {
   return (
