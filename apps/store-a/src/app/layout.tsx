@@ -4,6 +4,7 @@ import { TooltipProvider } from "@framecraft/ui";
 import { Header, Footer } from "@framecraft/ui/components/layout";
 import { Toaster } from "@framecraft/ui/components/ui/toaster";
 import { Inter, Playfair_Display, Montserrat } from "next/font/google";
+import Script from "next/script";
 
 import { brandConfig } from "../brand.config";
 import { QueryProvider } from "../components/providers/query-provider";
@@ -60,6 +61,9 @@ export const metadata: Metadata = {
   },
 };
 
+const GTM_CONTAINER_ID =
+  process.env.NEXT_PUBLIC_GTM_ID ?? "GTM-WNC3937K";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -68,9 +72,25 @@ export default function RootLayout({
   return (
     <html lang="en" className={playfair.variable} suppressHydrationWarning>
       <head>
+        <Script id="google-tag-manager" strategy="beforeInteractive">
+          {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','${GTM_CONTAINER_ID}');`}
+        </Script>
         <ThemeScript />
       </head>
       <body className={`${inter.className} ${montserrat.variable}`}>
+        <noscript>
+          <iframe
+            src={`https://www.googletagmanager.com/ns.html?id=${GTM_CONTAINER_ID}`}
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+            title="Google Tag Manager"
+          />
+        </noscript>
         <QueryProvider>
           <StoreProvider config={brandConfig}>
             <CartHydration />
