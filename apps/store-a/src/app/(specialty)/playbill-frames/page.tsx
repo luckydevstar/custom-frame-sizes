@@ -1,4 +1,7 @@
 import { Card } from "@framecraft/ui";
+import nextDynamic from "next/dynamic";
+import type { Metadata } from "next";
+import { Suspense } from "react";
 import {
   Theater,
   Ticket,
@@ -11,18 +14,15 @@ import {
   Users,
   Archive,
 } from "lucide-react";
-import nextDynamic from "next/dynamic";
-import { Suspense } from "react";
 
-import type { Metadata } from "next";
+import { PLAYBILL_DIMENSIONS, TICKET_DIMENSIONS } from "@framecraft/core";
+
+import { ScrollToDesignerButton } from "./scroll-button";
 
 const PlaybillFrameDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.PlaybillFrameDesigner),
   { ssr: false }
 );
-import { ScrollToDesignerButton } from "./scroll-button";
-
-import { PLAYBILL_DIMENSIONS, TICKET_DIMENSIONS } from "@framecraft/core";
 
 export const metadata: Metadata = {
   title: "Custom Playbill Frames | Broadway Program Display Frames",

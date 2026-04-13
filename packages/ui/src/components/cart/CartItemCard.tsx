@@ -5,7 +5,6 @@ import { Minus, Plus, Trash2 } from "lucide-react";
 import Image from "next/image";
 
 import { cn } from "../../utils";
-import { FramePreview } from "../marketing/FramePreview";
 import { Button } from "../ui/button";
 
 import { FrameConfigurationSummary } from "./FrameConfigurationSummary";
@@ -46,18 +45,17 @@ export function CartItemCard({ item, onQuantityChange, onRemove, className }: Ca
   const lineTotalCents = unitPriceCents * item.quantity;
 
   const config = item.configuration;
-  const uploadedImage = item.imageUrl ?? config?.imageUrl ?? null;
   const frame = config ? getFrameStyleById(config.frameStyleId) : undefined;
   const topMat =
     config?.matColorId ? getMatColorById(config.matColorId) : undefined;
-  const bottomMat = config?.matInnerColorId ? getMatColorById(config.matInnerColorId) : undefined;
-  const canShowPreview =
-    config && (config.matType === "single" || config.matType === "double") && topMat?.hexColor;
 
   const productDisplayName = config ? getProductDisplayName(config.frameStyleId) : "Custom Product";
 
-  // Generate frame corner swatch URL if frame exists
-  const frameSwatchUrl = frame?.id ? getStoreBaseAssetUrl(`/frames/${frame.id}/swatch.jpg`) : null;
+  // Get frame corner swatch image (prefer corner alternate image, fallback to thumbnail)
+  const frameCornerImage = frame
+    ? frame.alternateImages?.find((img) => img.type === "corner")?.url ?? frame.thumbnail
+    : null;
+  const frameSwatchUrl = frameCornerImage ? getStoreBaseAssetUrl(frameCornerImage) : null;
 
   return (
     <article
@@ -68,35 +66,11 @@ export function CartItemCard({ item, onQuantityChange, onRemove, className }: Ca
       data-testid={`cart-item-${item.id}`}
     >
       <div className="relative h-32 w-full shrink-0 overflow-hidden rounded-md bg-muted sm:h-28 sm:w-28">
-        {canShowPreview ? (
-          <FramePreview
-            frameSku={frame?.sku}
-            frameColor={frame?.color}
-            topMatColor={topMat!.hexColor}
-            bottomMatColor={
-              config.matType === "double" && bottomMat?.hexColor
-                ? bottomMat.hexColor
-                : topMat!.hexColor
-            }
-            matType={config.matType === "double" ? "double" : "single"}
-            uploadedImage={uploadedImage}
-            artworkWidth={config.artworkWidth}
-            artworkHeight={config.artworkHeight}
-            matBorderWidth={config.matBorderWidth}
-            frameWidth={frame?.mouldingWidth ?? 0.625}
-            fillMatOpening={true}
-            className="h-full w-full"
-          />
-        ) : frameSwatchUrl ? (
-          <Image
+        {frameSwatchUrl ? (
+          <img
             src={frameSwatchUrl}
             alt={`${frame?.name || "Frame"} corner swatch`}
-            fill
-            className="object-cover"
-            sizes="(max-width: 640px) 128px, 112px"
-            priority={false}
-            placeholder="blur"
-            blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 112 128'%3E%3Crect fill='%23e5e7eb' width='112' height='128'/%3E%3C/svg%3E"
+            className="w-full h-full object-cover"
           />
         ) : item.imageUrl || config?.imageUrl ? (
           <Image

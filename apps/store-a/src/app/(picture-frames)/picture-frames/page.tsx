@@ -1,13 +1,13 @@
 import { getFrameStyles, getStoreBaseAssetUrl } from "@framecraft/core";
 import { Button } from "@framecraft/ui";
-import { Award, ArrowRight, Sparkles, Ruler, CheckCircle2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
-
-import { SearchableFrames } from "./SearchableFrames";
 import type { Metadata } from "next";
+import { Suspense } from "react";
+import { Award, ArrowRight, Sparkles, Ruler, CheckCircle2 } from "lucide-react";
+
 import { generatePageMetadata } from "@/lib/seo-utils";
+import { SearchableFrames } from "./SearchableFrames";
 
 export const metadata: Metadata = generatePageMetadata("/picture-frames", {
   title: "Custom Picture Frames - Professional Grade & Ornate Designs | CustomFrameSizes.com",

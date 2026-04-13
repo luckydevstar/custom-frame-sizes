@@ -1,14 +1,8 @@
 import { getFrameStyleById, getStoreBaseAssetUrl } from "@framecraft/core";
 import { FrameDesigner } from "@framecraft/ui";
 import { notFound } from "next/navigation";
-import { Suspense } from "react";
-
-import { getFramePageContent } from "./frame-page-content";
-import { FrameDesignerHeroCta } from "./FrameDesignerHeroCta";
-import { FrameDesignerPageSections } from "./FrameDesignerPageSections";
-import { FrameHeroBadge } from "./FrameHeroBadge";
-
 import type { Metadata } from "next";
+import { Suspense } from "react";
 
 import {
   buildFrameProductMetaDescription,
@@ -17,6 +11,10 @@ import {
   generateBreadcrumbSchema,
   getCanonicalUrl,
 } from "@/lib/seo";
+import { getFramePageContent } from "./frame-page-content";
+import { FrameDesignerHeroCta } from "./FrameDesignerHeroCta";
+import { FrameDesignerPageSections } from "./FrameDesignerPageSections";
+import { FrameHeroBadge } from "./FrameHeroBadge";
 
 // Next.js 15: params is a Promise
 type Props = { params: Promise<{ frameSlug: string }> };

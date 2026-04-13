@@ -1,8 +1,7 @@
-import { SamplesClient } from "./SamplesClient";
-
 import type { Metadata } from "next";
 
 import { generatePageMetadata } from "@/lib/seo-utils";
+import { SamplesClient } from "./SamplesClient";
 
 export const metadata: Metadata = generatePageMetadata("/samples", {
   title: "Order Frame, Mat & Acrylic Samples | Free Shipping | Custom Frame Sizes",

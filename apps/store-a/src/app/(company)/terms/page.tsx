@@ -1,6 +1,5 @@
-import { FileText } from "lucide-react";
-
 import type { Metadata } from "next";
+import { FileText } from "lucide-react";
 
 import { generatePageMetadata } from "@/lib/seo-utils";
 

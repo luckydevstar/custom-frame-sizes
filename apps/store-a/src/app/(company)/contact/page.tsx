@@ -1,11 +1,10 @@
-import { Mail } from "lucide-react";
-
-import { ContactForm } from "./ContactForm";
-
 import type { Metadata } from "next";
+import { Mail } from "lucide-react";
 
 import { brandConfig } from "@/brand.config";
 import { generateMetadata } from "@/lib/seo";
+
+import { ContactForm } from "./ContactForm";
 
 export const metadata: Metadata = generateMetadata({
   title: "Contact Us | CustomFrameSizes.com – Framing Experts",

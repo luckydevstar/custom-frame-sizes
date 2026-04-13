@@ -1,13 +1,13 @@
 'use client';
 
-import { useSearchParams } from 'next/navigation';
-import { useMemo } from 'react';
-import { getStoreBaseAssetUrl } from '@framecraft/core';
-import type { FrameStyle } from '@framecraft/types';
-import { Button } from '@framecraft/ui';
-import { ArrowRight, Sparkles } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import type { FrameStyle } from '@framecraft/types';
+import { useMemo } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { getStoreBaseAssetUrl } from '@framecraft/core';
+import { Button } from '@framecraft/ui';
+import { ArrowRight, Sparkles } from 'lucide-react';
 
 interface SearchableFramesProps {
   frames: FrameStyle[];

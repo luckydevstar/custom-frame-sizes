@@ -1,4 +1,5 @@
-import { Card, CardContent, Button } from "@framecraft/ui";
+import Link from "next/link";
+import type { Metadata } from "next";
 import {
   Ruler,
   Package,
@@ -15,9 +16,8 @@ import {
   Sliders,
   CreditCard,
 } from "lucide-react";
-import Link from "next/link";
 
-import type { Metadata } from "next";
+import { Card, CardContent, Button } from "@framecraft/ui";
 
 import { generateMetadata } from "@/lib/seo";
 
