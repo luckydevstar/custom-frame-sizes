@@ -9,8 +9,18 @@ export const metadata: Metadata = {
   title: "Ticket Frames – Concert & Event Memorabilia Display | Custom Frame Sizes",
   description:
     "Frame your 2&quot; × 5&quot; concert tickets, sports stubs, and event passes. Choose from 6 multi-opening layouts. Framer's grade acrylic and archival mats protect your memories.",
-  keywords:
-    "ticket frames, concert ticket frame, sports ticket display, event memorabilia frame, ticket stub frame, festival ticket frame, multi-opening ticket frame, concert collection display, ticket preservation, custom ticket frame",
+  keywords: [
+    "ticket frames",
+    "concert ticket frame",
+    "sports ticket display",
+    "event memorabilia frame",
+    "ticket stub frame",
+    "festival ticket frame",
+    "multi-opening ticket frame",
+    "concert collection display",
+    "ticket preservation",
+    "custom ticket frame",
+  ],
   openGraph: {
     title: "Ticket Frames – Concert & Event Memorabilia Display",
     description:

@@ -53,8 +53,14 @@ export const metadata: Metadata = {
   title: "Preserved Bouquet Frames – Wedding Bouquet Framing | Custom Frame Sizes",
   description:
     "Frame your wedding bouquet with archival bouquet frames. Deep frames for preserved flowers with custom sizing and framer's grade acrylic. Professional-grade preservation.",
-  keywords:
-    "preserved bouquet frames, wedding bouquet shadowbox, bridal flower preservation, dried bouquet framing, 3D flower frames, wedding flower display",
+  keywords: [
+    "preserved bouquet frames",
+    "wedding bouquet shadowbox",
+    "bridal flower preservation",
+    "dried bouquet framing",
+    "3D flower frames",
+    "wedding flower display",
+  ],
   openGraph: {
     title: "Preserved Bouquet Frames – Wedding Bouquet Framing | Custom Frame Sizes",
     description:

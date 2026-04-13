@@ -367,7 +367,7 @@ export type { SearchBarProps } from "./components/navigation";
 // Specialty components
 export { FrameDesigner } from "./components/specialty/FrameDesigner";
 export { ShareDesignModal } from "./components/specialty/ShareDesignModal";
-export type { ShareDesignModalProps, EmailShareData } from "./components/specialty/ShareDesignModal";
+export type { EmailShareData } from "./components/specialty/ShareDesignModal";
 export { MatConfigurator } from "./components/specialty/MatConfigurator";
 export type { MatConfiguratorProps } from "./components/specialty/MatConfigurator";
 export { BulkPricingModal } from "./components/specialty/mat/BulkPricingModal";

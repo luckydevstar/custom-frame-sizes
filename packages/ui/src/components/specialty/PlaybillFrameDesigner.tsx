@@ -52,7 +52,7 @@ const shadowboxFrames = getFramesByCategory("shadowbox");
 const allGlassTypes = getGlassTypes();
 const glassTypes = allGlassTypes.filter((g) => g.id === "standard" || g.id === "non-glare");
 
-// Playbill lifestyle images (29 total) – paths under shared_assets/playbill/lifestyle
+// Playbill lifestyle images (29 total) â€“ paths under shared_assets/playbill/lifestyle
 const PLAYBILL_LIFESTYLE_IMAGES: Array<{ url: string; alt: string }> = [
   {
     url: getSharedAssetUrl("playbill/lifestyle/playbill-lifestyle-1.jpg"),
@@ -510,7 +510,7 @@ export function PlaybillFrameDesigner({
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({
         title: "Added to Cart!",
-        description: `${quantity}× Playbill Frame - ${currentLayout.name}`,
+        description: `${quantity}Ã— Playbill Frame - ${currentLayout.name}`,
       });
     } catch (error) {
       console.error("Add to cart error:", error);
@@ -651,7 +651,7 @@ export function PlaybillFrameDesigner({
                         <p className="font-medium">
                           Finished Size:{" "}
                           <span className="text-primary">
-                            {currentLayout.frameWidth.toFixed(2)}&quot; ×{" "}
+                            {currentLayout.frameWidth.toFixed(2)}&quot; Ã—{" "}
                             {(
                               currentLayout.frameHeight +
                               bottomWeightedExtra +
@@ -686,8 +686,8 @@ export function PlaybillFrameDesigner({
                         )}
                       </div>
                       <p className="text-muted-foreground text-xs">
-                        Layout: {currentLayout.name} • Playbill: 5.5&quot; × 8.5&quot;
-                        {matType === "double" && <> • Reveal: {MAT_REVEAL}&quot;</>}
+                        Layout: {currentLayout.name} â€¢ Playbill: 5.5&quot; Ã— 8.5&quot;
+                        {matType === "double" && <> â€¢ Reveal: {MAT_REVEAL}&quot;</>}
                       </p>
                     </div>
                   )}

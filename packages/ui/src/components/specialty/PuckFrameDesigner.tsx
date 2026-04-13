@@ -476,7 +476,7 @@ export function PuckFrameDesigner({ defaultFrameId, embedded = false }: PuckFram
               <div className="p-4 border-t bg-muted/20 text-sm text-muted-foreground">
                 <div className="flex items-center justify-between">
                   <span>
-                    Finished Size: {finishedWidth}&quot; × {finishedHeight}&quot;
+                    Finished Size: {finishedWidth}&quot; Ã— {finishedHeight}&quot;
                   </span>
                   <span>
                     {currentLayout.puckCount} puck{currentLayout.puckCount > 1 ? "s" : ""}
@@ -814,7 +814,7 @@ export function PuckFrameDesigner({ defaultFrameId, embedded = false }: PuckFram
             <div className="flex-1">
               <div className="text-lg font-bold">${(pricing.total * quantity).toFixed(2)}</div>
               <div className="text-xs text-muted-foreground">
-                {quantity > 1 ? `${quantity} × $${pricing.total.toFixed(2)}` : ""}
+                {quantity > 1 ? `${quantity} Ã— $${pricing.total.toFixed(2)}` : ""}
               </div>
             </div>
             <QuantitySelector value={quantity} onChange={setQuantity} />

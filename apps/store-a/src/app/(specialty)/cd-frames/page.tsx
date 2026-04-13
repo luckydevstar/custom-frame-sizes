@@ -10,8 +10,21 @@ export const metadata: Metadata = {
   title: "Custom CD Frames | CD Album Display | Professional Framing | Custom Frame Sizes",
   description:
     "Premium custom CD frames featuring 5 professional layouts for CD album display. Custom frame shop quality with framer's grade acrylic, archival matting, solid pine construction, and secure mounting system.",
-  keywords:
-    "CD frames, CD album frames, jewel case frames, CD display frames, music memorabilia framing, CD collection display, CD framing, custom CD frames, album art frames, CD case frames, music room decor, CD wall display, disc frames",
+  keywords: [
+    "CD frames",
+    "CD album frames",
+    "jewel case frames",
+    "CD display frames",
+    "music memorabilia framing",
+    "CD collection display",
+    "CD framing",
+    "custom CD frames",
+    "album art frames",
+    "CD case frames",
+    "music room decor",
+    "CD wall display",
+    "disc frames",
+  ],
   alternates: { canonical: pageUrl },
   openGraph: {
     title: "Custom CD Frames | CD Album Display | Custom Frame Sizes",

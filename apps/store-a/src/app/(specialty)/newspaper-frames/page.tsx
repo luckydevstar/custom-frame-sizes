@@ -58,8 +58,15 @@ export const metadata: Metadata = {
   title: "Newspaper Frames | Custom Sizes for Any Clipping | CustomFrameSizes.com",
   description:
     "Frame newspapers in custom sizes. Shadowbox frames protect headlines, birth announcements, and historic front pages. Archival mats, framer's grade acrylic, and professional mounting included.",
-  keywords:
-    "newspaper frames, custom newspaper framing, shadowbox newspaper frames, frame newspaper clipping, birth announcement frame, historic headline frame, sports championship frame",
+  keywords: [
+    "newspaper frames",
+    "custom newspaper framing",
+    "shadowbox newspaper frames",
+    "frame newspaper clipping",
+    "birth announcement frame",
+    "historic headline frame",
+    "sports championship frame",
+  ],
   openGraph: {
     title: "Newspaper Frames | Custom Sizes for Any Clipping",
     description:

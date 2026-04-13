@@ -140,7 +140,7 @@ export function ComicBookFrameDesigner({
     return defaultFrame || shadowboxFrames[0];
   }, [defaultFrameId, urlParams]);
 
-  // Designer state - Three-step flow: Format → Layout → Presentation
+  // Designer state - Three-step flow: Format â†’ Layout â†’ Presentation
   const [selectedFormat, setSelectedFormat] = useState<string>(() => {
     return urlParams.get("format") || "modern-age";
   });
@@ -740,7 +740,7 @@ export function ComicBookFrameDesigner({
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({
         title: "Added to Cart!",
-        description: `${quantity}× Comic Frame - ${currentLayout.displayName} (${manufacturingFrameDimensions.width.toFixed(1)}" × ${manufacturingFrameDimensions.height.toFixed(1)}")`,
+        description: `${quantity}Ã— Comic Frame - ${currentLayout.displayName} (${manufacturingFrameDimensions.width.toFixed(1)}" Ã— ${manufacturingFrameDimensions.height.toFixed(1)}")`,
       });
     } catch (error) {
       console.error("Add to cart error:", error);
@@ -940,7 +940,7 @@ export function ComicBookFrameDesigner({
                       <p className="text-sm font-medium">
                         Finished Size:{" "}
                         <span className="text-primary">
-                          {manufacturingFrameDimensions.width.toFixed(1)}&quot; ×{" "}
+                          {manufacturingFrameDimensions.width.toFixed(1)}&quot; Ã—{" "}
                           {manufacturingFrameDimensions.height.toFixed(1)}&quot;
                         </span>
                       </p>
@@ -958,9 +958,9 @@ export function ComicBookFrameDesigner({
                     </div>
                     <p className="text-xs text-muted-foreground">
                       {currentFormat
-                        ? `Comic: ${currentFormat.comicWidth}&quot; × ${currentFormat.comicHeight}&quot;`
+                        ? `Comic: ${currentFormat.comicWidth}&quot; Ã— ${currentFormat.comicHeight}&quot;`
                         : ""}{" "}
-                      • Mat Border: {MAT_BORDER}&quot;
+                      â€¢ Mat Border: {MAT_BORDER}&quot;
                     </p>
                   </div>
 
@@ -1244,13 +1244,13 @@ export function ComicBookFrameDesigner({
                               <div>
                                 <h4 className="font-semibold flex items-center gap-2">
                                   <BookOpen className="w-4 h-4" />
-                                  Modern (1985–Present)
+                                  Modern (1985â€“Present)
                                 </h4>
                                 <p className="text-sm text-muted-foreground mt-1">
                                   Contemporary comics and graphic novels
                                 </p>
                                 <p className="text-xs text-muted-foreground mt-1">
-                                  6.625&quot; × 10.25&quot;
+                                  6.625&quot; Ã— 10.25&quot;
                                 </p>
                               </div>
                               <Badge variant="default" className="text-xs">
@@ -1284,7 +1284,7 @@ export function ComicBookFrameDesigner({
                                       {format.notes}
                                     </p>
                                     <p className="text-xs text-muted-foreground mt-1">
-                                      {format.comicWidth}&quot; × {format.comicHeight}&quot;
+                                      {format.comicWidth}&quot; Ã— {format.comicHeight}&quot;
                                     </p>
                                   </div>
                                   {formatId === "golden-age" && (
@@ -1317,7 +1317,7 @@ export function ComicBookFrameDesigner({
                                   CGC, CBCS, PGX graded comics
                                 </p>
                                 <p className="text-xs text-muted-foreground mt-1">
-                                  8.25&quot; × 13.0&quot; × 0.75&quot; depth
+                                  8.25&quot; Ã— 13.0&quot; Ã— 0.75&quot; depth
                                 </p>
                               </div>
                               <Badge variant="secondary" className="text-xs">
@@ -1409,7 +1409,7 @@ export function ComicBookFrameDesigner({
                               )}
                               <p className="font-medium text-xs lg:text-sm">{frame.name}</p>
                               <p className="text-xs text-muted-foreground mt-1">
-                                {frame.mouldingWidth}&quot; wide × {frame.usableDepth}&quot; deep
+                                {frame.mouldingWidth}&quot; wide Ã— {frame.usableDepth}&quot; deep
                               </p>
                             </button>
                           ))}

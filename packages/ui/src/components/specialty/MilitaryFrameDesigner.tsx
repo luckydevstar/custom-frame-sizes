@@ -512,7 +512,7 @@ export function MilitaryFrameDesigner({
                             {lo.displayName.replace(" Size", "")}
                           </div>
                           <div className="text-xs text-muted-foreground mt-0.5">
-                            {lo.matOpeningWidth}×{lo.matOpeningHeight}&quot;
+                            {lo.matOpeningWidth}Ã—{lo.matOpeningHeight}&quot;
                           </div>
                         </button>
                       ))}
@@ -544,7 +544,7 @@ export function MilitaryFrameDesigner({
                               }
                             />
                           </div>
-                          <div className="flex items-end pb-0.5 text-muted-foreground">×</div>
+                          <div className="flex items-end pb-0.5 text-muted-foreground">Ã—</div>
                           <div className="flex-1">
                             <Label className="text-xs mb-1 block">Height (inches)</Label>
                             <Input
@@ -602,7 +602,7 @@ export function MilitaryFrameDesigner({
                           adjustedLayout.frameWidth +
                           2 * (selectedFrame.mouldingWidth ?? 0)
                         ).toFixed(1)}
-                        &quot; ×{" "}
+                        &quot; Ã—{" "}
                         {(
                           adjustedLayout.frameHeight +
                           2 * (selectedFrame.mouldingWidth ?? 0)
@@ -611,8 +611,8 @@ export function MilitaryFrameDesigner({
                       </span>
                     </p>
                     <p className="text-muted-foreground text-xs">
-                      Interior: {adjustedLayout.frameWidth}&quot; × {adjustedLayout.frameHeight}
-                      &quot; × {selectedFrame.usableDepth}&quot; depth
+                      Interior: {adjustedLayout.frameWidth}&quot; Ã— {adjustedLayout.frameHeight}
+                      &quot; Ã— {selectedFrame.usableDepth}&quot; depth
                     </p>
                   </div>
 
@@ -686,7 +686,7 @@ export function MilitaryFrameDesigner({
                           {lo.displayName.replace(" Size", "")}
                         </div>
                         <div className="text-xs text-muted-foreground mt-0.5">
-                          {lo.matOpeningWidth}×{lo.matOpeningHeight}&quot;
+                          {lo.matOpeningWidth}Ã—{lo.matOpeningHeight}&quot;
                         </div>
                       </button>
                     ))}
@@ -715,7 +715,7 @@ export function MilitaryFrameDesigner({
                             className={!customDimensionValidation.valid ? "border-destructive" : ""}
                           />
                         </div>
-                        <div className="pb-2 text-xl text-muted-foreground">×</div>
+                        <div className="pb-2 text-xl text-muted-foreground">Ã—</div>
                         <div className="flex-1">
                           <Label className="text-sm mb-1.5 block">Display Height</Label>
                           <Input
@@ -783,7 +783,7 @@ export function MilitaryFrameDesigner({
                             )}
                             <p className="font-medium text-sm mb-1.5">{frame.name}</p>
                             <p className="text-xs text-muted-foreground">
-                              Width: {frame.mouldingWidth}&quot; · Depth: {frame.usableDepth}&quot;
+                              Width: {frame.mouldingWidth}&quot; Â· Depth: {frame.usableDepth}&quot;
                             </p>
                           </button>
                         ))}

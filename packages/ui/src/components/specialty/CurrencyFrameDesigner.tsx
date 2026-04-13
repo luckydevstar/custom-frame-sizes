@@ -457,7 +457,7 @@ export function CurrencyFrameDesigner({
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({
         title: "Added to Cart!",
-        description: `${quantity}× ${currentLayout.displayName} Currency Frame added to your cart.`,
+        description: `${quantity}Ã— ${currentLayout.displayName} Currency Frame added to your cart.`,
       });
     } catch (error) {
       console.error("Add to cart error:", error);
@@ -513,7 +513,7 @@ export function CurrencyFrameDesigner({
                           {layoutOption.displayName.replace(" Size", "")}
                         </div>
                         <div className="text-xs text-muted-foreground mt-0.5">
-                          {layoutOption.matOpeningWidth}×{layoutOption.matOpeningHeight}&quot;
+                          {layoutOption.matOpeningWidth}Ã—{layoutOption.matOpeningHeight}&quot;
                         </div>
                       </button>
                     ))}
@@ -550,7 +550,7 @@ export function CurrencyFrameDesigner({
                             data-testid="input-custom-width-mobile"
                           />
                         </div>
-                        <div className="flex items-end pb-0.5 text-muted-foreground">×</div>
+                        <div className="flex items-end pb-0.5 text-muted-foreground">Ã—</div>
                         <div className="flex-1">
                           <Label
                             htmlFor="customHeight-mobile"
@@ -622,13 +622,13 @@ export function CurrencyFrameDesigner({
                         const mouldingWidth = selectedFrame.mouldingWidth ?? 0;
                         const overallWidth = interiorWidth + mouldingWidth * 2;
                         const overallHeight = interiorHeight + mouldingWidth * 2;
-                        return `${overallWidth.toFixed(1)}" × ${overallHeight.toFixed(1)}"`;
+                        return `${overallWidth.toFixed(1)}" Ã— ${overallHeight.toFixed(1)}"`;
                       })()}
                     </span>
                   </p>
                   <p className="text-muted-foreground text-xs">
-                    Display Area: {adjustedLayout.matOpeningWidth}&quot; ×{" "}
-                    {adjustedLayout.matOpeningHeight}&quot; × {selectedFrame.usableDepth}&quot;
+                    Display Area: {adjustedLayout.matOpeningWidth}&quot; Ã—{" "}
+                    {adjustedLayout.matOpeningHeight}&quot; Ã— {selectedFrame.usableDepth}&quot;
                     depth
                   </p>
                 </div>
@@ -705,7 +705,7 @@ export function CurrencyFrameDesigner({
                           {layoutOption.displayName.replace(" Size", "")}
                         </div>
                         <div className="text-xs text-muted-foreground mt-0.5">
-                          {layoutOption.matOpeningWidth}×{layoutOption.matOpeningHeight}&quot;
+                          {layoutOption.matOpeningWidth}Ã—{layoutOption.matOpeningHeight}&quot;
                         </div>
                       </button>
                     ))}
@@ -769,7 +769,7 @@ export function CurrencyFrameDesigner({
                               </span>
                             </div>
                           </div>
-                          <div className="pb-2 text-xl text-muted-foreground">×</div>
+                          <div className="pb-2 text-xl text-muted-foreground">Ã—</div>
                           <div className="flex-1">
                             <Label htmlFor="customHeight-desktop" className="text-sm mb-1.5 block">
                               Display Height
@@ -795,9 +795,9 @@ export function CurrencyFrameDesigner({
                           </p>
                         )}
                         <p className="text-xs text-muted-foreground mt-3">
-                          Min {CURRENCY_CUSTOM_SIZE_LIMITS.MIN_WIDTH}×
+                          Min {CURRENCY_CUSTOM_SIZE_LIMITS.MIN_WIDTH}Ã—
                           {CURRENCY_CUSTOM_SIZE_LIMITS.MIN_HEIGHT}&quot;. Max{" "}
-                          {CURRENCY_CUSTOM_SIZE_LIMITS.MAX_WIDTH}×
+                          {CURRENCY_CUSTOM_SIZE_LIMITS.MAX_WIDTH}Ã—
                           {CURRENCY_CUSTOM_SIZE_LIMITS.MAX_HEIGHT}&quot;. Decimals accepted.
                         </p>
                       </div>

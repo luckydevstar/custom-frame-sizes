@@ -144,7 +144,7 @@ export function PuzzleFrameDesigner({
         isSquare: false,
         category: "standard",
         aspectRatio: customWidth / customHeight,
-        label: `Custom — ${customWidth}" × ${customHeight}"`,
+        label: `Custom â€” ${customWidth}" Ã— ${customHeight}"`,
       };
     }
     // Default to 1000 piece standard
@@ -724,7 +724,7 @@ export function PuzzleFrameDesigner({
           isSquare: false,
           category: "standard",
           aspectRatio: w / h,
-          label: `Custom — ${w}" × ${h}"`,
+          label: `Custom â€” ${w}" Ã— ${h}"`,
         };
         setSelectedPuzzleSize(customSize);
       }
@@ -786,7 +786,7 @@ export function PuzzleFrameDesigner({
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({
         title: "Added to cart",
-        description: `${quantity}× Puzzle Frame added to cart`,
+        description: `${quantity}Ã— Puzzle Frame added to cart`,
       });
     } catch (error) {
       console.error("Error adding to cart:", error);
@@ -864,7 +864,7 @@ export function PuzzleFrameDesigner({
                     <p className="font-medium">
                       Finished Size:{" "}
                       <span className="text-primary">
-                        {frameWidth.toFixed(2)}&quot; × {frameHeight.toFixed(2)}&quot;
+                        {frameWidth.toFixed(2)}&quot; Ã— {frameHeight.toFixed(2)}&quot;
                       </span>
                     </p>
                     {selectedFrame.dimensionalDiagram && (
@@ -895,9 +895,9 @@ export function PuzzleFrameDesigner({
                     )}
                   </div>
                   <p className="text-muted-foreground text-xs">
-                    Puzzle: {selectedPuzzleSize?.width}&quot; × {selectedPuzzleSize?.height}&quot;
-                    {matType !== "none" && <> • Mat Border: {matBorder.toFixed(2)}&quot;</>}
-                    {matType === "double" && <> • Reveal: {matReveal.toFixed(2)}&quot;</>}
+                    Puzzle: {selectedPuzzleSize?.width}&quot; Ã— {selectedPuzzleSize?.height}&quot;
+                    {matType !== "none" && <> â€¢ Mat Border: {matBorder.toFixed(2)}&quot;</>}
+                    {matType === "double" && <> â€¢ Reveal: {matReveal.toFixed(2)}&quot;</>}
                   </p>
                 </div>
 
@@ -987,31 +987,31 @@ export function PuzzleFrameDesigner({
                   <SelectContent>
                     {/* Standard Puzzles */}
                     <SelectItem value="puzzle-100" data-testid="select-size-100">
-                      100 pieces — 14.25&quot; × 10.25&quot;
+                      100 pieces â€” 14.25&quot; Ã— 10.25&quot;
                     </SelectItem>
                     <SelectItem value="puzzle-150" data-testid="select-size-150">
-                      150 pieces — 14.25&quot; × 10.25&quot;
+                      150 pieces â€” 14.25&quot; Ã— 10.25&quot;
                     </SelectItem>
                     <SelectItem value="puzzle-200" data-testid="select-size-200">
-                      200 pieces — 19.25&quot; × 14.25&quot;
+                      200 pieces â€” 19.25&quot; Ã— 14.25&quot;
                     </SelectItem>
                     <SelectItem value="puzzle-300" data-testid="select-size-300">
-                      300 pieces — 18&quot; × 24&quot;
+                      300 pieces â€” 18&quot; Ã— 24&quot;
                     </SelectItem>
                     <SelectItem value="puzzle-500" data-testid="select-size-500">
-                      500 pieces — 19.25&quot; × 14.25&quot;
+                      500 pieces â€” 19.25&quot; Ã— 14.25&quot;
                     </SelectItem>
                     <SelectItem value="puzzle-750" data-testid="select-size-750">
-                      750 pieces — 24&quot; × 18&quot;
+                      750 pieces â€” 24&quot; Ã— 18&quot;
                     </SelectItem>
                     <SelectItem value="puzzle-1000" data-testid="select-size-1000">
-                      1000 pieces — 27&quot; × 20&quot;
+                      1000 pieces â€” 27&quot; Ã— 20&quot;
                     </SelectItem>
                     <SelectItem value="puzzle-1500" data-testid="select-size-1500">
-                      1500 pieces — 32&quot; × 24&quot;
+                      1500 pieces â€” 32&quot; Ã— 24&quot;
                     </SelectItem>
                     <SelectItem value="puzzle-2000" data-testid="select-size-2000">
-                      2000 pieces — 39&quot; × 27&quot;
+                      2000 pieces â€” 39&quot; Ã— 27&quot;
                     </SelectItem>
 
                     <Separator className="my-2" />
@@ -1021,39 +1021,39 @@ export function PuzzleFrameDesigner({
                       value="puzzle-500-panoramic"
                       data-testid="select-size-500-panoramic"
                     >
-                      500 pieces (panoramic) — 26&quot; × 9&quot;
+                      500 pieces (panoramic) â€” 26&quot; Ã— 9&quot;
                     </SelectItem>
                     <SelectItem
                       value="puzzle-750-panoramic"
                       data-testid="select-size-750-panoramic"
                     >
-                      750 pieces (panoramic) — 37&quot; × 12&quot;
+                      750 pieces (panoramic) â€” 37&quot; Ã— 12&quot;
                     </SelectItem>
                     <SelectItem
                       value="puzzle-1000-panoramic"
                       data-testid="select-size-1000-panoramic"
                     >
-                      1000 pieces (panoramic) — 39&quot; × 13&quot;
+                      1000 pieces (panoramic) â€” 39&quot; Ã— 13&quot;
                     </SelectItem>
 
                     <Separator className="my-2" />
 
                     {/* Square Puzzles */}
                     <SelectItem value="puzzle-500-square" data-testid="select-size-500-square">
-                      500 pieces (square) — 21&quot; × 21&quot;
+                      500 pieces (square) â€” 21&quot; Ã— 21&quot;
                     </SelectItem>
                     <SelectItem value="puzzle-1000-square" data-testid="select-size-1000-square">
-                      1000 pieces (square) — 25&quot; × 25&quot;
+                      1000 pieces (square) â€” 25&quot; Ã— 25&quot;
                     </SelectItem>
 
                     <Separator className="my-2" />
 
                     {/* Round Puzzles */}
                     <SelectItem value="puzzle-500-round" data-testid="select-size-500-round">
-                      500 pieces (round) — 25&quot; diameter
+                      500 pieces (round) â€” 25&quot; diameter
                     </SelectItem>
                     <SelectItem value="puzzle-1000-round" data-testid="select-size-1000-round">
-                      1000 pieces (round) — 27&quot; diameter
+                      1000 pieces (round) â€” 27&quot; diameter
                     </SelectItem>
 
                     <Separator className="my-2" />
@@ -1282,7 +1282,7 @@ export function PuzzleFrameDesigner({
                           data-testid="warning-oversize"
                         >
                           <p>
-                            This mat exceeds standard sheet size 32&quot;×40&quot;. Limited color
+                            This mat exceeds standard sheet size 32&quot;Ã—40&quot;. Limited color
                             selection available.
                           </p>
                         </div>
@@ -1700,9 +1700,9 @@ function PuzzlePreview({
       framePhotos?.bottomUrl &&
       framePhotos?.leftUrl &&
       framePhotos?.rightUrl ? (
-        // Textured frame using images with proper 45° miter cuts via clipPath polygons
+        // Textured frame using images with proper 45Â° miter cuts via clipPath polygons
         <>
-          {/* Top frame piece - clipped to trapezoid for 45° miters */}
+          {/* Top frame piece - clipped to trapezoid for 45Â° miters */}
           <div
             style={{
               position: "absolute",
@@ -1724,7 +1724,7 @@ function PuzzlePreview({
             }}
           />
 
-          {/* Bottom frame piece - clipped to trapezoid for 45° miters */}
+          {/* Bottom frame piece - clipped to trapezoid for 45Â° miters */}
           <div
             style={{
               position: "absolute",

@@ -6,18 +6,24 @@ import Link from "next/link";
 import { Suspense } from "react";
 
 import { SearchableFrames } from "./SearchableFrames";
-
 import type { Metadata } from "next";
-
-import { SearchableFrames } from "./SearchableFrames";
 import { generatePageMetadata } from "@/lib/seo-utils";
 
 export const metadata: Metadata = generatePageMetadata("/picture-frames", {
   title: "Custom Picture Frames - Professional Grade & Ornate Designs | CustomFrameSizes.com",
   description:
     "Browse our collection of custom picture frames in professional-grade finishes. Ornate gold frames, classic wood mouldings, and modern designs. Any size from 4×4 to 48×72 inches with precision 1/16 inch accuracy. Expert craftsmanship with instant pricing.",
-  keywords:
-    "custom picture frames, museum frames, ornate frames, gold picture frames, wood frames, custom framing, picture frame gallery, fine art frames, photo frames",
+  keywords: [
+    "custom picture frames",
+    "museum frames",
+    "ornate frames",
+    "gold picture frames",
+    "wood frames",
+    "custom framing",
+    "picture frame gallery",
+    "fine art frames",
+    "photo frames",
+  ],
 });
 
 function getCornerOrThumbUrl(frame: {

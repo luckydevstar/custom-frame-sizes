@@ -24,8 +24,16 @@ export const metadata: Metadata = generatePageMetadata("/shadowbox", {
   title: `Custom Shadowbox Frames - 3D Display & Deep Frames | ${brandConfig.name}`,
   description:
     "Custom shadowbox frames for memorabilia, jerseys, medals and 3D objects. Multiple styles, depths (0.875-2.5 in), 4x4 to 32x40. Instant pricing, museum quality.",
-  keywords:
-    "custom shadowbox frames, deep shadowbox, shadowbox display, jersey frame, medal display, 3D picture frames, memorabilia frames, shadow box custom size",
+  keywords: [
+    "custom shadowbox frames",
+    "deep shadowbox",
+    "shadowbox display",
+    "jersey frame",
+    "medal display",
+    "3D picture frames",
+    "memorabilia frames",
+    "shadow box custom size",
+  ],
 });
 
 function getCornerImage(frame: FrameStyle) {

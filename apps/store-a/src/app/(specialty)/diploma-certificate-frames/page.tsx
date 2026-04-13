@@ -26,8 +26,18 @@ export const metadata: Metadata = {
   title: "Diploma & Certificate Frames – Archival Custom Sizing | Custom Frame Sizes",
   description:
     "Design museum-grade diploma frames with archival UV glazing and custom sizing for any institution. Protect your achievements for life. Free design tool.",
-  keywords:
-    "diploma frames, certificate frames, college diploma frame, professional license frame, archival framing, UV protection glass, custom diploma sizing, museum quality framing, graduation diploma frame, university diploma frame",
+  keywords: [
+    "diploma frames",
+    "certificate frames",
+    "college diploma frame",
+    "professional license frame",
+    "archival framing",
+    "UV protection glass",
+    "custom diploma sizing",
+    "museum quality framing",
+    "graduation diploma frame",
+    "university diploma frame",
+  ],
   openGraph: {
     title: "Diploma & Certificate Frames – Archival Custom Sizing",
     description:

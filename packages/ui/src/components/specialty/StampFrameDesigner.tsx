@@ -437,7 +437,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
       await addToCartOnly(frameConfig, finalTotal, quantity);
       toast({
         title: "Added to Cart!",
-        description: `${quantity}× ${currentLayout.displayName} Stamp Frame added.`,
+        description: `${quantity}Ã— ${currentLayout.displayName} Stamp Frame added.`,
       });
     } catch (err) {
       toast({
@@ -530,7 +530,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                           {lo.displayName.replace(" Size", "")}
                         </div>
                         <div className="text-xs text-muted-foreground mt-0.5">
-                          {lo.matOpeningWidth}×{lo.matOpeningHeight}&quot;
+                          {lo.matOpeningWidth}Ã—{lo.matOpeningHeight}&quot;
                         </div>
                       </button>
                     ))}
@@ -567,7 +567,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                             data-testid="input-custom-width-mobile"
                           />
                         </div>
-                        <div className="flex items-end pb-0.5 text-muted-foreground">×</div>
+                        <div className="flex items-end pb-0.5 text-muted-foreground">Ã—</div>
                         <div className="flex-1">
                           <Label
                             htmlFor="customHeight-mobile"
@@ -633,7 +633,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                       {(adjustedLayout.frameWidth + (selectedFrame.mouldingWidth ?? 0) * 2).toFixed(
                         1
                       )}
-                      &quot; ×{" "}
+                      &quot; Ã—{" "}
                       {(
                         adjustedLayout.frameHeight +
                         (selectedFrame.mouldingWidth ?? 0) * 2
@@ -642,8 +642,8 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                     </span>
                   </p>
                   <p className="text-muted-foreground text-xs">
-                    Display Area: {adjustedLayout.matOpeningWidth}&quot; ×{" "}
-                    {adjustedLayout.matOpeningHeight}&quot; × {selectedFrame.usableDepth}&quot;
+                    Display Area: {adjustedLayout.matOpeningWidth}&quot; Ã—{" "}
+                    {adjustedLayout.matOpeningHeight}&quot; Ã— {selectedFrame.usableDepth}&quot;
                     depth
                   </p>
                 </div>
@@ -723,7 +723,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                         {lo.displayName.replace(" Size", "")}
                       </div>
                       <div className="text-xs text-muted-foreground mt-0.5">
-                        {lo.matOpeningWidth}×{lo.matOpeningHeight}&quot;
+                        {lo.matOpeningWidth}Ã—{lo.matOpeningHeight}&quot;
                       </div>
                     </button>
                   ))}
@@ -780,7 +780,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                             data-testid="input-custom-width-desktop"
                           />
                         </div>
-                        <div className="pb-2 text-xl text-muted-foreground">×</div>
+                        <div className="pb-2 text-xl text-muted-foreground">Ã—</div>
                         <div className="flex-1">
                           <Label htmlFor="customHeight-desktop" className="text-sm mb-1.5 block">
                             Display Height
@@ -801,9 +801,9 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                         </p>
                       )}
                       <p className="text-xs text-muted-foreground mt-3">
-                        Min {STAMP_CUSTOM_SIZE_LIMITS.MIN_WIDTH}×
+                        Min {STAMP_CUSTOM_SIZE_LIMITS.MIN_WIDTH}Ã—
                         {STAMP_CUSTOM_SIZE_LIMITS.MIN_HEIGHT}&quot;. Max{" "}
-                        {STAMP_CUSTOM_SIZE_LIMITS.MAX_WIDTH}×{STAMP_CUSTOM_SIZE_LIMITS.MAX_HEIGHT}
+                        {STAMP_CUSTOM_SIZE_LIMITS.MAX_WIDTH}Ã—{STAMP_CUSTOM_SIZE_LIMITS.MAX_HEIGHT}
                         &quot;. Decimals accepted.
                       </p>
                     </div>
@@ -879,7 +879,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                             )}
                             <p className="font-medium text-sm mb-1.5">{frame.name}</p>
                             <p className="text-xs text-muted-foreground">
-                              Width: {frame.mouldingWidth}&quot; · Depth: {frame.usableDepth}&quot;
+                              Width: {frame.mouldingWidth}&quot; Â· Depth: {frame.usableDepth}&quot;
                             </p>
                           </button>
                         ))}

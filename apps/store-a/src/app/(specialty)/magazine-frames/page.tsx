@@ -10,8 +10,20 @@ export const metadata: Metadata = {
     "Magazine Frames | Custom Shadowbox Frames for Collectible Magazines | CustomFrameSizes.com",
   description:
     "Custom magazine frames with shadowbox depth for collectible magazines. Framer's grade acrylic, archival matting, and multiple layouts. Frame vintage magazines from TIME, Life, Vogue, Rolling Stone, National Geographic, and more.",
-  keywords:
-    "magazine frames, shadowbox magazine frame, vintage magazine frame, collectible magazine display, magazine cover frame, custom magazine frame, Life magazine frame, Vogue frame, Rolling Stone frame, National Geographic frame, TIME magazine frame, magazine preservation frame",
+  keywords: [
+    "magazine frames",
+    "shadowbox magazine frame",
+    "vintage magazine frame",
+    "collectible magazine display",
+    "magazine cover frame",
+    "custom magazine frame",
+    "Life magazine frame",
+    "Vogue frame",
+    "Rolling Stone frame",
+    "National Geographic frame",
+    "TIME magazine frame",
+    "magazine preservation frame",
+  ],
   openGraph: {
     title: "Custom Magazine Frames - Shadowbox Frames for Collectible Magazines",
     description:

@@ -27,8 +27,15 @@ export const metadata: Metadata = {
   title: "Picture Frames by Style - Modern, Rustic, Classic | CFS",
   description:
     "Shop picture frames by style. Modern, rustic, classic, gallery, vintage, and minimalist frames in custom sizes 4×4 to 48×72 inches. Find your perfect aesthetic.",
-  keywords:
-    "modern picture frames, rustic frames, farmhouse frames, classic frames, gallery frames, minimalist frames, vintage frames",
+  keywords: [
+    "modern picture frames",
+    "rustic frames",
+    "farmhouse frames",
+    "classic frames",
+    "gallery frames",
+    "minimalist frames",
+    "vintage frames",
+  ],
   openGraph: {
     title: "Picture Frames by Style - Custom Sizes",
     description:

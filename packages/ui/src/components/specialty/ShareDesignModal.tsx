@@ -1,6 +1,6 @@
 "use client";
 
-import { Mail, Copy, X } from "lucide-react";
+import { Copy } from "lucide-react";
 import { useEffect, useState } from "react";
 
 import {

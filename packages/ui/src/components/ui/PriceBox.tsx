@@ -30,8 +30,10 @@ export interface PriceBoxProps {
   onQuantityChange: (quantity: number) => void;
   /** Callback when Add to Cart is clicked */
   onAddToCart: () => void;
-  /** Callback when Share Design is triggered (returns false to prevent modal close) */
+  /** Callback when Share Design is triggered */
   onShareDesign?: (data: EmailShareData) => Promise<void>;
+  /** Legacy callback for copy link (for backwards compatibility) */
+  onCopyLink?: () => void;
   /** Whether the checkout is processing */
   isProcessing?: boolean;
   /** Whether the Add to Cart button should be disabled */
@@ -87,6 +89,7 @@ export function PriceBox({
   onQuantityChange,
   onAddToCart,
   onShareDesign,
+  onCopyLink,
   isProcessing = false,
   disabled = false,
   priceItems,
@@ -104,6 +107,15 @@ export function PriceBox({
   const finalTotal = totalPrice * quantity;
 
   const designUrl = typeof window !== "undefined" ? window.location.href : "";
+
+  // Wrapper for onCopyLink for backwards compatibility
+  const handleShareDesignClick = () => {
+    if (onCopyLink) {
+      onCopyLink();
+    } else {
+      setShowShareModal(true);
+    }
+  };
 
   return (
     <>
@@ -206,7 +218,7 @@ export function PriceBox({
               variant="outline"
               size="sm"
               className="w-full"
-              onClick={() => setShowShareModal(true)}
+              onClick={handleShareDesignClick}
               data-testid={`${testIdPrefix}button-share-design`}
             >
               <Share2 className="h-3 w-3 mr-1" />
