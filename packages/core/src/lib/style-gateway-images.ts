@@ -164,7 +164,7 @@ export const FRAME_STYLE_ASSIGNMENTS: Record<string, string[]> = {
   "black-wood": ["Modern", "Minimalist"],
   "white-wood": ["Modern", "Minimalist"],
   "silver-wood": ["Modern"],
-  "bronz-picture-frame": ["Modern", "Gallery"],
+  "bronze-picture-frame": ["Modern", "Gallery"],
   "iron-ore-silver": ["Modern", "Gallery"],
   "black-peak": ["Modern"],
   "pink-wood": ["Modern"],

@@ -4,19 +4,13 @@ import Link from "next/link";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+import { generatePageMetadata } from "@/lib/seo-utils";
+
+export const metadata: Metadata = generatePageMetadata("/specialty-frames", {
   title: "Specialty Frames | Jersey, Diploma, Certificate & More | CustomFrameSizes.com",
   description:
     "Custom specialty frames for jerseys, diplomas, certificates, shadowboxes, movie posters, and more. Design each type with our dedicated tools. Any size, professional materials.",
-  openGraph: {
-    title: "Specialty Frames | Jersey, Diploma, Certificate & More",
-    description:
-      "Custom framing for jerseys, diplomas, certificates, shadowboxes, and specialty items. Dedicated designers for each type.",
-    type: "website",
-    url: "/specialty-frames",
-  },
-  alternates: { canonical: "/specialty-frames" },
-};
+});
 
 const categories = [
   {

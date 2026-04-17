@@ -8,6 +8,8 @@ import { ScrollToDesignerButton } from "./scroll-button";
 
 import type { Metadata } from "next";
 
+import { generatePageMetadata } from "@/lib/seo-utils";
+
 const CertificateFrameDesigner = dynamic(
   () => import("@framecraft/ui").then((mod) => ({ default: mod.CertificateFrameDesigner })),
   {
@@ -23,7 +25,7 @@ const CertificateFrameDesigner = dynamic(
   }
 );
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/certificate-frames", {
   title: "Certificate Frames – Professional Custom Sizing | Custom Frame Sizes",
   description:
     "Design professional-grade certificate frames with framer's grade acrylic. Perfect for professional licenses, awards, and credentials. Custom sizing for any certificate.",
@@ -38,23 +40,9 @@ export const metadata: Metadata = {
     "archival materials",
     "office credentials",
   ],
-  openGraph: {
-    title: "Certificate Frames – Professional Custom Sizing",
-    description:
-      "Professional-grade archival framing for professional credentials, licenses, and corporate awards. Custom sizing with framer's grade acrylic.",
-    url: "/certificate-frames",
-    type: "website",
-    images: ["/assets/certificate-frames-og.jpg"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Certificate Frames – Professional Custom Sizing",
-    description:
-      "Professional-grade archival framing for professional credentials and corporate awards.",
-    images: ["/assets/certificate-frames-og.jpg"],
-  },
-  alternates: { canonical: "/certificate-frames" },
-};
+  ogImage: "/assets/certificate-frames-og.jpg",
+  twitterImage: "/assets/certificate-frames-og.jpg",
+});
 
 export default function CertificateFramesPage() {
   const pageUrl = `${brandConfig.seo?.canonicalUrl || ""}/certificate-frames`;

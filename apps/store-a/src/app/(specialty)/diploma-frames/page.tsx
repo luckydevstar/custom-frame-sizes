@@ -6,19 +6,13 @@ import Link from "next/link";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+import { generatePageMetadata } from "@/lib/seo-utils";
+
+export const metadata: Metadata = generatePageMetadata("/diploma-frames", {
   title: "Diploma Frames | Custom College & University Diploma Framing | CustomFrameSizes.com",
   description:
     "Custom diploma frames for college and university degrees. Museum-grade archival framing with UV glazing. Any size, including honors seals and tassels. Design your diploma frame online.",
-  openGraph: {
-    title: "Diploma Frames | Custom College & University Framing",
-    description:
-      "Museum-grade diploma frames with archival materials and UV protection. Custom sizing for any institution. Design online with instant pricing.",
-    type: "website",
-    url: "/diploma-frames",
-  },
-  alternates: { canonical: "/diploma-frames" },
-};
+});
 
 export default function DiplomaFramesPage() {
   return (

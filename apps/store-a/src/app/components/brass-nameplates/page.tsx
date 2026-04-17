@@ -1,8 +1,10 @@
+import { generatePageMetadata } from "@/lib/seo-utils";
+
 import { BrassNameplatesClient } from "./BrassNameplatesClient";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/components/brass-nameplates", {
   title: "Custom Brass Nameplates - Laser Engraved Plaques | Custom Frame Sizes",
   description:
     "Order custom brass nameplates in any size from 1.5 to 12 inches. Laser-engraved with your text, choice of fonts, and decorative icons. Brass, silver, or black finishes.",
@@ -14,19 +16,7 @@ export const metadata: Metadata = {
     "personalized nameplate",
     "laser engraved",
   ],
-  openGraph: {
-    title: "Custom Brass Nameplates - Laser Engraved Plaques",
-    description:
-      "Order custom brass nameplates in any size from 1.5 to 12 inches. Laser-engraved with your text and decorative icons.",
-    type: "website",
-    url: "https://www.customframesizes.com/components/brass-nameplates",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Custom Brass Nameplates - Laser Engraved Plaques",
-    description: "Order custom brass nameplates in any size from 1.5 to 12 inches.",
-  },
-};
+});
 
 export default function BrassNameplatesPage() {
   return <BrassNameplatesClient />;

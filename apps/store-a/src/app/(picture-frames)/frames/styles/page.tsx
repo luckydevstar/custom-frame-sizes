@@ -8,6 +8,7 @@ import { Button, Card, CardContent } from "@framecraft/ui";
 import Link from "next/link";
 
 import { brandConfig } from "../../../../brand.config";
+import { generatePageMetadata } from "@/lib/seo-utils";
 
 import type { Metadata } from "next";
 
@@ -23,7 +24,7 @@ const orderedStyles = Object.entries(STYLE_METADATA)
     image: getStyleHubImage(styleName, frames as Parameters<typeof getStyleHubImage>[1]),
   }));
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/frames/styles", {
   title: "Picture Frames by Style - Modern, Rustic, Classic | CFS",
   description:
     "Shop picture frames by style. Modern, rustic, classic, gallery, vintage, and minimalist frames in custom sizes 4×4 to 48×72 inches. Find your perfect aesthetic.",
@@ -36,15 +37,7 @@ export const metadata: Metadata = {
     "minimalist frames",
     "vintage frames",
   ],
-  openGraph: {
-    title: "Picture Frames by Style - Custom Sizes",
-    description:
-      "Browse custom frames by style: modern, rustic, classic, gallery, vintage, and minimalist. Expert craftsmanship in any size.",
-    type: "website",
-    url: "/frames/styles",
-  },
-  alternates: { canonical: "/frames/styles" },
-};
+});
 
 export default function FramesByStylePage() {
   const baseUrl = brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com";

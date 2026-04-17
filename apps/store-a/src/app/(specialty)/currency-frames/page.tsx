@@ -9,7 +9,7 @@ import { ScrollToDesignerButton } from "./scroll-button";
 import type { Metadata } from "next";
 
 import { RelatedProducts } from "@/components/RelatedProducts";
-
+import { generatePageMetadata } from "@/lib/seo-utils";
 
 const CurrencyFrameDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.CurrencyFrameDesigner),
@@ -18,19 +18,11 @@ const CurrencyFrameDesigner = nextDynamic(
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/currency-frames", {
   title: "Currency Display Frames | Custom Shadow Box Frames for Paper Money",
   description:
     "Design custom currency display frames with shadowbox depth for your collection. Frame paper money with archival double matting, framer's grade acrylic, and optional brass nameplates. Available in preset and custom sizes.",
-  openGraph: {
-    title: "Currency Display Frames | Custom Shadow Box Frames for Paper Money",
-    description:
-      "Professional currency display frames with shadowbox depth, archival matting, and framer's grade acrylic glazing. Perfect for paper money displays and currency collections.",
-    type: "website",
-    url: "/currency-frames",
-  },
-  alternates: { canonical: "/currency-frames" },
-};
+});
 
 const productSchema = {
   "@context": "https://schema.org",

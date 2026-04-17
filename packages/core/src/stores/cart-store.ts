@@ -921,7 +921,6 @@ export const useCartStore = create<CartStore>(
           metadata: storedCart.metadata,
         });
 
-        console.log(`Cart persistence: Loaded ${storedCart.items.length} items from storage`);
       } catch (error) {
         console.error("Cart persistence: Failed to load from storage", error);
         set({

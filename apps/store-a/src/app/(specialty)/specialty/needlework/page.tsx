@@ -4,10 +4,12 @@ import { NeedleworkFramesContent } from "./needlework-frames-content";
 
 import type { Metadata } from "next";
 
+import { generatePageMetadata } from "@/lib/seo-utils";
+
 const baseUrl = "https://www.customframesizes.com";
 const pageUrl = `${baseUrl}/specialty/needlework`;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/specialty/needlework", {
   title: "Custom Needlework Frames | Cross Stitch & Embroidery Display | CustomFrameSizes.com",
   description:
     "Custom frames for needlework, cross stitch, and embroidery. Professional framing with framer's grade acrylic and archival materials. Handmade frames built to your exact size.",
@@ -23,15 +25,8 @@ export const metadata: Metadata = {
     "needlework preservation",
     "custom textile frames",
   ],
-  openGraph: {
-    title: "Custom Needlework Frames | Cross Stitch & Embroidery Display | Custom Frame Sizes",
-    description:
-      "Custom frames for cross stitch, embroidery, and needlepoint. Professional-grade framing with archival materials and handmade craftsmanship.",
-    type: "website",
-    url: pageUrl,
-  },
-  alternates: { canonical: pageUrl },
-};
+  domain: baseUrl,
+});
 
 const productSchema = {
   "@context": "https://schema.org/",

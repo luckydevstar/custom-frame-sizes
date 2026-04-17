@@ -6,21 +6,13 @@ import { ScrollToDesignerButton } from "./scroll-button";
 import type { Metadata } from "next";
 
 import { RelatedProducts } from "@/components/RelatedProducts";
+import { generatePageMetadata } from "@/lib/seo-utils";
 
-
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/wedding-invitation-frames", {
   title: "Wedding Invitation Frame | Custom Frame Sizes for Wedding Invitations",
   description:
     "Frame your wedding invitation as a treasured keepsake. Custom-sized frames with double matting, UV protection, and optional photo display. Perfect first anniversary gift.",
-  openGraph: {
-    title: "Wedding Invitation Frame | Custom Frame Sizes",
-    description:
-      "Preserve your wedding invitation in a beautiful custom frame. Display with your wedding photo or RSVP card. Archival matting protects delicate papers.",
-    type: "website",
-    url: "/wedding-invitation-frames",
-  },
-  alternates: { canonical: "/wedding-invitation-frames" },
-};
+});
 
 const weddingFeatures = [
   { icon: Heart, title: "Keepsake Quality", subtitle: "Professional-Grade Preservation" },

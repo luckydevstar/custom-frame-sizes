@@ -12,6 +12,7 @@ import type { GalleryImage } from "@framecraft/ui";
 import type { Metadata } from "next";
 
 import { RelatedProducts } from "@/components/RelatedProducts";
+import { generatePageMetadata } from "@/lib/seo-utils";
 
 const SIGNATURE_LIFESTYLE_PATHS: Array<{ path: string; alt: string }> = [
   {
@@ -53,19 +54,11 @@ const signatureLifestyleImages: GalleryImage[] = SIGNATURE_LIFESTYLE_PATHS.map((
   type: "lifestyle",
 }));
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/signature-frames", {
   title: "Wedding Frame for Guest Signatures - Replace Your Guest Book | Custom Frame Sizes",
   description:
     "Wedding frame with mat board for guest signatures. Replace your wedding guest book with a custom picture frame. Photo opening in center, wide mat for signatures. Includes colored pens. Choose 5×5 or 8×8 inch openings.",
-  openGraph: {
-    title: "Wedding Frame for Guest Signatures - Replace Your Guest Book",
-    description:
-      "Wedding frame replaces your guest book. Custom picture frame with photo opening and mat border for signatures. Includes colored pens. Perfect for weddings, graduations, and events.",
-    type: "website",
-    url: "/signature-frames",
-  },
-  alternates: { canonical: "/signature-frames" },
-};
+});
 
 const productSchema = {
   "@context": "https://schema.org",

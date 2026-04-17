@@ -134,7 +134,7 @@ export default function DesignerPage() {
                   frames, white and gold frames, and narrow or wide moulding profiles. All frames
                   are available in any size you enter.
                 </p>
-                <Link href="/frames" className="text-primary font-medium hover:underline">
+                <Link href="/frames/styles" className="text-primary font-medium hover:underline">
                   Browse all frame styles →
                 </Link>
               </section>

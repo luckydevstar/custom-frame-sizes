@@ -111,7 +111,7 @@ export function MegaMenu({ label, children, isActive = false }: MegaMenuProps) {
     >
       <Button
         variant={isActive ? "secondary" : "ghost"}
-        className="gap-1"
+        className="gap-1 min-h-11"
         data-testid={`button-megamenu-${label.toLowerCase().replace(/\s+/g, "-")}`}
         aria-expanded={isOpen}
         aria-haspopup="true"

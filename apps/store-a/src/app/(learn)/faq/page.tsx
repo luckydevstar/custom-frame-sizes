@@ -5,7 +5,7 @@ import { HelpCircle } from "lucide-react";
 import { generateMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = generateMetadata({
-  title: "FAQ | CustomFrameSizes.com – Framing Questions Answered",
+  title: "FAQ | CustomFrameSizes.com | Framing Questions Answered",
   description:
     "Answers to common questions about custom frames, sizes, shipping, local pickup, returns, glazing options, and production timelines.",
   canonical: "https://www.customframesizes.com/faq",

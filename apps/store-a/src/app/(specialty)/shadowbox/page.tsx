@@ -357,7 +357,7 @@ export default function ShadowboxPage() {
               </div>
             }
           >
-            <ShadowboxDesigner />
+            <ShadowboxDesigner embedded />
           </Suspense>
         </div>
 

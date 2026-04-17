@@ -49,8 +49,6 @@ export function TestimonialCarousel({
       }
     };
 
-    console.log("touchStartX", touchStartX);
-
     const handleSwipe = () => {
       const swipeThreshold = 50;
       if (touchStartX - touchEndX > swipeThreshold) {

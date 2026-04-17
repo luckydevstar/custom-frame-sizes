@@ -5,7 +5,9 @@ import { ScrollToDesignerButton } from "./scroll-button";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+import { generatePageMetadata } from "@/lib/seo-utils";
+
+export const metadata: Metadata = generatePageMetadata("/ticket-frames", {
   title: "Ticket Frames – Concert & Event Memorabilia Display | Custom Frame Sizes",
   description:
     "Frame your 2&quot; × 5&quot; concert tickets, sports stubs, and event passes. Choose from 6 multi-opening layouts. Framer's grade acrylic and archival mats protect your memories.",
@@ -21,23 +23,9 @@ export const metadata: Metadata = {
     "ticket preservation",
     "custom ticket frame",
   ],
-  openGraph: {
-    title: "Ticket Frames – Concert & Event Memorabilia Display",
-    description:
-      "Frame your 2&quot; × 5&quot; concert tickets, sports stubs, and event passes. Choose from 6 multi-opening layouts.",
-    type: "website",
-    url: "/ticket-frames",
-    images: ["/assets/ticket-frames-og.jpg"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Ticket Frames – Concert & Event Memorabilia Display",
-    description:
-      "Frame your 2&quot; × 5&quot; concert tickets, sports stubs, and event passes. Choose from 6 multi-opening layouts.",
-    images: ["/assets/ticket-frames-og.jpg"],
-  },
-  alternates: { canonical: "/ticket-frames" },
-};
+  ogImage: "/assets/ticket-frames-og.jpg",
+  twitterImage: "/assets/ticket-frames-og.jpg",
+});
 
 const serviceSchema = {
   "@context": "https://schema.org",

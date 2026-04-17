@@ -19,22 +19,18 @@ import { PLAYBILL_DIMENSIONS, TICKET_DIMENSIONS } from "@framecraft/core";
 
 import { ScrollToDesignerButton } from "./scroll-button";
 
+import { generatePageMetadata } from "@/lib/seo-utils";
+
 const PlaybillFrameDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.PlaybillFrameDesigner),
   { ssr: false }
 );
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/playbill-frames", {
   title: "Custom Playbill Frames | Broadway Program Display Frames",
   description:
     'Display Broadway programs and theater playbills in perfectly-sized frames. Standard 5.5x8.5" sizing with acid-free mats and professional-grade construction.',
-  openGraph: {
-    title: "Custom Playbill Frames | Broadway Program Display Frames",
-    description:
-      "Perfect frames for Broadway playbills and theater programs. Standard sizing with archival materials and professional construction.",
-    type: "website",
-  },
-};
+});
 
 const applications = [
   { icon: Theater, title: "Show Memories", description: "Keep your favorite nights" },

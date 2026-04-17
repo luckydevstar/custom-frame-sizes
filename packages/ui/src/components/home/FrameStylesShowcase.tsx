@@ -55,7 +55,7 @@ export function FrameStylesShowcase({
     "simple-picture-frame",
     "antique-silver",
     "iron-ore-silver",
-    "bronz-picture-frame",
+    "bronze-picture-frame",
     "light-oak",
     "executive-brown",
     "white-wash-wood",

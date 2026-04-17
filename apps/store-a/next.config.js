@@ -29,6 +29,11 @@ const nextConfig = {
       { source: '/returns', destination: '/returns-exchanges', permanent: true },
       { source: '/business-services', destination: '/business', permanent: true },
       { source: '/frame-quality-guarantee', destination: '/warranty', permanent: true },
+      // Legacy / mistaken URLs (SEO crawl C1)
+      { source: '/frames', destination: '/frames/styles', permanent: true },
+      { source: '/gallery', destination: '/samples', permanent: true },
+      { source: '/print-and-frame', destination: '/designer', permanent: true },
+      { source: '/frames/bronz-picture-frame', destination: '/frames/bronze-picture-frame', permanent: true },
     ];
   },
   async rewrites() {

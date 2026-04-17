@@ -163,9 +163,14 @@ function getFramesByTheme(frames: FrameStyle[]): Record<string, FrameStyle[]> {
 
 interface CanvasFrameDesignerProps {
   hideMobileSticky?: boolean;
+  /** When false, do not write configurator state to the address bar (clean URLs for hub pages / SEO). */
+  syncUrl?: boolean;
 }
 
-export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDesignerProps = {}) {
+export function CanvasFrameDesigner({
+  hideMobileSticky = false,
+  syncUrl = true,
+}: CanvasFrameDesignerProps = {}) {
   const [serviceType, setServiceType] = useState<"frame-only" | "print-and-frame">("frame-only");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
@@ -350,6 +355,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
 
   // Update URL when configuration changes
   useEffect(() => {
+    if (!syncUrl) return;
     const params = new URLSearchParams();
     params.set("frame", selectedFrame.id);
     params.set("depth", selectedDepth.toString());
@@ -360,7 +366,15 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
 
     const newUrl = `${window.location.pathname}?${params.toString()}`;
     window.history.replaceState({}, "", newUrl);
-  }, [selectedFrame, selectedDepth, artworkWidth, artworkHeight, serviceType, hangingHardware]);
+  }, [
+    syncUrl,
+    selectedFrame,
+    selectedDepth,
+    artworkWidth,
+    artworkHeight,
+    serviceType,
+    hangingHardware,
+  ]);
 
   // Fetch frame photos from API (corner, profile, lifestyle from store-a assets/canvas/)
   useEffect(() => {

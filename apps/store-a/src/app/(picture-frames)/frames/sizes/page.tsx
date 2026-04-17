@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import { brandConfig } from "../../../../brand.config";
+import { generatePageMetadata } from "@/lib/seo-utils";
 
 import allAvailableSizes from "./frame-sizes-remaining.json";
 import mostPopularSizes from "./frame-sizes.json";
@@ -22,7 +23,7 @@ type FrameSizeEntry = {
   primaryUseCase?: string;
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/frames/sizes", {
   title: `Picture Frames by Size - Custom Dimensions | ${brandConfig.name}`,
   description:
     "Shop 100+ custom picture frame sizes from 4×4 to 48×72 inches. Standard sizes (8×10, 16×20, 24×36) and hard-to-find dimensions. Made-to-order with instant pricing.",
@@ -35,15 +36,7 @@ export const metadata: Metadata = {
     "custom size frames",
     "frame size chart",
   ],
-  openGraph: {
-    title: "Picture Frames by Size - Custom Dimensions",
-    description:
-      "Shop custom frames by size: standard dimensions like 8×10 and 16×20, plus hard-to-find custom sizes. Precision-made to your exact specifications.",
-    type: "website",
-    url: "/frames/sizes",
-  },
-  alternates: { canonical: "/frames/sizes" },
-};
+});
 
 export default function FramesBySizePage() {
   const baseUrl = brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com";

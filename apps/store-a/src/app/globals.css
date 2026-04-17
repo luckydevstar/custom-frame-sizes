@@ -86,6 +86,14 @@
   overflow: visible !important;
 }
 
+/* Uppy resets focus outline; restore visible focus for keyboard users (WCAG 2.4.7) */
+.uppy-Root :focus-visible,
+.uppy-Dashboard :focus-visible,
+.uppy-Dashboard-inner :focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
 .sr-only:focus {
   position: static;
   width: auto;

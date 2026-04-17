@@ -11,18 +11,13 @@ import { ScrollToDesignerButton } from "./scroll-button";
 import type { Metadata } from "next";
 
 import { RelatedProducts } from "@/components/RelatedProducts";
+import { generatePageMetadata } from "@/lib/seo-utils";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/jersey-frames", {
   title: "Custom Jersey Display Frames | Professional Sports Memorabilia Shadowbox Framing",
   description:
     "Professional jersey display frames with 2-inch depth, team-specific triple mat colors, optional brass plaque engraving, and framer's grade acrylic. Designed for NHL, NBA, MLB, NFL jerseys and concert memorabilia.",
-  openGraph: {
-    title: "Custom Jersey Display Frames | Professional Sports Memorabilia Shadowbox Framing",
-    description:
-      "Expert jersey framing with team colors, conservation mounting, and 2-inch depth shadowboxes. Triple mat options for NHL, NBA, MLB, NFL jerseys with brass plaque engraving.",
-    type: "website",
-  },
-};
+});
 
 export default function JerseyFramesPage() {
   return (
