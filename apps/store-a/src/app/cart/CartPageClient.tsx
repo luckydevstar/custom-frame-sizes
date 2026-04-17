@@ -3,7 +3,7 @@
 import { getMatById } from "@framecraft/config";
 import { getFrameStyleById } from "@framecraft/core/services/products";
 import { useCartStore } from "@framecraft/core/stores";
-import { CartClient } from "@framecraft/ui";
+import { CartClient, getCardProductionCode } from "@framecraft/ui";
 import { useEffect } from "react";
 
 function matBoardLabel(matId: string | undefined): string | undefined {
@@ -74,6 +74,10 @@ export function CartPageClient() {
 
         const cfg = item.configuration;
         const frame = cfg ? getFrameStyleById(cfg.frameStyleId) : undefined;
+        const cardProductionCode =
+          cfg?.cardFormatId && cfg.cardLayoutId
+            ? getCardProductionCode(cfg.cardFormatId, cfg.cardLayoutId)
+            : undefined;
 
         return {
           merchandiseId: variantId,
@@ -87,6 +91,9 @@ export function CartPageClient() {
                 matOuterLabel: matBoardLabel(cfg.matColorId),
                 matInnerLabel: matBoardLabel(cfg.matInnerColorId),
                 lineIndex: lineIndex + 1,
+                cardProductionCode,
+                cardInteriorWidthIn: cfg.cardInteriorWidthIn,
+                cardInteriorHeightIn: cfg.cardInteriorHeightIn,
               }
             : undefined,
         };

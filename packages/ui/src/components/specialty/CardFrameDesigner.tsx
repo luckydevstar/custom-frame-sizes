@@ -619,10 +619,16 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
         return;
       }
 
+      const bottomWeightedExtra = bottomWeighted ? 0.5 : 0;
+      const interiorW = manufacturingFrameDimensions.width;
+      const interiorH = manufacturingFrameDimensions.height;
+      const artworkWidth = interiorW - MAT_BORDER * 2;
+      const artworkHeight = interiorH - bottomWeightedExtra - MAT_BORDER * 2;
+
       const frameConfig: FrameConfiguration = {
         serviceType: "frame-only",
-        artworkWidth: manufacturingFrameDimensions.width,
-        artworkHeight: manufacturingFrameDimensions.height,
+        artworkWidth,
+        artworkHeight,
         frameStyleId: selectedFrame.id,
         matType: matType === "none" ? "none" : matType,
         matBorderWidth: matType === "none" ? 0 : MAT_BORDER,
@@ -630,8 +636,13 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
         matColorId: matType === "none" ? "" : selectedMat.id,
         matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
         glassTypeId: selectedGlass.id,
-        orderSource: `card-frame-${selectedLayout}`,
+        orderSource: `graded-card-frame:${selectedFormat}:${selectedLayout}`,
         brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
+        bottomWeighted,
+        cardFormatId: selectedFormat,
+        cardLayoutId: selectedLayout,
+        cardInteriorWidthIn: interiorW,
+        cardInteriorHeightIn: interiorH,
       };
 
       const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
@@ -653,12 +664,14 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
     }
   }, [
     selectedLayout,
+    selectedFormat,
     selectedFrame.id,
     matType,
     selectedMat.id,
     selectedMatInner.id,
     selectedGlass.id,
     brassNameplateConfig,
+    bottomWeighted,
     quantity,
     pricing.total,
     manufacturingFrameDimensions,

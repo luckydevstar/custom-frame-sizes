@@ -49,13 +49,20 @@ export function CartItemCard({ item, onQuantityChange, onRemove, className }: Ca
   const topMat =
     config?.matColorId ? getMatColorById(config.matColorId) : undefined;
 
-  const productDisplayName = config ? getProductDisplayName(config.frameStyleId) : "Custom Product";
+  const productDisplayName = config?.cardFormatId
+    ? "Graded Card Frame"
+    : config
+      ? getProductDisplayName(config.frameStyleId)
+      : "Custom Product";
 
-  // Get frame corner swatch image (prefer corner alternate image, fallback to thumbnail)
+  const cardLifestyleImage = frame?.alternateImages?.find((img) => img.type === "card_lifestyle")?.url;
+  // Graded card: prefer lifestyle hero over corner swatch (Finding #10)
   const frameCornerImage = frame
     ? frame.alternateImages?.find((img) => img.type === "corner")?.url ?? frame.thumbnail
     : null;
-  const frameSwatchUrl = frameCornerImage ? getStoreBaseAssetUrl(frameCornerImage) : null;
+  const primaryFrameImage =
+    config?.cardFormatId && cardLifestyleImage ? cardLifestyleImage : frameCornerImage;
+  const frameSwatchUrl = primaryFrameImage ? getStoreBaseAssetUrl(primaryFrameImage) : null;
 
   return (
     <article
