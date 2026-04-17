@@ -143,7 +143,7 @@ export default function HomePage() {
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground text-center mb-8 max-w-3xl mx-auto leading-relaxed">
             Design your perfect custom picture frame online. Choose from 100+ professional frame
-            styles, any size from 4×4 to 60×60 inches, with instant pricing and real-time preview.
+            styles, any size from 4×4 to 32×40 inches, with instant pricing and real-time preview.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -179,7 +179,7 @@ export default function HomePage() {
             <p className="text-muted-foreground">Frame Styles to Choose From</p>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">4×4 to 60×60</div>
+            <div className="text-4xl font-bold text-primary mb-2">4×4 to 32×40</div>
             <p className="text-muted-foreground">Any Size You Need (1/8&quot; Precision)</p>
           </div>
           <div className="text-center">
