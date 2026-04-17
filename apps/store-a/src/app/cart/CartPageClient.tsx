@@ -7,6 +7,7 @@ import { useEffect } from "react";
 export function CartPageClient() {
   const setLoading = useCartStore((state) => state._setLoading);
   const setError = useCartStore((state) => state._setError);
+  const clearCart = useCartStore((state) => state.clearCart);
   const items = useCartStore((state) => state.items);
 
   // Clear any stale cart errors (like old Shopify store-config issues) when the cart page loads
@@ -92,6 +93,9 @@ export function CartPageClient() {
         throw new Error(freshCheckoutData.error?.message || "Failed to create fresh checkout");
       }
 
+      // Checkout URL is valid; clear local cart before leaving so a return/abandon
+      // does not show stale items (Finding #6).
+      clearCart();
       window.location.href = freshCheckoutData.checkoutUrl;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);
