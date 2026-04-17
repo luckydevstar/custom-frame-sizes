@@ -328,7 +328,7 @@ export default async function StyleDetailPage({ params }: Props) {
                   return (
                     <Link
                       key={frame.id}
-                      href={`/picture-frames?frame=${frame.id}`}
+                      href={`/designer?frame=${encodeURIComponent(frame.id)}`}
                       data-testid={`card-frame-${frame.id}`}
                     >
                       <Card className="hover:border-primary/30 active:scale-[0.98] h-full cursor-pointer transition-all">

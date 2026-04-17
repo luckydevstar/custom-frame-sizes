@@ -1,8 +1,10 @@
+import { generatePageMetadata } from "@/lib/seo-utils";
+
 import { CleatHangersClient } from "./CleatHangersClient";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/components/cleat-hangers", {
   title:
     '12" Heavy-Duty Metal Cleat Bar Hanging System - Professional French Cleat Picture Hangers | Custom Frame Sizes',
   description:
@@ -17,7 +19,7 @@ export const metadata: Metadata = {
     "gallery hanging hardware",
     "interlocking cleat system",
   ],
-};
+});
 
 export default function CleatHangersPage() {
   return <CleatHangersClient />;

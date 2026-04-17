@@ -2,7 +2,7 @@
 
 import { useParallax, useHeroImage, type HeroImage } from "@framecraft/core";
 import { ArrowRight } from "lucide-react";
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 import { Button } from "../ui/button";
 import { Skeleton } from "../ui/skeleton";
@@ -74,6 +74,7 @@ export function Hero({
   heroImagesData,
 }: HeroProps) {
   const { ref: parallaxRef, transform } = useParallax<HTMLDivElement>();
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   // Use hook if image prop is not provided (matches original behavior)
   // Pass heroImagesData to hook if provided
@@ -110,6 +111,24 @@ export function Hero({
   // Use overlay data from image if available, otherwise use defaults
   const title = image?.overlay?.title || defaultTitle;
   const subtitle = image?.overlay?.subtitle || defaultSubtitle;
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el || image?.mediaType !== "video") return;
+    const tryPlay = () => {
+      void el.play().catch(() => {});
+    };
+    tryPlay();
+    const onVis = () => {
+      if (document.visibilityState === "visible") tryPlay();
+    };
+    document.addEventListener("visibilitychange", onVis);
+    el.addEventListener("canplay", tryPlay);
+    return () => {
+      document.removeEventListener("visibilitychange", onVis);
+      el.removeEventListener("canplay", tryPlay);
+    };
+  }, [image]);
 
   // Calculate luminance-based overlay opacity
   const luminance = image?.luminance || "medium";
@@ -184,6 +203,7 @@ export function Hero({
       ) : image ? (
         image.mediaType === "video" ? (
           <video
+            ref={videoRef}
             className={`absolute inset-0 parallax-container object-cover ${transitionClass}`}
             style={{
               objectPosition: effectiveConfig.objectPosition,

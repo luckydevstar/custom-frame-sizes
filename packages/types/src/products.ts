@@ -151,6 +151,13 @@ export interface FrameConfiguration {
   imageFit?: "cover" | "contain"; // How to fit image in frame (cover=crop, contain=stretch/scale)
   brassNameplateConfig?: any; // Brass nameplate configuration for specialty frames
   bottomWeighted?: boolean; // Add 0.5" to bottom mat border for professional weighting
+  /** Graded card designer — slab format (psa | sgc-cgc-bgs | psa-pack-slabs) */
+  cardFormatId?: string;
+  /** Graded card designer — layout id (e.g. 2x4) for CARD-xxx production codes */
+  cardLayoutId?: string;
+  /** Manufacturing interior frame opening (inches); used for cart/slip “Interior Size” */
+  cardInteriorWidthIn?: number;
+  cardInteriorHeightIn?: number;
 }
 
 /**

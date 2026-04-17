@@ -1,5 +1,6 @@
 "use client";
 
+import { getCardProductionCode } from "../../lib/card-production-codes";
 import { getFrameStyleById, getMatColorById, getGlassTypeById } from "@framecraft/core";
 
 import { cn } from "../../utils";
@@ -67,8 +68,26 @@ export function FrameConfigurationSummary({
   // Build rows based on product type
   const rows: { label: string; value: string }[] = [];
 
-  // Size is always shown for all products
-  rows.push({ label: "Size", value: `${config.artworkWidth}" × ${config.artworkHeight}"` });
+  // Graded card: interior manufacturing size + layout code
+  if (
+    config.cardFormatId &&
+    typeof config.cardInteriorWidthIn === "number" &&
+    typeof config.cardInteriorHeightIn === "number"
+  ) {
+    rows.push({
+      label: "Interior Size",
+      value: `${config.cardInteriorWidthIn}" × ${config.cardInteriorHeightIn}"`,
+    });
+    const layoutCode = getCardProductionCode(
+      config.cardFormatId,
+      config.cardLayoutId ?? ""
+    );
+    if (layoutCode) {
+      rows.push({ label: "Layout", value: layoutCode });
+    }
+  } else {
+    rows.push({ label: "Size", value: `${config.artworkWidth}" × ${config.artworkHeight}"` });
+  }
 
   // Product-specific attributes
   switch (productType) {
@@ -139,10 +158,20 @@ export function FrameConfigurationSummary({
   }
 
   if (compact) {
-    const parts = [
-      `${config.artworkWidth}"×${config.artworkHeight}"`,
-    ];
-    
+    const layoutCode =
+      config.cardFormatId && config.cardLayoutId
+        ? getCardProductionCode(config.cardFormatId, config.cardLayoutId)
+        : undefined;
+    const parts =
+      config.cardFormatId &&
+      typeof config.cardInteriorWidthIn === "number" &&
+      typeof config.cardInteriorHeightIn === "number"
+        ? [
+            `${config.cardInteriorWidthIn}"×${config.cardInteriorHeightIn}"`,
+            ...(layoutCode ? [layoutCode] : []),
+          ]
+        : [`${config.artworkWidth}"×${config.artworkHeight}"`];
+
     if (productType === "frame") {
       parts.push(frameName);
       parts.push(

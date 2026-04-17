@@ -476,3 +476,6 @@ export { ThemeProvider, useThemeContext } from "./providers/ThemeProvider";
 
 // Brand components
 export * from "./components/brand";
+
+// Graded card production codes (checkout / packing slip)
+export { getCardProductionCode, CARD_PRODUCTION_LAYOUT_SEQUENCE } from "./lib/card-production-codes";

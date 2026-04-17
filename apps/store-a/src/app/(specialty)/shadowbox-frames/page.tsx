@@ -8,8 +8,9 @@ import { Suspense } from "react";
 
 import { ScrollToDesignerButton } from "./scroll-button";
 
-
 import type { Metadata } from "next";
+
+import { generatePageMetadata } from "@/lib/seo-utils";
 
 const ShadowboxDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.ShadowboxDesigner),
@@ -19,17 +20,11 @@ const ShadowboxDesigner = nextDynamic(
 // Avoid static prerender: designer deps reference `self` at module load
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/shadowbox-frames", {
   title: "Custom Shadowbox Frames | Memorabilia & 3D Display | CustomFrameSizes.com",
   description:
     "Design custom shadowbox frames for memorabilia, 3D items, and keepsakes. Adjustable depth, archival materials, and professional construction. Any size.",
-  openGraph: {
-    title: "Custom Shadowbox Frames | Memorabilia & 3D Display",
-    description:
-      "Custom shadowbox frames with adjustable depth for displaying 3D items, memorabilia, and keepsakes. Professional construction with archival materials.",
-    type: "website",
-  },
-};
+});
 
 function getCornerOrThumbUrl(frame: {
   alternateImages?: { type: string; url: string; alt?: string }[];

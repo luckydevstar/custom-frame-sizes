@@ -265,6 +265,8 @@ export type {
   CurrencyLayout,
   CurrencyBackingOption,
 } from "./currency-layouts";
+export { applyUserMatBorderToDisplayLayout } from "./display-layout-mat";
+export type { DisplayLayoutWithMatOpening } from "./display-layout-mat";
 export {
   getCurrencyLifestyleImages,
   getRandomCurrencyLifestyleImage,

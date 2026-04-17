@@ -177,7 +177,10 @@ export function AcrylicClient() {
     }
   };
 
-  const pricing = COMPONENT_PRICING as Record<string, { minimumPrice?: number }>;
+  const pricing = COMPONENT_PRICING as Record<
+    string,
+    { minimumPrice?: number | null }
+  >;
   const standardMin = pricing.STANDARD_ACRYLIC?.minimumPrice?.toFixed(2) ?? "9.95";
   const nonGlareMin = pricing.NON_GLARE_ACRYLIC?.minimumPrice?.toFixed(2) ?? "12.95";
 

@@ -4,8 +4,9 @@ import { NewspaperFramesContent } from "./newspaper-frames-content";
 
 import type { Metadata } from "next";
 
+import { generatePageMetadata } from "@/lib/seo-utils";
+
 const baseUrl = "https://www.customframesizes.com";
-const pageUrl = `${baseUrl}/newspaper-frames`;
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -54,7 +55,7 @@ const faqSchema = {
   ],
 };
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/newspaper-frames", {
   title: "Newspaper Frames | Custom Sizes for Any Clipping | CustomFrameSizes.com",
   description:
     "Frame newspapers in custom sizes. Shadowbox frames protect headlines, birth announcements, and historic front pages. Archival mats, framer's grade acrylic, and professional mounting included.",
@@ -67,15 +68,8 @@ export const metadata: Metadata = {
     "historic headline frame",
     "sports championship frame",
   ],
-  openGraph: {
-    title: "Newspaper Frames | Custom Sizes for Any Clipping",
-    description:
-      "Frame newspapers in custom sizes. Shadowbox frames protect headlines, birth announcements, and historic front pages.",
-    type: "website",
-    url: pageUrl,
-  },
-  alternates: { canonical: pageUrl },
-};
+  domain: baseUrl,
+});
 
 function NewspaperFallback() {
   return (

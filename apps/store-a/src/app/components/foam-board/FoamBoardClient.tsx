@@ -451,7 +451,7 @@ export function FoamBoardClient() {
                         <span className="text-sm text-muted-foreground ml-2">
                           from $
                           {(
-                            COMPONENT_PRICING as Record<string, { minimumPrice?: number }>
+                            COMPONENT_PRICING as Record<string, { minimumPrice?: number | null }>
                           ).STANDARD_WHITE_FOAM?.minimumPrice?.toFixed(2) ?? "6.95"}
                         </span>
                       </Label>
@@ -467,7 +467,7 @@ export function FoamBoardClient() {
                         <span className="text-sm text-muted-foreground ml-2">
                           from $
                           {(
-                            COMPONENT_PRICING as Record<string, { minimumPrice?: number }>
+                            COMPONENT_PRICING as Record<string, { minimumPrice?: number | null }>
                           ).STANDARD_BLACK_FOAM?.minimumPrice?.toFixed(2) ?? "7.95"}
                         </span>
                       </Label>
@@ -483,7 +483,7 @@ export function FoamBoardClient() {
                         <span className="text-sm text-muted-foreground ml-2">
                           from $
                           {(
-                            COMPONENT_PRICING as Record<string, { minimumPrice?: number }>
+                            COMPONENT_PRICING as Record<string, { minimumPrice?: number | null }>
                           ).SELF_ADHESIVE_WHITE_FOAM?.minimumPrice?.toFixed(2) ?? "9.95"}
                         </span>
                       </Label>
@@ -592,19 +592,19 @@ export function FoamBoardClient() {
                 <td className="p-4 text-center">
                   $
                   {(
-                    COMPONENT_PRICING as Record<string, { minimumPrice?: number }>
+                    COMPONENT_PRICING as Record<string, { minimumPrice?: number | null }>
                   ).STANDARD_WHITE_FOAM?.minimumPrice?.toFixed(2) ?? "6.95"}
                 </td>
                 <td className="p-4 text-center">
                   $
                   {(
-                    COMPONENT_PRICING as Record<string, { minimumPrice?: number }>
+                    COMPONENT_PRICING as Record<string, { minimumPrice?: number | null }>
                   ).STANDARD_BLACK_FOAM?.minimumPrice?.toFixed(2) ?? "7.95"}
                 </td>
                 <td className="p-4 text-center">
                   $
                   {(
-                    COMPONENT_PRICING as Record<string, { minimumPrice?: number }>
+                    COMPONENT_PRICING as Record<string, { minimumPrice?: number | null }>
                   ).SELF_ADHESIVE_WHITE_FOAM?.minimumPrice?.toFixed(2) ?? "9.95"}
                 </td>
               </tr>

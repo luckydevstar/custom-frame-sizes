@@ -379,7 +379,7 @@ export function SignatureFrameDesigner({
       await addToCartOnly(config, finalTotalPrice * quantity, quantity);
       toast({
         title: "Added to Cart!",
-        description: `${quantity} Ã— Custom Signature Frame${quantity > 1 ? "s" : ""}`,
+        description: `${quantity} × Custom Signature Frame${quantity > 1 ? "s" : ""}`,
       });
     } catch (err) {
       toast({
@@ -601,7 +601,7 @@ export function SignatureFrameDesigner({
                         >
                           <Square className="h-4 w-4" />
                         </div>
-                        <p className="font-semibold text-sm">5&quot; Ã— 5&quot;</p>
+                        <p className="font-semibold text-sm">5&quot; × 5&quot;</p>
                       </div>
                     </button>
                     <button
@@ -616,7 +616,7 @@ export function SignatureFrameDesigner({
                         >
                           <Square className="h-5 w-5" />
                         </div>
-                        <p className="font-semibold text-sm">8&quot; Ã— 8&quot;</p>
+                        <p className="font-semibold text-sm">8&quot; × 8&quot;</p>
                       </div>
                     </button>
                   </div>
@@ -724,7 +724,7 @@ export function SignatureFrameDesigner({
                   <div className="flex items-center justify-between">
                     <Label>Border Width: {matBorder}&quot;</Label>
                     <span className="text-sm text-muted-foreground">
-                      Overall: {frameDimensions.width}&quot; Ã— {frameDimensions.height}&quot;
+                      Overall: {frameDimensions.width}&quot; × {frameDimensions.height}&quot;
                     </span>
                   </div>
                   <Slider
@@ -747,7 +747,7 @@ export function SignatureFrameDesigner({
                   {frameDimensions.isOversize && (
                     <Alert variant="destructive" className="mt-2">
                       <AlertDescription className="text-xs">
-                        Maximum frame size is 32&quot; Ã— 32&quot;. Border has been limited.
+                        Maximum frame size is 32&quot; × 32&quot;. Border has been limited.
                       </AlertDescription>
                     </Alert>
                   )}
@@ -893,7 +893,7 @@ export function SignatureFrameDesigner({
                 ${(finalTotalPrice * quantity).toFixed(2)}
               </p>
               <p className="text-xs text-muted-foreground">
-                {frameDimensions.width}&quot; Ã— {frameDimensions.height}&quot;
+                {frameDimensions.width}&quot; × {frameDimensions.height}&quot;
               </p>
             </div>
             <div className="flex items-center gap-2">

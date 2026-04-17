@@ -9,18 +9,13 @@ import { ScrollToDesignerButton } from "./scroll-button";
 import type { Metadata } from "next";
 
 import { RelatedProducts } from "@/components/RelatedProducts";
+import { generatePageMetadata } from "@/lib/seo-utils";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/puzzle-frames", {
   title: "Jigsaw Puzzle Frames - Custom Sizes & Professional Preservation | Custom Frame Sizes",
   description:
     "Professional jigsaw puzzle frames for 100-2000 pieces. Custom sizes for standard, panoramic, square, and round puzzles. Shadowbox depth, puzzle glue sheets, circular mat cutouts.",
-  openGraph: {
-    title: "Jigsaw Puzzle Frames - Custom Sizes & Professional Preservation",
-    description:
-      "Shadowbox frames engineered for completed jigsaw puzzles. All sizes from 100 to 2000 pieces, including panoramic and round puzzles. Specialized backing and mat systems.",
-    type: "website",
-  },
-};
+});
 
 export default function PuzzleFramesPage() {
   const pageUrl = `${brandConfig.seo?.canonicalUrl || ""}/puzzle-frames`;

@@ -16,6 +16,7 @@ import {
   getStampLayout,
   getAllStampLayouts,
   getStampLayoutWithBrassNameplate,
+  applyUserMatBorderToDisplayLayout,
   STAMP_CUSTOM_SIZE_LIMITS,
   createCustomStampLayout,
   validateStampCustomDimensions,
@@ -47,6 +48,10 @@ import { QuantitySelector } from "../ui/quantity-selector";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Separator } from "../ui/separator";
 import { Slider } from "../ui/slider";
+import {
+  MAT_BORDER_SLIDER_MAX_INCHES,
+  MAT_BORDER_SLIDER_MIN_INCHES,
+} from "./shared/mat-border-slider-constants";
 
 import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
@@ -135,8 +140,12 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
     return "double";
   });
 
-  const [matBorderWidth, setMatBorderWidth] = useState("2.5");
-  const [matRevealWidth, setMatRevealWidth] = useState("0.25");
+  const [matBorderWidth, setMatBorderWidth] = useState(
+    () => urlParams.get("matBorder") ?? "2.5"
+  );
+  const [matRevealWidth, setMatRevealWidth] = useState(
+    () => urlParams.get("matReveal") ?? "0.25"
+  );
   const matBorder = parseFloat(matBorderWidth) || 2.5;
   const matReveal = parseFloat(matRevealWidth) || 0.25;
 
@@ -242,9 +251,15 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
   );
 
   const bottomWeightedExtra = bottomWeighted ? BOTTOM_WEIGHTED_EXTRA : 0;
+
+  const layoutWithUserMatBorder = useMemo(
+    () => applyUserMatBorderToDisplayLayout(currentLayout, matBorder, matType),
+    [currentLayout, matBorder, matType]
+  );
+
   const adjustedLayout = useMemo(() => {
     const baseLayout = getStampLayoutWithBrassNameplate({
-      layout: currentLayout,
+      layout: layoutWithUserMatBorder,
       brassPlaqueEnabled: brassNameplateConfig.enabled && matType !== "none",
     });
     return {
@@ -252,7 +267,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
       frameHeight: baseLayout.frameHeight + bottomWeightedExtra,
       matBorderBottom: baseLayout.matBorderBottom + bottomWeightedExtra,
     };
-  }, [currentLayout, brassNameplateConfig.enabled, matType, bottomWeightedExtra]);
+  }, [layoutWithUserMatBorder, brassNameplateConfig.enabled, matType, bottomWeightedExtra]);
 
   const [framePhotos, setFramePhotos] = useState<{
     cornerUrl?: string;
@@ -300,6 +315,8 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
     if (matType !== "none") {
       params.set("topMat", selectedTopMat.id);
       params.set("accentMat", selectedAccentMat.id);
+      params.set("matBorder", matBorderWidth);
+      params.set("matReveal", matRevealWidth);
     }
     if (selectedLayout === "custom") {
       params.set("customWidth", customWidth);
@@ -324,6 +341,8 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
     matType,
     selectedTopMat.id,
     selectedAccentMat.id,
+    matBorderWidth,
+    matRevealWidth,
     brassNameplateConfig,
     bottomWeighted,
     customWidth,
@@ -437,7 +456,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
       await addToCartOnly(frameConfig, finalTotal, quantity);
       toast({
         title: "Added to Cart!",
-        description: `${quantity}Ã— ${currentLayout.displayName} Stamp Frame added.`,
+        description: `${quantity}× ${currentLayout.displayName} Stamp Frame added.`,
       });
     } catch (err) {
       toast({
@@ -530,7 +549,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                           {lo.displayName.replace(" Size", "")}
                         </div>
                         <div className="text-xs text-muted-foreground mt-0.5">
-                          {lo.matOpeningWidth}Ã—{lo.matOpeningHeight}&quot;
+                          {lo.matOpeningWidth}×{lo.matOpeningHeight}&quot;
                         </div>
                       </button>
                     ))}
@@ -567,7 +586,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                             data-testid="input-custom-width-mobile"
                           />
                         </div>
-                        <div className="flex items-end pb-0.5 text-muted-foreground">Ã—</div>
+                        <div className="flex items-end pb-0.5 text-muted-foreground">×</div>
                         <div className="flex-1">
                           <Label
                             htmlFor="customHeight-mobile"
@@ -633,7 +652,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                       {(adjustedLayout.frameWidth + (selectedFrame.mouldingWidth ?? 0) * 2).toFixed(
                         1
                       )}
-                      &quot; Ã—{" "}
+                      &quot; ×{" "}
                       {(
                         adjustedLayout.frameHeight +
                         (selectedFrame.mouldingWidth ?? 0) * 2
@@ -642,8 +661,8 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                     </span>
                   </p>
                   <p className="text-muted-foreground text-xs">
-                    Display Area: {adjustedLayout.matOpeningWidth}&quot; Ã—{" "}
-                    {adjustedLayout.matOpeningHeight}&quot; Ã— {selectedFrame.usableDepth}&quot;
+                    Display Area: {adjustedLayout.matOpeningWidth}&quot; ×{" "}
+                    {adjustedLayout.matOpeningHeight}&quot; × {selectedFrame.usableDepth}&quot;
                     depth
                   </p>
                 </div>
@@ -723,7 +742,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                         {lo.displayName.replace(" Size", "")}
                       </div>
                       <div className="text-xs text-muted-foreground mt-0.5">
-                        {lo.matOpeningWidth}Ã—{lo.matOpeningHeight}&quot;
+                        {lo.matOpeningWidth}×{lo.matOpeningHeight}&quot;
                       </div>
                     </button>
                   ))}
@@ -780,7 +799,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                             data-testid="input-custom-width-desktop"
                           />
                         </div>
-                        <div className="pb-2 text-xl text-muted-foreground">Ã—</div>
+                        <div className="pb-2 text-xl text-muted-foreground">×</div>
                         <div className="flex-1">
                           <Label htmlFor="customHeight-desktop" className="text-sm mb-1.5 block">
                             Display Height
@@ -801,9 +820,9 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                         </p>
                       )}
                       <p className="text-xs text-muted-foreground mt-3">
-                        Min {STAMP_CUSTOM_SIZE_LIMITS.MIN_WIDTH}Ã—
+                        Min {STAMP_CUSTOM_SIZE_LIMITS.MIN_WIDTH}×
                         {STAMP_CUSTOM_SIZE_LIMITS.MIN_HEIGHT}&quot;. Max{" "}
-                        {STAMP_CUSTOM_SIZE_LIMITS.MAX_WIDTH}Ã—{STAMP_CUSTOM_SIZE_LIMITS.MAX_HEIGHT}
+                        {STAMP_CUSTOM_SIZE_LIMITS.MAX_WIDTH}×{STAMP_CUSTOM_SIZE_LIMITS.MAX_HEIGHT}
                         &quot;. Decimals accepted.
                       </p>
                     </div>
@@ -983,8 +1002,8 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                           </div>
                           <Slider
                             id="matBorder"
-                            min={1.5}
-                            max={8}
+                            min={MAT_BORDER_SLIDER_MIN_INCHES}
+                            max={MAT_BORDER_SLIDER_MAX_INCHES}
                             step={0.25}
                             value={[matBorder]}
                             onValueChange={(values) =>
@@ -992,8 +1011,8 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                             }
                             data-testid="slider-mat-border"
                             aria-label="Mat border width in inches"
-                            aria-valuemin={1.5}
-                            aria-valuemax={8}
+                            aria-valuemin={MAT_BORDER_SLIDER_MIN_INCHES}
+                            aria-valuemax={MAT_BORDER_SLIDER_MAX_INCHES}
                             aria-valuenow={matBorder}
                             aria-valuetext={`${matBorder.toFixed(2)} inches`}
                           />

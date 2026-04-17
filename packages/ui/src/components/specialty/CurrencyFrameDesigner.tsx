@@ -10,6 +10,7 @@ import { useIsMobile, useMobileViewToggle, useIntelligentPreviewSizing,
   getCurrencyLayout,
   getAllCurrencyLayouts,
   getCurrencyLayoutWithBrassNameplate,
+  applyUserMatBorderToDisplayLayout,
   CURRENCY_CUSTOM_SIZE_LIMITS,
   createCustomCurrencyLayout,
   validateCurrencyCustomDimensions,
@@ -47,6 +48,10 @@ import { Tooltip, TooltipTrigger, TooltipContent } from "../ui/tooltip";
 import { CurrencyPreviewCanvas } from "./CurrencyPreviewCanvas";
 import { BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import {
+  MAT_BORDER_SLIDER_MAX_INCHES,
+  MAT_BORDER_SLIDER_MIN_INCHES,
+} from "./shared/mat-border-slider-constants";
 
 import type { PriceLineItem } from "../ui/PriceBox";
 import type { CurrencyLayoutType } from "@framecraft/core";
@@ -145,8 +150,12 @@ export function CurrencyFrameDesigner({
     return "double";
   });
 
-  const [matBorderWidth, setMatBorderWidth] = useState("2.5");
-  const [matRevealWidth, setMatRevealWidth] = useState("0.25");
+  const [matBorderWidth, setMatBorderWidth] = useState(
+    () => urlParams.get("matBorder") ?? "2.5"
+  );
+  const [matRevealWidth, setMatRevealWidth] = useState(
+    () => urlParams.get("matReveal") ?? "0.25"
+  );
   const matBorder = parseFloat(matBorderWidth) || 2.5;
   const matReveal = parseFloat(matRevealWidth) || 0.25;
 
@@ -251,9 +260,15 @@ export function CurrencyFrameDesigner({
   );
 
   const bottomWeightedExtra = bottomWeighted ? BOTTOM_WEIGHTED_EXTRA : 0;
+
+  const layoutWithUserMatBorder = useMemo(
+    () => applyUserMatBorderToDisplayLayout(currentLayout, matBorder, matType),
+    [currentLayout, matBorder, matType]
+  );
+
   const adjustedLayout = useMemo(() => {
     const baseLayout = getCurrencyLayoutWithBrassNameplate({
-      layout: currentLayout,
+      layout: layoutWithUserMatBorder,
       brassPlaqueEnabled: brassNameplateConfig.enabled && matType !== "none",
     });
     return {
@@ -261,7 +276,7 @@ export function CurrencyFrameDesigner({
       frameHeight: baseLayout.frameHeight + bottomWeightedExtra,
       matBorderBottom: baseLayout.matBorderBottom + bottomWeightedExtra,
     };
-  }, [currentLayout, brassNameplateConfig.enabled, matType, bottomWeightedExtra]);
+  }, [layoutWithUserMatBorder, brassNameplateConfig.enabled, matType, bottomWeightedExtra]);
 
   const [framePhotos, setFramePhotos] = useState<{
     cornerUrl?: string;
@@ -310,6 +325,8 @@ export function CurrencyFrameDesigner({
     if (matType !== "none") {
       params.set("topMat", selectedTopMat.id);
       params.set("accentMat", selectedAccentMat.id);
+      params.set("matBorder", matBorderWidth);
+      params.set("matReveal", matRevealWidth);
     }
     if (selectedLayout === "custom") {
       params.set("customWidth", customWidth);
@@ -336,6 +353,8 @@ export function CurrencyFrameDesigner({
     matType,
     selectedTopMat.id,
     selectedAccentMat.id,
+    matBorderWidth,
+    matRevealWidth,
     customWidth,
     customHeight,
     brassNameplateConfig,
@@ -457,7 +476,7 @@ export function CurrencyFrameDesigner({
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({
         title: "Added to Cart!",
-        description: `${quantity}Ã— ${currentLayout.displayName} Currency Frame added to your cart.`,
+        description: `${quantity}× ${currentLayout.displayName} Currency Frame added to your cart.`,
       });
     } catch (error) {
       console.error("Add to cart error:", error);
@@ -513,7 +532,7 @@ export function CurrencyFrameDesigner({
                           {layoutOption.displayName.replace(" Size", "")}
                         </div>
                         <div className="text-xs text-muted-foreground mt-0.5">
-                          {layoutOption.matOpeningWidth}Ã—{layoutOption.matOpeningHeight}&quot;
+                          {layoutOption.matOpeningWidth}×{layoutOption.matOpeningHeight}&quot;
                         </div>
                       </button>
                     ))}
@@ -550,7 +569,7 @@ export function CurrencyFrameDesigner({
                             data-testid="input-custom-width-mobile"
                           />
                         </div>
-                        <div className="flex items-end pb-0.5 text-muted-foreground">Ã—</div>
+                        <div className="flex items-end pb-0.5 text-muted-foreground">×</div>
                         <div className="flex-1">
                           <Label
                             htmlFor="customHeight-mobile"
@@ -622,13 +641,13 @@ export function CurrencyFrameDesigner({
                         const mouldingWidth = selectedFrame.mouldingWidth ?? 0;
                         const overallWidth = interiorWidth + mouldingWidth * 2;
                         const overallHeight = interiorHeight + mouldingWidth * 2;
-                        return `${overallWidth.toFixed(1)}" Ã— ${overallHeight.toFixed(1)}"`;
+                        return `${overallWidth.toFixed(1)}" × ${overallHeight.toFixed(1)}"`;
                       })()}
                     </span>
                   </p>
                   <p className="text-muted-foreground text-xs">
-                    Display Area: {adjustedLayout.matOpeningWidth}&quot; Ã—{" "}
-                    {adjustedLayout.matOpeningHeight}&quot; Ã— {selectedFrame.usableDepth}&quot;
+                    Display Area: {adjustedLayout.matOpeningWidth}&quot; ×{" "}
+                    {adjustedLayout.matOpeningHeight}&quot; × {selectedFrame.usableDepth}&quot;
                     depth
                   </p>
                 </div>
@@ -705,7 +724,7 @@ export function CurrencyFrameDesigner({
                           {layoutOption.displayName.replace(" Size", "")}
                         </div>
                         <div className="text-xs text-muted-foreground mt-0.5">
-                          {layoutOption.matOpeningWidth}Ã—{layoutOption.matOpeningHeight}&quot;
+                          {layoutOption.matOpeningWidth}×{layoutOption.matOpeningHeight}&quot;
                         </div>
                       </button>
                     ))}
@@ -769,7 +788,7 @@ export function CurrencyFrameDesigner({
                               </span>
                             </div>
                           </div>
-                          <div className="pb-2 text-xl text-muted-foreground">Ã—</div>
+                          <div className="pb-2 text-xl text-muted-foreground">×</div>
                           <div className="flex-1">
                             <Label htmlFor="customHeight-desktop" className="text-sm mb-1.5 block">
                               Display Height
@@ -795,9 +814,9 @@ export function CurrencyFrameDesigner({
                           </p>
                         )}
                         <p className="text-xs text-muted-foreground mt-3">
-                          Min {CURRENCY_CUSTOM_SIZE_LIMITS.MIN_WIDTH}Ã—
+                          Min {CURRENCY_CUSTOM_SIZE_LIMITS.MIN_WIDTH}×
                           {CURRENCY_CUSTOM_SIZE_LIMITS.MIN_HEIGHT}&quot;. Max{" "}
-                          {CURRENCY_CUSTOM_SIZE_LIMITS.MAX_WIDTH}Ã—
+                          {CURRENCY_CUSTOM_SIZE_LIMITS.MAX_WIDTH}×
                           {CURRENCY_CUSTOM_SIZE_LIMITS.MAX_HEIGHT}&quot;. Decimals accepted.
                         </p>
                       </div>
@@ -976,8 +995,8 @@ export function CurrencyFrameDesigner({
                             </div>
                             <Slider
                               id="matBorder"
-                              min={1.5}
-                              max={8}
+                              min={MAT_BORDER_SLIDER_MIN_INCHES}
+                              max={MAT_BORDER_SLIDER_MAX_INCHES}
                               step={0.25}
                               value={[matBorder]}
                               onValueChange={(values) =>
@@ -985,8 +1004,8 @@ export function CurrencyFrameDesigner({
                               }
                               data-testid="slider-mat-border"
                               aria-label="Mat border width in inches"
-                              aria-valuemin={1.5}
-                              aria-valuemax={8}
+                              aria-valuemin={MAT_BORDER_SLIDER_MIN_INCHES}
+                              aria-valuemax={MAT_BORDER_SLIDER_MAX_INCHES}
                               aria-valuenow={matBorder}
                               aria-valuetext={`${matBorder.toFixed(2)} inches`}
                             />

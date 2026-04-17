@@ -3,6 +3,8 @@ import { Button, Card, CardContent } from "@framecraft/ui";
 import Link from "next/link";
 
 import { brandConfig } from "../../../../brand.config";
+import { getOgImage } from "@/lib/seo";
+import { generatePageMetadata } from "@/lib/seo-utils";
 
 import type { Metadata } from "next";
 
@@ -19,17 +21,14 @@ const orderedColors = Object.entries(COLOR_METADATA)
     image: getColorHubImage(colorName),
   }));
 
-export const metadata: Metadata = {
+const colorsOg = getOgImage(brandConfig.seo?.ogImage);
+
+export const metadata: Metadata = generatePageMetadata("/frames/colors", {
   title: "Picture Frames by Color - Custom Sizes | Custom Frame Sizes",
   description:
     "Shop custom picture frames by color. Black, white, gold, brown, silver finishes in sizes 4×4 to 48×72 inches. Expert craftsmanship with instant pricing.",
-  openGraph: {
-    title: "Picture Frames by Color - Custom Sizes",
-    description:
-      "Explore custom frames by color: black, white, gold, brown, silver, and specialty finishes. Expert craftsmanship in any size.",
-    type: "website",
-  },
-};
+  ogImage: colorsOg,
+});
 
 export default function FramesByColorPage() {
   // Breadcrumb Schema for SERP breadcrumb trails

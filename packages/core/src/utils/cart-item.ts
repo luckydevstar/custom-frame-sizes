@@ -10,6 +10,12 @@ import { getFrameStyleById } from "../services/products";
 import type { AddCartItemInput } from "../stores/cart-store";
 import type { FrameConfiguration } from "@framecraft/types";
 
+function formatInchesDisplay(inches: number): string {
+  const rounded = Math.round(inches * 100) / 100;
+  if (Number.isInteger(rounded)) return String(rounded);
+  return String(rounded);
+}
+
 const DEFAULT_FRAME_VARIANT_ID =
   (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHOPIFY_FRAME_VARIANT_ID) || null;
 const MOCK_VARIANT_ID = "gid://shopify/ProductVariant/mock";
@@ -34,14 +40,31 @@ export function createCartItemFromFrameConfig(
     DEFAULT_FRAME_VARIANT_ID ||
     MOCK_VARIANT_ID;
 
-  const title = options?.productTitle ?? "Custom Picture Frame";
+  const isGradedCard = Boolean(config.cardFormatId && config.cardLayoutId);
+  const title =
+    options?.productTitle ?? (isGradedCard ? "Graded Card Frame" : "Custom Picture Frame");
   const frameName = frameStyle?.name ?? config.frameStyleId;
+
+  let variantTitle: string;
+  if (
+    isGradedCard &&
+    typeof config.cardInteriorWidthIn === "number" &&
+    typeof config.cardInteriorHeightIn === "number" &&
+    frameStyle
+  ) {
+    const mw = frameStyle.mouldingWidth ?? 0.75;
+    const outerW = config.cardInteriorWidthIn + 2 * mw;
+    const outerH = config.cardInteriorHeightIn + 2 * mw;
+    variantTitle = `${frameName} - ${formatInchesDisplay(outerW)} × ${formatInchesDisplay(outerH)}`;
+  } else {
+    variantTitle = `${frameName} · ${config.artworkWidth}" × ${config.artworkHeight}"`;
+  }
 
   return {
     variantId,
     productHandle: "custom-frame",
     title,
-    variantTitle: `${frameName} · ${config.artworkWidth}" × ${config.artworkHeight}"`,
+    variantTitle,
     imageUrl: options?.imageUrl ?? config.imageUrl ?? null,
     price: Math.round(priceDollars * 100), // store uses cents
     currency: "USD",

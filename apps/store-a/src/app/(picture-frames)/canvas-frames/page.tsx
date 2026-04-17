@@ -114,7 +114,7 @@ export default function CanvasFramesPage() {
               </div>
             }
           >
-            <CanvasFrameDesigner />
+            <CanvasFrameDesigner syncUrl={false} />
           </Suspense>
         </div>
       </section>

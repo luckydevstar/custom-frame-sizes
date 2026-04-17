@@ -5,7 +5,9 @@ import { ScrollToDesignerButton } from "./scroll-button";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+import { generatePageMetadata } from "@/lib/seo-utils";
+
+export const metadata: Metadata = generatePageMetadata("/sonogram-frames", {
   title: "Sonogram Frames - Custom Ultrasound Picture Frames | CustomFrameSizes.com",
   description:
     "Frame your baby's first photo with custom sonogram frames. Display 1-3 ultrasound images with handwritten text. Great for pregnancy keepsakes and nursery decor.",
@@ -19,15 +21,7 @@ export const metadata: Metadata = {
     "nursery wall art",
     "baby announcement frame",
   ],
-  openGraph: {
-    title: "Sonogram Frames - Custom Ultrasound Picture Frames",
-    description:
-      "Frame your baby's first photo with custom sonogram frames. Display 1-3 ultrasound images with handwritten text. Great for pregnancy keepsakes.",
-    type: "website",
-    url: "/sonogram-frames",
-  },
-  alternates: { canonical: "/sonogram-frames" },
-};
+});
 
 const faqSchema = {
   "@context": "https://schema.org",

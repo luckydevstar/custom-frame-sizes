@@ -12,6 +12,8 @@ import { brandConfig } from "../../../../brand.config";
 
 import type { Metadata } from "next";
 
+import { generatePageMetadata } from "@/lib/seo-utils";
+
 const frames = getFrameStyles();
 const colorCounts = getShadowboxColorCounts(
   frames as Parameters<typeof getShadowboxColorCounts>[0],
@@ -28,7 +30,7 @@ const orderedColors = Object.entries(SHADOWBOX_COLOR_METADATA)
     ),
   }));
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/shadowboxes/colors", {
   title: "Shadowbox Frames by Color - Custom Depth Display Cases | Custom Frame Sizes",
   description:
     "Professional shadowbox frames in 7 color finishes: black, white, brown, silver, gold, blue, and natural wood. Deep-profile display cases for sports jerseys, military medals, vinyl records, and memorabilia.",
@@ -45,14 +47,7 @@ export const metadata: Metadata = {
     "medal display case",
     "memorabilia frames",
   ],
-  openGraph: {
-    title: "Shadowbox Frames by Color - Custom Depth Display Cases | Custom Frame Sizes",
-    description:
-      "Professional shadowbox frames in 7 color finishes for sports jerseys, military medals, and memorabilia. Professional-grade preservation with UV protection.",
-    type: "website",
-  },
-  alternates: { canonical: "/shadowboxes/colors" },
-};
+});
 
 const baseUrl = brandConfig.seo?.canonicalUrl || "https://www.customframesizes.com";
 

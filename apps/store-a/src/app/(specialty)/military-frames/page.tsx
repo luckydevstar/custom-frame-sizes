@@ -13,6 +13,7 @@ import { ScrollToDesignerButton } from "./scroll-button";
 import type { Metadata } from "next";
 
 import { RelatedProducts } from "@/components/RelatedProducts";
+import { generatePageMetadata } from "@/lib/seo-utils";
 /**
  * Military Frame Designer with branch presets, military layouts, brass nameplate, and hanging hardware.
  */
@@ -25,21 +26,12 @@ export const dynamic = "force-dynamic";
 
 const baseUrl = brandConfig.seo?.canonicalUrl ?? "https://www.customframesizes.com";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/military-frames", {
   title:
     "Military Shadow Box Frames | Custom Memorabilia Display Cases for Medals, Ribbons & Flags",
   description:
     "Design custom military shadow boxes with branch-specific colors. Frame medals, ribbons, patches, and flags with 2-inch depth and premium suede backing. Available for Army, Navy, Air Force, Marines, Coast Guard, and Space Force.",
-  openGraph: {
-    title:
-      "Military Shadow Box Frames | Custom Memorabilia Display Cases for Medals, Ribbons & Flags",
-    description:
-      "Professional military shadow box frames with branch-specific colors, conservation mounting, and 2-inch depth. Display medals, ribbons, patches, flags, and photos with premium suede backing.",
-    type: "website",
-    url: "/military-frames",
-  },
-  alternates: { canonical: "/military-frames" },
-};
+});
 
 const productSchema = {
   "@context": "https://schema.org",

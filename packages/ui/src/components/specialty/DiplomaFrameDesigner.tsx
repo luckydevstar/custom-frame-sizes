@@ -69,6 +69,10 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { DiplomaLifestyleCarousel } from "./DiplomaLifestyleCarousel";
 import { BottomWeightedMatting } from "./shared/BottomWeightedMatting";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import {
+  MAT_BORDER_SLIDER_MAX_INCHES,
+  MAT_BORDER_SLIDER_MIN_INCHES,
+} from "./shared/mat-border-slider-constants";
 
 import type { PriceLineItem } from "../ui/PriceBox";
 import type { FrameStyle, FrameConfiguration , BrassNameplateConfig } from "@framecraft/types";
@@ -195,8 +199,8 @@ const DIPLOMA_LAYOUTS: DiplomaLayoutConfig[] = [
 // Photo size options for layouts with photo opening
 const PHOTO_SIZE_OPTIONS: { id: PhotoSizeOption; label: string; width: number; height: number }[] =
   [
-    { id: "5x7", label: '5Ã—7"', width: 5, height: 7 },
-    { id: "8x10", label: '8Ã—10"', width: 8, height: 10 },
+    { id: "5x7", label: '5×7"', width: 5, height: 7 },
+    { id: "8x10", label: '8×10"', width: 8, height: 10 },
   ];
 
 interface DiplomaFrameDesignerProps {
@@ -334,7 +338,7 @@ export function DiplomaFrameDesigner({
   // Diploma size preset state
   const [selectedDiplomaSize, setSelectedDiplomaSize] = useState<DiplomaSize | null>(null);
 
-  // Custom dimensions - artwork size (default to 10Ã—8" landscape)
+  // Custom dimensions - artwork size (default to 10×8" landscape)
   const [artworkWidth, setArtworkWidth] = useState("10");
   const [artworkHeight, setArtworkHeight] = useState("8");
 
@@ -950,8 +954,8 @@ export function DiplomaFrameDesigner({
 
     // Calculate effective mat border for pricing
     // Using average of all four borders gives the CORRECT perimeter for perimeter-based pricing
-    // Perimeter with avg border: 2Ã—(artW + 2Ã—avg + artH + 2Ã—avg) = 2Ã—(artW + artH + sum of all borders)
-    // This matches the actual perimeter: 2Ã—((artW + left + right) + (artH + top + bottom))
+    // Perimeter with avg border: 2×(artW + 2×avg + artH + 2×avg) = 2×(artW + artH + sum of all borders)
+    // This matches the actual perimeter: 2×((artW + left + right) + (artH + top + bottom))
     const effectiveMatBorderForPricing =
       matType !== "none"
         ? (effectiveMatBorders.top +
@@ -1248,7 +1252,7 @@ export function DiplomaFrameDesigner({
   const tasselOpeningLayout = useMemo(() => {
     if (!currentLayout.hasTassel) return null;
 
-    // Tassel hook area: 2" wide Ã— 6" tall opening
+    // Tassel hook area: 2" wide × 6" tall opening
     const tasselW = 2;
     const tasselH = 6;
     const tasselOpeningW = tasselW * layout.scale;
@@ -2276,7 +2280,7 @@ export function DiplomaFrameDesigner({
                     <p className="font-medium">
                       Finished Size:{" "}
                       <span className="text-primary">
-                        {formatDimension(frameWidth)}&quot; Ã— {formatDimension(frameHeight)}&quot;
+                        {formatDimension(frameWidth)}&quot; × {formatDimension(frameHeight)}&quot;
                       </span>
                     </p>
                     {selectedFrame.dimensionalDiagram && (
@@ -2312,9 +2316,9 @@ export function DiplomaFrameDesigner({
                     )}
                   </div>
                   <p className="text-xs text-muted-foreground mt-1">
-                    Artwork: {formatDimension(artW)}&quot; Ã— {formatDimension(artH)}&quot;
-                    {matType !== "none" && ` â€¢ Mat Border: ${formatDimension(matBorder)}"`}
-                    {matType === "double" && ` â€¢ Reveal: ${formatDimension(matReveal)}"`}
+                    Artwork: {formatDimension(artW)}&quot; × {formatDimension(artH)}&quot;
+                    {matType !== "none" && ` • Mat Border: ${formatDimension(matBorder)}"`}
+                    {matType === "double" && ` • Reveal: ${formatDimension(matReveal)}"`}
                   </p>
                 </div>
               </Card>
@@ -2592,7 +2596,7 @@ export function DiplomaFrameDesigner({
                           data-testid={`button-diploma-${size.id}`}
                         >
                           <p className="font-semibold text-sm">
-                            {size.documentWidth}&quot; Ã— {size.documentHeight}&quot;
+                            {size.documentWidth}&quot; × {size.documentHeight}&quot;
                           </p>
                         </button>
                       ))}
@@ -2798,22 +2802,22 @@ export function DiplomaFrameDesigner({
                           </div>
                           <Slider
                             id="matBorder"
-                            min={1.5}
-                            max={8}
+                            min={MAT_BORDER_SLIDER_MIN_INCHES}
+                            max={MAT_BORDER_SLIDER_MAX_INCHES}
                             step={0.25}
                             value={[matBorder]}
                             onValueChange={(values) => setMatBorderWidth(String(values[0] ?? 2.5))}
                             data-testid="slider-mat-border"
                             aria-label="Mat border width in inches"
-                            aria-valuemin={1.5}
-                            aria-valuemax={8}
+                            aria-valuemin={MAT_BORDER_SLIDER_MIN_INCHES}
+                            aria-valuemax={MAT_BORDER_SLIDER_MAX_INCHES}
                             aria-valuenow={matBorder}
                             aria-valuetext={`${matBorder.toFixed(2)} inches`}
                           />
                           <p className="text-xs text-muted-foreground">
                             {brassNameplateConfig.enabled
                               ? 'Bottom border auto-extends to 3.75" for plaque'
-                              : 'Adjust the width of the mat border (1.5" - 8")'}
+                              : 'Adjust the width of the mat border (1" - 8")'}
                           </p>
 
                           <BottomWeightedMatting
@@ -3436,7 +3440,7 @@ export function DiplomaFrameDesigner({
             // Show success toast
             toast({
               title: "Size Updated",
-              description: `Frame size updated to ${newWidth}" Ã— ${newHeight}" from AR preview`,
+              description: `Frame size updated to ${newWidth}" × ${newHeight}" from AR preview`,
             });
           }}
         />

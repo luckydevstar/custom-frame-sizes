@@ -1,12 +1,23 @@
 "use client";
 
+import { getMatById } from "@framecraft/config";
+import { getFrameStyleById } from "@framecraft/core/services/products";
 import { useCartStore } from "@framecraft/core/stores";
-import { CartClient } from "@framecraft/ui";
+import { CartClient, getCardProductionCode } from "@framecraft/ui";
 import { useEffect } from "react";
+
+function matBoardLabel(matId: string | undefined): string | undefined {
+  if (!matId) return undefined;
+  const m = getMatById(matId);
+  if (!m) return matId;
+  const sku = m.sizes?.["32x40"]?.sku ?? m.sizes?.["40x60"]?.sku;
+  return sku ? `${m.name} (${sku})` : m.name;
+}
 
 export function CartPageClient() {
   const setLoading = useCartStore((state) => state._setLoading);
   const setError = useCartStore((state) => state._setError);
+  const clearCart = useCartStore((state) => state.clearCart);
   const items = useCartStore((state) => state.items);
 
   // Clear any stale cart errors (like old Shopify store-config issues) when the cart page loads
@@ -44,34 +55,47 @@ export function CartPageClient() {
         }
       });
 
-      // Import serialization and pricing functions
-      const { serializeFrameConfiguration } = await import("@framecraft/core/shopify");
       const { calculatePricing } = await import("@framecraft/core/services/pricing");
 
-      // Convert local cart items to API format with serialized configuration
-      const lines = items.map((item) => {
-        // Calculate price based on product type
+      // Convert local cart items to API format (BFF builds line-item properties for packing slip)
+      const lines = items.map((item, lineIndex) => {
         let priceCents: number;
-        
-        try {
-          // Try frame pricing first (works for custom frames)
-          const pricing = calculatePricing(item.configuration!);
-          priceCents = Math.round(pricing.total * 100); // Convert dollars to cents
-        } catch {
-          // If calculatePricing fails (non-frame products), use pre-calculated price from cart
-          // Foam board, cleat hangers, acrylic, etc. store their price in item.price (which is in cents)
+
+        if (item.configuration) {
+          try {
+            const pricing = calculatePricing(item.configuration);
+            priceCents = Math.round(pricing.total * 100);
+          } catch {
+            priceCents = item.price || 0;
+          }
+        } else {
           priceCents = item.price || 0;
         }
 
-        // Serialize configuration to Shopify attributes format
-        const attributes = serializeFrameConfiguration(item.configuration!);
+        const cfg = item.configuration;
+        const frame = cfg ? getFrameStyleById(cfg.frameStyleId) : undefined;
+        const cardProductionCode =
+          cfg?.cardFormatId && cfg.cardLayoutId
+            ? getCardProductionCode(cfg.cardFormatId, cfg.cardLayoutId)
+            : undefined;
 
         return {
           merchandiseId: variantId,
           quantity: item.quantity,
-          attributes, // Pre-serialized for Shopify
           priceCents,
-          configuration: item.configuration, // Send raw config for backend processing
+          configuration: cfg,
+          packing: cfg
+            ? {
+                frameDisplayName: frame?.name,
+                frameSku: frame?.sku,
+                matOuterLabel: matBoardLabel(cfg.matColorId),
+                matInnerLabel: matBoardLabel(cfg.matInnerColorId),
+                lineIndex: lineIndex + 1,
+                cardProductionCode,
+                cardInteriorWidthIn: cfg.cardInteriorWidthIn,
+                cardInteriorHeightIn: cfg.cardInteriorHeightIn,
+              }
+            : undefined,
         };
       });
 
@@ -92,6 +116,9 @@ export function CartPageClient() {
         throw new Error(freshCheckoutData.error?.message || "Failed to create fresh checkout");
       }
 
+      // Checkout URL is valid; clear local cart before leaving so a return/abandon
+      // does not show stale items (Finding #6).
+      clearCart();
       window.location.href = freshCheckoutData.checkoutUrl;
     } catch (error) {
       const message = error instanceof Error ? error.message : String(error);

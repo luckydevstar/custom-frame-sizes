@@ -466,13 +466,13 @@ export function JerseyFrameDesigner({
   const layout = useMemo(() => {
     // CRITICAL: Use the full frame interior dimensions, not the jersey opening dimensions!
     // This ensures the SVG clip paths and preview container share the same coordinate system.
-    // Layout A: 24Ã—24" interior
-    // Layout B: 24Ã—30" interior
+    // Layout A: 24×24" interior
+    // Layout B: 24×30" interior
     //
     // Note: computePreviewLayout expects artW/artH to be the mat opening size, so we need
     // to calculate the mat opening from the frame interior dimensions.
     // For jersey frames, the mat border is uniform, so:
-    // matOpening = frameInterior - (2 Ã— matBorder)
+    // matOpening = frameInterior - (2 × matBorder)
 
     // Get the main jersey opening to determine mat border width
     const mainOpening = currentLayout.openings.find((o) => o.purpose === "jersey-display");
@@ -783,15 +783,15 @@ export function JerseyFrameDesigner({
                           </div>
                           <ul className="space-y-1 text-muted-foreground">
                             <li>
-                              â€¢ <span className="font-medium text-foreground">Youth:</span>{" "}
+                              • <span className="font-medium text-foreground">Youth:</span>{" "}
                               Kids&apos; and women&apos;s jerseys
                             </li>
                             <li>
-                              â€¢ <span className="font-medium text-foreground">Adult:</span> Standard
+                              • <span className="font-medium text-foreground">Adult:</span> Standard
                               pro jerseys (NFL, NBA, MLB)
                             </li>
                             <li>
-                              â€¢ <span className="font-medium text-foreground">Hockey & XL:</span>{" "}
+                              • <span className="font-medium text-foreground">Hockey & XL:</span>{" "}
                               Bulky or stitched jerseys
                             </li>
                           </ul>
@@ -819,14 +819,14 @@ export function JerseyFrameDesigner({
                               currentLayout.frameInteriorHeight +
                               2 * (selectedFrame.mouldingWidth || 1.25) +
                               bottomWeightedExtra;
-                            return `${displayFrameWidth.toFixed(2)}&quot; Ã— ${displayFrameHeight.toFixed(2)}&quot;`;
+                            return `${displayFrameWidth.toFixed(2)}&quot; × ${displayFrameHeight.toFixed(2)}&quot;`;
                           })()}
                         </span>
                       </p>
                       <p className="text-muted-foreground text-xs">
-                        Interior: {currentLayout.frameInteriorWidth}&quot; Ã—{" "}
+                        Interior: {currentLayout.frameInteriorWidth}&quot; ×{" "}
                         {(currentLayout.frameInteriorHeight + bottomWeightedExtra).toFixed(1)}&quot;
-                        Ã— {selectedFrame.usableDepth}&quot; depth
+                        × {selectedFrame.usableDepth}&quot; depth
                         {bottomWeighted && (
                           <span className="ml-1 text-primary">(+0.5&quot; bottom-weighted)</span>
                         )}
@@ -1019,7 +1019,7 @@ export function JerseyFrameDesigner({
                               const frameHeight =
                                 currentLayout.frameInteriorHeight +
                                 2 * (selectedFrame.mouldingWidth || 1.25);
-                              return `${frameWidth.toFixed(2)}" Ã— ${frameHeight.toFixed(2)}"`;
+                              return `${frameWidth.toFixed(2)}" × ${frameHeight.toFixed(2)}"`;
                             })()}
                           </div>
                         </div>
@@ -1094,15 +1094,15 @@ export function JerseyFrameDesigner({
                           </div>
                           <ul className="space-y-1 text-muted-foreground">
                             <li>
-                              â€¢ <span className="font-medium text-foreground">Youth:</span>{" "}
+                              • <span className="font-medium text-foreground">Youth:</span>{" "}
                               Kids&apos; and women&apos;s jerseys
                             </li>
                             <li>
-                              â€¢ <span className="font-medium text-foreground">Adult:</span> Standard
+                              • <span className="font-medium text-foreground">Adult:</span> Standard
                               pro jerseys (NFL, NBA, MLB)
                             </li>
                             <li>
-                              â€¢ <span className="font-medium text-foreground">Hockey & XL:</span>{" "}
+                              • <span className="font-medium text-foreground">Hockey & XL:</span>{" "}
                               Bulky or stitched jerseys
                             </li>
                           </ul>

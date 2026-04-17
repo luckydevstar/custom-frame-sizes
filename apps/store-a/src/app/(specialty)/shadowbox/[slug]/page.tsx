@@ -6,6 +6,14 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
 
+import {
+  buildFrameProductMetaDescription,
+  generateBreadcrumbSchema,
+  generateMetadata as buildSeoMetadata,
+  generateProductSchema,
+  getCanonicalUrl,
+  getOgImage,
+} from "@/lib/seo";
 import { brandConfig } from "../../../../brand.config";
 
 import type { FrameStyle } from "@framecraft/types";
@@ -41,17 +49,27 @@ export async function generateMetadata({ params }: ShadowboxFramePageProps): Pro
   if (slug === "designer") return {};
   const frame = getShadowboxFrameBySlug(slug);
   if (!frame) return { title: "Shadowbox | Custom Frame Sizes" };
-  return {
+
+  const path = `/shadowbox/${slug}`;
+  const description = buildFrameProductMetaDescription({
+    name: `${frame.name} Shadowbox`,
+    shortDescription: frame.shortDescription,
+    featuredDescription: frame.featuredDescription,
+  });
+  const lifestyle =
+    frame.alternateImages?.find((i) => i.type === "lifestyle") ?? frame.alternateImages?.[0];
+  const ogFromAsset = lifestyle?.url
+    ? getStoreBaseAssetUrl(lifestyle.url.startsWith("/") ? lifestyle.url.slice(1) : lifestyle.url)
+    : undefined;
+
+  return buildSeoMetadata({
     title: `${frame.name} Shadowbox Frame - Custom Sizing | ${brandConfig.name}`,
-    description:
-      frame.shortDescription ||
-      `Custom ${frame.name} shadowbox frame. Professional-grade construction, instant pricing.`,
-    openGraph: {
-      title: `${frame.name} Shadowbox Frame - Custom Framing`,
-      description: frame.shortDescription || `Custom ${frame.name} shadowbox frame.`,
-      type: "website",
-    },
-  };
+    description,
+    canonical: getCanonicalUrl(path),
+    ogImage: getOgImage(ogFromAsset),
+    ogTitle: `${frame.name} Shadowbox Frame - Custom Framing`,
+    ogDescription: description,
+  });
 }
 
 export default async function ShadowboxFramePage({ params }: ShadowboxFramePageProps) {
@@ -62,8 +80,40 @@ export default async function ShadowboxFramePage({ params }: ShadowboxFramePageP
 
   const lifestyleImages = frame.alternateImages?.filter((img) => img.type === "lifestyle") ?? [];
 
+  const productImage = lifestyleImages[0]?.url
+    ? getStoreBaseAssetUrl(
+        lifestyleImages[0].url.startsWith("/") ? lifestyleImages[0].url.slice(1) : lifestyleImages[0].url
+      )
+    : undefined;
+
+  const breadcrumbJson = generateBreadcrumbSchema([
+    { name: "Home", url: getCanonicalUrl("/") },
+    { name: "Shadowbox Frames", url: getCanonicalUrl("/shadowbox") },
+    { name: `${frame.name} Shadowbox`, url: getCanonicalUrl(`/shadowbox/${slug}`) },
+  ]);
+
+  const productJson = generateProductSchema({
+    name: `${frame.name} Shadowbox Frame`,
+    description:
+      frame.featuredDescription ||
+      frame.shortDescription ||
+      `Custom ${frame.name} shadowbox frame with professional display depth.`,
+    url: getCanonicalUrl(`/shadowbox/${slug}`),
+    image: productImage,
+    material: frame.material,
+    lowPrice: 49,
+    highPrice: 899,
+    additionalProperties: [
+      { name: "Usable depth", value: `${frame.usableDepth}"` },
+      { name: "Moulding width", value: `${frame.mouldingWidth}"` },
+      { name: "Category", value: "Shadowbox" },
+    ],
+  });
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: productJson }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: breadcrumbJson }} />
       {/* Hero */}
       <section className="container mx-auto px-4 pt-6 pb-4 md:pt-8 md:pb-6">
         <div className="max-w-4xl mx-auto text-center">

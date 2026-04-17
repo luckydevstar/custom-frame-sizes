@@ -180,7 +180,6 @@ export function loadCart(storeId: string): StoredCart | null {
 
     // Check expiration
     if (isExpired(storedCart.expiresAt)) {
-      console.log("Cart persistence: Cart expired, clearing");
       clearCart(storeId);
       return null;
     }

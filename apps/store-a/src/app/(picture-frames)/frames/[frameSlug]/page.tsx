@@ -61,7 +61,7 @@ export default async function FrameDesignerBySlugPage({ params }: Props) {
 
   const breadcrumbs = [
     { name: "Home", url: getCanonicalUrl("/") },
-    { name: "Frames", url: getCanonicalUrl("/frames") },
+    { name: "Frames", url: getCanonicalUrl("/frames/styles") },
     { name: frame.name, url: getCanonicalUrl(`/frames/${frameSlug}`) },
   ];
 

@@ -23,12 +23,14 @@ import { ScrollToDesignerButton } from "./scroll-button";
 
 import type { Metadata } from "next";
 
+import { generatePageMetadata } from "@/lib/seo-utils";
+
 const CollageFrameDesigner = dynamic(
   () => import("@framecraft/ui").then((mod) => ({ default: mod.CollageFrameDesigner })),
   { ssr: false }
 );
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/collage-frames", {
   title: "Multi Opening Frames | Multi Photo Frames & Collage Mats | Custom Frame Sizes",
   description:
     "Custom multi opening frames with multi opening mats for 2-25 photos. Display family pictures in a multi photo frame with 20+ layouts, framer's grade acrylic, and archival matting. Fits photo sizes 4×4 to 16×20.",
@@ -46,21 +48,7 @@ export const metadata: Metadata = {
     "wedding collage frame",
     "baby collage frame",
   ],
-  openGraph: {
-    title: "Multi Opening Frames | Multi Photo Frames & Collage Mats",
-    description:
-      "Display 2-25 photos in one multi opening frame. 20+ layouts for family photos, weddings, and milestone memories with framer's grade acrylic and archival matting.",
-    type: "website",
-    url: "/collage-frames",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Multi Opening Frames | Multi Photo Frames & Collage Mats",
-    description:
-      "Display 2-25 photos in one multi photo frame. 20+ layouts with framer's grade acrylic and archival matting.",
-  },
-  alternates: { canonical: "/collage-frames" },
-};
+});
 
 const applications = [
   {
