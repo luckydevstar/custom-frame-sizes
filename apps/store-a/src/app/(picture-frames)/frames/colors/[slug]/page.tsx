@@ -354,7 +354,7 @@ export default async function ColorDetailPage({ params }: ColorDetailPageProps) 
                   {colorFrames.map((frame) => (
                     <Link
                       key={frame.id}
-                      href={`/picture-frames?frame=${frame.id}`}
+                      href={`/designer?frame=${encodeURIComponent(frame.id)}`}
                       data-testid={`card-frame-${frame.id}`}
                       className="block"
                     >
