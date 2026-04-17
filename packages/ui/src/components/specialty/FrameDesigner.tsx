@@ -10,9 +10,6 @@ import {
   downloadImage,
   getMatTilingStyle,
   getMatBevelColor,
-  calculatePrintDimensions,
-  generatePrintFile,
-  downloadPrintFile,
   getFramesByCategory,
   getGlassTypes,
   getFrameStyleById,
@@ -139,7 +136,6 @@ export function FrameDesigner({
     width: number;
     height: number;
   } | null>(null);
-  const [_isGeneratingPrint, setIsGeneratingPrint] = useState(false);
   const [fullImageOpen, setFullImageOpen] = useState(false);
   const [fullscreenImage, setFullscreenImage] = useState<
     "preview" | "corner" | "profile" | "lifestyle"
@@ -608,66 +604,8 @@ export function FrameDesigner({
     setIsCheckingOut(true);
 
     try {
-      // Generate print file for print-and-frame orders
-      if (serviceType === "print-and-frame" && selectedImage) {
-        setIsGeneratingPrint(true);
-        toast({
-          title: "Generating Print File",
-          description: "Creating your 300 DPI print-ready file...",
-        });
-
-        try {
-          // Calculate print dimensions
-          // Paper size = frame interior (artwork + mat borders)
-          // Image bleeds 1/2" over mat opening on all sides (only when mat is present)
-          //
-          // Bottom border logic (mutually exclusive):
-          // - If nameplate enabled: max(matBorder, 3.75") - nameplate takes precedence
-          // - Else if bottomWeighted: matBorder + 0.5"
-          // - Else: matBorder
-          let effectiveBottomBorder = matBorder;
-          if (matType !== "none") {
-            if (brassNameplateConfig.enabled) {
-              // Nameplate requires minimum 3.75" bottom border
-              effectiveBottomBorder = getTypeBBottomBorder(true, matBorder);
-            } else if (bottomWeighted) {
-              // Bottom-weighted adds 0.5" to bottom border
-              effectiveBottomBorder = matBorder + 0.5;
-            }
-          } else {
-            effectiveBottomBorder = 0;
-          }
-          const printDimensions = calculatePrintDimensions(
-            artWidth,
-            artHeight,
-            matBorder,
-            effectiveBottomBorder,
-            matType,
-          );
-
-          // Generate the print file
-          const printResult = await generatePrintFile(selectedImage, printDimensions);
-
-          // Download the print file
-          downloadPrintFile(printResult);
-
-          toast({
-            title: "Print File Ready",
-            description: `Downloaded ${printResult.filename} (${printResult.widthPixels}×${printResult.heightPixels}px at 300 DPI)`,
-          });
-        } catch (printError) {
-          console.error("Print file generation error:", printError);
-          toast({
-            title: "Print File Error",
-            description:
-              printError instanceof Error ? printError.message : "Failed to generate print file.",
-            variant: "destructive",
-          });
-          // Continue with checkout even if print file fails
-        } finally {
-          setIsGeneratingPrint(false);
-        }
-      }
+      // Print-and-frame: customer image URL is stored on the line item for fulfillment.
+      // We do not auto-download a print file on add to cart (Finding #12).
 
       // Always add to cart store (for cart page and future Shopify Plus Cart Transform flow)
       const cartInput = createCartItemFromFrameConfig(frameConfig, finalTotalPrice, quantity, {
@@ -1182,6 +1120,10 @@ export function FrameDesigner({
   // Calculate aspect ratio for proportional display (needed for dialog)
   const aspectRatio = isValidDimensions ? artWidth / artHeight : 1;
 
+  /** Print-and-frame: show full image in opening without cropping (Finding #12) */
+  const previewArtworkObjectFit: "cover" | "contain" =
+    serviceType === "print-and-frame" && selectedImage ? "contain" : "cover";
+
   // Compute preview layout using single-scale containment system
   const layout = useMemo(() => {
     const effectiveMatBorder = matType === "none" ? 0 : matBorder;
@@ -1692,7 +1634,7 @@ export function FrameDesigner({
                                 position: "absolute",
                                 width: "100%",
                                 height: "100%",
-                                objectFit: "cover",
+                                objectFit: previewArtworkObjectFit,
                               }}
                             />
                           )}
@@ -1704,7 +1646,7 @@ export function FrameDesigner({
                               position: "absolute",
                               width: "100%",
                               height: "100%",
-                              objectFit: "cover",
+                              objectFit: previewArtworkObjectFit,
                             }}
                             data-testid="img-preview"
                           />
@@ -1739,7 +1681,7 @@ export function FrameDesigner({
                                 position: "absolute",
                                 width: "100%",
                                 height: "100%",
-                                objectFit: "cover",
+                                objectFit: previewArtworkObjectFit,
                               }}
                             />
                           )}
@@ -1751,7 +1693,7 @@ export function FrameDesigner({
                               position: "absolute",
                               width: "100%",
                               height: "100%",
-                              objectFit: "cover",
+                              objectFit: previewArtworkObjectFit,
                             }}
                             data-testid="img-preview"
                           />
@@ -1775,7 +1717,7 @@ export function FrameDesigner({
                               position: "absolute",
                               width: "100%",
                               height: "100%",
-                              objectFit: "cover",
+                              objectFit: previewArtworkObjectFit,
                             }}
                           />
                         )}
@@ -1787,7 +1729,7 @@ export function FrameDesigner({
                             position: "absolute",
                             width: "100%",
                             height: "100%",
-                            objectFit: "cover",
+                            objectFit: previewArtworkObjectFit,
                           }}
                           data-testid="img-preview"
                         />
@@ -1890,7 +1832,7 @@ export function FrameDesigner({
                                 position: "absolute",
                                 width: "100%",
                                 height: "100%",
-                                objectFit: "cover",
+                                objectFit: previewArtworkObjectFit,
                               }}
                             />
                           )}
@@ -1902,7 +1844,7 @@ export function FrameDesigner({
                               position: "absolute",
                               width: "100%",
                               height: "100%",
-                              objectFit: "cover",
+                              objectFit: previewArtworkObjectFit,
                               opacity: selectedImage ? 1 : 0.8,
                             }}
                             data-testid="img-preview"
@@ -1937,7 +1879,7 @@ export function FrameDesigner({
                                 position: "absolute",
                                 width: "100%",
                                 height: "100%",
-                                objectFit: "cover",
+                                objectFit: previewArtworkObjectFit,
                               }}
                             />
                           )}
@@ -1949,7 +1891,7 @@ export function FrameDesigner({
                               position: "absolute",
                               width: "100%",
                               height: "100%",
-                              objectFit: "cover",
+                              objectFit: previewArtworkObjectFit,
                               opacity: selectedImage ? 1 : 0.8,
                             }}
                             data-testid="img-preview"
@@ -1973,7 +1915,7 @@ export function FrameDesigner({
                               position: "absolute",
                               width: "100%",
                               height: "100%",
-                              objectFit: "cover",
+                              objectFit: previewArtworkObjectFit,
                             }}
                           />
                         )}
@@ -1985,7 +1927,7 @@ export function FrameDesigner({
                             position: "absolute",
                             width: "100%",
                             height: "100%",
-                            objectFit: "cover",
+                            objectFit: previewArtworkObjectFit,
                             opacity: selectedImage ? 1 : 0.8,
                           }}
                           data-testid="img-preview"
@@ -2190,48 +2132,44 @@ export function FrameDesigner({
             Design Your Perfect Frame
           </h2>
           <Card className="p-4">
-            <RadioGroup
-              value={serviceType}
-              onValueChange={(value: "frame-only" | "print-and-frame") => {
-                markUserInteraction();
-                setServiceType(value);
-              }}
+            <div
+              className="grid grid-cols-2 gap-3"
+              role="radiogroup"
+              aria-label="Service type"
             >
-              <div className="grid grid-cols-2 gap-3">
-                <Label
-                  htmlFor="frame-only"
-                  className={`flex items-center justify-center p-4 rounded-md border-2 cursor-pointer hover-elevate active-elevate-2 ${
-                    serviceType === "frame-only" ? "border-primary bg-primary/5" : "border-border"
-                  }`}
-                >
-                  <RadioGroupItem
-                    value="frame-only"
-                    id="frame-only"
-                    className="sr-only"
-                    data-testid="radio-service-frame-only"
-                    aria-label="Frame only"
-                  />
-                  <span className="font-semibold">Frame Only</span>
-                </Label>
-                <Label
-                  htmlFor="print-and-frame"
-                  className={`flex items-center justify-center p-4 rounded-md border-2 cursor-pointer hover-elevate active-elevate-2 ${
-                    serviceType === "print-and-frame"
-                      ? "border-primary bg-primary/5"
-                      : "border-border"
-                  }`}
-                >
-                  <RadioGroupItem
-                    value="print-and-frame"
-                    id="print-and-frame"
-                    className="sr-only"
-                    data-testid="radio-service-print-and-frame"
-                    aria-label="Print and frame"
-                  />
-                  <span className="font-semibold">Print and Frame</span>
-                </Label>
-              </div>
-            </RadioGroup>
+              <button
+                type="button"
+                onClick={() => {
+                  markUserInteraction();
+                  setServiceType("frame-only");
+                }}
+                className={`flex items-center justify-center p-4 rounded-md border-2 cursor-pointer hover-elevate active-elevate-2 font-semibold ${
+                  serviceType === "frame-only" ? "border-primary bg-primary/5" : "border-border"
+                }`}
+                data-testid="radio-service-frame-only"
+                role="radio"
+                aria-checked={serviceType === "frame-only"}
+              >
+                Frame Only
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  markUserInteraction();
+                  setServiceType("print-and-frame");
+                }}
+                className={`flex items-center justify-center p-4 rounded-md border-2 cursor-pointer hover-elevate active-elevate-2 font-semibold ${
+                  serviceType === "print-and-frame"
+                    ? "border-primary bg-primary/5"
+                    : "border-border"
+                }`}
+                data-testid="radio-service-print-and-frame"
+                role="radio"
+                aria-checked={serviceType === "print-and-frame"}
+              >
+                Print and Frame
+              </button>
+            </div>
             {serviceType === "print-and-frame" && (
               <div className="mt-3 space-y-3">
                 {!selectedImage ? (
@@ -3209,7 +3147,7 @@ export function FrameDesigner({
                                       position: "absolute",
                                       width: "100%",
                                       height: "100%",
-                                      objectFit: "cover",
+                                      objectFit: previewArtworkObjectFit,
                                       opacity: selectedImage ? 1 : 0.8,
                                     }}
                                   />
@@ -3258,7 +3196,7 @@ export function FrameDesigner({
                                       position: "absolute",
                                       width: "100%",
                                       height: "100%",
-                                      objectFit: "cover",
+                                      objectFit: previewArtworkObjectFit,
                                       opacity: selectedImage ? 1 : 0.8,
                                     }}
                                   />
@@ -3280,7 +3218,7 @@ export function FrameDesigner({
                                   position: "absolute",
                                   width: "100%",
                                   height: "100%",
-                                  objectFit: "cover",
+                                  objectFit: previewArtworkObjectFit,
                                   opacity: selectedImage ? 1 : 0.8,
                                 }}
                               />
@@ -3360,7 +3298,7 @@ export function FrameDesigner({
                                         position: "absolute",
                                         width: "100%",
                                         height: "100%",
-                                        objectFit: "cover",
+                                        objectFit: previewArtworkObjectFit,
                                         opacity: selectedImage ? 1 : 0.8,
                                       }}
                                     />
@@ -3409,7 +3347,7 @@ export function FrameDesigner({
                                         position: "absolute",
                                         width: "100%",
                                         height: "100%",
-                                        objectFit: "cover",
+                                        objectFit: previewArtworkObjectFit,
                                         opacity: selectedImage ? 1 : 0.8,
                                       }}
                                     />
@@ -3431,7 +3369,7 @@ export function FrameDesigner({
                                     position: "absolute",
                                     width: "100%",
                                     height: "100%",
-                                    objectFit: "cover",
+                                    objectFit: previewArtworkObjectFit,
                                     opacity: selectedImage ? 1 : 0.8,
                                   }}
                                 />

@@ -63,6 +63,9 @@ export function CartItemCard({ item, onQuantityChange, onRemove, className }: Ca
   const primaryFrameImage =
     config?.cardFormatId && cardLifestyleImage ? cardLifestyleImage : frameCornerImage;
   const frameSwatchUrl = primaryFrameImage ? getStoreBaseAssetUrl(primaryFrameImage) : null;
+  const customerArtUrl = item.imageUrl ?? config?.imageUrl;
+  const usePrintAndFrameArt =
+    config?.serviceType === "print-and-frame" && customerArtUrl;
 
   return (
     <article
@@ -73,7 +76,17 @@ export function CartItemCard({ item, onQuantityChange, onRemove, className }: Ca
       data-testid={`cart-item-${item.id}`}
     >
       <div className="relative h-32 w-full shrink-0 overflow-hidden rounded-md bg-muted sm:h-28 sm:w-28">
-        {frameSwatchUrl ? (
+        {usePrintAndFrameArt ? (
+          <Image
+            src={customerArtUrl as string}
+            alt={`${frame?.name || "Custom frame"} with your artwork`}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 112px, 112px"
+            priority={false}
+            unoptimized={customerArtUrl.startsWith("blob:") || customerArtUrl.startsWith("data:")}
+          />
+        ) : frameSwatchUrl ? (
           <img
             src={frameSwatchUrl}
             alt={`${frame?.name || "Frame"} corner swatch`}
