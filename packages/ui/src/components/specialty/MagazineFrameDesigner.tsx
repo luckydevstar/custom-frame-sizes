@@ -255,7 +255,7 @@ export function MagazineFrameDesigner({
   const [, _setShowCustomMatColors] = useState(false);
   const [, _setShowDimensionsOverlay] = useState(false);
 
-  // Filter available layouts based on selected magazine size and 32Ã—40" mat sheet constraint
+  // Filter available layouts based on selected magazine size and 32×40" mat sheet constraint
   const availableLayouts = useMemo(() => {
     return getAvailableLayoutsForSize(selectedSize, MAT_BORDER);
   }, [selectedSize, MAT_BORDER]);
@@ -628,7 +628,7 @@ export function MagazineFrameDesigner({
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({
         title: "Added to Cart!",
-        description: `${quantity}Ã— Magazine Frame - ${currentLayout.displayName || "Custom"}`,
+        description: `${quantity}× Magazine Frame - ${currentLayout.displayName || "Custom"}`,
       });
     } catch (error) {
       console.error("Add to cart error:", error);
@@ -802,7 +802,7 @@ export function MagazineFrameDesigner({
                       <p className="text-sm font-medium">
                         Finished Size:{" "}
                         <span className="text-primary">
-                          {manufacturingFrameDimensions.width.toFixed(1)}&quot; Ã—{" "}
+                          {manufacturingFrameDimensions.width.toFixed(1)}&quot; ×{" "}
                           {manufacturingFrameDimensions.height.toFixed(1)}&quot;
                         </span>
                       </p>
@@ -820,9 +820,9 @@ export function MagazineFrameDesigner({
                     </div>
                     <p className="text-xs text-muted-foreground">
                       {currentSize
-                        ? `Magazine: ${currentSize.width}\u0022 Ã— ${currentSize.height}\u0022`
+                        ? `Magazine: ${currentSize.width}\u0022 × ${currentSize.height}\u0022`
                         : ""}{" "}
-                      â€¢ Mat Border: {MAT_BORDER}&quot;
+                      • Mat Border: {MAT_BORDER}&quot;
                     </p>
                   </div>
 
@@ -1009,8 +1009,8 @@ export function MagazineFrameDesigner({
                               <TooltipContent className="max-w-xs">
                                 <p>
                                   Select your magazine size. Choose from compact formats like digest
-                                  size (8Ã—10.5&quot;) to larger formats like Life Magazine
-                                  (10.5Ã—14&quot;).
+                                  size (8×10.5&quot;) to larger formats like Life Magazine
+                                  (10.5×14&quot;).
                                 </p>
                               </TooltipContent>
                             </Tooltip>
@@ -1062,7 +1062,7 @@ export function MagazineFrameDesigner({
                                         data-testid={`button-size-${size.id}-mobile`}
                                       >
                                         <span className="text-xs font-semibold leading-tight">
-                                          {size.width}Ã—{size.height}&quot;
+                                          {size.width}×{size.height}&quot;
                                         </span>
                                       </Button>
                                     </TooltipTrigger>
@@ -1096,7 +1096,7 @@ export function MagazineFrameDesigner({
                                                           key={idx}
                                                           className="text-xs text-muted-foreground leading-tight"
                                                         >
-                                                          â€¢ {mag}
+                                                          • {mag}
                                                         </div>
                                                       ))}
                                                     </div>
@@ -1106,7 +1106,7 @@ export function MagazineFrameDesigner({
                                                           key={idx}
                                                           className="text-xs text-muted-foreground leading-tight"
                                                         >
-                                                          â€¢ {mag}
+                                                          • {mag}
                                                         </div>
                                                       ))}
                                                     </div>
@@ -1117,7 +1117,7 @@ export function MagazineFrameDesigner({
                                                       key={idx}
                                                       className="text-xs text-muted-foreground leading-tight"
                                                     >
-                                                      â€¢ {mag}
+                                                      • {mag}
                                                     </div>
                                                   ))
                                                 )}
@@ -1165,7 +1165,7 @@ export function MagazineFrameDesigner({
                                         data-testid={`button-size-${size.id}-mobile`}
                                       >
                                         <span className="text-xs font-semibold leading-tight">
-                                          {size.width}Ã—{size.height}&quot;
+                                          {size.width}×{size.height}&quot;
                                         </span>
                                       </Button>
                                     </TooltipTrigger>
@@ -1199,7 +1199,7 @@ export function MagazineFrameDesigner({
                                                           key={idx}
                                                           className="text-xs text-muted-foreground leading-tight"
                                                         >
-                                                          â€¢ {mag}
+                                                          • {mag}
                                                         </div>
                                                       ))}
                                                     </div>
@@ -1209,7 +1209,7 @@ export function MagazineFrameDesigner({
                                                           key={idx}
                                                           className="text-xs text-muted-foreground leading-tight"
                                                         >
-                                                          â€¢ {mag}
+                                                          • {mag}
                                                         </div>
                                                       ))}
                                                     </div>
@@ -1220,7 +1220,7 @@ export function MagazineFrameDesigner({
                                                       key={idx}
                                                       className="text-xs text-muted-foreground leading-tight"
                                                     >
-                                                      â€¢ {mag}
+                                                      • {mag}
                                                     </div>
                                                   ))
                                                 )}
@@ -1267,7 +1267,7 @@ export function MagazineFrameDesigner({
                                       data-testid={`button-size-${size.id}-mobile`}
                                     >
                                       <span className="text-xs font-semibold leading-tight">
-                                        {size.width}Ã—{size.height}&quot;
+                                        {size.width}×{size.height}&quot;
                                       </span>
                                     </Button>
                                   </TooltipTrigger>
@@ -1301,7 +1301,7 @@ export function MagazineFrameDesigner({
                                                         key={idx}
                                                         className="text-xs text-muted-foreground leading-tight"
                                                       >
-                                                        â€¢ {mag}
+                                                        • {mag}
                                                       </div>
                                                     ))}
                                                   </div>
@@ -1311,7 +1311,7 @@ export function MagazineFrameDesigner({
                                                         key={idx}
                                                         className="text-xs text-muted-foreground leading-tight"
                                                       >
-                                                        â€¢ {mag}
+                                                        • {mag}
                                                       </div>
                                                     ))}
                                                   </div>
@@ -1322,7 +1322,7 @@ export function MagazineFrameDesigner({
                                                     key={idx}
                                                     className="text-xs text-muted-foreground leading-tight"
                                                   >
-                                                    â€¢ {mag}
+                                                    • {mag}
                                                   </div>
                                                 ))
                                               )}
@@ -1445,7 +1445,7 @@ export function MagazineFrameDesigner({
                                         data-testid={`button-size-${size.id}`}
                                       >
                                         <p className="font-semibold text-sm">
-                                          {size.width}Ã—{size.height} inch
+                                          {size.width}×{size.height} inch
                                         </p>
                                       </button>
                                     </TooltipTrigger>
@@ -1479,7 +1479,7 @@ export function MagazineFrameDesigner({
                                                           key={idx}
                                                           className="text-xs text-muted-foreground leading-tight"
                                                         >
-                                                          â€¢ {mag}
+                                                          • {mag}
                                                         </div>
                                                       ))}
                                                     </div>
@@ -1489,7 +1489,7 @@ export function MagazineFrameDesigner({
                                                           key={idx}
                                                           className="text-xs text-muted-foreground leading-tight"
                                                         >
-                                                          â€¢ {mag}
+                                                          • {mag}
                                                         </div>
                                                       ))}
                                                     </div>
@@ -1500,7 +1500,7 @@ export function MagazineFrameDesigner({
                                                       key={idx}
                                                       className="text-xs text-muted-foreground leading-tight"
                                                     >
-                                                      â€¢ {mag}
+                                                      • {mag}
                                                     </div>
                                                   ))
                                                 )}
@@ -1544,7 +1544,7 @@ export function MagazineFrameDesigner({
                                         data-testid={`button-size-${size.id}`}
                                       >
                                         <p className="font-semibold text-sm">
-                                          {size.width}Ã—{size.height} inch
+                                          {size.width}×{size.height} inch
                                         </p>
                                       </button>
                                     </TooltipTrigger>
@@ -1578,7 +1578,7 @@ export function MagazineFrameDesigner({
                                                           key={idx}
                                                           className="text-xs text-muted-foreground leading-tight"
                                                         >
-                                                          â€¢ {mag}
+                                                          • {mag}
                                                         </div>
                                                       ))}
                                                     </div>
@@ -1588,7 +1588,7 @@ export function MagazineFrameDesigner({
                                                           key={idx}
                                                           className="text-xs text-muted-foreground leading-tight"
                                                         >
-                                                          â€¢ {mag}
+                                                          • {mag}
                                                         </div>
                                                       ))}
                                                     </div>
@@ -1599,7 +1599,7 @@ export function MagazineFrameDesigner({
                                                       key={idx}
                                                       className="text-xs text-muted-foreground leading-tight"
                                                     >
-                                                      â€¢ {mag}
+                                                      • {mag}
                                                     </div>
                                                   ))
                                                 )}
@@ -1642,7 +1642,7 @@ export function MagazineFrameDesigner({
                                       data-testid={`button-size-${size.id}`}
                                     >
                                       <p className="font-semibold text-sm">
-                                        {size.width}Ã—{size.height} inch
+                                        {size.width}×{size.height} inch
                                       </p>
                                     </button>
                                   </TooltipTrigger>
@@ -1676,7 +1676,7 @@ export function MagazineFrameDesigner({
                                                         key={idx}
                                                         className="text-xs text-muted-foreground leading-tight"
                                                       >
-                                                        â€¢ {mag}
+                                                        • {mag}
                                                       </div>
                                                     ))}
                                                   </div>
@@ -1686,7 +1686,7 @@ export function MagazineFrameDesigner({
                                                         key={idx}
                                                         className="text-xs text-muted-foreground leading-tight"
                                                       >
-                                                        â€¢ {mag}
+                                                        • {mag}
                                                       </div>
                                                     ))}
                                                   </div>
@@ -1697,7 +1697,7 @@ export function MagazineFrameDesigner({
                                                     key={idx}
                                                     className="text-xs text-muted-foreground leading-tight"
                                                   >
-                                                    â€¢ {mag}
+                                                    • {mag}
                                                   </div>
                                                 ))
                                               )}
@@ -1811,7 +1811,7 @@ export function MagazineFrameDesigner({
                           <Alert>
                             <Info className="h-4 w-4" />
                             <AlertDescription>
-                              No layouts are available for this magazine size within the 32Ã—40&quot;
+                              No layouts are available for this magazine size within the 32×40&quot;
                               mat sheet constraint. Please select a smaller magazine size.
                             </AlertDescription>
                           </Alert>
@@ -1879,7 +1879,7 @@ export function MagazineFrameDesigner({
                               )}
                               <p className="font-medium text-xs lg:text-sm">{frame.name}</p>
                               <p className="text-xs text-muted-foreground mt-1">
-                                {frame.mouldingWidth}&quot; wide Ã— {frame.usableDepth}&quot; deep
+                                {frame.mouldingWidth}&quot; wide × {frame.usableDepth}&quot; deep
                               </p>
                             </button>
                           ))}

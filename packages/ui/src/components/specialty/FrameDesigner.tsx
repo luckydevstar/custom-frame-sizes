@@ -649,7 +649,7 @@ export function FrameDesigner({
 
           toast({
             title: "Print File Ready",
-            description: `Downloaded ${printResult.filename} (${printResult.widthPixels}Ã—${printResult.heightPixels}px at 300 DPI)`,
+            description: `Downloaded ${printResult.filename} (${printResult.widthPixels}×${printResult.heightPixels}px at 300 DPI)`,
           });
         } catch (printError) {
           console.error("Print file generation error:", printError);
@@ -905,7 +905,7 @@ export function FrameDesigner({
   const matBorder = parseFraction(matBorderWidth);
   const matReveal = parseFraction(matRevealWidth);
 
-  // Artwork size validation - minimum 4Ã—4 inches
+  // Artwork size validation - minimum 4×4 inches
   const artworkSizeValidation = useMemo(() => {
     if (artWidth === 0 && artHeight === 0) return null; // Don't validate empty inputs
     return validateArtworkSize(artWidth, artHeight);
@@ -1139,7 +1139,7 @@ export function FrameDesigner({
         className="bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-md p-3 text-sm text-red-800 dark:text-red-200"
         data-testid="warning-too-large"
       >
-        This frame is too large for online ordering â€“ please contact us to discuss your project
+        This frame is too large for online ordering – please contact us to discuss your project
       </div>,
     );
   }
@@ -2023,7 +2023,7 @@ export function FrameDesigner({
                 <p className="font-medium">
                   Finished Size:{" "}
                   <span className="text-primary">
-                    {frameWidth.toFixed(2)}&quot; Ã— {frameHeight.toFixed(2)}&quot;
+                    {frameWidth.toFixed(2)}&quot; × {frameHeight.toFixed(2)}&quot;
                   </span>
                 </p>
                 {selectedFrame.dimensionalDiagram && (
@@ -2058,9 +2058,9 @@ export function FrameDesigner({
                 )}
               </div>
               <p className="text-muted-foreground text-xs">
-                Artwork: {artWidth}&quot; Ã— {artHeight}&quot;
-                {matType !== "none" && <> â€¢ Mat Border: {matBorder.toFixed(2)}&quot;</>}
-                {matType === "double" && <> â€¢ Reveal: {matReveal.toFixed(2)}&quot;</>}
+                Artwork: {artWidth}&quot; × {artHeight}&quot;
+                {matType !== "none" && <> • Mat Border: {matBorder.toFixed(2)}&quot;</>}
+                {matType === "double" && <> • Reveal: {matReveal.toFixed(2)}&quot;</>}
               </p>
             </div>
 
@@ -3624,7 +3624,7 @@ export function FrameDesigner({
               // Show success toast
               toast({
                 title: "Size Updated",
-                description: `Frame size updated to ${newWidth}" Ã— ${newHeight}" from AR preview`,
+                description: `Frame size updated to ${newWidth}" × ${newHeight}" from AR preview`,
               });
             }}
           />

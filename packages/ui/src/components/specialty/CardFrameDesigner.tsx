@@ -639,7 +639,7 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({
         title: "Added to Cart!",
-        description: `${quantity}Ã— Card Frame - ${currentLayout.displayName ?? "Custom"}`,
+        description: `${quantity}× Card Frame - ${currentLayout.displayName ?? "Custom"}`,
       });
     } catch (error) {
       console.error("Add to cart error:", error);
@@ -1070,7 +1070,7 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
                       <p className="text-sm font-medium">
                         Finished Size:{" "}
                         <span className="text-primary">
-                          {manufacturingFrameDimensions.width.toFixed(1)}&quot; Ã—{" "}
+                          {manufacturingFrameDimensions.width.toFixed(1)}&quot; ×{" "}
                           {manufacturingFrameDimensions.height.toFixed(1)}&quot;
                         </span>
                       </p>
@@ -1088,9 +1088,9 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
                     </div>
                     <p className="text-xs text-muted-foreground">
                       {currentFormat
-                        ? `Card: ${currentFormat.cardWidth}\u0022 Ã— ${currentFormat.cardHeight}\u0022`
+                        ? `Card: ${currentFormat.cardWidth}\u0022 × ${currentFormat.cardHeight}\u0022`
                         : ""}{" "}
-                      â€¢ Mat Border: {MAT_BORDER}&quot;
+                      • Mat Border: {MAT_BORDER}&quot;
                     </p>
                   </div>
 
@@ -1304,7 +1304,7 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
                             data-testid="button-format-psa-mobile"
                           >
                             <span className="text-xs font-semibold leading-tight">PSA</span>
-                            <span className="text-[0.6rem] opacity-70">3&quot; Ã— 5.25&quot;</span>
+                            <span className="text-[0.6rem] opacity-70">3&quot; × 5.25&quot;</span>
                           </Button>
                           <Button
                             type="button"
@@ -1319,7 +1319,7 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
                               SGC | CGC | BGS
                             </span>
                             <span className="text-[0.6rem] opacity-70">
-                              3.25&quot; Ã— 5.375&quot;
+                              3.25&quot; × 5.375&quot;
                             </span>
                           </Button>
                           <Button
@@ -1332,7 +1332,7 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
                             data-testid="button-format-pack-slabs-mobile"
                           >
                             <span className="text-xs font-semibold leading-tight">Pack Slabs</span>
-                            <span className="text-[0.6rem] opacity-70">4.4&quot; Ã— 7.4&quot;</span>
+                            <span className="text-[0.6rem] opacity-70">4.4&quot; × 7.4&quot;</span>
                           </Button>
                         </div>
 
@@ -1358,7 +1358,7 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
                                   Standard PSA graded card frames
                                 </p>
                                 <p className="text-xs text-muted-foreground mt-1">
-                                  3.0&quot; Ã— 5.25&quot; Ã— 0.3&quot; depth
+                                  3.0&quot; × 5.25&quot; × 0.3&quot; depth
                                 </p>
                               </div>
                               <Badge variant="default" className="text-xs">
@@ -1387,7 +1387,7 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
                                   SGC, CGC, and BGS graded card frames
                                 </p>
                                 <p className="text-xs text-muted-foreground mt-1">
-                                  3.25&quot; Ã— 5.375&quot; Ã— 0.3&quot; depth
+                                  3.25&quot; × 5.375&quot; × 0.3&quot; depth
                                 </p>
                               </div>
                             </div>
@@ -1413,7 +1413,7 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
                                   Graded wax packs (Garbage Pail Kids, etc.)
                                 </p>
                                 <p className="text-xs text-muted-foreground mt-1">
-                                  4.4&quot; Ã— 7.4&quot; Ã— 0.5&quot; depth
+                                  4.4&quot; × 7.4&quot; × 0.5&quot; depth
                                 </p>
                               </div>
                             </div>
@@ -1529,7 +1529,7 @@ export function CardFrameDesigner({ defaultFrameId, embedded = false }: CardFram
                               )}
                               <p className="font-medium text-xs lg:text-sm">{frame.name}</p>
                               <p className="text-xs text-muted-foreground mt-1">
-                                {frame.mouldingWidth}&quot; wide Ã— {frame.usableDepth}&quot; deep
+                                {frame.mouldingWidth}&quot; wide × {frame.usableDepth}&quot; deep
                               </p>
                             </button>
                           ))}

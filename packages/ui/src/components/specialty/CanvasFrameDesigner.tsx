@@ -716,7 +716,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
   const artWidth = parseFraction(artworkWidth);
   const artHeight = parseFraction(artworkHeight);
 
-  // Artwork size validation - minimum 4Ã—4 inches
+  // Artwork size validation - minimum 4×4 inches
   const artworkSizeValidation = useMemo(() => {
     if (artWidth === 0 && artHeight === 0) return null; // Don't validate empty inputs
     return validateArtworkSize(artWidth, artHeight);
@@ -1113,7 +1113,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                 <p className="font-medium">
                   Finished Size:{" "}
                   <span className="text-primary">
-                    {frameWidth.toFixed(2)}&quot; Ã— {frameHeight.toFixed(2)}&quot;
+                    {frameWidth.toFixed(2)}&quot; × {frameHeight.toFixed(2)}&quot;
                   </span>
                 </p>
                 {selectedFrame.dimensionalDiagram && (
@@ -1148,7 +1148,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
                 )}
               </div>
               <p className="text-muted-foreground text-xs">
-                Canvas: {artWidth}&quot; Ã— {artHeight}&quot;
+                Canvas: {artWidth}&quot; × {artHeight}&quot;
               </p>
             </div>
 
@@ -2029,7 +2029,7 @@ export function CanvasFrameDesigner({ hideMobileSticky = false }: CanvasFrameDes
             // Show success toast
             toast({
               title: "Size Updated",
-              description: `Canvas size updated to ${newWidth}" Ã— ${newHeight}" from AR preview`,
+              description: `Canvas size updated to ${newWidth}" × ${newHeight}" from AR preview`,
             });
           }}
         />

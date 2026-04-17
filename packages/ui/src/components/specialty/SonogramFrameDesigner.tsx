@@ -414,7 +414,7 @@ export function SonogramFrameDesigner({
       await addToCartOnly(config, finalTotalPrice * quantity, quantity);
       toast({
         title: "Added to Cart!",
-        description: `${quantity} Ã— Custom Sonogram Frame${quantity > 1 ? "s" : ""}`,
+        description: `${quantity} × Custom Sonogram Frame${quantity > 1 ? "s" : ""}`,
       });
     } catch (err) {
       toast({
@@ -836,12 +836,12 @@ export function SonogramFrameDesigner({
                   <p className="font-medium">
                     Finished Size:{" "}
                     <span className="text-primary">
-                      {frameWidth.toFixed(2)}&quot; Ã— {frameHeight.toFixed(2)}&quot;
+                      {frameWidth.toFixed(2)}&quot; × {frameHeight.toFixed(2)}&quot;
                     </span>
                   </p>
                   <p className="text-muted-foreground text-xs">
-                    Sonogram: {selectedPreset.name} â€¢ Layout: {currentLayout.name}
-                    {matType !== "none" && <> â€¢ Mat Border: {matBorderWidth}&quot;</>}
+                    Sonogram: {selectedPreset.name} • Layout: {currentLayout.name}
+                    {matType !== "none" && <> • Mat Border: {matBorderWidth}&quot;</>}
                   </p>
                 </div>
                 {framePhotos.cornerUrl && (
@@ -1367,7 +1367,7 @@ export function SonogramFrameDesigner({
                   ${(finalTotalPrice * quantity).toFixed(2)}
                 </p>
                 <p className="text-xs text-muted-foreground">
-                  {frameWidth.toFixed(1)}&quot; Ã— {frameHeight.toFixed(1)}&quot;
+                  {frameWidth.toFixed(1)}&quot; × {frameHeight.toFixed(1)}&quot;
                 </p>
               </div>
               <div className="flex items-center gap-2">

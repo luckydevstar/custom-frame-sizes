@@ -583,7 +583,7 @@ export function ShadowboxDesigner({
   const matBorder = parseFraction(matBorderWidth);
   const matReveal = parseFraction(matRevealWidth);
 
-  // Artwork size validation - minimum 4Ã—4 inches
+  // Artwork size validation - minimum 4×4 inches
   const artworkSizeValidation = useMemo(() => {
     if (artWidth === 0 && artHeight === 0) return null; // Don't validate empty inputs
     return validateArtworkSize(artWidth, artHeight);
@@ -857,7 +857,7 @@ export function ShadowboxDesigner({
           className="bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-md p-3 text-sm text-red-800 dark:text-red-200"
           data-testid="warning-too-large"
         >
-          This frame is too large for online ordering â€“ please contact us to discuss your project
+          This frame is too large for online ordering – please contact us to discuss your project
         </div>
       );
     }
@@ -1413,7 +1413,7 @@ export function ShadowboxDesigner({
               <p className="font-medium">
                 Finished Size:{" "}
                 <span className="text-primary">
-                  {frameWidth.toFixed(2)}&quot; Ã— {frameHeight.toFixed(2)}&quot;
+                  {frameWidth.toFixed(2)}&quot; × {frameHeight.toFixed(2)}&quot;
                 </span>
               </p>
               {selectedFrame.dimensionalDiagram && (
@@ -1441,12 +1441,12 @@ export function ShadowboxDesigner({
             <p className="text-muted-foreground text-xs">
               {matType === "none" ? (
                 <>
-                  Interior: {(artWidth - 0.25).toFixed(2)}&quot; Ã— {(artHeight - 0.25).toFixed(2)}
-                  &quot; Ã— {selectedFrame.usableDepth}&quot;
+                  Interior: {(artWidth - 0.25).toFixed(2)}&quot; × {(artHeight - 0.25).toFixed(2)}
+                  &quot; × {selectedFrame.usableDepth}&quot;
                 </>
               ) : (
                 <>
-                  Viewable Area: {artWidth}&quot; Ã— {artHeight}&quot; â€¢ Mat Border:{" "}
+                  Viewable Area: {artWidth}&quot; × {artHeight}&quot; • Mat Border:{" "}
                   {matBorder.toFixed(2)}&quot;
                 </>
               )}
@@ -2560,7 +2560,7 @@ export function ShadowboxDesigner({
               // Show success toast
               toast({
                 title: "Size Updated",
-                description: `Shadowbox size updated to ${newWidth}" Ã— ${newHeight}" from AR preview`,
+                description: `Shadowbox size updated to ${newWidth}" × ${newHeight}" from AR preview`,
               });
             }}
           />
