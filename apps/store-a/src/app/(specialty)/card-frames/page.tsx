@@ -2,10 +2,11 @@ import { CardFramesContent } from "./card-frames-content";
 
 import type { Metadata } from "next";
 
-const baseUrl = "https://www.customframesizes.com";
-const pageUrl = `${baseUrl}/card-frames`;
+import { generatePageMetadata } from "@/lib/seo-utils";
 
-export const metadata: Metadata = {
+const baseUrl = "https://www.customframesizes.com";
+
+export const metadata: Metadata = generatePageMetadata("/card-frames", {
   title: "Graded Card Frames | PSA, SGC, CGC, BGS Card Display | CustomFrameSizes.com",
   description:
     "Shadowbox frames for PSA, SGC, CGC, and BGS graded cards. Display 1-8 slabs with double mats, brass nameplates, and archival protection. Custom layouts for sports cards and TCG.",
@@ -19,15 +20,8 @@ export const metadata: Metadata = {
     "TCG card display",
     "graded slab frames",
   ],
-  openGraph: {
-    title: "Graded Card Frames - Display Frames for PSA, SGC, CGC, BGS Slabs",
-    description:
-      "Professional shadowbox frames for graded sports cards and TCG. Custom layouts with archival protection.",
-    type: "website",
-    url: pageUrl,
-  },
-  alternates: { canonical: pageUrl },
-};
+  domain: baseUrl,
+});
 
 export default function CardFramesPage() {
   return <CardFramesContent />;

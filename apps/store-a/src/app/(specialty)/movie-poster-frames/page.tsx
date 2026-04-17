@@ -1,25 +1,20 @@
 import { Suspense } from "react";
 
+import { generatePageMetadata } from "@/lib/seo-utils";
+
 import { MoviePosterFramesContent } from "./movie-poster-frames-content";
 
 import type { Metadata } from "next";
 
 const baseUrl = "https://www.customframesizes.com";
-const pageUrl = `${baseUrl}/movie-poster-frames`;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/movie-poster-frames", {
   title: "Movie Poster Frames | Custom Onesheet Poster Framing | CustomFrameSizes.com",
   description:
     "Frame your onesheet movie posters with professional-grade custom frames. Choose from standard US Onesheet (27×40), British Quad, vintage sizes, and more. Archival matting and framer's grade acrylic included.",
-  openGraph: {
-    title: "Movie Poster Frames | Custom Onesheet Poster Framing",
-    description:
-      "Frame your onesheet movie posters with professional-grade custom frames. Standard US Onesheet, British Quad, vintage sizes, and custom options available.",
-    type: "website",
-    url: pageUrl,
-  },
-  alternates: { canonical: pageUrl },
-};
+  domain: baseUrl,
+  ogImage: `${baseUrl}/assets/og-image.jpg`,
+});
 
 const productSchema = {
   "@context": "https://schema.org",

@@ -8,21 +8,22 @@ import { Suspense } from "react";
 import { RecordAlbumLifestyleSection } from "./RecordAlbumLifestyleSection";
 import { ScrollToDesignerButton } from "./scroll-button";
 
+import { getOgImage } from "@/lib/seo";
+import { generatePageMetadata } from "@/lib/seo-utils";
+import { brandConfig } from "../../../../brand.config";
+
 import type { GalleryImage } from "@framecraft/ui";
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+const recordOg = getOgImage(brandConfig.seo?.ogImage);
+
+export const metadata: Metadata = generatePageMetadata("/specialty/record-album-frames", {
   title:
     "Custom Record Album Frames | Vinyl LP Display | Professional Framing | Custom Frame Sizes",
   description:
     "Premium custom record album frames featuring 3 professional layouts for vinyl LP display. Professional-grade protection with framer's grade acrylic, archival matting, solid pine construction, and archival nylon mounting system.",
-  openGraph: {
-    title: "Custom Record Album Frames | Vinyl LP Display",
-    description:
-      "Professional custom framing for vinyl records and album covers. 3 specialized layouts with solid pine frames, framer's grade acrylic, archival matting, and archival mounting system.",
-    type: "website",
-  },
-};
+  ogImage: recordOg,
+});
 
 const CAROUSEL_INDICES = [1, 2, 3, 4, 5, 6, 7, 8];
 const BREAKUP_INDICES = [9, 10, 11, 12];

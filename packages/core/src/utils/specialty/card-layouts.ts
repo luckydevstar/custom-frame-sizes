@@ -6,48 +6,18 @@
  */
 
 import { getCardFormatById } from "./card-formats";
+import {
+  getReferenceFrameDimensions,
+  PSA_PACK_SLAB_FRAME_DIMENSIONS,
+} from "./card-reference-dimensions";
 
-/**
- * PSA Pack Slab Frame Dimensions (for backend/order flow only)
- */
-export const PSA_PACK_SLAB_FRAME_DIMENSIONS: Record<
-  string,
-  { width: number; height: number } | null
-> = {
-  "1x1": { width: 7, height: 10 },
-  "1x2": { width: 13, height: 10 },
-  "1x3": { width: 18, height: 10 },
-  "1x4": { width: 23, height: 10 },
-  "1x5": { width: 28, height: 10 },
-  "1x6": { width: 33, height: 10 },
-  "1x7": { width: 38, height: 10 },
-  "1x8": { width: 42, height: 10 },
-  "1x9": { width: 47, height: 10 },
-  "2x1": { width: 7, height: 20 },
-  "3x1": { width: 7, height: 28 },
-  "4x1": { width: 7, height: 35 },
-  "5x1": { width: 7, height: 43 },
-  "6x1": { width: 7, height: 51 },
-  "7x1": null,
-  "8x1": null,
-  "9x1": null,
-  "2x2": { width: 13, height: 20 },
-  "2x3": { width: 18, height: 20 },
-  "2x4": { width: 23, height: 20 },
-  "2x5": { width: 28, height: 20 },
-  "2x6": { width: 33, height: 20 },
-  "2x7": { width: 38, height: 20 },
-  "2x8": null,
-  "2x9": null,
-  "3x2": { width: 13, height: 28 },
-  "3x3": { width: 18, height: 28 },
-  "3x4": { width: 23, height: 28 },
-  "3x5": { width: 28, height: 28 },
-  "4x2": { width: 13, height: 35 },
-  "4x3": { width: 18, height: 35 },
-  "4x4": { width: 23, height: 35 },
-  "4x5": { width: 28, height: 35 },
-};
+export {
+  getReferenceFrameDimensions,
+  PSA_GRADED_FRAME_DIMENSIONS,
+  SGC_GRADED_FRAME_DIMENSIONS,
+  PSA_PACK_SLAB_FRAME_DIMENSIONS,
+  PACK_SLAB_REFERENCE_LAYOUT_IDS,
+} from "./card-reference-dimensions";
 
 export const PACK_SLAB_EXCLUDED_LAYOUTS: CardLayoutType[] = ["7x1", "8x1", "9x1", "2x8", "2x9"];
 
@@ -606,6 +576,14 @@ export function calculateCardPreviewDimensions(
   _matBorder: number = 2.0,
   brassPlaqueEnabled: boolean = false
 ): { width: number; height: number } {
+  const ref = getReferenceFrameDimensions(formatId, layoutId);
+  if (ref) {
+    let { width, height } = ref;
+    if (brassPlaqueEnabled) {
+      height += 1.5;
+    }
+    return { width, height };
+  }
   const layout = getCardLayout(layoutId);
   const format = getCardFormatById(formatId);
   if (!format) {
@@ -628,10 +606,18 @@ export function calculateCardPreviewDimensions(
 
 export function calculateCardFrameSize(
   layoutId: CardLayoutType,
-  _formatId: string,
+  formatId: string,
   _matBorder: number = 2.0,
   brassPlaqueEnabled: boolean = false
 ): { width: number; height: number } {
+  const ref = getReferenceFrameDimensions(formatId, layoutId);
+  if (ref) {
+    let { width, height } = ref;
+    if (brassPlaqueEnabled) {
+      height += 1.5;
+    }
+    return { width, height };
+  }
   const layout = getCardLayout(layoutId);
   const width = layout.frameWidth;
   let height = layout.frameHeight;
@@ -648,7 +634,8 @@ export function getAllCardLayouts(): CardLayout[] {
 export function getPackSlabFrameDimensions(
   layoutId: CardLayoutType
 ): { width: number; height: number } | null {
-  return PSA_PACK_SLAB_FRAME_DIMENSIONS[layoutId] ?? null;
+  const d = PSA_PACK_SLAB_FRAME_DIMENSIONS[layoutId];
+  return d ? { width: d.width, height: d.height } : null;
 }
 
 export function validateCardLayoutSize(

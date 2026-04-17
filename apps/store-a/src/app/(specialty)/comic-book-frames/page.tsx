@@ -8,19 +8,13 @@ import { ScrollToDesignerButton } from "./scroll-button";
 import type { Metadata } from "next";
 
 import { RelatedProducts } from "@/components/RelatedProducts";
+import { generatePageMetadata } from "@/lib/seo-utils";
 
-
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/comic-book-frames", {
   title: "Custom Comic Book Frames | Display & Protect Your Collection | CustomFrameSizes.com",
   description:
     "Frame your comic book collection with custom shadowbox frames. Perfect for raw comics (Golden, Silver, Bronze, Modern Age) and graded slabs (CGC, PGX, CBCS). Choose single display or multi-comic layouts.",
-  openGraph: {
-    title: "Custom Comic Book Frames | Display & Protect Your Collection",
-    description:
-      "Frame your comic book collection with custom shadowbox frames. Perfect for raw comics and graded slabs. Professional UV protection and archival backing.",
-    type: "website",
-  },
-};
+});
 
 export default function ComicBookFramesPage() {
   return (

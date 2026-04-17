@@ -1,8 +1,10 @@
+import { generatePageMetadata } from "@/lib/seo-utils";
+
 import { SecurityHardwareKitClient } from "./SecurityHardwareKitClient";
 
 import type { Metadata } from "next";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/components/security-hardware-kit", {
   title:
     "Professional Security Hardware Kit for Wood Frames - Museum-Grade Anti-Theft System | Custom Frame Sizes",
   description:
@@ -16,7 +18,7 @@ export const metadata: Metadata = {
     "gallery frame security",
     "commercial frame hardware",
   ],
-};
+});
 
 export default function SecurityHardwareKitPage() {
   return <SecurityHardwareKitClient />;

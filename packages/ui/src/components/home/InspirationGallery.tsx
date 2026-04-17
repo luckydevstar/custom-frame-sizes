@@ -14,7 +14,7 @@ export interface InspirationGalleryProps {
 }
 
 export function InspirationGallery({
-  galleryLink = "/gallery",
+  galleryLink = "/samples",
   imageCategory = "inspiration",
   imageCount = 6,
 }: InspirationGalleryProps) {

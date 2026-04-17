@@ -1,3 +1,5 @@
+import { generatePageMetadata } from "@/lib/seo-utils";
+
 import { CdFramesContent } from "./cd-frames-content";
 
 import type { Metadata } from "next";
@@ -6,7 +8,7 @@ const baseUrl = "https://www.customframesizes.com";
 const pageUrl = `${baseUrl}/cd-frames`;
 const ogImage = `${baseUrl}/cd/lifestyle/cd-frame-lifestyle-1.jpg`;
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/cd-frames", {
   title: "Custom CD Frames | CD Album Display | Professional Framing | Custom Frame Sizes",
   description:
     "Premium custom CD frames featuring 5 professional layouts for CD album display. Custom frame shop quality with framer's grade acrylic, archival matting, solid pine construction, and secure mounting system.",
@@ -25,22 +27,9 @@ export const metadata: Metadata = {
     "CD wall display",
     "disc frames",
   ],
-  alternates: { canonical: pageUrl },
-  openGraph: {
-    title: "Custom CD Frames | CD Album Display | Custom Frame Sizes",
-    description:
-      "Professional custom framing for CDs and album artwork. 5 specialized layouts with solid pine frames, framer's grade acrylic, archival matting, and secure mounting system.",
-    type: "website",
-    url: pageUrl,
-    images: [{ url: ogImage }],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Custom CD Frames | CD Album Display",
-    description:
-      "Professional custom framing for CDs and album artwork. Frame CD cases, jewel cases, and disc artwork with professional-grade materials.",
-  },
-};
+  domain: baseUrl,
+  ogImage,
+});
 
 const productSchema = {
   "@context": "https://schema.org/",

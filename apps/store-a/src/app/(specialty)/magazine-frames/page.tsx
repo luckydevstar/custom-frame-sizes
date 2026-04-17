@@ -2,10 +2,11 @@ import { MagazineFramesContent } from "./magazine-frames-content";
 
 import type { Metadata } from "next";
 
-const baseUrl = "https://www.customframesizes.com";
-const pageUrl = `${baseUrl}/magazine-frames`;
+import { generatePageMetadata } from "@/lib/seo-utils";
 
-export const metadata: Metadata = {
+const baseUrl = "https://www.customframesizes.com";
+
+export const metadata: Metadata = generatePageMetadata("/magazine-frames", {
   title:
     "Magazine Frames | Custom Shadowbox Frames for Collectible Magazines | CustomFrameSizes.com",
   description:
@@ -24,15 +25,8 @@ export const metadata: Metadata = {
     "TIME magazine frame",
     "magazine preservation frame",
   ],
-  openGraph: {
-    title: "Custom Magazine Frames - Shadowbox Frames for Collectible Magazines",
-    description:
-      "Professional shadowbox frames for collectible magazines. Framer's grade acrylic and archival matting for all magazine sizes.",
-    type: "website",
-    url: pageUrl,
-  },
-  alternates: { canonical: pageUrl },
-};
+  domain: baseUrl,
+});
 
 const faqSchema = {
   "@context": "https://schema.org",

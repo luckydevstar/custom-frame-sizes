@@ -3,6 +3,8 @@ import { Hero, ValueProps, SeoTextBlock, FrameStylesShowcase } from "@framecraft
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
+import { generatePageMetadata } from "@/lib/seo-utils";
+
 import { brandConfig } from "../brand.config";
 import heroImagesDataRaw from "../data/heroImages.json";
 import testimonialsData from "../data/testimonials.json";
@@ -92,27 +94,14 @@ const EducationTeasers = dynamic(() => import("@framecraft/ui").then((m) => m.Ed
 // Type assertion for hero images data
 const heroImagesData = heroImagesDataRaw as HeroImage[];
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/", {
   title: brandConfig.seo.title,
   description: brandConfig.seo.description,
-  keywords: brandConfig.seo.keywords?.join(", "),
-  openGraph: {
-    title: brandConfig.seo.title,
-    description: brandConfig.seo.description,
-    images: brandConfig.seo.ogImage ? [brandConfig.seo.ogImage] : [],
-    type: "website",
-    url: brandConfig.seo.canonicalUrl,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: brandConfig.seo.title,
-    description: brandConfig.seo.description,
-    images: brandConfig.seo.twitterImage ? [brandConfig.seo.twitterImage] : [],
-  },
-  alternates: {
-    canonical: brandConfig.seo.canonicalUrl,
-  },
-};
+  keywords: brandConfig.seo.keywords,
+  domain: brandConfig.seo.canonicalUrl?.replace(/\/$/, "") ?? "https://www.customframesizes.com",
+  ogImage: brandConfig.seo.ogImage,
+  twitterImage: brandConfig.seo.twitterImage,
+});
 
 export default function HomePage() {
   const showTestimonial = brandConfig.features?.showHomeTestimonial ?? true;
@@ -143,7 +132,7 @@ export default function HomePage() {
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground text-center mb-8 max-w-3xl mx-auto leading-relaxed">
             Design your perfect custom picture frame online. Choose from 100+ professional frame
-            styles, any size from 4×4 to 60×60 inches, with instant pricing and real-time preview.
+            styles, any size from 4×4 to 32×40 inches, with instant pricing and real-time preview.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -153,7 +142,7 @@ export default function HomePage() {
               Start Designing Now
             </a>
             <a
-              href="/frames"
+              href="/frames/styles"
               className="inline-flex items-center justify-center px-8 py-3 border border-input bg-background rounded-lg font-semibold hover:bg-muted transition-colors"
             >
               Browse Frame Styles
@@ -179,7 +168,7 @@ export default function HomePage() {
             <p className="text-muted-foreground">Frame Styles to Choose From</p>
           </div>
           <div className="text-center">
-            <div className="text-4xl font-bold text-primary mb-2">4×4 to 60×60</div>
+            <div className="text-4xl font-bold text-primary mb-2">4×4 to 32×40</div>
             <p className="text-muted-foreground">Any Size You Need (1/8&quot; Precision)</p>
           </div>
           <div className="text-center">
@@ -400,7 +389,7 @@ export default function HomePage() {
           <h2 className="font-serif text-3xl font-bold text-center mb-12">
             Featured Frame Designs
           </h2>
-          <FrameStylesShowcase frames={pictureFrames} allFramesLink="/frames" />
+          <FrameStylesShowcase frames={pictureFrames} allFramesLink="/frames/styles" />
         </div>
       </section>
 
@@ -423,7 +412,7 @@ export default function HomePage() {
         <GlazingShowcase />
         <SpecialtyDesignersShowcase />
         <ValueProps />
-        {brandConfig.features?.enableGallery && <InspirationGallery />}
+        {brandConfig.features?.enableGallery && <InspirationGallery galleryLink="/samples" />}
         <EducationTeasers />
         <FaqMini />
         <SeoTextBlock />

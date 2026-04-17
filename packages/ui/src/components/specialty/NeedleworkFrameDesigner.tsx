@@ -49,19 +49,23 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 import { NeedleworkLifestyleCarousel } from "./NeedleworkLifestyleCarousel";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import {
+  MAT_BORDER_SLIDER_MAX_INCHES,
+  MAT_BORDER_SLIDER_MIN_INCHES,
+} from "./shared/mat-border-slider-constants";
 
 import type { PriceLineItem } from "../ui/PriceBox";
 import type { FrameStyle, GlassType, BrassNameplateConfig, FrameConfiguration } from "@framecraft/types";
 
 const NEEDLEWORK_SIZE_PRESETS = [
-  { w: 8, h: 8, label: '8Ã—8"' },
-  { w: 8, h: 10, label: '8Ã—10"' },
-  { w: 11, h: 14, label: '11Ã—14"' },
-  { w: 12, h: 12, label: '12Ã—12"' },
-  { w: 14, h: 14, label: '14Ã—14"' },
-  { w: 14, h: 18, label: '14Ã—18"' },
-  { w: 16, h: 20, label: '16Ã—20"' },
-  { w: 18, h: 24, label: '18Ã—24"' },
+  { w: 8, h: 8, label: '8×8"' },
+  { w: 8, h: 10, label: '8×10"' },
+  { w: 11, h: 14, label: '11×14"' },
+  { w: 12, h: 12, label: '12×12"' },
+  { w: 14, h: 14, label: '14×14"' },
+  { w: 14, h: 18, label: '14×18"' },
+  { w: 16, h: 20, label: '16×20"' },
+  { w: 18, h: 24, label: '18×24"' },
 ];
 
 const frameStyles = getFramesByCategory("picture");
@@ -473,7 +477,7 @@ export function NeedleworkFrameDesigner({
         className="bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-md p-3 text-sm text-red-800 dark:text-red-200"
         data-testid="warning-needlework-too-large"
       >
-        This frame is too large for online ordering â€“ please contact us
+        This frame is too large for online ordering – please contact us
       </div>
     );
   }
@@ -510,7 +514,7 @@ export function NeedleworkFrameDesigner({
       await addToCartOnly(frameConfig, totalPerUnit, quantity);
       toast({
         title: "Added to Cart",
-        description: `${quantity}Ã— Needlework Frame added to your cart.`,
+        description: `${quantity}× Needlework Frame added to your cart.`,
       });
     } catch (error) {
       console.error("Add to cart failed:", error);
@@ -798,11 +802,11 @@ export function NeedleworkFrameDesigner({
               <p className="font-medium" data-testid="text-needlework-finished-size">
                 Finished Size:{" "}
                 <span className="text-primary">
-                  {frameWidth.toFixed(1)}&quot; Ã— {frameHeight.toFixed(1)}&quot;
+                  {frameWidth.toFixed(1)}&quot; × {frameHeight.toFixed(1)}&quot;
                 </span>
               </p>
               <p className="text-muted-foreground text-xs">
-                Artwork: {artWidth}&quot; Ã— {artHeight}&quot; â€¢ Frame Width:{" "}
+                Artwork: {artWidth}&quot; × {artHeight}&quot; • Frame Width:{" "}
                 {selectedFrame.mouldingWidth ?? 1}&quot;
               </p>
             </div>
@@ -904,7 +908,7 @@ export function NeedleworkFrameDesigner({
                         data-testid="input-needlework-width"
                       />
                     </div>
-                    <div className="flex items-end pb-0.5 text-muted-foreground">Ã—</div>
+                    <div className="flex items-end pb-0.5 text-muted-foreground">×</div>
                     <div className="flex-1">
                       <Label
                         htmlFor="needleworkHeight"
@@ -1020,8 +1024,8 @@ export function NeedleworkFrameDesigner({
                       </div>
                       <Slider
                         id="needleworkMatBorder"
-                        min={1.5}
-                        max={8}
+                        min={MAT_BORDER_SLIDER_MIN_INCHES}
+                        max={MAT_BORDER_SLIDER_MAX_INCHES}
                         step={0.25}
                         value={[matBorder]}
                         onValueChange={(values) =>
@@ -1029,8 +1033,8 @@ export function NeedleworkFrameDesigner({
                         }
                         data-testid="slider-needlework-mat-border"
                         aria-label="Mat border width in inches"
-                        aria-valuemin={1.5}
-                        aria-valuemax={8}
+                        aria-valuemin={MAT_BORDER_SLIDER_MIN_INCHES}
+                        aria-valuemax={MAT_BORDER_SLIDER_MAX_INCHES}
                         aria-valuenow={matBorder}
                         aria-valuetext={`${matBorder.toFixed(2)} inches`}
                       />

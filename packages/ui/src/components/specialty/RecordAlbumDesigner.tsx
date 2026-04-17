@@ -1034,11 +1034,11 @@ export function RecordAlbumDesigner({
                           </span>
                         </div>
                         <span className="text-xs text-muted-foreground shrink-0 md:hidden">
-                          {layout.frameWidth}&quot; Ã— {layout.frameHeight}&quot;
+                          {layout.frameWidth}&quot; × {layout.frameHeight}&quot;
                         </span>
                       </div>
                       <p className="text-xs text-muted-foreground mb-1 md:mb-2 hidden md:block">
-                        {layout.frameWidth}&quot; Ã— {layout.frameHeight}&quot;
+                        {layout.frameWidth}&quot; × {layout.frameHeight}&quot;
                       </p>
                       <p className="text-xs text-muted-foreground line-clamp-1 md:line-clamp-2">
                         {layout.description}
@@ -1084,7 +1084,7 @@ export function RecordAlbumDesigner({
                       <p className="font-medium">
                         Finished Size:{" "}
                         <span className="text-primary">
-                          {layoutConfig.frameWidth}&quot; Ã—{" "}
+                          {layoutConfig.frameWidth}&quot; ×{" "}
                           {(brassNameplateConfig.enabled
                             ? (layoutConfig.frameHeight ?? 0) + 1.5
                             : layoutConfig.frameHeight
@@ -1095,8 +1095,8 @@ export function RecordAlbumDesigner({
                     </div>
                     <p className="text-muted-foreground text-xs">
                       Layout: {currentLayout?.name ?? selectedLayout}
-                      {matType !== "none" && ` â€¢ Mat: ${matType}`}
-                      {brassNameplateConfig.enabled && " â€¢ Brass Nameplate"}
+                      {matType !== "none" && ` • Mat: ${matType}`}
+                      {brassNameplateConfig.enabled && " • Brass Nameplate"}
                     </p>
                   </div>
                 )}
@@ -1219,7 +1219,7 @@ export function RecordAlbumDesigner({
                             )}
                             <p className="font-medium text-xs lg:text-sm">{frame.name}</p>
                             <p className="text-xs text-muted-foreground mt-1">
-                              {frame.mouldingWidth}&quot; wide Ã— {frame.usableDepth}&quot; deep
+                              {frame.mouldingWidth}&quot; wide × {frame.usableDepth}&quot; deep
                             </p>
                           </button>
                         ))}
@@ -1569,7 +1569,7 @@ export function RecordAlbumDesigner({
               <p className="text-xs font-medium text-center">
                 Overall Frame Dimensions:{" "}
                 <span className="font-normal">
-                  {layoutConfig.frameWidth}&quot; Ã—{" "}
+                  {layoutConfig.frameWidth}&quot; ×{" "}
                   {brassNameplateConfig.enabled
                     ? (layoutConfig.frameHeight ?? 0) + 1.5
                     : layoutConfig.frameHeight}

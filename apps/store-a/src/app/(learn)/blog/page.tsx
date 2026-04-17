@@ -13,18 +13,23 @@ import {
 import { FileText, Clock, Calendar } from "lucide-react";
 
 import { getBlogPosts, getAllTags, formatBlogDate } from "@/lib/blog";
+import { brandConfig } from "@/brand.config";
+import { generatePageMetadata } from "@/lib/seo-utils";
 
-export const metadata: Metadata = {
+const siteBase = (brandConfig.seo?.canonicalUrl ?? "https://www.customframesizes.com").replace(
+  /\/$/,
+  ""
+);
+const blogOg = brandConfig.seo?.ogImage ?? `${siteBase}/assets/og-image.jpg`;
+
+export const metadata: Metadata = generatePageMetadata("/blog", {
   title: "Framing Blog - Tips, Guides & Inspiration | Custom Frame Sizes",
   description:
     "Expert tips on custom framing, mat selection, gallery walls, and more. Learn from professional framers.",
-  openGraph: {
-    title: "Framing Blog - Tips, Guides & Inspiration",
-    description:
-      "Expert tips, practical guides, and creative inspiration for all your framing projects.",
-    type: "website",
-  },
-};
+  domain: siteBase.startsWith("http") ? siteBase : `https://${siteBase}`,
+  ogImage: blogOg,
+  twitterImage: blogOg,
+});
 
 const POSTS_PER_PAGE = 6;
 

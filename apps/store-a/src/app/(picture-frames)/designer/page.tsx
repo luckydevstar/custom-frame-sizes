@@ -14,7 +14,7 @@ import {
 export const metadata: Metadata = generateMetadata({
   title: "Custom Picture Frame Designer | Design Your Frame | CustomFrameSizes.com",
   description:
-    "Design custom picture frames online with our interactive designer. Any size from 4×4 to 60×60 inches. 100+ styles, instant pricing, and real-time preview.",
+    "Design custom picture frames online with our interactive designer. Any size from 4×4 to 32×40 inches. 100+ styles, instant pricing, and real-time preview.",
   canonical: "https://www.customframesizes.com/designer",
   ogTitle: "Custom Picture Frame Designer - Interactive Builder",
   ogDescription:
@@ -36,13 +36,13 @@ export default function DesignerPage() {
           __html: generateProductSchema({
             name: "Custom Picture Frame",
             description:
-              "Design custom picture frames online with our interactive designer. Any size from 4×4 to 60×60 inches. Choose from 100+ styles, instant pricing, and real-time preview.",
+              "Design custom picture frames online with our interactive designer. Any size from 4×4 to 32×40 inches. Choose from 100+ styles, instant pricing, and real-time preview.",
             lowPrice: 25,
             highPrice: 500,
             url: getCanonicalUrl("/designer"),
             material: "Wood (premium hardwoods), Metal, Metal composites",
             additionalProperties: [
-              { name: "Size Range", value: "4×4 to 60×60 inches" },
+              { name: "Size Range", value: "4×4 to 32×40 inches" },
               { name: "Frame Styles", value: "100+" },
               { name: "Size Granularity", value: "1/8 inch" },
               { name: "Features", value: "Custom size, real-time preview, instant pricing" },
@@ -73,7 +73,7 @@ export default function DesignerPage() {
           <h1 className="font-serif text-4xl font-bold mb-4">Custom Picture Frame Designer</h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Use our custom picture frame designer to create the perfect frame for your artwork.
-            Enter any size from 4×4 to 60×60 inches in 1/8&quot; increments, choose from 100+ frame
+            Enter any size from 4×4 to 32×40 inches in 1/8&quot; increments, choose from 100+ frame
             styles, and add mats and glazing with real-time pricing. What you see in the preview is
             exactly what we build and ship to you.
           </p>
@@ -134,7 +134,7 @@ export default function DesignerPage() {
                   frames, white and gold frames, and narrow or wide moulding profiles. All frames
                   are available in any size you enter.
                 </p>
-                <Link href="/frames" className="text-primary font-medium hover:underline">
+                <Link href="/frames/styles" className="text-primary font-medium hover:underline">
                   Browse all frame styles →
                 </Link>
               </section>
@@ -144,7 +144,7 @@ export default function DesignerPage() {
                 <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                   <li>
                     <strong className="text-foreground">Artwork size</strong> — Any dimensions from
-                    4×4 to 60×60 inches, 1/8&quot; increments
+                    4×4 to 32×40 inches, 1/8&quot; increments
                   </li>
                   <li>
                     <strong className="text-foreground">Frame style</strong> — 100+ styles (wood,
@@ -196,7 +196,7 @@ export default function DesignerPage() {
                 <li>
                   <p className="font-medium text-foreground">Can I order non-standard sizes?</p>
                   <p>
-                    Yes. Enter any size from 4×4 to 60×60 inches in 1/8&quot; increments. Custom
+                    Yes. Enter any size from 4×4 to 32×40 inches in 1/8&quot; increments. Custom
                     sizes are our specialty.
                   </p>
                 </li>

@@ -7,6 +7,8 @@ import { ScrollToDesignerButton } from "./scroll-button";
 
 import type { Metadata } from "next";
 
+import { generatePageMetadata } from "@/lib/seo-utils";
+
 const DiplomaFrameDesigner = dynamic(
   () => import("@framecraft/ui").then((mod) => ({ default: mod.DiplomaFrameDesigner })),
   {
@@ -22,7 +24,7 @@ const DiplomaFrameDesigner = dynamic(
   }
 );
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/diploma-certificate-frames", {
   title: "Diploma & Certificate Frames – Archival Custom Sizing | Custom Frame Sizes",
   description:
     "Design museum-grade diploma frames with archival UV glazing and custom sizing for any institution. Protect your achievements for life. Free design tool.",
@@ -38,23 +40,9 @@ export const metadata: Metadata = {
     "graduation diploma frame",
     "university diploma frame",
   ],
-  openGraph: {
-    title: "Diploma & Certificate Frames – Archival Custom Sizing",
-    description:
-      "Design museum-grade diploma frames with archival UV glazing and custom sizing for any institution. Protect your achievements for life. Free design tool.",
-    url: "/diploma-certificate-frames",
-    type: "website",
-    images: ["/assets/diploma-frames-og.jpg"],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Diploma & Certificate Frames – Archival Custom Sizing",
-    description:
-      "Design museum-grade diploma frames with archival UV glazing and custom sizing for any institution. Protect your achievements for life.",
-    images: ["/assets/diploma-frames-og.jpg"],
-  },
-  alternates: { canonical: "/diploma-certificate-frames" },
-};
+  ogImage: "/assets/diploma-frames-og.jpg",
+  twitterImage: "/assets/diploma-frames-og.jpg",
+});
 
 export default function DiplomaCertificateFramesPage() {
   const serviceSchema = {

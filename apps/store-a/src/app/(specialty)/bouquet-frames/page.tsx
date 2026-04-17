@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 
 import { RelatedProducts } from "@/components/RelatedProducts";
+import { generatePageMetadata } from "@/lib/seo-utils";
 import { brandConfig } from "../../../brand.config";
 import { ScrollToDesignerButton } from "./scroll-button";
 
@@ -46,7 +47,7 @@ const BOUQUET_INITIAL_CONFIG: ShadowboxConfig = {
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/bouquet-frames", {
   title: "Preserved Bouquet Frames – Wedding Bouquet Framing | Custom Frame Sizes",
   description:
     "Frame your wedding bouquet with archival bouquet frames. Deep frames for preserved flowers with custom sizing and framer's grade acrylic. Professional-grade preservation.",
@@ -58,15 +59,7 @@ export const metadata: Metadata = {
     "3D flower frames",
     "wedding flower display",
   ],
-  openGraph: {
-    title: "Preserved Bouquet Frames – Wedding Bouquet Framing | Custom Frame Sizes",
-    description:
-      "Deep bouquet frames for preserved wedding bouquets. Custom sizing, framer's grade acrylic glazing, professional-grade preservation.",
-    type: "website",
-    url: "/bouquet-frames",
-  },
-  alternates: { canonical: "/bouquet-frames" },
-};
+});
 
 const productSchema = {
   "@context": "https://schema.org",

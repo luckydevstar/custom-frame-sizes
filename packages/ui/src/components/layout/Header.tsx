@@ -146,6 +146,7 @@ export function Header({
         <Button
           variant={isActive("/canvas-frames") ? "secondary" : "ghost"}
           asChild
+          className="min-h-11"
           data-testid="link-nav-canvas-frames"
         >
           <Link href="/canvas-frames">Canvas Frames</Link>
@@ -161,6 +162,7 @@ export function Header({
         <Button
           variant={isActive("/learn") ? "secondary" : "ghost"}
           asChild
+          className="min-h-11"
           data-testid="link-nav-learn"
         >
           <Link href="/learn">Learn</Link>
@@ -169,6 +171,7 @@ export function Header({
         <Button
           variant={isActive("/contact") ? "secondary" : "ghost"}
           asChild
+          className="min-h-11"
           data-testid="link-nav-contact"
         >
           <Link href="/contact">Contact</Link>

@@ -45,6 +45,10 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import {
+  MAT_BORDER_SLIDER_MAX_INCHES,
+  MAT_BORDER_SLIDER_MIN_INCHES,
+} from "./shared/mat-border-slider-constants";
 
 import type { PriceLineItem } from "../ui/PriceBox";
 import type { FrameStyle, GlassType, BrassNameplateConfig, FrameConfiguration } from "@framecraft/types";
@@ -274,9 +278,9 @@ export function MoviePosterFrameDesigner({
   const customDimensionValidation = useMemo(() => {
     if (selectedSizeId !== "custom") return { valid: true as const };
     if (parsedCustomWidth < 4 || parsedCustomHeight < 4)
-      return { valid: false as const, message: 'Minimum size is 4" Ã— 4"' };
+      return { valid: false as const, message: 'Minimum size is 4" × 4"' };
     if (parsedCustomWidth > 50 || parsedCustomHeight > 80)
-      return { valid: false as const, message: 'Maximum size is 50" Ã— 80"' };
+      return { valid: false as const, message: 'Maximum size is 50" × 80"' };
     return { valid: true as const };
   }, [selectedSizeId, parsedCustomWidth, parsedCustomHeight]);
 
@@ -592,7 +596,7 @@ export function MoviePosterFrameDesigner({
         className="bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-md p-3 text-sm text-red-800 dark:text-red-200"
         data-testid="warning-movie-poster-too-large"
       >
-        This frame is too large for online ordering â€“ please contact us to discuss your project
+        This frame is too large for online ordering – please contact us to discuss your project
       </div>
     );
   }
@@ -629,7 +633,7 @@ export function MoviePosterFrameDesigner({
       await addToCartOnly(frameConfig, totalPrice + hardwarePrice + nameplatePrice, quantity);
       toast({
         title: "Added to Cart",
-        description: `${quantity}Ã— Onesheet Poster Frame added to your cart.`,
+        description: `${quantity}× Onesheet Poster Frame added to your cart.`,
       });
     } catch (error) {
       console.error("Add to cart failed:", error);
@@ -917,11 +921,11 @@ export function MoviePosterFrameDesigner({
               <p className="font-medium" data-testid="text-movie-poster-finished-size">
                 Finished Size:{" "}
                 <span className="text-primary">
-                  {frameWidth.toFixed(1)}&quot; Ã— {frameHeight.toFixed(1)}&quot;
+                  {frameWidth.toFixed(1)}&quot; × {frameHeight.toFixed(1)}&quot;
                 </span>
               </p>
               <p className="text-muted-foreground text-xs">
-                Poster Size: {artWidth}&quot; Ã— {artHeight}&quot; â€¢ Frame Width:{" "}
+                Poster Size: {artWidth}&quot; × {artHeight}&quot; • Frame Width:{" "}
                 {selectedFrame.mouldingWidth ?? 1}&quot;
               </p>
             </div>
@@ -1002,8 +1006,8 @@ export function MoviePosterFrameDesigner({
                     >
                       <div className="text-sm font-medium">{size.name}</div>
                       <div className="text-xs text-muted-foreground mt-0.5">
-                        {size.width}Ã—{size.height}&quot;
-                        {size.description ? ` â€¢ ${size.description}` : ""}
+                        {size.width}×{size.height}&quot;
+                        {size.description ? ` • ${size.description}` : ""}
                       </div>
                     </button>
                   ))}
@@ -1041,7 +1045,7 @@ export function MoviePosterFrameDesigner({
                           data-testid="input-movie-poster-custom-width"
                         />
                       </div>
-                      <div className="flex items-end pb-0.5 text-muted-foreground">Ã—</div>
+                      <div className="flex items-end pb-0.5 text-muted-foreground">×</div>
                       <div className="flex-1">
                         <Label
                           htmlFor="customHeight"
@@ -1168,17 +1172,17 @@ export function MoviePosterFrameDesigner({
                       </div>
                       <Slider
                         id="matBorder"
-                        min={1.5}
-                        max={8}
+                        min={MAT_BORDER_SLIDER_MIN_INCHES}
+                        max={MAT_BORDER_SLIDER_MAX_INCHES}
                         step={0.25}
                         value={[matBorder]}
                         onValueChange={(values) =>
-                          setMatBorderWidth(values[0]?.toString() ?? "1.5")
+                          setMatBorderWidth(values[0]?.toString() ?? "1")
                         }
                         data-testid="slider-movie-poster-mat-border"
                         aria-label="Mat border width in inches"
-                        aria-valuemin={1.5}
-                        aria-valuemax={8}
+                        aria-valuemin={MAT_BORDER_SLIDER_MIN_INCHES}
+                        aria-valuemax={MAT_BORDER_SLIDER_MAX_INCHES}
                         aria-valuenow={matBorder}
                         aria-valuetext={`${matBorder.toFixed(2)} inches`}
                       />

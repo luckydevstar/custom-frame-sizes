@@ -53,7 +53,7 @@ export function PrintAndFrameService() {
             </div>
 
             <div className="flex items-center justify-center">
-              <Link href="/print-and-frame">
+              <Link href="/designer">
                 <Button size="default" data-testid="button-print-and-frame">
                   Get Started
                 </Button>

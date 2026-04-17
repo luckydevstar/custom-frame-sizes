@@ -68,6 +68,10 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { DiplomaLifestyleCarousel } from "./DiplomaLifestyleCarousel";
 import { BottomWeightedMatting } from "./shared/BottomWeightedMatting";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import {
+  MAT_BORDER_SLIDER_MAX_INCHES,
+  MAT_BORDER_SLIDER_MIN_INCHES,
+} from "./shared/mat-border-slider-constants";
 
 import type { PriceLineItem } from "../ui/PriceBox";
 import type { FrameStyle, FrameConfiguration , BrassNameplateConfig } from "@framecraft/types";
@@ -1199,7 +1203,7 @@ export function CertificateFrameDesigner({
                     <p className="font-medium">
                       Finished Size:{" "}
                       <span className="text-primary">
-                        {formatDimension(frameWidth)}&quot; Ã— {formatDimension(frameHeight)}&quot;
+                        {formatDimension(frameWidth)}&quot; × {formatDimension(frameHeight)}&quot;
                       </span>
                     </p>
                     {selectedFrame.dimensionalDiagram && (
@@ -1238,9 +1242,9 @@ export function CertificateFrameDesigner({
                     )}
                   </div>
                   <p className="text-muted-foreground text-xs">
-                    Artwork: {formatDimension(artW)}&quot; Ã— {formatDimension(artH)}&quot;
-                    {matType !== "none" && ` â€¢ Mat Border: ${formatDimension(matBorder)}"`}
-                    {matType === "double" && ` â€¢ Reveal: ${formatDimension(matReveal)}"`}
+                    Artwork: {formatDimension(artW)}&quot; × {formatDimension(artH)}&quot;
+                    {matType !== "none" && ` • Mat Border: ${formatDimension(matBorder)}"`}
+                    {matType === "double" && ` • Reveal: ${formatDimension(matReveal)}"`}
                   </p>
                 </div>
               </Card>
@@ -1331,7 +1335,7 @@ export function CertificateFrameDesigner({
                           data-testid={`button-certificate-${size.id}`}
                         >
                           <p className="font-semibold text-sm">
-                            {size.documentWidth}&quot; Ã— {size.documentHeight}&quot;
+                            {size.documentWidth}&quot; × {size.documentHeight}&quot;
                           </p>
                         </button>
                       ))}
@@ -1490,15 +1494,15 @@ export function CertificateFrameDesigner({
                             min={
                               brassNameplateConfig.enabled
                                 ? BRASS_NAMEPLATE_SPECS.MIN_BOTTOM_BORDER
-                                : 1.5
+                                : MAT_BORDER_SLIDER_MIN_INCHES
                             }
-                            max={8}
+                            max={MAT_BORDER_SLIDER_MAX_INCHES}
                             step={0.25}
                             value={[matBorder ?? 0]}
                             onValueChange={(values) => {
                               const minBorder = brassNameplateConfig.enabled
                                 ? BRASS_NAMEPLATE_SPECS.MIN_BOTTOM_BORDER
-                                : 1.5;
+                                : MAT_BORDER_SLIDER_MIN_INCHES;
                               const clampedValue = Math.max(values[0] ?? 0, minBorder);
                               setMatBorderWidth(clampedValue.toString());
                             }}
@@ -1507,16 +1511,16 @@ export function CertificateFrameDesigner({
                             aria-valuemin={
                               brassNameplateConfig.enabled
                                 ? BRASS_NAMEPLATE_SPECS.MIN_BOTTOM_BORDER
-                                : 1.5
+                                : MAT_BORDER_SLIDER_MIN_INCHES
                             }
-                            aria-valuemax={8}
+                            aria-valuemax={MAT_BORDER_SLIDER_MAX_INCHES}
                             aria-valuenow={matBorder}
                             aria-valuetext={`${matBorder.toFixed(2)} inches`}
                           />
                           <p className="text-xs text-muted-foreground">
                             {brassNameplateConfig.enabled
                               ? `Minimum ${BRASS_NAMEPLATE_SPECS.MIN_BOTTOM_BORDER}" required for brass plaque`
-                              : 'Adjust the width of the mat border (1.5" - 8")'}
+                              : 'Adjust the width of the mat border (1" - 8")'}
                           </p>
                           {brassNameplateConfig.enabled &&
                             parseFloat(matBorderWidth) <=
@@ -1859,7 +1863,7 @@ export function CertificateFrameDesigner({
             setArtworkHeight(newHeight.toString());
             toast({
               title: "Size Updated",
-              description: `Frame size updated to ${newWidth}" Ã— ${newHeight}" from AR preview`,
+              description: `Frame size updated to ${newWidth}" × ${newHeight}" from AR preview`,
             });
           }}
         />

@@ -7,7 +7,7 @@ import { env } from "./env";
 
 import type { Metadata } from "next";
 
-const FRAME_META_PREFIX = "custom picture frame in any size from 4×4 to 60×60.";
+const FRAME_META_PREFIX = "custom picture frame in any size from 4×4 to 32×40.";
 const FRAME_META_SUFFIX = "Instant pricing at CustomFrameSizes.com.";
 /** Align with generateMetadata description cap (155) and plan target 120–160. */
 const FRAME_META_MAX = 155;

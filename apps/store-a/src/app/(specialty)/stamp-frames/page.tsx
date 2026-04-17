@@ -19,6 +19,8 @@ import { ScrollToDesignerButton } from "./scroll-button";
 import type { Metadata } from "next";
 
 import { RelatedProducts } from "@/components/RelatedProducts";
+import { generatePageMetadata } from "@/lib/seo-utils";
+
 const StampFrameDesigner = nextDynamic(
   () => import("@framecraft/ui").then((m) => m.StampFrameDesigner),
   {
@@ -36,19 +38,11 @@ const StampFrameDesigner = nextDynamic(
 
 export const dynamic = "force-dynamic";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = generatePageMetadata("/stamp-frames", {
   title: "Stamp Display Frames | Custom Shadow Box Frames for Stamp Collections",
   description:
     "Design custom stamp display frames with shadowbox depth for your collection. Frame stamps with archival double matting, professional-grade acrylic, and optional brass nameplates. Available in preset and custom sizes.",
-  openGraph: {
-    title: "Stamp Display Frames | Custom Shadow Box Frames for Stamp Collections",
-    description:
-      "Professional stamp display frames with shadowbox depth, archival matting, and professional-grade glazing. Perfect for philatelic displays and stamp collections.",
-    type: "website",
-    url: "/stamp-frames",
-  },
-  alternates: { canonical: "/stamp-frames" },
-};
+});
 
 const productSchema = {
   "@context": "https://schema.org",
