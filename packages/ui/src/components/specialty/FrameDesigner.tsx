@@ -79,6 +79,10 @@ import { Slider } from "../ui/slider";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import {
+  MAT_BORDER_SLIDER_MAX_INCHES,
+  MAT_BORDER_SLIDER_MIN_INCHES,
+} from "./shared/mat-border-slider-constants";
 
 import type { UploadResult } from "@uppy/core";
 
@@ -2508,8 +2512,8 @@ export function FrameDesigner({
                       </div>
                       <Slider
                         id="matBorder"
-                        min={1.5}
-                        max={8}
+                        min={MAT_BORDER_SLIDER_MIN_INCHES}
+                        max={MAT_BORDER_SLIDER_MAX_INCHES}
                         step={0.25}
                         value={[matBorder]}
                         onValueChange={(values) => {
@@ -2518,8 +2522,8 @@ export function FrameDesigner({
                         }}
                         data-testid="slider-mat-border"
                         aria-label="Mat border width in inches"
-                        aria-valuemin={1.5}
-                        aria-valuemax={8}
+                        aria-valuemin={MAT_BORDER_SLIDER_MIN_INCHES}
+                        aria-valuemax={MAT_BORDER_SLIDER_MAX_INCHES}
                         aria-valuenow={matBorder}
                         aria-valuetext={`${matBorder.toFixed(2)} inches`}
                       />

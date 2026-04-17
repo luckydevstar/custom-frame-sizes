@@ -49,6 +49,10 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 
 import { NeedleworkLifestyleCarousel } from "./NeedleworkLifestyleCarousel";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import {
+  MAT_BORDER_SLIDER_MAX_INCHES,
+  MAT_BORDER_SLIDER_MIN_INCHES,
+} from "./shared/mat-border-slider-constants";
 
 import type { PriceLineItem } from "../ui/PriceBox";
 import type { FrameStyle, GlassType, BrassNameplateConfig, FrameConfiguration } from "@framecraft/types";
@@ -1020,8 +1024,8 @@ export function NeedleworkFrameDesigner({
                       </div>
                       <Slider
                         id="needleworkMatBorder"
-                        min={1.5}
-                        max={8}
+                        min={MAT_BORDER_SLIDER_MIN_INCHES}
+                        max={MAT_BORDER_SLIDER_MAX_INCHES}
                         step={0.25}
                         value={[matBorder]}
                         onValueChange={(values) =>
@@ -1029,8 +1033,8 @@ export function NeedleworkFrameDesigner({
                         }
                         data-testid="slider-needlework-mat-border"
                         aria-label="Mat border width in inches"
-                        aria-valuemin={1.5}
-                        aria-valuemax={8}
+                        aria-valuemin={MAT_BORDER_SLIDER_MIN_INCHES}
+                        aria-valuemax={MAT_BORDER_SLIDER_MAX_INCHES}
                         aria-valuenow={matBorder}
                         aria-valuetext={`${matBorder.toFixed(2)} inches`}
                       />

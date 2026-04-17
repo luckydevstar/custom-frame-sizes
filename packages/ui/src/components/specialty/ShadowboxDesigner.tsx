@@ -29,6 +29,10 @@ import { Slider } from "../ui/slider";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
+import {
+  MAT_BORDER_SLIDER_MAX_INCHES,
+  MAT_BORDER_SLIDER_MIN_INCHES,
+} from "./shared/mat-border-slider-constants";
 
 import type { PriceLineItem } from "../ui/PriceBox";
 // Import types from @framecraft/types
@@ -1806,16 +1810,16 @@ export function ShadowboxDesigner({
                       </div>
                       <Slider
                         id="matBorder"
-                        min={1.5}
-                        max={8}
+                        min={MAT_BORDER_SLIDER_MIN_INCHES}
+                        max={MAT_BORDER_SLIDER_MAX_INCHES}
                         step={0.25}
                         value={[matBorder]}
                         onValueChange={(values) => setMatBorderWidth((values[0] ?? 2.5).toString())}
                         data-testid="slider-mat-border"
                         disabled={readonly}
                         aria-label="Mat border width in inches"
-                        aria-valuemin={1.5}
-                        aria-valuemax={8}
+                        aria-valuemin={MAT_BORDER_SLIDER_MIN_INCHES}
+                        aria-valuemax={MAT_BORDER_SLIDER_MAX_INCHES}
                         aria-valuenow={matBorder}
                         aria-valuetext={`${matBorder.toFixed(2)} inches`}
                       />

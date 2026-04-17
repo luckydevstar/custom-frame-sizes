@@ -16,6 +16,7 @@ import {
   getStampLayout,
   getAllStampLayouts,
   getStampLayoutWithBrassNameplate,
+  applyUserMatBorderToDisplayLayout,
   STAMP_CUSTOM_SIZE_LIMITS,
   createCustomStampLayout,
   validateStampCustomDimensions,
@@ -47,6 +48,10 @@ import { QuantitySelector } from "../ui/quantity-selector";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Separator } from "../ui/separator";
 import { Slider } from "../ui/slider";
+import {
+  MAT_BORDER_SLIDER_MAX_INCHES,
+  MAT_BORDER_SLIDER_MIN_INCHES,
+} from "./shared/mat-border-slider-constants";
 
 import { BottomWeightedMatting, BOTTOM_WEIGHTED_EXTRA } from "./shared/BottomWeightedMatting";
 import { HangingHardwareSection } from "./shared/HangingHardwareSection";
@@ -135,8 +140,12 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
     return "double";
   });
 
-  const [matBorderWidth, setMatBorderWidth] = useState("2.5");
-  const [matRevealWidth, setMatRevealWidth] = useState("0.25");
+  const [matBorderWidth, setMatBorderWidth] = useState(
+    () => urlParams.get("matBorder") ?? "2.5"
+  );
+  const [matRevealWidth, setMatRevealWidth] = useState(
+    () => urlParams.get("matReveal") ?? "0.25"
+  );
   const matBorder = parseFloat(matBorderWidth) || 2.5;
   const matReveal = parseFloat(matRevealWidth) || 0.25;
 
@@ -242,9 +251,15 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
   );
 
   const bottomWeightedExtra = bottomWeighted ? BOTTOM_WEIGHTED_EXTRA : 0;
+
+  const layoutWithUserMatBorder = useMemo(
+    () => applyUserMatBorderToDisplayLayout(currentLayout, matBorder, matType),
+    [currentLayout, matBorder, matType]
+  );
+
   const adjustedLayout = useMemo(() => {
     const baseLayout = getStampLayoutWithBrassNameplate({
-      layout: currentLayout,
+      layout: layoutWithUserMatBorder,
       brassPlaqueEnabled: brassNameplateConfig.enabled && matType !== "none",
     });
     return {
@@ -252,7 +267,7 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
       frameHeight: baseLayout.frameHeight + bottomWeightedExtra,
       matBorderBottom: baseLayout.matBorderBottom + bottomWeightedExtra,
     };
-  }, [currentLayout, brassNameplateConfig.enabled, matType, bottomWeightedExtra]);
+  }, [layoutWithUserMatBorder, brassNameplateConfig.enabled, matType, bottomWeightedExtra]);
 
   const [framePhotos, setFramePhotos] = useState<{
     cornerUrl?: string;
@@ -300,6 +315,8 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
     if (matType !== "none") {
       params.set("topMat", selectedTopMat.id);
       params.set("accentMat", selectedAccentMat.id);
+      params.set("matBorder", matBorderWidth);
+      params.set("matReveal", matRevealWidth);
     }
     if (selectedLayout === "custom") {
       params.set("customWidth", customWidth);
@@ -324,6 +341,8 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
     matType,
     selectedTopMat.id,
     selectedAccentMat.id,
+    matBorderWidth,
+    matRevealWidth,
     brassNameplateConfig,
     bottomWeighted,
     customWidth,
@@ -983,8 +1002,8 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                           </div>
                           <Slider
                             id="matBorder"
-                            min={1.5}
-                            max={8}
+                            min={MAT_BORDER_SLIDER_MIN_INCHES}
+                            max={MAT_BORDER_SLIDER_MAX_INCHES}
                             step={0.25}
                             value={[matBorder]}
                             onValueChange={(values) =>
@@ -992,8 +1011,8 @@ export function StampFrameDesigner({ defaultFrameId, embedded = false }: StampFr
                             }
                             data-testid="slider-mat-border"
                             aria-label="Mat border width in inches"
-                            aria-valuemin={1.5}
-                            aria-valuemax={8}
+                            aria-valuemin={MAT_BORDER_SLIDER_MIN_INCHES}
+                            aria-valuemax={MAT_BORDER_SLIDER_MAX_INCHES}
                             aria-valuenow={matBorder}
                             aria-valuetext={`${matBorder.toFixed(2)} inches`}
                           />
