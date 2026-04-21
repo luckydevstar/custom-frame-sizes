@@ -23,13 +23,12 @@ import {
   addCartLines as apiAddCartLines,
   getCheckoutUrl,
 } from "./framecraft-api";
+import { resolveCheckoutBrandingMetadata } from "./checkout-branding-registry";
 import { logApiError, logWarning } from "./logging";
 import { getFrameStyleById } from "./products";
 
 import type { ShopifyConfig } from "@framecraft/config";
 import type { FrameConfiguration , MatConfig } from "@framecraft/types";
-
-
 
 // Default API version
 const DEFAULT_API_VERSION = "2024-01";
@@ -338,7 +337,8 @@ export async function addToCart(
   config: FrameConfiguration,
   price: number,
   quantity: number = 1,
-  shopifyConfig?: ShopifyConfig
+  shopifyConfig?: ShopifyConfig,
+  branding?: { logoUrl?: string; homeUrl?: string }
 ) {
   // Get variant ID from environment or frame-specific mapping
   // Use process.env for Next.js
@@ -370,7 +370,8 @@ export async function addToCart(
         configuration: config,
         priceCents, // Pass calculated price to ensure backend uses same price
       }],
-      cart.id
+      cart.id,
+      resolveCheckoutBrandingMetadata(branding)
     );
     const checkoutUrl = await getCheckoutUrl(cart.id);
     if (checkoutUrl) {
@@ -404,13 +405,15 @@ export async function addToCart(
  * @param price - Calculated price in dollars (will be converted to cents and sent to backend)
  * @param quantity - Quantity to add
  * @param shopifyConfig - Optional Shopify configuration
+ * @param branding - Optional checkout branding metadata (logo URL, home URL)
  * @returns Cart object with id and checkoutUrl (but does NOT redirect)
  */
 export async function addToCartOnly(
   config: FrameConfiguration,
   price: number,
   quantity: number = 1,
-  shopifyConfig?: ShopifyConfig
+  shopifyConfig?: ShopifyConfig,
+  branding?: { logoUrl?: string; homeUrl?: string }
 ) {
   // Get variant ID from environment or frame-specific mapping
   const defaultVariantId =
@@ -439,7 +442,8 @@ export async function addToCartOnly(
           priceCents, // Pass calculated price to ensure backend uses same price
         },
       ],
-      cart.id
+      cart.id,
+      resolveCheckoutBrandingMetadata(branding)
     );
     return { checkoutUrl: updatedCart.checkoutUrl || null, id: updatedCart.id };
   }

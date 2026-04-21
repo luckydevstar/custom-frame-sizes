@@ -1,6 +1,11 @@
 "use client";
 
 import { getMatById } from "@framecraft/config";
+import {
+  logCheckoutBrandingCartSnapshot,
+  logCheckoutBrandingJson,
+  resolveCheckoutBrandingMetadata,
+} from "@framecraft/core";
 import { getFrameStyleById } from "@framecraft/core/services/products";
 import { useCartStore } from "@framecraft/core/stores";
 import { CartClient, getCardProductionCode } from "@framecraft/ui";
@@ -103,14 +108,27 @@ export function CartPageClient() {
       // The backend will handle clearing old carts and creating a new fresh one
       const apiBase = (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_API_URL) || "";
 
+      const branding = resolveCheckoutBrandingMetadata();
+
       const freshCheckoutRes = await fetch(`${apiBase}/api/cart/fresh-checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ lines }),
+        body: JSON.stringify(branding ? { lines, branding } : { lines }),
         credentials: "include",
       });
 
-      const freshCheckoutData = await freshCheckoutRes.json();
+      const freshCheckoutData = (await freshCheckoutRes.json()) as {
+        success?: boolean;
+        checkoutUrl?: string;
+        cartId?: string;
+        cart?: { id?: string; lines?: Array<{ id?: string; attributes?: Array<{ key: string; value: string }> }> };
+        error?: { message?: string };
+      };
+
+      logCheckoutBrandingJson("POST /api/cart/fresh-checkout response", freshCheckoutData);
+      if (freshCheckoutData.cart) {
+        logCheckoutBrandingCartSnapshot("fresh-checkout (cart returned by API)", freshCheckoutData.cart);
+      }
 
       if (!freshCheckoutData.success || !freshCheckoutData.checkoutUrl) {
         throw new Error(freshCheckoutData.error?.message || "Failed to create fresh checkout");

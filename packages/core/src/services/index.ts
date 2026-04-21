@@ -21,6 +21,7 @@ export * from "./logging";
 export * from "./mat-catalog";
 export * from "./print-compositor";
 export * from "./shopify";
+export * from "./checkout-branding-registry";
 // framecraft-api is intentionally not re-exported at the top-level to avoid
 // name clashes (e.g., addCartLines). It is consumed internally by shopify.ts.
 export * from "./gateway-colors";

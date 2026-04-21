@@ -14,6 +14,7 @@ import { createContext, useContext, useMemo, type ReactNode } from "react";
 
 import { useFeatureFlag } from "../hooks/use-feature-flag";
 import { useTheme } from "../hooks/use-theme";
+import { syncCheckoutBrandingFromBrandConfig } from "../services/checkout-branding-registry";
 
 import type { BrandConfig } from "@framecraft/config";
 
@@ -65,6 +66,8 @@ export interface StoreProviderProps {
  * Accepts config directly for simplicity and independence.
  */
 export function StoreProvider({ config, children }: StoreProviderProps): JSX.Element {
+  syncCheckoutBrandingFromBrandConfig(config);
+
   // Check if store is active
   const isActive = useMemo(() => {
     return config.metadata?.isActive !== false; // Default to true if not specified
