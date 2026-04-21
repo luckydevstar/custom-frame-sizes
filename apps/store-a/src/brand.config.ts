@@ -77,6 +77,12 @@ export const brandConfig: BrandConfig = {
     twitterImage: `https://${env.shopify.storeDomain || "www.customframesizes.com"}/assets/og-image.jpg`,
   },
 
+  checkout: {
+    // Branding for Shopify checkout extension (logo and home link)
+    logoUrl: `https://${env.shopify.storeDomain || "www.customframesizes.com"}/assets/brand/logo-blue.png`,
+    homeUrl: `https://${env.shopify.storeDomain || "www.customframesizes.com"}/`,
+  },
+
   branding: {
     tagline: "Custom Frame Sizes - Exact Dimensions",
     valueProposition: "Design picture frames in custom sizes with live preview, mats, and glazing options. Professional framing with exact measurements down to 1/8 inch and instant pricing.",

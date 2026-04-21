@@ -25,6 +25,11 @@ export interface FramecraftCartLineInput {
   priceCents?: number; // Optional: pre-calculated price in cents from frontend
 }
 
+export interface BrandingMetadata {
+  logoUrl?: string;
+  homeUrl?: string;
+}
+
 export interface FramecraftCart {
   id: string;
   checkoutUrl?: string | null;
@@ -73,13 +78,15 @@ export async function createOrGetCart(cartId?: string | null): Promise<Framecraf
 }
 
 /**
- * Add configured lines to the cart. cartId can be omitted if cookie is set.
+ * Add configured lines to the cart with optional branding metadata.
+ * cartId can be omitted if cookie is set.
  */
 export async function addCartLines(
   lines: FramecraftCartLineInput[],
-  cartId?: string
+  cartId?: string,
+  branding?: BrandingMetadata
 ): Promise<FramecraftCart> {
-  const body = cartId ? { cartId, lines } : { lines };
+  const body = cartId ? { cartId, lines, branding } : { lines, branding };
   const data = await request<{ cart: FramecraftCart }>("POST", "/api/cart/lines", body);
   if (!data.cart) throw new Error("No cart in response");
   return data.cart;
