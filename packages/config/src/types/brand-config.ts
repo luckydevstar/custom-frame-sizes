@@ -239,6 +239,24 @@ export interface BrandConfig {
   seo: SEOConfig;
 
   /**
+   * Shopify Checkout UI Extension branding
+   * Configuration for checkout page (logo, home link, etc.)
+   */
+  checkout?: {
+    /**
+     * Logo URL for checkout page
+     * Should be HTTPS and publicly accessible
+     */
+    logoUrl?: string;
+
+    /**
+     * Home page URL for checkout logo link
+     * Where users are directed when clicking the logo
+     */
+    homeUrl?: string;
+  };
+
+  /**
    * Brand positioning and messaging
    */
   branding?: {

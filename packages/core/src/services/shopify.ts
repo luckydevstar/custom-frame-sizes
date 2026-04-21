@@ -338,7 +338,8 @@ export async function addToCart(
   config: FrameConfiguration,
   price: number,
   quantity: number = 1,
-  shopifyConfig?: ShopifyConfig
+  shopifyConfig?: ShopifyConfig,
+  branding?: { logoUrl?: string; homeUrl?: string }
 ) {
   // Get variant ID from environment or frame-specific mapping
   // Use process.env for Next.js
@@ -370,7 +371,8 @@ export async function addToCart(
         configuration: config,
         priceCents, // Pass calculated price to ensure backend uses same price
       }],
-      cart.id
+      cart.id,
+      branding // Pass branding metadata to backend
     );
     const checkoutUrl = await getCheckoutUrl(cart.id);
     if (checkoutUrl) {
@@ -404,13 +406,15 @@ export async function addToCart(
  * @param price - Calculated price in dollars (will be converted to cents and sent to backend)
  * @param quantity - Quantity to add
  * @param shopifyConfig - Optional Shopify configuration
+ * @param branding - Optional checkout branding metadata (logo URL, home URL)
  * @returns Cart object with id and checkoutUrl (but does NOT redirect)
  */
 export async function addToCartOnly(
   config: FrameConfiguration,
   price: number,
   quantity: number = 1,
-  shopifyConfig?: ShopifyConfig
+  shopifyConfig?: ShopifyConfig,
+  branding?: { logoUrl?: string; homeUrl?: string }
 ) {
   // Get variant ID from environment or frame-specific mapping
   const defaultVariantId =
@@ -439,7 +443,8 @@ export async function addToCartOnly(
           priceCents, // Pass calculated price to ensure backend uses same price
         },
       ],
-      cart.id
+      cart.id,
+      branding // Pass branding metadata to backend
     );
     return { checkoutUrl: updatedCart.checkoutUrl || null, id: updatedCart.id };
   }
