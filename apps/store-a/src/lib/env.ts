@@ -27,8 +27,14 @@ export const env = {
     apiVersion: getOptionalEnvVar("NEXT_PUBLIC_SHOPIFY_API_VERSION", "2024-01"),
   },
 
-  // API Endpoints
-  apiUrl: getEnvVar("NEXT_PUBLIC_API_URL", "http://localhost:3000/api"),
+  // API Endpoints (FrameCraft API origin only; client code appends /api/...)
+  apiUrl: getEnvVar("NEXT_PUBLIC_API_URL", "https://dev-api.customframesizes.com"),
+
+  /**
+   * Public browser origin for this deployment (no trailing slash), e.g. https://dev.customframesizes.com
+   * Used in brand.config checkout URLs so logo/home links are absolute HTTPS on Shopify checkout.
+   */
+  siteOrigin: getOptionalEnvVar("NEXT_PUBLIC_SITE_ORIGIN"),
 
   // Sentry (optional)
   sentry: {

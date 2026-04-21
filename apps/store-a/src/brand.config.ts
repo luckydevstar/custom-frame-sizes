@@ -8,6 +8,9 @@
 import type { BrandConfig } from "@framecraft/config";
 import { env } from "./lib/env";
 
+/** Absolute origin for checkout branding (Shopify checkout cannot use relative /assets URLs). */
+const publicSiteOrigin = (env.siteOrigin ?? "https://www.customframesizes.com").replace(/\/$/, "");
+
 export const brandConfig: BrandConfig = {
   storeId: "store-a",
   name: "CustomFrameSizes.com",
@@ -78,9 +81,9 @@ export const brandConfig: BrandConfig = {
   },
 
   checkout: {
-    // Branding for Shopify checkout extension (logo and home link)
-    logoUrl: `https://${env.shopify.storeDomain || "www.customframesizes.com"}/assets/brand/logo-blue.png`,
-    homeUrl: `https://${env.shopify.storeDomain || "www.customframesizes.com"}/`,
+    // Branding for Shopify checkout UI extension (cart line attributes). Per-store in each app's brand.config.ts.
+    logoUrl: `${publicSiteOrigin}/assets/brand/logo-blue.png`,
+    homeUrl: `${publicSiteOrigin}/`,
   },
 
   branding: {

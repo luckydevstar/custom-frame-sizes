@@ -23,13 +23,12 @@ import {
   addCartLines as apiAddCartLines,
   getCheckoutUrl,
 } from "./framecraft-api";
+import { resolveCheckoutBrandingMetadata } from "./checkout-branding-registry";
 import { logApiError, logWarning } from "./logging";
 import { getFrameStyleById } from "./products";
 
 import type { ShopifyConfig } from "@framecraft/config";
 import type { FrameConfiguration , MatConfig } from "@framecraft/types";
-
-
 
 // Default API version
 const DEFAULT_API_VERSION = "2024-01";
@@ -372,7 +371,7 @@ export async function addToCart(
         priceCents, // Pass calculated price to ensure backend uses same price
       }],
       cart.id,
-      branding // Pass branding metadata to backend
+      resolveCheckoutBrandingMetadata(branding)
     );
     const checkoutUrl = await getCheckoutUrl(cart.id);
     if (checkoutUrl) {
@@ -444,7 +443,7 @@ export async function addToCartOnly(
         },
       ],
       cart.id,
-      branding // Pass branding metadata to backend
+      resolveCheckoutBrandingMetadata(branding)
     );
     return { checkoutUrl: updatedCart.checkoutUrl || null, id: updatedCart.id };
   }
