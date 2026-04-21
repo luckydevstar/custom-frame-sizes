@@ -25,6 +25,9 @@ import {
   isShopifyEnabled,
   createCartItemFromFrameConfig,
   useCartStore,
+  checkImageResolution,
+  runReplicateUpscaleChain,
+  toAbsoluteImageUrlForUpscaling,
 } from "@framecraft/core";
 import {
   BRASS_NAMEPLATE_SPECS,
@@ -132,7 +135,7 @@ export function FrameDesigner({
   const [bottomWeighted, setBottomWeighted] = useState(false);
   const [copyrightAgreed, setCopyrightAgreed] = useState(false);
   const [uploadedImageAspectRatio, setUploadedImageAspectRatio] = useState<number | null>(null);
-  const [_uploadedImageDimensions, setUploadedImageDimensions] = useState<{
+  const [uploadedImageDimensions, setUploadedImageDimensions] = useState<{
     width: number;
     height: number;
   } | null>(null);
@@ -604,18 +607,50 @@ export function FrameDesigner({
     setIsCheckingOut(true);
 
     try {
-      // Print-and-frame: customer image URL is stored on the line item for fulfillment.
-      // We do not auto-download a print file on add to cart (Finding #12).
+      // Print-and-frame: optional AI upscale for 300 DPI, then store URL on the line item (no client download).
+      let imageUrlForCart = selectedImage ?? undefined;
+      if (
+        serviceType === "print-and-frame" &&
+        selectedImage &&
+        uploadedImageDimensions
+      ) {
+        const targetW = artWidth + 1;
+        const targetH = artHeight + 1;
+        const resolutionCheck = checkImageResolution(
+          uploadedImageDimensions.width,
+          uploadedImageDimensions.height,
+          targetW,
+          targetH
+        );
+        if (!resolutionCheck.sufficient && resolutionCheck.recommendedUpscale > 1) {
+          toast({
+            title: "AI upscaling",
+            description: `Preparing your image for print (up to ${resolutionCheck.recommendedUpscale}× enhancement).`,
+          });
+          const absolute = toAbsoluteImageUrlForUpscaling(selectedImage);
+          const result = await runReplicateUpscaleChain(
+            absolute,
+            resolutionCheck.recommendedUpscale
+          );
+          if (result.ok && result.outputUrl) {
+            imageUrlForCart = result.outputUrl;
+          } else if (!result.ok && result.status !== 503) {
+            console.warn("[print-and-frame] Upscale skipped:", result.error);
+          }
+        }
+      }
 
-      // Always add to cart store (for cart page and future Shopify Plus Cart Transform flow)
-      const cartInput = createCartItemFromFrameConfig(frameConfig, finalTotalPrice, quantity, {
-        imageUrl: selectedImage ?? undefined,
+      const configForCart: FrameConfiguration = {
+        ...frameConfig,
+        imageUrl: imageUrlForCart,
+      };
+
+      const cartInput = createCartItemFromFrameConfig(configForCart, finalTotalPrice, quantity, {
+        imageUrl: imageUrlForCart,
       });
       useCartStore.getState().addItem(cartInput);
 
-      // Add to backend/Shopify cart (creates backend cart, does NOT redirect)
-      // This syncs immediately for better reliability, but cart page will also sync before checkout
-      await addToCartOnly(frameConfig, finalTotalPrice, quantity);
+      await addToCartOnly(configForCart, finalTotalPrice, quantity);
 
       toast({
         title: "Added to Cart!",

@@ -20,6 +20,7 @@ export * from "./validation";
 export * from "./logging";
 export * from "./mat-catalog";
 export * from "./print-compositor";
+export * from "./upscale-client";
 export * from "./shopify";
 export * from "./checkout-branding-registry";
 // framecraft-api is intentionally not re-exported at the top-level to avoid

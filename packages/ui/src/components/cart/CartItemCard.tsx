@@ -65,7 +65,8 @@ export function CartItemCard({ item, onQuantityChange, onRemove, className }: Ca
   const frameSwatchUrl = primaryFrameImage ? getStoreBaseAssetUrl(primaryFrameImage) : null;
   const customerArtUrl = item.imageUrl ?? config?.imageUrl;
   const usePrintAndFrameArt =
-    config?.serviceType === "print-and-frame" && customerArtUrl;
+    config?.serviceType === "print-and-frame" && Boolean(customerArtUrl);
+  const printArtSrc = usePrintAndFrameArt ? (customerArtUrl as string) : null;
 
   return (
     <article
@@ -76,16 +77,29 @@ export function CartItemCard({ item, onQuantityChange, onRemove, className }: Ca
       data-testid={`cart-item-${item.id}`}
     >
       <div className="relative h-32 w-full shrink-0 overflow-hidden rounded-md bg-muted sm:h-28 sm:w-28">
-        {usePrintAndFrameArt ? (
-          <Image
-            src={customerArtUrl as string}
-            alt={`${frame?.name || "Custom frame"} with your artwork`}
-            fill
-            className="object-cover"
-            sizes="(max-width: 640px) 112px, 112px"
-            priority={false}
-            unoptimized={customerArtUrl.startsWith("blob:") || customerArtUrl.startsWith("data:")}
-          />
+        {usePrintAndFrameArt && printArtSrc ? (
+          <div
+            className="relative h-full w-full p-1.5"
+            style={{
+              background: frame
+                ? `linear-gradient(145deg, ${frame.borderColor}, ${frame.color})`
+                : undefined,
+            }}
+          >
+            <div className="relative h-full w-full overflow-hidden rounded-sm bg-white shadow-inner">
+              <Image
+                src={printArtSrc}
+                alt={`${frame?.name || "Custom frame"} with your artwork`}
+                fill
+                className="object-contain"
+                sizes="(max-width: 640px) 112px, 112px"
+                priority={false}
+                unoptimized={
+                  printArtSrc.startsWith("blob:") || printArtSrc.startsWith("data:")
+                }
+              />
+            </div>
+          </div>
         ) : frameSwatchUrl ? (
           <img
             src={frameSwatchUrl}

@@ -18,6 +18,8 @@ import {
   useIntersectionVisible,
   createCartItemFromFrameConfig,
   useCartStore,
+  runReplicateUpscaleChain,
+  toAbsoluteImageUrlForUpscaling,
 } from "@framecraft/core";
 import {
   Upload,
@@ -49,7 +51,6 @@ import { Dialog, DialogContent, DialogTitle } from "../ui/dialog";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { QuantitySelector } from "../ui/quantity-selector";
-import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
 import { Tabs, TabsList, TabsTrigger } from "../ui/tabs";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "../ui/tooltip";
 
@@ -633,6 +634,8 @@ export function CanvasFrameDesigner({
     setIsCheckingOut(true);
 
     try {
+      let orderImageUrlForLineItem = selectedImage ?? undefined;
+
       // Generate canvas print file for Print and Frame service
       if (serviceType === "print-and-frame" && selectedImage) {
         setIsGeneratingPrint(true);
@@ -643,10 +646,10 @@ export function CanvasFrameDesigner({
         });
 
         try {
-          // Calculate canvas print dimensions
           const canvasDimensions = calculateCanvasPrintDimensions(artWidth, artHeight);
 
-          // Check if upscaling is needed and request it
+          let imageUrlForPrint = selectedImage;
+
           if (uploadedImageDimensions) {
             const resolutionCheck = checkImageResolution(
               uploadedImageDimensions.width,
@@ -655,39 +658,28 @@ export function CanvasFrameDesigner({
               canvasDimensions.printedImageHeight
             );
 
-            // Request upscaling if needed
             if (!resolutionCheck.sufficient && resolutionCheck.recommendedUpscale > 1) {
               toast({
                 title: "AI Upscaling",
-                description: `Enhancing image quality with ${resolutionCheck.recommendedUpscale}x AI upscaling for crisp 300 DPI printing...`,
+                description: `Enhancing image quality with up to ${resolutionCheck.recommendedUpscale}× AI upscaling for crisp 300 DPI printing...`,
               });
 
-              // Call upscaling API
-              const upscaleResponse = await apiRequest("POST", "/api/upscale", {
-                imageUrl: selectedImage,
-                targetWidth: canvasDimensions.printedImageWidth,
-                targetHeight: canvasDimensions.printedImageHeight,
-                currentWidth: uploadedImageDimensions.width,
-                currentHeight: uploadedImageDimensions.height,
-              });
+              const absolute = toAbsoluteImageUrlForUpscaling(selectedImage);
+              const upscaleResult = await runReplicateUpscaleChain(
+                absolute,
+                resolutionCheck.recommendedUpscale
+              );
 
-              const upscaleResult = await upscaleResponse.json();
-
-              if (upscaleResult.upscaledUrl) {
-                // Generate print file with upscaled image
-                await generateCanvasPrintFile(upscaleResult.upscaledUrl, canvasDimensions);
-              } else {
-                // Generate with original image if upscaling failed
-                await generateCanvasPrintFile(selectedImage, canvasDimensions);
+              if (upscaleResult.ok) {
+                imageUrlForPrint = upscaleResult.outputUrl;
+              } else if (upscaleResult.status !== 503) {
+                console.warn("[canvas] Upscale skipped:", upscaleResult.error);
               }
-            } else {
-              // No upscaling needed - generate print file directly
-              await generateCanvasPrintFile(selectedImage, canvasDimensions);
             }
-          } else {
-            // No dimension info - generate print file directly
-            await generateCanvasPrintFile(selectedImage, canvasDimensions);
           }
+
+          await generateCanvasPrintFile(imageUrlForPrint, canvasDimensions);
+          orderImageUrlForLineItem = imageUrlForPrint;
 
           toast({
             title: "Print File Ready",
@@ -705,10 +697,16 @@ export function CanvasFrameDesigner({
         }
       }
 
-      // Call Shopify checkout service
-      const cartInput = createCartItemFromFrameConfig(frameConfig, finalTotalPrice, quantity);
+      const configForCart: FrameConfiguration = {
+        ...frameConfig,
+        imageUrl: orderImageUrlForLineItem,
+      };
+
+      const cartInput = createCartItemFromFrameConfig(configForCart, finalTotalPrice, quantity, {
+        imageUrl: orderImageUrlForLineItem,
+      });
       useCartStore.getState().addItem(cartInput);
-      await addToCartOnly(frameConfig, finalTotalPrice, quantity);
+      await addToCartOnly(configForCart, finalTotalPrice, quantity);
       toast({
         title: "Added to Cart!",
         description: "Canvas print added to your cart.",
@@ -791,6 +789,10 @@ export function CanvasFrameDesigner({
 
   // Calculate aspect ratio for proportional display (needed for dialog)
   const aspectRatio = isValidDimensions ? artWidth / artHeight : 1;
+
+  /** Print-and-frame: show full artwork in opening; cover crops to fill (Finding #2). */
+  const previewArtworkObjectFit: "cover" | "contain" =
+    serviceType === "print-and-frame" && selectedImage ? "contain" : "cover";
 
   // Calculate canvas print dimensions for resolution checking
   const canvasPrintDimensions = useMemo(() => {
@@ -1076,7 +1078,7 @@ export function CanvasFrameDesigner({
                                 left: 0,
                                 width: "100%",
                                 height: "100%",
-                                objectFit: "cover",
+                                objectFit: previewArtworkObjectFit,
                               }}
                             />
                           )}
@@ -1091,7 +1093,7 @@ export function CanvasFrameDesigner({
                               left: 0,
                               width: "100%",
                               height: "100%",
-                              objectFit: "cover",
+                              objectFit: previewArtworkObjectFit,
                             }}
                             data-testid="img-preview"
                           />
@@ -1297,43 +1299,34 @@ export function CanvasFrameDesigner({
           className={`space-y-6 ${mobileView === "preview" ? "hidden lg:block" : ""}`}
         >
           <Card className="p-4">
-            <RadioGroup
-              value={serviceType}
-              onValueChange={(value: "frame-only" | "print-and-frame") => setServiceType(value)}
-            >
-              <div className="grid grid-cols-2 gap-3">
-                <Label
-                  htmlFor="frame-only"
-                  className={`flex items-center justify-center p-4 rounded-md border-2 cursor-pointer hover-elevate active-elevate-2 ${
-                    serviceType === "frame-only" ? "border-primary bg-primary/5" : "border-border"
-                  }`}
-                >
-                  <RadioGroupItem
-                    value="frame-only"
-                    id="frame-only"
-                    className="sr-only"
-                    data-testid="radio-frame-only"
-                  />
-                  <span className="font-semibold">Frame Only</span>
-                </Label>
-                <Label
-                  htmlFor="print-and-frame"
-                  className={`flex items-center justify-center p-4 rounded-md border-2 cursor-pointer hover-elevate active-elevate-2 ${
-                    serviceType === "print-and-frame"
-                      ? "border-primary bg-primary/5"
-                      : "border-border"
-                  }`}
-                >
-                  <RadioGroupItem
-                    value="print-and-frame"
-                    id="print-and-frame"
-                    className="sr-only"
-                    data-testid="radio-print-and-frame"
-                  />
-                  <span className="font-semibold">Print and Frame</span>
-                </Label>
-              </div>
-            </RadioGroup>
+            <div className="grid grid-cols-2 gap-3" role="radiogroup" aria-label="Service type">
+              <button
+                type="button"
+                onClick={() => setServiceType("frame-only")}
+                className={`flex items-center justify-center p-4 rounded-md border-2 cursor-pointer hover-elevate active-elevate-2 font-semibold ${
+                  serviceType === "frame-only" ? "border-primary bg-primary/5" : "border-border"
+                }`}
+                data-testid="radio-frame-only"
+                role="radio"
+                aria-checked={serviceType === "frame-only"}
+              >
+                Frame Only
+              </button>
+              <button
+                type="button"
+                onClick={() => setServiceType("print-and-frame")}
+                className={`flex items-center justify-center p-4 rounded-md border-2 cursor-pointer hover-elevate active-elevate-2 font-semibold ${
+                  serviceType === "print-and-frame"
+                    ? "border-primary bg-primary/5"
+                    : "border-border"
+                }`}
+                data-testid="radio-print-and-frame"
+                role="radio"
+                aria-checked={serviceType === "print-and-frame"}
+              >
+                Print and Frame
+              </button>
+            </div>
             {serviceType === "print-and-frame" && !selectedImage && (
               <p className="text-xs text-muted-foreground mt-2">
                 Upload an image to use Print and Frame service
