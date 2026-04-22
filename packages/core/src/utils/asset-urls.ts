@@ -1,13 +1,15 @@
 /**
  * Asset URL Helper Functions
  *
- * Simple two-bucket CDN setup:
+ * Multi-store CDN setup:
  * - Shared assets (frames, mats, comic, etc.): NEXT_PUBLIC_CDN_SHARED_URL
- * - Store-A assets (assets/ directory): NEXT_PUBLIC_CDN_STORE_A_URL
+ * - Store-specific assets (assets/ directory): NEXT_PUBLIC_CDN_STORE_URL (falls back to NEXT_PUBLIC_CDN_STORE_A_URL for backwards compatibility)
  *
  * Environment Variables:
  * - NEXT_PUBLIC_CDN_SHARED_URL: Base URL for shared assets bucket
- * - NEXT_PUBLIC_CDN_STORE_A_URL: Base URL for store-a assets bucket
+ * - NEXT_PUBLIC_CDN_STORE_URL: Base URL for current store's assets bucket (generic)
+ * - NEXT_PUBLIC_CDN_STORE_A_URL: Base URL for store-a assets bucket (deprecated, kept for backwards compatibility)
+ * - NEXT_PUBLIC_CDN_STORE_B_URL: Base URL for store-b assets bucket (deprecated, kept for backwards compatibility)
  */
 
 /**
@@ -25,14 +27,31 @@ function getSharedCdnUrl(): string | null {
 }
 
 /**
- * Get the store-a assets CDN URL
- * In Next.js, NEXT_PUBLIC_* variables are replaced at build time by webpack
+ * Get the store-specific assets CDN URL
+ * Tries NEXT_PUBLIC_CDN_STORE_URL first (explicit per deployment), then picks store A/B bucket
+ * from NEXT_PUBLIC_SITE_ID so Store B is not forced onto Store A's CDN when both env vars are set.
  */
 function getStoreCdnUrl(): string | null {
   // Direct access so webpack can replace at build time
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (typeof process !== "undefined" && process.env) {
-    return process.env.NEXT_PUBLIC_CDN_STORE_A_URL || null;
+    const env = process.env;
+    if (env.NEXT_PUBLIC_CDN_STORE_URL) {
+      return env.NEXT_PUBLIC_CDN_STORE_URL;
+    }
+    const siteId = env.NEXT_PUBLIC_SITE_ID;
+    if (siteId === "store-b" && env.NEXT_PUBLIC_CDN_STORE_B_URL) {
+      return env.NEXT_PUBLIC_CDN_STORE_B_URL;
+    }
+    if (siteId === "store-a" && env.NEXT_PUBLIC_CDN_STORE_A_URL) {
+      return env.NEXT_PUBLIC_CDN_STORE_A_URL;
+    }
+    if (env.NEXT_PUBLIC_CDN_STORE_A_URL) {
+      return env.NEXT_PUBLIC_CDN_STORE_A_URL;
+    }
+    if (env.NEXT_PUBLIC_CDN_STORE_B_URL) {
+      return env.NEXT_PUBLIC_CDN_STORE_B_URL;
+    }
   }
   return null;
 }
@@ -53,6 +72,9 @@ function normalizeCdnUrl(url: string): string {
  * @example
  * getSharedAssetUrl("frames/8576/corner.jpg")
  * // Returns: "https://pub-d2f459227a6d44cab26325fa3d6ea821.r2.dev/frames/8576/corner.jpg"
+ *
+ * @remarks
+ * Shared assets are used across all stores (store-a, store-b, etc.)
  */
 export function getSharedAssetUrl(path: string): string {
   const cdnUrl = getSharedCdnUrl();
@@ -93,9 +115,12 @@ function normalizeCanvasImagePath(path: string): string {
 
 /**
  * Get store-a bucket base URL + path (no "assets/" prefix).
- * Use for frame images and any store-a bucket path at root (e.g. "frames/8745/corner_a.jpg").
+ * Use for frame images and any store bucket path at root (e.g. "frames/8745/corner_a.jpg").
  * CDN: use path as-is so it matches R2 bucket filenames (e.g. 10727_corner_a.jpg in Cloudflare).
  * Local: normalize corner_a → corner-a etc. for URL; API route will try both hyphen and underscore on disk.
+ *
+ * @remarks
+ * This works across all stores (store-a, store-b, etc.) as they share the same bucket structure
  */
 export function getStoreBaseAssetUrl(path: string): string {
   const cdnUrl = getStoreCdnUrl();
@@ -131,8 +156,11 @@ export function getStoreBaseAssetUrl(path: string): string {
 /**
  * Resolve frame photo URL for use in designers.
  * API may return relative paths (/frames/...) or full CDN URLs. When relative,
- * applies getStoreBaseAssetUrl so client gets correct CDN URL (NEXT_PUBLIC_CDN_STORE_A_URL
+ * applies getStoreBaseAssetUrl so client gets correct CDN URL (NEXT_PUBLIC_CDN_STORE_URL
  * is inlined in client bundle). Use when rendering framePhotos.topUrl, bottomUrl, etc.
+ *
+ * @remarks
+ * Works across all stores as they use the same bucket structure
  */
 export function resolveFramePhotoUrl(url: string | undefined): string {
   if (!url) return "";
@@ -141,7 +169,7 @@ export function resolveFramePhotoUrl(url: string | undefined): string {
 }
 
 /**
- * Get CDN URL for a store-a asset (assets/ directory)
+ * Get CDN URL for a store-specific asset (assets/ directory)
  *
  * @param path - Relative path from assets directory (e.g., "brand/logo.png" or "plywood-texture.png")
  * @returns Full CDN URL or local path
@@ -149,6 +177,9 @@ export function resolveFramePhotoUrl(url: string | undefined): string {
  * @example
  * getStoreAssetUrl("plywood-texture.png")
  * // Returns: "https://pub-e7bceef7c942453b92d35da77e807c44.r2.dev/assets/plywood-texture.png"
+ *
+ * @remarks
+ * Works with both store-a and store-b using NEXT_PUBLIC_CDN_STORE_URL
  */
 export function getStoreAssetUrl(path: string): string {
   const cdnUrl = getStoreCdnUrl();
