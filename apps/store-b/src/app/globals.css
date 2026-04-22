@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Uppy CSS imports */
+@import '@uppy/core/dist/style.css';
+@import '@uppy/dashboard/dist/style.css';
+
+@layer base {
+  :root {
+    /* Light mode - ShadowBox original warm/earthy theme */
+    --background: 40 33% 98%;
+    --foreground: 0 0% 10%;
+    --card: 40 33% 98%;
+    --card-foreground: 0 0% 10%;
+    --popover: 40 33% 98%;
+    --popover-foreground: 0 0% 10%;
+    --primary: 44 47% 37%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 40 20% 93%;
+    --secondary-foreground: 0 0% 10%;
+    --muted: 40 20% 93%;
+    --muted-foreground: 218 8% 38%;
+    --accent: 94 17% 38%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 30 15% 85%;
+    --input: 30 15% 85%;
+    --ring: 44 47% 37%;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Dark mode - ShadowBox warm/earthy theme */
+    --background: 0 0% 7%;
+    --foreground: 40 33% 93%;
+    --card: 0 0% 10%;
+    --card-foreground: 40 33% 93%;
+    --popover: 0 0% 10%;
+    --popover-foreground: 40 33% 93%;
+    --primary: 44 47% 37%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 14%;
+    --secondary-foreground: 40 33% 93%;
+    --muted: 0 0% 14%;
+    --muted-foreground: 218 8% 55%;
+    --accent: 94 17% 38%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 44 47% 37%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-inter, system-ui, -apple-system, sans-serif);
+  }
+  h1, h2, h3, h4, h5, h6,
+  .hero-title {
+    font-family: var(--font-playfair), "Playfair Display", Georgia, ui-serif, serif;
+  }
+
+  h1 {
+    letter-spacing: -0.02em;
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+}
+
+/* Prevent Uppy dashboard from permanently locking page scroll */
+.uppy-Dashboard-isFixed,
+.uppy-Dashboard--isFixed {
+  height: auto !important;
+  overflow: visible !important;
+}
+
+/* Uppy resets focus outline; restore visible focus for keyboard users (WCAG 2.4.7) */
+.uppy-Root :focus-visible,
+.uppy-Dashboard :focus-visible,
+.uppy-Dashboard-inner :focus-visible {
+  outline: 2px solid hsl(var(--ring));
+  outline-offset: 2px;
+}
+
+.sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: 0.5rem 0.75rem;
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+  z-index: 1000;
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  border-radius: 0.25rem;
+  box-shadow: 0 0 0 2px hsl(var(--ring));
+}
+
+/* P3 #20: prefers-reduced-motion (WCAG 2.3.3) */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
