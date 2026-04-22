@@ -37,6 +37,10 @@ export interface PriceBoxProps {
   onCopyLink?: () => void;
   /** Whether the checkout is processing */
   isProcessing?: boolean;
+  /** Current step text under the overlay title (e.g. upscaling, saving to R2) */
+  processingDetail?: string;
+  /** Optional overlay title; default "Adding to cart…" */
+  processingTitle?: string;
   /** Whether the Add to Cart button should be disabled */
   disabled?: boolean;
   /** Itemized price breakdown (if provided, enables collapsible mode) */
@@ -92,6 +96,8 @@ export function PriceBox({
   onShareDesign,
   onCopyLink,
   isProcessing = false,
+  processingDetail,
+  processingTitle = "Adding to cart…",
   disabled = false,
   priceItems,
   warnings,
@@ -240,7 +246,11 @@ export function PriceBox({
       )}
 
       {/* Processing Overlay */}
-      <ProcessingOverlay isOpen={isProcessing} message="Adding to cart..." />
+      <ProcessingOverlay
+        isOpen={isProcessing}
+        message={processingTitle}
+        detail={processingDetail}
+      />
     </>
   );
 }

@@ -1021,6 +1021,10 @@ export async function uploadCollagePrintFile(
     const uploadResponse = await fetch("/api/objects/upload", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        fileName: _filename || "collage-print.jpg",
+        contentType: "image/jpeg",
+      }),
     });
 
     if (!uploadResponse.ok) {

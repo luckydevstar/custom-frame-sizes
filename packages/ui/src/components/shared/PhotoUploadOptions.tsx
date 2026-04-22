@@ -1,8 +1,5 @@
 "use client";
 
-import AwsS3 from "@uppy/aws-s3";
-import Uppy from "@uppy/core";
-import { DashboardModal } from "@uppy/react";
 import { Image as ImageIcon, Link as LinkIcon } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 
@@ -14,18 +11,20 @@ import { Input } from "../ui/input";
 import { Label } from "../ui/label";
 import { Separator } from "../ui/separator";
 
-// Note: CSS imports should be handled in the app's global CSS or _app.tsx
-// These are commented out to avoid build errors - add to app CSS:
-// @import '@uppy/core/dist/style.css';
-// @import '@uppy/dashboard/dist/style.css';
 import { ImageEditor } from "./ImageEditor";
 
 import type { UploadResult } from "@uppy/core";
 
+const MAX_FILE_BYTES = 104857600; // 100MB (match previous Uppy limit)
+
 interface PhotoUploadOptionsProps {
   open: boolean;
   onClose: () => void;
-  onGetUploadParameters: () => Promise<{ method: "PUT"; url: string }>;
+  /**
+   * Same-origin upload endpoint (multipart). Default works for Next.js store-a `/api/objects/upload`.
+   * Browser never calls R2 directly, so R2 bucket CORS is not required for this path.
+   */
+  sameOriginUploadUrl?: string;
   onComplete?: (result: UploadResult<Record<string, unknown>, Record<string, unknown>>) => void;
   onUrlSubmit?: (url: string) => void;
   onImageUpdate?: (url: string) => void; // Callback to update preview URL immediately after editing
@@ -34,78 +33,20 @@ interface PhotoUploadOptionsProps {
 export function PhotoUploadOptions({
   open,
   onClose,
-  onGetUploadParameters,
+  sameOriginUploadUrl = "/api/objects/upload",
   onComplete,
   onUrlSubmit,
   onImageUpdate,
 }: PhotoUploadOptionsProps) {
   const { toast } = useToast();
-  const [showUppy, setShowUppy] = useState(false);
   const [urlInput, setUrlInput] = useState("");
   const [isLoadingUrl, setIsLoadingUrl] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // Image editor state
   const [showEditor, setShowEditor] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [filePreviewUrl, setFilePreviewUrl] = useState<string | null>(null);
-
-  // Initialize Uppy instance
-  const [uppy] = useState(() =>
-    new Uppy({
-      restrictions: {
-        maxNumberOfFiles: 1,
-        maxFileSize: 104857600, // 100MB
-        allowedFileTypes: ["image/*"],
-      },
-      autoProceed: false,
-      locale: {
-        strings: {
-          // Customize text for world-class UX
-          dropHereOr: "Drop your photo here or %{browse}",
-          browse: "Upload artwork image",
-          // Remove redundant file count mentions
-          xFilesSelected: {
-            0: "Ready to upload",
-            1: "Ready to upload",
-          },
-          uploadXFiles: {
-            0: "Continue",
-            1: "Continue",
-          },
-          // Clear error messages
-          exceedsSize: "Photo is too large. Maximum size: %{size}",
-          youCanOnlyUploadFileTypes: "Please select an image file",
-        },
-        pluralize: (n: number) => (n === 1 ? 0 : 1),
-      },
-    })
-      .use(AwsS3, {
-        shouldUseMultipart: false,
-        getUploadParameters: async (file) => {
-          const params = await onGetUploadParameters();
-          uppy.setFileMeta(file.id, { uploadURL: params.url });
-          return params;
-        },
-      })
-      .on("upload", () => {
-        setIsUploading(true);
-      })
-      .on("complete", (result) => {
-        setIsUploading(false);
-        onComplete?.(result);
-        setShowUppy(false);
-        uppy.cancelAll();
-        onClose();
-      })
-      .on("cancel-all", () => {
-        setIsUploading(false);
-      })
-      .on("error", () => {
-        setIsUploading(false);
-      }),
-  );
 
   const handleDeviceUpload = () => {
     fileInputRef.current?.click();
@@ -115,10 +56,17 @@ export function PhotoUploadOptions({
     const file = event.target.files?.[0];
     if (!file) return;
 
-    // Clear the input value immediately so the same file can be selected again
     event.target.value = "";
 
-    // Create a preview URL for the editor
+    if (file.size > MAX_FILE_BYTES) {
+      toast({
+        title: "File too large",
+        description: "Photo is too large. Maximum size: 100 MB",
+        variant: "destructive",
+      });
+      return;
+    }
+
     const previewUrl = URL.createObjectURL(file);
     setSelectedFile(file);
     setFilePreviewUrl(previewUrl);
@@ -128,44 +76,81 @@ export function PhotoUploadOptions({
   const handleEditorComplete = async (editedBlob: Blob) => {
     if (!selectedFile) return;
 
-    try {
-      // Convert blob to file
-      const editedFile = new File([editedBlob], selectedFile.name, {
-        type: "image/jpeg",
-        lastModified: Date.now(),
-      });
+    const editedFile = new File([editedBlob], selectedFile.name, {
+      type: "image/jpeg",
+      lastModified: Date.now(),
+    });
 
-      // Create a new preview URL from the edited blob BEFORE revoking the old one
-      const newPreviewUrl = URL.createObjectURL(editedBlob);
-
-      // Update the parent component's image immediately so the preview doesn't break
-      if (onImageUpdate) {
-        onImageUpdate(newPreviewUrl);
-      }
-
-      // Add to Uppy
-      uppy.addFile({
-        name: editedFile.name,
-        type: editedFile.type,
-        data: editedFile,
-      });
-
-      // Clean up - now safe to revoke old URL since we have a new one
-      setShowEditor(false);
-      if (filePreviewUrl) {
-        URL.revokeObjectURL(filePreviewUrl);
-      }
-      setFilePreviewUrl(null);
-      setSelectedFile(null);
-
-      // Show Uppy dashboard for upload
-      setShowUppy(true);
-    } catch (error) {
+    if (editedFile.size > MAX_FILE_BYTES) {
       toast({
-        title: "Error",
-        description: "Failed to process edited image. Please try again.",
+        title: "File too large",
+        description: "Photo is too large. Maximum size: 100 MB",
         variant: "destructive",
       });
+      return;
+    }
+
+    const newPreviewUrl = URL.createObjectURL(editedBlob);
+
+    if (onImageUpdate) {
+      onImageUpdate(newPreviewUrl);
+    }
+
+    // Show upload overlay first, then close editor — avoids main "Upload Your Photo" dialog flashing open
+    // while `open` is still true (that dialog uses `open && !showEditor && !isUploading`).
+    setIsUploading(true);
+    setShowEditor(false);
+    if (filePreviewUrl) {
+      URL.revokeObjectURL(filePreviewUrl);
+    }
+    setFilePreviewUrl(null);
+    setSelectedFile(null);
+
+    try {
+      const formData = new FormData();
+      formData.append("file", editedFile);
+
+      const res = await fetch(sameOriginUploadUrl, {
+        method: "POST",
+        body: formData,
+        credentials: "include",
+      });
+
+      const data = (await res.json().catch(() => ({}))) as { objectPath?: string; error?: string };
+      if (!res.ok) {
+        throw new Error(
+          typeof data.error === "string" ? data.error : `Upload failed (${res.status})`,
+        );
+      }
+
+      const uploadURL = data.objectPath;
+      if (!uploadURL) {
+        throw new Error("Server did not return objectPath.");
+      }
+      const resultPayload = {
+        successful: [
+          {
+            id: "r2-direct-upload",
+            name: editedFile.name,
+            meta: { uploadURL },
+          },
+        ],
+        failed: [],
+      };
+      onComplete?.(
+        resultPayload as unknown as UploadResult<Record<string, unknown>, Record<string, unknown>>,
+      );
+
+      onClose();
+    } catch (error) {
+      console.error("[PhotoUploadOptions] R2 upload failed:", error);
+      toast({
+        title: "Upload failed",
+        description: error instanceof Error ? error.message : "Could not upload image.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsUploading(false);
     }
   };
 
@@ -190,7 +175,6 @@ export function PhotoUploadOptions({
 
     setIsLoadingUrl(true);
     try {
-      // Validate URL points to an image
       const img = new Image();
       img.onload = () => {
         onUrlSubmit?.(urlInput);
@@ -207,7 +191,7 @@ export function PhotoUploadOptions({
         });
       };
       img.src = urlInput;
-    } catch (error) {
+    } catch {
       setIsLoadingUrl(false);
       toast({
         title: "Error",
@@ -217,66 +201,37 @@ export function PhotoUploadOptions({
     }
   };
 
-  // Clear file input when modal closes to allow re-selecting the same file
   useEffect(() => {
     if (!open && fileInputRef.current) {
       fileInputRef.current.value = "";
     }
   }, [open]);
 
-  // When the parent re-opens the upload modal, always reset internal modal state
-  // so the main options dialog appears again (not the last Uppy/editor state).
   useEffect(() => {
     if (open) {
       setShowEditor(false);
-      setShowUppy(false);
       setIsUploading(false);
     }
   }, [open]);
 
-  // Defensive: ensure page scroll is restored when all upload UI is closed
   useEffect(() => {
     if (typeof document === "undefined") return;
     const htmlEl = document.documentElement;
     const bodyEl = document.body;
 
-    // When no dialog/editor/dashboard/loading is visible, clear any leftover scroll locks
-    if (!open && !showUppy && !showEditor && !isUploading) {
+    if (!open && !showEditor && !isUploading) {
       if (htmlEl.style.overflow === "hidden") {
         htmlEl.style.overflow = "";
       }
       if (bodyEl.style.overflow === "hidden") {
         bodyEl.style.overflow = "";
       }
-
-      // Uppy sometimes leaves its fixed class on the body or modal container,
-      // which forces height: 100vh; overflow: hidden and kills page scroll.
-      bodyEl.classList.remove("uppy-Dashboard--isFixed", "uppy-Dashboard-isFixed");
-      const fixedDashboards = document.querySelectorAll<HTMLElement>(
-        ".uppy-Dashboard--isFixed, .uppy-Dashboard-isFixed",
-      );
-      fixedDashboards.forEach((el) => {
-        el.classList.remove("uppy-Dashboard--isFixed", "uppy-Dashboard-isFixed");
-        if (el.style.overflow === "hidden") {
-          el.style.overflow = "";
-        }
-        if (el.style.height === "100vh") {
-          el.style.height = "";
-        }
-      });
     }
-  }, [open, showUppy, showEditor, isUploading]);
-
-  // Cleanup Uppy on unmount
-  useEffect(() => {
-    return () => {
-      uppy.destroy();
-    };
-  }, [uppy]);
+  }, [open, showEditor, isUploading]);
 
   return (
     <>
-      <Dialog open={open && !showUppy && !showEditor} onOpenChange={onClose}>
+      <Dialog open={open && !showEditor && !isUploading} onOpenChange={onClose}>
         <DialogContent className="sm:max-w-md" data-testid="dialog-upload-options">
           <DialogHeader>
             <DialogTitle className="text-xl md:text-2xl">Upload Your Photo</DialogTitle>
@@ -286,7 +241,6 @@ export function PhotoUploadOptions({
           </DialogHeader>
 
           <div className="space-y-3 py-4">
-            {/* Hidden file input for native picker */}
             <input
               ref={fileInputRef}
               type="file"
@@ -297,7 +251,6 @@ export function PhotoUploadOptions({
               aria-label="Upload artwork image"
             />
 
-            {/* Primary: Device Photo Library */}
             <Button
               onClick={handleDeviceUpload}
               className="w-full h-auto py-4 text-base md:text-lg"
@@ -317,7 +270,6 @@ export function PhotoUploadOptions({
               </div>
             </div>
 
-            {/* URL Input - Collapsed by default on mobile */}
             <div className="space-y-2">
               <Label htmlFor="url-input" className="text-sm">
                 Or paste an image URL
@@ -348,7 +300,6 @@ export function PhotoUploadOptions({
         </DialogContent>
       </Dialog>
 
-      {/* Image Editor */}
       {showEditor && filePreviewUrl && (
         <ImageEditor
           imageUrl={filePreviewUrl}
@@ -357,18 +308,9 @@ export function PhotoUploadOptions({
         />
       )}
 
-      {/* Uppy Dashboard Modal */}
-      <DashboardModal
-        uppy={uppy}
-        open={showUppy}
-        onRequestClose={() => setShowUppy(false)}
-        proudlyDisplayPoweredByUppy={false}
-      />
-
-      {/* Upload Loading Overlay (non-modal so it doesn't lock page scroll) */}
       {isUploading && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-background/70"
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-background/80"
           data-testid="dialog-upload-loading"
         >
           <div className="sm:max-w-md flex items-center justify-center min-h-[200px] rounded-lg bg-background shadow-lg px-6 py-4">

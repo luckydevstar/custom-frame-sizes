@@ -20,6 +20,7 @@ import {
   useCartStore,
   runReplicateUpscaleChain,
   toAbsoluteImageUrlForUpscaling,
+  ingestRemoteOrdersImageIfNeeded,
 } from "@framecraft/core";
 import {
   Upload,
@@ -43,6 +44,7 @@ import { TrustBox } from "../marketing/TrustBox";
 import { ARViewer } from "../shared/ARViewer";
 import { PhotoUploadOptions } from "../shared/PhotoUploadOptions";
 import { TermsOfServiceModal } from "../shared/TermsOfServiceModal";
+import { ProcessingOverlay } from "../ui/ProcessingOverlay";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
@@ -193,6 +195,8 @@ export function CanvasFrameDesigner({
   const [fullImageOpen, setFullImageOpen] = useState(false);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [isGeneratingPrint, setIsGeneratingPrint] = useState(false);
+  const [cartProcessingTitle, setCartProcessingTitle] = useState("Adding to cart…");
+  const [cartProcessingDetail, setCartProcessingDetail] = useState<string | undefined>();
   const [previousImage, setPreviousImage] = useState<string | null>(null);
   const prevImageRef = useRef<string | null>(null);
   const [quantity, setQuantity] = useState(1);
@@ -498,51 +502,65 @@ export function CanvasFrameDesigner({
     };
   }, [pricingSidebarExpanded]);
 
-  const handleGetUploadParameters = async () => {
-    const response = await apiRequest("POST", "/api/objects/upload");
-    const data = await response.json();
-    return {
-      method: "PUT" as const,
-      url: data.uploadURL,
-    };
-  };
-
   const handleUploadComplete = async (
     result: UploadResult<Record<string, unknown>, Record<string, unknown>>
   ) => {
-    if (result.successful && result.successful.length > 0) {
-      const uploadedFile = result.successful[0];
-      if (!uploadedFile) return;
-      // The upload URL was stored in file meta by PhotoUploadOptions
-      const uploadURL = uploadedFile.meta?.uploadURL as string;
+    if (!result.successful?.length) {
+      const raw = result.failed?.[0]?.error as unknown;
+      const msg =
+        typeof raw === "string"
+          ? raw
+          : raw && typeof raw === "object" && "message" in raw
+            ? String((raw as { message: unknown }).message)
+            : "Upload did not complete.";
+      toast({
+        title: "Upload failed",
+        description: msg,
+        variant: "destructive",
+      });
+      return;
+    }
 
-      if (uploadURL) {
-        try {
-          // Store the image URL for display and future order processing
-          const response = await apiRequest("PUT", "/api/frame-images", { imageURL: uploadURL });
-          const data = await response.json();
+    const uploadedFile = result.successful[0];
+    if (!uploadedFile) return;
+    const uploadURL =
+      (uploadedFile.meta?.uploadURL as string | undefined) ??
+      (uploadedFile as { uploadURL?: string }).uploadURL;
 
-          // Calculate aspect ratio and dimensions from uploaded image
-          const img = new Image();
-          img.onload = () => {
-            const ratio = img.width / img.height;
-            setUploadedImageAspectRatio(ratio);
-            setUploadedImageDimensions({ width: img.width, height: img.height });
+    if (!uploadURL) {
+      toast({
+        title: "Upload failed",
+        description: "Missing upload URL after upload.",
+        variant: "destructive",
+      });
+      return;
+    }
 
-            // Always update dimensions to match uploaded photo's aspect ratio
-            const defaultWidth = 16;
-            const defaultHeight = defaultWidth / ratio;
-            setArtworkWidth(defaultWidth.toString());
-            setArtworkHeight(defaultHeight.toFixed(2));
-          };
-          img.src = data.objectPath;
+    try {
+      const response = await apiRequest("PUT", "/api/frame-images", { imageURL: uploadURL });
+      const data = await response.json();
 
-          // Set the image to the object path for display
-          setSelectedImage(data.objectPath);
-        } catch (error) {
-          console.error("Error storing uploaded image:", error);
-        }
-      }
+      const img = new Image();
+      img.onload = () => {
+        const ratio = img.width / img.height;
+        setUploadedImageAspectRatio(ratio);
+        setUploadedImageDimensions({ width: img.width, height: img.height });
+
+        const defaultWidth = 16;
+        const defaultHeight = defaultWidth / ratio;
+        setArtworkWidth(defaultWidth.toString());
+        setArtworkHeight(defaultHeight.toFixed(2));
+      };
+      img.src = data.objectPath;
+
+      setSelectedImage(data.objectPath);
+    } catch (error) {
+      console.error("Error storing uploaded image:", error);
+      toast({
+        title: "Upload failed",
+        description: error instanceof Error ? error.message : "Could not finalize upload.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -632,6 +650,8 @@ export function CanvasFrameDesigner({
     }
 
     setIsCheckingOut(true);
+    setCartProcessingTitle("Adding to cart…");
+    setCartProcessingDetail("Preparing your canvas…");
 
     try {
       let orderImageUrlForLineItem = selectedImage ?? undefined;
@@ -639,11 +659,8 @@ export function CanvasFrameDesigner({
       // Generate canvas print file for Print and Frame service
       if (serviceType === "print-and-frame" && selectedImage) {
         setIsGeneratingPrint(true);
-
-        toast({
-          title: "Generating Print File",
-          description: "Creating your canvas print with gallery wrap edges...",
-        });
+        setCartProcessingTitle("Preparing canvas print");
+        setCartProcessingDetail("Creating gallery-wrap print file…");
 
         try {
           const canvasDimensions = calculateCanvasPrintDimensions(artWidth, artHeight);
@@ -659,10 +676,9 @@ export function CanvasFrameDesigner({
             );
 
             if (!resolutionCheck.sufficient && resolutionCheck.recommendedUpscale > 1) {
-              toast({
-                title: "AI Upscaling",
-                description: `Enhancing image quality with up to ${resolutionCheck.recommendedUpscale}× AI upscaling for crisp 300 DPI printing...`,
-              });
+              setCartProcessingDetail(
+                `AI upscaling (${resolutionCheck.recommendedUpscale}×) for high-resolution print. This can take a minute…`,
+              );
 
               const absolute = toAbsoluteImageUrlForUpscaling(selectedImage);
               const upscaleResult = await runReplicateUpscaleChain(
@@ -671,20 +687,28 @@ export function CanvasFrameDesigner({
               );
 
               if (upscaleResult.ok) {
-                imageUrlForPrint = upscaleResult.outputUrl;
+                const replicateUrl = upscaleResult.outputUrl;
+                try {
+                  setCartProcessingDetail("Saving enhanced image to your order storage…");
+                  imageUrlForPrint = await ingestRemoteOrdersImageIfNeeded(replicateUrl);
+                } catch (ingestErr) {
+                  console.warn("[canvas] R2 ingest of upscale output:", ingestErr);
+                  setCartProcessingDetail(
+                    ingestErr instanceof Error
+                      ? `Could not store enhanced image permanently: ${ingestErr.message}. Using a temporary link.`
+                      : "Could not store enhanced image permanently; using a temporary link.",
+                  );
+                  imageUrlForPrint = replicateUrl;
+                }
               } else if (upscaleResult.status !== 503) {
                 console.warn("[canvas] Upscale skipped:", upscaleResult.error);
               }
             }
           }
 
+          setCartProcessingDetail("Building print-ready file…");
           await generateCanvasPrintFile(imageUrlForPrint, canvasDimensions);
           orderImageUrlForLineItem = imageUrlForPrint;
-
-          toast({
-            title: "Print File Ready",
-            description: "Your canvas print has been prepared with mirrored gallery wrap edges.",
-          });
         } catch (printError) {
           console.error("Error generating canvas print file:", printError);
           toast({
@@ -697,6 +721,9 @@ export function CanvasFrameDesigner({
         }
       }
 
+      setCartProcessingTitle("Adding to cart…");
+      setCartProcessingDetail("Adding item to your cart…");
+
       const configForCart: FrameConfiguration = {
         ...frameConfig,
         imageUrl: orderImageUrlForLineItem,
@@ -706,6 +733,7 @@ export function CanvasFrameDesigner({
         imageUrl: orderImageUrlForLineItem,
       });
       useCartStore.getState().addItem(cartInput);
+      setCartProcessingDetail("Syncing with the store…");
       await addToCartOnly(configForCart, finalTotalPrice, quantity);
       toast({
         title: "Added to Cart!",
@@ -721,6 +749,8 @@ export function CanvasFrameDesigner({
       });
     } finally {
       setIsCheckingOut(false);
+      setCartProcessingTitle("Adding to cart…");
+      setCartProcessingDetail(undefined);
     }
   };
 
@@ -2000,11 +2030,16 @@ export function CanvasFrameDesigner({
         </Button>
       )}
 
+      <ProcessingOverlay
+        isOpen={isCheckingOut}
+        message={cartProcessingTitle}
+        detail={cartProcessingDetail}
+      />
+
       {/* Photo Upload Modal */}
       <PhotoUploadOptions
         open={showUploadModal}
         onClose={() => setShowUploadModal(false)}
-        onGetUploadParameters={handleGetUploadParameters}
         onComplete={handleUploadComplete}
         onUrlSubmit={handleUrlUpload}
         onImageUpdate={(url: string) => setSelectedImage(url)}

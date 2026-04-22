@@ -2,7 +2,6 @@
 
 import { formatPrice, getFrameStyleById, getMatColorById, getStoreBaseAssetUrl } from "@framecraft/core";
 import { Minus, Plus, Trash2 } from "lucide-react";
-import Image from "next/image";
 
 import { cn } from "../../utils";
 import { Button } from "../ui/button";
@@ -87,16 +86,11 @@ export function CartItemCard({ item, onQuantityChange, onRemove, className }: Ca
             }}
           >
             <div className="relative h-full w-full overflow-hidden rounded-sm bg-white shadow-inner">
-              <Image
+              {/* Native img: customer/R2 URLs may use hostnames outside next/image remotePatterns */}
+              <img
                 src={printArtSrc}
                 alt={`${frame?.name || "Custom frame"} with your artwork`}
-                fill
-                className="object-contain"
-                sizes="(max-width: 640px) 112px, 112px"
-                priority={false}
-                unoptimized={
-                  printArtSrc.startsWith("blob:") || printArtSrc.startsWith("data:")
-                }
+                className="h-full w-full object-contain"
               />
             </div>
           </div>
@@ -107,15 +101,10 @@ export function CartItemCard({ item, onQuantityChange, onRemove, className }: Ca
             className="w-full h-full object-cover"
           />
         ) : item.imageUrl || config?.imageUrl ? (
-          <Image
+          <img
             src={(item.imageUrl ?? config?.imageUrl) as string}
             alt={`Custom ${frame?.name || "frame"} with ${topMat?.name || "mat"}`}
-            fill
-            className="object-cover"
-            sizes="(max-width: 640px) 112px, 112px"
-            priority={false}
-            placeholder="blur"
-            blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 112 128'%3E%3Crect fill='%23e5e7eb' width='112' height='128'/%3E%3C/svg%3E"
+            className="h-full w-full object-cover"
           />
         ) : (
           <div className="flex h-full w-full flex-col items-center justify-center gap-1 bg-muted/80 p-2 text-center text-muted-foreground text-xs">
