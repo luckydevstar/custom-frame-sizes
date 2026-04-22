@@ -77,7 +77,7 @@ export default function FAQ() {
 
           {/* Contact Prompt */}
           <div className="mt-12 p-8 rounded-lg bg-muted/50 border border-border text-center space-y-4">
-            <h3 className="font-semibold text-lg">Didn't find your answer?</h3>
+            <h3 className="font-semibold text-lg">Didn&apos;t find your answer?</h3>
             <p className="text-muted-foreground">
               Have a specific question about your custom frame project? Our team is here to help.
             </p>
