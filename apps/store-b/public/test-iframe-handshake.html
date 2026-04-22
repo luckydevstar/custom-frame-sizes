@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostMessage Handshake Test - Shadowbox Embed</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #333;
+            margin-top: 0;
+        }
+        h2 {
+            color: #666;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        iframe {
+            width: 100%;
+            height: 800px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .controls {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background: #0066cc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover {
+            background: #0052a3;
+        }
+        .message-log {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .message {
+            padding: 4px 0;
+            border-bottom: 1px solid #333;
+        }
+        .message:last-child {
+            border-bottom: none;
+        }
+        .message-type {
+            color: #4ec9b0;
+            font-weight: bold;
+        }
+        .message-ready {
+            color: #4fc1ff;
+        }
+        .message-change {
+            color: #ce9178;
+        }
+        .message-load {
+            color: #b5cea8;
+        }
+        .message-readonly {
+            color: #dcdcaa;
+        }
+        .timestamp {
+            color: #858585;
+            font-size: 11px;
+        }
+        .status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        .status-pending {
+            background: #fff3cd;
+            color: #856404;
+        }
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+        }
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 PostMessage Handshake Test</h1>
+        <p>This page tests the bi-directional postMessage communication between parent and embedded shadowbox designer.</p>
+        
+        <div id="handshake-status" class="status status-pending">
+            ⏳ Waiting for SHADOWBOX_READY handshake...
+        </div>
+        
+        <div class="controls">
+            <button id="btn-load-config" disabled>📥 Load Config (30x24)</button>
+            <button id="btn-set-readonly" disabled>🔒 Set Readonly</button>
+            <button id="btn-clear-log">🗑️ Clear Log</button>
+        </div>
+        
+        <h2>Embedded Designer (iframe)</h2>
+        <iframe id="shadowbox-frame" src="/embed/shadowbox?width=20&height=16"></iframe>
+        
+        <h2>Message Log</h2>
+        <div id="message-log" class="message-log"></div>
+    </div>
+
+    <script>
+        const log = document.getElementById('message-log');
+        const status = document.getElementById('handshake-status');
+        const btnLoad = document.getElementById('btn-load-config');
+        const btnReadonly = document.getElementById('btn-set-readonly');
+        const btnClear = document.getElementById('btn-clear-log');
+        const iframe = document.getElementById('shadowbox-frame');
+        
+        let handshakeComplete = false;
+        let messageCount = 0;
+        
+        // Helper to log messages
+        function logMessage(type, direction, data = {}) {
+            messageCount++;
+            const msg = document.createElement('div');
+            msg.className = 'message';
+            
+            const timestamp = new Date().toLocaleTimeString();
+            const typeClass = `message-${type.toLowerCase().replace('shadowbox_', '')}`;
+            
+            msg.innerHTML = `
+                <span class="timestamp">[${timestamp}]</span>
+                <span class="message-type ${typeClass}">${direction} ${type}</span>
+                ${Object.keys(data).length > 0 ? `<div style="padding-left: 20px; color: #858585;">${JSON.stringify(data, null, 2)}</div>` : ''}
+            `;
+            
+            log.appendChild(msg);
+            log.scrollTop = log.scrollHeight;
+        }
+        
+        // Listen for messages from iframe
+        window.addEventListener('message', (event) => {
+            if (!event.data || !event.data.type) return;
+            
+            const { type, data } = event.data;
+            
+            logMessage(type, '⬅️ RECEIVED', data);
+            
+            // Handle SHADOWBOX_READY handshake
+            if (type === 'SHADOWBOX_READY' && !handshakeComplete) {
+                handshakeComplete = true;
+                status.className = 'status status-success';
+                status.textContent = '✅ Handshake complete! Designer is ready.';
+                btnLoad.disabled = false;
+                btnReadonly.disabled = false;
+            }
+            
+            // Log CHANGE messages (may be frequent)
+            if (type === 'SHADOWBOX_CHANGE') {
+                // Only log dimensions to avoid spam
+                const dims = data.design ? `${data.design.artworkWidth}x${data.design.artworkHeight}` : '';
+                logMessage(type, '⬅️ RECEIVED', { dimensions: dims });
+            }
+        });
+        
+        // Send SHADOWBOX_LOAD message
+        btnLoad.addEventListener('click', () => {
+            const message = {
+                type: 'SHADOWBOX_LOAD',
+                data: {
+                    design: {
+                        artworkWidth: '30',
+                        artworkHeight: '24',
+                        frameId: 'walnut-modern',
+                        matType: 'double'
+                    }
+                }
+            };
+            
+            iframe.contentWindow.postMessage(message, '*');
+            logMessage('SHADOWBOX_LOAD', '➡️ SENT', message.data);
+        });
+        
+        // Send SHADOWBOX_SET_READONLY message
+        btnReadonly.addEventListener('click', () => {
+            const message = {
+                type: 'SHADOWBOX_SET_READONLY',
+                data: {
+                    readonly: true
+                }
+            };
+            
+            iframe.contentWindow.postMessage(message, '*');
+            logMessage('SHADOWBOX_SET_READONLY', '➡️ SENT', message.data);
+            
+            // Update button to show readonly is active
+            btnReadonly.textContent = '🔓 Set Editable';
+            btnReadonly.onclick = () => {
+                const msg = {
+                    type: 'SHADOWBOX_SET_READONLY',
+                    data: { readonly: false }
+                };
+                iframe.contentWindow.postMessage(msg, '*');
+                logMessage('SHADOWBOX_SET_READONLY', '➡️ SENT', msg.data);
+                btnReadonly.textContent = '🔒 Set Readonly';
+                btnReadonly.onclick = arguments.callee.caller;
+            };
+        });
+        
+        // Clear log
+        btnClear.addEventListener('click', () => {
+            log.innerHTML = '';
+            messageCount = 0;
+        });
+        
+        // Show loading message
+        logMessage('INFO', 'ℹ️', { message: 'Waiting for iframe to load and send SHADOWBOX_READY...' });
+        
+        // Timeout check
+        setTimeout(() => {
+            if (!handshakeComplete) {
+                status.className = 'status status-error';
+                status.textContent = '❌ Handshake timeout - SHADOWBOX_READY not received';
+                logMessage('ERROR', '⚠️', { message: 'Handshake failed - no READY message received within 5 seconds' });
+            }
+        }, 5000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+<svg width="280" height="44" viewBox="0 0 280 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Frame icon with brand blue -->
+  <rect x="2" y="2" width="40" height="40" stroke="#1D7BC7" stroke-width="2.5" fill="none" rx="1"/>
+  
+  <!-- "Custom Frame" text using web fonts -->
+  <g style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Inter', sans-serif;">
+    <text x="54" y="22" font-size="18" font-weight="600" fill="#1a1a1a" style="letter-spacing: -0.02em;">Custom Frame</text>
+    <text x="54" y="36" font-size="16" font-weight="400" fill="#1a1a1a" style="letter-spacing: -0.01em;">Sizes.com</text>
+  </g>
+</svg>

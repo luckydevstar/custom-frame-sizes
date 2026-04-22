@@ -1,0 +1,17 @@
+{
+  "name": "CustomFrameSizes.com",
+  "short_name": "CustomFrameSizes",
+  "description": "Custom picture frames in exact sizes you need",
+  "icons": [
+    {
+      "src": "/assets/brand/cfs-mark.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#1D7BC7",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/"
+}

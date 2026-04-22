@@ -1,0 +1,9 @@
+# robots.txt for ShadowboxFrames.com
+User-agent: *
+Allow: /
+Disallow: /debug/
+Disallow: /order-dashboard
+Disallow: /order-fulfillment
+Disallow: /pricing-metrics
+Disallow: /test/
+Sitemap: https://shadowboxframes.com/sitemap.xml
