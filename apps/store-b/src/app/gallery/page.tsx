@@ -70,7 +70,7 @@ export default function Gallery() {
       {/* CTA */}
       <section className="bg-muted/50 px-4 py-16">
         <div className="mx-auto max-w-3xl text-center space-y-6">
-          <h2 className="font-serif text-3xl font-bold">Don't see what you're looking for?</h2>
+          <h2 className="font-serif text-3xl font-bold">Don&apos;t see what you&apos;re looking for?</h2>
           <p className="text-muted-foreground">
             Create a completely custom shadowbox frame tailored to your vision.
           </p>

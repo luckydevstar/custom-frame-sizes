@@ -21,7 +21,7 @@ export default function Home() {
           </div>
           <p className="text-base text-muted-foreground max-w-2xl mx-auto leading-relaxed">
             Design shadow box frames in any size, from compact 8×10 display cases to large-format 30×40 jersey frames. 
-            Choose your size down to 1/8" increments, pick your depth, select from premium mat colors, and preview in real time.
+            Choose your size down to 1/8 in. increments, pick your depth, select from premium mat colors, and preview in real time.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4 pt-4">
             <a 
@@ -45,7 +45,7 @@ export default function Home() {
         <div className="mx-auto max-w-6xl">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center">
-              <div className="text-3xl font-bold text-accent mb-2">1/8"</div>
+              <div className="text-3xl font-bold text-accent mb-2">1/8 in.</div>
               <p className="text-sm text-muted-foreground">Precision to 1/8 inch increments</p>
             </div>
             <div className="text-center">
@@ -87,7 +87,7 @@ export default function Home() {
               <div className="space-y-2">
                 <h3 className="font-semibold text-lg">Choose Your Depth</h3>
                 <p className="text-muted-foreground">
-                  Select frame depth from ¾" to 3" depending on what you're displaying.
+                  Select frame depth from ¾ in. to 3 in. depending on what you&apos;re displaying.
                 </p>
               </div>
               <div className="space-y-2">
@@ -122,7 +122,7 @@ export default function Home() {
               </div>
               <h3 className="font-semibold text-lg mb-2">Custom Design</h3>
               <p className="text-muted-foreground">
-                Create exactly what you envision. Real-time preview shows you exactly what you'll receive.
+                Create exactly what you envision. Real-time preview shows you exactly what you&apos;ll receive.
               </p>
             </div>
 
@@ -152,7 +152,7 @@ export default function Home() {
               </div>
               <h3 className="font-semibold text-lg mb-2">Quality Guarantee</h3>
               <p className="text-muted-foreground">
-                Every frame is inspected for quality. If you're not satisfied, we'll make it right.
+                Every frame is inspected for quality. If you&apos;re not satisfied, we&apos;ll make it right.
               </p>
             </div>
           </div>

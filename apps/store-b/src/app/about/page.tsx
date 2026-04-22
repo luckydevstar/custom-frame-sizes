@@ -30,13 +30,13 @@ export default function About() {
             <div className="space-y-6">
               <h2 className="font-serif text-3xl font-bold">Our Mission</h2>
               <p className="text-muted-foreground leading-relaxed">
-                At ShadowboxFrames.com, we believe that what matters most deserves to be displayed beautifully. 
-                Whether it's a cherished memory, a hard-earned achievement, or a treasured collection, 
-                we craft custom shadowbox frames that preserve and honor what's important to you.
+                At ShadowboxFrames.com, we believe that what matters most deserves to be displayed beautifully.
+                Whether it&apos;s a cherished memory, a hard-earned achievement, or a treasured collection,
+                we craft custom shadowbox frames that preserve and honor what&apos;s important to you.
               </p>
               <p className="text-muted-foreground leading-relaxed">
                 Every frame is handcrafted in our US-based workshop with premium materials and attention to detail. 
-                We work with you to create exactly what you envision, down to the 1/8" increment.
+                We work with you to create exactly what you envision, down to the 1/8 in. increment.
               </p>
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function About() {
               <div className="text-4xl mb-4">🎯</div>
               <h3 className="font-semibold text-lg mb-3">Precision</h3>
               <p className="text-muted-foreground text-sm">
-                Custom sizes down to 1/8" increments. We build exactly what you want, not one size fits all.
+                Custom sizes down to 1/8 in. increments. We build exactly what you want, not one size fits all.
               </p>
             </div>
             <div className="bg-background rounded-lg p-8 border border-border">

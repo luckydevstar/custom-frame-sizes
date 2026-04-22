@@ -31,12 +31,12 @@ export default function JerseyFrames() {
               <h2 className="font-serif text-3xl font-bold">Showcase Your Team Spirit</h2>
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  Jersey frames are the perfect way to display and preserve your favorite sports memorabilia. 
-                  Whether it's a signed jersey, team-worn collectible, or your favorite player's number, 
-                  we'll create a frame that does it justice.
+                  Jersey frames are the perfect way to display and preserve your favorite sports memorabilia.
+                  Whether it&apos;s a signed jersey, team-worn collectible, or your favorite player&apos;s number,
+                  we&apos;ll create a frame that does it justice.
                 </p>
                 <p>
-                  Our jersey frames feature premium shadow box construction with deep frames (typically 1.5" to 2.5") 
+                  Our jersey frames feature premium shadow box construction with deep frames (typically 1.5 in. to 2.5 in.)
                   to accommodate the thickness of folded jerseys. We use museum-quality materials and UV-protective glass 
                   to ensure your memorabilia stays protected.
                 </p>
