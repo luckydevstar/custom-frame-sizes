@@ -4,7 +4,7 @@
 import AwsS3 from "@uppy/aws-s3";
 import Uppy from "@uppy/core";
 import { DashboardModal } from "@uppy/react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { Button } from "../ui/button";
 
@@ -19,7 +19,7 @@ import type { ReactNode } from "react";
 interface ObjectUploaderProps {
   maxNumberOfFiles?: number;
   maxFileSize?: number;
-  onGetUploadParameters: () => Promise<{
+  onGetUploadParameters: (file: { name: string; type?: string }) => Promise<{
     method: "PUT";
     url: string;
   }>;
@@ -67,6 +67,7 @@ export function ObjectUploader({
   children,
 }: ObjectUploaderProps) {
   const [showModal, setShowModal] = useState(false);
+  const presignedUrlByFileIdRef = useRef<Map<string, string>>(new Map());
   const [uppy] = useState(() =>
     new Uppy({
       restrictions: {
@@ -85,16 +86,33 @@ export function ObjectUploader({
       .use(AwsS3, {
         shouldUseMultipart: false,
         getUploadParameters: async (file) => {
-          const params = await onGetUploadParameters();
-          // Store the upload URL in file meta so we can access it later
+          const params = await onGetUploadParameters({
+            name: file.name ?? "upload",
+            type: file.type,
+          });
+          presignedUrlByFileIdRef.current.set(file.id, params.url);
           uppy.setFileMeta(file.id, { uploadURL: params.url });
           return params;
         },
       })
       .on("complete", (result) => {
-        onComplete?.(result);
+        const successful = result.successful?.map((f) => {
+          const fromMeta = f.meta?.uploadURL as string | undefined;
+          const fromUppy = (f as { uploadURL?: string }).uploadURL;
+          const fromRef = presignedUrlByFileIdRef.current.get(f.id);
+          presignedUrlByFileIdRef.current.delete(f.id);
+          const uploadURL = fromMeta ?? fromUppy ?? fromRef;
+          return {
+            ...f,
+            meta: { ...f.meta, ...(uploadURL ? { uploadURL } : {}) },
+          };
+        });
+        onComplete?.({
+          ...result,
+          successful: successful ?? [],
+        } as UploadResult<Record<string, unknown>, Record<string, unknown>>);
         setShowModal(false);
-        // Clear files after upload to allow re-uploading
+        presignedUrlByFileIdRef.current.clear();
         uppy.cancelAll();
       }),
   );

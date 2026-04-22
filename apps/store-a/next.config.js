@@ -34,6 +34,7 @@ const nextConfig = {
       { source: '/gallery', destination: '/samples', permanent: true },
       { source: '/print-and-frame', destination: '/designer', permanent: true },
       { source: '/frames/bronz-picture-frame', destination: '/frames/bronze-picture-frame', permanent: true },
+      { source: '/order-fulfillment', destination: '/', permanent: true },
     ];
   },
   async rewrites() {

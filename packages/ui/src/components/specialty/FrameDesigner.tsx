@@ -28,6 +28,7 @@ import {
   checkImageResolution,
   runReplicateUpscaleChain,
   toAbsoluteImageUrlForUpscaling,
+  ingestRemoteOrdersImageIfNeeded,
 } from "@framecraft/core";
 import {
   BRASS_NAMEPLATE_SPECS,
@@ -144,6 +145,8 @@ export function FrameDesigner({
     "preview" | "corner" | "profile" | "lifestyle"
   >("preview");
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [cartProcessingTitle, setCartProcessingTitle] = useState("Adding to cart…");
+  const [cartProcessingDetail, setCartProcessingDetail] = useState<string | undefined>();
   const [previousImage, setPreviousImage] = useState<string | null>(null);
   const prevImageRef = useRef<string | null>(null);
   const [quantity, setQuantity] = useState(1);
@@ -483,51 +486,65 @@ export function FrameDesigner({
     }
   }, [matType, bottomWeighted]);
 
-  const handleGetUploadParameters = async () => {
-    const response = await apiRequest("POST", "/api/objects/upload");
-    const data = await response.json();
-    return {
-      method: "PUT" as const,
-      url: data.uploadURL,
-    };
-  };
-
   const handleUploadComplete = async (
     result: UploadResult<Record<string, unknown>, Record<string, unknown>>,
   ) => {
-    if (result.successful && result.successful.length > 0) {
-      const uploadedFile = result.successful[0];
-      if (!uploadedFile) return;
-      // The upload URL was stored in file meta by PhotoUploadOptions
-      const uploadURL = uploadedFile.meta?.uploadURL as string;
+    if (!result.successful?.length) {
+      const raw = result.failed?.[0]?.error as unknown;
+      const msg =
+        typeof raw === "string"
+          ? raw
+          : raw && typeof raw === "object" && "message" in raw
+            ? String((raw as { message: unknown }).message)
+            : "Upload did not complete.";
+      toast({
+        title: "Upload failed",
+        description: msg,
+        variant: "destructive",
+      });
+      return;
+    }
 
-      if (uploadURL) {
-        try {
-          // Store the image URL for display and future order processing
-          const response = await apiRequest("PUT", "/api/frame-images", { imageURL: uploadURL });
-          const data = await response.json();
+    const uploadedFile = result.successful[0];
+    if (!uploadedFile) return;
+    const uploadURL =
+      (uploadedFile.meta?.uploadURL as string | undefined) ??
+      (uploadedFile as { uploadURL?: string }).uploadURL;
 
-          // Calculate aspect ratio and capture dimensions from uploaded image
-          const img = new Image();
-          img.onload = () => {
-            const ratio = img.width / img.height;
-            setUploadedImageAspectRatio(ratio);
-            setUploadedImageDimensions({ width: img.width, height: img.height });
+    if (!uploadURL) {
+      toast({
+        title: "Upload failed",
+        description: "Missing upload URL after upload.",
+        variant: "destructive",
+      });
+      return;
+    }
 
-            // Always update dimensions to match uploaded photo's aspect ratio
-            const defaultWidth = 16;
-            const defaultHeight = defaultWidth / ratio;
-            setArtworkWidth(defaultWidth.toString());
-            setArtworkHeight(defaultHeight.toFixed(2));
-          };
-          img.src = data.objectPath;
+    try {
+      const response = await apiRequest("PUT", "/api/frame-images", { imageURL: uploadURL });
+      const data = await response.json();
 
-          // Set the image to the object path for display
-          setSelectedImage(data.objectPath);
-        } catch (error) {
-          console.error("Error storing uploaded image:", error);
-        }
-      }
+      const img = new Image();
+      img.onload = () => {
+        const ratio = img.width / img.height;
+        setUploadedImageAspectRatio(ratio);
+        setUploadedImageDimensions({ width: img.width, height: img.height });
+
+        const defaultWidth = 16;
+        const defaultHeight = defaultWidth / ratio;
+        setArtworkWidth(defaultWidth.toString());
+        setArtworkHeight(defaultHeight.toFixed(2));
+      };
+      img.src = data.objectPath;
+
+      setSelectedImage(data.objectPath);
+    } catch (error) {
+      console.error("Error storing uploaded image:", error);
+      toast({
+        title: "Upload failed",
+        description: error instanceof Error ? error.message : "Could not finalize upload.",
+        variant: "destructive",
+      });
     }
   };
 
@@ -605,6 +622,8 @@ export function FrameDesigner({
     }
 
     setIsCheckingOut(true);
+    setCartProcessingTitle("Adding to cart…");
+    setCartProcessingDetail("Preparing your design…");
 
     try {
       // Print-and-frame: optional AI upscale for 300 DPI, then store URL on the line item (no client download).
@@ -623,22 +642,35 @@ export function FrameDesigner({
           targetH
         );
         if (!resolutionCheck.sufficient && resolutionCheck.recommendedUpscale > 1) {
-          toast({
-            title: "AI upscaling",
-            description: `Preparing your image for print (up to ${resolutionCheck.recommendedUpscale}× enhancement).`,
-          });
+          setCartProcessingDetail(
+            `AI upscaling for print (${resolutionCheck.recommendedUpscale}×). This can take a minute…`,
+          );
           const absolute = toAbsoluteImageUrlForUpscaling(selectedImage);
           const result = await runReplicateUpscaleChain(
             absolute,
             resolutionCheck.recommendedUpscale
           );
           if (result.ok && result.outputUrl) {
-            imageUrlForCart = result.outputUrl;
+            const replicateUrl = result.outputUrl;
+            try {
+              setCartProcessingDetail("Saving enhanced image to your order storage…");
+              imageUrlForCart = await ingestRemoteOrdersImageIfNeeded(replicateUrl);
+            } catch (ingestErr) {
+              console.warn("[print-and-frame] R2 ingest of upscale output:", ingestErr);
+              setCartProcessingDetail(
+                ingestErr instanceof Error
+                  ? `Could not store enhanced image permanently: ${ingestErr.message}. Using a temporary link.`
+                  : "Could not store enhanced image permanently; using a temporary link.",
+              );
+              imageUrlForCart = replicateUrl;
+            }
           } else if (!result.ok && result.status !== 503) {
             console.warn("[print-and-frame] Upscale skipped:", result.error);
           }
         }
       }
+
+      setCartProcessingDetail("Adding item to your cart…");
 
       const configForCart: FrameConfiguration = {
         ...frameConfig,
@@ -650,6 +682,7 @@ export function FrameDesigner({
       });
       useCartStore.getState().addItem(cartInput);
 
+      setCartProcessingDetail("Syncing with the store…");
       await addToCartOnly(configForCart, finalTotalPrice, quantity);
 
       toast({
@@ -666,6 +699,8 @@ export function FrameDesigner({
       });
     } finally {
       setIsCheckingOut(false);
+      setCartProcessingTitle("Adding to cart…");
+      setCartProcessingDetail(undefined);
     }
   };
 
@@ -2768,6 +2803,8 @@ export function FrameDesigner({
             }}
             onAddToCart={handleCheckout}
             isProcessing={isCheckingOut}
+            processingTitle={cartProcessingTitle}
+            processingDetail={cartProcessingDetail}
             disabled={
               !isValidDimensions ||
               isTooLarge ||
@@ -3562,7 +3599,6 @@ export function FrameDesigner({
       <PhotoUploadOptions
         open={showUploadModal}
         onClose={() => setShowUploadModal(false)}
-        onGetUploadParameters={handleGetUploadParameters}
         onComplete={handleUploadComplete}
         onUrlSubmit={handleUrlUpload}
         onImageUpdate={(url: string) => setSelectedImage(url)}
