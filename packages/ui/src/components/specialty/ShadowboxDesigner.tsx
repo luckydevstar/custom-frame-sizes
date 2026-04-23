@@ -209,6 +209,17 @@ export function ShadowboxDesigner({
 
   // Brass nameplate configuration (Type B behavior)
   const [brassNameplateConfig, setBrassNameplateConfig] = useState<BrassNameplateConfig>(() => {
+    if (typeof window === "undefined") {
+      return {
+        enabled: false,
+        line1: "",
+        line2: "",
+        line3: "",
+        font: "georgia",
+        color: "brass-black",
+        includeFlag: false,
+      };
+    }
     const params = new URLSearchParams(window.location.search);
     const enabled = params.get("nameplateEnabled") === "true";
     return {
@@ -2055,8 +2066,10 @@ export function ShadowboxDesigner({
                     // Calculate larger display dimensions for dialog - use much larger artwork scale
                     const dialogArtworkScale = 150; // Very large scale for artwork
                     const dialogBorderScale = 40; // Separate smaller scale for borders
-                    const dialogMaxWidth = window.innerWidth * 0.9;
-                    const dialogMaxHeight = window.innerHeight * 0.85;
+                    const vw = typeof window !== "undefined" ? window.innerWidth : 1200;
+                    const vh = typeof window !== "undefined" ? window.innerHeight : 800;
+                    const dialogMaxWidth = vw * 0.9;
+                    const dialogMaxHeight = vh * 0.85;
 
                     // Calculate borders using smaller scale to prevent them eating up space
                     // If no mat, set mat border to 0

@@ -1,0 +1,106 @@
+[
+  {
+    "id": "shadowbox-hero-1",
+    "src": "/assets/hero/shadowbox-hero-1.mp4",
+    "alt": "Custom shadowbox frames showcasing memorabilia and dimensional displays",
+    "weight": 1,
+    "overlay": {
+      "title": "Display Your Story",
+      "subtitle": "Design your custom shadowbox frame in minutes."
+    },
+    "credit": "ShadowboxFrames",
+    "luminance": "medium",
+    "mediaType": "video"
+  },
+  {
+    "id": "shadowbox-hero-2",
+    "src": "/assets/hero/shadowbox-hero-2.mp4",
+    "alt": "Professional shadowbox frames with precision craftsmanship and archival materials",
+    "weight": 1,
+    "overlay": {
+      "title": "Display Your Story",
+      "subtitle": "Design your custom shadowbox frame in minutes."
+    },
+    "credit": "ShadowboxFrames",
+    "luminance": "medium",
+    "mediaType": "video"
+  },
+  {
+    "id": "shadowbox-hero-3",
+    "src": "/assets/hero/shadowbox-hero-3.mp4",
+    "alt": "Handcrafted shadowbox frames displaying collectibles and keepsakes",
+    "weight": 1,
+    "overlay": {
+      "title": "Display Your Story",
+      "subtitle": "Design your custom shadowbox frame in minutes."
+    },
+    "credit": "ShadowboxFrames",
+    "luminance": "medium",
+    "mediaType": "video"
+  },
+  {
+    "id": "shadowbox-hero-4",
+    "src": "/assets/hero/shadowbox-hero-4.mp4",
+    "alt": "Premium shadowbox frames with archival backing and deep profiles",
+    "weight": 1,
+    "overlay": {
+      "title": "Display Your Story",
+      "subtitle": "Design your custom shadowbox frame in minutes."
+    },
+    "credit": "ShadowboxFrames",
+    "luminance": "medium",
+    "mediaType": "video"
+  },
+  {
+    "id": "shadowbox-hero-5",
+    "src": "/assets/hero/shadowbox-hero-5.mp4",
+    "alt": "Custom-built shadowbox frames for sports memorabilia and awards",
+    "weight": 1,
+    "overlay": {
+      "title": "Display Your Story",
+      "subtitle": "Design your custom shadowbox frame in minutes."
+    },
+    "credit": "ShadowboxFrames",
+    "luminance": "medium",
+    "mediaType": "video"
+  },
+  {
+    "id": "shadowbox-hero-6",
+    "src": "/assets/hero/shadowbox-hero-6.mp4",
+    "alt": "Elegant shadowbox frames with custom matting and professional finishing",
+    "weight": 1,
+    "overlay": {
+      "title": "Display Your Story",
+      "subtitle": "Design your custom shadowbox frame in minutes."
+    },
+    "credit": "ShadowboxFrames",
+    "luminance": "medium",
+    "mediaType": "video"
+  },
+  {
+    "id": "shadowbox-hero-7",
+    "src": "/assets/hero/shadowbox-hero-7.mp4",
+    "alt": "Shadowbox frames showcasing dimensional art and preserved florals",
+    "weight": 1,
+    "overlay": {
+      "title": "Display Your Story",
+      "subtitle": "Design your custom shadowbox frame in minutes."
+    },
+    "credit": "ShadowboxFrames",
+    "luminance": "medium",
+    "mediaType": "video"
+  },
+  {
+    "id": "shadowbox-hero-8",
+    "src": "/assets/hero/shadowbox-hero-8.mp4",
+    "alt": "Professional shadowbox displays with precision-cut openings and archival mounting",
+    "weight": 1,
+    "overlay": {
+      "title": "Display Your Story",
+      "subtitle": "Design your custom shadowbox frame in minutes."
+    },
+    "credit": "ShadowboxFrames",
+    "luminance": "medium",
+    "mediaType": "video"
+  }
+]

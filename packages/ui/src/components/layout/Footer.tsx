@@ -40,6 +40,9 @@ export interface FooterProps {
    * If not provided, form will submit but do nothing
    */
   onNewsletterSubmit?: (email: string) => void;
+
+  /** Override newsletter column body copy (e.g. store-specific) */
+  newsletterDescription?: string;
 }
 
 // Default footer links (can be overridden via props or store config)
@@ -77,7 +80,7 @@ const defaultLinks: FooterLinks = {
   ],
 };
 
-export function Footer({ links, onNewsletterSubmit }: FooterProps) {
+export function Footer({ links, onNewsletterSubmit, newsletterDescription }: FooterProps) {
   const currentYear = new Date().getFullYear();
   const storeConfig = useStoreConfig();
 
@@ -135,7 +138,9 @@ export function Footer({ links, onNewsletterSubmit }: FooterProps) {
           {/* Newsletter Column */}
           <div>
             <h3 className="mb-4 text-base font-semibold text-white">Stay Updated</h3>
-            <p className="mb-3 text-sm text-white/80">Get framing tips and exclusive offers</p>
+            <p className="mb-3 text-sm text-white/80">
+              {newsletterDescription ?? "Get framing tips and exclusive offers"}
+            </p>
             <form onSubmit={handleNewsletterSubmit} className="space-y-2">
               <label htmlFor="newsletter-email" className="sr-only">
                 Email address

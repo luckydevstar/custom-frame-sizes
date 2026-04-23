@@ -14,7 +14,7 @@ import { useCartStore, cartSelectors } from "@framecraft/core/stores";
 import { ShoppingCart, Phone, Mail, Menu } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, type ReactNode } from "react";
+import { cloneElement, isValidElement, useState, type ReactNode } from "react";
 
 import { Logo } from "../brand/Logo";
 import { ComponentsMegaMenu } from "../navigation/ComponentsMegaMenu";
@@ -182,12 +182,24 @@ export function Header({
   // Default search bar
   const displaySearchBar = searchBar !== undefined ? searchBar : <SearchBar />;
 
-  // Default mobile navigation
+  const closeMobileMenu = () => setMobileMenuOpen(false);
+
+  // Default mobile navigation; inject onNavigate so custom menus close the sheet (e.g. store-b)
   const displayMobileNavigation =
     mobileNavigation !== undefined ? (
-      mobileNavigation
+      isValidElement<{ onNavigate?: () => void }>(mobileNavigation) ? (
+        cloneElement(mobileNavigation, {
+          onNavigate: () => {
+            const props = mobileNavigation.props as { onNavigate?: () => void };
+            props.onNavigate?.();
+            closeMobileMenu();
+          },
+        })
+      ) : (
+        mobileNavigation
+      )
     ) : (
-      <MobileNavigation onNavigate={() => setMobileMenuOpen(false)} />
+      <MobileNavigation onNavigate={closeMobileMenu} />
     );
 
   // Default cart click handler: use callback if provided, else navigate to cart page

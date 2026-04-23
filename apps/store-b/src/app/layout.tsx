@@ -1,12 +1,14 @@
 import "./globals.css";
 import { StoreProvider } from "@framecraft/core";
 import { TooltipProvider } from "@framecraft/ui";
-import { Header, Footer } from "@framecraft/ui/components/layout";
+import { Footer } from "@framecraft/ui/components/layout";
 import { Toaster } from "@framecraft/ui/components/ui/toaster";
 import { Outfit, Cormorant_Garamond } from "next/font/google";
 import Script from "next/script";
 
 import { brandConfig } from "../brand.config";
+import { shadowboxFooterLinks } from "../config/shadowbox-footer-links";
+import { StoreBHeader } from "../components/layout/store-b-header";
 import { QueryProvider } from "../components/providers/query-provider";
 import { ThemeScript } from "../components/providers/theme-script";
 
@@ -94,11 +96,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 <a href="#main-content" className="sr-only sr-only:focus">
                   Skip to main content
                 </a>
-                <Header />
+                <StoreBHeader />
                 <main id="main-content" className="flex-1">
                   {children}
                 </main>
-                <Footer />
+                <Footer
+                  links={shadowboxFooterLinks}
+                  newsletterDescription="Get shadowbox framing tips and exclusive offers"
+                />
                 <Toaster />
               </div>
             </TooltipProvider>
