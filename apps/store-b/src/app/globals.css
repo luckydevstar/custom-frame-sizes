@@ -29,6 +29,14 @@
     --input: 30 15% 85%;
     --ring: 44 47% 37%;
     --radius: 0.5rem;
+    /* b-shadow-box-frames-original/index.css */
+    --section-gap: 3rem;
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --section-gap: 4rem;
+    }
   }
 
   .dark {
@@ -120,5 +128,23 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* b-shadow-box-frames-original card hover (We Also Offer, etc.) */
+@layer utilities {
+  .home-section-stack {
+    gap: var(--section-gap);
+  }
+  .hover-elevate {
+    transition: transform 280ms cubic-bezier(0.19, 1, 0.22, 1), filter 280ms cubic-bezier(0.19, 1, 0.22, 1);
+    will-change: transform;
+  }
+  .hover-elevate:hover {
+    transform: scale3d(1.008, 1.008, 1);
+    filter: brightness(0.95);
+  }
+  .dark .hover-elevate:hover {
+    filter: brightness(1.1);
   }
 }

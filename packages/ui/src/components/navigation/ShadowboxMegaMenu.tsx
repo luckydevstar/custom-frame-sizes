@@ -1,12 +1,32 @@
 "use client";
 
-import { Palette, Shirt, Award, ArrowRight, Heart, Banknote, Circle } from "lucide-react";
+import { Palette, Shirt, Award, ArrowRight, Heart, Banknote, Circle, Layers, Paintbrush } from "lucide-react";
 import Link from "next/link";
 
 import { PostageStampIcon } from "../icons/PostageStampIcon";
 
-export function ShadowboxMegaMenu() {
+export interface ShadowboxMegaMenuProps {
+  /**
+   * Primary hub for shadowbox designer / collection (ShadowboxFrames.com uses `/shadowbox/designer`).
+   * @default "/shadowbox"
+   */
+  viewAllHref?: string;
+}
+
+export function ShadowboxMegaMenu({ viewAllHref = "/shadowbox" }: ShadowboxMegaMenuProps) {
   const browseOptions = [
+    {
+      label: "Browse by Depth",
+      href: "/shadowboxes/depth",
+      icon: Layers,
+      description: "Find the right depth for your items",
+    },
+    {
+      label: "Browse by Style",
+      href: "/shadowboxes/styles",
+      icon: Paintbrush,
+      description: "Classic, modern, rustic & more",
+    },
     {
       label: "Browse by Color",
       href: "/shadowboxes/colors",
@@ -60,7 +80,7 @@ export function ShadowboxMegaMenu() {
         {/* Browse Options */}
         <div>
           {/* View All - Featured Link */}
-          <Link href="/shadowbox" data-testid="link-megamenu-view-all-shadowboxes">
+          <Link href={viewAllHref} data-testid="link-megamenu-view-all-shadowboxes">
             <div className="flex items-center justify-between px-3 py-3 mb-3 rounded-md bg-primary/5 border border-primary/20 hover-elevate active-elevate-2">
               <div>
                 <div className="font-bold text-sm text-primary">View All Shadowboxes</div>

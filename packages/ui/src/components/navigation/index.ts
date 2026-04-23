@@ -11,5 +11,6 @@ export type { SearchBarProps } from "./SearchBar";
 export { MegaMenu } from "./MegaMenu";
 export { PictureFramesMegaMenu } from "./PictureFramesMegaMenu";
 export { ShadowboxMegaMenu } from "./ShadowboxMegaMenu";
+export type { ShadowboxMegaMenuProps } from "./ShadowboxMegaMenu";
 export { ComponentsMegaMenu } from "./ComponentsMegaMenu";
 export { MobileNavigation } from "./MobileNavigation";
