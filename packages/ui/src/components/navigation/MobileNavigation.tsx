@@ -37,6 +37,9 @@ import {
   Circle,
   Film,
   SprayCan,
+  LayoutDashboard,
+  Gem,
+  Paintbrush,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -46,9 +49,14 @@ import { Button } from "../ui/button";
 
 interface MobileNavigationProps {
   onNavigate?: () => void;
+  /**
+   * Shadowbox designer hub (ShadowboxFrames.com uses `/shadowbox/designer`; store-a uses `/shadowbox`).
+   * @default "/shadowbox"
+   */
+  shadowboxHubHref?: string;
 }
 
-export function MobileNavigation({ onNavigate }: MobileNavigationProps) {
+export function MobileNavigation({ onNavigate, shadowboxHubHref = "/shadowbox" }: MobileNavigationProps) {
   const storeConfig = useStoreConfig();
 
   const handleNavigate = () => {
@@ -155,14 +163,35 @@ export function MobileNavigation({ onNavigate }: MobileNavigationProps) {
                   asChild
                   onClick={handleNavigate}
                 >
-                  <Link href="/shadowbox" data-testid="link-mobile-shadowboxes">
+                  <Link href={shadowboxHubHref} data-testid="link-mobile-shadowboxes">
                     <Box className="h-4 w-4 mr-3 text-muted-foreground" />
                     <span>All Shadowboxes</span>
                   </Link>
                 </Button>
 
-                {/* Shadowbox Browse Option */}
                 <div className="ml-7 space-y-1 border-l-2 border-muted pl-3">
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start h-10 text-sm pl-0"
+                    asChild
+                    onClick={handleNavigate}
+                  >
+                    <Link href="/shadowboxes/depth" data-testid="link-mobile-shadowboxes-by-depth">
+                      <Layers className="h-3.5 w-3.5 mr-2.5 text-muted-foreground" />
+                      Browse by Depth
+                    </Link>
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start h-10 text-sm pl-0"
+                    asChild
+                    onClick={handleNavigate}
+                  >
+                    <Link href="/shadowboxes/styles" data-testid="link-mobile-shadowboxes-by-style">
+                      <Paintbrush className="h-3.5 w-3.5 mr-2.5 text-muted-foreground" />
+                      Browse by Style
+                    </Link>
+                  </Button>
                   <Button
                     variant="ghost"
                     className="w-full justify-start h-10 text-sm pl-0"
@@ -184,6 +213,17 @@ export function MobileNavigation({ onNavigate }: MobileNavigationProps) {
                 <div className="text-xs font-semibold text-muted-foreground px-0 py-2">
                   SPECIALTY FRAMES
                 </div>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start h-10 text-sm pl-0"
+                  asChild
+                  onClick={handleNavigate}
+                >
+                  <Link href="/bulletin-board-designer" data-testid="link-mobile-bulletin-boards-pf">
+                    <LayoutDashboard className="h-4 w-4 mr-3 text-muted-foreground" />
+                    Bulletin Boards
+                  </Link>
+                </Button>
                 <Button
                   variant="ghost"
                   className="w-full justify-start h-10 text-sm pl-0"
@@ -212,9 +252,31 @@ export function MobileNavigation({ onNavigate }: MobileNavigationProps) {
                   asChild
                   onClick={handleNavigate}
                 >
+                  <Link href="/challenge-coin-frames" data-testid="link-mobile-challenge-coin-frames">
+                    <Award className="h-4 w-4 mr-3 text-muted-foreground" />
+                    Challenge Coin Frames
+                  </Link>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start h-10 text-sm pl-0"
+                  asChild
+                  onClick={handleNavigate}
+                >
                   <Link href="/comic-book-frames" data-testid="link-mobile-comic-frames">
                     <Book className="h-4 w-4 mr-3 text-muted-foreground" />
                     Comic Book Frames
+                  </Link>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start h-10 text-sm pl-0"
+                  asChild
+                  onClick={handleNavigate}
+                >
+                  <Link href="/specialty/diamond-painting" data-testid="link-mobile-diamond-painting-frames">
+                    <Gem className="h-4 w-4 mr-3 text-muted-foreground" />
+                    Diamond Painting Frames
                   </Link>
                 </Button>
                 <Button
@@ -237,6 +299,17 @@ export function MobileNavigation({ onNavigate }: MobileNavigationProps) {
                   <Link href="/card-frames" data-testid="link-mobile-card-frames">
                     <CreditCard className="h-4 w-4 mr-3 text-muted-foreground" />
                     Graded Card Frames
+                  </Link>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start h-10 text-sm pl-0"
+                  asChild
+                  onClick={handleNavigate}
+                >
+                  <Link href="/specialty/latch-hook" data-testid="link-mobile-latch-hook-frames">
+                    <Scissors className="h-4 w-4 mr-3 text-muted-foreground" />
+                    Latch Hook Frames
                   </Link>
                 </Button>
                 <Button
@@ -281,6 +354,17 @@ export function MobileNavigation({ onNavigate }: MobileNavigationProps) {
                   <Link href="/newspaper-frames" data-testid="link-mobile-newspaper-frames">
                     <Newspaper className="h-4 w-4 mr-3 text-muted-foreground" />
                     Newspaper Frames
+                  </Link>
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="w-full justify-start h-10 text-sm pl-0"
+                  asChild
+                  onClick={handleNavigate}
+                >
+                  <Link href="/specialty/paint-by-number" data-testid="link-mobile-paint-by-number-frames">
+                    <Paintbrush className="h-4 w-4 mr-3 text-muted-foreground" />
+                    Paint by Number Frames
                   </Link>
                 </Button>
                 <Button

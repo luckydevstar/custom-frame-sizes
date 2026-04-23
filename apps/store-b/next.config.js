@@ -65,6 +65,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'assets.customframesizes.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'shared-assets.customframesizes.com',
+      },
     ],
   },
   experimental: {
