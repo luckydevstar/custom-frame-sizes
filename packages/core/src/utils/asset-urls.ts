@@ -64,6 +64,19 @@ function normalizeCdnUrl(url: string): string {
 }
 
 /**
+ * Optional base URL for `frames/...` paths only (SKU edge/corner photos in the shared catalog).
+ * Use when the store CDN (e.g. brand bucket) does not contain the full frames/ tree yet.
+ */
+function getFramesCatalogCdnUrl(): string | null {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (typeof process !== "undefined" && process.env) {
+    const raw = process.env.NEXT_PUBLIC_CDN_FRAMES_CATALOG_URL;
+    if (raw) return normalizeCdnUrl(String(raw).replace(/\/$/, ""));
+  }
+  return null;
+}
+
+/**
  * Get CDN URL for a shared asset (frames, mats, comic, etc.)
  *
  * @param path - Relative path (e.g., "frames/8576/corner.jpg" or "comic/inserts/golden-silver-bronze/ActionComics_1.jpg")
@@ -131,6 +144,10 @@ export function getStoreBaseAssetUrl(path: string): string {
     (cleanPath.includes("corner_a") || cleanPath.includes("profile_a"))
   ) {
     cleanPath = normalizeCanvasImagePath(cleanPath);
+  }
+  const framesCatalogBase = getFramesCatalogCdnUrl();
+  if (framesCatalogBase && cleanPath.startsWith("frames/")) {
+    return `${framesCatalogBase}/${cleanPath}`;
   }
   if (cdnUrl) {
     return `${normalizeCdnUrl(cdnUrl)}/${cleanPath}`;
@@ -295,11 +312,13 @@ export function isCdnConfigured(): boolean {
 export function getCdnConfig(): {
   sharedUrl: string | null;
   storeUrl: string | null;
+  framesCatalogUrl: string | null;
   isConfigured: boolean;
 } {
   return {
     sharedUrl: getSharedCdnUrl(),
     storeUrl: getStoreCdnUrl(),
+    framesCatalogUrl: getFramesCatalogCdnUrl(),
     isConfigured: isCdnConfigured(),
   };
 }
