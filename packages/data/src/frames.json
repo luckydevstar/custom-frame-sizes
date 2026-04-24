@@ -15510,5 +15510,336 @@
       "rightUrl": "/assets/canvas/textures/11351_right.jpg"
     },
     "frameClass": "canvas"
+  },
+  {
+    "id": "ultra-deep-matte-black",
+    "name": "Ultra Deep Black Shadow Box",
+    "brandSubtitle": "Vault Frame",
+    "material": "Wood",
+    "color": "#000000",
+    "colorName": "Black",
+    "pricePerInch": 0,
+    "borderColor": "#000000",
+    "mouldingWidth": 1.25,
+    "usableDepth": 3.5,
+    "category": "shadowbox",
+    "shopifyVariantId": null,
+    "sku": "83946",
+    "thumbnail": "/frames/83946/83946_bottom.jpg",
+    "featured": false,
+    "shortDescription": "Our deepest shadowbox. 3.5 inches of display depth in matte black",
+    "featuredDescription": "Three and a half inches of interior depth behind a 1¼-inch-wide matte black moulding. Nearly twice as deep as our next-deepest frame, this is built for items that nothing else can hold. full helmets, thick sculpture, oversized dried bouquets, multi-layer memorial displays, or stacked memorabilia arrangements. The extra depth means contents sit well behind the acrylic with room to spare. The matte black finish absorbs light and directs attention inward, making dimensional objects appear to float inside the frame.",
+    "dimensionalDiagram": "/frames/83946/83946-dim.png",
+    "alternateImages": [
+      {
+        "type": "designer",
+        "url": "/frames/83946/83946_top.jpg",
+        "alt": "Ultra Deep Black Shadowbox top edge view showing matte black finish with 1.25 inch moulding width and 3.5 inch usable depth for custom shadowbox frame designer"
+      },
+      {
+        "type": "designer",
+        "url": "/frames/83946/83946_bottom.jpg",
+        "alt": "Ultra Deep Black Shadowbox bottom edge view displaying black wood profile with 1.25 inch moulding width and 3.5 inch usable depth for shadowbox designer tool"
+      },
+      {
+        "type": "designer",
+        "url": "/frames/83946/83946_left.jpg",
+        "alt": "Ultra Deep Black Shadowbox left edge view showing consistent black finish with 1.25 inch moulding width and 3.5 inch usable depth for custom frame visualization"
+      },
+      {
+        "type": "designer",
+        "url": "/frames/83946/83946_right.jpg",
+        "alt": "Ultra Deep Black Shadowbox right edge view displaying uniform matte black surface with precise 1.25 inch moulding width and 3.5 inch usable depth dimensions"
+      },
+      {
+        "type": "corner",
+        "url": "/frames/83946/83946_corner_a.png",
+        "alt": "Ultra Deep Black Shadowbox corner detail showing precision mitered joint with matte black finish and 1.25 inch moulding width with 3.5 inch usable depth for ultra-deep shadowbox displays"
+      },
+      {
+        "type": "profile",
+        "url": "/frames/83946/83946-pro-a.jpg",
+        "alt": "Ultra Deep Black Shadowbox profile view showing 1.25 inch moulding width with maximum 3.5 inch usable depth channel for helmets sculptures thick collectibles and layered memorabilia display in matte black finish"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_01.png",
+        "alt": "Ultra Deep Black Shadowbox displaying a preserved dried wedding bouquet with ivory roses and eucalyptus"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_02.png",
+        "alt": "Ultra Deep Black Shadowbox with a vintage baseball mitt and ball mounted inside"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_03.png",
+        "alt": "Ultra Deep Black Shadowbox displaying mounted boxing gloves"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_04.png",
+        "alt": "Ultra Deep Black Shadowbox with a wedding cake topper and dried flower accents"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_05.png",
+        "alt": "Ultra Deep Black Shadowbox displaying vintage baby shoes on cream backing"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_06.png",
+        "alt": "Ultra Deep Black Shadowbox with a championship belt mounted on navy backing"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_07.png",
+        "alt": "Ultra Deep Black Shadowbox displaying military medals ribbons and a folded flag"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_08.png",
+        "alt": "Ultra Deep Black Shadowbox with wedding heels and a folded lace veil"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_09.png",
+        "alt": "Ultra Deep Black Shadowbox displaying a large preserved bridal bouquet with peonies and garden roses"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_10.png",
+        "alt": "Woman admiring an Ultra Deep Black Shadowbox with a preserved wedding bouquet on the wall"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_11.png",
+        "alt": "Man hanging an Ultra Deep Black Shadowbox containing a baseball mitt in a modern den"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_12.png",
+        "alt": "Couple viewing their Ultra Deep Black Shadowbox wedding display on a gallery wall"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_13.png",
+        "alt": "Father and son looking at boxing gloves in an Ultra Deep Black Shadowbox"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_14.png",
+        "alt": "Woman arranging an Ultra Deep Black Shadowbox with a preserved bridal bouquet"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_15.png",
+        "alt": "Veteran standing next to an Ultra Deep Black Shadowbox military display"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_16.png",
+        "alt": "Parents with newborn admiring baby shoes in an Ultra Deep Black Shadowbox"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_17.png",
+        "alt": "Friends viewing a championship belt in an Ultra Deep Black Shadowbox"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_18.png",
+        "alt": "Man holding an Ultra Deep Black Shadowbox with a wedding cake topper"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_19.png",
+        "alt": "Grandmother receiving a military display Ultra Deep Black Shadowbox as a gift"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_20.png",
+        "alt": "Athlete standing proudly next to boxing gloves in an Ultra Deep Black Shadowbox"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83946/lifestyle_ultra_21.png",
+        "alt": "Bride holding an Ultra Deep Black Shadowbox with her preserved bouquet"
+      }
+    ],
+    "displayName": "Ultra Deep Black Shadow Box"
+  },
+  {
+    "id": "ultra-deep-bright-white",
+    "name": "Ultra Deep White Shadow Box",
+    "brandSubtitle": "Archive Frame",
+    "material": "Wood",
+    "color": "#FFFFFF",
+    "colorName": "White",
+    "pricePerInch": 0,
+    "borderColor": "#E8E8E8",
+    "mouldingWidth": 1.25,
+    "usableDepth": 3.5,
+    "category": "shadowbox",
+    "shopifyVariantId": null,
+    "sku": "83947",
+    "thumbnail": "/frames/83947/83947_bottom.jpg",
+    "featured": false,
+    "shortDescription": "Our deepest shadowbox. 3.5 inches of display depth in bright white",
+    "featuredDescription": "Three and a half inches of interior depth behind a 1¼-inch-wide bright white moulding. Nearly twice as deep as our next-deepest frame, this is the frame for items that need serious room. full helmets, thick sculpture, oversized dried bouquets, multi-layer memorial displays, or stacked memorabilia. The white finish keeps heavy, dimensional contents from feeling visually heavy on the wall, making it ideal for living rooms and bedrooms where you want warmth without weight.",
+    "dimensionalDiagram": "/frames/83947/83947-dim.png",
+    "alternateImages": [
+      {
+        "type": "designer",
+        "url": "/frames/83947/83947_top.jpg",
+        "alt": "Ultra Deep White Shadowbox top edge view showing pristine white finish with 1.25 inch moulding width and 3.5 inch usable depth for custom shadowbox frame designer"
+      },
+      {
+        "type": "designer",
+        "url": "/frames/83947/83947_bottom.jpg",
+        "alt": "Ultra Deep White Shadowbox bottom edge view displaying clean white profile with 1.25 inch moulding width and 3.5 inch usable depth for shadowbox designer tool"
+      },
+      {
+        "type": "designer",
+        "url": "/frames/83947/83947_left.jpg",
+        "alt": "Ultra Deep White Shadowbox left edge view showing consistent white finish with 1.25 inch moulding width and 3.5 inch usable depth for custom frame visualization"
+      },
+      {
+        "type": "designer",
+        "url": "/frames/83947/83947_right.jpg",
+        "alt": "Ultra Deep White Shadowbox right edge view displaying uniform white surface with precise 1.25 inch moulding width and 3.5 inch usable depth dimensions"
+      },
+      {
+        "type": "corner",
+        "url": "/frames/83947/83947_corner_a.png",
+        "alt": "Ultra Deep White Shadowbox corner detail showing precision mitered joint with bright white finish and 1.25 inch moulding width with 3.5 inch usable depth for ultra-deep shadowbox displays"
+      },
+      {
+        "type": "profile",
+        "url": "/frames/83947/83947-pro-a.jpg",
+        "alt": "Ultra Deep White Shadowbox profile view showing 1.25 inch moulding width with maximum 3.5 inch usable depth channel for helmets sculptures thick collectibles and layered memorabilia display in bright white finish"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_01.png",
+        "alt": "Ultra Deep White Shadowbox displaying a preserved dried wedding bouquet with ivory roses and eucalyptus"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_02.png",
+        "alt": "Ultra Deep White Shadowbox with a vintage baseball mitt and ball mounted inside"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_03.png",
+        "alt": "Ultra Deep White Shadowbox displaying mounted boxing gloves on gray backing"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_04.png",
+        "alt": "Ultra Deep White Shadowbox with a wedding cake topper and dried flower accents"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_05.png",
+        "alt": "Ultra Deep White Shadowbox displaying vintage baby shoes in a pastel nursery"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_06.png",
+        "alt": "Ultra Deep White Shadowbox with a championship belt mounted on navy backing"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_07.png",
+        "alt": "Ultra Deep White Shadowbox displaying military medals ribbons and a folded flag"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_08.png",
+        "alt": "Ultra Deep White Shadowbox with wedding heels and a folded lace veil"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_09.png",
+        "alt": "Ultra Deep White Shadowbox displaying a large preserved bridal bouquet"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_10.png",
+        "alt": "Ultra Deep White Shadowbox with a christening outfit on cream backing"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_11.png",
+        "alt": "Woman smiling at camera holding an Ultra Deep White Shadowbox with a preserved bouquet"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_12.png",
+        "alt": "Man hanging an Ultra Deep White Shadowbox containing a baseball mitt"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_13.png",
+        "alt": "Happy couple standing next to their Ultra Deep White Shadowbox wedding display"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_14.png",
+        "alt": "Mother smiling at camera holding an Ultra Deep White Shadowbox with baby shoes"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_15.png",
+        "alt": "Man smiling at camera holding an Ultra Deep White Shadowbox with boxing gloves"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_16.png",
+        "alt": "Veteran standing next to an Ultra Deep White Shadowbox military display"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_17.png",
+        "alt": "Bride holding an Ultra Deep White Shadowbox with her preserved bouquet"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_18.png",
+        "alt": "Couple with an Ultra Deep White Shadowbox featuring a cake topper"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_19.png",
+        "alt": "Grandmother receiving a military display Ultra Deep White Shadowbox as a gift"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_20.png",
+        "alt": "Woman smiling at camera holding an Ultra Deep White Shadowbox with a championship belt"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_21.png",
+        "alt": "Father smiling at camera holding Ultra Deep White Shadowbox with christening outfit"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_22.png",
+        "alt": "Two friends admiring a large bridal bouquet in an Ultra Deep White Shadowbox on the wall"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_23.png",
+        "alt": "Man carrying an Ultra Deep White Shadowbox with a baseball mitt through a hallway"
+      },
+      {
+        "type": "lifestyle",
+        "url": "/frames/83947/lifestyle_ultra_24.png",
+        "alt": "Woman standing next to a preserved bouquet in an Ultra Deep White Shadowbox on the wall"
+      }
+    ],
+    "displayName": "Ultra Deep White Shadow Box"
   }
 ]

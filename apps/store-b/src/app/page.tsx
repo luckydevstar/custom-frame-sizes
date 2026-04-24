@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { HomePageContent } from "./home-page-content";
+import { HomePageContent } from "@/components/home/home-page-content";
 
 /** Matches b-shadow-box-frames-original Home.tsx <Seo /> defaults */
 export const metadata: Metadata = {

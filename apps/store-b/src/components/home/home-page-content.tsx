@@ -16,10 +16,15 @@ import {
 import heroImagesDataRaw from "@/data/heroImages.json";
 
 import { brandConfig } from "@/brand.config";
-import { FinalCta } from "@/components/home/final-cta";
-import { HeroTrustStrip } from "@/components/home/hero-trust-strip";
-import { ShadowboxSeoTextBlock } from "@/components/home/shadowbox-seo-text-block";
-import { WeAlsoOffer } from "@/components/home/we-also-offer";
+import {
+  shadowboxHomeFaqs,
+  shadowboxHowItWorksConfig,
+  shadowboxValuePropsConfig,
+} from "@/config/shadowbox-home";
+import { FinalCta } from "./final-cta";
+import { HeroTrustStrip } from "./hero-trust-strip";
+import { ShadowboxSeoTextBlock } from "./shadowbox-seo-text-block";
+import { WeAlsoOffer } from "./we-also-offer";
 
 const heroImagesData = heroImagesDataRaw as HeroImage[];
 
@@ -41,8 +46,8 @@ export function HomePageContent() {
   return (
     <div>
       <Hero
-        title="Handcrafted Shadow Box Frames for Your Story"
-        subtitle="Every meaningful moment deserves more than a flat frame. We handcraft each shadow box in our workshop to give your cherished objects the depth, protection, and beauty they deserve."
+        title="Display Your Story"
+        subtitle="Design your custom shadowbox frame in minutes."
         ctaPrimary={{ label: "Design Your Shadowbox", href: "#designer" }}
         ctaSecondary={{ label: "Browse Shadow Boxes", href: "/shadowbox" }}
         heroImagesData={heroImagesData}
@@ -54,7 +59,8 @@ export function HomePageContent() {
           heightMobile: "35vh",
           objectPosition: "center center",
         }}
-        showTrustIndicators={false}
+        showTrustIndicators
+        titleEmphasisLastWord
       />
       <HeroTrustStrip />
 
@@ -83,14 +89,25 @@ export function HomePageContent() {
       </div>
 
       <div className="flex flex-col home-section-stack">
-        {homeSections.howItWorks && <HowItWorks />}
+        {homeSections.howItWorks && <HowItWorks config={shadowboxHowItWorksConfig} />}
         {showTestimonial && <TestimonialCarousel />}
-        {homeSections.valueProps && <ValueProps />}
-        <ShadowboxShowcase frames={shadowboxFrames} shadowboxLink="/shadowbox" />
+        {homeSections.valueProps && <ValueProps config={shadowboxValuePropsConfig} />}
+        <ShadowboxShowcase
+          frames={shadowboxFrames}
+          shadowboxLink="/shadowbox"
+          variant="shadowboxframes"
+        />
         <GlazingShowcase />
         <MatDesignerShowcase />
         <SpecialtyDesignersShowcase />
-        {homeSections.faqMini && <FaqMini />}
+        {homeSections.faqMini && (
+          <FaqMini
+            faqs={shadowboxHomeFaqs}
+            sectionTitle="Questions we hear most"
+            sectionSubtitle="Quick answers about our handcrafted shadow box frames."
+            viewAllStyle="link"
+          />
+        )}
         <ShadowboxSeoTextBlock />
         <FinalCta />
         <WeAlsoOffer />

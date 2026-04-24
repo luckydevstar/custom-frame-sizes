@@ -358,6 +358,7 @@ export type {
   FrameStylesShowcaseProps,
   StyleInspirationSectionProps,
   ShadowboxShowcaseProps,
+  ShadowboxShowcaseVariant,
   CanvasFramesShowcaseProps,
 } from "./components/home";
 

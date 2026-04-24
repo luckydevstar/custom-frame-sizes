@@ -169,7 +169,33 @@ export function getFrameSlug(frameId: string): string {
     "silver-wood": "silver-wood",
     "pink-wood": "pink-wood",
     "6301": "museum-bronze", // Legacy SKU support
-    // Add more frame-specific slugs here as new frame pages are created
+    // ShadowboxFrames.com / b-shadow-box-frames-original shadowbox slugs (SEO paths under /shadowbox/)
+    "standard-depth-matte-black": "classic-matte-black-shadow-box",
+    "standard-depth-bright-white": "crisp-white-shadow-box",
+    "deep-wide-profile-black": "grand-black-deep-shadow-box",
+    "ultra-deep-two-tone-walnut": "dual-tone-walnut-shadow-box",
+    "deep-slim-matte-black": "narrow-black-deep-shadow-box",
+    "standard-depth-honey-oak": "warm-oak-shadow-box",
+    "deep-rustic-walnut": "reclaimed-walnut-deep-shadow-box",
+    "standard-depth-coastal-whitewash": "driftwood-white-shadow-box",
+    "deep-architectural-matte-black": "modern-matte-black-shadow-box",
+    "extra-deep-matte-black": "deep-black-shadow-box",
+    "extra-deep-bright-white": "deep-white-shadow-box",
+    "extra-deep-rich-walnut": "deep-walnut-shadow-box",
+    "medium-depth-gloss-white": "high-gloss-white-shadow-box",
+    "deep-charcoal-satin": "charcoal-deep-shadow-box",
+    "deep-natural-maple": "maple-deep-shadow-box",
+    "standard-depth-barn-black": "barnwood-black-shadow-box",
+    "medium-depth-glossy-black": "high-gloss-black-shadow-box",
+    "medium-depth-stainless-silver": "brushed-silver-shadow-box",
+    "medium-depth-gold": "warm-gold-shadow-box",
+    "standard-depth-barn-blue": "barnwood-blue-shadow-box",
+    "standard-depth-natural-wood": "natural-wood-shadow-box",
+    "standard-depth-modern-white": "pure-white-shadow-box",
+    "standard-depth-modern-black": "modern-black-shadow-box",
+    "standard-depth-modern-brown": "modern-brown-shadow-box",
+    "ultra-deep-matte-black": "ultra-deep-black-shadow-box",
+    "ultra-deep-bright-white": "ultra-deep-white-shadow-box",
   };
 
   let baseSlug: string;

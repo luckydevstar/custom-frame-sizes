@@ -1,6 +1,7 @@
 "use client";
 
 import { useIntersectionAnimation } from "@framecraft/core";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
@@ -14,6 +15,10 @@ export interface FAQ {
 export interface FaqMiniProps {
   faqs?: FAQ[];
   faqPageLink?: string;
+  sectionTitle?: string;
+  sectionSubtitle?: string;
+  /** `link` = text primary link with arrow (ShadowboxFrames.com); `button` = outline button */
+  viewAllStyle?: "button" | "link";
 }
 
 const defaultFaqs: FAQ[] = [
@@ -44,7 +49,13 @@ const defaultFaqs: FAQ[] = [
   },
 ];
 
-export function FaqMini({ faqs = defaultFaqs, faqPageLink = "/faq" }: FaqMiniProps) {
+export function FaqMini({
+  faqs = defaultFaqs,
+  faqPageLink = "/faq",
+  sectionTitle = "Frequently Asked Questions",
+  sectionSubtitle = "Quick answers to common questions about our custom frames",
+  viewAllStyle = "button",
+}: FaqMiniProps) {
   const titleRef = useIntersectionAnimation({ animationClass: "motion-fade-rise" });
   const accordionRef = useIntersectionAnimation({ animationClass: "motion-slide-in" });
 
@@ -76,11 +87,9 @@ export function FaqMini({ faqs = defaultFaqs, faqPageLink = "/faq" }: FaqMiniPro
             className="font-serif text-3xl md:text-4xl font-semibold mb-4"
             data-testid="text-faq-title"
           >
-            Frequently Asked Questions
+            {sectionTitle}
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Quick answers to common questions about our custom frames
-          </p>
+          <p className="text-muted-foreground max-w-2xl mx-auto">{sectionSubtitle}</p>
         </div>
 
         <Accordion
@@ -107,11 +116,22 @@ export function FaqMini({ faqs = defaultFaqs, faqPageLink = "/faq" }: FaqMiniPro
         </Accordion>
 
         <div className="text-center">
-          <Button variant="outline" asChild>
-            <Link href={faqPageLink} data-testid="button-view-full-faq">
+          {viewAllStyle === "link" ? (
+            <Link
+              href={faqPageLink}
+              className="text-sm font-medium text-primary hover:underline inline-flex items-center gap-1"
+              data-testid="link-view-full-faq"
+            >
               View All FAQs
+              <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
             </Link>
-          </Button>
+          ) : (
+            <Button variant="outline" asChild>
+              <Link href={faqPageLink} data-testid="button-view-full-faq">
+                View All FAQs
+              </Link>
+            </Button>
+          )}
         </div>
       </section>
     </>
