@@ -27,6 +27,10 @@ export interface AlternateImage {
 
 export interface FrameStyle {
   id: string;
+  /** Marketing title for grids (e.g. ShadowboxFrames curated collection); falls back to `name` */
+  displayName?: string;
+  /** Series subtitle under title (e.g. "Forge Frame") */
+  brandSubtitle?: string;
   name: string;
   material: string;
   color: string; // Hex color code

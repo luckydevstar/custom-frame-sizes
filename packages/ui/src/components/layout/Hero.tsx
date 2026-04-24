@@ -1,7 +1,7 @@
 "use client";
 
 import { useParallax, useHeroImage, type HeroImage } from "@framecraft/core";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ShieldCheck, Truck } from "lucide-react";
 import { useEffect, useMemo, useRef } from "react";
 
 import { Button } from "../ui/button";
@@ -49,6 +49,8 @@ export interface HeroProps {
   maxHeightPx?: number;
   objectPosition?: string;
   showTrustIndicators?: boolean;
+  /** Italicize the last word of the hero title (ShadowboxFrames.com style: "Display Your *Story*") */
+  titleEmphasisLastWord?: boolean;
   image?: HeroImage | null;
   isLoading?: boolean;
   error?: Error | null;
@@ -67,6 +69,7 @@ export function Hero({
   maxHeightPx = 600,
   objectPosition = "center center",
   showTrustIndicators = true,
+  titleEmphasisLastWord = false,
   image: imageProp,
   isLoading: isLoadingProp,
   error: errorProp,
@@ -184,6 +187,7 @@ export function Hero({
           ctaPrimary={ctaPrimary}
           ctaSecondary={ctaSecondary}
           showTrustIndicators={showTrustIndicators}
+          titleEmphasisLastWord={titleEmphasisLastWord}
         />
       </div>
     );
@@ -244,6 +248,7 @@ export function Hero({
         ctaPrimary={ctaPrimary}
         ctaSecondary={ctaSecondary}
         showTrustIndicators={showTrustIndicators}
+        titleEmphasisLastWord={titleEmphasisLastWord}
         isVisible={!isLoading}
       />
     </div>
@@ -256,6 +261,7 @@ interface HeroContentProps {
   ctaPrimary: { label: string; onClick?: () => void; href?: string };
   ctaSecondary: { label: string; onClick?: () => void; href?: string };
   showTrustIndicators: boolean;
+  titleEmphasisLastWord?: boolean;
   isVisible?: boolean;
 }
 
@@ -264,7 +270,8 @@ function HeroContent({
   subtitle,
   ctaPrimary,
   ctaSecondary,
-  showTrustIndicators: _showTrustIndicators,
+  showTrustIndicators,
+  titleEmphasisLastWord = false,
   isVisible = true,
 }: HeroContentProps) {
   // Respect prefers-reduced-motion (SSR safe)
@@ -304,7 +311,21 @@ function HeroContent({
         style={{ textShadow: "0 2px 8px rgba(0,0,0,0.3)" }}
         data-testid="text-hero-title"
       >
-        {title}
+        {titleEmphasisLastWord ? (
+          (() => {
+            const words = title.trim().split(/\s+/);
+            const last = words.pop();
+            return (
+              <>
+                {words.join(" ")}
+                {words.length > 0 ? " " : ""}
+                {last ? <em>{last}</em> : null}
+              </>
+            );
+          })()
+        ) : (
+          title
+        )}
       </h1>
       <p
         className="text-base md:text-xl text-white/90 mb-6 md:mb-8 max-w-2xl mx-auto"
@@ -329,6 +350,21 @@ function HeroContent({
           {ctaSecondary.label}
         </Button>
       </div>
+      {showTrustIndicators && (
+        <div
+          className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 mt-4 text-xs text-white/70"
+          data-testid="text-trust-badge"
+        >
+          <span className="inline-flex items-center gap-1">
+            <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
+            Love It or We Make It Right
+          </span>
+          <span className="inline-flex items-center gap-1">
+            <Truck className="h-3.5 w-3.5" aria-hidden="true" />
+            Free Shipping Over $75
+          </span>
+        </div>
+      )}
     </div>
   );
 }

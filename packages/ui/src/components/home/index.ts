@@ -21,7 +21,7 @@ export type { FrameStylesShowcaseProps } from "./FrameStylesShowcase";
 export { StyleInspirationSection } from "./StyleInspirationSection";
 export type { StyleInspirationSectionProps } from "./StyleInspirationSection";
 export { ShadowboxShowcase } from "./ShadowboxShowcase";
-export type { ShadowboxShowcaseProps } from "./ShadowboxShowcase";
+export type { ShadowboxShowcaseProps, ShadowboxShowcaseVariant } from "./ShadowboxShowcase";
 export { CanvasFramesShowcase } from "./CanvasFramesShowcase";
 export type { CanvasFramesShowcaseProps } from "./CanvasFramesShowcase";
 export { PrintAndFrameService } from "./PrintAndFrameService";

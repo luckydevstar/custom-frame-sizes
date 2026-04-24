@@ -64,8 +64,9 @@ function normalizeCdnUrl(url: string): string {
 }
 
 /**
- * Optional base URL for `frames/...` paths only (SKU edge/corner photos in the shared catalog).
- * Use when the store CDN (e.g. brand bucket) does not contain the full frames/ tree yet.
+ * Optional base URL for `frames/...` paths only (SKU edge/corner photos).
+ * When set, it overrides NEXT_PUBLIC_CDN_STORE_URL for paths starting with `frames/`.
+ * Leave unset so each store’s NEXT_PUBLIC_CDN_STORE_URL serves the mirrored catalog (e.g. store-b on assets.shadowboxframes.com).
  */
 function getFramesCatalogCdnUrl(): string | null {
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
