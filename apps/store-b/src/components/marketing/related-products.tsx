@@ -149,9 +149,12 @@ export function RelatedProducts({
   title = "Other Display Options",
   columns = 3,
 }: RelatedProductsProps) {
-  const products = productKeys
-    .map((key) => ({ ...PRODUCT_CATALOG[key], key }))
-    .filter((p) => p.href);
+  const products = productKeys.flatMap((key) => {
+    const item = PRODUCT_CATALOG[key];
+    if (!item) return [];
+    const entry: RelatedProduct & { key: string } = { ...item, key };
+    return [entry];
+  });
 
   if (products.length === 0) return null;
 

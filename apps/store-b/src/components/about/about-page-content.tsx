@@ -109,7 +109,7 @@ export function AboutPageContent() {
                   { icon: Sliders, text: "Every frame is built with individual attention" },
                   { icon: Eye, text: "Proudly crafted in our workshop in the United States" },
                   { icon: DollarSign, text: "Talk to real people who understand shadow boxes" },
-                ].map((item, i) => (
+                ].map((item) => (
                   <li key={item.text} className="flex items-center gap-3">
                     <item.icon className="h-5 w-5 text-primary flex-shrink-0" />
                     <span className="text-muted-foreground">{item.text}</span>

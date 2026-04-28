@@ -1,6 +1,6 @@
 "use client";
 
-import { Image, Palette, Ruler, Sparkles, Crown, Users } from "lucide-react";
+import { Image as ImageIcon, Palette, Ruler, Sparkles, Crown, Users } from "lucide-react";
 import { useEffect } from "react";
 
 import { Card, Progress } from "@framecraft/ui";
@@ -21,7 +21,7 @@ const achievements = [
     description: "Design 5 different custom frames",
     unlocked: true,
     progress: 100,
-    icon: <Image className="h-6 w-6 text-chart-3" />,
+    icon: <ImageIcon className="h-6 w-6 text-chart-3" />,
   },
   {
     title: "Mat Master",
