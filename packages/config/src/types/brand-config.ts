@@ -254,6 +254,13 @@ export interface BrandConfig {
      * Where users are directed when clicking the logo
      */
     homeUrl?: string;
+
+    /**
+     * Short store code written to cart attribute `_fc_store_code` (→ order note attributes).
+     * Webhook maps to Shopify order metafield `custom.store_code` for ShipStation Custom Field automation.
+     * Use stable uppercase codes per storefront (e.g. CFS, CPF, SBF).
+     */
+    shipStationStoreCode?: string;
   };
 
   /**
