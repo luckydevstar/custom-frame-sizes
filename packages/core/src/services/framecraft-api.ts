@@ -28,6 +28,8 @@ export interface FramecraftCartLineInput {
 export interface BrandingMetadata {
   logoUrl?: string;
   homeUrl?: string;
+  /** Cart attribute `_fc_store_code` — webhook writes Shopify metafield `custom.store_code`. */
+  storeCode?: string;
 }
 
 export interface FramecraftCart {
