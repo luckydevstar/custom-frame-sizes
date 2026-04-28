@@ -27,6 +27,7 @@ const nextConfig = {
     return [
       // Add store-b specific redirects here
       { source: '/returns', destination: '/returns-exchanges', permanent: true },
+      { source: '/jerseys', destination: '/jersey-frames', permanent: true },
     ];
   },
   async rewrites() {
