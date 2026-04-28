@@ -28,6 +28,7 @@ const nextConfig = {
       // Add store-b specific redirects here
       { source: '/returns', destination: '/returns-exchanges', permanent: true },
       { source: '/jerseys', destination: '/jersey-frames', permanent: true },
+      { source: '/shadowbox-designer', destination: '/shadowbox/designer', permanent: true },
     ];
   },
   async rewrites() {
