@@ -27,6 +27,16 @@ const nextConfig = {
     return [
       // Add store-b specific redirects here
       { source: '/returns', destination: '/returns-exchanges', permanent: true },
+      { source: '/jerseys', destination: '/jersey-frames', permanent: true },
+      { source: '/shadowbox-designer', destination: '/shadowbox/designer', permanent: true },
+      { source: '/specialty/mat-designer', destination: '/mat-designer', permanent: true },
+      { source: '/specialty/bouquet', destination: '/bouquet-frames', permanent: true },
+      { source: '/specialty/record-album-frames', destination: '/record-album-frames', permanent: true },
+      { source: '/specialty/collage', destination: '/collage-frames', permanent: true },
+      { source: '/photo-collage-frames', destination: '/collage-frames', permanent: true },
+      { source: '/collage-frames/designer', destination: '/collage-frames', permanent: true },
+      { source: '/shadowbox/deep-frames', destination: '/shadowbox/deep-shadowbox-frames', permanent: true },
+      { source: '/shadowbox/depth-guide', destination: '/shadowbox/deep-shadowbox-frames', permanent: true },
     ];
   },
   async rewrites() {
