@@ -84,6 +84,8 @@ export const brandConfig: BrandConfig = {
     // Branding for Shopify checkout UI extension (cart line attributes). Per-store in each app's brand.config.ts.
     logoUrl: `${publicSiteOrigin}/assets/brand/logo-blue.png`,
     homeUrl: `${publicSiteOrigin}/`,
+    /** ShipStation / fulfillment — matches `custom.store_code` after webhook (Finding #9). */
+    shipStationStoreCode: "CFS",
   },
 
   branding: {

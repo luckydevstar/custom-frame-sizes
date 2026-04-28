@@ -29,14 +29,20 @@ function debugLog(message: string, data?: unknown): void {
 
 export function syncCheckoutBrandingFromBrandConfig(config: BrandConfig): void {
   const c = config.checkout;
-  if (!c?.logoUrl?.trim() && !c?.homeUrl?.trim()) {
+  const logoUrl = c?.logoUrl?.trim();
+  const homeUrl = c?.homeUrl?.trim();
+  const storeCode = c?.shipStationStoreCode?.trim();
+
+  if (!logoUrl && !homeUrl && !storeCode) {
     storeCheckout = undefined;
-    debugLog("sync: brand config has no checkout.logoUrl / checkout.homeUrl — cleared store cache");
+    debugLog("sync: brand config has no checkout.logoUrl / checkout.homeUrl / checkout.shipStationStoreCode — cleared store cache");
     return;
   }
+
   storeCheckout = {
-    logoUrl: c.logoUrl?.trim() || undefined,
-    homeUrl: c.homeUrl?.trim() || undefined,
+    logoUrl: logoUrl || undefined,
+    homeUrl: homeUrl || undefined,
+    storeCode: storeCode || undefined,
   };
   debugLog("sync from brand.config.checkout", storeCheckout);
 }
@@ -97,15 +103,25 @@ export function resolveCheckoutBrandingMetadata(
     explicit?.logoUrl?.trim() || storeCheckout?.logoUrl || envBranding?.logoUrl;
   const homeUrl =
     explicit?.homeUrl?.trim() || storeCheckout?.homeUrl || envBranding?.homeUrl;
-  if (!logoUrl && !homeUrl) {
+  const storeCode =
+    explicit?.storeCode?.trim() ||
+    storeCheckout?.storeCode ||
+    (typeof process !== "undefined" && process.env?.NEXT_PUBLIC_SHIP_STATION_STORE_CODE?.trim()) ||
+    undefined;
+
+  if (!logoUrl && !homeUrl && !storeCode) {
     debugLog("resolve: no branding (explicit, store, or env)", {
-      hasExplicit: Boolean(explicit?.logoUrl || explicit?.homeUrl),
-      hasStore: Boolean(storeCheckout?.logoUrl || storeCheckout?.homeUrl),
+      hasExplicit: Boolean(explicit?.logoUrl || explicit?.homeUrl || explicit?.storeCode),
+      hasStore: Boolean(storeCheckout?.logoUrl || storeCheckout?.homeUrl || storeCheckout?.storeCode),
       hasEnv: Boolean(envBranding?.logoUrl || envBranding?.homeUrl),
     });
     return undefined;
   }
-  const resolved = { logoUrl, homeUrl };
+  const resolved: BrandingMetadata = {
+    logoUrl: logoUrl || undefined,
+    homeUrl: homeUrl || undefined,
+    storeCode: storeCode || undefined,
+  };
   debugLog("resolve → will send to API", resolved);
   return resolved;
 }

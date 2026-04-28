@@ -84,6 +84,7 @@ export const brandConfig: BrandConfig = {
   checkout: {
     logoUrl: `${publicSiteOrigin}/assets/brand/logo-light.png`,
     homeUrl: `${publicSiteOrigin}/`,
+    shipStationStoreCode: "SBF",
   },
 
   branding: {
