@@ -1,0 +1,1202 @@
+{
+  "standard-depth-matte-black": {
+    "meta": {
+      "title": "Classic Matte Black Shadow Box | Forge Frame | ShadowboxFrames.com",
+      "description": "Handcrafted matte black shadow box with standard depth. A timeless, versatile frame for displaying medals, keepsakes, and cherished mementos."
+    },
+    "hero": {
+      "badgeLabel": "Timeless & Versatile",
+      "headline": "Classic Matte Black Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Forge Frame",
+      "designButtonLabel": "Design Your Shadow Box"
+    },
+    "inspirationSubtitle": "The one that goes with everything",
+    "designHeading": "Design & Character",
+    "designBodySource": "static",
+    "designBodyParagraph": "Our matte black finish absorbs light rather than reflecting it, which means all the attention stays on what's inside your shadow box. The smooth, non-reflective surface works in any room and alongside any decor style. No matter what color your walls are, this frame quietly fits in while letting your display take center stage. Each frame is handcrafted with clean lines and a subtle profile that feels intentional without being fussy.",
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Standard 0.75\" Depth",
+        "subtitle": "Room for Medals, Patches, Photos, and Keepsakes",
+        "testId": "benefit-depth"
+      },
+      {
+        "icon": "Award",
+        "title": "Handcrafted Construction",
+        "subtitle": "Built with Care by Our Team of Artisanal Framemakers",
+        "testId": "benefit-minimalist-display"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadow Box?",
+      "description": "Choose your depth, set your dimensions, and we'll handcraft a matte black shadow box frame built to display your keepsakes for years to come."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchesWords",
+    "categoryLabel": "Shadow Box"
+  },
+  "standard-depth-bright-white": {
+    "meta": {
+      "title": "Crisp White Shadow Box | Alabaster Frame | ShadowboxFrames.com",
+      "description": "A clean, bright white shadow box handcrafted with standard depth. Built for keepsakes, baby mementos, and colorful collections."
+    },
+    "hero": {
+      "badgeLabel": "Clean & Bright",
+      "headline": "Crisp White Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Alabaster Frame",
+      "designButtonLabel": "Design Your Shadow Box"
+    },
+    "inspirationSubtitle": "Clean, bright, and full of possibility",
+    "designHeading": "Design & Character",
+    "designBodySource": "static",
+    "designBodyParagraph": "Bright white has a way of making colors sing. The clean finish on this shadow box amplifies whatever you display inside, from soft pastels to bold primaries. It's a natural fit for nurseries, bathrooms, sunlit hallways, and anywhere you want a fresh, uncluttered look. The profile is simple and understated -- no ornate details to compete with your keepsakes, just a clean border that frames the moment beautifully.",
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Standard 0.75\" Depth",
+        "subtitle": "Fits Flat Keepsakes and Lightly Dimensional Items",
+        "testId": "benefit-depth"
+      },
+      {
+        "icon": "Award",
+        "title": "Artisanal Build",
+        "subtitle": "Handcrafted with Smooth, Even Surfaces That Last",
+        "testId": "benefit-contemporary-display"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadow Box?",
+      "description": "White opens up a room and opens up possibilities. Design your bright white shadow box with our easy-to-use tool and see instant pricing."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchesWords",
+    "categoryLabel": "Shadow Box"
+  },
+  "deep-wide-profile-black": {
+    "meta": {
+      "title": "Grand Black Deep Shadow Box | Sentinel Frame | ShadowboxFrames.com",
+      "description": "Custom Deep Wide-Profile Black Shadowbox Frame with precision sizing. Bold wide profile with exceptional display depth. Professional-grade construction, instant pricing."
+    },
+    "hero": {
+      "badgeLabel": "Deep Profile Display",
+      "headline": "Grand Black Deep Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Sentinel Frame",
+      "designButtonLabel": "Design Your Shadowbox"
+    },
+    "inspirationSubtitle": "Bold wide profile with exceptional display depth",
+    "designHeading": "Design & Craftsmanship",
+    "designBodySource": "featuredDescription",
+    "designBodyParagraph": null,
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Deep Profile",
+        "subtitle": "Extra Space for Jerseys and Memorabilia",
+        "testId": "benefit-deep-profile"
+      },
+      {
+        "icon": "Award",
+        "title": "Frame Shop Quality",
+        "subtitle": "To Protect Your Items",
+        "testId": "benefit-professional"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadowbox?",
+      "description": "Design your perfect shadowbox with our easy-to-use designer tool. Get instant pricing and real-time preview."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchesWords",
+    "categoryLabel": "Shadowbox"
+  },
+  "ultra-deep-two-tone-walnut": {
+    "meta": {
+      "title": "Dual-Tone Walnut Shadow Box | Joiner Frame | ShadowboxFrames.com",
+      "description": "Custom Ultra Deep Two-Tone Walnut Shadowbox Frame with precision sizing. Sophisticated two-tone walnut with maximum depth capacity. Professional-grade construction, instant pricing."
+    },
+    "hero": {
+      "badgeLabel": "Deep Profile Display",
+      "headline": "Dual-Tone Walnut Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Joiner Frame",
+      "designButtonLabel": "Design Your Shadowbox"
+    },
+    "inspirationSubtitle": "Sophisticated two-tone walnut with maximum depth capacity",
+    "designHeading": "Design & Craftsmanship",
+    "designBodySource": "featuredDescription",
+    "designBodyParagraph": null,
+    "features": [
+      {
+        "icon": "Sparkles",
+        "title": "Two-Tone Walnut",
+        "subtitle": "Layered Color Adds Visual Interest",
+        "testId": "benefit-two-tone"
+      },
+      {
+        "icon": "Shield",
+        "title": "Frame Shop Quality",
+        "subtitle": "To Protect Your Items",
+        "testId": "benefit-museum-protection"
+      },
+      {
+        "icon": "Box",
+        "title": "Extra Deep 2.5\"",
+        "subtitle": "Ideal for Thick Canvas and Memorabilia",
+        "testId": "benefit-extra-deep"
+      },
+      {
+        "icon": "Award",
+        "title": "Premium Display",
+        "subtitle": "Sophisticated Style Showcases Treasured Pieces",
+        "testId": "benefit-premium-display"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadowbox?",
+      "description": "Design your perfect shadowbox with our easy-to-use designer tool. Get instant pricing and real-time preview."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchesWords",
+    "categoryLabel": "Shadowbox"
+  },
+  "deep-slim-matte-black": {
+    "meta": {
+      "title": "Narrow Black Deep Shadow Box | Chisel Frame | ShadowboxFrames.com",
+      "description": "Custom Deep Slim Matte Black Shadowbox Frame with precision sizing. Refined slim profile with deep dimensional capacity. Professional-grade construction, instant pricing."
+    },
+    "hero": {
+      "badgeLabel": "Deep Profile Display",
+      "headline": "Narrow Black Deep Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Chisel Frame",
+      "designButtonLabel": "Design Your Shadowbox"
+    },
+    "inspirationSubtitle": "Refined slim profile with deep dimensional capacity",
+    "designHeading": "Design & Craftsmanship",
+    "designBodySource": "featuredDescription",
+    "designBodyParagraph": null,
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Deep Profile",
+        "subtitle": "Extra Space for Jerseys and Memorabilia",
+        "testId": "benefit-deep-profile"
+      },
+      {
+        "icon": "Award",
+        "title": "Frame Shop Quality",
+        "subtitle": "To Protect Your Items",
+        "testId": "benefit-professional"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadowbox?",
+      "description": "Design your perfect shadowbox with our easy-to-use designer tool. Get instant pricing and real-time preview."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchesWords",
+    "categoryLabel": "Shadowbox"
+  },
+  "standard-depth-honey-oak": {
+    "meta": {
+      "title": "Warm Oak Shadow Box | Acorn Frame | ShadowboxFrames.com",
+      "description": "A warm honey oak shadow box with golden undertones and standard depth. Handcrafted for displaying keepsakes with natural, sunlit warmth."
+    },
+    "hero": {
+      "badgeLabel": "Golden Warmth",
+      "headline": "Warm Oak Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Acorn Frame",
+      "designButtonLabel": "Design Your Shadow Box"
+    },
+    "inspirationSubtitle": "Golden warmth in every grain",
+    "designHeading": "Design & Character",
+    "designBodySource": "static",
+    "designBodyParagraph": "The honey oak finish glows. There's no other way to say it. The golden undertones catch natural and artificial light alike, giving this frame a living, breathing quality that flat finishes can't match. Visible grain patterns add texture and depth, making each shadow box feel handpicked from the lumber yard. It's a warm, approachable frame that works beautifully in kitchens, dining rooms, and any space that values natural materials.",
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Standard 0.75\" Depth",
+        "subtitle": "Comfortable Depth for Flat and Lightly Dimensional Items",
+        "testId": "benefit-depth"
+      },
+      {
+        "icon": "Award",
+        "title": "Light-Catching Finish",
+        "subtitle": "Sealed Surface Picks Up Light for a Warm Glow",
+        "testId": "benefit-natural-display"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadow Box?",
+      "description": "Golden warmth in every grain. Design your honey oak shadow box with our easy-to-use tool and see instant pricing."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchesWords",
+    "categoryLabel": "Shadow Box"
+  },
+  "deep-rustic-walnut": {
+    "meta": {
+      "title": "Reclaimed Walnut Deep Shadow Box | Timber Frame | ShadowboxFrames.com",
+      "description": "Custom Deep Rustic Walnut Shadowbox Frame with precision sizing. Rich rustic walnut with generous display depth. Professional-grade construction, instant pricing."
+    },
+    "hero": {
+      "badgeLabel": "Deep Profile Display",
+      "headline": "Reclaimed Walnut Deep Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Timber Frame",
+      "designButtonLabel": "Design Your Shadowbox"
+    },
+    "inspirationSubtitle": "Rich rustic walnut with generous display depth",
+    "designHeading": "Design & Craftsmanship",
+    "designBodySource": "featuredDescription",
+    "designBodyParagraph": null,
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Deep Profile",
+        "subtitle": "Extra Space for Jerseys and Memorabilia",
+        "testId": "benefit-deep-profile"
+      },
+      {
+        "icon": "Award",
+        "title": "Frame Shop Quality",
+        "subtitle": "To Protect Your Items",
+        "testId": "benefit-professional"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadowbox?",
+      "description": "Design your perfect shadowbox with our easy-to-use designer tool. Get instant pricing and real-time preview."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchesWords",
+    "categoryLabel": "Shadowbox"
+  },
+  "deep-architectural-matte-black": {
+    "meta": {
+      "title": "Modern Matte Black Shadow Box | Monument Frame | ShadowboxFrames.com",
+      "description": "Custom Deep Architectural Matte Black Shadowbox Frame with precision sizing. Modern architectural black with substantial depth. Professional-grade construction, instant pricing."
+    },
+    "hero": {
+      "badgeLabel": "Deep Profile Display",
+      "headline": "Modern Matte Black Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Monument Frame",
+      "designButtonLabel": "Design Your Shadowbox"
+    },
+    "inspirationSubtitle": "Modern architectural black with substantial depth",
+    "designHeading": "Design & Craftsmanship",
+    "designBodySource": "featuredDescription",
+    "designBodyParagraph": null,
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Deep Profile",
+        "subtitle": "Extra Space for Jerseys and Memorabilia",
+        "testId": "benefit-deep-profile"
+      },
+      {
+        "icon": "Award",
+        "title": "Frame Shop Quality",
+        "subtitle": "To Protect Your Items",
+        "testId": "benefit-professional"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadowbox?",
+      "description": "Design your perfect shadowbox with our easy-to-use designer tool. Get instant pricing and real-time preview."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchesWords",
+    "categoryLabel": "Shadowbox"
+  },
+  "extra-deep-bright-white": {
+    "meta": {
+      "title": "Deep White Shadow Box | Archive Frame | ShadowboxFrames.com",
+      "description": "Custom Extra Deep Bright White Shadowbox Frame with precision sizing. Exceptional depth with brilliant white finish. Professional-grade construction, instant pricing."
+    },
+    "hero": {
+      "badgeLabel": "Deep Profile Display",
+      "headline": "Deep White Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Archive Frame",
+      "designButtonLabel": "Design Your Shadowbox"
+    },
+    "inspirationSubtitle": "Exceptional depth with brilliant white finish",
+    "designHeading": "Design & Craftsmanship",
+    "designBodySource": "featuredDescription",
+    "designBodyParagraph": null,
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Deep Profile",
+        "subtitle": "Extra Space for Jerseys and Memorabilia",
+        "testId": "benefit-deep-profile"
+      },
+      {
+        "icon": "Award",
+        "title": "Frame Shop Quality",
+        "subtitle": "To Protect Your Items",
+        "testId": "benefit-professional"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadowbox?",
+      "description": "Design your perfect shadowbox with our easy-to-use designer tool. Get instant pricing and real-time preview."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchesWords",
+    "categoryLabel": "Shadowbox"
+  },
+  "extra-deep-rich-walnut": {
+    "meta": {
+      "title": "Extra Deep Rich Walnut Shadowbox Frame - Custom Sizing | ShadowboxFrames.com",
+      "description": "Custom Extra Deep Rich Walnut Shadowbox Frame with precision sizing. Luxurious walnut with extra dimensional capacity. Professional-grade construction, instant pricing."
+    },
+    "hero": {
+      "badgeLabel": "Deep Profile Display",
+      "headline": "Extra Deep Rich Walnut Shadowbox Frame",
+      "subtitleMode": "shortFromCatalog",
+      "brandItalic": null,
+      "designButtonLabel": "Design Your Shadowbox"
+    },
+    "inspirationSubtitle": "Luxurious walnut with extra dimensional capacity",
+    "designHeading": "Design & Craftsmanship",
+    "designBodySource": "featuredDescription",
+    "designBodyParagraph": null,
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Deep Profile",
+        "subtitle": "Extra Space for Jerseys and Memorabilia",
+        "testId": "benefit-deep-profile"
+      },
+      {
+        "icon": "Award",
+        "title": "Frame Shop Quality",
+        "subtitle": "To Protect Your Items",
+        "testId": "benefit-professional"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadowbox?",
+      "description": "Design your perfect shadowbox with our easy-to-use designer tool. Get instant pricing and real-time preview."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchesWords",
+    "categoryLabel": "Shadowbox"
+  },
+  "standard-depth-coastal-whitewash": {
+    "meta": {
+      "title": "Driftwood White Shadow Box | Shoreline Frame | ShadowboxFrames.com",
+      "description": "A beach-inspired whitewash shadow box with standard depth. Handcrafted with a soft, weathered finish for coastal and relaxed displays."
+    },
+    "hero": {
+      "badgeLabel": "Softly Weathered",
+      "headline": "Driftwood White Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Shoreline Frame",
+      "designButtonLabel": "Design Your Shadow Box"
+    },
+    "inspirationSubtitle": "Softly weathered, like a day at the shore",
+    "designHeading": "Design & Character",
+    "designBodySource": "static",
+    "designBodyParagraph": "The whitewash technique lets the wood grain peek through a thin veil of soft white, creating a layered, textured look that feels relaxed and natural. It's not stark or polished -- it's the kind of finish that invites bare feet and open windows. The weathered quality gives each frame a lived-in warmth that's impossible to fake with solid paint. It works beautifully in beach houses, sunrooms, and any space that wants to feel a little more like vacation.",
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Standard 0.75\" Depth",
+        "subtitle": "Accommodates Flat Items and Lightweight Dimensional Keepsakes",
+        "testId": "benefit-depth"
+      },
+      {
+        "icon": "Award",
+        "title": "Weathered Character",
+        "subtitle": "Slightly Imperfect, Lived-In Quality with Beachy Personality",
+        "testId": "benefit-coastal-display"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadow Box?",
+      "description": "Softly weathered, like a day at the shore. Design your coastal whitewash shadow box with our easy-to-use tool and see instant pricing."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchesWords",
+    "categoryLabel": "Shadow Box"
+  },
+  "extra-deep-matte-black": {
+    "meta": {
+      "title": "Extra Deep Matte Black Shadowbox Frame - Custom Sizing | ShadowboxFrames.com",
+      "description": "Custom Extra Deep Matte Black Shadowbox Frame with precision sizing. Maximum display capacity with bold matte black. Professional-grade construction, instant pricing."
+    },
+    "hero": {
+      "badgeLabel": "Deep Profile Display",
+      "headline": "Extra Deep Matte Black Shadowbox Frame",
+      "subtitleMode": "shortFromCatalog",
+      "brandItalic": null,
+      "designButtonLabel": "Design Your Shadowbox"
+    },
+    "inspirationSubtitle": "Maximum display capacity with bold matte black",
+    "designHeading": "Design & Craftsmanship",
+    "designBodySource": "featuredDescription",
+    "designBodyParagraph": null,
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Deep Profile",
+        "subtitle": "Extra Space for Jerseys and Memorabilia",
+        "testId": "benefit-deep-profile"
+      },
+      {
+        "icon": "Award",
+        "title": "Frame Shop Quality",
+        "subtitle": "To Protect Your Items",
+        "testId": "benefit-professional"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadowbox?",
+      "description": "Design your perfect shadowbox with our easy-to-use designer tool. Get instant pricing and real-time preview."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchesWords",
+    "categoryLabel": "Shadowbox"
+  },
+  "medium-depth-gloss-white": {
+    "meta": {
+      "title": "Medium Depth Gloss White Shadowbox Frame - Custom Sizing | ShadowboxFrames.com",
+      "description": "Custom Medium Depth Gloss White Shadowbox Frame with precision sizing. Brilliant gloss white finish with medium depth. Professional-grade construction, instant pricing."
+    },
+    "hero": {
+      "badgeLabel": "Deep Profile Display",
+      "headline": "Medium Depth Gloss White Shadowbox Frame",
+      "subtitleMode": "shortFromCatalog",
+      "brandItalic": null,
+      "designButtonLabel": "Design Your Shadowbox"
+    },
+    "inspirationSubtitle": "Brilliant gloss white finish with medium depth",
+    "designHeading": "Design & Craftsmanship",
+    "designBodySource": "featuredDescription",
+    "designBodyParagraph": null,
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Deep Profile",
+        "subtitle": "Extra Space for Jerseys and Memorabilia",
+        "testId": "benefit-deep-profile"
+      },
+      {
+        "icon": "Award",
+        "title": "Frame Shop Quality",
+        "subtitle": "To Protect Your Items",
+        "testId": "benefit-professional"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadowbox?",
+      "description": "Design your perfect shadowbox with our easy-to-use designer tool. Get instant pricing and real-time preview."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchesWords",
+    "categoryLabel": "Shadowbox"
+  },
+  "deep-charcoal-satin": {
+    "meta": {
+      "title": "Charcoal Deep Shadow Box | Graphite Frame | ShadowboxFrames.com",
+      "description": "Custom Deep Charcoal Satin Shadowbox Frame with precision sizing. Refined charcoal satin with deep profile. Professional-grade construction, instant pricing."
+    },
+    "hero": {
+      "badgeLabel": "Deep Profile Display",
+      "headline": "Charcoal Deep Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Graphite Frame",
+      "designButtonLabel": "Design Your Shadowbox"
+    },
+    "inspirationSubtitle": "Refined charcoal satin with deep profile",
+    "designHeading": "Design & Craftsmanship",
+    "designBodySource": "featuredDescription",
+    "designBodyParagraph": null,
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Deep Profile",
+        "subtitle": "Extra Space for Jerseys and Memorabilia",
+        "testId": "benefit-deep-profile"
+      },
+      {
+        "icon": "Award",
+        "title": "Frame Shop Quality",
+        "subtitle": "To Protect Your Items",
+        "testId": "benefit-professional"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadowbox?",
+      "description": "Design your perfect shadowbox with our easy-to-use designer tool. Get instant pricing and real-time preview."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchesWords",
+    "categoryLabel": "Shadowbox"
+  },
+  "deep-natural-maple": {
+    "meta": {
+      "title": "Maple Deep Shadow Box | Sugarwood Frame | ShadowboxFrames.com",
+      "description": "Custom Deep Natural Maple Shadowbox Frame with precision sizing. Natural maple beauty with generous depth. Professional-grade construction, instant pricing."
+    },
+    "hero": {
+      "badgeLabel": "Deep Profile Display",
+      "headline": "Maple Deep Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Sugarwood Frame",
+      "designButtonLabel": "Design Your Shadowbox"
+    },
+    "inspirationSubtitle": "Natural maple beauty with generous depth",
+    "designHeading": "Design & Craftsmanship",
+    "designBodySource": "featuredDescription",
+    "designBodyParagraph": null,
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Deep Profile",
+        "subtitle": "Extra Space for Jerseys and Memorabilia",
+        "testId": "benefit-deep-profile"
+      },
+      {
+        "icon": "Award",
+        "title": "Frame Shop Quality",
+        "subtitle": "To Protect Your Items",
+        "testId": "benefit-professional"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadowbox?",
+      "description": "Design your perfect shadowbox with our easy-to-use designer tool. Get instant pricing and real-time preview."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchesWords",
+    "categoryLabel": "Shadowbox"
+  },
+  "standard-depth-barn-black": {
+    "meta": {
+      "title": "Barnwood Black Shadow Box | Millhouse Frame | ShadowboxFrames.com",
+      "description": "Custom Standard Depth Barn Black Shadowbox Frame with precision sizing. Textured barn black finish with ribbed wood character and standard depth. Professional-grade construction, instant pricing."
+    },
+    "hero": {
+      "badgeLabel": "Textured Barn Wood Profile",
+      "headline": "Barnwood Black Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Millhouse Frame",
+      "designButtonLabel": "Design Your Shadowbox"
+    },
+    "inspirationSubtitle": "Bold textured black finish elevates industrial and modern displays",
+    "designHeading": "Design & Craftsmanship",
+    "designBodySource": "featuredDescription",
+    "designBodyParagraph": null,
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "3/4\" Shadowbox Depth",
+        "subtitle": "Accommodates Three-Dimensional Items",
+        "testId": "benefit-depth"
+      },
+      {
+        "icon": "Award",
+        "title": "Modern Display",
+        "subtitle": "Contemporary Style Elevates Your Memorabilia",
+        "testId": "benefit-modern-display"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadowbox?",
+      "description": "Design your perfect shadowbox with our easy-to-use designer tool. Get instant pricing and real-time preview."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchesWords",
+    "categoryLabel": "Shadowbox"
+  },
+  "medium-depth-glossy-black": {
+    "meta": {
+      "title": "Medium Depth Glossy Black Shadowbox Frame - Custom Sizing | ShadowboxFrames.com",
+      "description": "Custom Medium Depth Glossy Black Shadowbox Frame with precision sizing. Sleek high-gloss black finish with 1.5 inch depth for luxury displays. Professional-grade construction, instant pricing."
+    },
+    "hero": {
+      "badgeLabel": "High-Gloss Contemporary Profile",
+      "headline": "Medium Depth Glossy Black Shadowbox Frame",
+      "subtitleMode": "shortFromCatalog",
+      "brandItalic": null,
+      "designButtonLabel": "Design Your Shadowbox"
+    },
+    "inspirationSubtitle": "Mirror-like glossy finish delivers sophisticated elegance for premium showcases",
+    "designHeading": "Design & Craftsmanship",
+    "designBodySource": "featuredDescription",
+    "designBodyParagraph": null,
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Glossy Finish",
+        "subtitle": "Reflective Surface Adds Modern Sophistication",
+        "testId": "benefit-deep-profile"
+      },
+      {
+        "icon": "Award",
+        "title": "Frame Shop Quality",
+        "subtitle": "To Protect Your Items",
+        "testId": "benefit-professional"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadowbox?",
+      "description": "Design your perfect shadowbox with our easy-to-use designer tool. Get instant pricing and real-time preview."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchMarks",
+    "categoryLabel": "Shadowbox"
+  },
+  "medium-depth-stainless-silver": {
+    "meta": {
+      "title": "Medium Depth Stainless Silver Shadowbox Frame - Custom Sizing | ShadowboxFrames.com",
+      "description": "Custom Medium Depth Stainless Silver Shadowbox Frame with precision sizing. Brushed stainless steel finish with 1.5 inch depth for collectibles. Professional-grade construction, instant pricing."
+    },
+    "hero": {
+      "badgeLabel": "Brushed Stainless Steel Profile",
+      "headline": "Medium Depth Stainless Silver Shadowbox Frame",
+      "subtitleMode": "shortFromCatalog",
+      "brandItalic": null,
+      "designButtonLabel": "Design Your Shadowbox"
+    },
+    "inspirationSubtitle": "Professional brushed finish showcases authenticated collectibles with professional-grade elegance",
+    "designHeading": "Design & Craftsmanship",
+    "designBodySource": "featuredDescription",
+    "designBodyParagraph": null,
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Brushed Steel",
+        "subtitle": "Sleek Metallic Finish Complements Modern Art",
+        "testId": "benefit-deep-profile"
+      },
+      {
+        "icon": "Award",
+        "title": "Frame Shop Quality",
+        "subtitle": "To Protect Your Items",
+        "testId": "benefit-professional"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadowbox?",
+      "description": "Design your perfect shadowbox with our easy-to-use designer tool. Get instant pricing and real-time preview."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchMarks",
+    "categoryLabel": "Shadowbox"
+  },
+  "medium-depth-gold": {
+    "meta": {
+      "title": "Medium Depth Gold Shadowbox Frame - Custom Sizing | ShadowboxFrames.com",
+      "description": "Custom Medium Depth Gold Shadowbox Frame with precision sizing. Radiant gold finish with 1.5 inch depth for awards and prestigious displays. Professional-grade construction, instant pricing."
+    },
+    "hero": {
+      "badgeLabel": "Luxurious Gold Finish",
+      "headline": "Medium Depth Gold Shadowbox Frame",
+      "subtitleMode": "shortFromCatalog",
+      "brandItalic": null,
+      "designButtonLabel": "Design Your Shadowbox"
+    },
+    "inspirationSubtitle": "",
+    "designHeading": "Design & Craftsmanship",
+    "designBodySource": "featuredDescription",
+    "designBodyParagraph": null,
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Gold Finish",
+        "subtitle": "Luxurious Metallic Shine Never Fades",
+        "testId": "benefit-deep-profile"
+      },
+      {
+        "icon": "Award",
+        "title": "Frame Shop Quality",
+        "subtitle": "To Protect Your Items",
+        "testId": "benefit-professional"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadowbox?",
+      "description": "Design your perfect shadowbox with our easy-to-use designer tool. Get instant pricing and real-time preview."
+    },
+    "hasCarousel": false,
+    "specsFormat": "inchMarks",
+    "categoryLabel": "Shadowbox"
+  },
+  "standard-depth-barn-blue": {
+    "meta": {
+      "title": "Barnwood Blue Shadow Box | Bluebell Frame | ShadowboxFrames.com",
+      "description": "Custom Standard Depth Barn Blue Shadowbox Frame with precision sizing. Weathered coastal blue finish with 1 inch depth for beach memories and nautical displays. Rustic craftsmanship, instant pricing."
+    },
+    "hero": {
+      "badgeLabel": "Weathered Coastal Finish",
+      "headline": "Barnwood Blue Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Bluebell Frame",
+      "designButtonLabel": "Design Your Shadowbox"
+    },
+    "inspirationSubtitle": "Weathered coastal blue showcases maritime memories",
+    "designHeading": "Design & Craftsmanship",
+    "designBodySource": "featuredDescription",
+    "designBodyParagraph": null,
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "3/4\" Shadowbox Depth",
+        "subtitle": "Accommodates Three-Dimensional Items",
+        "testId": "benefit-depth"
+      },
+      {
+        "icon": "Award",
+        "title": "Modern Display",
+        "subtitle": "Contemporary Style Elevates Your Memorabilia",
+        "testId": "benefit-modern-display"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadowbox?",
+      "description": "Design your perfect shadowbox with our easy-to-use designer tool. Get instant pricing and real-time preview."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchMarks",
+    "categoryLabel": "Shadowbox"
+  },
+  "standard-depth-natural-wood": {
+    "meta": {
+      "title": "Natural Wood Shadow Box | Oakmoss Frame | ShadowboxFrames.com",
+      "description": "A warm natural wood shadow box with visible grain and standard depth. Handcrafted to bring organic warmth to your keepsakes and displays."
+    },
+    "hero": {
+      "badgeLabel": "Warm Grain, Real Character",
+      "headline": "Natural Wood Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Oakmoss Frame",
+      "designButtonLabel": "Design Your Shadow Box"
+    },
+    "inspirationSubtitle": "Every grain tells a story",
+    "designHeading": "Design & Character",
+    "designBodySource": "static",
+    "designBodyParagraph": "Every natural wood frame tells its own story through the grain. No two are exactly alike, which means your shadow box is as one-of-a-kind as the items inside it. The light, warm tone pairs beautifully with earthy displays -- dried botanicals, wooden keepsakes, travel souvenirs -- but it's equally at home with colorful collections. The finish is smooth and sealed to protect the wood while letting its natural beauty come through.",
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Standard 0.75\" Depth",
+        "subtitle": "Room for Flat Keepsakes, Pinned Items, and Lightweight Pieces",
+        "testId": "benefit-depth"
+      },
+      {
+        "icon": "Award",
+        "title": "Handcrafted Individuality",
+        "subtitle": "Natural Grain Varies, Making Every Frame One of a Kind",
+        "testId": "benefit-organic-display"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadow Box?",
+      "description": "Warm grain, real character. Design your natural wood shadow box with our easy-to-use tool and see instant pricing."
+    },
+    "hasCarousel": true,
+    "specsFormat": "inchMarks",
+    "categoryLabel": "Shadow Box"
+  },
+  "standard-depth-modern-white": {
+    "meta": {
+      "title": "Pure White Shadow Box | Snowcap Frame | ShadowboxFrames.com",
+      "description": "A minimal modern white shadow box with clean lines and standard depth. Handcrafted for bright, curated displays in contemporary spaces."
+    },
+    "hero": {
+      "badgeLabel": "Minimal & Clean",
+      "headline": "Pure White Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Snowcap Frame",
+      "designButtonLabel": "Design Your Shadow Box"
+    },
+    "inspirationSubtitle": "",
+    "designHeading": "Design & Character",
+    "designBodySource": "static",
+    "designBodyParagraph": "The modern white finish combines the crispness of white with the sharpness of an angular profile. It's more structured than our standard bright white -- think Scandinavian design rather than cottage style. The frame practically disappears into light-colored walls, making it ideal for displays where you want the items inside to feel like they're floating. Clean, quiet, and intentional.",
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Disappearing Frame Effect",
+        "subtitle": "Recedes Against Light Walls for Visual Focus",
+        "testId": "benefit-depth"
+      },
+      {
+        "icon": "Award",
+        "title": "Handcrafted Detail",
+        "subtitle": "Sharp Mitered Corners and Smooth, Even Finish",
+        "testId": "benefit-modern-display"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadow Box?",
+      "description": "Sometimes less really is more. Design your modern white shadow box with our easy-to-use tool and see instant pricing."
+    },
+    "hasCarousel": false,
+    "specsFormat": "inchMarks",
+    "categoryLabel": "Shadow Box"
+  },
+  "standard-depth-modern-black": {
+    "meta": {
+      "title": "Modern Black Shadow Box | Basalt Frame | ShadowboxFrames.com",
+      "description": "A sleek modern black shadow box with clean lines and standard depth. Handcrafted for contemporary spaces and curated displays."
+    },
+    "hero": {
+      "badgeLabel": "Sleek & Contemporary",
+      "headline": "Modern Black Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Basalt Frame",
+      "designButtonLabel": "Design Your Shadow Box"
+    },
+    "inspirationSubtitle": "",
+    "designHeading": "Design & Character",
+    "designBodySource": "static",
+    "designBodyParagraph": "What sets this modern profile apart from our classic matte black is the geometry. The lines are sharper, the profile is more angular, and the overall impression is more architectural. It's the kind of frame that looks intentional on a gallery wall or as part of a carefully arranged display grouping. The black finish is smooth and understated, letting the structure of the frame itself do the talking.",
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Modern Angular Profile",
+        "subtitle": "Sharp, Clean Lines for Contemporary Spaces",
+        "testId": "benefit-depth"
+      },
+      {
+        "icon": "Award",
+        "title": "Curated Grouping Ready",
+        "subtitle": "Consistent Geometry for Cohesive Wall Displays",
+        "testId": "benefit-contemporary-display"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadow Box?",
+      "description": "Modern doesn't mean cold. Design your sleek modern black shadow box with our easy-to-use tool and see instant pricing."
+    },
+    "hasCarousel": false,
+    "specsFormat": "inchMarks",
+    "categoryLabel": "Shadow Box"
+  },
+  "standard-depth-modern-brown": {
+    "meta": {
+      "title": "Modern Brown Shadow Box | Chestnut Frame | ShadowboxFrames.com",
+      "description": "A warm modern brown shadow box with clean contemporary lines and standard depth. Handcrafted for cozy, stylish displays."
+    },
+    "hero": {
+      "badgeLabel": "Contemporary Warmth",
+      "headline": "Modern Brown Shadow Box",
+      "subtitleMode": "brandItalic",
+      "brandItalic": "Chestnut Frame",
+      "designButtonLabel": "Design Your Shadow Box"
+    },
+    "inspirationSubtitle": "",
+    "designHeading": "Design & Character",
+    "designBodySource": "static",
+    "designBodyParagraph": "The modern brown finish walks a beautiful line between structured and approachable. The angular profile gives it a contemporary edge, while the warm brown color keeps things inviting. It's a frame that works in mid-century modern living rooms, cozy reading nooks, and sun-filled kitchens. The tone is rich without being dark, making it a versatile complement to both warm and cool color palettes.",
+    "features": [
+      {
+        "icon": "Zap",
+        "title": "Instant Pricing",
+        "subtitle": "See Your Cost as You Customize",
+        "testId": "benefit-instant-pricing"
+      },
+      {
+        "icon": "Ruler",
+        "title": "Any Custom Size",
+        "subtitle": "Built to Fit Your Exact Art",
+        "testId": "benefit-custom-size"
+      },
+      {
+        "icon": "Box",
+        "title": "Standard 0.75\" Depth",
+        "subtitle": "Fits Flat Keepsakes and Gently Dimensional Items",
+        "testId": "benefit-depth"
+      },
+      {
+        "icon": "Award",
+        "title": "Angular Profile",
+        "subtitle": "Sharp, Geometric Lines Softened by Warm Brown Color",
+        "testId": "benefit-warm-display"
+      }
+    ],
+    "cta": {
+      "title": "Ready to Create Your Custom Shadow Box?",
+      "description": "Contemporary warmth, right at home. Design your modern brown shadow box with our easy-to-use tool and see instant pricing."
+    },
+    "hasCarousel": false,
+    "specsFormat": "inchMarks",
+    "categoryLabel": "Shadow Box"
+  }
+}

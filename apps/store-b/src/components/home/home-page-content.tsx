@@ -1,18 +1,7 @@
 "use client";
 
 import { getFramesByCategory, type HeroImage } from "@framecraft/core";
-import {
-  FaqMini,
-  GlazingShowcase,
-  Hero,
-  HowItWorks,
-  MatDesignerShowcase,
-  ShadowboxDesigner,
-  ShadowboxShowcase,
-  SpecialtyDesignersShowcase,
-  TestimonialCarousel,
-  ValueProps,
-} from "@framecraft/ui";
+import { FaqMini, Hero, HowItWorks, ShadowboxDesigner, ShadowboxShowcase, TestimonialCarousel, ValueProps } from "@framecraft/ui";
 import heroImagesDataRaw from "@/data/heroImages.json";
 
 import { brandConfig } from "@/brand.config";
@@ -23,7 +12,10 @@ import {
 } from "@/config/shadowbox-home";
 import { FinalCta } from "./final-cta";
 import { HeroTrustStrip } from "./hero-trust-strip";
+import { ShadowboxGlazingShowcase } from "./shadowbox-glazing-showcase";
+import { ShadowboxMatDesignerShowcase } from "./shadowbox-mat-designer-showcase";
 import { ShadowboxSeoTextBlock } from "./shadowbox-seo-text-block";
+import { ShadowboxSpecialtyDesignersShowcase } from "./shadowbox-specialty-designers-showcase";
 import { WeAlsoOffer } from "./we-also-offer";
 
 const heroImagesData = heroImagesDataRaw as HeroImage[];
@@ -97,9 +89,9 @@ export function HomePageContent() {
           shadowboxLink="/shadowbox"
           variant="shadowboxframes"
         />
-        <GlazingShowcase />
-        <MatDesignerShowcase />
-        <SpecialtyDesignersShowcase />
+        <ShadowboxGlazingShowcase />
+        <ShadowboxMatDesignerShowcase />
+        <ShadowboxSpecialtyDesignersShowcase />
         {homeSections.faqMini && (
           <FaqMini
             faqs={shadowboxHomeFaqs}
