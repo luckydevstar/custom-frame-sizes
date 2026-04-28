@@ -29,6 +29,7 @@ const nextConfig = {
       { source: '/returns', destination: '/returns-exchanges', permanent: true },
       { source: '/jerseys', destination: '/jersey-frames', permanent: true },
       { source: '/shadowbox-designer', destination: '/shadowbox/designer', permanent: true },
+      { source: '/specialty/mat-designer', destination: '/mat-designer', permanent: true },
     ];
   },
   async rewrites() {
