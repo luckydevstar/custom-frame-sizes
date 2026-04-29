@@ -89,9 +89,17 @@ export default function GalleryWallGuidePage() {
 
           <h2 className="text-xl font-semibold text-foreground mt-8">Go deeper</h2>
           <p className="text-base leading-relaxed">
-            For layout templates, row-and-column ideas, and styling tips, read our pillar article{" "}
-            <Link href="/blog/gallery-wall-layouts" className="text-primary underline">
-              Gallery wall layouts
+            For print and frame size relationships, see our{" "}
+            <Link href="/frame-size-chart" className="text-primary underline">
+              frame size chart
+            </Link>{" "}
+            and{" "}
+            <Link href="/how-to-measure" className="text-primary underline">
+              how to measure for frames
+            </Link>
+            . More guides live on the{" "}
+            <Link href="/learn" className="text-primary underline">
+              Learn hub
             </Link>
             . When you&apos;re ready to build frames to exact sizes, use the{" "}
             <Link href="/designer" className="text-primary underline">

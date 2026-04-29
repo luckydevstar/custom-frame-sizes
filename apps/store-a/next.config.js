@@ -26,6 +26,8 @@ const nextConfig = {
   swcMinify: true, // Use SWC for faster minification
   async redirects() {
     return [
+      { source: '/blog', destination: '/learn', permanent: true },
+      { source: '/blog/:path*', destination: '/learn', permanent: true },
       { source: '/returns', destination: '/returns-exchanges', permanent: true },
       { source: '/business-services', destination: '/business', permanent: true },
       { source: '/frame-quality-guarantee', destination: '/warranty', permanent: true },
