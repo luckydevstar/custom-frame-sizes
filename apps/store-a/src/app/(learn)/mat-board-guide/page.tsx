@@ -183,12 +183,11 @@ export default function MatBoardGuidePage() {
           </ol>
           <p className="text-base leading-relaxed">
             <strong>Warning</strong>: Bright or bold mat colors can overpower artwork. Use vibrant
-            colors sparingly and intentionally. For more in-depth guidance on mat colors, check out
-            our{" "}
-            <Link href="/blog" className="text-primary underline hover:no-underline">
-              blog
-            </Link>
-            .
+            colors sparingly and intentionally. For more help, browse the{" "}
+            <Link href="/learn" className="text-primary underline hover:no-underline">
+              Learn hub
+            </Link>{" "}
+            or open the mat designer to preview swatches.
           </p>
 
           <h2 className="text-xl font-semibold text-foreground mt-8">

@@ -66,7 +66,6 @@ const defaultLinks: FooterLinks = {
   ],
   company: [
     { label: "About Us", path: "/about" },
-    { label: "Blog", path: "/blog" },
     { label: "Business Services", path: "/business" },
     { label: "Contact", path: "/contact" },
     { label: "Frame Quality Guarantee", path: "/warranty" },

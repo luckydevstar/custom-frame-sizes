@@ -1,7 +1,6 @@
 import { getFramesByCategory } from "@framecraft/core";
 import { MetadataRoute } from "next";
 
-import { getBlogPosts } from "@/lib/blog";
 import { siteUrl } from "@/lib/seo";
 
 const baseUrl = siteUrl;
@@ -117,26 +116,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.65,
     },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.75,
-    },
   ];
-
-  let blogPostEntries: MetadataRoute.Sitemap = [];
-  try {
-    const posts = getBlogPosts();
-    blogPostEntries = posts.map((post) => ({
-      url: `${baseUrl}/blog/${post.slug}`,
-      lastModified: post.date ? new Date(post.date) : now,
-      changeFrequency: "monthly" as const,
-      priority: 0.65,
-    }));
-  } catch {
-    blogPostEntries = [];
-  }
 
   // Dynamic frame detail pages
   try {
@@ -159,9 +139,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       }
     }
 
-    return [...staticPages, ...blogPostEntries, ...dynamicPages];
+    return [...staticPages, ...dynamicPages];
   } catch {
-    // If dynamic detail pages fail, still include blog URLs
-    return [...staticPages, ...blogPostEntries];
+    return staticPages;
   }
 }
