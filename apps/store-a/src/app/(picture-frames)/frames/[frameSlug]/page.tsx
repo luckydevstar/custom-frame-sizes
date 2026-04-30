@@ -19,8 +19,6 @@ import { FrameHeroBadge } from "./FrameHeroBadge";
 // Next.js 15: params is a Promise
 type Props = { params: Promise<{ frameSlug: string }> };
 
-export const dynamic = "force-dynamic";
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { frameSlug } = await params;
   const frame = getFrameStyleById(frameSlug);

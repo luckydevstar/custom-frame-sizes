@@ -1,0 +1,221 @@
+[
+  {
+    "id": "white",
+    "name": "Pure White",
+    "color": "#FFFFFF",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": true
+  },
+  {
+    "id": "cream",
+    "name": "Cream",
+    "color": "#FFFDD0",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "ivory",
+    "name": "Ivory",
+    "color": "#FFFFF0",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": true
+  },
+  {
+    "id": "beige",
+    "name": "Beige",
+    "color": "#F5F5DC",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "light-gray",
+    "name": "Light Gray",
+    "color": "#D3D3D3",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "medium-gray",
+    "name": "Medium Gray",
+    "color": "#808080",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "charcoal",
+    "name": "Charcoal",
+    "color": "#36454F",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": true
+  },
+  {
+    "id": "black",
+    "name": "Black",
+    "color": "#000000",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": true
+  },
+  {
+    "id": "navy",
+    "name": "Navy Blue",
+    "color": "#000080",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "royal-blue",
+    "name": "Royal Blue",
+    "color": "#4169E1",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "sky-blue",
+    "name": "Sky Blue",
+    "color": "#87CEEB",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "teal",
+    "name": "Teal",
+    "color": "#008080",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "aqua",
+    "name": "Aqua",
+    "color": "#00CED1",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "sage",
+    "name": "Sage Green",
+    "color": "#9DC183",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "forest",
+    "name": "Forest Green",
+    "color": "#228B22",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "burgundy",
+    "name": "Burgundy",
+    "color": "#800020",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "maroon",
+    "name": "Maroon",
+    "color": "#800000",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "gold",
+    "name": "Gold",
+    "color": "#FFD700",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "tan",
+    "name": "Tan",
+    "color": "#D2B48C",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "chocolate",
+    "name": "Chocolate",
+    "color": "#7B3F00",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "slate",
+    "name": "Slate",
+    "color": "#708090",
+    "pricePerInch": 0.25,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "suede-white",
+    "name": "Suede White",
+    "color": "#F8F8F8",
+    "type": "suede",
+    "pricePerInch": 0.45,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "suede-black",
+    "name": "Suede Black",
+    "color": "#1A1A1A",
+    "type": "suede",
+    "pricePerInch": 0.45,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "suede-gray",
+    "name": "Suede Gray",
+    "color": "#6B6B6B",
+    "type": "suede",
+    "pricePerInch": 0.45,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "canvas-cream",
+    "name": "Canvas Cream",
+    "color": "#FAF7F0",
+    "type": "canvas",
+    "pricePerInch": 0.45,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "canvas-beige",
+    "name": "Canvas Beige",
+    "color": "#E8DCC8",
+    "type": "canvas",
+    "pricePerInch": 0.45,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "suede-navy",
+    "name": "Suede Navy",
+    "color": "#1B2B4A",
+    "type": "suede",
+    "pricePerInch": 0.45,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "canvas-sage",
+    "name": "Canvas Sage",
+    "color": "#A8B89F",
+    "type": "canvas",
+    "pricePerInch": 0.45,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "suede-burgundy",
+    "name": "Suede Burgundy",
+    "color": "#6B1F28",
+    "type": "suede",
+    "pricePerInch": 0.45,
+    "isAvailableOversize": false
+  },
+  {
+    "id": "canvas-charcoal",
+    "name": "Canvas Charcoal",
+    "color": "#3E4A52",
+    "type": "canvas",
+    "pricePerInch": 0.45,
+    "isAvailableOversize": false
+  }
+]

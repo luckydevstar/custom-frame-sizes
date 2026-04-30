@@ -1,0 +1,24 @@
+{
+  "printAndFrame": {
+    "pricePerSquareInch": 0.15,
+    "description": "Print-and-Frame service pricing"
+  },
+  "oversizeFees": {
+    "threshold75to99": {
+      "minDimension": 75,
+      "maxDimension": 99.99,
+      "fee": 249,
+      "description": "Oversize fee for total dimensions 75-99.99 inches"
+    },
+    "threshold100Plus": {
+      "minDimension": 100,
+      "blocked": true,
+      "description": "Orders blocked for total dimensions 100+ inches"
+    }
+  },
+  "matMultipliers": {
+    "none": 0,
+    "single": 1,
+    "double": 1.5
+  }
+}

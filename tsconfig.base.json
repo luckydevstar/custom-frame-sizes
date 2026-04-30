@@ -55,7 +55,14 @@
       "@framecraft/types": ["./packages/types/src"],
       "@framecraft/types/*": ["./packages/types/src/*"],
       "@framecraft/data": ["./packages/data/src"],
-      "@framecraft/data/*": ["./packages/data/src/*"]
+      "@framecraft/data/*": ["./packages/data/src/*"],
+      // `@framecraft/store-data/*` is a virtual per-app data alias.
+      // At Next.js build time, each app's webpack/tsconfig overrides this to
+      // point to apps/store-x/src/data/*. This base mapping exists so
+      // packages/core and packages/config type-check standalone (and so
+      // editor IntelliSense works inside those packages); the runtime
+      // resolution always comes from each app's webpack alias.
+      "@framecraft/store-data/*": ["./packages/data/src/*"]
     }
   },
   "exclude": [

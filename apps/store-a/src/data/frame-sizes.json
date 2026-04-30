@@ -1,0 +1,2581 @@
+[
+  {
+    "size": "24x36",
+    "width": 24,
+    "height": 36,
+    "units": 2871,
+    "rank": 1,
+    "perimeter": 120,
+    "category": "poster",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": false,
+    "primaryUseCase": "Movie posters, concert posters, large art prints",
+    "secondaryUseCases": [
+      "Statement wall art",
+      "Photography prints",
+      "Vintage posters",
+      "Gallery displays"
+    ],
+    "recommendedMatSizes": [
+      "16x20",
+      "18x24",
+      "20x28"
+    ],
+    "description": "The #1 poster size - industry-standard 24×36 format perfect for movie posters, concert prints, and large-scale photography. This commanding vertical format creates powerful visual impact.",
+    "tier": 1
+  },
+  {
+    "size": "18x24",
+    "width": 18,
+    "height": 24,
+    "units": 2500,
+    "rank": 2,
+    "perimeter": 84,
+    "category": "poster",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": false,
+    "primaryUseCase": "Medium art prints, photography, decorative posters",
+    "secondaryUseCases": [
+      "Wedding portraits",
+      "Family photos",
+      "Travel photography",
+      "Abstract art"
+    ],
+    "recommendedMatSizes": [
+      "11x14",
+      "12x16",
+      "13x19"
+    ],
+    "description": "Perfect mid-size format balancing impact and versatility. Popular for wedding portraits, family photos, and medium art prints that need presence without overwhelming the space.",
+    "tier": 1
+  },
+  {
+    "size": "20x20",
+    "width": 20,
+    "height": 20,
+    "units": 2042,
+    "rank": 3,
+    "perimeter": 80,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography",
+    "secondaryUseCases": [
+      "Statement wall art",
+      "Abstract compositions",
+      "Modern gallery walls",
+      "Symmetrical designs"
+    ],
+    "recommendedMatSizes": [
+      "12x12",
+      "14x14"
+    ],
+    "description": "Modern 20×20 square format perfect for contemporary art, Instagram-scale prints, and symmetrical compositions. This balanced size creates striking visual impact in modern interiors.",
+    "tier": 1
+  },
+  {
+    "size": "16x20",
+    "width": 16,
+    "height": 20,
+    "units": 1798,
+    "rank": 4,
+    "perimeter": 72,
+    "category": "standard",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": false,
+    "primaryUseCase": "Professional portraits, medium art prints",
+    "secondaryUseCases": [
+      "Wedding photos",
+      "Senior portraits",
+      "Art reproductions",
+      "Family portraits"
+    ],
+    "recommendedMatSizes": [
+      "8x10",
+      "11x14",
+      "12x16"
+    ],
+    "description": "Classic portrait size beloved by photographers and art collectors. This versatile format works beautifully for professional portraits, medium artwork, and matted displays.",
+    "tier": 1
+  },
+  {
+    "size": "11x14",
+    "width": 11,
+    "height": 14,
+    "units": 1789,
+    "rank": 5,
+    "perimeter": 50,
+    "category": "standard",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": false,
+    "primaryUseCase": "Diplomas, certificates, small portraits",
+    "secondaryUseCases": [
+      "High school diplomas",
+      "Awards",
+      "Small family photos",
+      "Kids' art"
+    ],
+    "recommendedMatSizes": [
+      "8x10",
+      "5x7",
+      "8.5x11"
+    ],
+    "description": "Diploma and certificate standard - this traditional size perfectly frames achievements, small portraits, and artwork. Commonly used for high school diplomas and professional certificates.",
+    "tier": 1
+  },
+  {
+    "size": "12x16",
+    "width": 12,
+    "height": 16,
+    "units": 1699,
+    "rank": 6,
+    "perimeter": 56,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "9x12",
+      "8x11"
+    ],
+    "description": "Distinctive 12×16 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "8x10",
+    "width": 8,
+    "height": 10,
+    "units": 1692,
+    "rank": 7,
+    "perimeter": 36,
+    "category": "standard",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": false,
+    "primaryUseCase": "Family photos, portraits, desk frames",
+    "secondaryUseCases": [
+      "School pictures",
+      "Professional headshots",
+      "Small artwork",
+      "Gift frames"
+    ],
+    "recommendedMatSizes": [
+      "4x6",
+      "5x7"
+    ],
+    "description": "Classic photo frame size. While commonly available elsewhere, our custom-made frames offer superior craftsmanship and unique moulding profiles you won't find at big-box retailers.",
+    "tier": 1
+  },
+  {
+    "size": "10x10",
+    "width": 10,
+    "height": 10,
+    "units": 1586,
+    "rank": 8,
+    "perimeter": 40,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "6x6",
+      "7x7"
+    ],
+    "description": "Compact 10×10 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. Perfect for creating cohesive gallery walls.",
+    "tier": 1
+  },
+  {
+    "size": "30x40",
+    "width": 30,
+    "height": 40,
+    "units": 1516,
+    "rank": 9,
+    "perimeter": 140,
+    "category": "large",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": true,
+    "primaryUseCase": "Large art prints, statement pieces, commercial displays",
+    "secondaryUseCases": [
+      "Gallery artwork",
+      "Professional photography",
+      "Lobby displays",
+      "Feature walls"
+    ],
+    "recommendedMatSizes": [
+      "24x32",
+      "21x28"
+    ],
+    "description": "Substantial 30×40 large-format frame for statement artwork and professional displays. This commanding scale demands attention and works beautifully in spacious rooms and gallery settings. Custom-built with extra structural support.",
+    "tier": 1
+  },
+  {
+    "size": "24x30",
+    "width": 24,
+    "height": 30,
+    "units": 1488,
+    "rank": 10,
+    "perimeter": 108,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "19x24",
+      "16x21"
+    ],
+    "description": "Distinctive 24×30 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "16x40",
+    "width": 16,
+    "height": 40,
+    "units": 1385,
+    "rank": 11,
+    "perimeter": 112,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x32",
+      "11x28"
+    ],
+    "description": "Distinctive 16×40 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "6x6",
+    "width": 6,
+    "height": 6,
+    "units": 1334,
+    "rank": 12,
+    "perimeter": 24,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Small square art, coasters, mini prints",
+    "secondaryUseCases": [
+      "Tiny artwork",
+      "Decorative accents",
+      "Craft projects",
+      "Mini gallery walls"
+    ],
+    "recommendedMatSizes": [
+      "3x3",
+      "4x4"
+    ],
+    "description": "Petite 6×6 square frame for mini artwork, decorative accents, and creative displays. Hard to find in retail stores.",
+    "tier": 1
+  },
+  {
+    "size": "12x12",
+    "width": 12,
+    "height": 12,
+    "units": 1327,
+    "rank": 13,
+    "perimeter": 48,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "7x7",
+      "8x8"
+    ],
+    "description": "Compact 12×12 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. Perfect for creating cohesive gallery walls.",
+    "tier": 1
+  },
+  {
+    "size": "8x8",
+    "width": 8,
+    "height": 8,
+    "units": 1272,
+    "rank": 14,
+    "perimeter": 32,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Small square art, coasters, mini prints",
+    "secondaryUseCases": [
+      "Tiny artwork",
+      "Decorative accents",
+      "Craft projects",
+      "Mini gallery walls"
+    ],
+    "recommendedMatSizes": [
+      "4x4",
+      "5x5"
+    ],
+    "description": "Petite 8×8 square frame for mini artwork, decorative accents, and creative displays. Hard to find in retail stores.",
+    "tier": 1
+  },
+  {
+    "size": "20x30",
+    "width": 20,
+    "height": 30,
+    "units": 1184,
+    "rank": 15,
+    "perimeter": 100,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "16x24",
+      "14x21"
+    ],
+    "description": "Distinctive 20×30 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "18x18",
+    "width": 18,
+    "height": 18,
+    "units": 1171,
+    "rank": 16,
+    "perimeter": 72,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "10x10",
+      "12x12"
+    ],
+    "description": "Compact 18×18 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. Perfect for creating cohesive gallery walls.",
+    "tier": 1
+  },
+  {
+    "size": "30x30",
+    "width": 30,
+    "height": 30,
+    "units": 1163,
+    "rank": 17,
+    "perimeter": 120,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography",
+    "secondaryUseCases": [
+      "Statement wall art",
+      "Abstract compositions",
+      "Modern gallery walls",
+      "Symmetrical designs"
+    ],
+    "recommendedMatSizes": [
+      "18x18",
+      "21x21"
+    ],
+    "description": "Modern 30×30 square format perfect for contemporary art, Instagram-scale prints, and symmetrical compositions. This balanced size creates striking visual impact in modern interiors.",
+    "tier": 1
+  },
+  {
+    "size": "24x24",
+    "width": 24,
+    "height": 24,
+    "units": 1140,
+    "rank": 18,
+    "perimeter": 96,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography",
+    "secondaryUseCases": [
+      "Statement wall art",
+      "Abstract compositions",
+      "Modern gallery walls",
+      "Symmetrical designs"
+    ],
+    "recommendedMatSizes": [
+      "14x14",
+      "16x16"
+    ],
+    "description": "Modern 24×24 square format perfect for contemporary art, Instagram-scale prints, and symmetrical compositions. This balanced size creates striking visual impact in modern interiors.",
+    "tier": 1
+  },
+  {
+    "size": "14x24",
+    "width": 14,
+    "height": 24,
+    "units": 1116,
+    "rank": 19,
+    "perimeter": 76,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "11x19",
+      "9x16"
+    ],
+    "description": "Distinctive 14×24 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "9x12",
+    "width": 9,
+    "height": 12,
+    "units": 1113,
+    "rank": 20,
+    "perimeter": 42,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "7x9",
+      "6x8"
+    ],
+    "description": "Distinctive 9×12 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "12x24",
+    "width": 12,
+    "height": 24,
+    "units": 1106,
+    "rank": 21,
+    "perimeter": 72,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "9x19",
+      "8x16"
+    ],
+    "description": "Distinctive 12×24 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "22x28",
+    "width": 22,
+    "height": 28,
+    "units": 1096,
+    "rank": 22,
+    "perimeter": 100,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "17x22",
+      "15x19"
+    ],
+    "description": "Distinctive 22×28 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "6x9",
+    "width": 6,
+    "height": 9,
+    "units": 1067,
+    "rank": 23,
+    "perimeter": 30,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "4x7",
+      "4x6"
+    ],
+    "description": "Distinctive 6×9 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "13x13",
+    "width": 13,
+    "height": 13,
+    "units": 1065,
+    "rank": 24,
+    "perimeter": 52,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "7x7",
+      "9x9"
+    ],
+    "description": "Compact 13×13 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. Perfect for creating cohesive gallery walls.",
+    "tier": 1
+  },
+  {
+    "size": "4x4",
+    "width": 4,
+    "height": 4,
+    "units": 1029,
+    "rank": 25,
+    "perimeter": 16,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Small square art, coasters, mini prints",
+    "secondaryUseCases": [
+      "Tiny artwork",
+      "Decorative accents",
+      "Craft projects",
+      "Mini gallery walls"
+    ],
+    "recommendedMatSizes": [
+      "2x2",
+      "2x2"
+    ],
+    "description": "Petite 4×4 square frame for mini artwork, decorative accents, and creative displays. Hard to find in retail stores.",
+    "tier": 1
+  },
+  {
+    "size": "6x8",
+    "width": 6,
+    "height": 8,
+    "units": 1022,
+    "rank": 26,
+    "perimeter": 28,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "4x6",
+      "4x5"
+    ],
+    "description": "Distinctive 6×8 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "20x24",
+    "width": 20,
+    "height": 24,
+    "units": 1005,
+    "rank": 27,
+    "perimeter": 88,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "16x19",
+      "14x16"
+    ],
+    "description": "Distinctive 20×24 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "7x7",
+    "width": 7,
+    "height": 7,
+    "units": 1003,
+    "rank": 28,
+    "perimeter": 28,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Small square art, coasters, mini prints",
+    "secondaryUseCases": [
+      "Tiny artwork",
+      "Decorative accents",
+      "Craft projects",
+      "Mini gallery walls"
+    ],
+    "recommendedMatSizes": [
+      "4x4",
+      "4x4"
+    ],
+    "description": "Petite 7×7 square frame for mini artwork, decorative accents, and creative displays. Hard to find in retail stores.",
+    "tier": 1
+  },
+  {
+    "size": "11x17",
+    "width": 11,
+    "height": 17,
+    "units": 937,
+    "rank": 29,
+    "perimeter": 56,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "8x13",
+      "7x11"
+    ],
+    "description": "Distinctive 11×17 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "19x25",
+    "width": 19,
+    "height": 25,
+    "units": 913,
+    "rank": 30,
+    "perimeter": 88,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "15x20",
+      "13x17"
+    ],
+    "description": "Distinctive 19×25 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "5x7",
+    "width": 5,
+    "height": 7,
+    "units": 910,
+    "rank": 31,
+    "perimeter": 24,
+    "category": "small",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": false,
+    "primaryUseCase": "Wallet photos, small prints, gift frames",
+    "secondaryUseCases": [
+      "Wallet-size photos",
+      "Trading cards",
+      "Mini artwork",
+      "Desktop displays"
+    ],
+    "recommendedMatSizes": [
+      "4x5"
+    ],
+    "description": "Compact 5×7 size perfect for wallet photos, small prints, and desktop displays. Hard to find pre-made - custom framing ensures perfect fit.",
+    "tier": 1
+  },
+  {
+    "size": "15x20",
+    "width": 15,
+    "height": 20,
+    "units": 907,
+    "rank": 32,
+    "perimeter": 70,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x16",
+      "10x14"
+    ],
+    "description": "Distinctive 15×20 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "10x20",
+    "width": 10,
+    "height": 20,
+    "units": 886,
+    "rank": 33,
+    "perimeter": 60,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "8x16",
+      "7x14"
+    ],
+    "description": "Distinctive 10×20 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "14x14",
+    "width": 14,
+    "height": 14,
+    "units": 848,
+    "rank": 34,
+    "perimeter": 56,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "8x8",
+      "9x9"
+    ],
+    "description": "Compact 14×14 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. Perfect for creating cohesive gallery walls.",
+    "tier": 1
+  },
+  {
+    "size": "16x16",
+    "width": 16,
+    "height": 16,
+    "units": 837,
+    "rank": 35,
+    "perimeter": 64,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "9x9",
+      "11x11"
+    ],
+    "description": "Compact 16×16 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. Perfect for creating cohesive gallery walls.",
+    "tier": 1
+  },
+  {
+    "size": "32x40",
+    "width": 32,
+    "height": 40,
+    "units": 829,
+    "rank": 36,
+    "perimeter": 144,
+    "category": "large",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": true,
+    "primaryUseCase": "Large art prints, statement pieces, commercial displays",
+    "secondaryUseCases": [
+      "Gallery artwork",
+      "Professional photography",
+      "Lobby displays",
+      "Feature walls"
+    ],
+    "recommendedMatSizes": [
+      "25x32",
+      "22x28"
+    ],
+    "description": "Substantial 32×40 large-format frame for statement artwork and professional displays. This commanding scale demands attention and works beautifully in spacious rooms and gallery settings. Custom-built with extra structural support.",
+    "tier": 1
+  },
+  {
+    "size": "15x27",
+    "width": 15,
+    "height": 27,
+    "units": 827,
+    "rank": 37,
+    "perimeter": 84,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x21",
+      "10x18"
+    ],
+    "description": "Distinctive 15×27 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "32x42",
+    "width": 32,
+    "height": 42,
+    "units": 823,
+    "rank": 38,
+    "perimeter": 148,
+    "category": "large",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": true,
+    "primaryUseCase": "Large art prints, statement pieces, commercial displays",
+    "secondaryUseCases": [
+      "Gallery artwork",
+      "Professional photography",
+      "Lobby displays",
+      "Feature walls"
+    ],
+    "recommendedMatSizes": [
+      "25x33",
+      "22x29"
+    ],
+    "description": "Substantial 32×42 large-format frame for statement artwork and professional displays. This commanding scale demands attention and works beautifully in spacious rooms and gallery settings. Custom-built with extra structural support.",
+    "tier": 1
+  },
+  {
+    "size": "16x24",
+    "width": 16,
+    "height": 24,
+    "units": 819,
+    "rank": 39,
+    "perimeter": 80,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x19",
+      "11x16"
+    ],
+    "description": "Distinctive 16×24 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "8.5x11",
+    "width": 8.5,
+    "height": 11,
+    "units": 787,
+    "rank": 40,
+    "perimeter": 39,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "6x8",
+      "5x7"
+    ],
+    "description": "Distinctive 8.5×11 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "12x18",
+    "width": 12,
+    "height": 18,
+    "units": 771,
+    "rank": 41,
+    "perimeter": 60,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "9x14",
+      "8x12"
+    ],
+    "description": "Distinctive 12×18 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "26.5x38.5",
+    "width": 26.5,
+    "height": 38.5,
+    "units": 770,
+    "rank": 42,
+    "perimeter": 130,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": true,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "21x30",
+      "18x26"
+    ],
+    "description": "Distinctive 26.5×38.5 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "11x15",
+    "width": 11,
+    "height": 15,
+    "units": 761,
+    "rank": 43,
+    "perimeter": 52,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "8x12",
+      "7x10"
+    ],
+    "description": "Distinctive 11×15 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "22x22",
+    "width": 22,
+    "height": 22,
+    "units": 760,
+    "rank": 44,
+    "perimeter": 88,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography",
+    "secondaryUseCases": [
+      "Statement wall art",
+      "Abstract compositions",
+      "Modern gallery walls",
+      "Symmetrical designs"
+    ],
+    "recommendedMatSizes": [
+      "13x13",
+      "15x15"
+    ],
+    "description": "Modern 22×22 square format perfect for contemporary art, Instagram-scale prints, and symmetrical compositions. This balanced size creates striking visual impact in modern interiors.",
+    "tier": 1
+  },
+  {
+    "size": "28x40",
+    "width": 28,
+    "height": 40,
+    "units": 751,
+    "rank": 45,
+    "perimeter": 136,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": true,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "22x32",
+      "19x28"
+    ],
+    "description": "Distinctive 28×40 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "4x10",
+    "width": 4,
+    "height": 10,
+    "units": 745,
+    "rank": 46,
+    "perimeter": 28,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [],
+    "description": "Distinctive 4×10 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "12x14",
+    "width": 12,
+    "height": 14,
+    "units": 721,
+    "rank": 47,
+    "perimeter": 52,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "9x11",
+      "8x9"
+    ],
+    "description": "Distinctive 12×14 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "34x34",
+    "width": 34,
+    "height": 34,
+    "units": 712,
+    "rank": 48,
+    "perimeter": 136,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": true,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography",
+    "secondaryUseCases": [
+      "Statement wall art",
+      "Abstract compositions",
+      "Modern gallery walls",
+      "Symmetrical designs"
+    ],
+    "recommendedMatSizes": [
+      "20x20",
+      "23x23"
+    ],
+    "description": "Modern 34×34 square format perfect for contemporary art, Instagram-scale prints, and symmetrical compositions. This balanced size creates striking visual impact in modern interiors.",
+    "tier": 1
+  },
+  {
+    "size": "13x17",
+    "width": 13,
+    "height": 17,
+    "units": 708,
+    "rank": 49,
+    "perimeter": 60,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "10x13",
+      "9x11"
+    ],
+    "description": "Distinctive 13×17 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "16x42",
+    "width": 16,
+    "height": 42,
+    "units": 699,
+    "rank": 50,
+    "perimeter": 116,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x33",
+      "11x29"
+    ],
+    "description": "Distinctive 16×42 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "12x17",
+    "width": 12,
+    "height": 17,
+    "units": 690,
+    "rank": 51,
+    "perimeter": 58,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "9x13",
+      "8x11"
+    ],
+    "description": "Distinctive 12×17 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "10x12",
+    "width": 10,
+    "height": 12,
+    "units": 675,
+    "rank": 52,
+    "perimeter": 44,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "8x9",
+      "7x8"
+    ],
+    "description": "Distinctive 10×12 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "13x19",
+    "width": 13,
+    "height": 19,
+    "units": 660,
+    "rank": 53,
+    "perimeter": 64,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "10x15",
+      "9x13"
+    ],
+    "description": "Distinctive 13×19 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "19x24",
+    "width": 19,
+    "height": 24,
+    "units": 651,
+    "rank": 54,
+    "perimeter": 86,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "15x19",
+      "13x16"
+    ],
+    "description": "Distinctive 19×24 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "18x22",
+    "width": 18,
+    "height": 22,
+    "units": 641,
+    "rank": 55,
+    "perimeter": 80,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "14x17",
+      "12x15"
+    ],
+    "description": "Distinctive 18×22 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "8x18",
+    "width": 8,
+    "height": 18,
+    "units": 633,
+    "rank": 56,
+    "perimeter": 52,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "6x14",
+      "5x12"
+    ],
+    "description": "Distinctive 8×18 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "16x26",
+    "width": 16,
+    "height": 26,
+    "units": 624,
+    "rank": 57,
+    "perimeter": 84,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x20",
+      "11x18"
+    ],
+    "description": "Distinctive 16×26 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "32x32",
+    "width": 32,
+    "height": 32,
+    "units": 620,
+    "rank": 58,
+    "perimeter": 128,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": true,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography",
+    "secondaryUseCases": [
+      "Statement wall art",
+      "Abstract compositions",
+      "Modern gallery walls",
+      "Symmetrical designs"
+    ],
+    "recommendedMatSizes": [
+      "19x19",
+      "22x22"
+    ],
+    "description": "Modern 32×32 square format perfect for contemporary art, Instagram-scale prints, and symmetrical compositions. This balanced size creates striking visual impact in modern interiors.",
+    "tier": 1
+  },
+  {
+    "size": "17x17",
+    "width": 17,
+    "height": 17,
+    "units": 615,
+    "rank": 59,
+    "perimeter": 68,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "10x10",
+      "11x11"
+    ],
+    "description": "Compact 17×17 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. Perfect for creating cohesive gallery walls.",
+    "tier": 1
+  },
+  {
+    "size": "4x12",
+    "width": 4,
+    "height": 12,
+    "units": 613,
+    "rank": 60,
+    "perimeter": 32,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [],
+    "description": "Distinctive 4×12 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "8x12",
+    "width": 8,
+    "height": 12,
+    "units": 607,
+    "rank": 61,
+    "perimeter": 40,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "6x9",
+      "5x8"
+    ],
+    "description": "Distinctive 8×12 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "9x9",
+    "width": 9,
+    "height": 9,
+    "units": 607,
+    "rank": 62,
+    "perimeter": 36,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Small square art, coasters, mini prints",
+    "secondaryUseCases": [
+      "Tiny artwork",
+      "Decorative accents",
+      "Craft projects",
+      "Mini gallery walls"
+    ],
+    "recommendedMatSizes": [
+      "5x5",
+      "6x6"
+    ],
+    "description": "Petite 9×9 square frame for mini artwork, decorative accents, and creative displays. Hard to find in retail stores.",
+    "tier": 1
+  },
+  {
+    "size": "5x5",
+    "width": 5,
+    "height": 5,
+    "units": 602,
+    "rank": 63,
+    "perimeter": 20,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Small square art, coasters, mini prints",
+    "secondaryUseCases": [
+      "Tiny artwork",
+      "Decorative accents",
+      "Craft projects",
+      "Mini gallery walls"
+    ],
+    "recommendedMatSizes": [
+      "3x3",
+      "3x3"
+    ],
+    "description": "Petite 5×5 square frame for mini artwork, decorative accents, and creative displays. Hard to find in retail stores.",
+    "tier": 1
+  },
+  {
+    "size": "13x39",
+    "width": 13,
+    "height": 39,
+    "units": 584,
+    "rank": 64,
+    "perimeter": 104,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "10x31",
+      "9x27"
+    ],
+    "description": "Distinctive 13×39 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "12x15",
+    "width": 12,
+    "height": 15,
+    "units": 583,
+    "rank": 65,
+    "perimeter": 54,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "9x12",
+      "8x10"
+    ],
+    "description": "Distinctive 12×15 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "10x14",
+    "width": 10,
+    "height": 14,
+    "units": 580,
+    "rank": 66,
+    "perimeter": 48,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "8x11",
+      "7x9"
+    ],
+    "description": "Distinctive 10×14 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "9x13",
+    "width": 9,
+    "height": 13,
+    "units": 577,
+    "rank": 67,
+    "perimeter": 44,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "7x10",
+      "6x9"
+    ],
+    "description": "Distinctive 9×13 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "6x12",
+    "width": 6,
+    "height": 12,
+    "units": 566,
+    "rank": 68,
+    "perimeter": 36,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "4x9",
+      "4x8"
+    ],
+    "description": "Distinctive 6×12 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "15x15",
+    "width": 15,
+    "height": 15,
+    "units": 564,
+    "rank": 69,
+    "perimeter": 60,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "9x9",
+      "10x10"
+    ],
+    "description": "Compact 15×15 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. Perfect for creating cohesive gallery walls.",
+    "tier": 1
+  },
+  {
+    "size": "17x22",
+    "width": 17,
+    "height": 22,
+    "units": 563,
+    "rank": 70,
+    "perimeter": 78,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "13x17",
+      "11x15"
+    ],
+    "description": "Distinctive 17×22 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "24x32",
+    "width": 24,
+    "height": 32,
+    "units": 550,
+    "rank": 71,
+    "perimeter": 112,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "19x25",
+      "16x22"
+    ],
+    "description": "Distinctive 24×32 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "4x8",
+    "width": 4,
+    "height": 8,
+    "units": 550,
+    "rank": 72,
+    "perimeter": 24,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [],
+    "description": "Distinctive 4×8 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "4x6",
+    "width": 4,
+    "height": 6,
+    "units": 536,
+    "rank": 73,
+    "perimeter": 20,
+    "category": "small",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": false,
+    "primaryUseCase": "Wallet photos, small prints, gift frames",
+    "secondaryUseCases": [
+      "Wallet-size photos",
+      "Trading cards",
+      "Mini artwork",
+      "Desktop displays"
+    ],
+    "recommendedMatSizes": [],
+    "description": "Compact 4×6 size perfect for wallet photos, small prints, and desktop displays. Hard to find pre-made - custom framing ensures perfect fit.",
+    "tier": 1
+  },
+  {
+    "size": "14x17",
+    "width": 14,
+    "height": 17,
+    "units": 523,
+    "rank": 74,
+    "perimeter": 62,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "11x13",
+      "9x11"
+    ],
+    "description": "Distinctive 14×17 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "8x11",
+    "width": 8,
+    "height": 11,
+    "units": 520,
+    "rank": 75,
+    "perimeter": 38,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "6x8",
+      "5x7"
+    ],
+    "description": "Distinctive 8×11 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "26x38",
+    "width": 26,
+    "height": 38,
+    "units": 508,
+    "rank": 76,
+    "perimeter": 128,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": true,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "20x30",
+      "18x26"
+    ],
+    "description": "Distinctive 26×38 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "14x22",
+    "width": 14,
+    "height": 22,
+    "units": 507,
+    "rank": 77,
+    "perimeter": 72,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "11x17",
+      "9x15"
+    ],
+    "description": "Distinctive 14×22 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "5x10",
+    "width": 5,
+    "height": 10,
+    "units": 507,
+    "rank": 78,
+    "perimeter": 30,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "4x8"
+    ],
+    "description": "Distinctive 5×10 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "22x30",
+    "width": 22,
+    "height": 30,
+    "units": 505,
+    "rank": 79,
+    "perimeter": 104,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "17x24",
+      "15x21"
+    ],
+    "description": "Distinctive 22×30 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "13x16",
+    "width": 13,
+    "height": 16,
+    "units": 488,
+    "rank": 80,
+    "perimeter": 58,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "10x12",
+      "9x11"
+    ],
+    "description": "Distinctive 13×16 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "20x28",
+    "width": 20,
+    "height": 28,
+    "units": 487,
+    "rank": 81,
+    "perimeter": 96,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "16x22",
+      "14x19"
+    ],
+    "description": "Distinctive 20×28 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "14x19",
+    "width": 14,
+    "height": 19,
+    "units": 469,
+    "rank": 82,
+    "perimeter": 66,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "11x15",
+      "9x13"
+    ],
+    "description": "Distinctive 14×19 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "14x18",
+    "width": 14,
+    "height": 18,
+    "units": 464,
+    "rank": 83,
+    "perimeter": 64,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "11x14",
+      "9x12"
+    ],
+    "description": "Distinctive 14×18 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "6x10",
+    "width": 6,
+    "height": 10,
+    "units": 460,
+    "rank": 84,
+    "perimeter": 32,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "4x8",
+      "4x7"
+    ],
+    "description": "Distinctive 6×10 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "7x10",
+    "width": 7,
+    "height": 10,
+    "units": 454,
+    "rank": 85,
+    "perimeter": 34,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "5x8",
+      "4x7"
+    ],
+    "description": "Distinctive 7×10 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "3x5",
+    "width": 3,
+    "height": 5,
+    "units": 449,
+    "rank": 86,
+    "perimeter": 16,
+    "category": "small",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Wallet photos, small prints, gift frames",
+    "secondaryUseCases": [
+      "Wallet-size photos",
+      "Trading cards",
+      "Mini artwork",
+      "Desktop displays"
+    ],
+    "recommendedMatSizes": [],
+    "description": "Compact 3×5 size perfect for wallet photos, small prints, and desktop displays. Hard to find pre-made - custom framing ensures perfect fit.",
+    "tier": 1
+  },
+  {
+    "size": "17x21",
+    "width": 17,
+    "height": 21,
+    "units": 440,
+    "rank": 87,
+    "perimeter": 76,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "13x16",
+      "11x14"
+    ],
+    "description": "Distinctive 17×21 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "3x4",
+    "width": 3,
+    "height": 4,
+    "units": 439,
+    "rank": 88,
+    "perimeter": 14,
+    "category": "small",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Wallet photos, small prints, gift frames",
+    "secondaryUseCases": [
+      "Wallet-size photos",
+      "Trading cards",
+      "Mini artwork",
+      "Desktop displays"
+    ],
+    "recommendedMatSizes": [],
+    "description": "Compact 3×4 size perfect for wallet photos, small prints, and desktop displays. Hard to find pre-made - custom framing ensures perfect fit.",
+    "tier": 1
+  },
+  {
+    "size": "4x5",
+    "width": 4,
+    "height": 5,
+    "units": 416,
+    "rank": 89,
+    "perimeter": 18,
+    "category": "small",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Wallet photos, small prints, gift frames",
+    "secondaryUseCases": [
+      "Wallet-size photos",
+      "Trading cards",
+      "Mini artwork",
+      "Desktop displays"
+    ],
+    "recommendedMatSizes": [],
+    "description": "Compact 4×5 size perfect for wallet photos, small prints, and desktop displays. Hard to find pre-made - custom framing ensures perfect fit.",
+    "tier": 1
+  },
+  {
+    "size": "10x16",
+    "width": 10,
+    "height": 16,
+    "units": 414,
+    "rank": 90,
+    "perimeter": 52,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "8x12",
+      "7x11"
+    ],
+    "description": "Distinctive 10×16 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "3x3",
+    "width": 3,
+    "height": 3,
+    "units": 414,
+    "rank": 91,
+    "perimeter": 12,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Small square art, coasters, mini prints",
+    "secondaryUseCases": [
+      "Tiny artwork",
+      "Decorative accents",
+      "Craft projects",
+      "Mini gallery walls"
+    ],
+    "recommendedMatSizes": [
+      "1x1",
+      "2x2"
+    ],
+    "description": "Petite 3×3 square frame for mini artwork, decorative accents, and creative displays. Hard to find in retail stores.",
+    "tier": 1
+  },
+  {
+    "size": "9x11",
+    "width": 9,
+    "height": 11,
+    "units": 412,
+    "rank": 92,
+    "perimeter": 40,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "7x8",
+      "6x7"
+    ],
+    "description": "Distinctive 9×11 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "12x36",
+    "width": 12,
+    "height": 36,
+    "units": 411,
+    "rank": 93,
+    "perimeter": 96,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "9x28",
+      "8x25"
+    ],
+    "description": "Distinctive 12×36 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "11.7x16.5",
+    "width": 11.7,
+    "height": 16.5,
+    "units": 401,
+    "rank": 94,
+    "perimeter": 56.4,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "9x13",
+      "8x11"
+    ],
+    "description": "Distinctive 11.7×16.5 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "15x18",
+    "width": 15,
+    "height": 18,
+    "units": 395,
+    "rank": 95,
+    "perimeter": 66,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x14",
+      "10x12"
+    ],
+    "description": "Distinctive 15×18 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "15x21",
+    "width": 15,
+    "height": 21,
+    "units": 395,
+    "rank": 96,
+    "perimeter": 72,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x16",
+      "10x14"
+    ],
+    "description": "Distinctive 15×21 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "11x11",
+    "width": 11,
+    "height": 11,
+    "units": 386,
+    "rank": 97,
+    "perimeter": 44,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "6x6",
+      "7x7"
+    ],
+    "description": "Compact 11×11 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. Perfect for creating cohesive gallery walls.",
+    "tier": 1
+  },
+  {
+    "size": "5.5x8.5",
+    "width": 5.5,
+    "height": 8.5,
+    "units": 386,
+    "rank": 98,
+    "perimeter": 28,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "4x6"
+    ],
+    "description": "Distinctive 5.5×8.5 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "15x19",
+    "width": 15,
+    "height": 19,
+    "units": 384,
+    "rank": 99,
+    "perimeter": 68,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x15",
+      "10x13"
+    ],
+    "description": "Distinctive 15×19 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "5x8",
+    "width": 5,
+    "height": 8,
+    "units": 382,
+    "rank": 100,
+    "perimeter": 26,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "4x6"
+    ],
+    "description": "Distinctive 5×8 custom size that stands out from standard formats. Perfect for fine art, professional photography, and unique compositions requiring precise dimensions.",
+    "tier": 1
+  }
+]

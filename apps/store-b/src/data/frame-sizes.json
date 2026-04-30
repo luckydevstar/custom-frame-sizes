@@ -1,0 +1,2581 @@
+[
+  {
+    "size": "24x36",
+    "width": 24,
+    "height": 36,
+    "units": 2871,
+    "rank": 1,
+    "perimeter": 120,
+    "category": "poster",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": false,
+    "primaryUseCase": "Movie posters, concert posters, large art prints",
+    "secondaryUseCases": [
+      "Statement wall art",
+      "Photography prints",
+      "Vintage posters",
+      "Gallery displays"
+    ],
+    "recommendedMatSizes": [
+      "16x20",
+      "18x24",
+      "20x28"
+    ],
+    "description": "The #1 poster size. industry-standard 24×36 format with 864 square inches of display area. This commanding 2:3 ratio vertical format accommodates most commercially printed posters without trimming.",
+    "tier": 1
+  },
+  {
+    "size": "18x24",
+    "width": 18,
+    "height": 24,
+    "units": 2500,
+    "rank": 2,
+    "perimeter": 84,
+    "category": "poster",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": false,
+    "primaryUseCase": "Medium art prints, photography, decorative posters",
+    "secondaryUseCases": [
+      "Wedding portraits",
+      "Family photos",
+      "Travel photography",
+      "Abstract art"
+    ],
+    "recommendedMatSizes": [
+      "11x14",
+      "12x16",
+      "13x19"
+    ],
+    "description": "Perfect mid-size format balancing impact and versatility. Popular for wedding portraits, family photos, and medium art prints that need presence without overwhelming the space.",
+    "tier": 1
+  },
+  {
+    "size": "20x20",
+    "width": 20,
+    "height": 20,
+    "units": 2042,
+    "rank": 3,
+    "perimeter": 80,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography",
+    "secondaryUseCases": [
+      "Statement wall art",
+      "Abstract compositions",
+      "Modern gallery walls",
+      "Symmetrical designs"
+    ],
+    "recommendedMatSizes": [
+      "12x12",
+      "14x14"
+    ],
+    "description": "Modern 20×20 square format covering 400 square inches in a 1:1 ratio. This balanced size matches standard large-format square prints and pairs well in grouped wall arrangements.",
+    "tier": 1
+  },
+  {
+    "size": "16x20",
+    "width": 16,
+    "height": 20,
+    "units": 1798,
+    "rank": 4,
+    "perimeter": 72,
+    "category": "standard",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": false,
+    "primaryUseCase": "Professional portraits, medium art prints",
+    "secondaryUseCases": [
+      "Wedding photos",
+      "Senior portraits",
+      "Art reproductions",
+      "Family portraits"
+    ],
+    "recommendedMatSizes": [
+      "8x10",
+      "11x14",
+      "12x16"
+    ],
+    "description": "Classic portrait size beloved by photographers and art collectors. This versatile format works beautifully for professional portraits, medium artwork, and matted displays.",
+    "tier": 1
+  },
+  {
+    "size": "11x14",
+    "width": 11,
+    "height": 14,
+    "units": 1789,
+    "rank": 5,
+    "perimeter": 50,
+    "category": "standard",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": false,
+    "primaryUseCase": "Diplomas, certificates, small portraits",
+    "secondaryUseCases": [
+      "High school diplomas",
+      "Awards",
+      "Small family photos",
+      "Kids' art"
+    ],
+    "recommendedMatSizes": [
+      "8x10",
+      "5x7",
+      "8.5x11"
+    ],
+    "description": "Diploma and certificate standard - this traditional size perfectly frames achievements, small portraits, and artwork. Commonly used for high school diplomas and professional certificates.",
+    "tier": 1
+  },
+  {
+    "size": "12x16",
+    "width": 12,
+    "height": 16,
+    "units": 1699,
+    "rank": 6,
+    "perimeter": 56,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "9x12",
+      "8x11"
+    ],
+    "description": "This 12×16 format yields 192 square inches of display area with a 3:4 aspect ratio, accommodating artwork and prints outside standard retail dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "8x10",
+    "width": 8,
+    "height": 10,
+    "units": 1692,
+    "rank": 7,
+    "perimeter": 36,
+    "category": "standard",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": false,
+    "primaryUseCase": "Family photos, portraits, desk frames",
+    "secondaryUseCases": [
+      "School pictures",
+      "Professional headshots",
+      "Small artwork",
+      "Gift frames"
+    ],
+    "recommendedMatSizes": [
+      "4x6",
+      "5x7"
+    ],
+    "description": "Classic photo frame size. While commonly available elsewhere, our custom-made frames offer superior craftsmanship and unique moulding profiles you won't find at big-box retailers.",
+    "tier": 1
+  },
+  {
+    "size": "10x10",
+    "width": 10,
+    "height": 10,
+    "units": 1586,
+    "rank": 8,
+    "perimeter": 40,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "6x6",
+      "7x7"
+    ],
+    "description": "Compact 10×10 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. This 10×10 square frame provides 100 square inches of symmetrical display area with a 40-inch perimeter, sized for social media prints and compact square artwork.",
+    "tier": 1
+  },
+  {
+    "size": "30x40",
+    "width": 30,
+    "height": 40,
+    "units": 1516,
+    "rank": 9,
+    "perimeter": 140,
+    "category": "large",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": true,
+    "primaryUseCase": "Large art prints, statement pieces, commercial displays",
+    "secondaryUseCases": [
+      "Gallery artwork",
+      "Professional photography",
+      "Lobby displays",
+      "Feature walls"
+    ],
+    "recommendedMatSizes": [
+      "24x32",
+      "21x28"
+    ],
+    "description": "Substantial 30×40 large-format frame for statement artwork and professional displays. This commanding scale demands attention and works beautifully in spacious rooms and gallery settings. Custom-built with extra structural support.",
+    "tier": 1
+  },
+  {
+    "size": "24x30",
+    "width": 24,
+    "height": 30,
+    "units": 1488,
+    "rank": 10,
+    "perimeter": 108,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "19x24",
+      "16x21"
+    ],
+    "description": "At 24\" wide by 30\" tall, this non-standard proportion provides 720 sq. in. of viewable space. a 4:5 ratio not commonly stocked in retail stores.",
+    "tier": 1
+  },
+  {
+    "size": "16x40",
+    "width": 16,
+    "height": 40,
+    "units": 1385,
+    "rank": 11,
+    "perimeter": 112,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x32",
+      "11x28"
+    ],
+    "description": "The 16×40 dimensions offer a 2:5 width-to-height ratio across 640 square inches, matching specialized print formats and custom artwork sizes.",
+    "tier": 1
+  },
+  {
+    "size": "6x6",
+    "width": 6,
+    "height": 6,
+    "units": 1334,
+    "rank": 12,
+    "perimeter": 24,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Small square art, coasters, mini prints",
+    "secondaryUseCases": [
+      "Tiny artwork",
+      "Decorative accents",
+      "Craft projects",
+      "Mini gallery walls"
+    ],
+    "recommendedMatSizes": [
+      "3x3",
+      "4x4"
+    ],
+    "description": "Petite 6×6 square frame for mini artwork, decorative accents, and creative displays. Hard to find in retail stores.",
+    "tier": 1
+  },
+  {
+    "size": "12x12",
+    "width": 12,
+    "height": 12,
+    "units": 1327,
+    "rank": 13,
+    "perimeter": 48,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "7x7",
+      "8x8"
+    ],
+    "description": "Compact 12×12 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. At 12\" per side, this 144-sq.-in. square format matches standard vinyl single artwork and square-cropped photographic prints.",
+    "tier": 1
+  },
+  {
+    "size": "8x8",
+    "width": 8,
+    "height": 8,
+    "units": 1272,
+    "rank": 14,
+    "perimeter": 32,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Small square art, coasters, mini prints",
+    "secondaryUseCases": [
+      "Tiny artwork",
+      "Decorative accents",
+      "Craft projects",
+      "Mini gallery walls"
+    ],
+    "recommendedMatSizes": [
+      "4x4",
+      "5x5"
+    ],
+    "description": "Petite 8×8 square frame for mini artwork, decorative accents, and creative displays. Hard to find in retail stores.",
+    "tier": 1
+  },
+  {
+    "size": "20x30",
+    "width": 20,
+    "height": 30,
+    "units": 1184,
+    "rank": 15,
+    "perimeter": 100,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "16x24",
+      "14x21"
+    ],
+    "description": "Measuring 20\" by 30\" with a 100-inch perimeter, this frame accommodates non-standard prints that fall between common retail sizes.",
+    "tier": 1
+  },
+  {
+    "size": "18x18",
+    "width": 18,
+    "height": 18,
+    "units": 1171,
+    "rank": 16,
+    "perimeter": 72,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "10x10",
+      "12x12"
+    ],
+    "description": "Compact 18×18 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. The 18×18 equal-sided dimensions span 324 square inches within a 72\" perimeter, accommodating square-format prints and symmetrical compositions.",
+    "tier": 1
+  },
+  {
+    "size": "30x30",
+    "width": 30,
+    "height": 30,
+    "units": 1163,
+    "rank": 17,
+    "perimeter": 120,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography",
+    "secondaryUseCases": [
+      "Statement wall art",
+      "Abstract compositions",
+      "Modern gallery walls",
+      "Symmetrical designs"
+    ],
+    "recommendedMatSizes": [
+      "18x18",
+      "21x21"
+    ],
+    "description": "Gallery-scale 30×30 square format with 900 square inches of display area. The 1:1 ratio and 120-inch perimeter give this format a substantial presence on any wall.",
+    "tier": 1
+  },
+  {
+    "size": "24x24",
+    "width": 24,
+    "height": 24,
+    "units": 1140,
+    "rank": 18,
+    "perimeter": 96,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography",
+    "secondaryUseCases": [
+      "Statement wall art",
+      "Abstract compositions",
+      "Modern gallery walls",
+      "Symmetrical designs"
+    ],
+    "recommendedMatSizes": [
+      "14x14",
+      "16x16"
+    ],
+    "description": "Mid-range 24×24 square format with 576 square inches of display area. The 96-inch perimeter and 1:1 ratio make this a versatile size that bridges small accent and statement piece categories.",
+    "tier": 1
+  },
+  {
+    "size": "14x24",
+    "width": 14,
+    "height": 24,
+    "units": 1116,
+    "rank": 19,
+    "perimeter": 76,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "11x19",
+      "9x16"
+    ],
+    "description": "This 336-square-inch format spans 14×24 inches in a 7:12 ratio, built to order for artwork requiring exact non-standard proportions.",
+    "tier": 1
+  },
+  {
+    "size": "9x12",
+    "width": 9,
+    "height": 12,
+    "units": 1113,
+    "rank": 20,
+    "perimeter": 42,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "7x9",
+      "6x8"
+    ],
+    "description": "The 9×12 opening provides 108 sq. in. of display area. a custom proportion not available from mass-market frame manufacturers.",
+    "tier": 1
+  },
+  {
+    "size": "12x24",
+    "width": 12,
+    "height": 24,
+    "units": 1106,
+    "rank": 21,
+    "perimeter": 72,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "9x19",
+      "8x16"
+    ],
+    "description": "With interior dimensions of 12\" by 24\" and a 72\" total perimeter, this size bridges the gap between adjacent standard frame formats.",
+    "tier": 1
+  },
+  {
+    "size": "22x28",
+    "width": 22,
+    "height": 28,
+    "units": 1096,
+    "rank": 22,
+    "perimeter": 100,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "17x22",
+      "15x19"
+    ],
+    "description": "This 22×28 frame covers 616 square inches at a 11:14 aspect ratio, individually cut for prints that require precise non-standard sizing.",
+    "tier": 1
+  },
+  {
+    "size": "6x9",
+    "width": 6,
+    "height": 9,
+    "units": 1067,
+    "rank": 23,
+    "perimeter": 30,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "4x7",
+      "4x6"
+    ],
+    "description": "At 54 square inches with a 2:3 proportion, the 6×9 format fits specialized prints, documents, and artwork unavailable in standard frame sizes.",
+    "tier": 1
+  },
+  {
+    "size": "13x13",
+    "width": 13,
+    "height": 13,
+    "units": 1065,
+    "rank": 24,
+    "perimeter": 52,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "7x7",
+      "9x9"
+    ],
+    "description": "Compact 13×13 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. This 169-square-inch frame measures 13\" on each side, providing symmetrical proportions for square-format photography and album-cover reproductions.",
+    "tier": 1
+  },
+  {
+    "size": "4x4",
+    "width": 4,
+    "height": 4,
+    "units": 1029,
+    "rank": 25,
+    "perimeter": 16,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Small square art, coasters, mini prints",
+    "secondaryUseCases": [
+      "Tiny artwork",
+      "Decorative accents",
+      "Craft projects",
+      "Mini gallery walls"
+    ],
+    "recommendedMatSizes": [
+      "2x2",
+      "2x2"
+    ],
+    "description": "Petite 4×4 square frame for mini artwork, decorative accents, and creative displays. Hard to find in retail stores.",
+    "tier": 1
+  },
+  {
+    "size": "6x8",
+    "width": 6,
+    "height": 8,
+    "units": 1022,
+    "rank": 26,
+    "perimeter": 28,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "4x6",
+      "4x5"
+    ],
+    "description": "The 6\" by 8\" dimensions yield a 28-inch perimeter and 48 sq. in. of viewable area, crafted for non-standard prints and custom compositions.",
+    "tier": 1
+  },
+  {
+    "size": "20x24",
+    "width": 20,
+    "height": 24,
+    "units": 1005,
+    "rank": 27,
+    "perimeter": 88,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "16x19",
+      "14x16"
+    ],
+    "description": "This 20×24 custom format accommodates 480 square inches of content in a 5:6 ratio. a size exclusively available through custom framing.",
+    "tier": 1
+  },
+  {
+    "size": "7x7",
+    "width": 7,
+    "height": 7,
+    "units": 1003,
+    "rank": 28,
+    "perimeter": 28,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Small square art, coasters, mini prints",
+    "secondaryUseCases": [
+      "Tiny artwork",
+      "Decorative accents",
+      "Craft projects",
+      "Mini gallery walls"
+    ],
+    "recommendedMatSizes": [
+      "4x4",
+      "4x4"
+    ],
+    "description": "Petite 7×7 square frame for mini artwork, decorative accents, and creative displays. Hard to find in retail stores.",
+    "tier": 1
+  },
+  {
+    "size": "11x17",
+    "width": 11,
+    "height": 17,
+    "units": 937,
+    "rank": 29,
+    "perimeter": 56,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "8x13",
+      "7x11"
+    ],
+    "description": "Spanning 11\" wide and 17\" tall, this 187-sq.-in. frame provides the exact proportions needed for specialty prints and non-standard documents.",
+    "tier": 1
+  },
+  {
+    "size": "19x25",
+    "width": 19,
+    "height": 25,
+    "units": 913,
+    "rank": 30,
+    "perimeter": 88,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "15x20",
+      "13x17"
+    ],
+    "description": "The 19:25 aspect ratio of this 19×25 frame delivers 475 square inches of display surface, matching artwork dimensions outside retail availability.",
+    "tier": 1
+  },
+  {
+    "size": "5x7",
+    "width": 5,
+    "height": 7,
+    "units": 910,
+    "rank": 31,
+    "perimeter": 24,
+    "category": "small",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": false,
+    "primaryUseCase": "Wallet photos, small prints, gift frames",
+    "secondaryUseCases": [
+      "Wallet-size photos",
+      "Trading cards",
+      "Mini artwork",
+      "Desktop displays"
+    ],
+    "recommendedMatSizes": [
+      "4x5"
+    ],
+    "description": "Compact 5×7 size with a 5:7 aspect ratio covering 35 square inches. Standard photo lab print size. custom framing ensures precise fit with no trimming required.",
+    "tier": 1
+  },
+  {
+    "size": "15x20",
+    "width": 15,
+    "height": 20,
+    "units": 907,
+    "rank": 32,
+    "perimeter": 70,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x16",
+      "10x14"
+    ],
+    "description": "At 15×20 inches, this frame's 70\" perimeter and 300-sq.-in. area support custom-printed content requiring exact dimensional specifications.",
+    "tier": 1
+  },
+  {
+    "size": "10x20",
+    "width": 10,
+    "height": 20,
+    "units": 886,
+    "rank": 33,
+    "perimeter": 60,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "8x16",
+      "7x14"
+    ],
+    "description": "This 10\" by 20\" format presents 200 square inches in a 1:2 ratio. dimensions specifically engineered for non-standard artwork and prints.",
+    "tier": 1
+  },
+  {
+    "size": "14x14",
+    "width": 14,
+    "height": 14,
+    "units": 848,
+    "rank": 34,
+    "perimeter": 56,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "8x8",
+      "9x9"
+    ],
+    "description": "Compact 14×14 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. With 14\" sides and 196 sq. in. of area, this square format fits social media prints, tile art, and other 1:1 ratio content.",
+    "tier": 1
+  },
+  {
+    "size": "16x16",
+    "width": 16,
+    "height": 16,
+    "units": 837,
+    "rank": 35,
+    "perimeter": 64,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "9x9",
+      "11x11"
+    ],
+    "description": "Compact 16×16 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. The 16×16 dimensions offer a true 1:1 ratio across 256 square inches. a format matching square photographic prints and decorative tile displays.",
+    "tier": 1
+  },
+  {
+    "size": "32x40",
+    "width": 32,
+    "height": 40,
+    "units": 829,
+    "rank": 36,
+    "perimeter": 144,
+    "category": "large",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": true,
+    "primaryUseCase": "Large art prints, statement pieces, commercial displays",
+    "secondaryUseCases": [
+      "Gallery artwork",
+      "Professional photography",
+      "Lobby displays",
+      "Feature walls"
+    ],
+    "recommendedMatSizes": [
+      "25x32",
+      "22x28"
+    ],
+    "description": "Substantial 32×40 large-format frame for statement artwork and professional displays. This commanding scale demands attention and works beautifully in spacious rooms and gallery settings. Custom-built with extra structural support.",
+    "tier": 1
+  },
+  {
+    "size": "15x27",
+    "width": 15,
+    "height": 27,
+    "units": 827,
+    "rank": 37,
+    "perimeter": 84,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x21",
+      "10x18"
+    ],
+    "description": "With 405 sq. in. of interior space, the 15×27 frame's 5:9 proportions serve prints and artwork that exceed or fall between standard sizes.",
+    "tier": 1
+  },
+  {
+    "size": "32x42",
+    "width": 32,
+    "height": 42,
+    "units": 823,
+    "rank": 38,
+    "perimeter": 148,
+    "category": "large",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": true,
+    "primaryUseCase": "Large art prints, statement pieces, commercial displays",
+    "secondaryUseCases": [
+      "Gallery artwork",
+      "Professional photography",
+      "Lobby displays",
+      "Feature walls"
+    ],
+    "recommendedMatSizes": [
+      "25x33",
+      "22x29"
+    ],
+    "description": "Substantial 32×42 large-format frame for statement artwork and professional displays. This commanding scale demands attention and works beautifully in spacious rooms and gallery settings. Custom-built with extra structural support.",
+    "tier": 1
+  },
+  {
+    "size": "16x24",
+    "width": 16,
+    "height": 24,
+    "units": 819,
+    "rank": 39,
+    "perimeter": 80,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x19",
+      "11x16"
+    ],
+    "description": "The 16×24 interior at 384 square inches provides a 2:3 format, purpose-built for specialized prints not accommodated by off-the-shelf frames.",
+    "tier": 1
+  },
+  {
+    "size": "8.5x11",
+    "width": 8.5,
+    "height": 11,
+    "units": 787,
+    "rank": 40,
+    "perimeter": 39,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "6x8",
+      "5x7"
+    ],
+    "description": "Measuring 8.5×11 with 93.5 sq. in. of total area, this frame's 17:22 ratio is individually fabricated for artwork requiring custom proportions.",
+    "tier": 1
+  },
+  {
+    "size": "12x18",
+    "width": 12,
+    "height": 18,
+    "units": 771,
+    "rank": 41,
+    "perimeter": 60,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "9x14",
+      "8x12"
+    ],
+    "description": "This 216-square-inch, 12×18 frame features a 60\" perimeter and provides the exact clearance needed for non-standard print formats.",
+    "tier": 1
+  },
+  {
+    "size": "26.5x38.5",
+    "width": 26.5,
+    "height": 38.5,
+    "units": 770,
+    "rank": 42,
+    "perimeter": 130,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": true,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "21x30",
+      "18x26"
+    ],
+    "description": "At a 53:77 aspect ratio, the 26.5×38.5 dimensions produce 1020.25 sq. in. of usable area. matching specialized documents and custom photographic prints.",
+    "tier": 1
+  },
+  {
+    "size": "11x15",
+    "width": 11,
+    "height": 15,
+    "units": 761,
+    "rank": 43,
+    "perimeter": 52,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "8x12",
+      "7x10"
+    ],
+    "description": "The 11\" width and 15\" height create 165 square inches of display space in a 11:15 format, cut to precise tolerances for custom content.",
+    "tier": 1
+  },
+  {
+    "size": "22x22",
+    "width": 22,
+    "height": 22,
+    "units": 760,
+    "rank": 44,
+    "perimeter": 88,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography",
+    "secondaryUseCases": [
+      "Statement wall art",
+      "Abstract compositions",
+      "Modern gallery walls",
+      "Symmetrical designs"
+    ],
+    "recommendedMatSizes": [
+      "13x13",
+      "15x15"
+    ],
+    "description": "Modern 22×22 square format with 484 square inches of display area. Sits between standard 20×20 and 24×24 sizes, offering a distinctive 88-inch perimeter footprint.",
+    "tier": 1
+  },
+  {
+    "size": "28x40",
+    "width": 28,
+    "height": 40,
+    "units": 751,
+    "rank": 45,
+    "perimeter": 136,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": true,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "22x32",
+      "19x28"
+    ],
+    "description": "This 28×40 frame, with its 136-inch perimeter, accommodates 1120 sq. in. of artwork in proportions found only through custom ordering.",
+    "tier": 1
+  },
+  {
+    "size": "4x10",
+    "width": 4,
+    "height": 10,
+    "units": 745,
+    "rank": 46,
+    "perimeter": 28,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [],
+    "description": "At 4×10 inches and a 2:5 width-to-height proportion, this 40-sq.-in. frame is individually sized for content that won't fit standard formats.",
+    "tier": 1
+  },
+  {
+    "size": "12x14",
+    "width": 12,
+    "height": 14,
+    "units": 721,
+    "rank": 47,
+    "perimeter": 52,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "9x11",
+      "8x9"
+    ],
+    "description": "The 12×14 opening yields 168 square inches and a 6:7 ratio, providing exact dimensional matching for specialized artwork and documents.",
+    "tier": 1
+  },
+  {
+    "size": "34x34",
+    "width": 34,
+    "height": 34,
+    "units": 712,
+    "rank": 48,
+    "perimeter": 136,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": true,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography",
+    "secondaryUseCases": [
+      "Statement wall art",
+      "Abstract compositions",
+      "Modern gallery walls",
+      "Symmetrical designs"
+    ],
+    "recommendedMatSizes": [
+      "20x20",
+      "23x23"
+    ],
+    "description": "Large-scale 34×34 square format spanning 1,156 square inches with a 136-inch perimeter. One of the largest standard square sizes available, requiring reinforced hanging hardware.",
+    "tier": 1
+  },
+  {
+    "size": "13x17",
+    "width": 13,
+    "height": 17,
+    "units": 708,
+    "rank": 49,
+    "perimeter": 60,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "10x13",
+      "9x11"
+    ],
+    "description": "Sized at 13\" by 17\" with 221 sq. in. of viewable surface, this frame's 13:17 proportions fill a gap between common retail frame sizes.",
+    "tier": 1
+  },
+  {
+    "size": "16x42",
+    "width": 16,
+    "height": 42,
+    "units": 699,
+    "rank": 50,
+    "perimeter": 116,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x33",
+      "11x29"
+    ],
+    "description": "This 16×42 format provides 672 square inches in a 116\"-perimeter frame, individually manufactured for artwork requiring these exact measurements.",
+    "tier": 1
+  },
+  {
+    "size": "12x17",
+    "width": 12,
+    "height": 17,
+    "units": 690,
+    "rank": 51,
+    "perimeter": 58,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "9x13",
+      "8x11"
+    ],
+    "description": "With a 12:17 ratio across 12×17 inches, this frame's 204-sq.-in. area serves custom prints and specialty artwork not fitting standard options.",
+    "tier": 1
+  },
+  {
+    "size": "10x12",
+    "width": 10,
+    "height": 12,
+    "units": 675,
+    "rank": 52,
+    "perimeter": 44,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "8x9",
+      "7x8"
+    ],
+    "description": "The 10×12 dimensions span 120 square inches at a 5:6 proportion, fabricated for prints and documents requiring this specific non-standard size.",
+    "tier": 1
+  },
+  {
+    "size": "13x19",
+    "width": 13,
+    "height": 19,
+    "units": 660,
+    "rank": 53,
+    "perimeter": 64,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "10x15",
+      "9x13"
+    ],
+    "description": "At 13\" by 19\" this 247-sq.-in. frame accommodates a 13:19 aspect ratio. an uncommon format available exclusively through custom framing services.",
+    "tier": 1
+  },
+  {
+    "size": "19x24",
+    "width": 19,
+    "height": 24,
+    "units": 651,
+    "rank": 54,
+    "perimeter": 86,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "15x19",
+      "13x16"
+    ],
+    "description": "This 19×24 custom frame with its 86\" perimeter provides 456 sq. in. of display area in proportions tailored to specialty print formats.",
+    "tier": 1
+  },
+  {
+    "size": "18x22",
+    "width": 18,
+    "height": 22,
+    "units": 641,
+    "rank": 55,
+    "perimeter": 80,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "14x17",
+      "12x15"
+    ],
+    "description": "Covering 396 square inches at 18×22, this 9:11-ratio frame is constructed to exact specifications for artwork outside mass-produced size ranges.",
+    "tier": 1
+  },
+  {
+    "size": "8x18",
+    "width": 8,
+    "height": 18,
+    "units": 633,
+    "rank": 56,
+    "perimeter": 52,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "6x14",
+      "5x12"
+    ],
+    "description": "The 8\" by 18\" interior offers a 4:9 format and 144 sq. in. of space, manufactured on demand for prints that require precise custom sizing.",
+    "tier": 1
+  },
+  {
+    "size": "16x26",
+    "width": 16,
+    "height": 26,
+    "units": 624,
+    "rank": 57,
+    "perimeter": 84,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x20",
+      "11x18"
+    ],
+    "description": "This 16×26 frame's 416-square-inch area and 8:13 proportion accommodate specialty prints and non-standard compositions not found in retail framing.",
+    "tier": 1
+  },
+  {
+    "size": "32x32",
+    "width": 32,
+    "height": 32,
+    "units": 620,
+    "rank": 58,
+    "perimeter": 128,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": true,
+    "primaryUseCase": "Large square art, Instagram prints, modern photography",
+    "secondaryUseCases": [
+      "Statement wall art",
+      "Abstract compositions",
+      "Modern gallery walls",
+      "Symmetrical designs"
+    ],
+    "recommendedMatSizes": [
+      "19x19",
+      "22x22"
+    ],
+    "description": "Large 32×32 square format with 1,024 square inches of display area and a 128-inch perimeter. This 1:1 ratio size fills a wall section roughly 2.5 feet across before matting.",
+    "tier": 1
+  },
+  {
+    "size": "17x17",
+    "width": 17,
+    "height": 17,
+    "units": 615,
+    "rank": 59,
+    "perimeter": 68,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "10x10",
+      "11x11"
+    ],
+    "description": "Compact 17×17 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. At 17×17 inches with a 68\" perimeter, this frame's 289-sq.-in. area accommodates square-cropped prints and symmetrical artwork.",
+    "tier": 1
+  },
+  {
+    "size": "4x12",
+    "width": 4,
+    "height": 12,
+    "units": 613,
+    "rank": 60,
+    "perimeter": 32,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [],
+    "description": "At 4×12 inches, the 32\" perimeter encloses 48 sq. in. of display area in a 1:3 format available only as a custom-cut frame.",
+    "tier": 1
+  },
+  {
+    "size": "8x12",
+    "width": 8,
+    "height": 12,
+    "units": 607,
+    "rank": 61,
+    "perimeter": 40,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "6x9",
+      "5x8"
+    ],
+    "description": "This 2:3-ratio frame measures 8×12 with 96 square inches of viewable area, sized for specialty prints and non-standard photographic formats.",
+    "tier": 1
+  },
+  {
+    "size": "9x9",
+    "width": 9,
+    "height": 9,
+    "units": 607,
+    "rank": 62,
+    "perimeter": 36,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Small square art, coasters, mini prints",
+    "secondaryUseCases": [
+      "Tiny artwork",
+      "Decorative accents",
+      "Craft projects",
+      "Mini gallery walls"
+    ],
+    "recommendedMatSizes": [
+      "5x5",
+      "6x6"
+    ],
+    "description": "Petite 9×9 square frame for mini artwork, decorative accents, and creative displays. Hard to find in retail stores.",
+    "tier": 1
+  },
+  {
+    "size": "5x5",
+    "width": 5,
+    "height": 5,
+    "units": 602,
+    "rank": 63,
+    "perimeter": 20,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Small square art, coasters, mini prints",
+    "secondaryUseCases": [
+      "Tiny artwork",
+      "Decorative accents",
+      "Craft projects",
+      "Mini gallery walls"
+    ],
+    "recommendedMatSizes": [
+      "3x3",
+      "3x3"
+    ],
+    "description": "Petite 5×5 square frame for mini artwork, decorative accents, and creative displays. Hard to find in retail stores.",
+    "tier": 1
+  },
+  {
+    "size": "13x39",
+    "width": 13,
+    "height": 39,
+    "units": 584,
+    "rank": 64,
+    "perimeter": 104,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "10x31",
+      "9x27"
+    ],
+    "description": "The 13×39 dimensions and 104\" perimeter yield 507 sq. in. of content space. a specialized format made to order for custom artwork.",
+    "tier": 1
+  },
+  {
+    "size": "12x15",
+    "width": 12,
+    "height": 15,
+    "units": 583,
+    "rank": 65,
+    "perimeter": 54,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "9x12",
+      "8x10"
+    ],
+    "description": "Spanning 12\" by 15\" with a 4:5 aspect ratio, this 180-sq.-in. frame is fabricated for content that demands exact non-standard dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "10x14",
+    "width": 10,
+    "height": 14,
+    "units": 580,
+    "rank": 66,
+    "perimeter": 48,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "8x11",
+      "7x9"
+    ],
+    "description": "This 10×14 frame provides 140 square inches at a 5:7 ratio, individually produced for prints and artwork requiring these specific measurements.",
+    "tier": 1
+  },
+  {
+    "size": "9x13",
+    "width": 9,
+    "height": 13,
+    "units": 577,
+    "rank": 67,
+    "perimeter": 44,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "7x10",
+      "6x9"
+    ],
+    "description": "At 117 sq. in. with 9\" by 13\" interior dimensions, this frame matches specialized print sizes unavailable in standard retail frame assortments.",
+    "tier": 1
+  },
+  {
+    "size": "6x12",
+    "width": 6,
+    "height": 12,
+    "units": 566,
+    "rank": 68,
+    "perimeter": 36,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "4x9",
+      "4x8"
+    ],
+    "description": "The 6×12 format's 1:2 ratio and 72-sq.-in. area make it a custom-only size, fabricated to exact measurements for specialty content.",
+    "tier": 1
+  },
+  {
+    "size": "15x15",
+    "width": 15,
+    "height": 15,
+    "units": 564,
+    "rank": 69,
+    "perimeter": 60,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "9x9",
+      "10x10"
+    ],
+    "description": "Compact 15×15 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. This 15\" square frame encloses 225 sq. in. in true 1:1 proportions, individually sized for square prints and compact decorative artwork.",
+    "tier": 1
+  },
+  {
+    "size": "17x22",
+    "width": 17,
+    "height": 22,
+    "units": 563,
+    "rank": 70,
+    "perimeter": 78,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "13x17",
+      "11x15"
+    ],
+    "description": "Measuring 17×22 inches with a 78\" perimeter, this frame delivers 374 sq. in. of display area in a non-standard 17:22 format.",
+    "tier": 1
+  },
+  {
+    "size": "24x32",
+    "width": 24,
+    "height": 32,
+    "units": 550,
+    "rank": 71,
+    "perimeter": 112,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "19x25",
+      "16x22"
+    ],
+    "description": "This 24\" by 32\" frame encloses 768 square inches in a 3:4 proportion, built for artwork and prints that fall outside conventional sizes.",
+    "tier": 1
+  },
+  {
+    "size": "4x8",
+    "width": 4,
+    "height": 8,
+    "units": 550,
+    "rank": 72,
+    "perimeter": 24,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [],
+    "description": "At 4×8 and 32 sq. in., this 1:2-ratio frame serves non-standard prints and documents requiring individually cut, precision-fitted framing.",
+    "tier": 1
+  },
+  {
+    "size": "4x6",
+    "width": 4,
+    "height": 6,
+    "units": 536,
+    "rank": 73,
+    "perimeter": 20,
+    "category": "small",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": true,
+    "isOversized": false,
+    "primaryUseCase": "Wallet photos, small prints, gift frames",
+    "secondaryUseCases": [
+      "Wallet-size photos",
+      "Trading cards",
+      "Mini artwork",
+      "Desktop displays"
+    ],
+    "recommendedMatSizes": [],
+    "description": "Compact 4×6 size with a 2:3 aspect ratio covering 24 square inches. Matches the most common photo print size. custom framing ensures an exact fit without cropping.",
+    "tier": 1
+  },
+  {
+    "size": "14x17",
+    "width": 14,
+    "height": 17,
+    "units": 523,
+    "rank": 74,
+    "perimeter": 62,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "11x13",
+      "9x11"
+    ],
+    "description": "The 14×17 interior dimensions yield a 14:17 ratio across 238 square inches. a custom size made for artwork outside standard frame catalogs.",
+    "tier": 1
+  },
+  {
+    "size": "8x11",
+    "width": 8,
+    "height": 11,
+    "units": 520,
+    "rank": 75,
+    "perimeter": 38,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "6x8",
+      "5x7"
+    ],
+    "description": "This 88-sq.-in. frame at 8×11 inches features a 38\" perimeter and 8:11 ratio, individually sized for non-standard artwork and prints.",
+    "tier": 1
+  },
+  {
+    "size": "26x38",
+    "width": 26,
+    "height": 38,
+    "units": 508,
+    "rank": 76,
+    "perimeter": 128,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": true,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "20x30",
+      "18x26"
+    ],
+    "description": "With 26\" by 38\" proportions and 988 sq. in. of area, this 13:19-format frame accommodates specialized prints not covered by standard sizing.",
+    "tier": 1
+  },
+  {
+    "size": "14x22",
+    "width": 14,
+    "height": 22,
+    "units": 507,
+    "rank": 77,
+    "perimeter": 72,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "11x17",
+      "9x15"
+    ],
+    "description": "The 14×22 opening's 308 square inches and 7:11 aspect ratio provide exact size matching for custom artwork and specialty documents.",
+    "tier": 1
+  },
+  {
+    "size": "5x10",
+    "width": 5,
+    "height": 10,
+    "units": 507,
+    "rank": 78,
+    "perimeter": 30,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "4x8"
+    ],
+    "description": "At 5×10 with a 30-inch perimeter, this frame's 50-sq.-in. interior is custom-cut for content requiring these precise non-standard dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "22x30",
+    "width": 22,
+    "height": 30,
+    "units": 505,
+    "rank": 79,
+    "perimeter": 104,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "17x24",
+      "15x21"
+    ],
+    "description": "This 22×30 frame covers 660 square inches in a 11:15 proportion, fabricated on demand for prints and artwork between standard retail sizes.",
+    "tier": 1
+  },
+  {
+    "size": "13x16",
+    "width": 13,
+    "height": 16,
+    "units": 488,
+    "rank": 80,
+    "perimeter": 58,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "10x12",
+      "9x11"
+    ],
+    "description": "The 13:16 ratio of this 13\" by 16\" frame encloses 208 sq. in., serving specialized content that requires individually manufactured framing.",
+    "tier": 1
+  },
+  {
+    "size": "20x28",
+    "width": 20,
+    "height": 28,
+    "units": 487,
+    "rank": 81,
+    "perimeter": 96,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "16x22",
+      "14x19"
+    ],
+    "description": "Sized at 20×28 inches with 560 sq. in. of viewable area, this 96\"-perimeter frame matches custom artwork requiring exact proportions.",
+    "tier": 1
+  },
+  {
+    "size": "14x19",
+    "width": 14,
+    "height": 19,
+    "units": 469,
+    "rank": 82,
+    "perimeter": 66,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "11x15",
+      "9x13"
+    ],
+    "description": "This 14×19 format features a 14:19 width-to-height ratio and 266 square inches of space, individually crafted for non-standard display needs.",
+    "tier": 1
+  },
+  {
+    "size": "14x18",
+    "width": 14,
+    "height": 18,
+    "units": 464,
+    "rank": 83,
+    "perimeter": 64,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "11x14",
+      "9x12"
+    ],
+    "description": "At 14\" wide and 18\" tall, this frame provides 252 sq. in. with a 7:9 proportion. a custom size made for artwork outside mass-produced ranges.",
+    "tier": 1
+  },
+  {
+    "size": "6x10",
+    "width": 6,
+    "height": 10,
+    "units": 460,
+    "rank": 84,
+    "perimeter": 32,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "4x8",
+      "4x7"
+    ],
+    "description": "The 6×10 dimensions create a 3:5-ratio display spanning 60 square inches, individually cut to fit specialty prints and custom compositions.",
+    "tier": 1
+  },
+  {
+    "size": "7x10",
+    "width": 7,
+    "height": 10,
+    "units": 454,
+    "rank": 85,
+    "perimeter": 34,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "5x8",
+      "4x7"
+    ],
+    "description": "This 70-sq.-in., 7×10 frame in a 7:10 format is precision-cut for artwork and documents that require exact non-standard measurements.",
+    "tier": 1
+  },
+  {
+    "size": "3x5",
+    "width": 3,
+    "height": 5,
+    "units": 449,
+    "rank": 86,
+    "perimeter": 16,
+    "category": "small",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Wallet photos, small prints, gift frames",
+    "secondaryUseCases": [
+      "Wallet-size photos",
+      "Trading cards",
+      "Mini artwork",
+      "Desktop displays"
+    ],
+    "recommendedMatSizes": [],
+    "description": "Compact 3×5 size with a 3:5 aspect ratio covering 15 square inches. Sized for wallet prints and small keepsake photos. rarely available as a ready-made frame.",
+    "tier": 1
+  },
+  {
+    "size": "17x21",
+    "width": 17,
+    "height": 21,
+    "units": 440,
+    "rank": 87,
+    "perimeter": 76,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "13x16",
+      "11x14"
+    ],
+    "description": "With interior measurements of 17\" by 21\" and a 76\" perimeter, this frame's 357 sq. in. accommodate prints in non-standard proportions.",
+    "tier": 1
+  },
+  {
+    "size": "3x4",
+    "width": 3,
+    "height": 4,
+    "units": 439,
+    "rank": 88,
+    "perimeter": 14,
+    "category": "small",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Wallet photos, small prints, gift frames",
+    "secondaryUseCases": [
+      "Wallet-size photos",
+      "Trading cards",
+      "Mini artwork",
+      "Desktop displays"
+    ],
+    "recommendedMatSizes": [],
+    "description": "Compact 3×4 size with a 3:4 aspect ratio covering 12 square inches. One of the smallest standard frame sizes. custom sizing is typically the only option at this scale.",
+    "tier": 1
+  },
+  {
+    "size": "4x5",
+    "width": 4,
+    "height": 5,
+    "units": 416,
+    "rank": 89,
+    "perimeter": 18,
+    "category": "small",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Wallet photos, small prints, gift frames",
+    "secondaryUseCases": [
+      "Wallet-size photos",
+      "Trading cards",
+      "Mini artwork",
+      "Desktop displays"
+    ],
+    "recommendedMatSizes": [],
+    "description": "Compact 4×5 size with a 4:5 aspect ratio covering 20 square inches. Matches standard 4×5 photo prints and fits comfortably on a shelf or narrow ledge.",
+    "tier": 1
+  },
+  {
+    "size": "10x16",
+    "width": 10,
+    "height": 16,
+    "units": 414,
+    "rank": 90,
+    "perimeter": 52,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "8x12",
+      "7x11"
+    ],
+    "description": "The 10×16 frame at 160 sq. in. and a 5:8 ratio is individually fabricated for content requiring dimensions outside standard frame offerings.",
+    "tier": 1
+  },
+  {
+    "size": "3x3",
+    "width": 3,
+    "height": 3,
+    "units": 414,
+    "rank": 91,
+    "perimeter": 12,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Small square art, coasters, mini prints",
+    "secondaryUseCases": [
+      "Tiny artwork",
+      "Decorative accents",
+      "Craft projects",
+      "Mini gallery walls"
+    ],
+    "recommendedMatSizes": [
+      "1x1",
+      "2x2"
+    ],
+    "description": "Petite 3×3 square frame for mini artwork, decorative accents, and creative displays. Hard to find in retail stores.",
+    "tier": 1
+  },
+  {
+    "size": "9x11",
+    "width": 9,
+    "height": 11,
+    "units": 412,
+    "rank": 92,
+    "perimeter": 40,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "7x8",
+      "6x7"
+    ],
+    "description": "This 9×11 format, spanning 99 square inches, serves as a custom-only size for prints and artwork that demand the 9:11 proportion.",
+    "tier": 1
+  },
+  {
+    "size": "12x36",
+    "width": 12,
+    "height": 36,
+    "units": 411,
+    "rank": 93,
+    "perimeter": 96,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "9x28",
+      "8x25"
+    ],
+    "description": "At 12×36 inches, this 432-sq.-in. frame features a 1:3 ratio and 96\" perimeter, individually made for non-standard prints and artwork.",
+    "tier": 1
+  },
+  {
+    "size": "11.7x16.5",
+    "width": 11.7,
+    "height": 16.5,
+    "units": 401,
+    "rank": 94,
+    "perimeter": 56.4,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "9x13",
+      "8x11"
+    ],
+    "description": "The 11.7\" by 16.5\" interior yields 193.05 square inches at a 39:55 aspect ratio, custom-manufactured for artwork requiring these exact dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "15x18",
+    "width": 15,
+    "height": 18,
+    "units": 395,
+    "rank": 95,
+    "perimeter": 66,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x14",
+      "10x12"
+    ],
+    "description": "This 15×18 format yields 270 square inches of display area with a 5:6 aspect ratio, accommodating artwork and prints outside standard retail dimensions.",
+    "tier": 1
+  },
+  {
+    "size": "15x21",
+    "width": 15,
+    "height": 21,
+    "units": 395,
+    "rank": 96,
+    "perimeter": 72,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x16",
+      "10x14"
+    ],
+    "description": "At 15\" wide by 21\" tall, this non-standard proportion provides 315 sq. in. of viewable space. a 5:7 ratio not commonly stocked in retail stores.",
+    "tier": 1
+  },
+  {
+    "size": "11x11",
+    "width": 11,
+    "height": 11,
+    "units": 386,
+    "rank": 97,
+    "perimeter": 44,
+    "category": "square",
+    "orientation": "square",
+    "isSquare": true,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Square photos, album art, Instagram prints",
+    "secondaryUseCases": [
+      "Social media prints",
+      "Album artwork",
+      "Small modern art",
+      "Compact displays"
+    ],
+    "recommendedMatSizes": [
+      "6x6",
+      "7x7"
+    ],
+    "description": "Compact 11×11 square format ideal for Instagram prints, vinyl records, and modern minimalist displays. Measuring 11×11 with 121 square inches of display space, this frame suits 1:1-ratio content including square photos and album artwork.",
+    "tier": 1
+  },
+  {
+    "size": "5.5x8.5",
+    "width": 5.5,
+    "height": 8.5,
+    "units": 386,
+    "rank": 98,
+    "perimeter": 28,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "4x6"
+    ],
+    "description": "The 5.5×8.5 dimensions offer a 11:17 width-to-height ratio across 46.75 square inches, matching specialized print formats and custom artwork sizes.",
+    "tier": 1
+  },
+  {
+    "size": "15x19",
+    "width": 15,
+    "height": 19,
+    "units": 384,
+    "rank": 99,
+    "perimeter": 68,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "12x15",
+      "10x13"
+    ],
+    "description": "Measuring 15\" by 19\" with a 68-inch perimeter, this frame accommodates non-standard prints that fall between common retail sizes.",
+    "tier": 1
+  },
+  {
+    "size": "5x8",
+    "width": 5,
+    "height": 8,
+    "units": 382,
+    "rank": 100,
+    "perimeter": 26,
+    "category": "custom",
+    "orientation": "portrait",
+    "isSquare": false,
+    "isStandard": false,
+    "isOversized": false,
+    "primaryUseCase": "Custom artwork, unique photography, specialty prints",
+    "secondaryUseCases": [
+      "Fine art reproductions",
+      "Professional photography",
+      "Gallery displays",
+      "Custom matting"
+    ],
+    "recommendedMatSizes": [
+      "4x6"
+    ],
+    "description": "This 40-square-inch format spans 5×8 inches in a 5:8 ratio, built to order for artwork requiring exact non-standard proportions.",
+    "tier": 1
+  }
+]

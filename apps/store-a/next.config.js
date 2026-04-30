@@ -75,6 +75,7 @@ const nextConfig = {
   },
   experimental: {
     optimizePackageImports: ['@framecraft/ui', '@framecraft/core'],
+    instrumentationHook: true,
   },
   webpack: (config, { isServer }) => {
     // Suppress "Critical dependency" warnings from Sentry/OpenTelemetry node_modules
@@ -93,6 +94,10 @@ const nextConfig = {
       '@framecraft/types': path.resolve(__dirname, '../../packages/types/src'),
       '@framecraft/data': path.resolve(__dirname, '../../packages/data/src'),
       '@framecraft/ui': path.resolve(__dirname, '../../packages/ui/src'),
+      // Per-app product data injection. Resolves to this app's isolated data
+      // folder so shared core/config modules statically embed store-specific
+      // JSON at module-load time. See packages/core/src/services/products.ts.
+      '@framecraft/store-data': path.resolve(__dirname, 'src/data'),
     };
 
     // Exclude server-only packages from client bundle

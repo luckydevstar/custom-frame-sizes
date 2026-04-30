@@ -21,9 +21,6 @@ type ColorDetailPageProps = {
   params: Promise<{ slug: string }> | { slug: string };
 };
 
-// Ensure params are always read from the request (avoids static-generation issues)
-export const dynamic = "force-dynamic";
-
 export function generateStaticParams() {
   return Object.values(COLOR_METADATA).map((data) => ({ slug: data.slug }));
 }

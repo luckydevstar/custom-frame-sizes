@@ -1,0 +1,424 @@
+[
+  {
+    "id": "grid-2x2",
+    "name": "2×2 Grid",
+    "description": "Classic four-frame grid arrangement. Total wall footprint measures 44×52 inches with 3-inch spacing between frames.",
+    "category": "grid",
+    "frameCount": 4,
+    "spacing": 3,
+    "totalWidth": 44,
+    "totalHeight": 52,
+    "framePositions": [
+      {
+        "id": "frame-1",
+        "x": 0,
+        "y": 0,
+        "width": 20.5,
+        "height": 24.5,
+        "suggestedArtworkWidth": 16,
+        "suggestedArtworkHeight": 20,
+        "label": "Top Left"
+      },
+      {
+        "id": "frame-2",
+        "x": 23.5,
+        "y": 0,
+        "width": 20.5,
+        "height": 24.5,
+        "suggestedArtworkWidth": 16,
+        "suggestedArtworkHeight": 20,
+        "label": "Top Right"
+      },
+      {
+        "id": "frame-3",
+        "x": 0,
+        "y": 27.5,
+        "width": 20.5,
+        "height": 24.5,
+        "suggestedArtworkWidth": 16,
+        "suggestedArtworkHeight": 20,
+        "label": "Bottom Left"
+      },
+      {
+        "id": "frame-4",
+        "x": 23.5,
+        "y": 27.5,
+        "width": 20.5,
+        "height": 24.5,
+        "suggestedArtworkWidth": 16,
+        "suggestedArtworkHeight": 20,
+        "label": "Bottom Right"
+      }
+    ]
+  },
+  {
+    "id": "grid-2x3",
+    "name": "2×3 Grid",
+    "description": "Six-frame vertical gallery. Ideal for portrait photography or storytelling sequences.",
+    "category": "grid",
+    "frameCount": 6,
+    "spacing": 3,
+    "totalWidth": 32,
+    "totalHeight": 69,
+    "framePositions": [
+      {
+        "id": "frame-1",
+        "x": 0,
+        "y": 0,
+        "width": 14.5,
+        "height": 19.5,
+        "suggestedArtworkWidth": 11,
+        "suggestedArtworkHeight": 14,
+        "label": "Top Left"
+      },
+      {
+        "id": "frame-2",
+        "x": 17.5,
+        "y": 0,
+        "width": 14.5,
+        "height": 19.5,
+        "suggestedArtworkWidth": 11,
+        "suggestedArtworkHeight": 14,
+        "label": "Top Right"
+      },
+      {
+        "id": "frame-3",
+        "x": 0,
+        "y": 22.5,
+        "width": 14.5,
+        "height": 19.5,
+        "suggestedArtworkWidth": 11,
+        "suggestedArtworkHeight": 14,
+        "label": "Middle Left"
+      },
+      {
+        "id": "frame-4",
+        "x": 17.5,
+        "y": 22.5,
+        "width": 14.5,
+        "height": 19.5,
+        "suggestedArtworkWidth": 11,
+        "suggestedArtworkHeight": 14,
+        "label": "Middle Right"
+      },
+      {
+        "id": "frame-5",
+        "x": 0,
+        "y": 45,
+        "width": 14.5,
+        "height": 19.5,
+        "suggestedArtworkWidth": 11,
+        "suggestedArtworkHeight": 14,
+        "label": "Bottom Left"
+      },
+      {
+        "id": "frame-6",
+        "x": 17.5,
+        "y": 45,
+        "width": 14.5,
+        "height": 19.5,
+        "suggestedArtworkWidth": 11,
+        "suggestedArtworkHeight": 14,
+        "label": "Bottom Right"
+      }
+    ]
+  },
+  {
+    "id": "grid-3x2",
+    "name": "3×2 Grid",
+    "description": "Six-frame horizontal gallery. Spans 50 inches wide by 45 inches tall with uniform 3-inch gaps.",
+    "category": "grid",
+    "frameCount": 6,
+    "spacing": 3,
+    "totalWidth": 50,
+    "totalHeight": 45,
+    "framePositions": [
+      {
+        "id": "frame-1",
+        "x": 0,
+        "y": 0,
+        "width": 14.5,
+        "height": 19.5,
+        "suggestedArtworkWidth": 11,
+        "suggestedArtworkHeight": 14,
+        "label": "Top Left"
+      },
+      {
+        "id": "frame-2",
+        "x": 17.5,
+        "y": 0,
+        "width": 14.5,
+        "height": 19.5,
+        "suggestedArtworkWidth": 11,
+        "suggestedArtworkHeight": 14,
+        "label": "Top Center"
+      },
+      {
+        "id": "frame-3",
+        "x": 35,
+        "y": 0,
+        "width": 14.5,
+        "height": 19.5,
+        "suggestedArtworkWidth": 11,
+        "suggestedArtworkHeight": 14,
+        "label": "Top Right"
+      },
+      {
+        "id": "frame-4",
+        "x": 0,
+        "y": 22.5,
+        "width": 14.5,
+        "height": 19.5,
+        "suggestedArtworkWidth": 11,
+        "suggestedArtworkHeight": 14,
+        "label": "Bottom Left"
+      },
+      {
+        "id": "frame-5",
+        "x": 17.5,
+        "y": 22.5,
+        "width": 14.5,
+        "height": 19.5,
+        "suggestedArtworkWidth": 11,
+        "suggestedArtworkHeight": 14,
+        "label": "Bottom Center"
+      },
+      {
+        "id": "frame-6",
+        "x": 35,
+        "y": 22.5,
+        "width": 14.5,
+        "height": 19.5,
+        "suggestedArtworkWidth": 11,
+        "suggestedArtworkHeight": 14,
+        "label": "Bottom Right"
+      }
+    ]
+  },
+  {
+    "id": "grid-3x3",
+    "name": "3×3 Grid",
+    "description": "Nine-frame statement wall. Create a dramatic focal point with matching or varied images.",
+    "category": "grid",
+    "frameCount": 9,
+    "spacing": 2,
+    "totalWidth": 38,
+    "totalHeight": 44,
+    "framePositions": [
+      {
+        "id": "frame-1",
+        "x": 0,
+        "y": 0,
+        "width": 11.5,
+        "height": 13.5,
+        "suggestedArtworkWidth": 8,
+        "suggestedArtworkHeight": 10,
+        "label": "Top Left"
+      },
+      {
+        "id": "frame-2",
+        "x": 13.5,
+        "y": 0,
+        "width": 11.5,
+        "height": 13.5,
+        "suggestedArtworkWidth": 8,
+        "suggestedArtworkHeight": 10,
+        "label": "Top Center"
+      },
+      {
+        "id": "frame-3",
+        "x": 27,
+        "y": 0,
+        "width": 11.5,
+        "height": 13.5,
+        "suggestedArtworkWidth": 8,
+        "suggestedArtworkHeight": 10,
+        "label": "Top Right"
+      },
+      {
+        "id": "frame-4",
+        "x": 0,
+        "y": 15.5,
+        "width": 11.5,
+        "height": 13.5,
+        "suggestedArtworkWidth": 8,
+        "suggestedArtworkHeight": 10,
+        "label": "Middle Left"
+      },
+      {
+        "id": "frame-5",
+        "x": 13.5,
+        "y": 15.5,
+        "width": 11.5,
+        "height": 13.5,
+        "suggestedArtworkWidth": 8,
+        "suggestedArtworkHeight": 10,
+        "label": "Middle Center"
+      },
+      {
+        "id": "frame-6",
+        "x": 27,
+        "y": 15.5,
+        "width": 11.5,
+        "height": 13.5,
+        "suggestedArtworkWidth": 8,
+        "suggestedArtworkHeight": 10,
+        "label": "Middle Right"
+      },
+      {
+        "id": "frame-7",
+        "x": 0,
+        "y": 31,
+        "width": 11.5,
+        "height": 13.5,
+        "suggestedArtworkWidth": 8,
+        "suggestedArtworkHeight": 10,
+        "label": "Bottom Left"
+      },
+      {
+        "id": "frame-8",
+        "x": 13.5,
+        "y": 31,
+        "width": 11.5,
+        "height": 13.5,
+        "suggestedArtworkWidth": 8,
+        "suggestedArtworkHeight": 10,
+        "label": "Bottom Center"
+      },
+      {
+        "id": "frame-9",
+        "x": 27,
+        "y": 31,
+        "width": 11.5,
+        "height": 13.5,
+        "suggestedArtworkWidth": 8,
+        "suggestedArtworkHeight": 10,
+        "label": "Bottom Right"
+      }
+    ]
+  },
+  {
+    "id": "salon-5",
+    "name": "5-Frame Salon",
+    "description": "Asymmetric gallery style with one large center piece surrounded by four smaller frames. Museum-inspired organic arrangement.",
+    "category": "salon",
+    "frameCount": 5,
+    "spacing": 3.5,
+    "totalWidth": 52,
+    "totalHeight": 44,
+    "framePositions": [
+      {
+        "id": "frame-center",
+        "x": 15,
+        "y": 10,
+        "width": 20.5,
+        "height": 24.5,
+        "suggestedArtworkWidth": 16,
+        "suggestedArtworkHeight": 20,
+        "label": "Center Large"
+      },
+      {
+        "id": "frame-top-left",
+        "x": 0,
+        "y": 0,
+        "width": 11.5,
+        "height": 13.5,
+        "suggestedArtworkWidth": 8,
+        "suggestedArtworkHeight": 10,
+        "label": "Top Left"
+      },
+      {
+        "id": "frame-top-right",
+        "x": 39,
+        "y": 2,
+        "width": 11.5,
+        "height": 13.5,
+        "suggestedArtworkWidth": 8,
+        "suggestedArtworkHeight": 10,
+        "label": "Top Right"
+      },
+      {
+        "id": "frame-bottom-left",
+        "x": 2,
+        "y": 30,
+        "width": 11.5,
+        "height": 13.5,
+        "suggestedArtworkWidth": 8,
+        "suggestedArtworkHeight": 10,
+        "label": "Bottom Left"
+      },
+      {
+        "id": "frame-bottom-right",
+        "x": 39.5,
+        "y": 27,
+        "width": 11.5,
+        "height": 13.5,
+        "suggestedArtworkWidth": 8,
+        "suggestedArtworkHeight": 10,
+        "label": "Bottom Right"
+      }
+    ]
+  },
+  {
+    "id": "staircase-5",
+    "name": "5-Frame Staircase",
+    "description": "Diagonal ascending arrangement. Each frame offsets 10.5 inches vertically across a 78.5-inch horizontal span.",
+    "category": "staircase",
+    "frameCount": 5,
+    "spacing": 3,
+    "totalWidth": 78.5,
+    "totalHeight": 61.5,
+    "framePositions": [
+      {
+        "id": "frame-1",
+        "x": 0,
+        "y": 42,
+        "width": 14.5,
+        "height": 19.5,
+        "suggestedArtworkWidth": 11,
+        "suggestedArtworkHeight": 14,
+        "label": "Bottom Left"
+      },
+      {
+        "id": "frame-2",
+        "x": 16,
+        "y": 31.5,
+        "width": 14.5,
+        "height": 19.5,
+        "suggestedArtworkWidth": 11,
+        "suggestedArtworkHeight": 14,
+        "label": "Second"
+      },
+      {
+        "id": "frame-3",
+        "x": 32,
+        "y": 21,
+        "width": 14.5,
+        "height": 19.5,
+        "suggestedArtworkWidth": 11,
+        "suggestedArtworkHeight": 14,
+        "label": "Middle"
+      },
+      {
+        "id": "frame-4",
+        "x": 48,
+        "y": 10.5,
+        "width": 14.5,
+        "height": 19.5,
+        "suggestedArtworkWidth": 11,
+        "suggestedArtworkHeight": 14,
+        "label": "Fourth"
+      },
+      {
+        "id": "frame-5",
+        "x": 64,
+        "y": 0,
+        "width": 14.5,
+        "height": 19.5,
+        "suggestedArtworkWidth": 11,
+        "suggestedArtworkHeight": 14,
+        "label": "Top Right"
+      }
+    ]
+  }
+]
