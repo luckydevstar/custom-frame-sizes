@@ -151,6 +151,12 @@ export const brandConfigSchema = z.object({
       isActive: z.boolean().optional(),
       createdAt: z.string().optional(),
       updatedAt: z.string().optional(),
+      contactPhone: z.string().optional(),
+      contactEmail: z.string().optional(),
+      gtmId: z.string().optional(),
+      socialProfiles: z.array(z.string().url()).optional(),
+      locale: z.string().optional(),
+      localeAlternates: z.record(z.string()).optional(),
     })
     .passthrough()
     .optional(),

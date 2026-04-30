@@ -3,6 +3,7 @@ const path = require('path');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
+const { redirects: storeRedirects } = require('./src/config/redirects.js');
 
 // Rewrite asset URLs to local API (assets_to_use). Path goes in URL so it is passed reliably.
 // Note: 'frames' is NOT included here because /frames/colors, /frames/styles, /frames/sizes are
@@ -25,19 +26,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true, // Use SWC for faster minification
   async redirects() {
-    return [
-      { source: '/blog', destination: '/learn', permanent: true },
-      { source: '/blog/:path*', destination: '/learn', permanent: true },
-      { source: '/returns', destination: '/returns-exchanges', permanent: true },
-      { source: '/business-services', destination: '/business', permanent: true },
-      { source: '/frame-quality-guarantee', destination: '/warranty', permanent: true },
-      // Legacy / mistaken URLs (SEO crawl C1)
-      { source: '/frames', destination: '/frames/styles', permanent: true },
-      { source: '/gallery', destination: '/samples', permanent: true },
-      { source: '/print-and-frame', destination: '/designer', permanent: true },
-      { source: '/frames/bronz-picture-frame', destination: '/frames/bronze-picture-frame', permanent: true },
-      { source: '/order-fulfillment', destination: '/', permanent: true },
-    ];
+    return storeRedirects;
   },
   async rewrites() {
     return [...assetRewrites, assetsRewrite];
@@ -48,6 +37,7 @@ const nextConfig = {
     '@framecraft/config',
     '@framecraft/types',
     '@framecraft/data',
+    '@framecraft/seo',
   ],
   images: {
     remotePatterns: [
@@ -93,6 +83,7 @@ const nextConfig = {
       '@framecraft/core': path.resolve(__dirname, '../../packages/core/src'),
       '@framecraft/types': path.resolve(__dirname, '../../packages/types/src'),
       '@framecraft/data': path.resolve(__dirname, '../../packages/data/src'),
+      '@framecraft/seo': path.resolve(__dirname, '../../packages/seo/src'),
       '@framecraft/ui': path.resolve(__dirname, '../../packages/ui/src'),
       // Per-app product data injection. Resolves to this app's isolated data
       // folder so shared core/config modules statically embed store-specific

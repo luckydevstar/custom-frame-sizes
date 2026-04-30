@@ -3,6 +3,7 @@ const path = require('path');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 });
+const { redirects: storeRedirects } = require('./src/config/redirects.js');
 
 // Rewrite asset URLs to local API (assets_to_use). Path goes in URL so it is passed reliably.
 const assetPrefixes = [
@@ -24,31 +25,7 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true, // Use SWC for faster minification
   async redirects() {
-    return [
-      // Add store-b specific redirects here
-      { source: '/frames', destination: '/picture-frames', permanent: false },
-      { source: '/diploma-frames', destination: '/diploma-certificate-frames', permanent: true },
-      { source: '/returns', destination: '/returns-exchanges', permanent: true },
-      { source: '/jerseys', destination: '/jersey-frames', permanent: true },
-      { source: '/shadowbox-designer', destination: '/shadowbox/designer', permanent: true },
-      { source: '/specialty/mat-designer', destination: '/mat-designer', permanent: true },
-      { source: '/specialty/bouquet', destination: '/bouquet-frames', permanent: true },
-      { source: '/specialty/record-album-frames', destination: '/record-album-frames', permanent: true },
-      { source: '/specialty/cd-frames', destination: '/cd-frames', permanent: true },
-      { source: '/specialty/movie-poster', destination: '/movie-poster-frames', permanent: true },
-      { source: '/specialty/collage', destination: '/collage-frames', permanent: true },
-      { source: '/specialty/ticket', destination: '/ticket-frames', permanent: true },
-      { source: '/photo-collage-frames', destination: '/collage-frames', permanent: true },
-      { source: '/collage-frames/designer', destination: '/collage-frames', permanent: true },
-      { source: '/ticket-stub-frames', destination: '/ticket-frames', permanent: true },
-      { source: '/magazine-frame-sizes', destination: '/magazine-sizes-guide', permanent: true },
-      { source: '/comic-book-frame', destination: '/comic-book-frames', permanent: true },
-      { source: '/designer/comic-book-frame', destination: '/comic-book-frames', permanent: true },
-      { source: '/playbill-frames/designer', destination: '/playbill-frames', permanent: true },
-      { source: '/newspaper-frames/designer', destination: '/newspaper-frames', permanent: true },
-      { source: '/shadowbox/deep-frames', destination: '/shadowbox/deep-shadowbox-frames', permanent: true },
-      { source: '/shadowbox/depth-guide', destination: '/shadowbox/deep-shadowbox-frames', permanent: true },
-    ];
+    return storeRedirects;
   },
   async rewrites() {
     return [...assetRewrites, assetsRewrite];
@@ -59,6 +36,7 @@ const nextConfig = {
     '@framecraft/config',
     '@framecraft/types',
     '@framecraft/data',
+    '@framecraft/seo',
   ],
   images: {
     remotePatterns: [
@@ -109,6 +87,7 @@ const nextConfig = {
       '@framecraft/core': path.resolve(__dirname, '../../packages/core/src'),
       '@framecraft/types': path.resolve(__dirname, '../../packages/types/src'),
       '@framecraft/data': path.resolve(__dirname, '../../packages/data/src'),
+      '@framecraft/seo': path.resolve(__dirname, '../../packages/seo/src'),
       '@framecraft/ui': path.resolve(__dirname, '../../packages/ui/src'),
       // Per-app product data injection. Resolves to this app's isolated data
       // folder so shared core/config modules statically embed store-specific

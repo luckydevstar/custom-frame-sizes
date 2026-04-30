@@ -303,6 +303,41 @@ export interface BrandConfig {
     updatedAt?: string;
 
     /**
+     * Public-facing contact phone (rendered in footer / Organization JSON-LD)
+     */
+    contactPhone?: string;
+
+    /**
+     * Public-facing contact email (rendered in footer / Organization JSON-LD)
+     */
+    contactEmail?: string;
+
+    /**
+     * Google Tag Manager container ID for this storefront (e.g. `GTM-XXXX`).
+     * Falls back to `process.env.NEXT_PUBLIC_GTM_ID` only if undefined.
+     */
+    gtmId?: string;
+
+    /**
+     * Social profile URLs surfaced as schema.org `sameAs` on the Organization
+     * JSON-LD payload.
+     */
+    socialProfiles?: string[];
+
+    /**
+     * BCP-47 locale tag for the storefront (default `"en_US"`). Drives
+     * `<html lang>` and Open Graph `og:locale`.
+     */
+    locale?: string;
+
+    /**
+     * Optional `<link rel="alternate" hreflang>` map. Keys are BCP-47 language
+     * codes (e.g. `"en-US"`, `"es"`); values are absolute URLs to the same
+     * page in that locale.
+     */
+    localeAlternates?: Record<string, string>;
+
+    /**
      * Custom metadata (key-value pairs)
      */
     [key: string]: unknown;

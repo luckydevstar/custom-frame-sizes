@@ -1,5 +1,6 @@
 import "./globals.css";
 import { StoreProvider } from "@framecraft/core";
+import { buildPreconnectLinks } from "@framecraft/seo";
 import { TooltipProvider } from "@framecraft/ui";
 import { Header, Footer } from "@framecraft/ui/components/layout";
 import { Toaster } from "@framecraft/ui/components/ui/toaster";
@@ -43,7 +44,14 @@ const montserrat = Montserrat({
 // Get SEO metadata from brand config
 const seoConfig = brandConfig.seo;
 
+// Resolve a single absolute base URL for `metadata` so Next can derive absolute
+// og/twitter image URLs from per-page relative `og-image` files.
+const METADATA_BASE = new URL(
+  seoConfig.canonicalUrl ?? `https://${brandConfig.domain}`,
+);
+
 export const metadata: Metadata = {
+  metadataBase: METADATA_BASE,
   title: seoConfig.title,
   description: seoConfig.description,
   keywords: seoConfig.keywords,
@@ -68,8 +76,19 @@ export const metadata: Metadata = {
   },
 };
 
+// GTM container is sourced from the brand config first; the env var is a deploy-time
+// override, and the legacy literal is a last-ditch fallback so existing dev envs keep working.
 const GTM_CONTAINER_ID =
-  process.env.NEXT_PUBLIC_GTM_ID ?? "GTM-WNC3937K";
+  brandConfig.metadata?.gtmId ?? process.env.NEXT_PUBLIC_GTM_ID ?? "GTM-WNC3937K";
+
+// Preconnect hosts for LCP improvement (shared defaults + store-a-specific R2/CDN).
+const PRECONNECT_TARGETS = buildPreconnectLinks([
+  { href: "https://cdn.shopify.com" },
+  { href: "https://customframesizes.r2.dev", crossOrigin: true },
+]);
+
+// HTML lang is derived from brand metadata (BCP-47 `xx_YY` → `xx-YY`).
+const HTML_LANG = (brandConfig.metadata?.locale ?? "en_US").replace("_", "-");
 
 export default function RootLayout({
   children,
@@ -77,8 +96,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={playfair.variable} suppressHydrationWarning>
+    <html lang={HTML_LANG} className={playfair.variable} suppressHydrationWarning>
       <head>
+        {PRECONNECT_TARGETS.map((target) => (
+          <link
+            key={target.href}
+            rel="preconnect"
+            href={target.href}
+            {...(target.crossOrigin ? { crossOrigin: "anonymous" } : {})}
+          />
+        ))}
         <Script id="google-tag-manager" strategy="beforeInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

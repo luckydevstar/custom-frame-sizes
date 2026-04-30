@@ -8,13 +8,17 @@
 import type { BrandConfig } from "@framecraft/config";
 import { env } from "./lib/env";
 
-/** Absolute origin for checkout branding (Shopify checkout cannot use relative /assets URLs). */
+/**
+ * Absolute origin for the storefront. Public site only — never the Shopify
+ * API host. See store-a/brand.config.ts for source-order rationale.
+ */
 const publicSiteOrigin = (env.siteOrigin ?? "https://www.shadowboxframes.com").replace(/\/$/, "");
+const publicHostname = publicSiteOrigin.replace(/^https?:\/\//, "");
 
 export const brandConfig: BrandConfig = {
   storeId: "store-b",
   name: "ShadowboxFrames.com",
-  domain: env.shopify.storeDomain || "www.shadowboxframes.com",
+  domain: publicHostname,
 
   shopify: {
     domain: env.shopify.storeDomain || "store-b.myshopify.com",
@@ -76,9 +80,9 @@ export const brandConfig: BrandConfig = {
       "ShadowboxFrames",
       "custom framing",
     ],
-    canonicalUrl: `https://${env.shopify.storeDomain || "www.shadowboxframes.com"}`,
-    ogImage: `https://${env.shopify.storeDomain || "www.shadowboxframes.com"}/assets/og-image.jpg`,
-    twitterImage: `https://${env.shopify.storeDomain || "www.shadowboxframes.com"}/assets/og-image.jpg`,
+    canonicalUrl: publicSiteOrigin,
+    ogImage: `${publicSiteOrigin}/assets/og-image.jpg`,
+    twitterImage: `${publicSiteOrigin}/assets/og-image.jpg`,
   },
 
   checkout: {
@@ -99,5 +103,13 @@ export const brandConfig: BrandConfig = {
     updatedAt: new Date().toISOString(),
     contactPhone: "1 (888) 874-7156",
     contactEmail: "hello@ShadowboxFrames.com",
+    // Google Tag Manager container; populate via NEXT_PUBLIC_GTM_ID for store-b.
+    gtmId: process.env.NEXT_PUBLIC_GTM_ID,
+    locale: "en_US",
+    socialProfiles: [
+      "https://www.facebook.com/shadowboxframes",
+      "https://www.instagram.com/shadowboxframes",
+      "https://www.pinterest.com/shadowboxframes",
+    ],
   },
 };
