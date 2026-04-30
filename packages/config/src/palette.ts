@@ -1,12 +1,14 @@
 /**
  * Production Mat Board Palette Configuration
  * 46 real mat SKUs with actual vendor pricing and sheet sizes
- * Replaces all previous mat data with production-ready catalog
  *
- * NOTE: This configuration has been extracted to @framecraft/config.
- * It imports from @framecraft/types to avoid circular dependencies with @framecraft/core.
- * Actual mat data is loaded dynamically from @framecraft/core's product catalog at runtime.
+ * Data is statically injected at build time via the `@framecraft/store-data`
+ * webpack alias declared in each app's `next.config.js`. Each app provides
+ * its own isolated `apps/{store}/src/data/mats.json`. No runtime
+ * initialization is required — all exports are populated at module load.
  */
+
+import matsDataRaw from "@framecraft/store-data/mats.json";
 
 export interface MatSize {
   sku: string;
@@ -20,7 +22,7 @@ export interface Mat {
   type: "Regular" | "Premium";
   name: string;
   swatchFile: string;
-  hexColor?: string; // Optional hex color for backwards compatibility
+  hexColor?: string;
   sizes: {
     "32x40": MatSize | null;
     "40x60": MatSize | null;
@@ -28,7 +30,7 @@ export interface Mat {
   coreColor: "white" | "black";
   isRegular: boolean;
   isPremium: boolean;
-  isAvailableOversize?: boolean; // Whether mat is available for oversize designs
+  isAvailableOversize?: boolean;
 }
 
 export interface MatDisplayOrder {
@@ -36,28 +38,41 @@ export interface MatDisplayOrder {
   premium: number[];
 }
 
-/**
- * Get all 46 production mats
- * Note: Initially empty array - gets populated at runtime when product catalog initializes
- */
-export const ALL_MATS: Mat[] = [];
+interface RawMatsContainer {
+  mats?: Mat[];
+  displayOrder?: {
+    desktop?: { regular?: number[]; premium?: number[] };
+    mobile?: { regular?: number[]; premium?: number[] };
+  };
+  metadata?: {
+    totalMats?: number;
+    regularCount?: number;
+    premiumCount?: number;
+    blackCoreCount?: number;
+  };
+}
+
+const matsContainer = matsDataRaw as RawMatsContainer;
 
 /**
- * Display order for desktop (27 regular + 18 premium, omits Terracotta)
- * Initially empty - gets populated at runtime when product catalog initializes
+ * All production mats for this store, populated from the per-app mats.json
+ */
+export const ALL_MATS: Mat[] = matsContainer.mats ?? [];
+
+/**
+ * Display order for desktop
  */
 export const DESKTOP_DISPLAY_ORDER: MatDisplayOrder = {
-  regular: [],
-  premium: [],
+  regular: matsContainer.displayOrder?.desktop?.regular ?? [],
+  premium: matsContainer.displayOrder?.desktop?.premium ?? [],
 };
 
 /**
- * Display order for mobile (28 regular + 18 premium, includes Terracotta in red section)
- * Initially empty - gets populated at runtime when product catalog initializes
+ * Display order for mobile
  */
 export const MOBILE_DISPLAY_ORDER: MatDisplayOrder = {
-  regular: [],
-  premium: [],
+  regular: matsContainer.displayOrder?.mobile?.regular ?? [],
+  premium: matsContainer.displayOrder?.mobile?.premium ?? [],
 };
 
 /**
@@ -89,22 +104,21 @@ export function getMatSwatchPath(mat: Mat): string {
 }
 
 /**
- * Get all regular mats (28 total)
+ * Get all regular mats
  */
 export function getRegularMats(): Mat[] {
   return ALL_MATS.filter((mat) => mat.isRegular);
 }
 
 /**
- * Get all premium mats (18 total)
+ * Get all premium mats
  */
 export function getPremiumMats(): Mat[] {
   return ALL_MATS.filter((mat) => mat.isPremium);
 }
 
 /**
- * Get mats with black core (4 total: Football Texture, Basketball Texture,
- * White with Black Core, Black with Black Core)
+ * Get mats with black core
  */
 export function getBlackCoreMats(): Mat[] {
   return ALL_MATS.filter((mat) => mat.coreColor === "black");
@@ -116,29 +130,20 @@ export function getBlackCoreMats(): Mat[] {
  * Size availability rules:
  * - Hide mats when smallest side > 32" OR largest side > 40"
  * - Only show mats that have appropriate sheet size available
- *
- * @param mat The mat to check
- * @param frameWidth Frame width in inches
- * @param frameHeight Frame height in inches
- * @returns true if mat is available for this frame size
  */
 export function isMatAvailableForSize(mat: Mat, frameWidth: number, frameHeight: number): boolean {
   const shortSide = Math.min(frameWidth, frameHeight);
   const longSide = Math.max(frameWidth, frameHeight);
 
-  // Check if frame size exceeds mat sheet availability
   if (shortSide > 32 || longSide > 40) {
-    // Frame requires 40x60 sheet
     return mat.sizes["40x60"] !== null;
   }
 
-  // Frame fits within 32x40 sheet - all mats with 32x40 size available
   return mat.sizes["32x40"] !== null;
 }
 
 /**
  * Get available mats for given frame dimensions
- * Filters mats based on size availability
  */
 export function getAvailableMatsForSize(
   frameWidth: number,
@@ -161,11 +166,6 @@ export function getAvailableMatsForSize(
 
 /**
  * Get mats in display order for given viewport
- *
- * @param viewport 'desktop' or 'mobile'
- * @param includeRegular Include regular mats (default true)
- * @param includePremium Include premium mats (default true)
- * @returns Array of mats in correct display order
  */
 export function getMatsInDisplayOrder(
   viewport: "desktop" | "mobile",
@@ -210,26 +210,21 @@ export function getRequiredSheetSize(
   const shortSide = Math.min(frameWidth, frameHeight);
   const longSide = Math.max(frameWidth, frameHeight);
 
-  // Check if frame is too large for any mat sheet
   if (shortSide > 40 || longSide > 60) {
-    return null; // Un-manufacturable
+    return null;
   }
 
-  // Requires 40x60 sheet
   if (shortSide > 32 || longSide > 40) {
     return "40x60";
   }
 
-  // Fits within 32x40 sheet
   return "32x40";
 }
 
 /**
  * Check if a mat color needs a border for visibility (light colors)
- * Used for mat selector swatches
  */
 export function matNeedsBorder(mat: Mat): boolean {
-  // White and off-white variants that need borders
   const whiteVariants = [
     "White",
     "Off White",
@@ -245,23 +240,20 @@ export function matNeedsBorder(mat: Mat): boolean {
  * Get mat metadata
  */
 export function getMatMetadata() {
-  // Return hardcoded values since we're avoiding imports from core
-  // Real values are determined at runtime by the product catalog initialization
+  const m = matsContainer.metadata;
   return {
-    total: 46,
-    regular: 28,
-    premium: 18,
-    blackCore: 4,
+    total: m?.totalMats ?? ALL_MATS.length,
+    regular: m?.regularCount ?? ALL_MATS.filter((mat) => mat.isRegular).length,
+    premium: m?.premiumCount ?? ALL_MATS.filter((mat) => mat.isPremium).length,
+    blackCore: m?.blackCoreCount ?? ALL_MATS.filter((mat) => mat.coreColor === "black").length,
   } as const;
 }
 
-// For backwards compatibility - compute once
-export const MAT_METADATA = {
-  total: 46,
-  regular: 28,
-  premium: 18,
-  blackCore: 4,
-} as const;
+/**
+ * @deprecated Prefer `getMatMetadata()` which reflects the per-app data.
+ * Retained for backwards compatibility with existing imports.
+ */
+export const MAT_METADATA = getMatMetadata();
 
 // ========================================
 // BACKWARDS COMPATIBILITY LAYER
@@ -341,7 +333,6 @@ export function getPremiumMatsForSize(widthIn: number, heightIn: number): Mat[] 
  */
 export function needsBorder(mat: Mat | string): boolean {
   if (typeof mat === "string") {
-    // Legacy: mat was a color hex code
     const lightColors = ["#FFFFFF", "#FFFDD0", "#FFFFF0", "#F5F5DC"];
     return lightColors.includes(mat);
   }

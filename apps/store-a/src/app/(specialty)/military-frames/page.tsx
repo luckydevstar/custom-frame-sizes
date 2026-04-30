@@ -22,8 +22,6 @@ const MilitaryFrameDesigner = nextDynamic(
   { ssr: false },
 );
 
-export const dynamic = "force-dynamic";
-
 const baseUrl = brandConfig.seo?.canonicalUrl ?? "https://www.customframesizes.com";
 
 export const metadata: Metadata = generatePageMetadata("/military-frames", {

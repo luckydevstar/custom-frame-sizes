@@ -45,8 +45,6 @@ const BOUQUET_INITIAL_CONFIG: ShadowboxConfig = {
   glazing: "acrylic",
 };
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = generatePageMetadata("/bouquet-frames", {
   title: "Preserved Bouquet Frames – Wedding Bouquet Framing | Custom Frame Sizes",
   description:

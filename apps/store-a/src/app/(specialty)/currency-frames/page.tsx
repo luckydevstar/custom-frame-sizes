@@ -16,8 +16,6 @@ const CurrencyFrameDesigner = nextDynamic(
   { ssr: false }
 );
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = generatePageMetadata("/currency-frames", {
   title: "Currency Display Frames | Custom Shadow Box Frames for Paper Money",
   description:

@@ -37,7 +37,8 @@
       "@framecraft/data": ["./packages/data/src"],
       "@framecraft/data/*": ["./packages/data/src/*"],
       "@framecraft/ui": ["./packages/ui/src"],
-      "@framecraft/ui/*": ["./packages/ui/src/*"]
+      "@framecraft/ui/*": ["./packages/ui/src/*"],
+      "@framecraft/store-data/*": ["./apps/store-a/src/data/*"]
     }
   },
   "include": [

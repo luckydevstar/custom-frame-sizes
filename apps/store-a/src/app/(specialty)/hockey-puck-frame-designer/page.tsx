@@ -13,8 +13,6 @@ const PuckFrameDesigner = nextDynamic(
   { ssr: false },
 );
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = generateMetadata({
   title: "Hockey Puck Display Frames | Custom Foam Insert Kit | CustomFrameSizes.com",
   description:

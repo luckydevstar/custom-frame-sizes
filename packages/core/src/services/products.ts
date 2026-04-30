@@ -1,193 +1,145 @@
 /**
- * Product data service (Store-Agnostic)
- * Provides access to frame, mat, and glass product data
+ * Product data service (Static, per-app data injection)
  *
- * ARCHITECTURE: This service is now data-agnostic and store-specific.
- * Each store (store-a, store-b) provides its own data files.
- * Dependencies:
- * - Types: @framecraft/types (extracted in P1-023)
- * - Validation: @framecraft/core/services/validation (extracted in P1-019)
- * - Palette config: @framecraft/config (extracted in P1-026)
+ * Each app provides its isolated catalog under `apps/{store}/src/data/` and
+ * aliases `@framecraft/store-data` to that folder via `next.config.js`. This
+ * module imports the JSON at top level, so the data is statically embedded in
+ * the bundle for every Next.js build. No runtime initialization, no global
+ * mutable state, no side effects: pages can be fully prerendered for SEO.
  *
- * Data isolation: Each app now maintains its own data in apps/{store}/src/data/
- * This prevents cross-contamination between stores while sharing business logic.
+ * Type-checking note: `tsconfig.base.json` maps `@framecraft/store-data/*` to
+ * `packages/data/src/*` purely so the package type-checks standalone. At
+ * Next.js build time the per-app webpack alias overrides this and the bundled
+ * data is the per-app data.
  */
 
 import { validateFrameStyles, validateMatColors, validateGlassTypes } from "./validation";
 
+import framesDataRaw from "@framecraft/store-data/frames.json";
+import matsDataRaw from "@framecraft/store-data/mats.json";
+import glassDataRaw from "@framecraft/store-data/glass.json";
+import pricingConfigRaw from "@framecraft/store-data/pricing-config.json";
+
 import type { FrameStyle, MatColor, GlassType, PricingConfig } from "@framecraft/types";
 
-/**
- * Product catalog instance - holds validated data for a specific store
- * Initialized by each app with its own data files
- */
-interface ProductCatalog {
-  validatedFrames: FrameStyle[];
-  validatedMats: MatColor[];
-  validatedGlass: GlassType[];
-  pricingConfig: PricingConfig;
-  rawMatsData?: any; // Store raw mats data for palette.ts (includes displayOrder, metadata)
-}
-
-// Global instance - initialized by each app in its layout/root component
-let catalog: ProductCatalog | null = null;
-
-/**
- * Initialize the product catalog with store-specific data
- * MUST be called once at app startup (e.g., in _app.tsx or layout.tsx)
- *
- * @param framesData - Array of frame definitions
- * @param matsDataRaw - Mat data (may have nested mats array, displayOrder, metadata)
- * @param glassData - Array of glass/acrylic options
- * @param pricingConfigData - Pricing configuration
- */
-export function initializeProductCatalog(
-  framesData: any,
-  matsDataRaw: any,
-  glassData: any,
-  pricingConfigData: any
-): void {
-  // Extract mats array from new catalog structure - mats.json already has correct structure
-  const matsDataNew = (matsDataRaw as any).mats || [];
-  const matsData = matsDataNew.map((mat: any) => {
-    // mats.json already has the correct structure with hexColor field
-    // Just ensure backward compatibility by adding color alias
-    return {
-      ...mat,
-      color: mat.hexColor || mat.color || "#FFFFFF", // Backward compatibility alias
-    };
-  }) as MatColor[];
-
-  // Validate data on load
-  const validatedFrames = validateFrameStyles(framesData);
-  const validatedMats = validateMatColors(matsData);
-  const validatedGlass = validateGlassTypes(glassData);
-
-  catalog = {
-    validatedFrames,
-    validatedMats,
-    validatedGlass,
-    pricingConfig: pricingConfigData as PricingConfig,
-    rawMatsData: matsDataRaw, // Keep raw data for palette.ts (includes displayOrder, metadata)
+interface RawMatsContainer {
+  mats?: unknown[];
+  displayOrder?: {
+    desktop?: { regular?: number[]; premium?: number[] };
+    mobile?: { regular?: number[]; premium?: number[] };
+  };
+  metadata?: {
+    totalMats?: number;
+    regularCount?: number;
+    premiumCount?: number;
+    blackCoreCount?: number;
   };
 }
 
+const matsContainer = matsDataRaw as RawMatsContainer;
+const matsArray = matsContainer.mats ?? [];
+
+// mats.json already has the correct structure with hexColor; ensure backward
+// compatibility by exposing a `color` alias used by older consumers.
+const matsForValidation = matsArray.map((m) => {
+  const mat = m as Record<string, unknown>;
+  return {
+    ...mat,
+    color: (mat.hexColor as string) || (mat.color as string) || "#FFFFFF",
+  };
+});
+
+const validatedFrames: FrameStyle[] = validateFrameStyles(framesDataRaw);
+const validatedMats: MatColor[] = validateMatColors(matsForValidation);
+const validatedGlass: GlassType[] = validateGlassTypes(glassDataRaw);
+const pricingConfig: PricingConfig = pricingConfigRaw as PricingConfig;
+
 /**
- * Get current catalog instance
- * Throws error if catalog not initialized
+ * @deprecated No-op. Data is now injected at build time via the
+ * `@framecraft/store-data` webpack alias. This export is retained only for
+ * backward compatibility with any external callers still invoking it.
  */
-function getCatalog(): ProductCatalog {
-  if (!catalog) {
-    throw new Error(
-      "Product catalog not initialized. Call initializeProductCatalog() at app startup."
-    );
-  }
-  return catalog;
+export function initializeProductCatalog(
+  _framesData?: unknown,
+  _matsDataRaw?: unknown,
+  _glassData?: unknown,
+  _pricingConfigData?: unknown,
+): void {
+  // intentionally empty
 }
 
 /**
  * Get all available frame styles
- * @returns Array of frame style configurations
  */
 export function getFrameStyles(): FrameStyle[] {
-  return getCatalog().validatedFrames;
+  return validatedFrames;
 }
 
 /**
  * Get a specific frame style by ID
- * @param id - Frame style ID
- * @returns Frame style or undefined if not found
  */
 export function getFrameStyleById(id: string): FrameStyle | undefined {
-  return getCatalog().validatedFrames.find((frame) => frame.id === id);
+  return validatedFrames.find((frame) => frame.id === id);
 }
 
 /**
  * Get all available mat colors
- * @returns Array of mat color options
  */
 export function getMatColors(): MatColor[] {
-  return getCatalog().validatedMats;
+  return validatedMats;
 }
 
 /**
  * Get a specific mat color by ID
- * @param id - Mat color ID
- * @returns Mat color or undefined if not found
- * Falls back to palette.config.ts for mats not yet in production catalog
- *
- * TODO: Update to use @framecraft/config once palette config is extracted in P1-026
  */
 export function getMatColorById(id: string): MatColor | undefined {
-  // First try production catalog
-  const productionMat = getCatalog().validatedMats.find((mat) => mat.id === id);
-  if (productionMat) return productionMat;
-
-  // TODO: Fall back to palette config from @framecraft/config once extracted
-  // For now, return undefined if not in production catalog
-  // const paletteMat = getPaletteMatById(id);
-  // if (paletteMat) { ... }
-
-  return undefined;
+  return validatedMats.find((mat) => mat.id === id);
 }
 
 /**
  * Get all available glass types
- * @returns Array of glass type options
  */
 export function getGlassTypes(): GlassType[] {
-  return getCatalog().validatedGlass;
+  return validatedGlass;
 }
 
 /**
  * Get a specific glass type by ID
- * @param id - Glass type ID
- * @returns Glass type or undefined if not found
  */
 export function getGlassTypeById(id: string): GlassType | undefined {
-  return getCatalog().validatedGlass.find((glass) => glass.id === id);
+  return validatedGlass.find((glass) => glass.id === id);
 }
 
 /**
  * Get pricing configuration
- * @returns Pricing configuration object
  */
 export function getPricingConfig(): PricingConfig {
-  return getCatalog().pricingConfig;
+  return pricingConfig;
 }
 
 /**
  * Filter frames by material
- * @param material - Material type to filter by
- * @returns Array of matching frame styles
  */
 export function getFramesByMaterial(material: string): FrameStyle[] {
-  return getCatalog().validatedFrames.filter((frame) => frame.material === material);
+  return validatedFrames.filter((frame) => frame.material === material);
 }
 
 /**
  * Filter frames by category
- * @param category - Frame category to filter by ("picture", "shadowbox", or "canvas")
- * @returns Array of matching frame styles
  */
 export function getFramesByCategory(category: "picture" | "shadowbox" | "canvas"): FrameStyle[] {
-  return getCatalog().validatedFrames.filter((frame) => frame.category === category);
+  return validatedFrames.filter((frame) => frame.category === category);
 }
 
 /**
  * Get default selections for frame designer
- * @returns Object with default frame, mat, and glass selections
  */
 export function getDefaultSelections() {
-  const frames = getFrameStyles();
-  const mats = getMatColors();
-  const glass = getGlassTypes();
-
   return {
-    frame: frames[0],
-    mat: mats[0],
-    matInner: mats[1],
-    glass: glass[0],
+    frame: validatedFrames[0],
+    mat: validatedMats[0],
+    matInner: validatedMats[1],
+    glass: validatedGlass[0],
   };
 }
 
@@ -206,16 +158,13 @@ export function getDefaultSelections() {
  * @returns URL slug with -frame suffix (e.g., "museum-bronze-frame")
  */
 export function getFrameSlug(frameId: string): string {
-  // Map specific frame IDs to their URL slugs (without -frame suffix)
-  // Add new frames here to ensure consistent URL structure
   const slugMap: Record<string, string> = {
     "museum-bronze": "museum-bronze",
     "black-wood": "black-wood",
     "white-wood": "white-wood",
     "silver-wood": "silver-wood",
     "pink-wood": "pink-wood",
-    "6301": "museum-bronze", // Legacy SKU support
-    // ShadowboxFrames.com / b-shadow-box-frames-original shadowbox slugs (SEO paths under /shadowbox/)
+    "6301": "museum-bronze",
     "standard-depth-matte-black": "classic-matte-black-shadow-box",
     "standard-depth-bright-white": "crisp-white-shadow-box",
     "deep-wide-profile-black": "grand-black-deep-shadow-box",
@@ -246,21 +195,18 @@ export function getFrameSlug(frameId: string): string {
 
   let baseSlug: string;
 
-  // Get base slug from map or generate it
-  if (slugMap[frameId]) {
-    baseSlug = slugMap[frameId];
+  const mapped = slugMap[frameId];
+  if (mapped) {
+    baseSlug = mapped;
   } else {
-    // Fallback: get frame by ID and convert name to slug
     const frame = getFrameStyleById(frameId);
     if (frame) {
       baseSlug = frame.name.toLowerCase().replace(/\s+/g, "-");
     } else {
-      // Last resort: use the ID itself
       baseSlug = frameId.replace(/_/g, "-");
     }
   }
 
-  // Always append -frame suffix for SEO
   return `${baseSlug}-frame`;
 }
 
@@ -270,15 +216,17 @@ export function getFrameSlug(frameId: string): string {
  * @internal Used by @framecraft/config palette.ts
  */
 export function getMatColorsWithMetadata() {
-  if (!catalog || !catalog.rawMatsData) {
-    throw new Error(
-      "Product catalog not initialized or mat metadata not available. Call initializeProductCatalog() at app startup."
-    );
-  }
-
   return {
-    mats: catalog.validatedMats,
-    displayOrder: catalog.rawMatsData.displayOrder || { desktop: { regular: [], premium: [] }, mobile: { regular: [], premium: [] } },
-    metadata: catalog.rawMatsData.metadata || { totalMats: 0, regularCount: 0, premiumCount: 0, blackCoreCount: 0 },
+    mats: validatedMats,
+    displayOrder: matsContainer.displayOrder ?? {
+      desktop: { regular: [], premium: [] },
+      mobile: { regular: [], premium: [] },
+    },
+    metadata: matsContainer.metadata ?? {
+      totalMats: 0,
+      regularCount: 0,
+      premiumCount: 0,
+      blackCoreCount: 0,
+    },
   };
 }

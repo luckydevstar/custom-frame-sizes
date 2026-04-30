@@ -6,13 +6,9 @@ import { Toaster } from "@framecraft/ui/components/ui/toaster";
 import { Inter, Playfair_Display, Montserrat } from "next/font/google";
 import Script from "next/script";
 
-// Server-side catalog initialization (must be imported here)
-import "@/lib/init-catalog.server";
-
 import { brandConfig } from "../brand.config";
 import { QueryProvider } from "../components/providers/query-provider";
 import { ThemeScript } from "../components/providers/theme-script";
-import { ProductCatalogInitializer } from "../components/providers/product-catalog-initializer";
 
 import { CartHydration } from "./components/CartHydration";
 
@@ -104,7 +100,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         </noscript>
         <QueryProvider>
           <StoreProvider config={brandConfig}>
-            <ProductCatalogInitializer />
             <CartHydration />
             <TooltipProvider>
               <div className="flex min-h-screen flex-col">

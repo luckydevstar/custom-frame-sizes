@@ -24,8 +24,6 @@ const ShadowboxDesigner = nextDynamic(
   { ssr: false }
 );
 
-export const dynamic = "force-dynamic";
-
 function getAllShadowboxSlugs(): string[] {
   const frames = getFrameStyles().filter((f) => f.category === "shadowbox");
   return frames.map((f) => f.id);

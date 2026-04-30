@@ -36,8 +36,6 @@ const StampFrameDesigner = nextDynamic(
   }
 );
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = generatePageMetadata("/stamp-frames", {
   title: "Stamp Display Frames | Custom Shadow Box Frames for Stamp Collections",
   description:

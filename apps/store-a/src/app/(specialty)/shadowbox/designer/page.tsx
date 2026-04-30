@@ -17,8 +17,6 @@ const ShadowboxDesigner = nextDynamic(
   { ssr: false },
 );
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = generateMetadata({
   title: "Custom Shadowbox Designer | Design Your Shadowbox | CustomFrameSizes.com",
   description:

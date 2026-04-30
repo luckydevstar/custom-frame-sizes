@@ -25,8 +25,6 @@ const ShadowboxDesigner = nextDynamic(
   { ssr: false },
 );
 
-export const dynamic = "force-dynamic";
-
 export const metadata: Metadata = generatePageMetadata("/shadowbox", {
   title: `Custom Shadowbox Frames - 3D Display & Deep Frames | ${brandConfig.name}`,
   description:
