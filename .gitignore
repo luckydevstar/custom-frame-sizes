@@ -9,6 +9,11 @@ build/
 .next/
 out/
 .turbo/
+*.d.ts.map
+*.js.map
+src/**/*.js
+src/**/*.d.ts
+src/**/*.d.ts.map
 
 # Testing
 coverage/
