@@ -1,6 +1,6 @@
 "use client";
 
-import { Palette, Shirt, Award, ArrowRight, Heart, Banknote, Circle, Layers, Paintbrush } from "lucide-react";
+import { Palette, Shirt, Award, ArrowRight, Heart, Banknote, Circle } from "lucide-react";
 import Link from "next/link";
 
 import { PostageStampIcon } from "../icons/PostageStampIcon";
@@ -15,18 +15,6 @@ export interface ShadowboxMegaMenuProps {
 
 export function ShadowboxMegaMenu({ viewAllHref = "/shadowbox" }: ShadowboxMegaMenuProps) {
   const browseOptions = [
-    {
-      label: "Browse by Depth",
-      href: "/shadowboxes/depth",
-      icon: Layers,
-      description: "Find the right depth for your items",
-    },
-    {
-      label: "Browse by Style",
-      href: "/shadowboxes/styles",
-      icon: Paintbrush,
-      description: "Classic, modern, rustic & more",
-    },
     {
       label: "Browse by Color",
       href: "/shadowboxes/colors",

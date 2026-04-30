@@ -94,7 +94,8 @@ export function FrameStylesShowcase({
 
   return (
     <section className="py-10 sm:py-12 bg-muted/30" data-testid="section-frame-styles">
-      <div className="container mx-auto px-6">
+      {/* w-full: avoid nested container + px-6 when parent already uses container (e.g. store-a home) */}
+      <div className="w-full">
         {/* Section Header */}
         <div className="text-center mb-8">
           <h2

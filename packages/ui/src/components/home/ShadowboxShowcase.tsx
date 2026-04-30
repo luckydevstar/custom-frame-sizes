@@ -2,7 +2,6 @@
 
 import { getFrameSlug, getStoreBaseAssetUrl } from "@framecraft/core";
 import { ArrowRight } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
 
@@ -108,35 +107,22 @@ export function ShadowboxShowcase({
                 data-testid={`shadowbox-${shadowbox.id}`}
               >
                 <div className="aspect-[4/3] relative overflow-hidden">
-                  {variant === "shadowboxframes" ? (
-                    // Native img: onError fallback matches original ShadowboxFrames.com
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
-                      src={shadowbox.image}
-                      alt={shadowbox.alt}
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
-                      onError={(e) => {
-                        const target = e.currentTarget;
-                        if (!target.dataset.retried && shadowbox.fallbackUrl) {
-                          target.dataset.retried = "true";
-                          target.src = shadowbox.fallbackUrl;
-                        }
-                      }}
-                    />
-                  ) : (
-                    <Image
-                      src={shadowbox.image}
-                      alt={shadowbox.alt}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                      priority={false}
-                      placeholder="blur"
-                      blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23e5e7eb' width='400' height='300'/%3E%3C/svg%3E"
-                    />
-                  )}
+                  {/* Native img + onError: CDN 404s fall back to thumbnail (matches shadowboxframes variant) */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={shadowbox.image}
+                    alt={shadowbox.alt}
+                    className="absolute inset-0 h-full w-full object-cover"
+                    loading="lazy"
+                    decoding="async"
+                    onError={(e) => {
+                      const target = e.currentTarget;
+                      if (!target.dataset.retried && shadowbox.fallbackUrl) {
+                        target.dataset.retried = "true";
+                        target.src = shadowbox.fallbackUrl;
+                      }
+                    }}
+                  />
 
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
 
