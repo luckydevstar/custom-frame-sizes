@@ -27,10 +27,13 @@ import type { FrameConfiguration, PricingBreakdown } from "@framecraft/types";
 
 // Re-export for mat designer, foam board, acrylic, and other consumers
 export {
+  ALL_FRAME_MOULDING_PRICES,
+  calculateDedicatedPagePrice,
+  calculateFrameLinearFeet,
   calculateFramePriceBySku,
   calculateMatPriceForDesigner,
-  calculateDedicatedPagePrice,
   COMPONENT_PRICING,
+  PRICING_MARKUPS,
 } from "./pricing-engine";
 export type { ComponentType } from "./pricing-engine";
 

@@ -1,0 +1,154 @@
+{
+  "colors": [
+    {
+      "id": "black",
+      "name": "Black",
+      "slug": "black",
+      "description": "Timeless black frames that add bold contrast and modern sophistication to any artwork. Finished with a matte lacquer coating over solid wood moulding.",
+      "hex": "#000000",
+      "family": "Neutral",
+      "imageId": "picture_frame_close__7cf3a148",
+      "popular": true
+    },
+    {
+      "id": "white",
+      "name": "White",
+      "slug": "white",
+      "description": "Classic white frames that brighten and enhance artwork. Versatile choice for any décor style, from traditional to modern.",
+      "hex": "#FFFFFF",
+      "family": "Neutral",
+      "imageUrl": "/frames/8989/lifestyle1.png",
+      "popular": true
+    },
+    {
+      "id": "walnut",
+      "name": "Walnut",
+      "slug": "walnut",
+      "description": "Rich walnut tones with deep brown hues. Traditional elegance that complements wood furniture and classic interiors.",
+      "hex": "#5C4033",
+      "family": "Brown",
+      "imageId": "wooden_frame_corner__5477f308",
+      "popular": true
+    },
+    {
+      "id": "oak",
+      "name": "Oak",
+      "slug": "oak",
+      "description": "Natural oak with warm golden-brown tones. Timeless choice that brings organic warmth to any room.",
+      "hex": "#D2691E",
+      "family": "Brown",
+      "imageId": "wooden_picture_frame_584b3d48",
+      "popular": true
+    },
+    {
+      "id": "gold",
+      "name": "Gold",
+      "slug": "gold",
+      "description": "Luxurious gold frames with ornate or simple styling. Adds prestige and elegance to fine art, mirrors, and portraits.",
+      "hex": "#FFD700",
+      "family": "Metallic",
+      "imageId": "picture_frame_logo_i_e64c2931",
+      "popular": true
+    },
+    {
+      "id": "silver",
+      "name": "Silver",
+      "slug": "silver",
+      "description": "Sleek silver frames with modern appeal. Constructed from brushed aluminum with a satin-finish clear coat.",
+      "hex": "#C0C0C0",
+      "family": "Metallic",
+      "imageId": "picture_frame_glass__816af96f",
+      "popular": true
+    },
+    {
+      "id": "bronze",
+      "name": "Bronze",
+      "slug": "bronze",
+      "description": "Antique bronze with aged patina. Vintage charm that pairs beautifully with traditional and eclectic décor.",
+      "hex": "#CD7F32",
+      "family": "Metallic",
+      "imageId": "picture_frame_close__059707dd",
+      "popular": false
+    },
+    {
+      "id": "espresso",
+      "name": "Espresso",
+      "slug": "espresso",
+      "description": "Deep espresso brown for sophisticated gallery walls. Professional-grade finish that highlights artwork beautifully.",
+      "hex": "#3D2817",
+      "family": "Brown",
+      "imageId": "wooden_frame_corner__13e160bd",
+      "popular": true
+    },
+    {
+      "id": "driftwood",
+      "name": "Driftwood",
+      "slug": "driftwood",
+      "description": "Weathered driftwood gray with coastal appeal. Brings relaxed, beachy vibes to farmhouse and cottage interiors.",
+      "hex": "#8B8680",
+      "family": "Gray",
+      "imageId": "wooden_picture_frame_dff9aa04",
+      "popular": false
+    },
+    {
+      "id": "natural",
+      "name": "Natural",
+      "slug": "natural",
+      "description": "Light natural wood showcasing authentic grain patterns. Scandinavian simplicity for organic, minimalist spaces.",
+      "hex": "#E3C9A8",
+      "family": "Brown",
+      "imageId": "wooden_frame_corner__4db2f244",
+      "popular": true
+    },
+    {
+      "id": "charcoal",
+      "name": "Charcoal",
+      "slug": "charcoal",
+      "description": "Dark charcoal gray with subtle texture. Modern alternative to black for contemporary and industrial interiors.",
+      "hex": "#36454F",
+      "family": "Gray",
+      "imageId": "picture_frame_close__2bb2e3fe",
+      "popular": false
+    },
+    {
+      "id": "champagne",
+      "name": "Champagne",
+      "slug": "champagne",
+      "description": "Elegant champagne with pearl shimmer. Sophisticated accent that adds glamour to portraits and formal artwork.",
+      "hex": "#F7E7CE",
+      "family": "Metallic",
+      "imageId": "picture_frame_close__e9d34dc7",
+      "popular": false
+    },
+    {
+      "id": "navy",
+      "name": "Navy",
+      "slug": "navy",
+      "description": "Deep navy blue for nautical and coastal themes. Bold color choice that makes artwork pop against dark walls.",
+      "hex": "#000080",
+      "family": "Blue",
+      "imageId": "picture_frame_mat_bo_36d2243f",
+      "popular": false
+    },
+    {
+      "id": "sage",
+      "name": "Sage",
+      "slug": "sage",
+      "description": "Soft sage green inspired by nature. Calming botanical choice made from solid wood with a hand-applied matte stain.",
+      "hex": "#9CAF88",
+      "family": "Green",
+      "imageId": "picture_frame_mat_bo_51a60237",
+      "popular": false
+    },
+    {
+      "id": "ivory",
+      "name": "Ivory",
+      "slug": "ivory",
+      "description": "Warm ivory with cream undertones. Timeless elegance for vintage photographs and heirloom artwork.",
+      "hex": "#FFFFF0",
+      "family": "Neutral",
+      "imageId": "professional_picture_c66ee953",
+      "popular": false
+    }
+  ]
+}
