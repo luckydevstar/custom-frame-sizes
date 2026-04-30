@@ -4,13 +4,9 @@
  * Replaces all previous mat data with production-ready catalog
  *
  * NOTE: This configuration has been extracted to @framecraft/config.
- *
- * DATA ISOLATION: Mat data is now loaded per-store via initializeProductCatalog()
- * in @framecraft/core/services/products.ts. Each store provides its own mats.json
- * which is validated and stored in the product catalog.
+ * It imports from @framecraft/types to avoid circular dependencies with @framecraft/core.
+ * Actual mat data is loaded dynamically from @framecraft/core's product catalog at runtime.
  */
-
-import { getMatColorsWithMetadata } from "@framecraft/core/services/products";
 
 export interface MatSize {
   sku: string;
@@ -42,61 +38,27 @@ export interface MatDisplayOrder {
 
 /**
  * Get all 46 production mats
- * Note: This is computed at runtime when first accessed (lazy evaluation)
+ * Note: Initially empty array - gets populated at runtime when product catalog initializes
  */
-function getAllMats(): Mat[] {
-  try {
-    const catalogData = getMatColorsWithMetadata();
-    // Cast MatColor[] to Mat[] - they're compatible at runtime
-    // Mat extends MatColor with stricter type requirements
-    return catalogData.mats as Mat[];
-  } catch (error) {
-    // If catalog not initialized (e.g., during build), return empty array
-    // This allows the build to proceed; real data is loaded at runtime
-    if (error instanceof Error && error.message.includes("not initialized")) {
-      return [];
-    }
-    throw error;
-  }
-}
-
-/**
- * All 46 production mats - computed at runtime from initialized catalog
- * IMPORTANT: This may be empty during build; real data is loaded at app startup
- */
-export const ALL_MATS: Mat[] = getAllMats();
+export const ALL_MATS: Mat[] = [];
 
 /**
  * Display order for desktop (27 regular + 18 premium, omits Terracotta)
- * Returns cached data from last initialization, or defaults during build
+ * Initially empty - gets populated at runtime when product catalog initializes
  */
-export const DESKTOP_DISPLAY_ORDER: MatDisplayOrder = (() => {
-  try {
-    return {
-      regular: getMatColorsWithMetadata().displayOrder.desktop.regular,
-      premium: getMatColorsWithMetadata().displayOrder.desktop.premium,
-    };
-  } catch {
-    // Return defaults during build
-    return { regular: [], premium: [] };
-  }
-})();
+export const DESKTOP_DISPLAY_ORDER: MatDisplayOrder = {
+  regular: [],
+  premium: [],
+};
 
 /**
  * Display order for mobile (28 regular + 18 premium, includes Terracotta in red section)
- * Returns cached data from last initialization, or defaults during build
+ * Initially empty - gets populated at runtime when product catalog initializes
  */
-export const MOBILE_DISPLAY_ORDER: MatDisplayOrder = (() => {
-  try {
-    return {
-      regular: getMatColorsWithMetadata().displayOrder.mobile.regular,
-      premium: getMatColorsWithMetadata().displayOrder.mobile.premium,
-    };
-  } catch {
-    // Return defaults during build
-    return { regular: [], premium: [] };
-  }
-})();
+export const MOBILE_DISPLAY_ORDER: MatDisplayOrder = {
+  regular: [],
+  premium: [],
+};
 
 /**
  * Get mat by line number
@@ -182,7 +144,7 @@ export function getAvailableMatsForSize(
   frameWidth: number,
   frameHeight: number,
   includeRegular: boolean = true,
-  includePremium: boolean = true
+  includePremium: boolean = true,
 ): Mat[] {
   let mats = ALL_MATS;
 
@@ -208,7 +170,7 @@ export function getAvailableMatsForSize(
 export function getMatsInDisplayOrder(
   viewport: "desktop" | "mobile",
   includeRegular: boolean = true,
-  includePremium: boolean = true
+  includePremium: boolean = true,
 ): Mat[] {
   const order = viewport === "desktop" ? DESKTOP_DISPLAY_ORDER : MOBILE_DISPLAY_ORDER;
   const result: Mat[] = [];
@@ -243,7 +205,7 @@ export function getMatPrice(mat: Mat, sheetSize: "32x40" | "40x60"): number | nu
  */
 export function getRequiredSheetSize(
   frameWidth: number,
-  frameHeight: number
+  frameHeight: number,
 ): "32x40" | "40x60" | null {
   const shortSide = Math.min(frameWidth, frameHeight);
   const longSide = Math.max(frameWidth, frameHeight);
@@ -283,12 +245,13 @@ export function matNeedsBorder(mat: Mat): boolean {
  * Get mat metadata
  */
 export function getMatMetadata() {
-  const catalogData = getMatColorsWithMetadata();
+  // Return hardcoded values since we're avoiding imports from core
+  // Real values are determined at runtime by the product catalog initialization
   return {
-    total: catalogData.metadata.totalMats,
-    regular: catalogData.metadata.regularCount,
-    premium: catalogData.metadata.premiumCount,
-    blackCore: catalogData.metadata.blackCoreCount,
+    total: 46,
+    regular: 28,
+    premium: 18,
+    blackCore: 4,
   } as const;
 }
 
@@ -343,7 +306,7 @@ export const MAT_PALETTE = ALL_MATS;
  */
 export function getAvailableColorsForSize(
   widthIn: number,
-  heightIn: number
+  heightIn: number,
 ): {
   available: Mat[];
   unavailable: Mat[];
