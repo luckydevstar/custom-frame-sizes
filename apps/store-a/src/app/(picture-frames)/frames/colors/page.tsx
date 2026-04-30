@@ -8,6 +8,10 @@ import { generatePageMetadata } from "@/lib/seo-utils";
 
 import type { Metadata } from "next";
 
+// Dynamic rendering: This page requires the product catalog to be initialized
+// at runtime (via server-side init-catalog.server.ts or client-side initializer)
+export const dynamic = "force-dynamic";
+
 // Count frames per color
 const colorCounts = countFramesPerColor();
 

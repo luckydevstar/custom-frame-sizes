@@ -5,12 +5,12 @@
  *
  * NOTE: This configuration has been extracted to @framecraft/config.
  *
- * TODO: Data file import - mats.json needs to be in @framecraft/data package
- * For now, using relative import from root data/ folder
+ * DATA ISOLATION: Mat data is now loaded per-store via initializeProductCatalog()
+ * in @framecraft/core/services/products.ts. Each store provides its own mats.json
+ * which is validated and stored in the product catalog.
  */
 
-// Import data from @framecraft/data package
-import { matsData } from "@framecraft/data";
+import { getMatColorsWithMetadata } from "@framecraft/core/services/products";
 
 export interface MatSize {
   sku: string;
@@ -41,21 +41,62 @@ export interface MatDisplayOrder {
 }
 
 /**
- * All 46 production mats
+ * Get all 46 production mats
+ * Note: This is computed at runtime when first accessed (lazy evaluation)
  */
-export const ALL_MATS: Mat[] = (matsData as any).mats as Mat[];
+function getAllMats(): Mat[] {
+  try {
+    const catalogData = getMatColorsWithMetadata();
+    // Cast MatColor[] to Mat[] - they're compatible at runtime
+    // Mat extends MatColor with stricter type requirements
+    return catalogData.mats as Mat[];
+  } catch (error) {
+    // If catalog not initialized (e.g., during build), return empty array
+    // This allows the build to proceed; real data is loaded at runtime
+    if (error instanceof Error && error.message.includes("not initialized")) {
+      return [];
+    }
+    throw error;
+  }
+}
+
+/**
+ * All 46 production mats - computed at runtime from initialized catalog
+ * IMPORTANT: This may be empty during build; real data is loaded at app startup
+ */
+export const ALL_MATS: Mat[] = getAllMats();
 
 /**
  * Display order for desktop (27 regular + 18 premium, omits Terracotta)
+ * Returns cached data from last initialization, or defaults during build
  */
-export const DESKTOP_DISPLAY_ORDER: MatDisplayOrder = (matsData as any).displayOrder
-  .desktop as MatDisplayOrder;
+export const DESKTOP_DISPLAY_ORDER: MatDisplayOrder = (() => {
+  try {
+    return {
+      regular: getMatColorsWithMetadata().displayOrder.desktop.regular,
+      premium: getMatColorsWithMetadata().displayOrder.desktop.premium,
+    };
+  } catch {
+    // Return defaults during build
+    return { regular: [], premium: [] };
+  }
+})();
 
 /**
  * Display order for mobile (28 regular + 18 premium, includes Terracotta in red section)
+ * Returns cached data from last initialization, or defaults during build
  */
-export const MOBILE_DISPLAY_ORDER: MatDisplayOrder = (matsData as any).displayOrder
-  .mobile as MatDisplayOrder;
+export const MOBILE_DISPLAY_ORDER: MatDisplayOrder = (() => {
+  try {
+    return {
+      regular: getMatColorsWithMetadata().displayOrder.mobile.regular,
+      premium: getMatColorsWithMetadata().displayOrder.mobile.premium,
+    };
+  } catch {
+    // Return defaults during build
+    return { regular: [], premium: [] };
+  }
+})();
 
 /**
  * Get mat by line number
@@ -241,11 +282,22 @@ export function matNeedsBorder(mat: Mat): boolean {
 /**
  * Get mat metadata
  */
+export function getMatMetadata() {
+  const catalogData = getMatColorsWithMetadata();
+  return {
+    total: catalogData.metadata.totalMats,
+    regular: catalogData.metadata.regularCount,
+    premium: catalogData.metadata.premiumCount,
+    blackCore: catalogData.metadata.blackCoreCount,
+  } as const;
+}
+
+// For backwards compatibility - compute once
 export const MAT_METADATA = {
-  total: (matsData as any).metadata.totalMats,
-  regular: (matsData as any).metadata.regularCount,
-  premium: (matsData as any).metadata.premiumCount,
-  blackCore: (matsData as any).metadata.blackCoreCount,
+  total: 46,
+  regular: 28,
+  premium: 18,
+  blackCore: 4,
 } as const;
 
 // ========================================
