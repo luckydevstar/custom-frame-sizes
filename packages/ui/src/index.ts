@@ -478,5 +478,9 @@ export { ThemeProvider, useThemeContext } from "./providers/ThemeProvider";
 // Brand components
 export * from "./components/brand";
 
+// SEO components
+export { JsonLd } from "./components/seo";
+export type { JsonLdProps } from "./components/seo";
+
 // Graded card production codes (checkout / packing slip)
 export { getCardProductionCode, CARD_PRODUCTION_LAYOUT_SEQUENCE } from "./lib/card-production-codes";

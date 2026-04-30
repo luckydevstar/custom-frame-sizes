@@ -1,24 +1,11 @@
-import { MetadataRoute } from "next";
+import { seo } from "@/lib/seo";
 
-import { siteUrl } from "@/lib/seo";
-
-const baseUrl = siteUrl;
+import type { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
-  return {
-    rules: [
-      {
-        userAgent: "*",
-        allow: "/",
-        disallow: ["/api/", "/admin/", "/cart/*", "/_next/", "/static/"],
-        crawlDelay: 1,
-      },
-      // Block bad bots
-      {
-        userAgent: ["AhrefsBot", "SemrushBot", "DotBot"],
-        disallow: "/",
-      },
-    ],
-    sitemap: `${baseUrl}/sitemap.xml`,
-  };
+  return seo.robots({
+    disallow: ["/api/", "/admin/", "/cart/*", "/_next/", "/static/"],
+    crawlDelay: 1,
+    blockUserAgents: ["AhrefsBot", "SemrushBot", "DotBot"],
+  });
 }

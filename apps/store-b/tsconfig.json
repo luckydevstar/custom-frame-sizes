@@ -36,6 +36,8 @@
       "@framecraft/types/*": ["./packages/types/src/*"],
       "@framecraft/data": ["./packages/data/src"],
       "@framecraft/data/*": ["./packages/data/src/*"],
+      "@framecraft/seo": ["./packages/seo/src"],
+      "@framecraft/seo/*": ["./packages/seo/src/*"],
       "@framecraft/ui": ["./packages/ui/src"],
       "@framecraft/ui/*": ["./packages/ui/src/*"],
       "@framecraft/store-data/*": ["./apps/store-b/src/data/*"]
@@ -56,6 +58,7 @@
     { "path": "../../packages/config" },
     { "path": "../../packages/core" },
     { "path": "../../packages/types" },
-    { "path": "../../packages/data" }
+    { "path": "../../packages/data" },
+    { "path": "../../packages/seo" }
   ]
 }

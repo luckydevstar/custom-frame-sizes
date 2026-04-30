@@ -1,8 +1,9 @@
 import { getFramesByCategory } from "@framecraft/core";
-import { Hero, ValueProps, SeoTextBlock, FrameStylesShowcase } from "@framecraft/ui";
+import { Hero, ValueProps, SeoTextBlock, FrameStylesShowcase, JsonLd } from "@framecraft/ui";
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 
+import { seo } from "@/lib/seo";
 import { generatePageMetadata } from "@/lib/seo-utils";
 
 import { brandConfig } from "../brand.config";
@@ -274,76 +275,31 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Structured Data - Product Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Product",
+      {/* Structured Data — composed via @framecraft/seo (brand-aware, dedup-safe) */}
+      <JsonLd
+        schemas={[
+          seo.organizationSchema(),
+          seo.websiteSchema(),
+          seo.productSchema({
             name: "Custom Frame",
-            brand: {
-              "@type": "Brand",
-              name: brandConfig.name,
-            },
+            description: brandConfig.seo.description,
             material: "Wood (premium hardwoods)",
-            additionalProperty: {
-              "@type": "PropertyValue",
-              name: "Sizing Granularity",
-              value: "1/8 inch",
-            },
-            offers: {
-              "@type": "AggregateOffer",
-              priceCurrency: "USD",
-              lowPrice: "25",
-              highPrice: "300",
-              availability: "https://schema.org/InStock",
-              url: brandConfig.seo.canonicalUrl,
-            },
+            lowPrice: 25,
+            highPrice: 300,
+            url: "/",
+            additionalProperties: [{ name: "Sizing Granularity", value: "1/8 inch" }],
           }),
-        }}
+          seo.itemListSchema(
+            pictureFrames.slice(0, 24).map((frame) => ({
+              name: frame.name,
+              url: `/frames/${frame.id}`,
+              image: frame.thumbnail ?? frame.swatchImage ?? frame.photos?.cornerUrl,
+            })),
+            { listName: "Featured Picture Frame Styles" },
+          ),
+        ]}
       />
 
-      {/* Structured Data - Organization Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Organization",
-            name: brandConfig.name,
-            url: brandConfig.seo.canonicalUrl,
-            logo: brandConfig.seo.ogImage,
-            contactPoint: {
-              "@type": "ContactPoint",
-              telephone: brandConfig.metadata?.contactPhone,
-              email: brandConfig.metadata?.contactEmail,
-              contactType: "Customer Service",
-            },
-          }),
-        }}
-      />
-
-      {/* Structured Data - WebSite Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            name: brandConfig.name,
-            url: brandConfig.seo.canonicalUrl,
-            potentialAction: {
-              "@type": "SearchAction",
-              target: {
-                "@type": "EntryPoint",
-                urlTemplate: `${brandConfig.seo.canonicalUrl}/picture-frames?search={search_term_string}`,
-              },
-              "query-input": "required name=search_term_string",
-            },
-          }),
-        }}
-      />
 
       {/* Frame Designer Section */}
       <div id="designer" className="max-w-7xl mx-auto px-6 py-16">

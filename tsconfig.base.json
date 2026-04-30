@@ -56,6 +56,8 @@
       "@framecraft/types/*": ["./packages/types/src/*"],
       "@framecraft/data": ["./packages/data/src"],
       "@framecraft/data/*": ["./packages/data/src/*"],
+      "@framecraft/seo": ["./packages/seo/src"],
+      "@framecraft/seo/*": ["./packages/seo/src/*"],
       // `@framecraft/store-data/*` is a virtual per-app data alias.
       // At Next.js build time, each app's webpack/tsconfig overrides this to
       // point to apps/store-x/src/data/*. This base mapping exists so

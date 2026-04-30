@@ -18,6 +18,7 @@
     "@framecraft/config": "*",
     "@framecraft/core": "*",
     "@framecraft/data": "*",
+    "@framecraft/seo": "*",
     "@framecraft/types": "*",
     "@framecraft/ui": "*",
     "@google/model-viewer": "^3.5.0",

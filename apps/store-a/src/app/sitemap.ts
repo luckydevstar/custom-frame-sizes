@@ -1,146 +1,59 @@
 import { getFramesByCategory } from "@framecraft/core";
-import { MetadataRoute } from "next";
 
-import { siteUrl } from "@/lib/seo";
+import { seo } from "@/lib/seo";
 
-const baseUrl = siteUrl;
+import type { MetadataRoute } from "next";
 
+/**
+ * Sitemap for store-a. Composed via `@framecraft/seo.createSitemap` so:
+ *   - canonical URLs are derived from the brand config (no hardcoded host)
+ *   - featured frames are bumped to higher priority
+ *   - lastModified for the homepage uses the build timestamp; static pages
+ *     fall back to a recent-ish date so crawlers see meaningful timestamps.
+ */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
   const oneMonthAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
 
-  // Static pages with high priority
-  const staticPages: MetadataRoute.Sitemap = [
-    {
-      url: baseUrl,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/designer`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/mat-designer`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/shadowbox/designer`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/diploma/designer`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/certificate/designer`,
-      lastModified: now,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
+  const staticEntries = [
+    { url: "/", lastModified: now, changeFrequency: "weekly" as const, priority: 1.0 },
+    { url: "/designer", lastModified: now, changeFrequency: "monthly" as const, priority: 0.9 },
+    { url: "/mat-designer", lastModified: now, changeFrequency: "monthly" as const, priority: 0.9 },
+    { url: "/shadowbox/designer", lastModified: now, changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: "/diploma/designer", lastModified: now, changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: "/certificate/designer", lastModified: now, changeFrequency: "monthly" as const, priority: 0.7 },
     // Company pages
-    {
-      url: `${baseUrl}/about`,
-      lastModified: oneMonthAgo,
-      changeFrequency: "yearly",
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: oneMonthAgo,
-      changeFrequency: "yearly",
-      priority: 0.6,
-    },
+    { url: "/about", lastModified: oneMonthAgo, changeFrequency: "yearly" as const, priority: 0.6 },
+    { url: "/contact", lastModified: oneMonthAgo, changeFrequency: "yearly" as const, priority: 0.6 },
     // Category landing pages
-    {
-      url: `${baseUrl}/picture-frames`,
-      lastModified: oneMonthAgo,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/shadowbox-frames`,
-      lastModified: oneMonthAgo,
-      changeFrequency: "monthly",
-      priority: 0.75,
-    },
-    {
-      url: `${baseUrl}/diploma-frames`,
-      lastModified: oneMonthAgo,
-      changeFrequency: "monthly",
-      priority: 0.75,
-    },
-    {
-      url: `${baseUrl}/certificate-frames`,
-      lastModified: oneMonthAgo,
-      changeFrequency: "monthly",
-      priority: 0.75,
-    },
-    {
-      url: `${baseUrl}/specialty-frames`,
-      lastModified: oneMonthAgo,
-      changeFrequency: "monthly",
-      priority: 0.75,
-    },
-    // Learn/Resources pages
-    {
-      url: `${baseUrl}/faq`,
-      lastModified: oneMonthAgo,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/learn`,
-      lastModified: oneMonthAgo,
-      changeFrequency: "monthly",
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/gallery-wall-guide`,
-      lastModified: oneMonthAgo,
-      changeFrequency: "monthly",
-      priority: 0.65,
-    },
-    {
-      url: `${baseUrl}/components`,
-      lastModified: oneMonthAgo,
-      changeFrequency: "monthly",
-      priority: 0.65,
-    },
+    { url: "/picture-frames", lastModified: oneMonthAgo, changeFrequency: "monthly" as const, priority: 0.8 },
+    { url: "/shadowbox-frames", lastModified: oneMonthAgo, changeFrequency: "monthly" as const, priority: 0.75 },
+    { url: "/diploma-frames", lastModified: oneMonthAgo, changeFrequency: "monthly" as const, priority: 0.75 },
+    { url: "/certificate-frames", lastModified: oneMonthAgo, changeFrequency: "monthly" as const, priority: 0.75 },
+    { url: "/specialty-frames", lastModified: oneMonthAgo, changeFrequency: "monthly" as const, priority: 0.75 },
+    // Learn / resources pages
+    { url: "/faq", lastModified: oneMonthAgo, changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: "/learn", lastModified: oneMonthAgo, changeFrequency: "monthly" as const, priority: 0.6 },
+    { url: "/gallery-wall-guide", lastModified: oneMonthAgo, changeFrequency: "monthly" as const, priority: 0.65 },
+    { url: "/components", lastModified: oneMonthAgo, changeFrequency: "monthly" as const, priority: 0.65 },
   ];
 
-  // Dynamic frame detail pages
+  const dynamicEntries: { url: string; lastModified: Date; changeFrequency: "monthly"; priority: number }[] = [];
   try {
-    const frameCategories: Array<"picture" | "shadowbox"> = ["picture", "shadowbox"];
-    const dynamicPages: MetadataRoute.Sitemap = [];
-
-    for (const category of frameCategories) {
-      try {
-        const frames = getFramesByCategory(category);
-        frames.forEach((frame) => {
-          dynamicPages.push({
-            url: `${baseUrl}/frames/${frame.id}`,
-            lastModified: oneMonthAgo,
-            changeFrequency: "monthly",
-            priority: 0.7,
-          });
+    for (const category of ["picture", "shadowbox"] as const) {
+      const frames = getFramesByCategory(category);
+      for (const frame of frames) {
+        dynamicEntries.push({
+          url: `/frames/${frame.id}`,
+          lastModified: oneMonthAgo,
+          changeFrequency: "monthly",
+          priority: frame.featured ? 0.8 : 0.65,
         });
-      } catch {
-        // Skip if category doesn't exist
       }
     }
-
-    return [...staticPages, ...dynamicPages];
   } catch {
-    return staticPages;
+    // Catalog unavailable at build time — keep static entries only.
   }
+
+  return seo.sitemap({ staticEntries, dynamicEntries });
 }

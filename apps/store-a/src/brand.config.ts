@@ -8,13 +8,23 @@
 import type { BrandConfig } from "@framecraft/config";
 import { env } from "./lib/env";
 
-/** Absolute origin for checkout branding (Shopify checkout cannot use relative /assets URLs). */
+/**
+ * Absolute origin for this storefront. This is the *public* site (used for
+ * canonicals, sitemap, OG URLs, checkout branding). It must NOT be the Shopify
+ * `*.myshopify.com` API host — that's an implementation detail.
+ *
+ * Source order:
+ *   1. `NEXT_PUBLIC_SITE_ORIGIN` (per-deploy override, e.g. dev/staging)
+ *   2. The production hostname literal below (last-resort fallback)
+ */
 const publicSiteOrigin = (env.siteOrigin ?? "https://www.customframesizes.com").replace(/\/$/, "");
+/** Hostname without scheme (used in `domain` and various BrandConfig fields). */
+const publicHostname = publicSiteOrigin.replace(/^https?:\/\//, "");
 
 export const brandConfig: BrandConfig = {
   storeId: "store-a",
   name: "CustomFrameSizes.com",
-  domain: env.shopify.storeDomain || "www.customframesizes.com",
+  domain: publicHostname,
 
   shopify: {
     domain: env.shopify.storeDomain || "store-a.myshopify.com",
@@ -75,9 +85,9 @@ export const brandConfig: BrandConfig = {
       "exact dimensions",
       "CustomFrameSizes",
     ],
-    canonicalUrl: `https://${env.shopify.storeDomain || "www.customframesizes.com"}`,
-    ogImage: `https://${env.shopify.storeDomain || "www.customframesizes.com"}/assets/og-image.jpg`,
-    twitterImage: `https://${env.shopify.storeDomain || "www.customframesizes.com"}/assets/og-image.jpg`,
+    canonicalUrl: publicSiteOrigin,
+    ogImage: `${publicSiteOrigin}/assets/og-image.jpg`,
+    twitterImage: `${publicSiteOrigin}/assets/og-image.jpg`,
   },
 
   checkout: {
@@ -101,6 +111,16 @@ export const brandConfig: BrandConfig = {
     // Contact information for header/footer
     contactPhone: "1 (888) 874-7156",
     contactEmail: "hello@CustomFrameSizes.com",
+    // Google Tag Manager container; falls back to NEXT_PUBLIC_GTM_ID if undefined.
+    gtmId: process.env.NEXT_PUBLIC_GTM_ID ?? "GTM-WNC3937K",
+    // BCP-47 locale for <html lang> + og:locale
+    locale: "en_US",
+    // schema.org Organization sameAs profiles
+    socialProfiles: [
+      "https://www.facebook.com/customframesizes",
+      "https://www.instagram.com/customframesizes",
+      "https://www.pinterest.com/customframesizes",
+    ],
   },
 };
 
