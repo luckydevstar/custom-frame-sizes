@@ -108,7 +108,12 @@ export default function HomePage() {
 
   // Get frames data for showcase components
   const pictureFrames = getFramesByCategory("picture");
-  const shadowboxFrames = getFramesByCategory("shadowbox");
+  // Match a-custom-frame-sizes-original home ShadowboxShowcase (24 styles). Shared catalog added
+  // ultra-deep black/white for ShadowboxFrames.com; exclude them from CFS home grid only.
+  const shadowboxHomeExclude = new Set(["ultra-deep-matte-black", "ultra-deep-bright-white"]);
+  const shadowboxFrames = getFramesByCategory("shadowbox").filter(
+    (f) => !shadowboxHomeExclude.has(f.id),
+  );
 
   return (
     <>
@@ -383,9 +388,9 @@ export default function HomePage() {
       {/* Print & Frame Service */}
       <PrintAndFrameService />
 
-      {/* Section 5: Featured Designs Gallery */}
+      {/* Section 5: Featured Designs Gallery — same width as ShadowboxShowcase (container), not max-w-6xl */}
       <section className="bg-muted/20 py-16 md:py-20">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="container mx-auto px-6">
           <h2 className="font-serif text-3xl font-bold text-center mb-12">
             Featured Frame Designs
           </h2>

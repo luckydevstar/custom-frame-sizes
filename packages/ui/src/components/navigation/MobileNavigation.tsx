@@ -176,28 +176,6 @@ export function MobileNavigation({ onNavigate, shadowboxHubHref = "/shadowbox" }
                     asChild
                     onClick={handleNavigate}
                   >
-                    <Link href="/shadowboxes/depth" data-testid="link-mobile-shadowboxes-by-depth">
-                      <Layers className="h-3.5 w-3.5 mr-2.5 text-muted-foreground" />
-                      Browse by Depth
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start h-10 text-sm pl-0"
-                    asChild
-                    onClick={handleNavigate}
-                  >
-                    <Link href="/shadowboxes/styles" data-testid="link-mobile-shadowboxes-by-style">
-                      <Paintbrush className="h-3.5 w-3.5 mr-2.5 text-muted-foreground" />
-                      Browse by Style
-                    </Link>
-                  </Button>
-                  <Button
-                    variant="ghost"
-                    className="w-full justify-start h-10 text-sm pl-0"
-                    asChild
-                    onClick={handleNavigate}
-                  >
                     <Link href="/shadowboxes/colors" data-testid="link-mobile-shadowboxes-by-color">
                       <Palette className="h-3.5 w-3.5 mr-2.5 text-muted-foreground" />
                       Browse by Color

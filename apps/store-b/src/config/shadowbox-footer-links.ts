@@ -8,8 +8,6 @@ export const shadowboxFooterLinks: FooterLinks = {
   shop: [
     { label: "Shadowbox Designer", path: "/shadowbox" },
     { label: "Frame Designer", path: "/" },
-    { label: "Browse by Depth", path: "/shadowboxes/depth" },
-    { label: "Browse by Style", path: "/shadowboxes/styles" },
     { label: "Browse by Color", path: "/shadowboxes/colors" },
     { label: "Frame Styles", path: "/picture-frames" },
     { label: "Order Samples", path: "/samples" },
