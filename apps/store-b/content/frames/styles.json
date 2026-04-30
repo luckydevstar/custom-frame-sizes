@@ -1,0 +1,269 @@
+{
+  "styles": [
+    {
+      "id": "classic-oak",
+      "name": "Classic Oak",
+      "slug": "classic-oak",
+      "description": "Timeless oak wood frame with natural grain patterns. Features a 1-inch moulding width and a clear satin topcoat.",
+      "material": "Wood",
+      "finish": "Natural",
+      "mouldingWidth": "1 inch",
+      "imageId": "wooden_picture_frame_584b3d48",
+      "featured": true
+    },
+    {
+      "id": "modern-black",
+      "name": "Modern Black",
+      "slug": "modern-black",
+      "description": "Sleek black frame with clean lines. Ideal for contemporary and minimalist spaces.",
+      "material": "Wood",
+      "finish": "Matte Black",
+      "mouldingWidth": "0.75 inches",
+      "imageId": "picture_frame_close__7cf3a148",
+      "featured": true
+    },
+    {
+      "id": "white-wood",
+      "name": "White Wood Frame",
+      "slug": "white-wood",
+      "description": "Clean white wood finish with timeless appeal. The 0.75 inch moulding width provides classic elegance and pairs well with single or double mat configurations.",
+      "material": "Wood",
+      "finish": "White",
+      "mouldingWidth": "0.75 inches",
+      "imageUrl": "/frames/8989/lifestyle1.png",
+      "featured": true,
+      "sku": "8989"
+    },
+    {
+      "id": "walnut-traditional",
+      "name": "Walnut Traditional",
+      "slug": "walnut-traditional",
+      "description": "Rich walnut wood with deep brown tones. Classic elegance for heirloom pieces.",
+      "material": "Wood",
+      "finish": "Natural Walnut",
+      "mouldingWidth": "1.25 inches",
+      "imageId": "wooden_frame_corner__5477f308",
+      "featured": true
+    },
+    {
+      "id": "gold-ornate",
+      "name": "Gold Ornate",
+      "slug": "gold-ornate",
+      "description": "Decorative gold frame with intricate detailing. Adds luxury to fine art and portraits.",
+      "material": "Wood with Gold Leaf",
+      "finish": "Antique Gold",
+      "mouldingWidth": "2 inches",
+      "imageId": "picture_frame_logo_i_e64c2931",
+      "featured": true
+    },
+    {
+      "id": "silver-contemporary",
+      "name": "Silver Contemporary",
+      "slug": "silver-contemporary",
+      "description": "Polished silver frame with modern appeal. Built from 0.5-inch brushed metal with mitered corner joins.",
+      "material": "Metal",
+      "finish": "Brushed Silver",
+      "mouldingWidth": "0.5 inches",
+      "imageId": "picture_frame_glass__816af96f",
+      "featured": false
+    },
+    {
+      "id": "espresso-gallery",
+      "name": "Espresso Gallery",
+      "slug": "espresso-gallery",
+      "description": "Deep espresso brown frame. Professional-grade finish for gallery walls and collections.",
+      "material": "Wood",
+      "finish": "Espresso Stain",
+      "mouldingWidth": "1 inch",
+      "imageId": "wooden_frame_corner__13e160bd",
+      "featured": true
+    },
+    {
+      "id": "driftwood-rustic",
+      "name": "Driftwood Rustic",
+      "slug": "driftwood-rustic",
+      "description": "Weathered driftwood finish. Coastal and farmhouse charm for casual displays.",
+      "material": "Wood",
+      "finish": "Driftwood Gray",
+      "mouldingWidth": "1.5 inches",
+      "imageId": "wooden_picture_frame_dff9aa04",
+      "featured": false
+    },
+    {
+      "id": "charcoal-slim",
+      "name": "Charcoal Slim",
+      "slug": "charcoal-slim",
+      "description": "Narrow charcoal frame with subtle texture. Minimalist option for modern art.",
+      "material": "Wood",
+      "finish": "Charcoal",
+      "mouldingWidth": "0.5 inches",
+      "imageId": "picture_frame_close__2bb2e3fe",
+      "featured": false
+    },
+    {
+      "id": "bronze-antique",
+      "name": "Bronze Antique",
+      "slug": "bronze-antique",
+      "description": "Vintage bronze frame with aged patina. Classic sophistication for traditional art.",
+      "material": "Metal",
+      "finish": "Antique Bronze",
+      "mouldingWidth": "1 inch",
+      "imageId": "picture_frame_close__059707dd",
+      "featured": false
+    },
+    {
+      "id": "champagne-beveled",
+      "name": "Champagne Beveled",
+      "slug": "champagne-beveled",
+      "description": "Beveled champagne frame with reflective finish. Elegant accent for portraits.",
+      "material": "Wood",
+      "finish": "Champagne Pearl",
+      "mouldingWidth": "1.25 inches",
+      "imageId": "picture_frame_close__e9d34dc7",
+      "featured": false
+    },
+    {
+      "id": "natural-pine",
+      "name": "Natural Pine",
+      "slug": "natural-pine",
+      "description": "Light pine wood with visible grain. Casual warmth for family photos.",
+      "material": "Wood",
+      "finish": "Natural Pine",
+      "mouldingWidth": "1 inch",
+      "imageId": "wooden_frame_corner__4db2f244",
+      "featured": false
+    },
+    {
+      "id": "navy-coastal",
+      "name": "Navy Coastal",
+      "slug": "navy-coastal",
+      "description": "Deep navy blue frame. Nautical appeal for beach and coastal themes.",
+      "material": "Wood",
+      "finish": "Navy Blue",
+      "mouldingWidth": "0.75 inches",
+      "imageId": "picture_frame_mat_bo_36d2243f",
+      "featured": false
+    },
+    {
+      "id": "sage-botanical",
+      "name": "Sage Botanical",
+      "slug": "sage-botanical",
+      "description": "Soft sage green frame. Nature-inspired choice for botanical prints.",
+      "material": "Wood",
+      "finish": "Sage Green",
+      "mouldingWidth": "1 inch",
+      "imageId": "picture_frame_mat_bo_51a60237",
+      "featured": false
+    },
+    {
+      "id": "cherry-wood",
+      "name": "Cherry Wood",
+      "slug": "cherry-wood",
+      "description": "Rich cherry wood with reddish hues. Formal elegance for certificates and diplomas.",
+      "material": "Wood",
+      "finish": "Cherry Stain",
+      "mouldingWidth": "1.25 inches",
+      "imageId": "professional_custom__30e31d28",
+      "featured": false
+    },
+    {
+      "id": "maple-natural",
+      "name": "Maple Natural",
+      "slug": "maple-natural",
+      "description": "Light maple wood with smooth finish. Scandinavian simplicity for modern homes.",
+      "material": "Wood",
+      "finish": "Natural Maple",
+      "mouldingWidth": "0.75 inches",
+      "imageId": "professional_custom__645585c1",
+      "featured": false
+    },
+    {
+      "id": "bamboo-eco",
+      "name": "Bamboo Eco",
+      "slug": "bamboo-eco",
+      "description": "Sustainable bamboo frame. Eco-friendly option with natural texture.",
+      "material": "Bamboo",
+      "finish": "Natural",
+      "mouldingWidth": "1 inch",
+      "imageId": "professional_custom__93a00b74",
+      "featured": false
+    },
+    {
+      "id": "pewter-industrial",
+      "name": "Pewter Industrial",
+      "slug": "pewter-industrial",
+      "description": "Raw pewter metal frame. Industrial edge for loft and urban spaces.",
+      "material": "Metal",
+      "finish": "Pewter",
+      "mouldingWidth": "0.5 inches",
+      "imageId": "professional_picture_9913bfa1",
+      "featured": false
+    },
+    {
+      "id": "ivory-classic",
+      "name": "Ivory Classic",
+      "slug": "ivory-classic",
+      "description": "Warm ivory frame with subtle cream undertones. Timeless choice for vintage photos.",
+      "material": "Wood",
+      "finish": "Ivory",
+      "mouldingWidth": "1 inch",
+      "imageId": "professional_picture_c66ee953",
+      "featured": false
+    },
+    {
+      "id": "mahogany-prestige",
+      "name": "Mahogany Prestige",
+      "slug": "mahogany-prestige",
+      "description": "Premium mahogany wood. Prestigious look for executive offices and formal settings.",
+      "material": "Wood",
+      "finish": "Mahogany Stain",
+      "mouldingWidth": "1.5 inches",
+      "imageId": "picture_frame_packag_0de484b9",
+      "featured": false
+    },
+    {
+      "id": "copper-vintage",
+      "name": "Copper Vintage",
+      "slug": "copper-vintage",
+      "description": "Aged copper frame with warm metallic tones. Vintage charm for eclectic collections.",
+      "material": "Metal",
+      "finish": "Antique Copper",
+      "mouldingWidth": "0.75 inches",
+      "imageId": "picture_frame_packag_c89c1496",
+      "featured": false
+    },
+    {
+      "id": "grey-wash",
+      "name": "Grey Wash",
+      "slug": "grey-wash",
+      "description": "Light grey washed wood. Modern farmhouse style for casual interiors.",
+      "material": "Wood",
+      "finish": "Grey Wash",
+      "mouldingWidth": "1 inch",
+      "imageId": "custom_picture_frami_307d9208",
+      "featured": false
+    },
+    {
+      "id": "red-oak-rustic",
+      "name": "Red Oak Rustic",
+      "slug": "red-oak-rustic",
+      "description": "Red oak with rustic finish. Warm country charm for cabin and lodge décor.",
+      "material": "Wood",
+      "finish": "Red Oak",
+      "mouldingWidth": "1.25 inches",
+      "imageId": "custom_picture_frami_c9e9091b",
+      "featured": false
+    },
+    {
+      "id": "platinum-sleek",
+      "name": "Platinum Sleek",
+      "slug": "platinum-sleek",
+      "description": "Ultra-thin platinum metal frame. Sleek sophistication for modern photography.",
+      "material": "Metal",
+      "finish": "Platinum",
+      "mouldingWidth": "0.25 inches",
+      "imageId": "custom_picture_frami_f8d56b83",
+      "featured": false
+    }
+  ]
+}

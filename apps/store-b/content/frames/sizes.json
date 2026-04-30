@@ -1,0 +1,198 @@
+{
+  "sizes": [
+    {
+      "id": "small",
+      "name": "Small Frames",
+      "slug": "small",
+      "description": "Compact frames ranging from 4×4 to 8×10 inches, built with the same moulding stock as our larger sizes. Ideal for wallet photos, small prints, and personal keepsakes.",
+      "range": "4×4 to 8×10 inches",
+      "dimensions": [
+        "4×4",
+        "4×6",
+        "5×5",
+        "5×7",
+        "6×8",
+        "8×8",
+        "8×10"
+      ],
+      "imageId": "family_photos_framed_4f43c356",
+      "useCases": [
+        "Desk photos",
+        "Wallet-size prints",
+        "Small artwork",
+        "Children's drawings",
+        "Instagram prints"
+      ],
+      "popular": true
+    },
+    {
+      "id": "medium",
+      "name": "Medium Frames",
+      "slug": "medium",
+      "description": "Versatile mid-size frames for walls and tabletops. The most popular size range for family portraits, standard prints, and everyday artwork.",
+      "range": "11×14 to 16×20 inches",
+      "dimensions": [
+        "11×14",
+        "12×12",
+        "12×16",
+        "12×18",
+        "14×18",
+        "16×16",
+        "16×20"
+      ],
+      "imageId": "framed_artwork_wall__1fa2fbd6",
+      "useCases": [
+        "Family portraits",
+        "Standard prints",
+        "Certificate framing",
+        "Wedding photos",
+        "Wall art"
+      ],
+      "popular": true
+    },
+    {
+      "id": "large",
+      "name": "Large Frames",
+      "slug": "large",
+      "description": "Statement-making frames for focal point artwork. Available from 18×24 to 24×36 inches, shipped with reinforced corner bracing.",
+      "range": "18×24 to 24×36 inches",
+      "dimensions": [
+        "18×24",
+        "20×20",
+        "20×24",
+        "20×30",
+        "22×28",
+        "24×24",
+        "24×30",
+        "24×36"
+      ],
+      "imageId": "gallery_wall_framed__bce58a3a",
+      "useCases": [
+        "Movie posters",
+        "Large artwork",
+        "Statement pieces",
+        "Photography prints",
+        "Canvas reproductions"
+      ],
+      "popular": true
+    },
+    {
+      "id": "oversize",
+      "name": "Oversize Frames",
+      "slug": "oversize",
+      "description": "Extra-large frames for dramatic displays and commercial spaces. Professional-grade framing for impressive artwork and architectural prints.",
+      "range": "30×40 inches and larger",
+      "dimensions": [
+        "30×40",
+        "32×40",
+        "36×48",
+        "40×60",
+        "48×72",
+        "Custom sizes available"
+      ],
+      "imageId": "modern_living_room_g_06f3c02a",
+      "useCases": [
+        "Museum reproductions",
+        "Architectural prints",
+        "Commercial displays",
+        "Gallery exhibitions",
+        "Hotel/office art"
+      ],
+      "popular": false,
+      "note": "Oversize frames may require special shipping. Contact us for custom sizing beyond 48×72 inches."
+    },
+    {
+      "id": "panoramic",
+      "name": "Panoramic Frames",
+      "slug": "panoramic",
+      "description": "Wide aspect ratio frames for landscape photography and panoramic prints. Offered in ratios from 1:3 to 1:4 with aluminum hanging wire included.",
+      "range": "Various panoramic ratios",
+      "dimensions": [
+        "8×24",
+        "10×30",
+        "12×36",
+        "16×48",
+        "20×60"
+      ],
+      "imageId": "framed_artwork_wall__68f96bbd",
+      "useCases": [
+        "Landscape photography",
+        "Cityscapes",
+        "Beach scenes",
+        "Mountain vistas",
+        "Skyline prints"
+      ],
+      "popular": false
+    },
+    {
+      "id": "square",
+      "name": "Square Frames",
+      "slug": "square",
+      "description": "Modern square frames for Instagram prints and contemporary art. Clean, balanced proportions for minimalist displays.",
+      "range": "Square formats",
+      "dimensions": [
+        "4×4",
+        "8×8",
+        "12×12",
+        "16×16",
+        "20×20",
+        "24×24"
+      ],
+      "imageId": "gallery_wall_framed__a2637cf0",
+      "useCases": [
+        "Instagram prints",
+        "Square artwork",
+        "Album covers",
+        "Modern photography",
+        "Grid gallery walls"
+      ],
+      "popular": true
+    },
+    {
+      "id": "standard-photo",
+      "name": "Standard Photo Sizes",
+      "slug": "standard-photo",
+      "description": "Classic photo print dimensions from traditional film formats. Sized to accept lab prints from 4×6 through 11×14 without trimming.",
+      "range": "Common photo sizes",
+      "dimensions": [
+        "4×6",
+        "5×7",
+        "8×10",
+        "8.5×11",
+        "11×14"
+      ],
+      "imageId": "family_photos_framed_1be5750f",
+      "useCases": [
+        "Photo lab prints",
+        "School photos",
+        "Family snapshots",
+        "Event photography",
+        "Everyday pictures"
+      ],
+      "popular": true
+    },
+    {
+      "id": "document",
+      "name": "Document & Certificate",
+      "slug": "document",
+      "description": "Standard document sizes for certificates, diplomas, and official papers. Professional framing for important documents.",
+      "range": "Letter to Legal sizes",
+      "dimensions": [
+        "8.5×11 (Letter)",
+        "8.5×14 (Legal)",
+        "11×17 (Tabloid)",
+        "A4 (8.3×11.7)",
+        "A3 (11.7×16.5)"
+      ],
+      "imageId": "professional_custom__30e31d28",
+      "useCases": [
+        "Certificates",
+        "Diplomas",
+        "Licenses",
+        "Awards",
+        "Official documents"
+      ],
+      "popular": false
+    }
+  ]
+}

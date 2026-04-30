@@ -24,6 +24,7 @@ export const shadowboxFooterLinks: FooterLinks = {
   ],
   company: [
     { label: "About Us", path: "/about" },
+    { label: "Blog", path: "/blog" },
     { label: "Business Services", path: "/business" },
     { label: "Contact", path: "/contact" },
     { label: "Quality Guarantee", path: "/warranty" },
