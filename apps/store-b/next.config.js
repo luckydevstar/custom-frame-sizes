@@ -9,7 +9,7 @@ const assetPrefixes = [
   'mats', 'canvas', 'magazine', 'comic', 'playbill', 'newspaper',
   'collage', 'card-frames', 'diploma', 'cd', 'ticket-frames', 'invitation-frames',
   'needlework', 'signature-frames', 'record-album', 'puzzle', 'sonogram', 'military',
-  'blog', 'components', 'stock', 'movie-poster', 'shadowbox',
+  'components', 'stock', 'movie-poster', 'shadowbox',
 ];
 const assetRewrites = assetPrefixes.map((prefix) => ({
   source: `/${prefix}/:path*`,
@@ -26,6 +26,7 @@ const nextConfig = {
   async redirects() {
     return [
       // Add store-b specific redirects here
+      { source: '/frames', destination: '/picture-frames', permanent: false },
       { source: '/returns', destination: '/returns-exchanges', permanent: true },
       { source: '/jerseys', destination: '/jersey-frames', permanent: true },
       { source: '/shadowbox-designer', destination: '/shadowbox/designer', permanent: true },

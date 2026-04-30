@@ -3,5 +3,13 @@
   "rules": {
     "@next/next/no-html-link-for-pages": ["error", "apps/store-b/src/app"],
     "import/order": "off"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["src/components/resources/**/*.tsx"],
+      "rules": {
+        "react/no-unescaped-entities": "off"
+      }
+    }
+  ]
 }
