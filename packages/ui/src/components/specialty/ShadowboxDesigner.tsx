@@ -715,7 +715,7 @@ export function ShadowboxDesigner({
 
   // Resolve backing display name (used both in frameConfig and customAttributes)
   const backingDisplayName = useMemo(() => {
-    if (selectedBacking === "none") return "None";
+    if (selectedBacking === "none") return "No Backing";
     if (selectedBacking === "plywood") return "Plywood";
     return MAT_PALETTE.find((m) => m.id === selectedBacking)?.name ?? selectedBacking;
   }, [selectedBacking]);
