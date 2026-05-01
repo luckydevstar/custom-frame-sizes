@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   getFramesByCategory,
@@ -94,9 +94,9 @@ type CanvasDepth = (typeof CANVAS_DEPTHS)[number];
 // Depth labels for display
 const DEPTH_LABELS: Record<CanvasDepth, string> = {
   1.0: '1"',
-  1.375: '1â…œ"',
-  1.5: '1Â½"',
-  1.625: '1â…"',
+  1.375: '1 3/8"',
+  1.5: '1 1/2"',
+  1.625: '1 5/8"',
 };
 
 // Theme labels for 1.625" depth
@@ -1448,7 +1448,7 @@ export function CanvasFrameDesigner({
                 </h4>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   Your canvas sits recessed within the frame. The gap between your canvas edge and
-                  the frame&apos;s inner edge is automatically set to Â¼&quot;, creating a floating
+                  the frame&apos;s inner edge is automatically set to 1/4&quot;, creating a floating
                   effect.
                 </p>
               </div>
