@@ -31,9 +31,17 @@ export {
   calculateDedicatedPagePrice,
   calculateFrameLinearFeet,
   calculateFramePriceBySku,
+  calculateMatCost,
   calculateMatPriceForDesigner,
+  calculateMatPriceV2,
+  calculateBackingKitRawCost,
+  calculateVGroovePrice,
+  calculateStandaloneMatPrice,
   COMPONENT_PRICING,
   PRICING_MARKUPS,
+  VGROOVE_PRICING,
+  BACKING_KIT_PRICING,
+  MAT_PRICING_CONFIG,
 } from "./pricing-engine";
 export type { ComponentType } from "./pricing-engine";
 

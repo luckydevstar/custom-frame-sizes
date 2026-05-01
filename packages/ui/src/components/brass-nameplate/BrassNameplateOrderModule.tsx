@@ -195,6 +195,10 @@ export function BrassNameplateOrderModule() {
     setIsCheckingOut(true);
 
     try {
+      const colorOption = COLOR_OPTIONS.find((c) => c.id === config.color);
+      const fontOptionSelected = FONT_OPTIONS.find((f) => f.id === config.font);
+      const activeLines = config.lines.filter((line) => line.text.trim());
+
       const brassNameplateConfig = {
         serviceType: "frame-only" as const,
         artworkWidth: width,
@@ -204,7 +208,16 @@ export function BrassNameplateOrderModule() {
         matBorderWidth: 0,
         matRevealWidth: 0,
         orderSource: "brass-nameplate-standalone",
-        brassNameplateConfig: config, // Store full nameplate config
+        brassNameplateConfig: config,
+        additionalInfo: {
+          "Product Type": "Brass Nameplate",
+          "Size": `${width}" × ${height}"`,
+          "Color": colorOption?.name ?? config.color,
+          "Font": fontOptionSelected?.name ?? config.font,
+          ...Object.fromEntries(
+            activeLines.map((line, i) => [`Line ${i + 1}`, line.text.trim()])
+          ),
+        } as Record<string, string>,
       };
 
       const cartInput = createCartItemFromFrameConfig(

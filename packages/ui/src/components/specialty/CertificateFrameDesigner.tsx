@@ -13,6 +13,7 @@ import { useIntelligentPreviewSizing ,
   getFrameStyleById,
   calculatePricing,
   parseFraction,
+  snapToEighth,
   validateArtworkSize,
   formatDimension,
   computePreviewLayout,
@@ -253,8 +254,8 @@ export function CertificateFrameDesigner({
       const certificatePreset = getCertificateSizeById(certificateSizeId);
       if (certificatePreset) {
         setSelectedCertificateSize(certificatePreset);
-        setArtworkWidth(certificatePreset.documentWidth.toString());
-        setArtworkHeight(certificatePreset.documentHeight.toString());
+        setArtworkWidth(formatDimension(certificatePreset.documentWidth));
+        setArtworkHeight(formatDimension(certificatePreset.documentHeight));
       }
     } else {
       if (width) setArtworkWidth(width);
@@ -434,7 +435,8 @@ export function CertificateFrameDesigner({
     setArtworkWidth(newWidth);
     if (serviceType === "print-and-frame" && uploadedImageAspectRatio && selectedImage) {
       const width = parseFraction(newWidth);
-      if (width > 0) setArtworkHeight((width / uploadedImageAspectRatio).toFixed(2));
+      // Snap computed height to nearest 1/8"
+      if (width > 0) setArtworkHeight(formatDimension(snapToEighth(width / uploadedImageAspectRatio)));
     }
   };
 
@@ -487,6 +489,8 @@ export function CertificateFrameDesigner({
       orderSource: `certificate-${serviceType}`,
       imageUrl: selectedImage || undefined,
       copyrightAgreed: serviceType === "frame-only" ? undefined : copyrightAgreed,
+      brassNameplateConfig:
+        brassNameplateConfig.enabled && matType !== "none" ? brassNameplateConfig : undefined,
     };
     // Add to local cart store for UI
     const cartInput = createCartItemFromFrameConfig(config, finalTotalPrice * quantity, quantity);
@@ -1328,15 +1332,24 @@ export function CertificateFrameDesigner({
                           key={size.id}
                           onClick={() => {
                             setSelectedCertificateSize(size);
-                            setArtworkWidth(size.documentWidth.toString());
-                            setArtworkHeight(size.documentHeight.toString());
+                            setArtworkWidth(formatDimension(size.documentWidth));
+                            setArtworkHeight(formatDimension(size.documentHeight));
                           }}
                           className={`p-3 rounded-md border-2 text-center hover-elevate active-elevate-2 ${selectedCertificateSize?.id === size.id ? "border-primary bg-primary/5 font-semibold" : "border-border bg-background"}`}
                           data-testid={`button-certificate-${size.id}`}
                         >
-                          <p className="font-semibold text-sm">
-                            {size.documentWidth}&quot; × {size.documentHeight}&quot;
-                          </p>
+                          {size.id.includes("a4") ? (
+                            <>
+                              <p className="font-semibold text-sm">A4 size</p>
+                              <p className="text-xs text-muted-foreground mt-0.5">
+                                {formatDimension(size.documentWidth)}&quot; × {formatDimension(size.documentHeight)}&quot;
+                              </p>
+                            </>
+                          ) : (
+                            <p className="font-semibold text-sm">
+                              {formatDimension(size.documentWidth)}&quot; × {formatDimension(size.documentHeight)}&quot;
+                            </p>
+                          )}
                         </button>
                       ))}
                       <button
@@ -1360,6 +1373,10 @@ export function CertificateFrameDesigner({
                             id="width"
                             value={artworkWidth}
                             onChange={(e) => handleWidthChange(e.target.value)}
+                            onBlur={(e) => {
+                              const parsed = parseFraction(e.target.value);
+                              if (parsed) handleWidthChange(formatDimension(snapToEighth(parsed)));
+                            }}
                             placeholder="e.g., 11 or 11 1/2"
                             className={
                               !isValidDimensions && artworkWidth ? "border-destructive" : ""
@@ -1373,6 +1390,10 @@ export function CertificateFrameDesigner({
                             id="height"
                             value={artworkHeight}
                             onChange={(e) => setArtworkHeight(e.target.value)}
+                            onBlur={(e) => {
+                              const parsed = parseFraction(e.target.value);
+                              if (parsed) setArtworkHeight(formatDimension(snapToEighth(parsed)));
+                            }}
                             placeholder="e.g., 20 or 20 3/4"
                             className={
                               !isValidDimensions && artworkHeight ? "border-destructive" : ""
@@ -1390,7 +1411,7 @@ export function CertificateFrameDesigner({
                         <p className="text-xs text-destructive">{artworkSizeValidation.message}</p>
                       )}
                       <p className="text-xs text-muted-foreground">
-                        Minimum 4 inches. Enter whole numbers or fractions.
+                        Min 4&quot;. Sizes snap to the nearest 1/8&quot; (e.g., 11 or 11 1/2)
                       </p>
                     </AccordionContent>
                   </AccordionItem>

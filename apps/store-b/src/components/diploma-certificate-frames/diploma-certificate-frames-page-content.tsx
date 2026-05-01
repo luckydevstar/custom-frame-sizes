@@ -165,8 +165,8 @@ export function DiplomaCertificateFramesPageContent() {
               </p>
               <p>
                 International diploma formats require different dimensional specifications. European and global universities
-                predominantly use ISO 216 paper sizes: A4 format (8.27×11.69 inches) for standard degrees and A3 format
-                (11.69×16.54 inches) for formal graduation documents. Our sizing system accommodates these international
+                predominantly use ISO 216 paper sizes: A4 format (8 1/4 × 11 3/4 inches) for standard degrees and A3 format
+                (11 3/4 × 16 1/2 inches) for formal graduation documents. Our sizing system accommodates these international
                 standards plus custom dimensions for historical diplomas, specialty certifications, and institutional awards
                 with non-standard proportions. The designer automatically calculates recommended frame dimensions based on
                 document size, enforcing minimum mat borders for professional appearance while allowing customization of
@@ -262,7 +262,7 @@ export function DiplomaCertificateFramesPageContent() {
                   </tr>
                   <tr>
                     <td className="p-3 md:p-4">International (A4)</td>
-                    <td className="p-3 md:p-4">8.27&quot; × 11.69&quot;</td>
+                    <td className="p-3 md:p-4">8 1/4&quot; × 11 3/4&quot;</td>
                     <td className="p-3 md:p-4">11&quot; × 14&quot;</td>
                   </tr>
                 </tbody>
@@ -307,7 +307,7 @@ export function DiplomaCertificateFramesPageContent() {
                 Yes, our designer includes preset sizing for all standard diploma formats: US Letter (8.5×11 inches) for high
                 school diplomas and general certificates, College/University format (11×14 inches) for Bachelor&apos;s and
                 Master&apos;s degrees from most U.S. institutions, Professional License size (8×10 inches) for medical, legal,
-                and trade board certifications, and international formats including A4 (8.27×11.69 inches) and A3 (11.69×16.54
+                and trade board certifications, and international formats including A4 (8 1/4 × 11 3/4 inches) and A3 (11 3/4 × 16 1/2
                 inches) for European and global universities.
               </p>
             </div>

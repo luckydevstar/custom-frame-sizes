@@ -375,8 +375,9 @@ export function ComicBookFrameDesigner({
         frame.alternateImages?.filter((img: AlternateImage) => img.type === "comic_lifestyle") ||
         [];
       lifestyleImages.forEach((img: AlternateImage) => {
+        const localPath = img.url.startsWith("/") ? img.url.slice(1) : img.url;
         allLifestyleImages.push({
-          url: img.url,
+          url: getSharedAssetUrl(localPath),
           alt: img.alt,
         });
       });
@@ -958,7 +959,7 @@ export function ComicBookFrameDesigner({
                     </div>
                     <p className="text-xs text-muted-foreground">
                       {currentFormat
-                        ? `Comic: ${currentFormat.comicWidth}&quot; × ${currentFormat.comicHeight}&quot;`
+                        ? `Comic: ${currentFormat.comicWidth}" × ${currentFormat.comicHeight}"`
                         : ""}{" "}
                       • Mat Border: {MAT_BORDER}&quot;
                     </p>

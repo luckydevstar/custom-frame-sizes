@@ -9,6 +9,13 @@ import { getStoreBaseAssetUrl } from '@framecraft/core';
 import { Button } from '@framecraft/ui';
 import { ArrowRight, Sparkles } from 'lucide-react';
 
+/** Hides its children whenever a ?search= query param is active. */
+export function HideOnSearch({ children }: { children: React.ReactNode }) {
+  const searchParams = useSearchParams();
+  if (searchParams.get('search')) return null;
+  return <>{children}</>;
+}
+
 interface SearchableFramesProps {
   frames: FrameStyle[];
 }

@@ -378,10 +378,13 @@ export function CurrencyFrameDesigner({
         matBorderBottom: adjustedLayout.matBorderBottom,
         matBorderLeft: adjustedLayout.matBorderLeft,
         frameFace: selectedFrame.mouldingWidth ?? 1.5,
+        // Only double mats have a visible reveal strip; pass 0 for single/none so
+        // the outer frame doesn't shrink when the user switches mat types.
+        matReveal: matType === "double" ? matReveal : 0,
         containerWpx: containerWidth ?? 300,
         containerHpx: previewContainerHeight,
       }),
-    [adjustedLayout, selectedFrame.mouldingWidth, previewContainerHeight, containerWidth]
+    [adjustedLayout, selectedFrame.mouldingWidth, previewContainerHeight, containerWidth, matType, matReveal]
   );
 
   const pricing = useMemo(() => {
@@ -470,6 +473,12 @@ export function CurrencyFrameDesigner({
         orderSource: `currency-${currentLayout.id || 'custom'}`,
         bottomWeighted,
         brassNameplateConfig: brassNameplateConfig.enabled && matType !== "none" ? brassNameplateConfig : undefined,
+        additionalInfo: {
+          "Product Type": "Currency Frame",
+          "Layout": currentLayout.displayName,
+          "Backing Color": (getCurrencyBackingById(selectedBackingId) ?? getDefaultCurrencyBacking()).name,
+          ...(hardware === "security" && { "Hardware": "Security Hardware" }),
+        },
       };
       const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
       useCartStore.getState().addItem(cartInput);
@@ -915,35 +924,28 @@ export function CurrencyFrameDesigner({
                       <p className="text-xs text-muted-foreground mb-4 italic">
                         Compatible with standard archival currency holders used by collectors.
                       </p>
-                      <RadioGroup
-                        value={selectedBackingId}
-                        onValueChange={setSelectedBackingId}
-                        className="grid grid-cols-2 gap-3"
-                      >
+                      <div className="grid grid-cols-2 gap-3" role="radiogroup" aria-label="Backing color">
                         {CURRENCY_BACKING_OPTIONS.map((option) => (
-                          <div key={option.id} className="flex items-center">
-                            <RadioGroupItem
-                              value={option.id}
-                              id={`backing-${option.id}`}
-                              className="sr-only"
+                          <button
+                            key={option.id}
+                            type="button"
+                            role="radio"
+                            aria-checked={selectedBackingId === option.id}
+                            onClick={() => setSelectedBackingId(option.id)}
+                            className={`flex items-center gap-3 w-full p-3 rounded-md border-2 cursor-pointer hover:shadow-md active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 ${
+                              selectedBackingId === option.id
+                                ? "border-primary bg-primary/5"
+                                : "border-border"
+                            }`}
+                          >
+                            <div
+                              className="w-8 h-8 rounded-md border shrink-0"
+                              style={{ backgroundColor: option.hex }}
                             />
-                            <Label
-                              htmlFor={`backing-${option.id}`}
-                              className={`flex items-center gap-3 w-full p-3 rounded-md border-2 cursor-pointer hover:shadow-md active:scale-[0.98] ${
-                                selectedBackingId === option.id
-                                  ? "border-primary bg-primary/5"
-                                  : "border-border"
-                              }`}
-                            >
-                              <div
-                                className="w-8 h-8 rounded-md border"
-                                style={{ backgroundColor: option.hex }}
-                              />
-                              <span className="text-sm font-medium">{option.name}</span>
-                            </Label>
-                          </div>
+                            <span className="text-sm font-medium">{option.name}</span>
+                          </button>
                         ))}
-                      </RadioGroup>
+                      </div>
                     </AccordionContent>
                   </AccordionItem>
 

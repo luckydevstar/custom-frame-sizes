@@ -14,6 +14,7 @@ import {
   getFrameStyleById,
   calculatePricing,
   parseFraction,
+  snapToEighth,
   validateArtworkSize,
   formatDimension,
   computePreviewLayout,
@@ -445,9 +446,9 @@ export function DiplomaFrameDesigner({
       const diplomaPreset = getDiplomaSizeById(diplomaSizeId);
       if (diplomaPreset) {
         setSelectedDiplomaSize(diplomaPreset);
-        // Auto-fill dimensions from preset
-        setArtworkWidth(diplomaPreset.documentWidth.toString());
-        setArtworkHeight(diplomaPreset.documentHeight.toString());
+        // Auto-fill dimensions from preset (formatted as fractions)
+        setArtworkWidth(formatDimension(diplomaPreset.documentWidth));
+        setArtworkHeight(formatDimension(diplomaPreset.documentHeight));
       }
     } else {
       // Load custom dimensions if no preset
@@ -769,8 +770,8 @@ export function DiplomaFrameDesigner({
     if (serviceType === "print-and-frame" && uploadedImageAspectRatio && selectedImage) {
       const width = parseFraction(newWidth);
       if (width > 0) {
-        const newHeight = width / uploadedImageAspectRatio;
-        setArtworkHeight(newHeight.toFixed(2));
+        // Snap computed height to nearest 1/8"
+        setArtworkHeight(formatDimension(snapToEighth(width / uploadedImageAspectRatio)));
       }
     }
   };
@@ -812,6 +813,8 @@ export function DiplomaFrameDesigner({
       orderSource: `diploma-${serviceType}`,
       imageUrl: selectedImage || undefined,
       copyrightAgreed: serviceType === "frame-only" ? undefined : copyrightAgreed,
+      brassNameplateConfig:
+        brassNameplateConfig.enabled && matType !== "none" ? brassNameplateConfig : undefined,
     };
 
     // Add to local cart store for UI
@@ -876,8 +879,7 @@ export function DiplomaFrameDesigner({
       // Adjusted gaps to achieve target frame sizes
       const tasselToPhotoGap = photoSize === "8x10" ? 2 : 1.5;
       const effectiveArtW = artW + tasselGap + tasselW + tasselToPhotoGap + photoW;
-      // Reduce height by 1.5" for tighter proportions
-      const effectiveArtH = Math.max(artH, tasselH, photoH) - 1.5;
+      const effectiveArtH = Math.max(artH, tasselH, photoH);
 
       return { effectiveArtW, effectiveArtH };
     } else {
@@ -2585,8 +2587,8 @@ export function DiplomaFrameDesigner({
                           key={size.id}
                           onClick={() => {
                             setSelectedDiplomaSize(size);
-                            setArtworkWidth(size.documentWidth.toString());
-                            setArtworkHeight(size.documentHeight.toString());
+                            setArtworkWidth(formatDimension(size.documentWidth));
+                            setArtworkHeight(formatDimension(size.documentHeight));
                           }}
                           className={`p-3 rounded-md border-2 text-center hover-elevate active-elevate-2 ${
                             selectedDiplomaSize?.id === size.id
@@ -2595,9 +2597,18 @@ export function DiplomaFrameDesigner({
                           }`}
                           data-testid={`button-diploma-${size.id}`}
                         >
-                          <p className="font-semibold text-sm">
-                            {size.documentWidth}&quot; × {size.documentHeight}&quot;
-                          </p>
+                          {size.id.includes("a4") ? (
+                            <>
+                              <p className="font-semibold text-sm">A4 size</p>
+                              <p className="text-xs text-muted-foreground mt-0.5">
+                                {formatDimension(size.documentWidth)}&quot; × {formatDimension(size.documentHeight)}&quot;
+                              </p>
+                            </>
+                          ) : (
+                            <p className="font-semibold text-sm">
+                              {formatDimension(size.documentWidth)}&quot; × {formatDimension(size.documentHeight)}&quot;
+                            </p>
+                          )}
                         </button>
                       ))}
                     </div>
@@ -2616,6 +2627,10 @@ export function DiplomaFrameDesigner({
                             id="width"
                             value={artworkWidth}
                             onChange={(e) => handleWidthChange(e.target.value)}
+                            onBlur={(e) => {
+                              const parsed = parseFraction(e.target.value);
+                              if (parsed) handleWidthChange(formatDimension(snapToEighth(parsed)));
+                            }}
                             onFocus={(e) => {
                               setTimeout(() => {
                                 e.target.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -2634,6 +2649,10 @@ export function DiplomaFrameDesigner({
                             id="height"
                             value={artworkHeight}
                             onChange={(e) => setArtworkHeight(e.target.value)}
+                            onBlur={(e) => {
+                              const parsed = parseFraction(e.target.value);
+                              if (parsed) setArtworkHeight(formatDimension(snapToEighth(parsed)));
+                            }}
                             onFocus={(e) => {
                               setTimeout(() => {
                                 e.target.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -2663,7 +2682,7 @@ export function DiplomaFrameDesigner({
                           </p>
                         )}
                       <p className="text-xs text-muted-foreground">
-                        Min 4&quot;. Decimals or fractions accepted (e.g., 16.5 or 16 1/2)
+                        Min 4&quot;. Sizes snap to the nearest 1/8&quot; (e.g., 16 or 16 1/2)
                       </p>
                     </AccordionContent>
                   </AccordionItem>

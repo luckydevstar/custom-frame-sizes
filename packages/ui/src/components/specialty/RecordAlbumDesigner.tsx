@@ -20,6 +20,7 @@ import {
   getLayoutPricingDimensions,
   getCDLayout,
   getCDPricingDimensions,
+  getCDPriceTier,
   getCDLifestyleImageUrl,
   getRecordAlbumLifestyleImageUrl,
   getSharedAssetUrl,
@@ -733,6 +734,7 @@ export function RecordAlbumDesigner({
         framePrice: 0,
         matPrice: 0,
         glassPrice: 0,
+        nonGlareUpcharge: 0,
         backerPrice: 0,
         oversizeFee: 0,
         hardwarePrice: 0,
@@ -770,13 +772,26 @@ export function RecordAlbumDesigner({
       bottomWeighted,
     };
     const pricingBreakdown = calculatePricing(frameConfig);
+
+    // For CD layouts the pricing engine uses tiny acrylic area (~95 sq in), so the
+    // material cost difference between standard and non-glare rounds away to $0.
+    // Enforce the flat $8 minimum non-glare upcharge defined in getCDPriceTier.
+    let nonGlareUpcharge = 0;
+    if (layoutType === "cd" && selectedGlass.id === "non-glare") {
+      const { tier } = getCDPriceTier(selectedLayout as CDLayoutType, { glassType: "non-glare" });
+      const standardBreakdown = calculatePricing({ ...frameConfig, glassTypeId: "standard" });
+      const engineDiff = pricingBreakdown.total - standardBreakdown.total;
+      nonGlareUpcharge = Math.max(0, tier.glassUpcharge - engineDiff);
+    }
+
     const hardwarePrice = hardware === "security" ? SECURITY_HARDWARE_UPCHARGE : 0;
     const nameplatePrice = brassNameplateConfig.enabled ? BRASS_NAMEPLATE_SPECS.PRICE : 0;
-    const total = pricingBreakdown.total + hardwarePrice + nameplatePrice;
+    const total = pricingBreakdown.total + nonGlareUpcharge + hardwarePrice + nameplatePrice;
     return {
       framePrice: pricingBreakdown.framePrice,
       matPrice: pricingBreakdown.matPrice,
       glassPrice: pricingBreakdown.glassPrice,
+      nonGlareUpcharge,
       backerPrice: 0,
       oversizeFee: pricingBreakdown.oversizeFee,
       hardwarePrice,
@@ -804,6 +819,13 @@ export function RecordAlbumDesigner({
       amount: pricing.framePrice + pricing.glassPrice,
       testId: "text-frame-price",
     });
+    if (pricing.nonGlareUpcharge > 0) {
+      items.push({
+        label: "Non-Glare Acrylic Upgrade",
+        amount: pricing.nonGlareUpcharge,
+        testId: "text-nonglare-upgrade-price",
+      });
+    }
     if (matType !== "none" && pricing.matPrice > 0) {
       const matLabel =
         matType === "double"
@@ -918,6 +940,11 @@ export function RecordAlbumDesigner({
         layoutType === "vinyl"
           ? `record-album-frame-${selectedLayout}`
           : `cd-frame-${selectedLayout}`;
+      const layoutName =
+        layoutType === "vinyl"
+          ? (getRecordAlbumLayout(selectedLayout as RecordAlbumLayoutType)?.name ?? selectedLayout)
+          : (getCDLayout(selectedLayout as CDLayoutType, selectedFrame.mouldingWidth)?.name ?? selectedLayout);
+
       const frameConfig: FrameConfiguration = {
         serviceType: "frame-only",
         artworkWidth: layoutDims.artworkWidth,
@@ -931,7 +958,15 @@ export function RecordAlbumDesigner({
         glassTypeId: selectedGlass.id,
         orderSource,
         brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
+        additionalInfo: {
+          "Product Type": layoutType === "cd" ? "CD Frame" : "Vinyl Record Frame",
+          "Layout": layoutName,
+          "Glass": selectedGlass.name,
+          ...(hardware === "security" && { "Hardware": "Security Hardware" }),
+          ...(brassNameplateConfig.enabled && { "Nameplate": "Yes" }),
+        },
       };
+
       const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
       useCartStore.getState().addItem(cartInput);
       await addToCartOnly(frameConfig, pricing.total, quantity);

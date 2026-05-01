@@ -616,12 +616,11 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
               <HelpTooltip
                 content={
                   <div>
-                    <p className="font-semibold mb-1">How it works:</p>
-                    <p className="mb-2">We trim each mat opening by ¼″ on every side (½″ total).</p>
                     <p>
-                      That means a 5×7″ photo fits a 4½×6½″ opening — a professional framing
-                      standard that keeps your artwork neatly tucked under the mat and held in
-                      place.
+                      Your mat opening is cut ¼″ smaller than your artwork on every side (½″
+                      total) so the mat covers the edge of your photo. A 5×7″ photo fits a
+                      4½×6½″ opening — the professional framing standard that keeps your artwork
+                      tucked behind the mat and held in place.
                     </p>
                   </div>
                 }
@@ -846,6 +845,23 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
       const frameStyleId = matConfig.selectedFrameId ? matConfig.selectedFrameId : "mat-board";
       
       // Create a mat configuration object compatible with frame configuration
+      // Build rich attributes (persisted in config so they survive localStorage reload)
+      const allMats = getMatsInDisplayOrder("desktop", true, true);
+      const topMatObj = allMats.find((m) => m.name === matConfig.topMat.color);
+      const bottomMatObj = matConfig.bottomMat
+        ? allMats.find((m) => m.name === matConfig.bottomMat!.color)
+        : undefined;
+      const topOpening = matConfig.topMat.openings[0];
+      const topMatLabel = topMatObj
+        ? `${topMatObj.name} (${topMatObj.sizes["32x40"]?.sku ?? topMatObj.sizes["40x60"]?.sku ?? topMatObj.id})`
+        : matConfig.topMat.color;
+      const bottomMatLabel = bottomMatObj
+        ? `${bottomMatObj.name} (${bottomMatObj.sizes["32x40"]?.sku ?? bottomMatObj.sizes["40x60"]?.sku ?? bottomMatObj.id})`
+        : matConfig.bottomMat?.color;
+      const hasRoundedCorners =
+        matConfig.topMat.openings.some((o) => o.cornerStyle === "rounded") ||
+        matConfig.bottomMat?.openings.some((o) => o.cornerStyle === "rounded");
+
       const matFrameConfig = {
         serviceType: "frame-only" as const,
         artworkWidth: matConfig.overallWIn,
@@ -858,8 +874,33 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
         matInnerColorId: matConfig.bottomMat ? matConfig.bottomMat.color : undefined,
         glassTypeId: matConfig.selectedGlassId || "standard",
         orderSource: "mat-designer",
+        additionalInfo: {
+          "Product Type": matConfig.selectedFrameId ? "Custom Mat + Frame" : "Custom Mat Board",
+          "Mat Type": matConfig.singleOrDouble === "double" ? "Double Mat" : "Single Mat",
+          "Top Mat Color": topMatLabel,
+          ...(matConfig.singleOrDouble === "double" && bottomMatLabel && {
+            "Bottom Mat Color": bottomMatLabel,
+          }),
+          "Mat Overall Size": `${matConfig.overallWIn}" × ${matConfig.overallHIn}"`,
+          ...(topOpening?.wIn && topOpening?.hIn && {
+            "Opening Size": `${topOpening.wIn}" × ${topOpening.hIn}"`,
+          }),
+          ...(matConfig.topMat.openings.length > 1 && {
+            "Number of Openings": String(matConfig.topMat.openings.length),
+          }),
+          "Rounded Corners": hasRoundedCorners ? "Yes" : "No",
+          "V-Groove": matConfig.vGroove?.enabled
+            ? `Yes (${matConfig.vGroove.offsetIn}" offset)`
+            : "No",
+          "Backing & Clear Bags": matConfig.backingKit?.enabled ? "Yes" : "No",
+          "Standard Overlap": matConfig.standardOverlap ? "Yes" : "No",
+          ...(matConfig.selectedFrameId && {
+            "Frame": getFrameStyleById(matConfig.selectedFrameId)?.name ?? matConfig.selectedFrameId,
+          }),
+          ...(matConfig.hardware === "security" && { "Hardware": "Security Hardware" }),
+        } as Record<string, string>,
       };
-      
+
       // Add to local cart store
       const productTitle = matConfig.selectedFrameId 
         ? `Custom Mat + ${getFrameStyleById(matConfig.selectedFrameId)?.name || "Frame"}`

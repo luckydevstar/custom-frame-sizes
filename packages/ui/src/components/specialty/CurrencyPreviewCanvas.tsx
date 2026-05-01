@@ -84,10 +84,8 @@ export const CurrencyPreviewCanvas = memo(function CurrencyPreviewCanvas({
     return Math.max(1, isNaN(width) || !isFinite(width) ? 1 : width);
   }, [layout.scale]);
 
-  const matRevealPx = useMemo(() => {
-    const revealInches = 0.25;
-    return layout.scale * revealInches;
-  }, [layout.scale]);
+  // Use the reveal already baked into the layout by computePreviewLayout (0 for single/none mats)
+  const matRevealPx = layout.matRevealPx;
 
   const frameLipPx = useMemo(() => {
     const ratio = selectedFrame.rabbetInsetRatio ?? 0.92;

@@ -155,6 +155,18 @@ export interface FrameConfiguration {
   imageFit?: "cover" | "contain"; // How to fit image in frame (cover=crop, contain=stretch/scale)
   brassNameplateConfig?: any; // Brass nameplate configuration for specialty frames
   bottomWeighted?: boolean; // Add 0.5" to bottom mat border for professional weighting
+  /** Shadowbox-specific display data (backing color name, depth, hardware) */
+  shadowboxInfo?: {
+    backingColor: string; // Human-readable backing name (e.g. "Ivory White", "Plywood", "None")
+    depth: number; // Interior depth in inches
+    hardware: "standard" | "security";
+  };
+  /**
+   * Generic extra display / production attributes persisted with the configuration.
+   * Emitted as discrete Shopify line item properties and shown in the cart summary.
+   * Use for designer-specific info that doesn't fit the standard FrameConfiguration fields.
+   */
+  additionalInfo?: Record<string, string>;
   /** Graded card designer — slab format (psa | sgc-cgc-bgs | psa-pack-slabs) */
   cardFormatId?: string;
   /** Graded card designer — layout id (e.g. 2x4) for CARD-xxx production codes */

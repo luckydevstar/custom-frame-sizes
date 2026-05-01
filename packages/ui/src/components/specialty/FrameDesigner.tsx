@@ -14,6 +14,8 @@ import {
   getGlassTypes,
   getFrameStyleById,
   parseFraction,
+  snapToEighth,
+  formatDimension,
   validateArtworkSize,
   computePreviewLayout,
   getStoreBaseAssetUrl,
@@ -587,6 +589,13 @@ export function FrameDesigner({
     }
   };
 
+  /** Snap a raw dimension string to the nearest 1/8" and return it as a fraction string. */
+  const snapDimensionInput = (raw: string): string => {
+    const parsed = parseFraction(raw);
+    if (!parsed || isNaN(parsed)) return raw;
+    return formatDimension(snapToEighth(parsed));
+  };
+
   // Handle width change with aspect ratio locking for print-and-frame
   const handleWidthChange = (newWidth: string) => {
     setArtworkWidth(newWidth);
@@ -595,8 +604,9 @@ export function FrameDesigner({
     if (serviceType === "print-and-frame" && uploadedImageAspectRatio && selectedImage) {
       const width = parseFraction(newWidth);
       if (width > 0) {
-        const newHeight = width / uploadedImageAspectRatio;
-        setArtworkHeight(newHeight.toFixed(2));
+        // Snap computed height to nearest 1/8" so the locked value is always valid
+        const snappedHeight = snapToEighth(width / uploadedImageAspectRatio);
+        setArtworkHeight(formatDimension(snappedHeight));
       }
     }
   };
@@ -675,6 +685,8 @@ export function FrameDesigner({
       const configForCart: FrameConfiguration = {
         ...frameConfig,
         imageUrl: imageUrlForCart,
+        brassNameplateConfig:
+          brassNameplateConfig.enabled && matType !== "none" ? brassNameplateConfig : undefined,
       };
 
       const cartInput = createCartItemFromFrameConfig(configForCart, finalTotalPrice, quantity, {
@@ -846,9 +858,9 @@ export function FrameDesigner({
     setMatType("double");
     setMatBorderWidth("2.5");
 
-    // Set dimensions
-    setArtworkWidth((size?.width ?? 0).toString());
-    setArtworkHeight((size?.height ?? 0).toString());
+    // Set dimensions (snapped to nearest 1/8")
+    setArtworkWidth(formatDimension(snapToEighth(size?.width ?? 0)));
+    setArtworkHeight(formatDimension(snapToEighth(size?.height ?? 0)));
 
     // Close modal
     setShowRecommendations(false);
@@ -2326,6 +2338,10 @@ export function FrameDesigner({
                         markUserInteraction();
                         handleWidthChange(e.target.value);
                       }}
+                      onBlur={(e) => {
+                        const snapped = snapDimensionInput(e.target.value);
+                        if (snapped !== e.target.value) handleWidthChange(snapped);
+                      }}
                       onFocus={(e) => {
                         setTimeout(() => {
                           e.target.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -2344,6 +2360,10 @@ export function FrameDesigner({
                       onChange={(e) => {
                         markUserInteraction();
                         setArtworkHeight(e.target.value);
+                      }}
+                      onBlur={(e) => {
+                        const snapped = snapDimensionInput(e.target.value);
+                        if (snapped !== e.target.value) setArtworkHeight(snapped);
                       }}
                       onFocus={(e) => {
                         setTimeout(() => {
@@ -2372,7 +2392,7 @@ export function FrameDesigner({
                     </p>
                   )}
                 <p className="text-xs text-muted-foreground">
-                  Min 4&quot;. Decimals or fractions accepted (e.g., 16.5 or 16 1/2)
+                  Min 4&quot;. Sizes snap to the nearest 1/8&quot; (e.g., 16 or 16 1/2)
                 </p>
               </AccordionContent>
             </AccordionItem>
@@ -3630,9 +3650,11 @@ export function FrameDesigner({
             }}
             onClose={() => setShowARViewer(false)}
             onSizeUpdate={(newWidth: number, newHeight: number) => {
-              // Update dimensions from AR resize
-              setArtworkWidth(newWidth.toString());
-              setArtworkHeight(newHeight.toString());
+              // Update dimensions from AR resize, snapped to nearest 1/8"
+              const snappedW = snapToEighth(newWidth);
+              const snappedH = snapToEighth(newHeight);
+              setArtworkWidth(formatDimension(snappedW));
+              setArtworkHeight(formatDimension(snappedH));
 
               // Show success toast
               toast({

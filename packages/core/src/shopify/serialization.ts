@@ -213,7 +213,68 @@ export function serializeFrameConfiguration(config: FrameConfiguration): Shopify
     });
   }
 
-  // 8. Configuration JSON (always last)
+  // 8. Shadowbox info (backing color, depth, hardware)
+  if (config.shadowboxInfo) {
+    attributes.push({ key: "Product Type", value: "Shadowbox Frame" });
+    attributes.push({ key: "Depth", value: `${config.shadowboxInfo.depth}"` });
+    attributes.push({ key: "Backing Color", value: config.shadowboxInfo.backingColor });
+    attributes.push({
+      key: "Hardware",
+      value: config.shadowboxInfo.hardware === "security" ? "Security Hardware" : "Standard",
+    });
+  }
+
+  // 9. Brass Nameplate (when attached to a frame)
+  const nameplateCfg = config.brassNameplateConfig as
+    | {
+        enabled?: boolean;
+        color?: string;
+        font?: string;
+        line1?: string;
+        line2?: string;
+        line3?: string;
+        lines?: Array<{ text?: string }>;
+      }
+    | undefined;
+  if (nameplateCfg?.enabled) {
+    const NAMEPLATE_COLOR_LABELS: Record<string, string> = {
+      "brass-black": "Brass with Black Text",
+      "silver-black": "Silver with Black Text",
+      "black-gold": "Black with Gold Text",
+      "black-silver": "Black with Silver Text",
+    };
+    attributes.push({
+      key: "Nameplate Color",
+      value: NAMEPLATE_COLOR_LABELS[nameplateCfg.color ?? ""] ?? nameplateCfg.color ?? "",
+    });
+    if (nameplateCfg.font) {
+      attributes.push({ key: "Nameplate Font", value: nameplateCfg.font });
+    }
+    // Support both flat (line1/line2/line3) and array (lines[]) formats
+    if (Array.isArray(nameplateCfg.lines)) {
+      nameplateCfg.lines.forEach((l, i) => {
+        if (l.text?.trim()) {
+          attributes.push({ key: `Nameplate Line ${i + 1}`, value: l.text.trim() });
+        }
+      });
+    } else {
+      if (nameplateCfg.line1?.trim())
+        attributes.push({ key: "Nameplate Line 1", value: nameplateCfg.line1.trim() });
+      if (nameplateCfg.line2?.trim())
+        attributes.push({ key: "Nameplate Line 2", value: nameplateCfg.line2.trim() });
+      if (nameplateCfg.line3?.trim())
+        attributes.push({ key: "Nameplate Line 3", value: nameplateCfg.line3.trim() });
+    }
+  }
+
+  // 10. Generic additional info (designer-supplied key-value pairs)
+  if (config.additionalInfo) {
+    for (const [key, value] of Object.entries(config.additionalInfo)) {
+      if (value) attributes.push({ key, value });
+    }
+  }
+
+  // 11. Configuration JSON (always last)
   attributes.push({
     key: "Configuration JSON",
     value: JSON.stringify(config),

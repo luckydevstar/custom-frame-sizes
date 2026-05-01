@@ -248,8 +248,8 @@ export default function FrameSizeChartPage() {
           </h2>
           <p className="text-base leading-relaxed">
             If you&apos;re framing international prints or documents:{" "}
-            <strong>A-Series (Common in Europe and worldwide)</strong> — A4: 8.3×11.7 inches
-            (210×297mm); A3: 11.7×16.5 inches (297×420mm); A2: 16.5×23.4 inches (420×594mm). These
+            <strong>A-Series (Common in Europe and worldwide)</strong> — A4: 8 1/4 × 11 3/4 inches
+            (210×297mm); A3: 11 3/4 × 16 1/2 inches (297×420mm); A2: 16 1/2 × 23 3/8 inches (420×594mm). These
             don&apos;t match US standard frame sizes, so custom framing may be necessary.
           </p>
 

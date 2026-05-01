@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   getFramesByCategory,
@@ -10,6 +10,8 @@ import {
   generateCanvasPrintFile,
   checkImageResolution,
   parseFraction,
+  snapToEighth,
+  formatDimension,
   validateArtworkSize,
   computePreviewLayout,
   getStoreBaseAssetUrl,
@@ -92,9 +94,9 @@ type CanvasDepth = (typeof CANVAS_DEPTHS)[number];
 // Depth labels for display
 const DEPTH_LABELS: Record<CanvasDepth, string> = {
   1.0: '1"',
-  1.375: '1â…œ"',
-  1.5: '1Â½"',
-  1.625: '1â…"',
+  1.375: '1 3/8"',
+  1.5: '1 1/2"',
+  1.625: '1 5/8"',
 };
 
 // Theme labels for 1.625" depth
@@ -611,8 +613,9 @@ export function CanvasFrameDesigner({
     if (serviceType === "print-and-frame" && uploadedImageAspectRatio && selectedImage) {
       const width = parseFraction(newWidth);
       if (width > 0) {
-        const newHeight = width / uploadedImageAspectRatio;
-        setArtworkHeight(newHeight.toFixed(2));
+        // Snap computed height to nearest 1/8"
+        const snappedHeight = snapToEighth(width / uploadedImageAspectRatio);
+        setArtworkHeight(formatDimension(snappedHeight));
       }
     }
   };
@@ -1445,7 +1448,7 @@ export function CanvasFrameDesigner({
                 </h4>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   Your canvas sits recessed within the frame. The gap between your canvas edge and
-                  the frame&apos;s inner edge is automatically set to Â¼&quot;, creating a floating
+                  the frame&apos;s inner edge is automatically set to 1/4&quot;, creating a floating
                   effect.
                 </p>
               </div>
@@ -1469,7 +1472,11 @@ export function CanvasFrameDesigner({
                       id="width"
                       value={artworkWidth}
                       onChange={(e) => handleWidthChange(e.target.value)}
-                      placeholder="e.g., 16 or 16.5"
+                      onBlur={(e) => {
+                        const parsed = parseFraction(e.target.value);
+                        if (parsed) handleWidthChange(formatDimension(snapToEighth(parsed)));
+                      }}
+                      placeholder="e.g., 16 or 16 1/2"
                       data-testid="input-width"
                     />
                   </div>
@@ -1479,7 +1486,11 @@ export function CanvasFrameDesigner({
                       id="height"
                       value={artworkHeight}
                       onChange={(e) => setArtworkHeight(e.target.value)}
-                      placeholder="e.g., 20 or 20.5"
+                      onBlur={(e) => {
+                        const parsed = parseFraction(e.target.value);
+                        if (parsed) setArtworkHeight(formatDimension(snapToEighth(parsed)));
+                      }}
+                      placeholder="e.g., 20 or 20 3/4"
                       disabled={serviceType === "print-and-frame" && !!selectedImage}
                       data-testid="input-height"
                     />
@@ -1491,7 +1502,7 @@ export function CanvasFrameDesigner({
                   </div>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  Min 4&quot;. Decimals or fractions accepted (e.g., 16.5 or 16 1/2)
+                  Min 4&quot;. Sizes snap to the nearest 1/8&quot; (e.g., 16 or 16 1/2)
                 </p>
 
                 {artworkSizeValidation && !artworkSizeValidation.valid && (

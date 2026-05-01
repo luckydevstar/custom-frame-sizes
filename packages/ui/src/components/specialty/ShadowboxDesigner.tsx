@@ -61,6 +61,8 @@ import {
   getGlassTypes,
   calculatePricing,
   parseFraction,
+  snapToEighth,
+  formatDimension,
   validateArtworkSize,
   computePreviewLayout,
   useIsMobile,
@@ -564,16 +566,22 @@ export function ShadowboxDesigner({
     setIsCheckingOut(true);
 
     try {
+      const configForCart: FrameConfiguration = {
+        ...frameConfig,
+        brassNameplateConfig:
+          brassNameplateConfig.enabled && matType !== "none" ? brassNameplateConfig : undefined,
+      };
+
       // Add to local cart store for UI
       const cartInput = createCartItemFromFrameConfig(
-        frameConfig,
+        configForCart,
         finalTotalPrice * quantity,
         quantity
       );
       useCartStore.getState().addItem(cartInput);
 
       // Add to backend/Shopify cart (creates backend cart, does NOT redirect)
-      await addToCartOnly(frameConfig, finalTotalPrice, quantity);
+      await addToCartOnly(configForCart, finalTotalPrice, quantity);
 
       toast({
         title: "Added to Cart!",
@@ -705,6 +713,13 @@ export function ShadowboxDesigner({
   const isValidDimensions =
     artWidth > 0 && artHeight > 0 && (!artworkSizeValidation || artworkSizeValidation.valid);
 
+  // Resolve backing display name (used both in frameConfig and customAttributes)
+  const backingDisplayName = useMemo(() => {
+    if (selectedBacking === "none") return "None";
+    if (selectedBacking === "plywood") return "Plywood";
+    return MAT_PALETTE.find((m) => m.id === selectedBacking)?.name ?? selectedBacking;
+  }, [selectedBacking]);
+
   // Create frame configuration for pricing calculation (shadowboxes are always frame-only, no prints)
   const frameConfig: FrameConfiguration = useMemo(
     () => ({
@@ -719,6 +734,12 @@ export function ShadowboxDesigner({
       matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
       glassTypeId: selectedGlass?.id ?? "standard",
       bottomWeighted,
+      orderSource: "shadowbox",
+      shadowboxInfo: {
+        backingColor: backingDisplayName,
+        depth,
+        hardware: hangingHardware,
+      },
     }),
     [
       artWidth,
@@ -731,6 +752,9 @@ export function ShadowboxDesigner({
       selectedMatInner.id,
       selectedGlass?.id,
       bottomWeighted,
+      backingDisplayName,
+      depth,
+      hangingHardware,
     ]
   );
 
@@ -1590,6 +1614,10 @@ export function ShadowboxDesigner({
                       id="width"
                       value={artworkWidth}
                       onChange={(e) => setArtworkWidth(e.target.value)}
+                      onBlur={(e) => {
+                        const parsed = parseFraction(e.target.value);
+                        if (parsed) setArtworkWidth(formatDimension(snapToEighth(parsed)));
+                      }}
                       onFocus={(e) => {
                         setTimeout(() => {
                           e.target.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -1607,6 +1635,10 @@ export function ShadowboxDesigner({
                       id="height"
                       value={artworkHeight}
                       onChange={(e) => setArtworkHeight(e.target.value)}
+                      onBlur={(e) => {
+                        const parsed = parseFraction(e.target.value);
+                        if (parsed) setArtworkHeight(formatDimension(snapToEighth(parsed)));
+                      }}
                       onFocus={(e) => {
                         setTimeout(() => {
                           e.target.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -1623,7 +1655,7 @@ export function ShadowboxDesigner({
                   <p className="text-xs text-destructive">{artworkSizeValidation.message}</p>
                 )}
                 <p className="text-xs text-muted-foreground">
-                  Min 4&quot;. Decimals or fractions accepted (e.g., 16.5 or 16 1/2)
+                  Min 4&quot;. Sizes snap to the nearest 1/8&quot; (e.g., 16 or 16 1/2)
                 </p>
               </AccordionContent>
             </AccordionItem>
@@ -2570,14 +2602,16 @@ export function ShadowboxDesigner({
             }}
             onClose={() => setShowARViewer(false)}
             onSizeUpdate={(newWidth, newHeight) => {
-              // Update dimensions from AR resize
-              setArtworkWidth(newWidth.toString());
-              setArtworkHeight(newHeight.toString());
+              // Update dimensions from AR resize, snapped to nearest 1/8"
+              const snappedW = snapToEighth(newWidth);
+              const snappedH = snapToEighth(newHeight);
+              setArtworkWidth(formatDimension(snappedW));
+              setArtworkHeight(formatDimension(snappedH));
 
               // Show success toast
               toast({
                 title: "Size Updated",
-                description: `Shadowbox size updated to ${newWidth}" × ${newHeight}" from AR preview`,
+                description: `Shadowbox size updated to ${formatDimension(snappedW)}" × ${formatDimension(snappedH)}" from AR preview`,
               });
             }}
           />

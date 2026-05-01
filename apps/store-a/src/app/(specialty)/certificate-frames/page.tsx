@@ -126,7 +126,7 @@ export default function CertificateFramesPage() {
         name: "Do standard certificate frames fit international documents?",
         acceptedAnswer: {
           "@type": "Answer",
-          text: "International certificates often use A4 paper size (8.27×11.69 inches). This is different from US Letter (8.5×11 inches). Standard US frames won't fit without gaps or trimming. Our designer has A4 presets in portrait and landscape. It figures out the right frame size with proper mat borders for you. European universities and global certifications often use A4 or A3 (11.69×16.54 inches) formats. Our custom sizing tool works with any measurement down to a fraction of an inch. We can frame certificates from any country. Use archival framing to protect international documents. Different paper and ink types may react differently to light and humidity.",
+          text: "International certificates often use A4 paper size (approximately 8 1/4 × 11 3/4 inches). This is different from US Letter (8.5×11 inches). Standard US frames won't fit without gaps or trimming. Our designer has A4 presets in portrait and landscape. It figures out the right frame size with proper mat borders for you. European universities and global certifications often use A4 or A3 (approximately 11 3/4 × 16 1/2 inches) formats. Our custom sizing tool works with any measurement in 1/8-inch increments. We can frame certificates from any country. Use archival framing to protect international documents. Different paper and ink types may react differently to light and humidity.",
         },
       },
     ],

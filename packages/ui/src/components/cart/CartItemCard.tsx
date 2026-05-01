@@ -119,7 +119,12 @@ export function CartItemCard({ item, onQuantityChange, onRemove, className }: Ca
       <div className="min-w-0 flex-1 space-y-2">
         <h3 className="font-medium leading-tight">{item.title}</h3>
         <p className="text-sm text-muted-foreground">{item.variantTitle}</p>
-        {item.configuration && <FrameConfigurationSummary config={item.configuration} />}
+        {item.configuration && (
+          <FrameConfigurationSummary
+            config={item.configuration}
+            extraAttributes={item.customAttributes}
+          />
+        )}
       </div>
 
       <div className="flex flex-col items-end justify-between gap-2 sm:flex-row sm:items-center sm:gap-6">

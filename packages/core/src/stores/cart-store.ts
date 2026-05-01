@@ -123,6 +123,12 @@ export interface CartItem {
   specialtyConfig?: SpecialtyConfig;
 
   /**
+   * Extra human-readable line item attributes to send to Shopify / ShipStation.
+   * Key-value pairs that supplement the serialized FrameConfiguration attributes.
+   */
+  customAttributes?: Record<string, string>;
+
+  /**
    * Shopify line item ID (set after cart creation/update)
    * null until synced with API
    */
@@ -807,11 +813,31 @@ export const useCartStore = create<CartStore>(
         }
 
         // Serialize configuration to attributes
-        const attributes = item.configuration
+        let attributes = item.configuration
           ? item.specialtyConfig
             ? serializeConfiguration(item.configuration, item.specialtyConfig)
             : serializeFrameConfiguration(item.configuration)
           : undefined;
+
+        // Merge in any designer-supplied human-readable attributes (before the trailing JSON blob)
+        if (item.customAttributes && attributes) {
+          const jsonIndex = attributes.findIndex((a) => a.key === "Configuration JSON");
+          const extras = Object.entries(item.customAttributes).map(([key, value]) => ({
+            key,
+            value,
+          }));
+          if (jsonIndex >= 0) {
+            attributes = [
+              ...attributes.slice(0, jsonIndex),
+              ...extras,
+              ...attributes.slice(jsonIndex),
+            ];
+          } else {
+            attributes = [...attributes, ...extras];
+          }
+        } else if (item.customAttributes && !attributes) {
+          attributes = Object.entries(item.customAttributes).map(([key, value]) => ({ key, value }));
+        }
 
         // If item has lineItemId, update it
         if (item.lineItemId) {
