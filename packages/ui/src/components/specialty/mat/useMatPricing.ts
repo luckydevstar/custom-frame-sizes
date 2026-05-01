@@ -1,6 +1,10 @@
 /**
- * Mat designer pricing – frame, glass, hardware, bundle discount.
- * Uses @framecraft/core pricing helpers.
+ * Mat designer pricing — standalone mat sheet pricing.
+ *
+ * Key rules (per business spec):
+ * - Mat raw cost + backing/bag raw cost are SUMMED first, then the v2 formula is applied.
+ * - V-groove is a flat retail add-on (not run through the multiplier formula).
+ * - Frame pricing uses the full frame pricing engine when a frame is selected.
  */
 
 import {
@@ -8,14 +12,15 @@ import {
   getGlassTypeById,
   formatPrice,
   calculateFramePriceBySku,
-  calculateMatPriceForDesigner,
+  calculateMatCost,
+  calculateMatPriceV2,
+  calculateBackingKitRawCost,
+  calculateVGroovePrice,
+  COMPONENT_PRICING,
 } from "@framecraft/core";
 
 import { useMatStore } from "./store";
 
-// Glass pricing (aligned with core COMPONENT_PRICING)
-const STANDARD_GLASS_COST_PER_SQIN = 0.00324;
-const GLASS_MARKUP = 8;
 const SECURITY_HARDWARE_PRICE = 7.95;
 
 export function useMatPricing() {
@@ -23,54 +28,80 @@ export function useMatPricing() {
 
   const w = config.overallWIn;
   const h = config.overallHIn;
-  const perimeter = (w + h) * 2;
   const area = w * h;
 
-  // Mat total (single or double approximation)
-  let matTotal = 0;
-  const singleMat = calculateMatPriceForDesigner(w, h, config.topMat.color);
-  if (singleMat !== null) {
-    matTotal = config.singleOrDouble === "double" && config.bottomMat ? singleMat * 1.5 : singleMat;
-  } else {
-    // Fallback: simple perimeter-based
-    matTotal = perimeter * 0.08;
+  // ── Raw material cost ─────────────────────────────────────────────────────
+  let matRawCost = calculateMatCost(w, h, config.topMat.color) ?? 0;
+  if (config.singleOrDouble === "double" && config.bottomMat) {
+    matRawCost += calculateMatCost(w, h, config.bottomMat.color) ?? matRawCost;
   }
-  const vGroovePrice = config.vGroove?.enabled ? 2.5 : 0;
-  const backingKitPrice = config.backingKit?.enabled ? 3.5 : 0;
-  // Per-unit mat total (mat + vGroove + backing)
-  const total = matTotal + vGroovePrice + backingKitPrice;
 
+  // Backing kit raw cost is added to mat raw cost BEFORE the formula (per spec)
+  const backingRawCost = config.backingKit?.enabled
+    ? calculateBackingKitRawCost(w, h)
+    : 0;
+
+  const totalRawCost = matRawCost + backingRawCost;
+
+  // ── Apply v2 pricing formula to combined raw cost ─────────────────────────
+  const matRetail = calculateMatPriceV2(w, h, totalRawCost);
+
+  // ── V-groove: flat retail add-on (not run through multiplier formula) ─────
+  const vGroovePrice = config.vGroove?.enabled ? calculateVGroovePrice(w, h) : 0;
+
+  // ── Backing kit line item (retail = what the formula produced for it) ─────
+  // We report it as a separate line item for the price breakdown, but the
+  // formula was already applied above in matRetail.
+  const backingKitPrice = config.backingKit?.enabled
+    ? calculateMatPriceV2(w, h, totalRawCost) - calculateMatPriceV2(w, h, matRawCost)
+    : 0;
+
+  // Per-unit mat total (mat + vGroove; backing already baked into matRetail)
+  const total = matRetail + vGroovePrice;
+
+  // ── Frame, glass, hardware (only when a frame is selected) ────────────────
   let framePrice = 0;
   let glassPrice = 0;
   let hardwarePrice = 0;
+
   if (config.selectedFrameId) {
     const frame = getFrameStyleById(config.selectedFrameId);
     if (frame) {
-      if (frame.sku) {
-        framePrice = calculateFramePriceBySku(w, h, frame.sku) ?? perimeter * frame.pricePerInch;
-      } else {
-        framePrice = perimeter * frame.pricePerInch;
-      }
+      const perimeter = (w + h) * 2;
+      framePrice = frame.sku
+        ? (calculateFramePriceBySku(w, h, frame.sku) ?? perimeter * frame.pricePerInch)
+        : perimeter * frame.pricePerInch;
     }
+
     const glassId = config.selectedGlassId || "standard";
     if (glassId !== "standard" && glassId !== "none") {
       const glass = getGlassTypeById(glassId);
       if (glass) {
-        glassPrice = area * STANDARD_GLASS_COST_PER_SQIN * GLASS_MARKUP;
+        const isNonGlare =
+          glass.id.includes("non-glare") || glass.name.toLowerCase().includes("non-glare");
+        const glassConfig = isNonGlare
+          ? COMPONENT_PRICING.NON_GLARE_ACRYLIC
+          : COMPONENT_PRICING.STANDARD_ACRYLIC;
+        glassPrice = area * glassConfig.costPerSqIn * glassConfig.designerMarkup;
       }
     }
+
     if (config.hardware === "security") {
       hardwarePrice = SECURITY_HARDWARE_PRICE;
     }
   }
 
   const subtotalWithFrame =
-    total + framePrice + (config.selectedGlassId === "standard" ? 0 : glassPrice) + hardwarePrice;
+    total +
+    framePrice +
+    (config.selectedGlassId === "standard" ? 0 : glassPrice) +
+    hardwarePrice;
   const bundleDiscount = config.selectedFrameId ? subtotalWithFrame * 0.1 : 0;
   const grandTotal = subtotalWithFrame - bundleDiscount;
 
   return {
     total,
+    matPrice: matRetail,
     framePrice,
     glassPrice: config.selectedGlassId === "standard" ? 0 : glassPrice,
     vGroovePrice,

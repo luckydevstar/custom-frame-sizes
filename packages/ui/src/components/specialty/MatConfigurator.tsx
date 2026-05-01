@@ -616,12 +616,11 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
               <HelpTooltip
                 content={
                   <div>
-                    <p className="font-semibold mb-1">How it works:</p>
-                    <p className="mb-2">We trim each mat opening by ¼″ on every side (½″ total).</p>
                     <p>
-                      That means a 5×7″ photo fits a 4½×6½″ opening — a professional framing
-                      standard that keeps your artwork neatly tucked under the mat and held in
-                      place.
+                      Your mat opening is cut ¼″ smaller than your artwork on every side (½″
+                      total) so the mat covers the edge of your photo. A 5×7″ photo fits a
+                      4½×6½″ opening — the professional framing standard that keeps your artwork
+                      tucked behind the mat and held in place.
                     </p>
                   </div>
                 }

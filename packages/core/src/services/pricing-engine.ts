@@ -591,6 +591,105 @@ export function calculateCompleteFramePrice(
   ).finalPrice;
 }
 
+// ============================================================================
+// MAT PRICING ENGINE (v2) — Standalone Mat Designer
+// ============================================================================
+
+/** V-groove tiered retail pricing (kept in sync with a-custom-frame-sizes-original/shared/schema.ts) */
+export const VGROOVE_PRICING = {
+  SMALL_THRESHOLD: 44, // W + H <= 44" uses small price
+  SMALL_PRICE: 9.95,
+  LARGE_PRICE: 14.95,
+} as const;
+
+/** Backing kit cost constants (VB222 backing board + clear bag) */
+export const BACKING_KIT_PRICING = {
+  VB222_FULL_SHEET_COST: 3.46, // Same cost as White mat 32×40 sheet
+  BAG_COST_PER_UNIT: 0.30,     // Clear self-seal bag per mat
+} as const;
+
+/** $7.99 floor for standalone mat prices */
+export const MAT_PRICING_CONFIG = {
+  FLOOR_PRICE: 7.99,
+} as const;
+
+/**
+ * V-groove retail price: tiered by mat size.
+ * $9.95 for W+H ≤ 44", $14.95 for larger mats.
+ */
+export function calculateVGroovePrice(widthIn: number, heightIn: number): number {
+  return widthIn + heightIn <= VGROOVE_PRICING.SMALL_THRESHOLD
+    ? VGROOVE_PRICING.SMALL_PRICE
+    : VGROOVE_PRICING.LARGE_PRICE;
+}
+
+/**
+ * Raw backing-kit cost (NOT yet marked up): VB222 sheet fraction + bag.
+ * Should be summed with mat raw cost before applying the v2 formula.
+ */
+export function calculateBackingKitRawCost(widthIn: number, heightIn: number): number {
+  const fraction = getMatSheetFraction(widthIn, heightIn) ?? 1.0;
+  return BACKING_KIT_PRICING.VB222_FULL_SHEET_COST * fraction + BACKING_KIT_PRICING.BAG_COST_PER_UNIT;
+}
+
+/**
+ * Apply the v2 pricing engine to a raw mat material cost.
+ * Uses the same multiplier schedule, handling fees, oversize surcharges,
+ * and marketing load as frames — but with a $7.99 floor.
+ *
+ * When backing & bags are selected, add their raw cost to `materialCost`
+ * BEFORE calling this function (per business rule).
+ */
+export function calculateMatPriceV2(
+  widthIn: number,
+  heightIn: number,
+  materialCost: number
+): number {
+  const perimeter = 2 * (widthIn + heightIn);
+  const multiplier = getMultiplier(materialCost);
+  const handlingFee = getHandlingFee(perimeter);
+  const oversizeSurcharge = getOversizeSurcharge(perimeter);
+
+  const preMarketing = materialCost * multiplier + handlingFee + oversizeSurcharge;
+  const withMarketing = preMarketing / (1 - NEW_PRICING_CONFIG.MARKETING_LOAD);
+  const rounded = roundUpTo99(withMarketing);
+
+  return rounded < MAT_PRICING_CONFIG.FLOOR_PRICE ? MAT_PRICING_CONFIG.FLOOR_PRICE : rounded;
+}
+
+/**
+ * Calculate complete standalone mat price.
+ * Sums mat + backing raw costs, applies v2 formula, then adds v-groove retail.
+ */
+export function calculateStandaloneMatPrice(
+  widthIn: number,
+  heightIn: number,
+  matName: string,
+  options: {
+    singleOrDouble?: "single" | "double";
+    bottomMatName?: string;
+    backingKit?: boolean;
+    vGroove?: boolean;
+  } = {}
+): number {
+  const { singleOrDouble = "single", bottomMatName, backingKit = false, vGroove = false } = options;
+
+  // Raw mat material cost
+  let matRawCost = calculateMatCost(widthIn, heightIn, matName) ?? 0;
+  if (singleOrDouble === "double" && bottomMatName) {
+    matRawCost += calculateMatCost(widthIn, heightIn, bottomMatName) ?? matRawCost;
+  }
+
+  // Sum backing raw cost before formula (per business rule)
+  const rawCost = matRawCost + (backingKit ? calculateBackingKitRawCost(widthIn, heightIn) : 0);
+
+  // Apply v2 formula
+  const matRetail = calculateMatPriceV2(widthIn, heightIn, rawCost);
+
+  // V-groove is a flat retail add-on (not run through the multiplier formula)
+  return matRetail + (vGroove ? calculateVGroovePrice(widthIn, heightIn) : 0);
+}
+
 /**
  * Calculate complete frame price by SKU
  * Returns null if SKU not found

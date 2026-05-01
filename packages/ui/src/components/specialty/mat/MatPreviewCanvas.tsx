@@ -118,8 +118,8 @@ export const MatPreviewCanvas = memo(function MatPreviewCanvas({
     return Math.max(1, isNaN(width) || !isFinite(width) ? 1 : width);
   }, [layout.scale]);
 
-  // Mat layer styles (following CurrencyPreviewCanvas pattern)
-  const matLayerStyle = (hex: string, name: string) => ({
+  // Mat layer styles — inset shadow only when inside a frame (adds depth behind glass)
+  const matLayerStyle = (hex: string, name: string, inFrame = true) => ({
     position: "absolute" as const,
     top: 0,
     left: 0,
@@ -127,7 +127,9 @@ export const MatPreviewCanvas = memo(function MatPreviewCanvas({
     bottom: 0,
     backgroundColor: hex,
     ...getMatTilingStyle(name, layout.scale, hex),
-    boxShadow: "inset 0 0 20px rgba(0,0,0,0.3), inset 0 1px 3px rgba(0,0,0,0.08)",
+    ...(inFrame && {
+      boxShadow: "inset 0 0 20px rgba(0,0,0,0.3), inset 0 1px 3px rgba(0,0,0,0.08)",
+    }),
     transition: "background-color 450ms cubic-bezier(0.19, 1.0, 0.22, 1.0)",
   });
 
@@ -340,17 +342,17 @@ export const MatPreviewCanvas = memo(function MatPreviewCanvas({
           {innerContent}
         </div>
       ) : (
-        // No frame: show mat only with drop shadow
+        // No frame: show mat only with directional outer shadow (light from top-right)
         <div
           style={{
             width: `${layout.outerPx.w}px`,
             height: `${layout.outerPx.h}px`,
             position: "relative",
-            filter: "drop-shadow(0 8px 24px rgba(0,0,0,0.25))",
+            filter: "drop-shadow(-4px 6px 12px rgba(0,0,0,0.28))",
           }}
         >
-          {/* Top mat layer (no frame lip padding when no frame) */}
-          <div style={matLayerStyle(topMatHex, config.topMat.color)}>
+          {/* Top mat layer — no inset shadow when shown without a frame */}
+          <div style={matLayerStyle(topMatHex, config.topMat.color, false)}>
             {isDouble && config.bottomMat
               ? renderDoubleMatOpening(getMatBevelColor(config.bottomMat.color))
               : renderOpening(getMatBevelColor(config.topMat.color))}
