@@ -125,23 +125,11 @@ export function FrameConfigurationSummary({
       break;
 
     case "brass-nameplate": {
-      rows.push({ label: "Product", value: "Brass Nameplate" });
-      // Show attached nameplate details when stored inline in config
-      const npCfg = config.brassNameplateConfig as
-        | { enabled?: boolean; color?: string; line1?: string; line2?: string; line3?: string }
-        | undefined;
-      if (npCfg?.color) {
-        const COLOR_LABELS: Record<string, string> = {
-          "brass-black": "Brass",
-          "silver-black": "Silver",
-          "black-gold": "Black/Gold",
-          "black-silver": "Black/Silver",
-        };
-        rows.push({ label: "Color", value: COLOR_LABELS[npCfg.color] ?? npCfg.color });
+      // Details are supplied via additionalInfo (set by BrassNameplateOrderModule).
+      // Only add a fallback "Product" label if additionalInfo doesn't already supply one.
+      if (!config.additionalInfo?.["Product Type"]) {
+        rows.push({ label: "Product", value: "Brass Nameplate" });
       }
-      if (npCfg?.line1?.trim()) rows.push({ label: "Line 1", value: npCfg.line1.trim() });
-      if (npCfg?.line2?.trim()) rows.push({ label: "Line 2", value: npCfg.line2.trim() });
-      if (npCfg?.line3?.trim()) rows.push({ label: "Line 3", value: npCfg.line3.trim() });
       break;
     }
 
@@ -207,14 +195,57 @@ export function FrameConfigurationSummary({
           value: config.serviceType === "print-and-frame" ? "Print & frame" : "Frame only",
         });
       }
+
+      // Brass nameplate attached to this frame item
+      const npCfg = config.brassNameplateConfig as
+        | {
+            enabled?: boolean;
+            color?: string;
+            font?: string;
+            line1?: string;
+            line2?: string;
+            line3?: string;
+            lines?: Array<{ text?: string }>;
+          }
+        | undefined;
+      if (npCfg?.enabled) {
+        const NP_COLOR_LABELS: Record<string, string> = {
+          "brass-black": "Brass with Black Text",
+          "silver-black": "Silver with Black Text",
+          "black-gold": "Black with Gold Text",
+          "black-silver": "Black with Silver Text",
+        };
+        rows.push({
+          label: "Nameplate Color",
+          value: NP_COLOR_LABELS[npCfg.color ?? ""] ?? npCfg.color ?? "",
+        });
+        // Flat format (line1/line2/line3) — used by most frame designers
+        if (npCfg.line1?.trim()) rows.push({ label: "Nameplate Line 1", value: npCfg.line1.trim() });
+        if (npCfg.line2?.trim()) rows.push({ label: "Nameplate Line 2", value: npCfg.line2.trim() });
+        if (npCfg.line3?.trim()) rows.push({ label: "Nameplate Line 3", value: npCfg.line3.trim() });
+        // Array format (lines[]) — used by standalone nameplate stored inside frame config
+        if (Array.isArray(npCfg.lines)) {
+          npCfg.lines.forEach((l, i) => {
+            if (l.text?.trim()) rows.push({ label: `Nameplate Line ${i + 1}`, value: l.text.trim() });
+          });
+        }
+      }
       break;
     }
   }
 
-  // Append any extra designer-specific attributes as additional rows
+  // Append persisted additionalInfo from config (survives localStorage round-trips)
+  if (config.additionalInfo) {
+    for (const [label, value] of Object.entries(config.additionalInfo)) {
+      if (value) rows.push({ label, value });
+    }
+  }
+
+  // Append runtime-only extra attributes (from customAttributes on the cart item)
   if (extraAttributes) {
     for (const [label, value] of Object.entries(extraAttributes)) {
-      if (value) rows.push({ label, value });
+      // Skip if already added via additionalInfo to avoid duplicates
+      if (value && !config.additionalInfo?.[label]) rows.push({ label, value });
     }
   }
 

@@ -566,25 +566,22 @@ export function ShadowboxDesigner({
     setIsCheckingOut(true);
 
     try {
-      // customAttributes for Shopify/ShipStation line properties (derived from frameConfig.shadowboxInfo)
-      const customAttributes: Record<string, string> = {
-        "Product Type": "Shadowbox Frame",
-        "Depth": `${depth}"`,
-        "Backing Color": backingDisplayName,
-        "Hardware": hangingHardware === "security" ? "Security Hardware" : "Standard",
+      const configForCart: FrameConfiguration = {
+        ...frameConfig,
+        brassNameplateConfig:
+          brassNameplateConfig.enabled && matType !== "none" ? brassNameplateConfig : undefined,
       };
 
       // Add to local cart store for UI
       const cartInput = createCartItemFromFrameConfig(
-        frameConfig,
+        configForCart,
         finalTotalPrice * quantity,
-        quantity,
-        { customAttributes }
+        quantity
       );
       useCartStore.getState().addItem(cartInput);
 
       // Add to backend/Shopify cart (creates backend cart, does NOT redirect)
-      await addToCartOnly(frameConfig, finalTotalPrice, quantity);
+      await addToCartOnly(configForCart, finalTotalPrice, quantity);
 
       toast({
         title: "Added to Cart!",

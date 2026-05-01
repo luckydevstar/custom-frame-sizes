@@ -378,10 +378,13 @@ export function CurrencyFrameDesigner({
         matBorderBottom: adjustedLayout.matBorderBottom,
         matBorderLeft: adjustedLayout.matBorderLeft,
         frameFace: selectedFrame.mouldingWidth ?? 1.5,
+        // Only double mats have a visible reveal strip; pass 0 for single/none so
+        // the outer frame doesn't shrink when the user switches mat types.
+        matReveal: matType === "double" ? matReveal : 0,
         containerWpx: containerWidth ?? 300,
         containerHpx: previewContainerHeight,
       }),
-    [adjustedLayout, selectedFrame.mouldingWidth, previewContainerHeight, containerWidth]
+    [adjustedLayout, selectedFrame.mouldingWidth, previewContainerHeight, containerWidth, matType, matReveal]
   );
 
   const pricing = useMemo(() => {
@@ -470,6 +473,12 @@ export function CurrencyFrameDesigner({
         orderSource: `currency-${currentLayout.id || 'custom'}`,
         bottomWeighted,
         brassNameplateConfig: brassNameplateConfig.enabled && matType !== "none" ? brassNameplateConfig : undefined,
+        additionalInfo: {
+          "Product Type": "Currency Frame",
+          "Layout": currentLayout.displayName,
+          "Backing Color": (getCurrencyBackingById(selectedBackingId) ?? getDefaultCurrencyBacking()).name,
+          ...(hardware === "security" && { "Hardware": "Security Hardware" }),
+        },
       };
       const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
       useCartStore.getState().addItem(cartInput);

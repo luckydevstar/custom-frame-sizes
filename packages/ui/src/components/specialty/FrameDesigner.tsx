@@ -685,6 +685,8 @@ export function FrameDesigner({
       const configForCart: FrameConfiguration = {
         ...frameConfig,
         imageUrl: imageUrlForCart,
+        brassNameplateConfig:
+          brassNameplateConfig.enabled && matType !== "none" ? brassNameplateConfig : undefined,
       };
 
       const cartInput = createCartItemFromFrameConfig(configForCart, finalTotalPrice, quantity, {

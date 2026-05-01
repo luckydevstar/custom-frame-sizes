@@ -489,6 +489,8 @@ export function CertificateFrameDesigner({
       orderSource: `certificate-${serviceType}`,
       imageUrl: selectedImage || undefined,
       copyrightAgreed: serviceType === "frame-only" ? undefined : copyrightAgreed,
+      brassNameplateConfig:
+        brassNameplateConfig.enabled && matType !== "none" ? brassNameplateConfig : undefined,
     };
     // Add to local cart store for UI
     const cartInput = createCartItemFromFrameConfig(config, finalTotalPrice * quantity, quantity);

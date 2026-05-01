@@ -845,21 +845,7 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
       const frameStyleId = matConfig.selectedFrameId ? matConfig.selectedFrameId : "mat-board";
       
       // Create a mat configuration object compatible with frame configuration
-      const matFrameConfig = {
-        serviceType: "frame-only" as const,
-        artworkWidth: matConfig.overallWIn,
-        artworkHeight: matConfig.overallHIn,
-        frameStyleId,
-        matType: matConfig.singleOrDouble || ("single" as const),
-        matBorderWidth: matConfig.topMat.openings[0]?.xIn || 0.5,
-        matRevealWidth: matConfig.singleOrDouble === "double" ? (matConfig.matRevealWidth || 0.125) : 0,
-        matColorId: matConfig.topMat.color || "white",
-        matInnerColorId: matConfig.bottomMat ? matConfig.bottomMat.color : undefined,
-        glassTypeId: matConfig.selectedGlassId || "standard",
-        orderSource: "mat-designer",
-      };
-
-      // Build rich human-readable attributes for ShipStation / cart display
+      // Build rich attributes (persisted in config so they survive localStorage reload)
       const allMats = getMatsInDisplayOrder("desktop", true, true);
       const topMatObj = allMats.find((m) => m.name === matConfig.topMat.color);
       const bottomMatObj = matConfig.bottomMat
@@ -876,32 +862,45 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
         matConfig.topMat.openings.some((o) => o.cornerStyle === "rounded") ||
         matConfig.bottomMat?.openings.some((o) => o.cornerStyle === "rounded");
 
-      const customAttributes: Record<string, string> = {
-        "Product Type": matConfig.selectedFrameId ? "Custom Mat + Frame" : "Custom Mat Board",
-        "Mat Type": matConfig.singleOrDouble === "double" ? "Double Mat" : "Single Mat",
-        "Top Mat Color": topMatLabel,
-        ...(matConfig.singleOrDouble === "double" && bottomMatLabel && {
-          "Bottom Mat Color": bottomMatLabel,
-        }),
-        "Mat Overall Size": `${matConfig.overallWIn}" × ${matConfig.overallHIn}"`,
-        ...(topOpening?.wIn && topOpening?.hIn && {
-          "Opening Size": `${topOpening.wIn}" × ${topOpening.hIn}"`,
-        }),
-        ...(matConfig.topMat.openings.length > 1 && {
-          "Number of Openings": String(matConfig.topMat.openings.length),
-        }),
-        "Rounded Corners": hasRoundedCorners ? "Yes" : "No",
-        "V-Groove": matConfig.vGroove?.enabled
-          ? `Yes (${matConfig.vGroove.offsetIn}" offset)`
-          : "No",
-        "Backing & Clear Bags": matConfig.backingKit?.enabled ? "Yes" : "No",
-        "Standard Overlap": matConfig.standardOverlap ? "Yes" : "No",
-        ...(matConfig.selectedFrameId && {
-          "Frame": getFrameStyleById(matConfig.selectedFrameId)?.name ?? matConfig.selectedFrameId,
-        }),
-        ...(matConfig.hardware === "security" && { "Hardware": "Security Hardware" }),
+      const matFrameConfig = {
+        serviceType: "frame-only" as const,
+        artworkWidth: matConfig.overallWIn,
+        artworkHeight: matConfig.overallHIn,
+        frameStyleId,
+        matType: matConfig.singleOrDouble || ("single" as const),
+        matBorderWidth: matConfig.topMat.openings[0]?.xIn || 0.5,
+        matRevealWidth: matConfig.singleOrDouble === "double" ? (matConfig.matRevealWidth || 0.125) : 0,
+        matColorId: matConfig.topMat.color || "white",
+        matInnerColorId: matConfig.bottomMat ? matConfig.bottomMat.color : undefined,
+        glassTypeId: matConfig.selectedGlassId || "standard",
+        orderSource: "mat-designer",
+        additionalInfo: {
+          "Product Type": matConfig.selectedFrameId ? "Custom Mat + Frame" : "Custom Mat Board",
+          "Mat Type": matConfig.singleOrDouble === "double" ? "Double Mat" : "Single Mat",
+          "Top Mat Color": topMatLabel,
+          ...(matConfig.singleOrDouble === "double" && bottomMatLabel && {
+            "Bottom Mat Color": bottomMatLabel,
+          }),
+          "Mat Overall Size": `${matConfig.overallWIn}" × ${matConfig.overallHIn}"`,
+          ...(topOpening?.wIn && topOpening?.hIn && {
+            "Opening Size": `${topOpening.wIn}" × ${topOpening.hIn}"`,
+          }),
+          ...(matConfig.topMat.openings.length > 1 && {
+            "Number of Openings": String(matConfig.topMat.openings.length),
+          }),
+          "Rounded Corners": hasRoundedCorners ? "Yes" : "No",
+          "V-Groove": matConfig.vGroove?.enabled
+            ? `Yes (${matConfig.vGroove.offsetIn}" offset)`
+            : "No",
+          "Backing & Clear Bags": matConfig.backingKit?.enabled ? "Yes" : "No",
+          "Standard Overlap": matConfig.standardOverlap ? "Yes" : "No",
+          ...(matConfig.selectedFrameId && {
+            "Frame": getFrameStyleById(matConfig.selectedFrameId)?.name ?? matConfig.selectedFrameId,
+          }),
+          ...(matConfig.hardware === "security" && { "Hardware": "Security Hardware" }),
+        } as Record<string, string>,
       };
-      
+
       // Add to local cart store
       const productTitle = matConfig.selectedFrameId 
         ? `Custom Mat + ${getFrameStyleById(matConfig.selectedFrameId)?.name || "Frame"}`
@@ -911,7 +910,7 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
         matFrameConfig,
         totalDollars,
         matConfig.quantity,
-        { productTitle, customAttributes }
+        { productTitle }
       );
       useCartStore.getState().addItem(cartInput);
       

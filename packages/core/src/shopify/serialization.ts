@@ -267,7 +267,14 @@ export function serializeFrameConfiguration(config: FrameConfiguration): Shopify
     }
   }
 
-  // 10. Configuration JSON (always last)
+  // 10. Generic additional info (designer-supplied key-value pairs)
+  if (config.additionalInfo) {
+    for (const [key, value] of Object.entries(config.additionalInfo)) {
+      if (value) attributes.push({ key, value });
+    }
+  }
+
+  // 11. Configuration JSON (always last)
   attributes.push({
     key: "Configuration JSON",
     value: JSON.stringify(config),

@@ -940,6 +940,11 @@ export function RecordAlbumDesigner({
         layoutType === "vinyl"
           ? `record-album-frame-${selectedLayout}`
           : `cd-frame-${selectedLayout}`;
+      const layoutName =
+        layoutType === "vinyl"
+          ? (getRecordAlbumLayout(selectedLayout as RecordAlbumLayoutType)?.name ?? selectedLayout)
+          : (getCDLayout(selectedLayout as CDLayoutType, selectedFrame.mouldingWidth)?.name ?? selectedLayout);
+
       const frameConfig: FrameConfiguration = {
         serviceType: "frame-only",
         artworkWidth: layoutDims.artworkWidth,
@@ -953,24 +958,16 @@ export function RecordAlbumDesigner({
         glassTypeId: selectedGlass.id,
         orderSource,
         brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
-      };
-      // Build human-readable attributes for ShipStation / cart display
-      const layoutName =
-        layoutType === "vinyl"
-          ? (getRecordAlbumLayout(selectedLayout as RecordAlbumLayoutType)?.name ?? selectedLayout)
-          : (getCDLayout(selectedLayout as CDLayoutType, selectedFrame.mouldingWidth)?.name ?? selectedLayout);
-      const customAttributes: Record<string, string> = {
-        "Product Type": layoutType === "cd" ? "CD Frame" : "Vinyl Record Frame",
-        "Layout": layoutName,
-        "Frame Style": selectedFrame.name,
-        "Glass": selectedGlass.name,
-        ...(hardware === "security" && { "Hardware": "Security Hardware" }),
-        ...(brassNameplateConfig.enabled && { "Nameplate": "Yes" }),
+        additionalInfo: {
+          "Product Type": layoutType === "cd" ? "CD Frame" : "Vinyl Record Frame",
+          "Layout": layoutName,
+          "Glass": selectedGlass.name,
+          ...(hardware === "security" && { "Hardware": "Security Hardware" }),
+          ...(brassNameplateConfig.enabled && { "Nameplate": "Yes" }),
+        },
       };
 
-      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity, {
-        customAttributes,
-      });
+      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
       useCartStore.getState().addItem(cartInput);
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({

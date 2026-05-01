@@ -161,6 +161,12 @@ export interface FrameConfiguration {
     depth: number; // Interior depth in inches
     hardware: "standard" | "security";
   };
+  /**
+   * Generic extra display / production attributes persisted with the configuration.
+   * Emitted as discrete Shopify line item properties and shown in the cart summary.
+   * Use for designer-specific info that doesn't fit the standard FrameConfiguration fields.
+   */
+  additionalInfo?: Record<string, string>;
   /** Graded card designer — slab format (psa | sgc-cgc-bgs | psa-pack-slabs) */
   cardFormatId?: string;
   /** Graded card designer — layout id (e.g. 2x4) for CARD-xxx production codes */
