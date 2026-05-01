@@ -12,6 +12,8 @@ export interface FrameConfigurationSummaryProps {
   className?: string;
   /** Compact single-line style when true */
   compact?: boolean;
+  /** Extra designer-specific attributes to append as additional rows */
+  extraAttributes?: Record<string, string>;
 }
 
 /**
@@ -51,6 +53,7 @@ export function FrameConfigurationSummary({
   config,
   className,
   compact = false,
+  extraAttributes,
 }: FrameConfigurationSummaryProps) {
   const productType = getProductType(config.frameStyleId);
   const frame = getFrameStyleById(config.frameStyleId);
@@ -121,40 +124,98 @@ export function FrameConfigurationSummary({
       rows.push({ label: "Type", value: "Professional Security Hardware" });
       break;
 
-    case "brass-nameplate":
+    case "brass-nameplate": {
       rows.push({ label: "Product", value: "Brass Nameplate" });
+      // Show attached nameplate details when stored inline in config
+      const npCfg = config.brassNameplateConfig as
+        | { enabled?: boolean; color?: string; line1?: string; line2?: string; line3?: string }
+        | undefined;
+      if (npCfg?.color) {
+        const COLOR_LABELS: Record<string, string> = {
+          "brass-black": "Brass",
+          "silver-black": "Silver",
+          "black-gold": "Black/Gold",
+          "black-silver": "Black/Silver",
+        };
+        rows.push({ label: "Color", value: COLOR_LABELS[npCfg.color] ?? npCfg.color });
+      }
+      if (npCfg?.line1?.trim()) rows.push({ label: "Line 1", value: npCfg.line1.trim() });
+      if (npCfg?.line2?.trim()) rows.push({ label: "Line 2", value: npCfg.line2.trim() });
+      if (npCfg?.line3?.trim()) rows.push({ label: "Line 3", value: npCfg.line3.trim() });
       break;
+    }
 
-    case "mat-board":
-      if (config.matType !== "none") {
-        rows.push({
-          label: "Mat Type",
-          value: config.matType === "double" ? "Double Mat" : "Single Mat",
-        });
+    case "mat-board": {
+      rows.push({
+        label: "Mat Type",
+        value: config.matType === "double" ? "Double Mat" : "Single Mat",
+      });
+      if (matColor) {
+        rows.push({ label: "Color", value: matColor.name ?? config.matColorId ?? "—" });
+      }
+      if (config.matType === "double" && matInnerColor) {
+        rows.push({ label: "Bottom Color", value: matInnerColor.name ?? config.matInnerColorId ?? "—" });
       }
       break;
+    }
 
     case "frame":
-    default:
-      // Full frame display for custom frames
+    default: {
+      // Detect CD/vinyl/shadowbox frames by orderSource — suppress internal border width label
+      const isRecordOrCDFrame =
+        config.orderSource?.startsWith("cd-frame-") ||
+        config.orderSource?.startsWith("record-album-frame-");
+      const isShadowbox = config.orderSource === "shadowbox";
+
       rows.push({ label: "Frame", value: frameName });
-      rows.push({
-        label: "Mat",
-        value:
-          config.matType === "none"
-            ? "None"
-            : config.matType === "single"
-              ? `${matName} (${config.matBorderWidth}" border)`
-              : `Double: ${matName} + ${matInnerName} (${config.matBorderWidth}" border, ${config.matRevealWidth}" reveal)`,
-      });
+      if (config.matType !== "none") {
+        if (isRecordOrCDFrame) {
+          // For CD/vinyl, the mat border is an internal layout parameter — show color only
+          rows.push({
+            label: "Mat",
+            value:
+              config.matType === "double"
+                ? `Double: ${matName} + ${matInnerName}`
+                : matName,
+          });
+        } else {
+          rows.push({
+            label: "Mat",
+            value:
+              config.matType === "single"
+                ? `${matName} (${config.matBorderWidth}" border)`
+                : `Double: ${matName} + ${matInnerName} (${config.matBorderWidth}" border, ${config.matRevealWidth}" reveal)`,
+          });
+        }
+      } else       if (!isShadowbox) {
+        rows.push({ label: "Mat", value: "None" });
+      }
       if (config.glassTypeId && glassDisplay) {
         rows.push({ label: "Glazing", value: glassDisplay });
       }
-      rows.push({
-        label: "Service",
-        value: config.serviceType === "print-and-frame" ? "Print & frame" : "Frame only",
-      });
+      // Shadowbox-specific rows — read directly from the persisted config
+      if (isShadowbox && config.shadowboxInfo) {
+        rows.push({ label: "Backing Color", value: config.shadowboxInfo.backingColor });
+        rows.push({ label: "Depth", value: `${config.shadowboxInfo.depth}"` });
+        if (config.shadowboxInfo.hardware === "security") {
+          rows.push({ label: "Hardware", value: "Security Hardware" });
+        }
+      }
+      if (!isShadowbox) {
+        rows.push({
+          label: "Service",
+          value: config.serviceType === "print-and-frame" ? "Print & frame" : "Frame only",
+        });
+      }
       break;
+    }
+  }
+
+  // Append any extra designer-specific attributes as additional rows
+  if (extraAttributes) {
+    for (const [label, value] of Object.entries(extraAttributes)) {
+      if (value) rows.push({ label, value });
+    }
   }
 
   if (compact) {

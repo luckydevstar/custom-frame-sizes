@@ -32,7 +32,7 @@ export function createCartItemFromFrameConfig(
   config: FrameConfiguration,
   priceDollars: number,
   quantity: number = 1,
-  options?: { imageUrl?: string | null; productTitle?: string }
+  options?: { imageUrl?: string | null; productTitle?: string; customAttributes?: Record<string, string> }
 ): AddCartItemInput {
   const frameStyle = getFrameStyleById(config.frameStyleId);
   const variantId =
@@ -70,5 +70,6 @@ export function createCartItemFromFrameConfig(
     currency: "USD",
     quantity,
     configuration: config,
+    customAttributes: options?.customAttributes,
   };
 }

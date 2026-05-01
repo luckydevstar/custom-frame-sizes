@@ -954,7 +954,23 @@ export function RecordAlbumDesigner({
         orderSource,
         brassNameplateConfig: brassNameplateConfig.enabled ? brassNameplateConfig : undefined,
       };
-      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity);
+      // Build human-readable attributes for ShipStation / cart display
+      const layoutName =
+        layoutType === "vinyl"
+          ? (getRecordAlbumLayout(selectedLayout as RecordAlbumLayoutType)?.name ?? selectedLayout)
+          : (getCDLayout(selectedLayout as CDLayoutType, selectedFrame.mouldingWidth)?.name ?? selectedLayout);
+      const customAttributes: Record<string, string> = {
+        "Product Type": layoutType === "cd" ? "CD Frame" : "Vinyl Record Frame",
+        "Layout": layoutName,
+        "Frame Style": selectedFrame.name,
+        "Glass": selectedGlass.name,
+        ...(hardware === "security" && { "Hardware": "Security Hardware" }),
+        ...(brassNameplateConfig.enabled && { "Nameplate": "Yes" }),
+      };
+
+      const cartInput = createCartItemFromFrameConfig(frameConfig, pricing.total, quantity, {
+        customAttributes,
+      });
       useCartStore.getState().addItem(cartInput);
       await addToCartOnly(frameConfig, pricing.total, quantity);
       toast({

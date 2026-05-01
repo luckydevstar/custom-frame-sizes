@@ -10,7 +10,6 @@ import {
   Package,
   Shield,
   AlertCircle,
-  Disc3,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";

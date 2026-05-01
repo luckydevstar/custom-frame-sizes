@@ -915,35 +915,28 @@ export function CurrencyFrameDesigner({
                       <p className="text-xs text-muted-foreground mb-4 italic">
                         Compatible with standard archival currency holders used by collectors.
                       </p>
-                      <RadioGroup
-                        value={selectedBackingId}
-                        onValueChange={setSelectedBackingId}
-                        className="grid grid-cols-2 gap-3"
-                      >
+                      <div className="grid grid-cols-2 gap-3" role="radiogroup" aria-label="Backing color">
                         {CURRENCY_BACKING_OPTIONS.map((option) => (
-                          <div key={option.id} className="flex items-center">
-                            <RadioGroupItem
-                              value={option.id}
-                              id={`backing-${option.id}`}
-                              className="sr-only"
+                          <button
+                            key={option.id}
+                            type="button"
+                            role="radio"
+                            aria-checked={selectedBackingId === option.id}
+                            onClick={() => setSelectedBackingId(option.id)}
+                            className={`flex items-center gap-3 w-full p-3 rounded-md border-2 cursor-pointer hover:shadow-md active:scale-[0.98] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-1 ${
+                              selectedBackingId === option.id
+                                ? "border-primary bg-primary/5"
+                                : "border-border"
+                            }`}
+                          >
+                            <div
+                              className="w-8 h-8 rounded-md border shrink-0"
+                              style={{ backgroundColor: option.hex }}
                             />
-                            <Label
-                              htmlFor={`backing-${option.id}`}
-                              className={`flex items-center gap-3 w-full p-3 rounded-md border-2 cursor-pointer hover:shadow-md active:scale-[0.98] ${
-                                selectedBackingId === option.id
-                                  ? "border-primary bg-primary/5"
-                                  : "border-border"
-                              }`}
-                            >
-                              <div
-                                className="w-8 h-8 rounded-md border"
-                                style={{ backgroundColor: option.hex }}
-                              />
-                              <span className="text-sm font-medium">{option.name}</span>
-                            </Label>
-                          </div>
+                            <span className="text-sm font-medium">{option.name}</span>
+                          </button>
                         ))}
-                      </RadioGroup>
+                      </div>
                     </AccordionContent>
                   </AccordionItem>
 

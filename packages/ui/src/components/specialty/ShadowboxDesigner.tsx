@@ -566,11 +566,20 @@ export function ShadowboxDesigner({
     setIsCheckingOut(true);
 
     try {
+      // customAttributes for Shopify/ShipStation line properties (derived from frameConfig.shadowboxInfo)
+      const customAttributes: Record<string, string> = {
+        "Product Type": "Shadowbox Frame",
+        "Depth": `${depth}"`,
+        "Backing Color": backingDisplayName,
+        "Hardware": hangingHardware === "security" ? "Security Hardware" : "Standard",
+      };
+
       // Add to local cart store for UI
       const cartInput = createCartItemFromFrameConfig(
         frameConfig,
         finalTotalPrice * quantity,
-        quantity
+        quantity,
+        { customAttributes }
       );
       useCartStore.getState().addItem(cartInput);
 
@@ -707,6 +716,13 @@ export function ShadowboxDesigner({
   const isValidDimensions =
     artWidth > 0 && artHeight > 0 && (!artworkSizeValidation || artworkSizeValidation.valid);
 
+  // Resolve backing display name (used both in frameConfig and customAttributes)
+  const backingDisplayName = useMemo(() => {
+    if (selectedBacking === "none") return "None";
+    if (selectedBacking === "plywood") return "Plywood";
+    return MAT_PALETTE.find((m) => m.id === selectedBacking)?.name ?? selectedBacking;
+  }, [selectedBacking]);
+
   // Create frame configuration for pricing calculation (shadowboxes are always frame-only, no prints)
   const frameConfig: FrameConfiguration = useMemo(
     () => ({
@@ -721,6 +737,12 @@ export function ShadowboxDesigner({
       matInnerColorId: matType === "double" ? selectedMatInner.id : undefined,
       glassTypeId: selectedGlass?.id ?? "standard",
       bottomWeighted,
+      orderSource: "shadowbox",
+      shadowboxInfo: {
+        backingColor: backingDisplayName,
+        depth,
+        hardware: hangingHardware,
+      },
     }),
     [
       artWidth,
@@ -733,6 +755,9 @@ export function ShadowboxDesigner({
       selectedMatInner.id,
       selectedGlass?.id,
       bottomWeighted,
+      backingDisplayName,
+      depth,
+      hangingHardware,
     ]
   );
 

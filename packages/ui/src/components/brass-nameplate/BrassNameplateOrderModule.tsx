@@ -207,11 +207,25 @@ export function BrassNameplateOrderModule() {
         brassNameplateConfig: config, // Store full nameplate config
       };
 
+      // Build human-readable attributes for ShipStation / cart display
+      const colorOption = COLOR_OPTIONS.find((c) => c.id === config.color);
+      const fontOptionSelected = FONT_OPTIONS.find((f) => f.id === config.font);
+      const activeLines = config.lines.filter((line) => line.text.trim());
+      const customAttributes: Record<string, string> = {
+        "Product Type": "Brass Nameplate",
+        "Size": `${width}" × ${height}"`,
+        "Color": colorOption?.name ?? config.color,
+        "Font": fontOptionSelected?.name ?? config.font,
+        ...Object.fromEntries(
+          activeLines.map((line, i) => [`Line ${i + 1}`, line.text.trim()])
+        ),
+      };
+
       const cartInput = createCartItemFromFrameConfig(
         brassNameplateConfig,
         price,
         quantity,
-        { productTitle: "Custom Brass Nameplate" }
+        { productTitle: "Custom Brass Nameplate", customAttributes }
       );
       useCartStore.getState().addItem(cartInput);
       await addToCartOnly(brassNameplateConfig, price, quantity);

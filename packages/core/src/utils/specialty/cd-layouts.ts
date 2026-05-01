@@ -106,7 +106,7 @@ function discWithCover(moulding: number = DEFAULT_FRAME_MOLDING_WIDTH): CDLayout
   const C = CD_SPECS.COVER_SIZE * SCALE_FACTOR;
 
   const artworkW = 9.0;
-  const artworkH = 5.3;
+  const artworkH = 5.25; // snapped to nearest 1/8" (was 5.3)
   const border = 0.75;
 
   const GAP_TO_LABEL = 1.3;

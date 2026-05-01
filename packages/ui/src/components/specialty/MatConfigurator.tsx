@@ -858,6 +858,49 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
         glassTypeId: matConfig.selectedGlassId || "standard",
         orderSource: "mat-designer",
       };
+
+      // Build rich human-readable attributes for ShipStation / cart display
+      const allMats = getMatsInDisplayOrder("desktop", true, true);
+      const topMatObj = allMats.find((m) => m.name === matConfig.topMat.color);
+      const bottomMatObj = matConfig.bottomMat
+        ? allMats.find((m) => m.name === matConfig.bottomMat!.color)
+        : undefined;
+      const topOpening = matConfig.topMat.openings[0];
+      const topMatLabel = topMatObj
+        ? `${topMatObj.name} (${topMatObj.sizes["32x40"]?.sku ?? topMatObj.sizes["40x60"]?.sku ?? topMatObj.id})`
+        : matConfig.topMat.color;
+      const bottomMatLabel = bottomMatObj
+        ? `${bottomMatObj.name} (${bottomMatObj.sizes["32x40"]?.sku ?? bottomMatObj.sizes["40x60"]?.sku ?? bottomMatObj.id})`
+        : matConfig.bottomMat?.color;
+      const hasRoundedCorners =
+        matConfig.topMat.openings.some((o) => o.cornerStyle === "rounded") ||
+        matConfig.bottomMat?.openings.some((o) => o.cornerStyle === "rounded");
+
+      const customAttributes: Record<string, string> = {
+        "Product Type": matConfig.selectedFrameId ? "Custom Mat + Frame" : "Custom Mat Board",
+        "Mat Type": matConfig.singleOrDouble === "double" ? "Double Mat" : "Single Mat",
+        "Top Mat Color": topMatLabel,
+        ...(matConfig.singleOrDouble === "double" && bottomMatLabel && {
+          "Bottom Mat Color": bottomMatLabel,
+        }),
+        "Mat Overall Size": `${matConfig.overallWIn}" × ${matConfig.overallHIn}"`,
+        ...(topOpening?.wIn && topOpening?.hIn && {
+          "Opening Size": `${topOpening.wIn}" × ${topOpening.hIn}"`,
+        }),
+        ...(matConfig.topMat.openings.length > 1 && {
+          "Number of Openings": String(matConfig.topMat.openings.length),
+        }),
+        "Rounded Corners": hasRoundedCorners ? "Yes" : "No",
+        "V-Groove": matConfig.vGroove?.enabled
+          ? `Yes (${matConfig.vGroove.offsetIn}" offset)`
+          : "No",
+        "Backing & Clear Bags": matConfig.backingKit?.enabled ? "Yes" : "No",
+        "Standard Overlap": matConfig.standardOverlap ? "Yes" : "No",
+        ...(matConfig.selectedFrameId && {
+          "Frame": getFrameStyleById(matConfig.selectedFrameId)?.name ?? matConfig.selectedFrameId,
+        }),
+        ...(matConfig.hardware === "security" && { "Hardware": "Security Hardware" }),
+      };
       
       // Add to local cart store
       const productTitle = matConfig.selectedFrameId 
@@ -868,7 +911,7 @@ export function MatConfigurator({ useFrameDesignerFallback = false }: MatConfigu
         matFrameConfig,
         totalDollars,
         matConfig.quantity,
-        { productTitle }
+        { productTitle, customAttributes }
       );
       useCartStore.getState().addItem(cartInput);
       
