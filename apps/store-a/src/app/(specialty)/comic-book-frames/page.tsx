@@ -1,4 +1,5 @@
 import { ComicBookFrameDesigner, TrustBox } from "@framecraft/ui";
+import { getSharedAssetUrl } from "@framecraft/core";
 import { Sparkles, Shield, Box, Grid3x3, Star } from "lucide-react";
 import Image from "next/image";
 import { Suspense } from "react";
@@ -122,7 +123,7 @@ export default function ComicBookFramesPage() {
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
               <div className="order-2 lg:order-1 relative aspect-[4/3] w-full rounded-lg overflow-hidden border shadow-sm">
                 <Image
-                  src="/comic/whats-included.jpg"
+                  src={getSharedAssetUrl("comic/whats-included.jpg")}
                   alt="Comic book frame components breakdown showing frame, mats, backing, hardware, and acrylic"
                   fill
                   className="object-cover"

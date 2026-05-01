@@ -7,7 +7,7 @@ import { Suspense } from "react";
 import { Award, ArrowRight, Sparkles, Ruler, CheckCircle2 } from "lucide-react";
 
 import { generatePageMetadata } from "@/lib/seo-utils";
-import { SearchableFrames } from "./SearchableFrames";
+import { SearchableFrames, HideOnSearch } from "./SearchableFrames";
 
 export const metadata: Metadata = generatePageMetadata("/picture-frames", {
   title: "Custom Picture Frames - Professional Grade & Ornate Designs | CustomFrameSizes.com",
@@ -120,7 +120,9 @@ export default function PictureFramesPage() {
         </div>
       </section>
 
-      {/* Signature Collection (featured frames) */}
+      {/* Signature Collection (featured frames) – hidden when search is active */}
+      <Suspense fallback={null}>
+        <HideOnSearch>
       {signatureFrames.length > 0 && (
         <section className="container mx-auto px-4 py-12 md:py-16 border-t">
           <div className="max-w-7xl mx-auto">
@@ -179,6 +181,8 @@ export default function PictureFramesPage() {
           </div>
         </section>
       )}
+        </HideOnSearch>
+      </Suspense>
 
       {/* Browse All Frame Styles */}
       {displayFrames.length > 0 && (

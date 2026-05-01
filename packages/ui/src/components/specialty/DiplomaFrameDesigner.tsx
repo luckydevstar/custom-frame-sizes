@@ -877,8 +877,7 @@ export function DiplomaFrameDesigner({
       // Adjusted gaps to achieve target frame sizes
       const tasselToPhotoGap = photoSize === "8x10" ? 2 : 1.5;
       const effectiveArtW = artW + tasselGap + tasselW + tasselToPhotoGap + photoW;
-      // Reduce height by 1.5" for tighter proportions
-      const effectiveArtH = Math.max(artH, tasselH, photoH) - 1.5;
+      const effectiveArtH = Math.max(artH, tasselH, photoH);
 
       return { effectiveArtW, effectiveArtH };
     } else {

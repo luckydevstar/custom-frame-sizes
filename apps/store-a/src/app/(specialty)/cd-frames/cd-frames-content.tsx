@@ -148,22 +148,6 @@ export function CdFramesContent() {
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
                     <div className="p-3 rounded-lg bg-primary/10 flex-shrink-0">
-                      <Disc3 className="w-6 h-6 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-semibold mb-2">Secure Mounting System</h3>
-                      <p className="text-muted-foreground">
-                        No sticky tape or glue needed. Special clips hold your CDs safely in place.
-                        You can take them out anytime without damage.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-              <Card className="hover-elevate">
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 rounded-lg bg-primary/10 flex-shrink-0">
                       <Award className="w-6 h-6 text-primary" />
                     </div>
                     <div>
