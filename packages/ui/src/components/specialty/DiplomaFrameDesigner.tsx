@@ -446,9 +446,9 @@ export function DiplomaFrameDesigner({
       const diplomaPreset = getDiplomaSizeById(diplomaSizeId);
       if (diplomaPreset) {
         setSelectedDiplomaSize(diplomaPreset);
-        // Auto-fill dimensions from preset
-        setArtworkWidth(diplomaPreset.documentWidth.toString());
-        setArtworkHeight(diplomaPreset.documentHeight.toString());
+        // Auto-fill dimensions from preset (formatted as fractions)
+        setArtworkWidth(formatDimension(diplomaPreset.documentWidth));
+        setArtworkHeight(formatDimension(diplomaPreset.documentHeight));
       }
     } else {
       // Load custom dimensions if no preset
@@ -2586,8 +2586,8 @@ export function DiplomaFrameDesigner({
                           key={size.id}
                           onClick={() => {
                             setSelectedDiplomaSize(size);
-                            setArtworkWidth(size.documentWidth.toString());
-                            setArtworkHeight(size.documentHeight.toString());
+                            setArtworkWidth(formatDimension(size.documentWidth));
+                            setArtworkHeight(formatDimension(size.documentHeight));
                           }}
                           className={`p-3 rounded-md border-2 text-center hover-elevate active-elevate-2 ${
                             selectedDiplomaSize?.id === size.id
@@ -2596,9 +2596,18 @@ export function DiplomaFrameDesigner({
                           }`}
                           data-testid={`button-diploma-${size.id}`}
                         >
-                          <p className="font-semibold text-sm">
-                            {size.documentWidth}&quot; × {size.documentHeight}&quot;
-                          </p>
+                          {size.id.includes("a4") ? (
+                            <>
+                              <p className="font-semibold text-sm">A4 size</p>
+                              <p className="text-xs text-muted-foreground mt-0.5">
+                                {formatDimension(size.documentWidth)}&quot; × {formatDimension(size.documentHeight)}&quot;
+                              </p>
+                            </>
+                          ) : (
+                            <p className="font-semibold text-sm">
+                              {formatDimension(size.documentWidth)}&quot; × {formatDimension(size.documentHeight)}&quot;
+                            </p>
+                          )}
                         </button>
                       ))}
                     </div>

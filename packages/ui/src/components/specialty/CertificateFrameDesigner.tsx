@@ -254,8 +254,8 @@ export function CertificateFrameDesigner({
       const certificatePreset = getCertificateSizeById(certificateSizeId);
       if (certificatePreset) {
         setSelectedCertificateSize(certificatePreset);
-        setArtworkWidth(certificatePreset.documentWidth.toString());
-        setArtworkHeight(certificatePreset.documentHeight.toString());
+        setArtworkWidth(formatDimension(certificatePreset.documentWidth));
+        setArtworkHeight(formatDimension(certificatePreset.documentHeight));
       }
     } else {
       if (width) setArtworkWidth(width);
@@ -1330,15 +1330,24 @@ export function CertificateFrameDesigner({
                           key={size.id}
                           onClick={() => {
                             setSelectedCertificateSize(size);
-                            setArtworkWidth(size.documentWidth.toString());
-                            setArtworkHeight(size.documentHeight.toString());
+                            setArtworkWidth(formatDimension(size.documentWidth));
+                            setArtworkHeight(formatDimension(size.documentHeight));
                           }}
                           className={`p-3 rounded-md border-2 text-center hover-elevate active-elevate-2 ${selectedCertificateSize?.id === size.id ? "border-primary bg-primary/5 font-semibold" : "border-border bg-background"}`}
                           data-testid={`button-certificate-${size.id}`}
                         >
-                          <p className="font-semibold text-sm">
-                            {size.documentWidth}&quot; × {size.documentHeight}&quot;
-                          </p>
+                          {size.id.includes("a4") ? (
+                            <>
+                              <p className="font-semibold text-sm">A4 size</p>
+                              <p className="text-xs text-muted-foreground mt-0.5">
+                                {formatDimension(size.documentWidth)}&quot; × {formatDimension(size.documentHeight)}&quot;
+                              </p>
+                            </>
+                          ) : (
+                            <p className="font-semibold text-sm">
+                              {formatDimension(size.documentWidth)}&quot; × {formatDimension(size.documentHeight)}&quot;
+                            </p>
+                          )}
                         </button>
                       ))}
                       <button
