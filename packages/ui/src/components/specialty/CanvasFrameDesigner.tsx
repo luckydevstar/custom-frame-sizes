@@ -10,6 +10,8 @@ import {
   generateCanvasPrintFile,
   checkImageResolution,
   parseFraction,
+  snapToEighth,
+  formatDimension,
   validateArtworkSize,
   computePreviewLayout,
   getStoreBaseAssetUrl,
@@ -611,8 +613,9 @@ export function CanvasFrameDesigner({
     if (serviceType === "print-and-frame" && uploadedImageAspectRatio && selectedImage) {
       const width = parseFraction(newWidth);
       if (width > 0) {
-        const newHeight = width / uploadedImageAspectRatio;
-        setArtworkHeight(newHeight.toFixed(2));
+        // Snap computed height to nearest 1/8"
+        const snappedHeight = snapToEighth(width / uploadedImageAspectRatio);
+        setArtworkHeight(formatDimension(snappedHeight));
       }
     }
   };
@@ -1469,7 +1472,11 @@ export function CanvasFrameDesigner({
                       id="width"
                       value={artworkWidth}
                       onChange={(e) => handleWidthChange(e.target.value)}
-                      placeholder="e.g., 16 or 16.5"
+                      onBlur={(e) => {
+                        const parsed = parseFraction(e.target.value);
+                        if (parsed) handleWidthChange(formatDimension(snapToEighth(parsed)));
+                      }}
+                      placeholder="e.g., 16 or 16 1/2"
                       data-testid="input-width"
                     />
                   </div>
@@ -1479,7 +1486,11 @@ export function CanvasFrameDesigner({
                       id="height"
                       value={artworkHeight}
                       onChange={(e) => setArtworkHeight(e.target.value)}
-                      placeholder="e.g., 20 or 20.5"
+                      onBlur={(e) => {
+                        const parsed = parseFraction(e.target.value);
+                        if (parsed) setArtworkHeight(formatDimension(snapToEighth(parsed)));
+                      }}
+                      placeholder="e.g., 20 or 20 3/4"
                       disabled={serviceType === "print-and-frame" && !!selectedImage}
                       data-testid="input-height"
                     />
@@ -1491,7 +1502,7 @@ export function CanvasFrameDesigner({
                   </div>
                 </div>
                 <p className="text-xs text-muted-foreground">
-                  Min 4&quot;. Decimals or fractions accepted (e.g., 16.5 or 16 1/2)
+                  Min 4&quot;. Sizes snap to the nearest 1/8&quot; (e.g., 16 or 16 1/2)
                 </p>
 
                 {artworkSizeValidation && !artworkSizeValidation.valid && (

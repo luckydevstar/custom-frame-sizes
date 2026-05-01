@@ -7,6 +7,8 @@ import {
   getFrameStyleById,
   calculatePricing,
   parseFraction,
+  snapToEighth,
+  formatDimension,
   computePreviewLayout,
   getSharedAssetUrl,
   getMatTilingStyle,
@@ -904,7 +906,11 @@ export function NeedleworkFrameDesigner({
                         id="needleworkWidth"
                         value={artworkWidth}
                         onChange={(e) => setArtworkWidth(e.target.value)}
-                        placeholder="e.g., 12"
+                        onBlur={(e) => {
+                          const parsed = parseFraction(e.target.value);
+                          if (parsed) setArtworkWidth(formatDimension(snapToEighth(parsed)));
+                        }}
+                        placeholder="e.g., 12 or 12 1/2"
                         data-testid="input-needlework-width"
                       />
                     </div>
@@ -920,13 +926,17 @@ export function NeedleworkFrameDesigner({
                         id="needleworkHeight"
                         value={artworkHeight}
                         onChange={(e) => setArtworkHeight(e.target.value)}
-                        placeholder="e.g., 12"
+                        onBlur={(e) => {
+                          const parsed = parseFraction(e.target.value);
+                          if (parsed) setArtworkHeight(formatDimension(snapToEighth(parsed)));
+                        }}
+                        placeholder="e.g., 12 or 12 1/2"
                         data-testid="input-needlework-height"
                       />
                     </div>
                   </div>
                   <p className="text-xs text-muted-foreground mt-2">
-                    Min 4&quot;. Decimals or fractions accepted.
+                    Min 4&quot;. Sizes snap to the nearest 1/8&quot; (e.g., 12 or 12 1/2)
                   </p>
                 </div>
               </AccordionContent>

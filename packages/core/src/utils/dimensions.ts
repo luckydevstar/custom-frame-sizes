@@ -91,6 +91,31 @@ export function formatDimension(value: number): string {
 }
 
 /**
+ * Snap a decimal value to the nearest 1/8" increment.
+ *
+ * @example
+ * snapToEighth(18.541244) // returns 18.5  (18 1/2)
+ * snapToEighth(20.111)    // returns 20.125 (20 1/8)
+ * snapToEighth(16)        // returns 16
+ */
+export function snapToEighth(value: number): number {
+  return Math.round(value * 8) / 8;
+}
+
+/**
+ * Check whether a value already sits on a 1/8" grid (within floating-point tolerance).
+ *
+ * @example
+ * isMultipleOfEighth(16.5)   // true  (16 1/2)
+ * isMultipleOfEighth(16.125) // true  (16 1/8)
+ * isMultipleOfEighth(16.1)   // false
+ */
+export function isMultipleOfEighth(value: number): boolean {
+  const eighths = value * 8;
+  return Math.abs(eighths - Math.round(eighths)) < 0.001;
+}
+
+/**
  * Validate dimension input
  *
  * @param value - Dimension value to validate

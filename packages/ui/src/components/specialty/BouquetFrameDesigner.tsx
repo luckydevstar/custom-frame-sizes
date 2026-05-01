@@ -47,6 +47,8 @@ import {
   getGlassTypes,
   calculatePricing,
   parseFraction,
+  snapToEighth,
+  formatDimension,
   validateArtworkSize,
   computePreviewLayout,
   addToCartOnly,
@@ -1387,6 +1389,10 @@ export function BouquetFrameDesigner({
                       id="width"
                       value={artworkWidth}
                       onChange={(e) => setArtworkWidth(e.target.value)}
+                      onBlur={(e) => {
+                        const parsed = parseFraction(e.target.value);
+                        if (parsed) setArtworkWidth(formatDimension(snapToEighth(parsed)));
+                      }}
                       placeholder="e.g., 16 or 16 1/2"
                       className={!isValidDimensions && artworkWidth ? "border-destructive" : ""}
                       data-testid="input-width"
@@ -1399,6 +1405,10 @@ export function BouquetFrameDesigner({
                       id="height"
                       value={artworkHeight}
                       onChange={(e) => setArtworkHeight(e.target.value)}
+                      onBlur={(e) => {
+                        const parsed = parseFraction(e.target.value);
+                        if (parsed) setArtworkHeight(formatDimension(snapToEighth(parsed)));
+                      }}
                       placeholder="e.g., 20 or 20 3/4"
                       className={!isValidDimensions && artworkHeight ? "border-destructive" : ""}
                       data-testid="input-height"
@@ -1410,7 +1420,7 @@ export function BouquetFrameDesigner({
                   <p className="text-xs text-destructive">{artworkSizeValidation.message}</p>
                 )}
                 <p className="text-xs text-muted-foreground">
-                  Min 4&quot;. Decimals or fractions accepted (e.g., 16.5 or 16 1/2)
+                  Min 4&quot;. Sizes snap to the nearest 1/8&quot; (e.g., 16 or 16 1/2)
                 </p>
               </AccordionContent>
             </AccordionItem>

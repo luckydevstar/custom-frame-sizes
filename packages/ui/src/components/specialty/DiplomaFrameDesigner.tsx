@@ -14,6 +14,7 @@ import {
   getFrameStyleById,
   calculatePricing,
   parseFraction,
+  snapToEighth,
   validateArtworkSize,
   formatDimension,
   computePreviewLayout,
@@ -769,8 +770,8 @@ export function DiplomaFrameDesigner({
     if (serviceType === "print-and-frame" && uploadedImageAspectRatio && selectedImage) {
       const width = parseFraction(newWidth);
       if (width > 0) {
-        const newHeight = width / uploadedImageAspectRatio;
-        setArtworkHeight(newHeight.toFixed(2));
+        // Snap computed height to nearest 1/8"
+        setArtworkHeight(formatDimension(snapToEighth(width / uploadedImageAspectRatio)));
       }
     }
   };
@@ -2616,6 +2617,10 @@ export function DiplomaFrameDesigner({
                             id="width"
                             value={artworkWidth}
                             onChange={(e) => handleWidthChange(e.target.value)}
+                            onBlur={(e) => {
+                              const parsed = parseFraction(e.target.value);
+                              if (parsed) handleWidthChange(formatDimension(snapToEighth(parsed)));
+                            }}
                             onFocus={(e) => {
                               setTimeout(() => {
                                 e.target.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -2634,6 +2639,10 @@ export function DiplomaFrameDesigner({
                             id="height"
                             value={artworkHeight}
                             onChange={(e) => setArtworkHeight(e.target.value)}
+                            onBlur={(e) => {
+                              const parsed = parseFraction(e.target.value);
+                              if (parsed) setArtworkHeight(formatDimension(snapToEighth(parsed)));
+                            }}
                             onFocus={(e) => {
                               setTimeout(() => {
                                 e.target.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -2663,7 +2672,7 @@ export function DiplomaFrameDesigner({
                           </p>
                         )}
                       <p className="text-xs text-muted-foreground">
-                        Min 4&quot;. Decimals or fractions accepted (e.g., 16.5 or 16 1/2)
+                        Min 4&quot;. Sizes snap to the nearest 1/8&quot; (e.g., 16 or 16 1/2)
                       </p>
                     </AccordionContent>
                   </AccordionItem>

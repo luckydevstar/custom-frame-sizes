@@ -13,6 +13,7 @@ import { useIntelligentPreviewSizing ,
   getFrameStyleById,
   calculatePricing,
   parseFraction,
+  snapToEighth,
   validateArtworkSize,
   formatDimension,
   computePreviewLayout,
@@ -434,7 +435,8 @@ export function CertificateFrameDesigner({
     setArtworkWidth(newWidth);
     if (serviceType === "print-and-frame" && uploadedImageAspectRatio && selectedImage) {
       const width = parseFraction(newWidth);
-      if (width > 0) setArtworkHeight((width / uploadedImageAspectRatio).toFixed(2));
+      // Snap computed height to nearest 1/8"
+      if (width > 0) setArtworkHeight(formatDimension(snapToEighth(width / uploadedImageAspectRatio)));
     }
   };
 
@@ -1360,6 +1362,10 @@ export function CertificateFrameDesigner({
                             id="width"
                             value={artworkWidth}
                             onChange={(e) => handleWidthChange(e.target.value)}
+                            onBlur={(e) => {
+                              const parsed = parseFraction(e.target.value);
+                              if (parsed) handleWidthChange(formatDimension(snapToEighth(parsed)));
+                            }}
                             placeholder="e.g., 11 or 11 1/2"
                             className={
                               !isValidDimensions && artworkWidth ? "border-destructive" : ""
@@ -1373,6 +1379,10 @@ export function CertificateFrameDesigner({
                             id="height"
                             value={artworkHeight}
                             onChange={(e) => setArtworkHeight(e.target.value)}
+                            onBlur={(e) => {
+                              const parsed = parseFraction(e.target.value);
+                              if (parsed) setArtworkHeight(formatDimension(snapToEighth(parsed)));
+                            }}
                             placeholder="e.g., 20 or 20 3/4"
                             className={
                               !isValidDimensions && artworkHeight ? "border-destructive" : ""
@@ -1390,7 +1400,7 @@ export function CertificateFrameDesigner({
                         <p className="text-xs text-destructive">{artworkSizeValidation.message}</p>
                       )}
                       <p className="text-xs text-muted-foreground">
-                        Minimum 4 inches. Enter whole numbers or fractions.
+                        Min 4&quot;. Sizes snap to the nearest 1/8&quot; (e.g., 11 or 11 1/2)
                       </p>
                     </AccordionContent>
                   </AccordionItem>
